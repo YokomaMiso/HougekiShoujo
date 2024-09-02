@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
+    GameManager gameManager;
+    public void SetGameManager(GameManager _gameManager) { gameManager = _gameManager; }
+
     int selectNum = 0;
     bool isCanSelect = true;
 
@@ -38,10 +42,10 @@ public class TitleCanvasBehavior : MonoBehaviour
 
     void CursorDisplay()
     {
-        for (int i = 0; i < 2; i++) 
+        for (int i = 0; i < 2; i++)
         {
             Color color = Color.white;
-            if (i == selectNum) {color= Color.yellow;}
+            if (i == selectNum) { color = Color.yellow; }
             transform.GetChild(i).GetComponent<Image>().color = color;
         }
     }
@@ -52,11 +56,11 @@ public class TitleCanvasBehavior : MonoBehaviour
             switch (selectNum)
             {
                 case 0:
-                    GameManager.ChangeState(GAME_STATE.LOAD);
+                    gameManager.ChangeState(GAME_STATE.LOAD);
                     Destroy(gameObject);
                     break;
                 case 1:
-                    GameManager.ChangeState(GAME_STATE.OPTION);
+                    gameManager.ChangeState(GAME_STATE.OPTION);
                     Destroy(gameObject);
                     break;
             }

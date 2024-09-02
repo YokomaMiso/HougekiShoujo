@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CanonProjectileBehavior : MonoBehaviour
 {
+    Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
     [SerializeField] GameObject explosion;
     [SerializeField] Animator imageAnimator;
     [SerializeField] RuntimeAnimatorController animatorController;
@@ -23,12 +26,14 @@ public class CanonProjectileBehavior : MonoBehaviour
 
     void Update()
     {
-        imageAnimator.speed = 1 * TimeManager.TimeRate();
+        imageAnimator.speed = 1 * ownerPlayer.managerMaster.timeManager.TimeRate();
 
-        timer += TimeManager.GetDeltaTime();
+        float deltaTime = ownerPlayer.managerMaster.timeManager.GetDeltaTime();
+
+        timer += deltaTime;
         if (timer > lifeTime) { Destroy(gameObject); }
 
-        transform.position += transform.forward * speed * TimeManager.GetDeltaTime();
+        transform.position += transform.forward * speed * deltaTime;
     }
 
     public void SetAngle(float _angle)
@@ -42,6 +47,7 @@ public class CanonProjectileBehavior : MonoBehaviour
         Vector3 spawnPos = transform.position;
         spawnPos.y = 2;
         GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
+        obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
 
         OwnerID id;
         id = obj.AddComponent<OwnerID>();

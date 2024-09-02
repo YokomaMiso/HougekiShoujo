@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ExplosionBehavior : MonoBehaviour
 {
+    Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
     [SerializeField] Animator imageAnimator;
 
     float lifeTime;
@@ -25,9 +28,9 @@ public class ExplosionBehavior : MonoBehaviour
 
     void Update()
     {
-        imageAnimator.speed = 2 * TimeManager.TimeRate();
+        imageAnimator.speed = 2 * ownerPlayer.managerMaster.timeManager.TimeRate();
 
-        timer += TimeManager.GetDeltaTime();
+        timer += ownerPlayer.managerMaster.timeManager.GetDeltaTime();
         if (timer >= lifeTime)
         {
             Destroy(gameObject);

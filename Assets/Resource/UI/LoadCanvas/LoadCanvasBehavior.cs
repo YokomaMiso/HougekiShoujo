@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class LoadCanvasBehavior : MonoBehaviour
 {
+    GameManager gameManager;
+    public void SetGameManager(GameManager _gameManager) { gameManager = _gameManager; }
+
     int selectNum = 0;
     bool isCanSelect = true;
 
@@ -70,12 +73,12 @@ public class LoadCanvasBehavior : MonoBehaviour
             if (selectNum < 3)
             {
                 //SaveManager.LoadPlayerData(selectNum);
-                GameManager.ChangeState(GAME_STATE.IN_GAME);
+                gameManager.ChangeState(GAME_STATE.IN_GAME);
                 Destroy(gameObject);
             }
             else
             {
-                GameManager.ChangeState(GAME_STATE.TITLE);
+                gameManager.ChangeState(GAME_STATE.TITLE);
                 Destroy(gameObject);
             }
         }

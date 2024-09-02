@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public static bool slow;
-    public static bool stop;
+    Managers managerMaster;
+    public void SetManagerMaster(Managers _managerMaster) { managerMaster = _managerMaster; }
+
+    public bool slow;
+    public bool stop;
     const float slowRate = 0.1f;
 
-    static public float GetDeltaTime()
+    public void SetSlow(bool _slow) { slow = _slow; }
+    public void SetStop(bool _stop) { stop = _stop; }
+
+    public float GetDeltaTime()
     {
         if (stop) { return 0; }
         if (slow) { return Time.deltaTime * slowRate; }
@@ -16,7 +22,7 @@ public class TimeManager : MonoBehaviour
         return Time.deltaTime;
     }
 
-    public static float TimeRate() 
+    public float TimeRate() 
     {
         if (stop) { return 0.0f; }
         if (slow) { return slowRate; }
