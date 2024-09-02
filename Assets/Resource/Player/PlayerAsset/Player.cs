@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         playerMove = gameObject.GetComponent<PlayerMove>();
         playerReload = gameObject.GetComponent<PlayerReload>();
         playerAim = gameObject.GetComponent<PlayerAim>();
-        playerAim.SetPlayer(this, transform.GetChild(1).gameObject, transform.GetChild(2).gameObject);
+        playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
 
         playerRecoil = gameObject.GetComponent<PlayerRecoil>();
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
