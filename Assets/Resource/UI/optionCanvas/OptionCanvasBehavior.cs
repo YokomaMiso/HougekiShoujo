@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class OptionCanvasBehavior : MonoBehaviour
 {
+    GameManager gameManager;
+    public void SetGameManager(GameManager _gameManager) { gameManager = _gameManager; }
+
     OptionData optionData;
     int selectNum = 0;
     bool isCanSelect = true;
@@ -13,7 +16,7 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void Start()
     {
-        optionData = Managers.optionData;
+        optionData = gameManager.managerMaster.optionData;
         transform.GetChild(0).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
         transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
         transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.sfxVolume);
@@ -107,10 +110,10 @@ public class OptionCanvasBehavior : MonoBehaviour
         {
             if (selectNum == 5)
             {
-                Managers.optionData = optionData;
+                gameManager.managerMaster.optionData = optionData;
 
-                SaveManager.SaveOptionData();
-                GameManager.ChangeState(GameManager.prevState);
+                gameManager.managerMaster.saveManager.SaveOptionData();
+                gameManager.ChangeState(gameManager.prevState);
                 Destroy(gameObject);
             }
         }

@@ -4,18 +4,43 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
-    public static Managers instance;
-    public static OptionData optionData;
+    int playerID;
 
-    void Awake()
-    {
-        if (instance == null) { instance = this; DontDestroyOnLoad(gameObject); }
-        else { Destroy(gameObject); }
+    [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject otherPlayerPrefab;
+    GameObject[] playerInstance;
+    const int playerMaxNum = 2;
 
-    }
+    //仮座標
+    Vector3[] pos = new Vector3[2] { Vector3.forward * 3, Vector3.left * 3 };
+
+    public OptionData optionData;
+
+    public GameManager gameManager;
+    public SaveManager saveManager;
+    public TimeManager timeManager;
 
     void Start()
     {
-        SaveManager.LoadOptionData();
+        gameManager = GetComponent<GameManager>();
+        gameManager.SetManagerMaster(this);
+        saveManager = GetComponent<SaveManager>();
+        saveManager.SetManagerMaster(this);
+        timeManager = GetComponent<TimeManager>();
+        timeManager.SetManagerMaster(this);
+
+        saveManager.LoadOptionData();
+
+        playerInstance = new GameObject[playerMaxNum];
+        //仮のプレイヤー生成処理
+        for (int i = 0; i < playerMaxNum; i++)
+        {
+            if (true) { playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity); }
+            else { playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity); }
+
+            playerInstance[i].GetComponent<Player>().SetManagerMaster(this);
+        }
+
+
     }
 }

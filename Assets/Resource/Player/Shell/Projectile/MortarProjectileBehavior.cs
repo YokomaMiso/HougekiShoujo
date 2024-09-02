@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MortarProjectileBehavior : MonoBehaviour
 {
+    Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
     [SerializeField] GameObject explosion;
     [SerializeField] Animator imageAnimator;
 
@@ -24,9 +27,11 @@ public class MortarProjectileBehavior : MonoBehaviour
 
     void Update()
     {
-        imageAnimator.speed = 1 * TimeManager.TimeRate();
+        imageAnimator.speed = 1 * ownerPlayer.managerMaster.timeManager.TimeRate();
 
-        timer += TimeManager.GetDeltaTime();
+        float deltaTime = ownerPlayer.managerMaster.timeManager.GetDeltaTime();
+
+        timer += deltaTime;
         if (timer > lifeTime) { Destroy(gameObject); }
 
         float timeRate = timer / lifeTime;
@@ -45,6 +50,7 @@ public class MortarProjectileBehavior : MonoBehaviour
         Vector3 spawnPos = transform.position;
         spawnPos.y = 2;
         GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
+        obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
 
         OwnerID id;
         id = obj.AddComponent<OwnerID>();
