@@ -6,24 +6,25 @@ public class PlayerAim : MonoBehaviour
 {
     Player ownerPlayer;
 
-    [SerializeField] GameObject attackArea;
-    [SerializeField] GameObject aoeArea;
+    GameObject attackArea;
+    GameObject aoeArea;
 
     [SerializeField] Material[] attackAreaMat;
 
     Vector3 aimVector = Vector3.zero;
     Shell nowShell;
     SHELL_TYPE nowShellType;
-    public void SetPlayer(Player _player) { ownerPlayer = _player; }
-
-
-    void Start()
+    public void SetPlayer(Player _player, GameObject _aoeArea, GameObject _attackArea)
     {
+        ownerPlayer = _player;
+
+        aoeArea = _aoeArea;
+        attackArea = _attackArea;
+
         aoeArea.GetComponent<MeshRenderer>().sortingOrder = 1;
         attackArea.SetActive(false);
         aoeArea.SetActive(false);
     }
-
     public void AimStart(Shell _shell)
     {
         nowShell = _shell;

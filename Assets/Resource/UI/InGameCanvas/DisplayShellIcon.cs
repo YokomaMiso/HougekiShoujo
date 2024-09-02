@@ -23,6 +23,8 @@ public class DisplayShellIcon : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in players)
         {
+            if (!player.GetComponent<Player>()) { continue; }
+
             ownerPlayer = player.GetComponent<Player>();
             if (ownerPlayer.GetPlayerID() == 0)
             {

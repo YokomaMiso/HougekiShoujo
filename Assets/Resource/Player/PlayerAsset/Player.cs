@@ -7,14 +7,15 @@ public enum CANON_STATE { EMPTY = -1, SHELL_ONE = 0, SHELL_TWO, SHELL_THREE }
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] PlayerData playerData;
+
     PlayerMove playerMove;
     PlayerReload playerReload;
     PlayerAim playerAim;
     PlayerRecoil playerRecoil;
-    PlayerData playerData;
     PlayerImage playerImage;
 
-    int playerID;
+    int playerID = 0;
     public int GetPlayerID() { return playerID; }
     public PlayerData GetPlayerData() { return playerData; }
 
@@ -24,11 +25,12 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        playerMove = gameObject.AddComponent<PlayerMove>();
-        playerReload = gameObject.AddComponent<PlayerReload>();
-        playerAim = gameObject.AddComponent<PlayerAim>();
-        playerAim.SetPlayer(this);
-        playerRecoil = gameObject.AddComponent<PlayerRecoil>();
+        playerMove = gameObject.GetComponent<PlayerMove>();
+        playerReload = gameObject.GetComponent<PlayerReload>();
+        playerAim = gameObject.GetComponent<PlayerAim>();
+        playerAim.SetPlayer(this, transform.GetChild(1).gameObject, transform.GetChild(2).gameObject);
+
+        playerRecoil = gameObject.GetComponent<PlayerRecoil>();
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
 

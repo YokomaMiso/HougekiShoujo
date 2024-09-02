@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f795c9a41830dc4da68cac42095a28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1403006355}
 --- !u!212 &220096530
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -726,6 +727,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1403006355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2800551926712735169, guid: 6b481421d924a114c8883c6f268f4518,
+    type: 3}
+  m_PrefabInstance: {fileID: 2118694628}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d16ecd7d0030cd64699ab19c4894960f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1424673033
 PrefabInstance:
   m_ObjectHideFlags: 0
