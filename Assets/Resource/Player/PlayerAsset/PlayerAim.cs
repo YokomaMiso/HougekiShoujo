@@ -84,6 +84,7 @@ public class PlayerAim : MonoBehaviour
         GameObject projectile = nowShell.GetProjectile();
         GameObject obj;
         float angle;
+        OwnerID id;
 
         switch (nowShellType)
         {
@@ -96,6 +97,9 @@ public class PlayerAim : MonoBehaviour
                 obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
                 angle = Mathf.Atan2(aimVector.z, aimVector.x) * Mathf.Rad2Deg;
                 obj.GetComponent<CanonProjectileBehavior>().SetAngle(angle);
+
+                id = obj.AddComponent<OwnerID>();
+                id.SetID(ownerPlayer.GetPlayerID());
                 break;
 
             case SHELL_TYPE.MORTOR:
@@ -103,8 +107,15 @@ public class PlayerAim : MonoBehaviour
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;
                 obj.GetComponent<MortarProjectileBehavior>().ProjectileStart(transform.position + aimVector);
+
+                id = obj.AddComponent<OwnerID>();
+                id.SetID(ownerPlayer.GetPlayerID());
                 break;
         }
+
+
+        
+
     }
 
     void Update()

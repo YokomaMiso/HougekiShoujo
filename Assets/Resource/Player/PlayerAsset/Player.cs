@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     PlayerImage playerImage;
 
     int playerID = 0;
+    public int SetPlayerID(int _id) { playerID = _id;  return playerID; }
     public int GetPlayerID() { return playerID; }
     public PlayerData GetPlayerData() { return playerData; }
 
