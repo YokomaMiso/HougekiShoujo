@@ -14,7 +14,7 @@ public class ExplosionBehavior : MonoBehaviour
         imageAnimator.speed = 1;
         lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
 
-        Vector3 distance = transform.position - Player.instance.transform.position;
+        Vector3 distance = transform.position - Camera.main.transform.position;
         float weight = distance.magnitude / 5;
         if (weight < 1) { weight = 1; }
 

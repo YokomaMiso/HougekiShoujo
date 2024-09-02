@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
+    Player ownerPlayer;
+
     [SerializeField] GameObject attackArea;
     [SerializeField] GameObject aoeArea;
 
@@ -13,6 +14,8 @@ public class PlayerAim : MonoBehaviour
     Vector3 aimVector = Vector3.zero;
     Shell nowShell;
     SHELL_TYPE nowShellType;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
 
     void Start()
     {
@@ -105,7 +108,7 @@ public class PlayerAim : MonoBehaviour
 
     void Update()
     {
-        if (Player.instance.playerState != PLAYER_STATE.AIMING)
+        if (ownerPlayer.playerState != PLAYER_STATE.AIMING)
         {
             aimVector = Vector3.zero;
             attackAreaMat[0].SetFloat("_Direction", 0);

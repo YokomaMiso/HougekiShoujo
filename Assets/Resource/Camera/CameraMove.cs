@@ -6,6 +6,7 @@ public class CameraMove : MonoBehaviour
 {
     [SerializeField] float distance = 10;
     [SerializeField] float asistValue = 2;
+    Player player;
 
     static readonly Vector3 ingameRotation = new Vector3(45, 0, 0);
     float initialTimer;
@@ -16,6 +17,8 @@ public class CameraMove : MonoBehaviour
     {
     }
 
+    public void SetPlayer(Player _player) { player = _player; }
+
     void Update()
     {
         if (GameManager.state != GAME_STATE.IN_GAME) { return; }
@@ -23,7 +26,7 @@ public class CameraMove : MonoBehaviour
         else
         {
             CameraShakeUpdate();
-            Move(Player.instance.transform.position);
+            Move(player.transform.position);
         }
     }
 
@@ -36,7 +39,7 @@ public class CameraMove : MonoBehaviour
         transform.rotation = Quaternion.Euler(angle);
 
 
-        Vector3 playerPos = Player.instance.transform.position;
+        Vector3 playerPos = player.transform.position;
         Vector3 pos = Vector3.Lerp(new Vector3(1.0f, 1.5f, -2.0f), playerPos + new Vector3(0, distance, -distance), initialTimer);
         transform.position = pos;
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestReload : MonoBehaviour
 {
+    [SerializeField] Player player;
     SpriteRenderer spriteRenderer;
 
     void Start()
@@ -13,9 +14,9 @@ public class TestReload : MonoBehaviour
     void Update()
     {
         Color color = Color.clear;
-        if (Player.instance.playerState == PLAYER_STATE.RELOADING) 
+        if (player.playerState == PLAYER_STATE.RELOADING) 
         {
-            transform.position = Player.instance.transform.position + Vector3.up + Vector3.back * 3;
+            transform.position = player.transform.position + Vector3.up + Vector3.back * 3;
             color = Color.white;
         }
 

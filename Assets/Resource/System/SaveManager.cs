@@ -37,6 +37,7 @@ public class SaveManager : MonoBehaviour
 
     }
 
+    /*
     public static void SavePlayerData(int _num)
     {
         StreamWriter writer;
@@ -100,6 +101,7 @@ public class SaveManager : MonoBehaviour
             //SavePlayerData(_num);
         }
     }
+    */
     public static void SaveOptionData()
     {
         StreamWriter writer;

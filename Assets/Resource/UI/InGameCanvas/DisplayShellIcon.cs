@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class DisplayShellIcon : MonoBehaviour
 {
+    Player ownerPlayer;
     [SerializeField] Sprite iconFrame;
 
     Image[] icons;
@@ -18,11 +19,21 @@ public class DisplayShellIcon : MonoBehaviour
         icons = new Image[PlayerData.maxShellCount + 1];
         iconPos = new Vector3[PlayerData.maxShellCount];
 
-        for (int i = 0; i < PlayerData.maxShellCount; i++)
+        //仮の処理　プレイヤーを探す
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
         {
-            icons[i] = transform.GetChild(i).GetComponent<Image>();
-            icons[i].sprite = Player.instance.playerData.GetShell(i).GetSprite();
-            iconPos[i] = icons[i].transform.position;
+            ownerPlayer = player.GetComponent<Player>();
+            if (ownerPlayer.GetPlayerID() == 0)
+            {
+                for (int i = 0; i < PlayerData.maxShellCount; i++)
+                {
+                    icons[i] = transform.GetChild(i).GetComponent<Image>();
+                    icons[i].sprite = ownerPlayer.GetPlayerData().GetShell(i).GetSprite();
+                    iconPos[i] = icons[i].transform.position;
+                }
+                break;
+            }
         }
 
         icons[iconFrameNum] = transform.GetChild(iconFrameNum).GetComponent<Image>();
@@ -37,7 +48,7 @@ public class DisplayShellIcon : MonoBehaviour
 
     void CheckPlayerShell()
     {
-       int canonState = Player.instance.GetCanonState();
+       int canonState = ownerPlayer.GetCanonState();
 
         switch (canonState)
         {

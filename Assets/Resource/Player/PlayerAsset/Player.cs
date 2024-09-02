@@ -7,29 +7,36 @@ public enum CANON_STATE { EMPTY = -1, SHELL_ONE = 0, SHELL_TWO, SHELL_THREE }
 
 public class Player : MonoBehaviour
 {
-    public static Player instance;
-    public PlayerMove playerMove;
-    public PlayerReload playerReload;
-    public PlayerAim playerAim;
-    public PlayerRecoil playerRecoil;
-    public PlayerData playerData;
-    public PlayerImage playerImage;
+    PlayerMove playerMove;
+    PlayerReload playerReload;
+    PlayerAim playerAim;
+    PlayerRecoil playerRecoil;
+    PlayerData playerData;
+    PlayerImage playerImage;
+
+    int playerID;
+    public int GetPlayerID() { return playerID; }
+    public PlayerData GetPlayerData() { return playerData; }
 
     public PLAYER_STATE playerState = PLAYER_STATE.IDLE;
     public CANON_STATE canonState = CANON_STATE.EMPTY;
     public int GetCanonState() { return (int)canonState; }
 
-    void Awake()
-    {
-        if (instance == null) { instance = this; DontDestroyOnLoad(gameObject); }
-        else { Destroy(gameObject); }
-    }
-
     void Start()
     {
-        playerMove = GetComponent<PlayerMove>();
+        playerMove = gameObject.AddComponent<PlayerMove>();
+        playerReload = gameObject.AddComponent<PlayerReload>();
+        playerAim = gameObject.AddComponent<PlayerAim>();
+        playerAim.SetPlayer(this);
+        playerRecoil = gameObject.AddComponent<PlayerRecoil>();
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
+        playerImage.SetPlayer(this);
 
+        //プレイヤーが自分のキャラクターなら
+        if (playerID == 0)
+        {
+            Camera.main.GetComponent<CameraMove>().SetPlayer(this);
+        }
     }
 
     void Update()

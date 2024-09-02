@@ -10,6 +10,7 @@ public class LoadCanvasBehavior : MonoBehaviour
 
     void Start()
     {
+        /*
         for (int i = 0; i < 3; i++)
         {
             if (SaveManager.CheckLoadData(i) == 1)
@@ -17,6 +18,7 @@ public class LoadCanvasBehavior : MonoBehaviour
                 transform.GetChild(i).GetChild(0).GetComponent<Text>().text = "ÉfÅ[É^Ç†ÇÈÇÊ";
             }
         }
+        */
     }
 
     void Update()
@@ -67,7 +69,7 @@ public class LoadCanvasBehavior : MonoBehaviour
         {
             if (selectNum < 3)
             {
-                SaveManager.LoadPlayerData(selectNum);
+                //SaveManager.LoadPlayerData(selectNum);
                 GameManager.ChangeState(GAME_STATE.IN_GAME);
                 Destroy(gameObject);
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    Player ownerPlayer;
     [SerializeField] float speed = 5;
 
     public Vector3 Move()
@@ -15,5 +16,10 @@ public class PlayerMove : MonoBehaviour
         transform.position += movement * speed * TimeManager.deltaTime;
 
         return movement;
+    }
+
+    public void SetPlayer(Player _player)
+    {
+        ownerPlayer = _player;
     }
 }

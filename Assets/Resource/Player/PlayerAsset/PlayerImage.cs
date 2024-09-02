@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerImage : MonoBehaviour
 {
+    Player ownerPlayer;
+
     [SerializeField] SpriteRenderer charaSprite;
     [SerializeField] RuntimeAnimatorController idleAnimationController;
     [SerializeField] RuntimeAnimatorController runAnimationController;
@@ -13,6 +15,11 @@ public class PlayerImage : MonoBehaviour
 
     int[] animSpeed = new int[5] { 1, 2, 1, 1, 1 };
 
+    public void SetPlayer(Player _player)
+    {
+        ownerPlayer=_player;
+    }
+
     void Start()
     {
 
@@ -20,10 +27,10 @@ public class PlayerImage : MonoBehaviour
 
     void Update()
     {
-        int num = (int)Player.instance.playerState;
+        int num = (int)ownerPlayer.playerState;
 
         RuntimeAnimatorController applyController = idleAnimationController;
-        switch (Player.instance.playerState)
+        switch (ownerPlayer.playerState)
         {
             case PLAYER_STATE.IDLE:
                 applyController = idleAnimationController;
