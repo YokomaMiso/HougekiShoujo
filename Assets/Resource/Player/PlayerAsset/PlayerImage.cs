@@ -47,6 +47,6 @@ public class PlayerImage : MonoBehaviour
                 break;
         }
         charaSprite.GetComponent<Animator>().runtimeAnimatorController = applyController;
-        charaSprite.GetComponent<Animator>().speed = animSpeed[num] * ownerPlayer.managerMaster.timeManager.GetDeltaTime();
+        charaSprite.GetComponent<Animator>().speed = animSpeed[num] * ownerPlayer.managerMaster.timeManager.TimeRate();
     }
 }
