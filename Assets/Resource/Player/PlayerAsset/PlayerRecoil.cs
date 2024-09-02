@@ -15,7 +15,7 @@ public class PlayerRecoil : MonoBehaviour
     {
         if (isRecoil)
         {
-            timer += TimeManager.deltaTime;
+            timer += TimeManager.GetDeltaTime();
             if (timer > recoilTime)
             {
                 isRecoil = false;

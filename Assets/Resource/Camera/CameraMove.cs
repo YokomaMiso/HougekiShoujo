@@ -48,7 +48,7 @@ public class CameraMove : MonoBehaviour
     {
         if (shakeValue == 0) { return; }
 
-        shakeValue -= TimeManager.deltaTime;
+        shakeValue -= TimeManager.GetDeltaTime();
         if (shakeValue < 0) { shakeValue = 0; }
     }
 

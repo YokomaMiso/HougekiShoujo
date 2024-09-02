@@ -9,7 +9,7 @@ public class PlayerReload : MonoBehaviour
     int shellNum = -1;
     public int ReloadBehavior()
     {
-        timer += TimeManager.deltaTime;
+        timer += TimeManager.GetDeltaTime();
         if (timer > reloadTime) 
         {
             timer = 0;

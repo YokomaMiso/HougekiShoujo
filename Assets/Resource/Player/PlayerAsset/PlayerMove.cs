@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
         movement += Vector3.right * Input.GetAxis("Horizontal");
         movement += Vector3.forward * Input.GetAxis("Vertical");
 
-        transform.position += movement * speed * TimeManager.deltaTime;
+        transform.position += movement * speed * TimeManager.GetDeltaTime();
 
         return movement;
     }

@@ -70,7 +70,7 @@ public class PlayerAim : MonoBehaviour
 
                 case SHELL_TYPE.MORTOR:
                     float limit = attackArea.transform.localScale.x / 2;
-                    aimVector += movement * 5 * TimeManager.deltaTime;
+                    aimVector += movement * 5 * TimeManager.GetDeltaTime();
                     if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
                     aoeArea.transform.position = attackArea.transform.position + aimVector;
                     break;

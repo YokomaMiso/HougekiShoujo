@@ -27,7 +27,7 @@ public class ExplosionBehavior : MonoBehaviour
     {
         imageAnimator.speed = 2 * TimeManager.TimeRate();
 
-        timer += TimeManager.deltaTime;
+        timer += TimeManager.GetDeltaTime();
         if (timer >= lifeTime)
         {
             Destroy(gameObject);
