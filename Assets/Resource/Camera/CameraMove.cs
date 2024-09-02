@@ -46,6 +46,8 @@ public class CameraMove : MonoBehaviour
 
     void CameraShakeUpdate()
     {
+        if (!player.managerMaster.optionData.cameraShakeOn) { return; }
+
         if (shakeValue == 0) { return; }
 
         shakeValue -= player.managerMaster.timeManager.GetDeltaTime();
