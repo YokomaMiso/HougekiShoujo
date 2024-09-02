@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2f368ecd56bdadb46a9d385a7c4a3f52
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - titleCanvas: {fileID: 3921321195368664648, guid: 9935455dab8a8074b9de2cf883de551b,
+      type: 3}
+  - loadCanvas: {fileID: 3921321195368664648, guid: 78bc3f445b06f66429e24942d39080c9,
+      type: 3}
+  - optionCanvas: {fileID: 4432466077039030639, guid: 9153756e2b41858418c0a0d355e7a280,
+      type: 3}
+  - consoleCanvas: {fileID: 4432466077039030639, guid: ce89db31f955e8744add04a0988d3e38,
+      type: 3}
+  - ingameCanvas: {fileID: 4432466077039030639, guid: 1dc3a59cd7d7d25438a4ba9491ef2032,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
