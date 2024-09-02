@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    public static bool slow;
-    public static bool stop;
+    Managers managerMaster;
+    public void SetManagerMaster(Managers _managerMaster) { managerMaster = _managerMaster; }
+
+    public bool slow;
+    public bool stop;
     const float slowRate = 0.1f;
 
-    public static float deltaTime;
+    public void SetSlow(bool _slow) { slow = _slow; }
+    public void SetStop(bool _stop) { stop = _stop; }
 
-    void Update()
-    {
-        if (stop)
-        {
-            deltaTime = 0;
-            return;
-        }
-
-        deltaTime = Time.deltaTime;
-        if (slow) { deltaTime *= slowRate; }
-    }
-
-    static public float GetTime()
+    public float GetDeltaTime()
     {
         if (stop) { return 0; }
-        if (slow) { return Time.deltaTime * 0.1f; }
+        if (slow) { return Time.deltaTime * slowRate; }
 
         return Time.deltaTime;
     }
 
-    public static float TimeRate() { return deltaTime / Time.deltaTime; }
+    public float TimeRate() 
+    {
+        if (stop) { return 0.0f; }
+        if (slow) { return slowRate; }
+
+        return 1.0f;
+    }
 }

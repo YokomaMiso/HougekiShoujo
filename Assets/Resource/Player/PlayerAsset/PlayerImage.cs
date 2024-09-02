@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerImage : MonoBehaviour
 {
     Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
 
     [SerializeField] SpriteRenderer charaSprite;
     [SerializeField] RuntimeAnimatorController idleAnimationController;
@@ -15,10 +17,6 @@ public class PlayerImage : MonoBehaviour
 
     int[] animSpeed = new int[5] { 1, 2, 1, 1, 1 };
 
-    public void SetPlayer(Player _player)
-    {
-        ownerPlayer=_player;
-    }
 
     void Start()
     {
@@ -49,6 +47,6 @@ public class PlayerImage : MonoBehaviour
                 break;
         }
         charaSprite.GetComponent<Animator>().runtimeAnimatorController = applyController;
-        charaSprite.GetComponent<Animator>().speed = animSpeed[num] * TimeManager.TimeRate();
+        charaSprite.GetComponent<Animator>().speed = animSpeed[num] * ownerPlayer.managerMaster.timeManager.TimeRate();
     }
 }

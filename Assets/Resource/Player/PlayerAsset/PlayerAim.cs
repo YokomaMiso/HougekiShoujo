@@ -70,7 +70,7 @@ public class PlayerAim : MonoBehaviour
 
                 case SHELL_TYPE.MORTOR:
                     float limit = attackArea.transform.localScale.x / 2;
-                    aimVector += movement * 5 * TimeManager.deltaTime;
+                    aimVector += movement * 5 * ownerPlayer.managerMaster.timeManager.GetDeltaTime();
                     if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
                     aoeArea.transform.position = attackArea.transform.position + aimVector;
                     break;
@@ -84,10 +84,11 @@ public class PlayerAim : MonoBehaviour
         GameObject projectile = nowShell.GetProjectile();
         GameObject obj;
         float angle;
+        OwnerID id;
 
         switch (nowShellType)
         {
-            case SHELL_TYPE.BLAST:
+            default: //SHELL_TYPE.BLAST
 
                 break;
 
@@ -96,6 +97,10 @@ public class PlayerAim : MonoBehaviour
                 obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
                 angle = Mathf.Atan2(aimVector.z, aimVector.x) * Mathf.Rad2Deg;
                 obj.GetComponent<CanonProjectileBehavior>().SetAngle(angle);
+                obj.GetComponent<CanonProjectileBehavior>().SetPlayer(ownerPlayer);
+
+                id = obj.AddComponent<OwnerID>();
+                id.SetID(ownerPlayer.GetPlayerID());
                 break;
 
             case SHELL_TYPE.MORTOR:
@@ -103,8 +108,16 @@ public class PlayerAim : MonoBehaviour
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;
                 obj.GetComponent<MortarProjectileBehavior>().ProjectileStart(transform.position + aimVector);
+                obj.GetComponent<MortarProjectileBehavior>().SetPlayer(ownerPlayer);
+
+                id = obj.AddComponent<OwnerID>();
+                id.SetID(ownerPlayer.GetPlayerID());
                 break;
         }
+
+
+        
+
     }
 
     void Update()

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerRecoil : MonoBehaviour
 {
+    Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
     const float recoilTime = 1;
     float timer;
     bool isRecoil;
@@ -15,7 +18,7 @@ public class PlayerRecoil : MonoBehaviour
     {
         if (isRecoil)
         {
-            timer += TimeManager.deltaTime;
+            timer += ownerPlayer.managerMaster.timeManager.GetDeltaTime();
             if (timer > recoilTime)
             {
                 isRecoil = false;

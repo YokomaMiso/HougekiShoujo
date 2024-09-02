@@ -7,6 +7,9 @@ public enum CANON_STATE { EMPTY = -1, SHELL_ONE = 0, SHELL_TWO, SHELL_THREE }
 
 public class Player : MonoBehaviour
 {
+    public Managers managerMaster;
+    public void SetManagerMaster(Managers _managerMaster) { managerMaster = _managerMaster; }
+
     [SerializeField] PlayerData playerData;
 
     PlayerMove playerMove;
@@ -16,6 +19,7 @@ public class Player : MonoBehaviour
     PlayerImage playerImage;
 
     int playerID = 0;
+    public int SetPlayerID(int _id) { playerID = _id;  return playerID; }
     public int GetPlayerID() { return playerID; }
     public PlayerData GetPlayerData() { return playerData; }
 
@@ -26,11 +30,17 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerMove = gameObject.GetComponent<PlayerMove>();
+        playerMove.SetPlayer(this);
+
         playerReload = gameObject.GetComponent<PlayerReload>();
+        playerReload.SetPlayer(this);
+
         playerAim = gameObject.GetComponent<PlayerAim>();
-        playerAim.SetPlayer(this, transform.GetChild(1).gameObject, transform.GetChild(2).gameObject);
+        playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
 
         playerRecoil = gameObject.GetComponent<PlayerRecoil>();
+        playerRecoil.SetPlayer(this);
+
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
 
@@ -43,7 +53,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.state != GAME_STATE.IN_GAME) { return; }
+        if (managerMaster.gameManager.state != GAME_STATE.IN_GAME) { return; }
 
         //DEBUG
         //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }

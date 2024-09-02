@@ -21,7 +21,7 @@ public class CameraMove : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.state != GAME_STATE.IN_GAME) { return; }
+        if (player.managerMaster.gameManager.state != GAME_STATE.IN_GAME) { return; }
         if (initialTimer < 1) { InitialAngle(); }
         else
         {
@@ -48,7 +48,7 @@ public class CameraMove : MonoBehaviour
     {
         if (shakeValue == 0) { return; }
 
-        shakeValue -= TimeManager.deltaTime;
+        shakeValue -= player.managerMaster.timeManager.GetDeltaTime();
         if (shakeValue < 0) { shakeValue = 0; }
     }
 
