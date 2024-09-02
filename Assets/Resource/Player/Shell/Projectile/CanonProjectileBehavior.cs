@@ -41,7 +41,11 @@ public class CanonProjectileBehavior : MonoBehaviour
     {
         Vector3 spawnPos = transform.position;
         spawnPos.y = 2;
-        Instantiate(explosion, spawnPos, Quaternion.identity);
+        GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
+
+        OwnerID id;
+        id = obj.AddComponent<OwnerID>();
+        id.SetID(this.transform.GetComponent<OwnerID>().GetID());
     }
 
     void OnTriggerEnter(Collider other)
