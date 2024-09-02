@@ -26,7 +26,7 @@ public class MortarProjectileBehavior : MonoBehaviour
     {
         imageAnimator.speed = 1 * TimeManager.TimeRate();
 
-        timer += TimeManager.deltaTime;
+        timer += TimeManager.GetDeltaTime();
         if (timer > lifeTime) { Destroy(gameObject); }
 
         float timeRate = timer / lifeTime;

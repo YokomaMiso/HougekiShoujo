@@ -25,10 +25,10 @@ public class CanonProjectileBehavior : MonoBehaviour
     {
         imageAnimator.speed = 1 * TimeManager.TimeRate();
 
-        timer += TimeManager.deltaTime;
+        timer += TimeManager.GetDeltaTime();
         if (timer > lifeTime) { Destroy(gameObject); }
 
-        transform.position += transform.forward * speed * TimeManager.deltaTime;
+        transform.position += transform.forward * speed * TimeManager.GetDeltaTime();
     }
 
     public void SetAngle(float _angle)
