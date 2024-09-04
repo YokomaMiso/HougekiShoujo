@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class TitleCanvasBehavior : MonoBehaviour
             switch (selectNum)
             {
                 case 0:
-                    gameManager.ChangeState(GAME_STATE.LOAD);
+                    SceneManager.LoadScene(1);
                     Destroy(gameObject);
                     break;
                 case 1:
