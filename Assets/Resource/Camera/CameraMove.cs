@@ -59,6 +59,8 @@ public class CameraMove : MonoBehaviour
     }
     public void SetCameraShake(float _shakeValue)
     {
+        if (!player.managerMaster.optionData.cameraShakeOn) { return; }
+
         if (_shakeValue <= shakeValue) { return; }
 
         shakeValue = _shakeValue;

@@ -35,7 +35,7 @@ public class Managers : MonoBehaviour
         //‰¼‚ÌƒvƒŒƒCƒ„[¶¬ˆ—
         for (int i = 0; i < playerMaxNum; i++)
         {
-            if (true) { playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity); }
+            if (i == 0) { playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity); }
             else { playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity); }
 
             playerInstance[i].GetComponent<Player>().SetManagerMaster(this);
