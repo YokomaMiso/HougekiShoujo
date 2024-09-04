@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING }
-public enum CANON_STATE { EMPTY = -1, SHELL_ONE = 0, SHELL_TWO, SHELL_THREE }
+public enum CANON_STATE { EMPTY = -1, RELOADED=0 }
 
 public class Player : MonoBehaviour
 {
@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
                         //移動に応じてキャラグラフィックの向き変更
                         DirectionChange(movement);
                     }
-                    else if (inputNum - 3 == GetCanonState())
+                    else if (inputNum - 2 == GetCanonState())
                     {
                         playerAim.Fire(playerImage.transform.localScale);
                         playerState = PLAYER_STATE.ATTACKING;
@@ -103,8 +103,6 @@ public class Player : MonoBehaviour
                     MoveBehavior();
                     break;
                 case 0:
-                case 1:
-                case 2:
                     if (canonState == CANON_STATE.EMPTY)
                     {
                         playerReload.Reload(inputNum);
@@ -114,15 +112,13 @@ public class Player : MonoBehaviour
                     {
                         if (GetCanonState() == inputNum)
                         {
-                            playerAim.AimStart(playerData.GetShell(inputNum));
+                            playerAim.AimStart(playerData.GetShell());
                             playerState = PLAYER_STATE.AIMING;
                         }
-                        else
-                        {
-                            playerReload.Reload(inputNum);
-                            playerState = PLAYER_STATE.RELOADING;
-                        }
                     }
+                    break;
+                case 1:
+  
                     break;
             }
 
@@ -151,13 +147,13 @@ public class Player : MonoBehaviour
     int InputCheck()
     {
         int reloadValue = -1;
-        if (Input.GetButtonDown("X")) { reloadValue = 0; }
-        if (Input.GetButtonDown("Y")) { reloadValue = 1; }
-        if (Input.GetButtonDown("Cancel")) { reloadValue = 2; }
+        //if (Input.GetButtonDown("X")) { reloadValue = 0; }
+        if (Input.GetButtonDown("Y")) { reloadValue = 0; }
+        if (Input.GetButtonDown("Cancel")) { reloadValue = 1; }
 
-        if (Input.GetButtonUp("X")) { reloadValue = 3; }
-        if (Input.GetButtonUp("Y")) { reloadValue = 4; }
-        if (Input.GetButtonUp("Cancel")) { reloadValue = 5; }
+        //if (Input.GetButtonUp("X")) { reloadValue = 3; }
+        if (Input.GetButtonUp("Y")) { reloadValue = 2; }
+        if (Input.GetButtonUp("Cancel")) { reloadValue = 3; }
 
         return reloadValue;
     }

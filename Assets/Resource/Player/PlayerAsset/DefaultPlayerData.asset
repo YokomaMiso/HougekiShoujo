@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
   m_Name: DefaultPlayerData
   m_EditorClassIdentifier: 
-  statusValue: 0100000001000000010000000100000001000000
-  shells:
-  - {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
-  - {fileID: 11400000, guid: e153c3496aaafbd4c80861b57f56fa94, type: 2}
-  - {fileID: 11400000, guid: 74998d58e3c668641a22ecfb124d6544, type: 2}
-  weapon: {fileID: 11400000, guid: 758c0598117e18c4292312a2c0e48d9a, type: 2}
+  id: 0
+  moveSpeed: 0
+  shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
+  subWeapon: {fileID: 11400000, guid: 758c0598117e18c4292312a2c0e48d9a, type: 2}

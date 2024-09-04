@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920a068138514e64bb8a379f64afbcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2522134910337228876, guid: 6b481421d924a114c8883c6f268f4518,
-    type: 3}
+  playerPrefab:
+  - {fileID: 2522134910337228876, guid: 6b481421d924a114c8883c6f268f4518, type: 3}
   otherPlayerPrefab: {fileID: 2522134910337228876, guid: bcfe3edfcc728a849a9b5c1b4fce4af6,
     type: 3}
   optionData: {fileID: 11400000, guid: b1541ee7568dc4744a860ae65a90629c, type: 2}

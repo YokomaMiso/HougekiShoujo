@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public class Managers : MonoBehaviour
 {
     int playerID;
+    int characterID = 0;
 
-    [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject[] playerPrefab;
     [SerializeField] GameObject otherPlayerPrefab;
     GameObject[] playerInstance;
     const int playerMaxNum = 2;
@@ -35,12 +37,11 @@ public class Managers : MonoBehaviour
         //‰¼‚ÌƒvƒŒƒCƒ„[¶¬ˆ—
         for (int i = 0; i < playerMaxNum; i++)
         {
-            if (i == 0) { playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity); }
+            if (i == 0) { playerInstance[i] = Instantiate(playerPrefab[characterID], pos[i], Quaternion.identity); }
             else { playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity); }
 
             playerInstance[i].GetComponent<Player>().SetManagerMaster(this);
         }
-
 
     }
 }
