@@ -112,6 +112,7 @@ public class OptionCanvasBehavior : MonoBehaviour
             if (selectNum == 5)
             {
                 Managers.instance.SaveOptionData(optionData);
+                Managers.instance.canvasManager.ChangeCanvas(Managers.instance.prevState);
                 Managers.instance.ChangeState(Managers.instance.prevState);
                 Destroy(gameObject);
             }

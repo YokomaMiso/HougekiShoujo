@@ -61,6 +61,7 @@ public class TitleCanvasBehavior : MonoBehaviour
                     break;
                 case 1:
                     Managers.instance.ChangeState(GAME_STATE.OPTION);
+                    Managers.instance.canvasManager.ChangeCanvas(GAME_STATE.OPTION);
                     Destroy(gameObject);
                     break;
             }
