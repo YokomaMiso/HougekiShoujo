@@ -68,7 +68,7 @@ public class SendDataCreator
     /// </summary>
     /// <param name="_data">外部で作成されたインスタンスを指定します</param>
     /// <returns>渡したインスタンスをバイト配列として返します</returns>
-    byte[] StructToByte(PlayerNetData _data)
+    public byte[] StructToByte(PlayerNetData _data)
     {
         int size = Marshal.SizeOf(_data.mainPacketData);
 
@@ -85,7 +85,7 @@ public class SendDataCreator
     /// バイト配列から構造体に組み直します
     /// </summary>
     /// <returns>組まれた構造体です</returns>
-    PacketDataForPerFrame ByteToStruct()
+    public PacketDataForPerFrame ByteToStruct()
     {
         PacketDataForPerFrame _data = new PacketDataForPerFrame();
         int size = Marshal.SizeOf(_data);
@@ -97,10 +97,5 @@ public class SendDataCreator
         gch.Free();
 
         return _data;
-    }
-
-    public int GetBytesLength(byte[] element)
-    {
-        return Marshal.SizeOf(element);
     }
 }

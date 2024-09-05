@@ -10,9 +10,9 @@ public class OSCManager : MonoBehaviour
     //////////////////////////////
 
     //自身のネットワークデータ
-    SendDataCreator.PlayerNetData myNetData = new SendDataCreator.PlayerNetData();
+    SendDataCreator.PlayerNetData myNetData = default;
 
-    SendDataCreator netIstance = new SendDataCreator();
+    SendDataCreator netInstance = new SendDataCreator();
 
     //1フレーム前の全プレイヤーデータ格納用
     List<SendDataCreator.PlayerNetData> beforeNetData = new List<SendDataCreator.PlayerNetData>();
@@ -42,14 +42,25 @@ public class OSCManager : MonoBehaviour
 
 
         myNetData.mainPacketData.comData.myIP = "255.255.255.255";
-        myNetData.mainPacketData.comData.targetIP = "255.255.255.255";
+        myNetData.mainPacketData.comData.targetIP = "127.0.0.1";
         myNetData.mainPacketData.comData.myPort = 8000;
         myNetData.mainPacketData.comData.targetPort = 8001;
         myNetData.mainPacketData.comData.receiveAddress = "/example/server";
         myNetData.mainPacketData.comData.sendAddress = "/example/client";
 
-        OnEnable();
-        
+        //if (server == null)
+        //{
+        //    server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
+        //}
+
+        //server.TryAddMethodPair(myNetData.mainPacketData.comData.receiveAddress, ReadValue, MainThreadMethod);
+
+        if (client == null)
+        {
+            client = new OscClient(myNetData.mainPacketData.comData.targetIP, myNetData.mainPacketData.comData.targetPort);
+
+        }
+
     }
 
     // Update is called once per frame
@@ -57,32 +68,21 @@ public class OSCManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            client.Send(myNetData.mainPacketData.comData.receiveAddress, 1);
+            SendValue();
         }
     }
 
     private void OnEnable()
     {
 
-        if(server == null)
-        {
-            server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
-        }
-
-        server.TryAddMethodPair(myNetData.mainPacketData.comData.receiveAddress, ReadValue, MainThreadMethod);
-
-        if(client == null)
-        {
-            client = new OscClient(myNetData.mainPacketData.comData.targetIP, myNetData.mainPacketData.comData.targetPort);
-
-        }
+        
         
 
     }
 
     private void OnDisable()
     {
-        server.RemoveMethod(myNetData.mainPacketData.comData.receiveAddress, ReadValue);
+        //server.RemoveMethod(myNetData.mainPacketData.comData.receiveAddress, ReadValue);
     }
 
     private void ReadValue(OscMessageValues values)
@@ -92,7 +92,8 @@ public class OSCManager : MonoBehaviour
 
     private void SendValue()
     {
-        client.Send(myNetData.mainPacketData.comData.receiveAddress, myNetData.sendData, netIstance.GetBytesLength(myNetData.sendData));
+        myNetData.sendData = netInstance.StructToByte(myNetData);
+        client.Send(myNetData.mainPacketData.comData.receiveAddress, myNetData.sendData, myNetData.sendData.Length);
     }
 
     private void MainThreadMethod()
