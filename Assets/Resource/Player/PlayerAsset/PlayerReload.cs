@@ -7,9 +7,15 @@ public class PlayerReload : MonoBehaviour
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-    [SerializeField] float reloadTime = 2;
+    float reloadTime = 2;
     float timer;
     int shellNum = -1;
+
+    void Start()
+    {
+        reloadTime = ownerPlayer.GetPlayerData().GetShell().GetReloadTime();    
+    }
+
     public int ReloadBehavior()
     {
         timer += Managers.instance.timeManager.GetDeltaTime();

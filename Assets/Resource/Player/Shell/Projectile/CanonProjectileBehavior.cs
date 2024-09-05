@@ -7,7 +7,7 @@ public class CanonProjectileBehavior : MonoBehaviour
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-    [SerializeField] GameObject explosion;
+    
     [SerializeField] Animator imageAnimator;
     [SerializeField] RuntimeAnimatorController animatorController;
     int animNum = 0;
@@ -24,6 +24,7 @@ public class CanonProjectileBehavior : MonoBehaviour
 
     void Start()
     {
+
         Vector3 forwardVector = transform.forward;
         imageAnimator.runtimeAnimatorController = animatorController;
 
@@ -54,12 +55,9 @@ public class CanonProjectileBehavior : MonoBehaviour
     {
         Vector3 spawnPos = transform.position;
         spawnPos.y = 2;
+        GameObject explosion = ownerPlayer.GetPlayerData().GetShell().GetExplosion();
         GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
-
-        OwnerID id;
-        id = obj.AddComponent<OwnerID>();
-        id.SetID(this.transform.GetComponent<OwnerID>().GetID());
     }
 
     void OnTriggerEnter(Collider other)
