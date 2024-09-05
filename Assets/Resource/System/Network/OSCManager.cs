@@ -81,6 +81,11 @@ public class OSCManager : MonoBehaviour
             client.Send(myNetData.mainPacketData.comData.receiveAddress, 1);
             //SendValue();
         }
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            Debug.Log(receiveNum);
+        }
     }
 
     private void OnEnable()
@@ -104,7 +109,7 @@ public class OSCManager : MonoBehaviour
     private void ReadValue(OscMessageValues values)
     {
         //values.ReadBlobElement(0, ref myNetData.receiveData);
-        receiveNum = values.ReadIntElement(0);
+        receiveNum += values.ReadIntElement(0);
     }
 
     private void SendValue()
