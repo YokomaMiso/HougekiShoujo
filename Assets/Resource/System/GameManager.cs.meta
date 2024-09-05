@@ -14,7 +14,7 @@ MonoImporter:
       type: 3}
   - ingameCanvas: {fileID: 4432466077039030639, guid: 1dc3a59cd7d7d25438a4ba9491ef2032,
       type: 3}
-  executionOrder: 0
+  executionOrder: -45
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

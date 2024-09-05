@@ -15,19 +15,8 @@ public class DisplayShellIcon : MonoBehaviour
         shellIcon = transform.GetChild(0).GetComponent<Image>();
         iconFrame = transform.GetChild(2).GetComponent<Image>();
 
-        //仮の処理　プレイヤーを探す
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            if (!player.GetComponent<Player>()) { continue; }
-
-            ownerPlayer = player.GetComponent<Player>();
-            if (ownerPlayer.GetPlayerID() == 0)
-            {
-                shellIcon.sprite = ownerPlayer.GetPlayerData().GetShell().GetSprite();
-                break;
-            }
-        }
+        ownerPlayer = Managers.instance.gameManager.GetPlayer(Managers.instance.playerID).GetComponent<Player>();
+        shellIcon.sprite = ownerPlayer.GetPlayerData().GetShell().GetSprite();
 
         iconFrame.color = Color.clear;
     }

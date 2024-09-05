@@ -8,6 +8,7 @@ public class ExplosionBehavior : MonoBehaviour
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
     [SerializeField] Animator imageAnimator;
+    [SerializeField, Tag] string hitTag;
 
     float lifeTime;
     float timer;
@@ -28,12 +29,20 @@ public class ExplosionBehavior : MonoBehaviour
 
     void Update()
     {
-        imageAnimator.speed = 2 * ownerPlayer.managerMaster.timeManager.TimeRate();
+        imageAnimator.speed = 2 * Managers.instance.timeManager.TimeRate();
 
-        timer += ownerPlayer.managerMaster.timeManager.GetDeltaTime();
+        timer += Managers.instance.timeManager.GetDeltaTime();
         if (timer >= lifeTime)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == hitTag)
+        {
+            other.GetComponent<Player>().SetDead();
         }
     }
 }

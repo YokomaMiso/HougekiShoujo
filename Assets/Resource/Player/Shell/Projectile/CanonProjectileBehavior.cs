@@ -18,6 +18,8 @@ public class CanonProjectileBehavior : MonoBehaviour
     float angle = 0;
     float timer = 0;
 
+    [SerializeField, Tag] string hitTag;
+
     void Start()
     {
         Vector3 forwardVector = transform.forward;
@@ -26,9 +28,9 @@ public class CanonProjectileBehavior : MonoBehaviour
 
     void Update()
     {
-        imageAnimator.speed = 1 * ownerPlayer.managerMaster.timeManager.TimeRate();
+        imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
 
-        float deltaTime = ownerPlayer.managerMaster.timeManager.GetDeltaTime();
+        float deltaTime = Managers.instance.timeManager.GetDeltaTime();
 
         timer += deltaTime;
         if (timer > lifeTime) { Destroy(gameObject); }
@@ -56,9 +58,9 @@ public class CanonProjectileBehavior : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == hitTag)
         {
-            Destroy(gameObject);
+            if (other.GetComponent<Player>() != ownerPlayer) { Destroy(gameObject); }
         }
     }
 }

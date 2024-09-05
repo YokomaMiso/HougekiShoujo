@@ -11,7 +11,7 @@ public class RadioBoxIndexSetting : MonoBehaviour
     {
         on = _on;
 
-        Color[] colors = new Color[2] { new Color(1, 1, 0.8f), Color.white };
+        Color[] colors = new Color[2] { Color.yellow, Color.white };
 
         if (_on)
         {

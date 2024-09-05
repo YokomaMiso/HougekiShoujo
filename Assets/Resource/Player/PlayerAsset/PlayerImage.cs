@@ -7,7 +7,6 @@ public class PlayerImage : MonoBehaviour
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-
     [SerializeField] SpriteRenderer charaSprite;
     [SerializeField] RuntimeAnimatorController idleAnimationController;
     [SerializeField] RuntimeAnimatorController runAnimationController;
@@ -47,6 +46,6 @@ public class PlayerImage : MonoBehaviour
                 break;
         }
         charaSprite.GetComponent<Animator>().runtimeAnimatorController = applyController;
-        charaSprite.GetComponent<Animator>().speed = animSpeed[num] * ownerPlayer.managerMaster.timeManager.TimeRate();
+        charaSprite.GetComponent<Animator>().speed = animSpeed[num] * Managers.instance.timeManager.TimeRate();
     }
 }

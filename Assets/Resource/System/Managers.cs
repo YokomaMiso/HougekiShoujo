@@ -1,47 +1,74 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Text;
+using UnityEngine.SceneManagement;
+
+public enum GAME_STATE { TITLE = 0, ROOM, IN_GAME, OPTION, };
 
 public class Managers : MonoBehaviour
 {
-    int playerID;
-    int characterID = 0;
+    /*シングルトン*/
+    public static Managers instance;
 
-    [SerializeField] GameObject[] playerPrefab;
-    [SerializeField] GameObject otherPlayerPrefab;
-    GameObject[] playerInstance;
-    const int playerMaxNum = 2;
-
-    //仮座標
-    Vector3[] pos = new Vector3[2] { Vector3.forward * 3, Vector3.left * 3 };
-
+    /*セーブデータ*/
     public OptionData optionData;
 
+    /*ゲーム全体のステート*/
+    public GAME_STATE state = GAME_STATE.TITLE;
+    public GAME_STATE prevState = GAME_STATE.TITLE;
+
+    /*ゲーム内で使用するID*/
+    public int playerID;
+    int characterID = 0;
+
+    /*各種マネージャ*/
     public GameManager gameManager;
     public SaveManager saveManager;
     public TimeManager timeManager;
+    public CanvasManager canvasManager;
 
-    void Start()
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            //シングルトン化
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            //各マネージャの指定
+            ManagerLoad();
+            //オプションデータのロード
+            optionData = saveManager.LoadOptionData();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    void ManagerLoad()
     {
         gameManager = GetComponent<GameManager>();
-        gameManager.SetManagerMaster(this);
         saveManager = GetComponent<SaveManager>();
-        saveManager.SetManagerMaster(this);
         timeManager = GetComponent<TimeManager>();
-        timeManager.SetManagerMaster(this);
+        canvasManager = GetComponent<CanvasManager>();
+    }
 
-        saveManager.LoadOptionData();
+    public void ChangeScene(GAME_STATE _state)
+    {
+        if (_state >= GAME_STATE.OPTION) { return; }
 
-        playerInstance = new GameObject[playerMaxNum];
-        //仮のプレイヤー生成処理
-        for (int i = 0; i < playerMaxNum; i++)
-        {
-            if (i == 0) { playerInstance[i] = Instantiate(playerPrefab[characterID], pos[i], Quaternion.identity); }
-            else { playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity); }
+        SceneManager.LoadScene((int)_state);
+    }
 
-            playerInstance[i].GetComponent<Player>().SetManagerMaster(this);
-        }
+    public void ChangeState(GAME_STATE _state)
+    {
+        prevState = state;
+        state = _state;
+    }
 
+    public OptionData GetOptionData() { return optionData; }
+    public void SaveOptionData(OptionData _receiveData)
+    {
+        optionData = _receiveData;
+        saveManager.SaveOptionData(optionData);
     }
 }

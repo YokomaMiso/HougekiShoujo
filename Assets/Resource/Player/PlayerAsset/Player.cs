@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING }
-public enum CANON_STATE { EMPTY = -1, RELOADED=0 }
+public enum CANON_STATE { EMPTY = -1, RELOADED = 0 }
 
 public class Player : MonoBehaviour
 {
-    public Managers managerMaster;
-    public void SetManagerMaster(Managers _managerMaster) { managerMaster = _managerMaster; }
-
-    [SerializeField] PlayerData playerData;
+    PlayerData playerData;
 
     PlayerMove playerMove;
     PlayerReload playerReload;
@@ -18,46 +15,61 @@ public class Player : MonoBehaviour
     PlayerRecoil playerRecoil;
     PlayerImage playerImage;
 
-    int playerID = 0;
-    public int SetPlayerID(int _id) { playerID = _id;  return playerID; }
+    int playerID;
+    public void SetPlayerID(int _id) { playerID = _id; }
     public int GetPlayerID() { return playerID; }
+
+    public void SetPlayerData(PlayerData _playerData) { playerData = _playerData; }
     public PlayerData GetPlayerData() { return playerData; }
 
     public PLAYER_STATE playerState = PLAYER_STATE.IDLE;
     public CANON_STATE canonState = CANON_STATE.EMPTY;
     public int GetCanonState() { return (int)canonState; }
 
+    bool IsMine() { return playerID == Managers.instance.playerID; }
+
+    bool alive = true;
+    public void SetDead()
+    {
+        alive = false;
+        if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
+        if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
+    }
+    public bool GetAlive() { return alive; }
+
     void Start()
     {
-        playerMove = gameObject.GetComponent<PlayerMove>();
-        playerMove.SetPlayer(this);
+        if (IsMine())
+        {
+            playerMove = gameObject.GetComponent<PlayerMove>();
+            playerMove.SetPlayer(this);
 
-        playerReload = gameObject.GetComponent<PlayerReload>();
-        playerReload.SetPlayer(this);
+            playerReload = gameObject.GetComponent<PlayerReload>();
+            playerReload.SetPlayer(this);
 
-        playerAim = gameObject.GetComponent<PlayerAim>();
-        playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
+            playerAim = gameObject.GetComponent<PlayerAim>();
+            playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
 
-        playerRecoil = gameObject.GetComponent<PlayerRecoil>();
-        playerRecoil.SetPlayer(this);
-
+            playerRecoil = gameObject.GetComponent<PlayerRecoil>();
+            playerRecoil.SetPlayer(this);
+        }
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
-
-        //プレイヤーが自分のキャラクターなら
-        if (playerID == 0)
-        {
-            Camera.main.GetComponent<CameraMove>().SetPlayer(this);
-        }
     }
 
     void Update()
     {
-        if (managerMaster.gameManager.state != GAME_STATE.IN_GAME) { return; }
+        if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
 
         //DEBUG
         //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }
 
+        if (IsMine()) { OwnPlayerBehavior(); }
+        else { }
+    }
+
+    void OwnPlayerBehavior()
+    {
         int inputNum = InputCheck();
 
         if (InAction())
@@ -118,11 +130,9 @@ public class Player : MonoBehaviour
                     }
                     break;
                 case 1:
-  
+
                     break;
             }
-
-
         }
     }
 

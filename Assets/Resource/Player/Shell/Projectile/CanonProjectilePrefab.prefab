@@ -73,6 +73,7 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 81c0c6dd80912384abc8b8352d447bb1, type: 2}
   speed: 10
   lifeTime: 2
+  hitTag: Player
 --- !u!1 &2008790680177907739
 GameObject:
   m_ObjectHideFlags: 0

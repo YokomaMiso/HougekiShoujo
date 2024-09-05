@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    Managers managerMaster;
-    public void SetManagerMaster(Managers _managerMaster) { managerMaster = _managerMaster; }
-
     public bool slow;
     public bool stop;
     const float slowRate = 0.1f;

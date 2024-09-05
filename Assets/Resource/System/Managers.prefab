@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 2265797116704708556}
   - component: {fileID: 5065934935842733564}
   - component: {fileID: 8405644380948887651}
+  - component: {fileID: 6183413137266105822}
   m_Layer: 0
-  m_Name: Managers_Ingame
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,14 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920a068138514e64bb8a379f64afbcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab:
-  - {fileID: 2522134910337228876, guid: 6b481421d924a114c8883c6f268f4518, type: 3}
-  otherPlayerPrefab: {fileID: 2522134910337228876, guid: bcfe3edfcc728a849a9b5c1b4fce4af6,
-    type: 3}
   optionData: {fileID: 11400000, guid: b1541ee7568dc4744a860ae65a90629c, type: 2}
+  state: 0
+  prevState: 0
+  playerID: 0
   gameManager: {fileID: 0}
   saveManager: {fileID: 0}
   timeManager: {fileID: 0}
+  canvasManager: {fileID: 0}
 --- !u!114 &2265797116704708556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,21 +68,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f368ecd56bdadb46a9d385a7c4a3f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managerMaster: {fileID: 0}
-  startUpState: 4
-  state: 4
-  prevState: 4
-  canvases: []
-  titleCanvas: {fileID: 3921321195368664648, guid: 9935455dab8a8074b9de2cf883de551b,
+  playerPrefab: {fileID: 2522134910337228876, guid: 6b481421d924a114c8883c6f268f4518,
     type: 3}
-  loadCanvas: {fileID: 3921321195368664648, guid: 78bc3f445b06f66429e24942d39080c9,
+  otherPlayerPrefab: {fileID: 2522134910337228876, guid: bcfe3edfcc728a849a9b5c1b4fce4af6,
     type: 3}
-  optionCanvas: {fileID: 4432466077039030639, guid: 9153756e2b41858418c0a0d355e7a280,
-    type: 3}
-  consoleCanvas: {fileID: 4432466077039030639, guid: ce89db31f955e8744add04a0988d3e38,
-    type: 3}
-  ingameCanvas: {fileID: 4432466077039030639, guid: 1dc3a59cd7d7d25438a4ba9491ef2032,
-    type: 3}
+  playerDatas:
+  - {fileID: 11400000, guid: 4263fdabccc477f44a3fe0d41781cf02, type: 2}
+  - {fileID: 11400000, guid: c856c19e79586664899c176953f21bd5, type: 2}
+  - {fileID: 11400000, guid: ea5e95e04c0f14c4990e57486f7b9d47, type: 2}
 --- !u!114 &5065934935842733564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,3 +104,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slow: 0
   stop: 0
+--- !u!114 &6183413137266105822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662274610589041154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd86f04291569a49a160c096bad0931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvases: []
+  titleCanvas: {fileID: 3921321195368664648, guid: 9935455dab8a8074b9de2cf883de551b,
+    type: 3}
+  roomCanvas: {fileID: 4432466077039030639, guid: ce89db31f955e8744add04a0988d3e38,
+    type: 3}
+  ingameCanvas: {fileID: 4432466077039030639, guid: 1dc3a59cd7d7d25438a4ba9491ef2032,
+    type: 3}
+  optionCanvas: {fileID: 4432466077039030639, guid: 9153756e2b41858418c0a0d355e7a280,
+    type: 3}
