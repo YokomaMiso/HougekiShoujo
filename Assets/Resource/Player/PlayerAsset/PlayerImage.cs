@@ -7,7 +7,6 @@ public class PlayerImage : MonoBehaviour
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-
     [SerializeField] SpriteRenderer charaSprite;
     [SerializeField] RuntimeAnimatorController idleAnimationController;
     [SerializeField] RuntimeAnimatorController runAnimationController;

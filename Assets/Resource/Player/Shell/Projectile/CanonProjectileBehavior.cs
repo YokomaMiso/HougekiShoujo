@@ -18,6 +18,8 @@ public class CanonProjectileBehavior : MonoBehaviour
     float angle = 0;
     float timer = 0;
 
+    [SerializeField, Tag] string hitTag;
+
     void Start()
     {
         Vector3 forwardVector = transform.forward;
@@ -56,9 +58,9 @@ public class CanonProjectileBehavior : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == hitTag)
         {
-            Destroy(gameObject);
+            if (other.GetComponent<Player>() != ownerPlayer) { Destroy(gameObject); }
         }
     }
 }
