@@ -10,12 +10,20 @@ public class Shell : ScriptableObject
     [SerializeField, Header("Shell Icon")] Sprite shellIcon;
     [SerializeField, Header("Shell Type")] SHELL_TYPE type;
     [SerializeField, Header("Projectile")] GameObject projectile;
+    [SerializeField, Header("Explosion")] GameObject explosion;
     [SerializeField, Header("Explain"), TextArea(1, 2)] string shellExplain;
 
     [SerializeField, Header("Reload Time")] float reloadTime;
+    [SerializeField, Header("Recoil Time")] float recoilTime;
+    [SerializeField, Header("Aim Range")] float aimRange;
 
     public Sprite GetShellIcon() { return shellIcon; }
     public SHELL_TYPE GetShellType() { return type; }
     public GameObject GetProjectile() {  return projectile; }
+    public GameObject GetExplosion() {  return explosion; }
     public string GetShellExplain() {  return shellExplain; }
+
+    public float GetReloadTime() {  return reloadTime; }
+    public float GetRecoilTime() {  return recoilTime; }
+    public float GetAimRange() {  return aimRange; }
 }

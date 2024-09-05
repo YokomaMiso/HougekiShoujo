@@ -12,25 +12,29 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] Material[] attackAreaMat;
 
     Vector3 aimVector = Vector3.zero;
-    Shell nowShell;
-    SHELL_TYPE nowShellType;
+    Shell shellData;
+
     public void SetPlayer(Player _player, GameObject _aoeArea, GameObject _attackArea)
     {
         ownerPlayer = _player;
+        shellData = ownerPlayer.GetPlayerData().GetShell();
+
+        attackArea = _attackArea;
+        float aimRange = shellData.GetAimRange();
+        attackArea.transform.localScale = new Vector3(aimRange, aimRange, 1);
+        attackArea.SetActive(false);
 
         aoeArea = _aoeArea;
-        attackArea = _attackArea;
-
+        float explosionRadius = shellData.GetExplosion().GetComponent<SphereCollider>().radius;
+        float explosionScale = shellData.GetExplosion().transform.localScale.x;
+        float explosionRange = explosionRadius * 2 * explosionScale;
+        aoeArea.transform.localScale = new Vector3(explosionRange, explosionRange, 1);
         aoeArea.GetComponent<MeshRenderer>().sortingOrder = 1;
-        attackArea.SetActive(false);
         aoeArea.SetActive(false);
     }
-    public void AimStart(Shell _shell)
+    public void AimStart()
     {
-        nowShell = _shell;
-        nowShellType = nowShell.GetShellType();
-
-        switch (nowShellType)
+        switch (shellData.GetShellType())
         {
             case SHELL_TYPE.BLAST:
                 attackArea.SetActive(true);
@@ -46,6 +50,8 @@ public class PlayerAim : MonoBehaviour
                 aoeArea.SetActive(true);
                 break;
         }
+
+        Camera.main.GetComponent<CameraMove>().SetCameraFar(shellData.GetAimRange() / 2);
     }
 
     public Vector3 AimMove()
@@ -56,7 +62,7 @@ public class PlayerAim : MonoBehaviour
 
         if (movement != Vector3.zero)
         {
-            switch (nowShellType)
+            switch (shellData.GetShellType())
             {
                 case SHELL_TYPE.BLAST:
                     attackAreaMat[0].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
@@ -81,16 +87,16 @@ public class PlayerAim : MonoBehaviour
 
     public void Fire(Vector3 _scale)
     {
-        GameObject projectile = nowShell.GetProjectile();
+        GameObject projectile = shellData.GetProjectile();
         GameObject obj;
         float angle;
         OwnerID id;
 
-        switch (nowShellType)
+        switch (shellData.GetShellType())
         {
             default: //SHELL_TYPE.BLAST
                 angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
-                const float blastDistance = 1.5f; 
+                const float blastDistance = 1.5f;
                 obj = Instantiate(projectile, transform.position + aimVector * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
 
                 id = obj.AddComponent<OwnerID>();
@@ -120,6 +126,7 @@ public class PlayerAim : MonoBehaviour
                 break;
         }
 
+        Camera.main.GetComponent<CameraMove>().ResetCameraFar();
     }
 
     void Update()

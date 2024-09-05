@@ -13,6 +13,10 @@ public class CameraMove : MonoBehaviour
 
     float shakeValue;
 
+    float targetFar = 5;
+    const float defaultFar = 5;
+    float aimTimer;
+
     void Start()
     {
     }
@@ -26,6 +30,7 @@ public class CameraMove : MonoBehaviour
         else
         {
             CameraShakeUpdate();
+            FarUpdate();
             Move(player.transform.position);
         }
     }
@@ -51,6 +56,16 @@ public class CameraMove : MonoBehaviour
         shakeValue -= Managers.instance.timeManager.GetDeltaTime();
         if (shakeValue < 0) { shakeValue = 0; }
     }
+    void FarUpdate()
+    {
+        Camera camera = GetComponent<Camera>();
+        if (camera.orthographicSize == targetFar) { return; }
+
+        aimTimer += Time.deltaTime;
+        if (aimTimer > 1) { aimTimer = 1; }
+        float nowFar = Mathf.MoveTowards(camera.orthographicSize, targetFar, aimTimer);
+        camera.orthographicSize = nowFar;
+    }
 
     public void Move(Vector3 _pos)
     {
@@ -65,4 +80,7 @@ public class CameraMove : MonoBehaviour
 
         shakeValue = _shakeValue;
     }
+    public void SetCameraFar(float _far) { targetFar = _far; }
+    public void ResetCameraFar() { targetFar = defaultFar; aimTimer = 0; }
+
 }

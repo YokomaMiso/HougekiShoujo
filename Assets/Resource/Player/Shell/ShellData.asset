@@ -16,4 +16,9 @@ MonoBehaviour:
   type: 0
   projectile: {fileID: 3179393461812120061, guid: 5fbefd8f387895448bc643a35cd119ea,
     type: 3}
+  explosion: {fileID: 3179393461812120061, guid: 5fbefd8f387895448bc643a35cd119ea,
+    type: 3}
   shellExplain: "\u52D5\u304D\u306F\u901F\u3044\u304C\u5C04\u7A0B\u304C\u77ED\u3044\n\u767A\u5C04\u5F8C\u3059\u3050\u306B\u7206\u767A\u3059\u308B"
+  reloadTime: 1.5
+  recoilTime: 1.5
+  aimRange: 5
