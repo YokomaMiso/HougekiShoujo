@@ -18,7 +18,7 @@ public class Managers : MonoBehaviour
     public GAME_STATE prevState = GAME_STATE.TITLE;
 
     /*ゲーム内で使用するID*/
-    int playerID;
+    public int playerID;
     int characterID = 0;
 
     /*各種マネージャ*/
@@ -63,7 +63,6 @@ public class Managers : MonoBehaviour
     {
         prevState = state;
         state = _state;
-        canvasManager.ChangeCanvas(state);
     }
 
     public OptionData GetOptionData() { return optionData; }

@@ -8,8 +8,10 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (Input.GetButtonDown("Submit"))
         {
-            Managers.instance.ChangeScene(GAME_STATE.IN_GAME);
-            Managers.instance.ChangeState(GAME_STATE.IN_GAME);
+            GAME_STATE sendState = GAME_STATE.IN_GAME;
+
+            Managers.instance.ChangeScene(sendState);
+            Managers.instance.ChangeState(sendState);
             Destroy(gameObject);
         }
     }
