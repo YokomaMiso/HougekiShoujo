@@ -8,15 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    Managers managerMaster;
-    public void SetManagerMaster(Managers _managerMaster) { managerMaster = _managerMaster; }
-
 
     [SerializeField] PlayerData defaultPlayerData;
-    PlayerData initializePlayerData;
 
     [SerializeField] OptionData defaultOptionData;
-    OptionData initializeOptionData;
 
     string saveDataFilePath;
     string optionDataFilePath;
@@ -30,8 +25,6 @@ public class SaveManager : MonoBehaviour
         saveDataFilePath = Application.persistentDataPath + "/savedata";
         optionDataFilePath = Application.persistentDataPath + "/optiondata";
         fileExtension = ".json";
-        initializePlayerData = defaultPlayerData;
-        initializeOptionData = defaultOptionData;
     }
     void Start()
     {
@@ -103,14 +96,11 @@ public class SaveManager : MonoBehaviour
         }
     }
     */
-    public void SaveOptionData()
+    public void SaveOptionData(OptionData _receiveData)
     {
         StreamWriter writer;
 
-        OptionData od;
-        od = managerMaster.optionData;
-
-        string jsonstr = JsonUtility.ToJson(od);
+        string jsonstr = JsonUtility.ToJson(_receiveData);
 
         string loadPath = optionDataFilePath + fileExtension;
 
@@ -119,8 +109,10 @@ public class SaveManager : MonoBehaviour
         writer.Flush();
         writer.Close();
     }
-    public void LoadOptionData()
+    public OptionData LoadOptionData()
     {
+        OptionData returnData;
+
         string loadPath = saveDataFilePath + fileExtension;
         //ファイルが存在している
         if (File.Exists(loadPath))
@@ -131,14 +123,15 @@ public class SaveManager : MonoBehaviour
             string datastr = reader.ReadToEnd();
             reader.Close();
 
-            od = JsonUtility.FromJson<OptionData>(datastr);
-            managerMaster.optionData = od;
+            returnData = JsonUtility.FromJson<OptionData>(datastr);
         }
         //ファイルが存在しない
         else
         {
-            managerMaster.optionData = initializeOptionData;
-            SaveOptionData();
+            returnData = defaultOptionData;
+            SaveOptionData(returnData);
         }
+
+        return returnData;
     }
 }

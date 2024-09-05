@@ -31,6 +31,6 @@ public class VolumeIndexSetting : MonoBehaviour
         if (nowValue > maxValue) { nowValue = maxValue; }
 
         transform.GetChild(1).GetComponent<Slider>().value = nowValue;
-        transform.GetChild(2).GetChild(0).GetComponent<Text>().text = nowValue.ToString();
+        transform.GetChild(2).GetChild(0).GetComponent<Text>().text = nowValue.ToString("f1");
     }
 }
