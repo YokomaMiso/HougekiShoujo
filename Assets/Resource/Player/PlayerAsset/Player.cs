@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
 
         if (InAction())
         {
+            playerMove.MoveStop();
+
             switch (playerState)
             {
                 case PLAYER_STATE.RELOADING:
