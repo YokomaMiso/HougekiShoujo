@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageAnimator: {fileID: 8277721792466392800}
+  hitTag: Player
 --- !u!135 &1166596283970069200
 SphereCollider:
   m_ObjectHideFlags: 0
