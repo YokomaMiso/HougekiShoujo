@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
                     {
                         if (GetCanonState() == inputNum)
                         {
-                            playerAim.AimStart(playerData.GetShell());
+                            playerAim.AimStart();
                             playerState = PLAYER_STATE.AIMING;
                         }
                     }
