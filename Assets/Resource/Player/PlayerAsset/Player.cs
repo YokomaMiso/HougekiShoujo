@@ -7,9 +7,6 @@ public enum CANON_STATE { EMPTY = -1, RELOADED=0 }
 
 public class Player : MonoBehaviour
 {
-    public Managers managerMaster;
-    public void SetManagerMaster(Managers _managerMaster) { managerMaster = _managerMaster; }
-
     [SerializeField] PlayerData playerData;
 
     PlayerMove playerMove;
@@ -53,7 +50,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (managerMaster.gameManager.state != GAME_STATE.IN_GAME) { return; }
+        if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
 
         //DEBUG
         //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }

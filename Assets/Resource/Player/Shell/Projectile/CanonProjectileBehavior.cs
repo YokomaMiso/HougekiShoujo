@@ -26,9 +26,9 @@ public class CanonProjectileBehavior : MonoBehaviour
 
     void Update()
     {
-        imageAnimator.speed = 1 * ownerPlayer.managerMaster.timeManager.TimeRate();
+        imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
 
-        float deltaTime = ownerPlayer.managerMaster.timeManager.GetDeltaTime();
+        float deltaTime = Managers.instance.timeManager.GetDeltaTime();
 
         timer += deltaTime;
         if (timer > lifeTime) { Destroy(gameObject); }

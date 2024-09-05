@@ -18,7 +18,7 @@ public class PlayerRecoil : MonoBehaviour
     {
         if (isRecoil)
         {
-            timer += ownerPlayer.managerMaster.timeManager.GetDeltaTime();
+            timer += Managers.instance.timeManager.GetDeltaTime();
             if (timer > recoilTime)
             {
                 isRecoil = false;
