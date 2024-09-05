@@ -40,7 +40,7 @@ public class PlayerAim : MonoBehaviour
                 attackArea.SetActive(true);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[1];
                 break;
-            case SHELL_TYPE.MORTOR:
+            case SHELL_TYPE.MORTAR:
                 attackArea.SetActive(true);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[2];
                 aoeArea.SetActive(true);
@@ -68,7 +68,7 @@ public class PlayerAim : MonoBehaviour
                     aimVector = movement;
                     break;
 
-                case SHELL_TYPE.MORTOR:
+                case SHELL_TYPE.MORTAR:
                     float limit = attackArea.transform.localScale.x / 2;
                     aimVector += movement * Managers.instance.GetOptionData().mortarSensitive * Managers.instance.timeManager.GetDeltaTime();
                     if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
@@ -108,7 +108,7 @@ public class PlayerAim : MonoBehaviour
                 id.SetID(ownerPlayer.GetPlayerID());
                 break;
 
-            case SHELL_TYPE.MORTOR:
+            case SHELL_TYPE.MORTAR:
                 Vector3 spawnPos = transform.position + Vector3.up + (aimVector.normalized * 0.5f);
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;

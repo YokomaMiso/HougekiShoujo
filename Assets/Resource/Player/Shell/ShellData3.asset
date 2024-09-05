@@ -16,3 +16,4 @@ MonoBehaviour:
   type: 2
   projectile: {fileID: 1008518316061016973, guid: d1e9b76a44427f44d9463411c190d4a8,
     type: 3}
+  shellExplain: "\u4E0A\u7A7A\u304B\u3089\u306E\u9060\u8DDD\u96E2\u7832\u6483\n\u52D5\u304D\u306F\u9045\u3044\u304C\u5C04\u7A0B\u304C\u9577\u3044"

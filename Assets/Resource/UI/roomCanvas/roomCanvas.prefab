@@ -1076,9 +1076,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 975987788752269184}
   - {fileID: 3490240337752832441}
   - {fileID: 6143599857827087503}
-  - {fileID: 975987788752269184}
   - {fileID: 4153932910680180982}
   - {fileID: 2420625027714075811}
   - {fileID: 959871997207241356}
@@ -1167,6 +1167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e0405fb1535c143861149f2e9cea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shellText: {fileID: 3891643832387518444}
 --- !u!1 &4592004139669785361
 GameObject:
   m_ObjectHideFlags: 0
