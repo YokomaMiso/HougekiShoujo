@@ -9,7 +9,10 @@ public class OSCManager : MonoBehaviour
     //////// 本番使用変数 ////////
     //////////////////////////////
 
-    List<SendDataCreator.PlayerNetData> netData = new List<SendDataCreator.PlayerNetData>();
+    //自身のネットワークデータ
+    SendDataCreator.PlayerNetData myNetData = new SendDataCreator.PlayerNetData();
+
+    SendDataCreator netIstance = new SendDataCreator();
 
     //1フレーム前の全プレイヤーデータ格納用
     List<SendDataCreator.PlayerNetData> beforeNetData = new List<SendDataCreator.PlayerNetData>();
@@ -36,11 +39,64 @@ public class OSCManager : MonoBehaviour
     void Start()
     {
         //netData[0].mainPacketData
+
+
+        myNetData.mainPacketData.comData.myIP = "255.255.255.255";
+        myNetData.mainPacketData.comData.targetIP = "255.255.255.255";
+        myNetData.mainPacketData.comData.myPort = 8000;
+        myNetData.mainPacketData.comData.targetPort = 8001;
+        myNetData.mainPacketData.comData.receiveAddress = "/example/server";
+        myNetData.mainPacketData.comData.sendAddress = "/example/client";
+
+        OnEnable();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            client.Send(myNetData.mainPacketData.comData.receiveAddress, 1);
+        }
+    }
+
+    private void OnEnable()
+    {
+
+        if(server == null)
+        {
+            server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
+        }
+
+        server.TryAddMethodPair(myNetData.mainPacketData.comData.receiveAddress, ReadValue, MainThreadMethod);
+
+        if(client == null)
+        {
+            client = new OscClient(myNetData.mainPacketData.comData.targetIP, myNetData.mainPacketData.comData.targetPort);
+
+        }
         
+
+    }
+
+    private void OnDisable()
+    {
+        server.RemoveMethod(myNetData.mainPacketData.comData.receiveAddress, ReadValue);
+    }
+
+    private void ReadValue(OscMessageValues values)
+    {
+        values.ReadBlobElement(0, ref myNetData.receiveData);
+    }
+
+    private void SendValue()
+    {
+        client.Send(myNetData.mainPacketData.comData.receiveAddress, myNetData.sendData, netIstance.GetBytesLength(myNetData.sendData));
+    }
+
+    private void MainThreadMethod()
+    {
+
     }
 }

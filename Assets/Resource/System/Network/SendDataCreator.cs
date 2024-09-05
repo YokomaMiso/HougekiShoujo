@@ -14,6 +14,7 @@ public class SendDataCreator
     {
         public PacketDataForPerFrame mainPacketData;
         public byte[] sendData;
+        public byte[] receiveData;
     }
 
     /// <summary>
@@ -30,9 +31,10 @@ public class SendDataCreator
     /// </summary>
     public struct UsersBaseData
     {
-        public int IP;             //ユーザIP
-        public int sendPort;       //送信ポート番号
-        public int receivePort;    //受信ポート番号
+        public int myPort;       //送信ポート番号
+        public int targetPort;    //受信ポート番号
+        public string myIP;           //ユーザIP
+        public string targetIP;       //ユーザIP
         public string sendAddress;    //送信アドレス
         public string receiveAddress; //受信アドレス
     }
@@ -95,5 +97,10 @@ public class SendDataCreator
         gch.Free();
 
         return _data;
+    }
+
+    public int GetBytesLength(byte[] element)
+    {
+        return Marshal.SizeOf(element);
     }
 }
