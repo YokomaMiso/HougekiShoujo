@@ -11,6 +11,11 @@ public class RoomCanvasBehavior : MonoBehaviour
     GameObject bannerSelecter;
     GameObject playerBanners;
 
+    Image charaVisual;
+    Image charaIcon;
+    Image rollDisplay;
+    Text rollText;
+
     Image shellIcon;
     Text shellText;
 
@@ -36,6 +41,11 @@ public class RoomCanvasBehavior : MonoBehaviour
         teamsBG = transform.GetChild(1).gameObject;
         bannerSelecter = transform.GetChild(2).gameObject;
         playerBanners = transform.GetChild(3).gameObject;
+
+        charaVisual = charaSelect.transform.GetChild(0).GetComponent<Image>();
+        charaIcon = charaVisual.transform.GetChild(0).GetComponent<Image>();
+        rollDisplay = charaVisual.transform.GetChild(1).GetComponent<Image>();
+        rollText = charaVisual.transform.GetChild(2).GetComponent<Text>();
 
         shellIcon = charaSelect.transform.GetChild(1).GetComponent<Image>();
         shellText = shellIcon.transform.GetChild(0).GetComponent<Text>();
@@ -69,8 +79,26 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
 
         Managers.instance.gameManager.SetCharacterNum(charaSelectNum);
-        shellIcon.sprite = Managers.instance.gameManager.playerDatas[charaSelectNum].GetShell().GetSprite();
-        shellText.text = Managers.instance.gameManager.playerDatas[charaSelectNum].GetShell().GetShellExplain();
+        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaSelectNum];
+
+        CharaDisplayUpdate(nowPlayerData);
+        ShellDisplayUpdate(nowPlayerData);
+    }
+
+    void CharaDisplayUpdate(PlayerData _playerData)
+    {
+        Color[] rollColor = new Color[3] { new Color(0.75f, 0.25f, 0.25f), new Color(0.25f, 0.75f, 0.25f), new Color(0.25f, 0.25f, 0.75f) };
+        string[] rollKanji = new string[3] { "‹ß", "’†", "‰“" };
+        int rollNumber = (int)_playerData.GetShell().GetShellType();
+
+        rollDisplay.color = rollColor[rollNumber];
+        rollText.text = rollKanji[rollNumber];
+    }
+
+    void ShellDisplayUpdate(PlayerData _playerData)
+    {
+        shellIcon.sprite = _playerData.GetShell().GetShellIcon();
+        shellText.text = _playerData.GetShell().GetShellExplain();
     }
 
     void PlayerBannerController()

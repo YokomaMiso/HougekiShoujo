@@ -16,7 +16,7 @@ public class DisplayShellIcon : MonoBehaviour
         iconFrame = transform.GetChild(2).GetComponent<Image>();
 
         ownerPlayer = Managers.instance.gameManager.GetPlayer(Managers.instance.playerID).GetComponent<Player>();
-        shellIcon.sprite = ownerPlayer.GetPlayerData().GetShell().GetSprite();
+        shellIcon.sprite = ownerPlayer.GetPlayerData().GetShell().GetShellIcon();
 
         iconFrame.color = Color.clear;
     }
