@@ -109,12 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16ecd7d0030cd64699ab19c4894960f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMove: {fileID: 6191823321996411971}
-  playerReload: {fileID: 6069827069582108553}
-  playerAim: {fileID: 6022571088057247346}
-  playerRecoil: {fileID: 7282194418369032847}
-  playerData: {fileID: 11400000, guid: 9abeeb30f05f77543bef0160234b1b99, type: 2}
-  playerImage: {fileID: 8190928637479480723}
   playerState: 0
   canonState: -1
 --- !u!114 &6191823321996411971
@@ -155,8 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d58c817298319f44bcc28acf5d37bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackArea: {fileID: 7769733745417900706}
-  aoeArea: {fileID: 8161249377535324938}
   attackAreaMat:
   - {fileID: 2100000, guid: 18d30dc649b245b4ea4cc287c099efba, type: 2}
   - {fileID: 2100000, guid: 2cb4fd4687fb7bc4bab2651cdd9fc8c8, type: 2}
@@ -188,7 +180,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -219,7 +211,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &2790001896572511875
 GameObject:
