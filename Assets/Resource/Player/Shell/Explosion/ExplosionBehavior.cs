@@ -9,6 +9,7 @@ public class ExplosionBehavior : MonoBehaviour
 
     [SerializeField] Animator imageAnimator;
     [SerializeField, Tag] string hitTag;
+    [SerializeField, Range(0.0f, 1.0f)] float cameraShakeRate = 1.0f;
 
     float lifeTime;
     float timer;
@@ -22,7 +23,7 @@ public class ExplosionBehavior : MonoBehaviour
         float weight = distance.magnitude / 5;
         if (weight < 1) { weight = 1; }
 
-        float shakeValue = 1.0f / weight;
+        float shakeValue = 1.0f / weight * cameraShakeRate;
         Camera.main.GetComponent<CameraMove>().SetCameraShake(shakeValue);
 
     }
