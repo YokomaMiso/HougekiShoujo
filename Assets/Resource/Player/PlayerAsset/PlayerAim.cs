@@ -89,7 +89,12 @@ public class PlayerAim : MonoBehaviour
         switch (nowShellType)
         {
             default: //SHELL_TYPE.BLAST
+                angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
+                const float blastDistance = 1.5f; 
+                obj = Instantiate(projectile, transform.position + aimVector * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
 
+                id = obj.AddComponent<OwnerID>();
+                id.SetID(ownerPlayer.GetPlayerID());
                 break;
 
             case SHELL_TYPE.CANON:
@@ -114,9 +119,6 @@ public class PlayerAim : MonoBehaviour
                 id.SetID(ownerPlayer.GetPlayerID());
                 break;
         }
-
-
-        
 
     }
 

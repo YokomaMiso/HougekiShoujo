@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
             Player nowPlayer = playerInstance[i].GetComponent<Player>();
             nowPlayer.SetPlayerID(i);
-            nowPlayer.SetPlayerData(playerDatas[1]);
+            nowPlayer.SetPlayerData(playerDatas[0]);
         }
     }
 
