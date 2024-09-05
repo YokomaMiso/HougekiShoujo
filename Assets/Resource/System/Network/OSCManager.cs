@@ -28,6 +28,13 @@ public class OSCManager : MonoBehaviour
     //////// デバック用変数 ////////
     ////////////////////////////////
 
+    [SerializeField]
+    int port = 8000;
+
+    [SerializeField]
+    int otherPort = 8001;
+
+
     //現フレームの全プレイヤーデータ格納用
     //List<Player> nowFramePlayerData = new List<Player>();
 
@@ -45,8 +52,8 @@ public class OSCManager : MonoBehaviour
 
         myNetData.mainPacketData.comData.myIP = "255.255.255.255";
         myNetData.mainPacketData.comData.targetIP = "255.255.255.255";
-        myNetData.mainPacketData.comData.myPort = 8000;
-        myNetData.mainPacketData.comData.targetPort = 8001;
+        myNetData.mainPacketData.comData.myPort = port;
+        myNetData.mainPacketData.comData.targetPort = otherPort;
         myNetData.mainPacketData.comData.receiveAddress = "/example";
         myNetData.mainPacketData.comData.sendAddress = "/example";
 
