@@ -69,7 +69,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
 
         Managers.instance.gameManager.SetCharacterNum(charaSelectNum);
-        shellIcon.sprite = Managers.instance.gameManager.playerDatas[charaSelectNum].GetShell().GetSprite();
+        shellIcon.sprite = Managers.instance.gameManager.playerDatas[charaSelectNum].GetShell().GetShellIcon();
         shellText.text = Managers.instance.gameManager.playerDatas[charaSelectNum].GetShell().GetShellExplain();
     }
 
