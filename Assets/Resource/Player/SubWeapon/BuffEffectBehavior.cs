@@ -18,6 +18,8 @@ public class BuffEffectBehavior : MonoBehaviour
 
     public void DisplayBuff(float _value)
     {
+        if (vfx == null) { return; }
+
         if (_value == 1.0f) { vfx.Stop(); return; }
         
         int num = 0;

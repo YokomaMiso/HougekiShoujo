@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     PlayerReload playerReload;
     PlayerAim playerAim;
     PlayerRecoil playerRecoil;
+    PlayerSubAction playerSubAction;
     PlayerImage playerImage;
 
     int playerID;
@@ -26,6 +27,7 @@ public class Player : MonoBehaviour
     public PLAYER_STATE playerState = PLAYER_STATE.IDLE;
     public CANON_STATE canonState = CANON_STATE.EMPTY;
     public int GetCanonState() { return (int)canonState; }
+    public float GetSubWeaponReload() { return playerSubAction.ReloadTime(); }
 
     bool IsMine() { return playerID == Managers.instance.playerID; }
 
@@ -53,6 +55,9 @@ public class Player : MonoBehaviour
 
             playerRecoil = gameObject.GetComponent<PlayerRecoil>();
             playerRecoil.SetPlayer(this);
+
+            playerSubAction= gameObject.GetComponent<PlayerSubAction>();
+            playerSubAction.SetPlayer(this);
         }
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
@@ -135,7 +140,7 @@ public class Player : MonoBehaviour
                     }
                     break;
                 case 1:
-
+                    playerSubAction.UseSubWeapon();
                     break;
             }
         }
