@@ -7,18 +7,19 @@ public enum CHARACTER_ID { MAEDE = 0, AAA, III, UUU, EEE, MAX_NUM };
 public class PlayerData : ScriptableObject
 {
     [Header("Character ID")]
-    [SerializeField, Header("Status Array")] CHARACTER_ID id;
-
+    [SerializeField, Header("Character ID")] CHARACTER_ID id;
+    [Header("Animation")]
+    [SerializeField, Header("Anim Data")] CharacterAnimData characterAnimData;
     [Header("Status Data")]
     [SerializeField, Header("Move Speed")] float moveSpeed = 5;
-
     [Header("Shell Data")]
     [SerializeField, Header("Shell")] Shell shell;
-
     [Header("Weapon Data")]
     [SerializeField, Header("Sub Weapon")] SubWeapon subWeapon;
 
     public int GetID() { return (int)id; }
+    public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
+
     public float GetMoveSpeed() {  return moveSpeed; }
 
     public Shell GetShell() { return shell; }

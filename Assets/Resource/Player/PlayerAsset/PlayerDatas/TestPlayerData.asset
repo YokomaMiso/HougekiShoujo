@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestPlayerData
   m_EditorClassIdentifier: 
   id: 0
+  characterAnimData: {fileID: 11400000, guid: 7795e22e14e28714699f56646211d174, type: 2}
   moveSpeed: 0
   shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
   subWeapon: {fileID: 11400000, guid: 758c0598117e18c4292312a2c0e48d9a, type: 2}
