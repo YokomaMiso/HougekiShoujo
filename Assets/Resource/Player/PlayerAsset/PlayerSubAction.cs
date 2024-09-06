@@ -36,6 +36,7 @@ public class PlayerSubAction : MonoBehaviour
                 transform.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, lifeTime);
                 break;
             case SUB_TYPE.MINE:
+                GameObject obj = Instantiate(subWeaponData.GetMine(), transform.position + Vector3.up, Quaternion.identity);
                 break;
             case SUB_TYPE.BLINK:
                 break;

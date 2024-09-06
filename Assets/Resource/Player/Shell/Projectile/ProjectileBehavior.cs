@@ -11,8 +11,8 @@ public abstract class ProjectileBehavior : MonoBehaviour
     [SerializeField] protected float lifeTime;
     protected float timer = 0;
 
-    [SerializeField, Tag] protected string playerTag;
-    [SerializeField, Tag] protected string groundTag;
+    protected string playerTag = "Player";
+    protected string groundTag = "Ground";
     protected string[] hitTags;
 
     protected virtual void Start()
@@ -41,7 +41,13 @@ public abstract class ProjectileBehavior : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.tag == hitTags[0] || other.tag == hitTags[1])
+        bool check = false;
+        for (int i = 0; i < hitTags.Length; i++)
+        {
+            if (other.tag == hitTags[i]) { check = true; break; }
+        }
+
+        if (check)
         {
             if (other.GetComponent<Player>() != ownerPlayer) { Destroy(gameObject); }
         }
