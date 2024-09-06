@@ -12,12 +12,17 @@ public class RoomCanvasBehavior : MonoBehaviour
     GameObject playerBanners;
 
     Image charaVisual;
-    Image charaIcon;
+    Image nameBar;
+    Text nameText;
+
     Image rollDisplay;
     Text rollText;
 
     Image shellIcon;
     Text shellText;
+
+    Image subWeaponIcon;
+    Text subWeaponText;
 
     int charaSelectNum = 0;
     const int maxCharaCount = 3;
@@ -43,12 +48,17 @@ public class RoomCanvasBehavior : MonoBehaviour
         playerBanners = transform.GetChild(3).gameObject;
 
         charaVisual = charaSelect.transform.GetChild(0).GetComponent<Image>();
-        charaIcon = charaVisual.transform.GetChild(0).GetComponent<Image>();
+        nameBar = charaVisual.transform.GetChild(0).GetComponent<Image>();
+        nameText= nameBar.transform.GetChild(0).GetComponent<Text>();
+
         rollDisplay = charaVisual.transform.GetChild(1).GetComponent<Image>();
         rollText = charaVisual.transform.GetChild(2).GetComponent<Text>();
 
         shellIcon = charaSelect.transform.GetChild(1).GetComponent<Image>();
         shellText = shellIcon.transform.GetChild(0).GetComponent<Text>();
+
+        subWeaponIcon = charaSelect.transform.GetChild(2).GetComponent<Image>();
+        subWeaponText = subWeaponIcon.transform.GetChild(0).GetComponent<Text>();
     }
 
     void Update()
@@ -83,11 +93,13 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         CharaDisplayUpdate(nowPlayerData);
         ShellDisplayUpdate(nowPlayerData);
+        SubWeaponDisplayUpdate(nowPlayerData);
     }
 
     void CharaDisplayUpdate(PlayerData _playerData)
     {
         charaVisual.sprite = _playerData.GetCharacterAnimData().GetCharaIdle();
+        nameText.text = _playerData.GetCharaName();
 
         Color[] rollColor = new Color[3] { new Color(0.75f, 0.25f, 0.25f), new Color(0.25f, 0.75f, 0.25f), new Color(0.25f, 0.25f, 0.75f) };
         string[] rollKanji = new string[3] { "‹ß", "’†", "‰“" };
@@ -102,6 +114,12 @@ public class RoomCanvasBehavior : MonoBehaviour
         shellIcon.sprite = _playerData.GetShell().GetShellIcon();
         shellText.text = _playerData.GetShell().GetShellExplain();
     }
+    void SubWeaponDisplayUpdate(PlayerData _playerData)
+    {
+        subWeaponIcon.sprite = _playerData.GetSubWeapon().GetIcon();
+        subWeaponText.text = _playerData.GetSubWeapon().GetSubWeaponExplain();
+    }
+
 
     void PlayerBannerController()
     {
