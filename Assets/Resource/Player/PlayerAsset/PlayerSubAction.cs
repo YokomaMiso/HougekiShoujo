@@ -37,6 +37,7 @@ public class PlayerSubAction : MonoBehaviour
                 break;
             case SUB_TYPE.MINE:
                 GameObject obj = Instantiate(subWeaponData.GetMine(), transform.position + Vector3.up, Quaternion.identity);
+                obj.GetComponent<EMPMine>().SetPlayer(ownerPlayer);
                 break;
             case SUB_TYPE.BLINK:
                 break;
