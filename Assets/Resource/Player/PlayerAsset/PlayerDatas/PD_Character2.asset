@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PD_Character2
   m_EditorClassIdentifier: 
   id: 0
-  characterAnimData: {fileID: 11400000, guid: 7795e22e14e28714699f56646211d174, type: 2}
+  characterAnimData: {fileID: 11400000, guid: 9abf50c65441dfb4db61cb776c0c1c4a, type: 2}
   moveSpeed: 5
   shell: {fileID: 11400000, guid: e153c3496aaafbd4c80861b57f56fa94, type: 2}
   subWeapon: {fileID: 11400000, guid: f5a84c731abf50a47b0c9d6f12cb9677, type: 2}

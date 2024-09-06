@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.15, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2085172088775133810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -262,14 +262,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e173b3d6d0ad85a47a07ef934ab03c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charaSprite: {fileID: 6174117908524603338}
-  idleAnimationController: {fileID: 9100000, guid: 2fd4d7dbe9febc94e8cafc8f54ad6650,
-    type: 2}
-  runAnimationController: {fileID: 9100000, guid: fd9c3799e7e313f4db68afdfe8b8d6f5,
-    type: 2}
-  reloadAnimationController: {fileID: 9100000, guid: ce7f47d75f4533040a4fea82e6f2bc50,
-    type: 2}
-  aimAnimationController: {fileID: 9100000, guid: ce7f47d75f4533040a4fea82e6f2bc50,
-    type: 2}
-  recoilAnimationController: {fileID: 9100000, guid: b38d30c619220fe48b4173c4be43bf74,
-    type: 2}

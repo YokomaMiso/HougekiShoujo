@@ -87,6 +87,8 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void CharaDisplayUpdate(PlayerData _playerData)
     {
+        charaVisual.sprite = _playerData.GetCharacterAnimData().GetCharaIdle();
+
         Color[] rollColor = new Color[3] { new Color(0.75f, 0.25f, 0.25f), new Color(0.25f, 0.75f, 0.25f), new Color(0.25f, 0.25f, 0.75f) };
         string[] rollKanji = new string[3] { "‹ß", "’†", "‰“" };
         int rollNumber = (int)_playerData.GetShell().GetShellType();

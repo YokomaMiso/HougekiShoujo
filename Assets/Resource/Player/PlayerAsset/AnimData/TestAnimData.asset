@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TestAnimData
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: d34011df83d53f04c981c853b5f58f58, type: 3}
+  idleFirstSprite: {fileID: -282971030, guid: 7ba51288c09671b43a211a964a1d8aea, type: 3}
   idleAnimationData: {fileID: 9100000, guid: 2fd4d7dbe9febc94e8cafc8f54ad6650, type: 2}
   runAnimationData:
   - {fileID: 9100000, guid: fd9c3799e7e313f4db68afdfe8b8d6f5, type: 2}
