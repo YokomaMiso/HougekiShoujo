@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PD_Character1
   m_EditorClassIdentifier: 
   id: 0
-  moveSpeed: 0
+  moveSpeed: 5
   shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
   subWeapon: {fileID: 11400000, guid: 758c0598117e18c4292312a2c0e48d9a, type: 2}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING }
@@ -63,6 +64,8 @@ public class Player : MonoBehaviour
 
         //DEBUG
         //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }
+        //if (Input.GetKeyDown(KeyCode.X)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(2, 5); }
+        //if (Input.GetKeyDown(KeyCode.Z)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(1.0f/2, 5); }
 
         if (IsMine()) { OwnPlayerBehavior(); }
         else { }
