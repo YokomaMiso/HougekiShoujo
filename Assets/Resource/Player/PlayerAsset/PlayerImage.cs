@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 using UnityEngine;
 
 public class PlayerImage : MonoBehaviour
@@ -9,12 +10,24 @@ public class PlayerImage : MonoBehaviour
 
     SpriteRenderer charaSprite;
     CharacterAnimData animData;
+
+    Material MaterialData;
+
     int[] animSpeed = new int[5] { 1, 2, 1, 1, 1 };
+
 
     void Start()
     {
         charaSprite=transform.GetChild(0).GetComponent<SpriteRenderer>();
         animData = ownerPlayer.GetPlayerData().GetCharacterAnimData();
+        MaterialData = ownerPlayer.GetPlayerData().GetMaterial();
+
+        if (charaSprite != null)
+        {
+            charaSprite.shadowCastingMode = ShadowCastingMode.On;
+            charaSprite.material = MaterialData;
+        }
+        
     }
 
     void Update()
@@ -45,5 +58,7 @@ public class PlayerImage : MonoBehaviour
 
         charaSprite.GetComponent<Animator>().runtimeAnimatorController = applyController;
         charaSprite.GetComponent<Animator>().speed = animSpeed[num] * Managers.instance.timeManager.TimeRate();
+
+
     }
 }

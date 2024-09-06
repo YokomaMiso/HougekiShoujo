@@ -16,6 +16,8 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Shell")] Shell shell;
     [Header("Weapon Data")]
     [SerializeField, Header("Sub Weapon")] SubWeapon subWeapon;
+    [Header("Material Data")]
+    [SerializeField, Header("Material")] Material material;
 
     public int GetID() { return (int)id; }
     public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
@@ -24,5 +26,6 @@ public class PlayerData : ScriptableObject
 
     public Shell GetShell() { return shell; }
     public SubWeapon GetSubWeapon() { return subWeapon; }
+    public Material GetMaterial() { return material; }
 
 }
