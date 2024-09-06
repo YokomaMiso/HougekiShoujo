@@ -16,12 +16,12 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Shell")] Shell shell;
 
     [Header("Weapon Data")]
-    [SerializeField, Header("Sub Weapon")] Weapon subWeapon;
+    [SerializeField, Header("Sub Weapon")] SubWeapon subWeapon;
 
     public int GetID() { return (int)id; }
     public float GetMoveSpeed() {  return moveSpeed; }
 
     public Shell GetShell() { return shell; }
-    public Weapon GetSubWeapon() { return subWeapon; }
+    public SubWeapon GetSubWeapon() { return subWeapon; }
 
 }
