@@ -10,7 +10,7 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Status Array")] CHARACTER_ID id;
 
     [Header("Status Data")]
-    [SerializeField, Header("Move Speed")] float moveSpeed;
+    [SerializeField, Header("Move Speed")] float moveSpeed = 5;
 
     [Header("Shell Data")]
     [SerializeField, Header("Shell")] Shell shell;
@@ -19,6 +19,7 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Sub Weapon")] Weapon subWeapon;
 
     public int GetID() { return (int)id; }
+    public float GetMoveSpeed() {  return moveSpeed; }
 
     public Shell GetShell() { return shell; }
     public Weapon GetSubWeapon() { return subWeapon; }
