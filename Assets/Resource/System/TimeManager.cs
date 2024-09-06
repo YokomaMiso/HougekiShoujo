@@ -13,7 +13,7 @@ public class TimeManager : MonoBehaviour
 
     public float GetDeltaTime()
     {
-        if (stop) { return 0; }
+        if (stop) { return 0.0f; }
         if (slow) { return Time.deltaTime * slowRate; }
 
         return Time.deltaTime;
