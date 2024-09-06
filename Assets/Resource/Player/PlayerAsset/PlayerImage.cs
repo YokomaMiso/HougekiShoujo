@@ -18,8 +18,8 @@ public class PlayerImage : MonoBehaviour
 
     void Start()
     {
-        charaSprite=transform.GetChild(0).GetComponent<SpriteRenderer>();
         animData = ownerPlayer.GetPlayerData().GetCharacterAnimData();
+        charaSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
         MaterialData = ownerPlayer.GetPlayerData().GetMaterial();
 
         if (charaSprite != null)
@@ -27,21 +27,19 @@ public class PlayerImage : MonoBehaviour
             charaSprite.shadowCastingMode = ShadowCastingMode.On;
             charaSprite.material = MaterialData;
         }
-        
+
     }
 
     void Update()
     {
         int num = (int)ownerPlayer.playerState;
 
-        RuntimeAnimatorController applyController = ownerPlayer.GetPlayerData().GetCharacterAnimData().GetIdleAnim();
+        RuntimeAnimatorController applyController;// = ownerPlayer.GetPlayerData().GetCharacterAnimData().GetIdleAnim();
         switch (ownerPlayer.playerState)
         {
-            /*
-            case PLAYER_STATE.IDLE:
+            default://case PLAYER_STATE.IDLE:
                 applyController = animData.GetIdleAnim();
                 break;
-            */
             case PLAYER_STATE.RUN:
                 applyController = animData.GetRunAnim(0);
                 break;
@@ -58,7 +56,5 @@ public class PlayerImage : MonoBehaviour
 
         charaSprite.GetComponent<Animator>().runtimeAnimatorController = applyController;
         charaSprite.GetComponent<Animator>().speed = animSpeed[num] * Managers.instance.timeManager.TimeRate();
-
-
     }
 }
