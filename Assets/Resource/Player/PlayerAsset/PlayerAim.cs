@@ -96,8 +96,8 @@ public class PlayerAim : MonoBehaviour
             default: //SHELL_TYPE.BLAST
                 angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
                 const float blastDistance = 1.5f;
-                Vector3 applyPos = aimVector;
-                if (applyPos == Vector3.zero) { applyPos=Vector3.forward; }
+                Vector3 applyPos = aimVector.normalized;
+                if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
                 obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
                 break;
 

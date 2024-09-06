@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ed411256c0a3545ac11d57b7bb9940, type: 3}
+  m_Name: TsukasaAnimData
+  m_EditorClassIdentifier: 
+  characterIcon: {fileID: -961174824, guid: e1da27869baa27b46b1b16de8d415b58, type: 3}
+  idleFirstSprite: {fileID: -961174824, guid: e1da27869baa27b46b1b16de8d415b58, type: 3}
+  idleAnimationData: {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
+  runAnimationData:
+  - {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
+  aimAnimationData:
+  - {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
+  recoilAnimationData:
+  - {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
