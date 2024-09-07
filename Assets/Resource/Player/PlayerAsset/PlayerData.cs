@@ -6,8 +6,8 @@ public enum CHARACTER_ID { MAEDE = 0, AAA, III, UUU, EEE, MAX_NUM };
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Create/PlayerData/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
 {
-    [Header("Character ID")]
-    [SerializeField, Header("Character ID")] CHARACTER_ID id;
+    [Header("Character Name")]
+    [SerializeField, Header("Character Name")] string charaName;
     [Header("Animation")]
     [SerializeField, Header("Anim Data")] CharacterAnimData characterAnimData;
     [Header("Status Data")]
@@ -19,7 +19,7 @@ public class PlayerData : ScriptableObject
     [Header("Material Data")]
     [SerializeField, Header("Material")] Material material;
 
-    public int GetID() { return (int)id; }
+    public string GetCharaName() { return charaName; }
     public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
 
     public float GetMoveSpeed() {  return moveSpeed; }
