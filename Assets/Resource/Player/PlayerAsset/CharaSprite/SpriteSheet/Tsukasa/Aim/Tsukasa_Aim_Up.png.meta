@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 316656ed3fec5fe4abde3d4d49325119
+guid: 6da876831f63d9349a3c29200181e560
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tsukasa_Aim_Right_0
+      name: Tsukasa_Aim_Up_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b33a8186c3f354469368364683837f8
-      internalID: -1056493229
+      spriteID: 4d3ea43e02b7cad48aa98581302adf46
+      internalID: 1218597391
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Aim_Right_1
+      name: Tsukasa_Aim_Up_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58051a3059cf2b84785c25623d18a094
-      internalID: -170228940
+      spriteID: 4834d144229085c458dd959465db245a
+      internalID: 753285513
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e105d8025eef8f54e8de88eb73ea7ea2
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -162,8 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tsukasa_Aim_Right_0: -1056493229
-      Tsukasa_Aim_Right_1: -170228940
+      Tsukasa_Aim_Up_0: 1218597391
+      Tsukasa_Aim_Up_1: 753285513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

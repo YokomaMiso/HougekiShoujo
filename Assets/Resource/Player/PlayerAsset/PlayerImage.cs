@@ -34,7 +34,7 @@ public class PlayerImage : MonoBehaviour
     {
         int num = (int)ownerPlayer.playerState;
 
-        RuntimeAnimatorController applyController;// = ownerPlayer.GetPlayerData().GetCharacterAnimData().GetIdleAnim();
+        RuntimeAnimatorController applyController;
         switch (ownerPlayer.playerState)
         {
             default://case PLAYER_STATE.IDLE:
@@ -47,7 +47,10 @@ public class PlayerImage : MonoBehaviour
                 applyController = animData.GetReloadAnim();
                 break;
             case PLAYER_STATE.AIMING:
-                applyController = animData.GetAimAnim(0);
+                float time = charaSprite.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+                applyController = animData.GetAimAnim(ownerPlayer.AnimNumFromVector());
+                charaSprite.GetComponent<Animator>().ForceStateNormalizedTime(time);
+                //charaSprite.GetComponent<Animator>().Play(0, -1, time);
                 break;
             case PLAYER_STATE.ATTACKING:
                 applyController = animData.GetRecoilAnim(0);

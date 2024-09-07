@@ -19,7 +19,11 @@ MonoBehaviour:
   - {fileID: 9100000, guid: b90f70cf8dfe1184db583fda985ecfee, type: 2}
   reloadAnimationData: {fileID: 9100000, guid: a2560cbd49d4a154ca6be1e6823ed240, type: 2}
   aimAnimationData:
+  - {fileID: 9100000, guid: 2a35fdbfbe7d92149b894e0917a8b5c2, type: 2}
+  - {fileID: 9100000, guid: 059a037f4993f6b4fac74c51a1512fc1, type: 2}
   - {fileID: 9100000, guid: a2560cbd49d4a154ca6be1e6823ed240, type: 2}
+  - {fileID: 9100000, guid: 83d7e237575514e408c014480e7bbf26, type: 2}
+  - {fileID: 9100000, guid: ded9fb6e10f219f4899f34f1a34f5eb6, type: 2}
   recoilAnimationData:
   - {fileID: 9100000, guid: 623ec09593121a040980fa04cc8311e2, type: 2}
   deadAnimationData: {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
