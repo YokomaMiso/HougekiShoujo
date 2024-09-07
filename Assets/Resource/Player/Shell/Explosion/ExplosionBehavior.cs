@@ -6,13 +6,14 @@ public class ExplosionBehavior : MonoBehaviour
 {
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
+    public Player GetPlayer() { return ownerPlayer; }
 
-    [SerializeField] Animator imageAnimator;
+    [SerializeField] protected Animator imageAnimator;
     [SerializeField, Tag] protected string hitTag;
     [SerializeField, Range(0.0f, 1.0f)] float cameraShakeRate = 1.0f;
 
-    float lifeTime;
-    float timer;
+    protected float lifeTime;
+    protected float timer;
 
     protected virtual void Start()
     {
@@ -25,7 +26,6 @@ public class ExplosionBehavior : MonoBehaviour
 
         float shakeValue = 1.0f / weight * cameraShakeRate;
         Camera.main.GetComponent<CameraMove>().SetCameraShake(shakeValue);
-
     }
 
     protected virtual void Update()
