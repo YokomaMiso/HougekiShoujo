@@ -40,6 +40,21 @@ public class Player : MonoBehaviour
     }
     public bool GetAlive() { return alive; }
 
+    Vector3 inputVector;
+    public Vector3 GetInputVector() { return inputVector; }
+    public int AnimNumFromVector()
+    {
+        Vector3 normalizedVector = Vector3.Normalize(inputVector);
+        if (normalizedVector.x < 0) { normalizedVector.x *= -1; }
+        float angle = Mathf.Atan2(normalizedVector.x, normalizedVector.z) * Mathf.Rad2Deg;
+
+        if (angle < 22.5f) { return 0; }
+        else if (angle < 22.5f + 45) { return 1; }
+        else if (angle < 22.5f + 45 * 2) { return 2; }
+        else if (angle < 22.5f + 45 * 3) { return 3; }
+        else { return 4; }
+    }
+
     void Start()
     {
         if (IsMine())
@@ -56,7 +71,7 @@ public class Player : MonoBehaviour
             playerRecoil = gameObject.GetComponent<PlayerRecoil>();
             playerRecoil.SetPlayer(this);
 
-            playerSubAction= gameObject.GetComponent<PlayerSubAction>();
+            playerSubAction = gameObject.GetComponent<PlayerSubAction>();
             playerSubAction.SetPlayer(this);
         }
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
@@ -193,6 +208,8 @@ public class Player : MonoBehaviour
     void DirectionChange(Vector3 _movement)
     {
         if (_movement.x == 0) { return; }
+
+        inputVector = _movement;
 
         Vector3 imageScale = Vector3.one;
         if (_movement.x < 0) { imageScale.x *= -1; }

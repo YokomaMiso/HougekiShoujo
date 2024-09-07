@@ -22,6 +22,7 @@ public class PlayerAim : MonoBehaviour
         attackArea = _attackArea;
         float aimRange = shellData.GetAimRange();
         attackArea.transform.localScale = new Vector3(aimRange, aimRange, 1);
+        attackArea.GetComponent<MeshRenderer>().sortingOrder = 1;
         attackArea.SetActive(false);
 
         aoeArea = _aoeArea;
@@ -29,7 +30,7 @@ public class PlayerAim : MonoBehaviour
         float explosionScale = shellData.GetExplosion().transform.localScale.x;
         float explosionRange = explosionRadius * 2 * explosionScale;
         aoeArea.transform.localScale = new Vector3(explosionRange, explosionRange, 1);
-        aoeArea.GetComponent<MeshRenderer>().sortingOrder = 1;
+        aoeArea.GetComponent<MeshRenderer>().sortingOrder = 2;
         aoeArea.SetActive(false);
     }
     public void AimStart()

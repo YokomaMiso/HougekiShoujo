@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tsukasa_Aim_Right
+  m_Name: Tsukasa_Aim_Up
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1056493229, guid: 316656ed3fec5fe4abde3d4d49325119, type: 3}
+      value: {fileID: 1218597391, guid: 6da876831f63d9349a3c29200181e560, type: 3}
     - time: 0.083333336
-      value: {fileID: -170228940, guid: 316656ed3fec5fe4abde3d4d49325119, type: 3}
+      value: {fileID: 753285513, guid: 6da876831f63d9349a3c29200181e560, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,8 +46,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1056493229, guid: 316656ed3fec5fe4abde3d4d49325119, type: 3}
-    - {fileID: -170228940, guid: 316656ed3fec5fe4abde3d4d49325119, type: 3}
+    - {fileID: 1218597391, guid: 6da876831f63d9349a3c29200181e560, type: 3}
+    - {fileID: 753285513, guid: 6da876831f63d9349a3c29200181e560, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
