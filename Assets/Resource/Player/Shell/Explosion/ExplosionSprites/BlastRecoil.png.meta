@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c0733df21ec74c4f920a46a0dca8b3e
+guid: 4835e895e99493f43a12c0cc9304adc8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,76 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_0
+      name: BlastRecoil_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae0904b122837841b6e4b7cb466730a
+      internalID: 1345862510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlastRecoil_1
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e179794112c70f4a9d4084d9e4cb378
+      internalID: -1837081994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlastRecoil_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c304ee290a46e745ab541fcf6b00b1c
+      internalID: -1338357313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlastRecoil_3
       rect:
         serializedVersion: 2
         x: 0
         y: 256
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,41 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b7aea37083610741a5ba107e0cf158f
-      internalID: 318721535
+      spriteID: 72b8027ac2f70cc4dba7ea2731d87afb
+      internalID: 163092557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f737f4f8b8969645b32b86d4bf1c09f
-      internalID: -953696498
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tsukasa_Run_Right_2
+      name: BlastRecoil_4
       rect:
         serializedVersion: 2
         x: 256
         y: 256
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b668e705d056c7049959c302fa2ffc50
-      internalID: 706758568
+      spriteID: 6cb5e3fd3f70aae4a828f212ae52201a
+      internalID: 1865073629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_3
+      name: BlastRecoil_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 128
-        height: 128
+        x: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,62 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2614e526d99beb44082416a0e6e3ef67
-      internalID: 384013073
+      spriteID: 5e995c09776bc1e4a85a03629a0e3385
+      internalID: 2071920237
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52252c28ca15766468034f8b71acdcae
-      internalID: -231572172
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tsukasa_Run_Right_5
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a97ba3b54cdff3e4db95d7aeb31a4772
-      internalID: 1515478780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tsukasa_Run_Right_6
+      name: BlastRecoil_6
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,29 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d7cf620486faae4aadbfab4392d9874
-      internalID: 12639334
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tsukasa_Run_Right_7
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 709c8e80b81034c4daed6357809e32ea
-      internalID: -555018223
+      spriteID: 5741f6bca8563fe4bb5f286dfb8ae780
+      internalID: -528881653
       vertices: []
       indices: 
       edges: []
@@ -280,7 +259,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 72beec93852cfd84c99ef8dcbddd51fe
     internalID: 0
     vertices: []
     indices: 
@@ -288,14 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tsukasa_Run_Right_0: 318721535
-      Tsukasa_Run_Right_1: -953696498
-      Tsukasa_Run_Right_2: 706758568
-      Tsukasa_Run_Right_3: 384013073
-      Tsukasa_Run_Right_4: -231572172
-      Tsukasa_Run_Right_5: 1515478780
-      Tsukasa_Run_Right_6: 12639334
-      Tsukasa_Run_Right_7: -555018223
+      BlastRecoil_0: 1345862510
+      BlastRecoil_1: -1837081994
+      BlastRecoil_2: -1338357313
+      BlastRecoil_3: 163092557
+      BlastRecoil_4: 1865073629
+      BlastRecoil_5: 2071920237
+      BlastRecoil_6: -528881653
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

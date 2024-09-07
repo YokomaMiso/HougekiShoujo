@@ -13,7 +13,7 @@ public class PlayerImage : MonoBehaviour
 
     Material MaterialData;
 
-    int[] animSpeed = new int[5] { 1, 2, 1, 1, 1 };
+    int[] animSpeed = new int[5] { 1, 1, 1, 1, 1 };
 
 
     void Start()

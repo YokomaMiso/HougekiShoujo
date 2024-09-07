@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c0733df21ec74c4f920a46a0dca8b3e
+guid: 316656ed3fec5fe4abde3d4d49325119
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_0
+      name: Tsukasa_Aim_Right_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b7aea37083610741a5ba107e0cf158f
-      internalID: 318721535
+      spriteID: 1b33a8186c3f354469368364683837f8
+      internalID: -1056493229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_1
+      name: Tsukasa_Aim_Right_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f737f4f8b8969645b32b86d4bf1c09f
-      internalID: -953696498
+      spriteID: 58051a3059cf2b84785c25623d18a094
+      internalID: -170228940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_2
+      name: Tsukasa_Aim_Right_2
       rect:
         serializedVersion: 2
         x: 256
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b668e705d056c7049959c302fa2ffc50
-      internalID: 706758568
+      spriteID: a2fca0392091846458e65a9673a52895
+      internalID: 637155158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_3
+      name: Tsukasa_Aim_Right_3
       rect:
         serializedVersion: 2
         x: 0
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2614e526d99beb44082416a0e6e3ef67
-      internalID: 384013073
+      spriteID: 349e2def5e2ae294fbb482c5325ee95e
+      internalID: 743324866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_4
+      name: Tsukasa_Aim_Right_4
       rect:
         serializedVersion: 2
         x: 128
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52252c28ca15766468034f8b71acdcae
-      internalID: -231572172
+      spriteID: 9d5c3d0ef8d0d184289591b70b30ece8
+      internalID: 1190787504
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_5
+      name: Tsukasa_Aim_Right_5
       rect:
         serializedVersion: 2
         x: 256
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a97ba3b54cdff3e4db95d7aeb31a4772
-      internalID: 1515478780
+      spriteID: ba79611b12af9ed40bc2577b94095f73
+      internalID: -1575971833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Run_Right_6
+      name: Tsukasa_Aim_Right_6
       rect:
         serializedVersion: 2
         x: 0
@@ -250,29 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d7cf620486faae4aadbfab4392d9874
-      internalID: 12639334
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tsukasa_Run_Right_7
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 709c8e80b81034c4daed6357809e32ea
-      internalID: -555018223
+      spriteID: 7c4f80d0cbb52784dbbfff14a4e0760d
+      internalID: -1081432764
       vertices: []
       indices: 
       edges: []
@@ -280,7 +259,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: e105d8025eef8f54e8de88eb73ea7ea2
     internalID: 0
     vertices: []
     indices: 
@@ -288,14 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tsukasa_Run_Right_0: 318721535
-      Tsukasa_Run_Right_1: -953696498
-      Tsukasa_Run_Right_2: 706758568
-      Tsukasa_Run_Right_3: 384013073
-      Tsukasa_Run_Right_4: -231572172
-      Tsukasa_Run_Right_5: 1515478780
-      Tsukasa_Run_Right_6: 12639334
-      Tsukasa_Run_Right_7: -555018223
+      Tsukasa_Aim_Right_0: -1056493229
+      Tsukasa_Aim_Right_1: -170228940
+      Tsukasa_Aim_Right_2: 637155158
+      Tsukasa_Aim_Right_3: 743324866
+      Tsukasa_Aim_Right_4: 1190787504
+      Tsukasa_Aim_Right_5: -1575971833
+      Tsukasa_Aim_Right_6: -1081432764
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
