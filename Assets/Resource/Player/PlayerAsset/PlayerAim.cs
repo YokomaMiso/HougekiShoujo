@@ -99,6 +99,7 @@ public class PlayerAim : MonoBehaviour
                 Vector3 applyPos = aimVector.normalized;
                 if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
                 obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
+                obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
                 break;
 
             case SHELL_TYPE.CANON:
