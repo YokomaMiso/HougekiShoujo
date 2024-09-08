@@ -6,17 +6,18 @@ using UnityEngine;
 
 public class SendDataCreator
 {
-    ////// c#では構造体内のアクセスが厳しくゲッターセッターをひとつづつ作るかクラスにするかする必要があるためとりあえず全public宣言
+    ////// c#では構造体内のアクセスが厳しいためとりあえず全public宣言
+    //////（構造体のアクセスは現状のpublicが一番軽いみたいなので処理余裕があればプロパティでカプセル化）
 
     /// <summary>
     /// データ送受信時に使うデータを全てまとめたやつ
     /// </summary>
+    /// 構造体インスタンス作成時にメモリ上での並びを固定
     [StructLayout(LayoutKind.Sequential)]
     public struct PlayerNetData
     {
         public PacketDataForPerFrame mainPacketData;
-        public byte[] sendByteData;
-        public byte[] receivedByteData;
+        public byte[] byteData;
     }
 
     /// <summary>
@@ -35,9 +36,9 @@ public class SendDataCreator
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct UsersBaseData
     {
-        public int myPort;       //送信ポート番号
+        public int myPort;        //送信ポート番号
         public int targetPort;    //受信ポート番号
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]  //送信データがstringの場合必須　SizeConstに代入した値分のバイト長で固定
         public string myIP;           //ユーザIP
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
         public string targetIP;       //ユーザIP
@@ -48,7 +49,7 @@ public class SendDataCreator
     }
 
     /// <summary>
-    /// インゲーム内の通信させたいデータ格納用
+    /// インゲーム内の通信させたいデータ格納用　ゲーム内のデータはここに定義推奨
     /// </summary>
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct GameData
@@ -62,23 +63,24 @@ public class SendDataCreator
     //////// 本番使用変数 ////////
     //////////////////////////////
 
+    // NONE
 
     ////////////////////////////////
     //////// デバック用変数 ////////
     ////////////////////////////////
 
-    List<PlayerNetData> userData;
-    
+    // NONE
 
     //////////////////////
     //////// 関数 ////////
     //////////////////////
-    
+
     /// <summary>
-    /// ゲームデータをバイト配列へ変換します
+    /// 構造体からバイト配列へ変換します
     /// </summary>
-    /// <param name="_data">外部で作成されたインスタンスを指定します</param>
-    /// <returns>渡したインスタンスをバイト配列として返します</returns>
+    /// <typeparam name="T">バイト配列にしたい構造体</typeparam>
+    /// <param name="_data">バイト配列にしたい構造体のインスタンス</param>
+    /// <returns>バイト配列</returns>
     public byte[] StructToByte<T>(T _data)where T : struct
     {
         int size = Marshal.SizeOf(_data);
@@ -98,15 +100,15 @@ public class SendDataCreator
             gchw.Free();
         }
 
-        Debug.Log("バイト配列は " + bytes.Length);
-
         return bytes;
     }
 
     /// <summary>
-    /// バイト配列から構造体に組み直します
+    /// バイト配列から構造体へ変換します
     /// </summary>
-    /// <returns>組まれた構造体です</returns>
+    /// <typeparam name="T">バイト配列から変換させたい構造体</typeparam>
+    /// <param name="_data">バイト配列</param>
+    /// <returns>テンプレートで指定した構造体データ</returns>
     public T ByteToStruct<T>(byte[] _data) where T : struct
     {
         T strData = default(T);

@@ -11,9 +11,10 @@ public class OSCManager : MonoBehaviour
     //////////////////////////////
 
     //自身のネットワークデータ
-    SendDataCreator.PlayerNetData myNetData = new SendDataCreator.PlayerNetData();
+    public SendDataCreator.PlayerNetData myNetData = new SendDataCreator.PlayerNetData();
     
-    SendDataCreator.PlayerNetData receivedData = new SendDataCreator.PlayerNetData();
+    //送られてきた相手のデータ
+    public SendDataCreator.PlayerNetData receivedData = new SendDataCreator.PlayerNetData();
     
     SendDataCreator netInstance = new SendDataCreator();
 
@@ -28,18 +29,14 @@ public class OSCManager : MonoBehaviour
     //////// デバック用変数 ////////
     ////////////////////////////////
 
+    // とりあえずシングルトンで運用（調停や証明書周りが決まってきたら修正）
+    public static OSCManager OSCinstance;
+
     [SerializeField]
     int port = 8000;
 
     [SerializeField]
     int otherPort = 8001;
-
-    //現フレームの全プレイヤーデータ格納用
-    //List<Player> nowFramePlayerData = new List<Player>();
-
-    int receiveNum = 0;
-
-    //byte[] testData = new byte[99999];
 
     //////////////////////
     //////// 関数 ////////
@@ -48,13 +45,13 @@ public class OSCManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //netData[0].mainPacketData
 
         myNetData = default;
         myNetData.mainPacketData = default;
-        myNetData.receivedByteData = new byte[0];
-        myNetData.sendByteData = null;
+        myNetData.byteData = null;
+
         receivedData = default;
+        receivedData.byteData = new byte[0];
 
         myNetData.mainPacketData.comData.myIP = "255.255.255.255";
         myNetData.mainPacketData.comData.targetIP = "255.255.255.255";
@@ -85,7 +82,6 @@ public class OSCManager : MonoBehaviour
         //デバック用で任意のタイミングで送れるようにしておく
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //client.Send(myNetData.mainPacketData.comData.receiveAddress, 1);
             SendValue();
         }
 
@@ -99,14 +95,10 @@ public class OSCManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log(receivedData.mainPacketData.inGameData.num);
-
-            //Debug.Log("送信前バイト情報 : " + myNetData.sendByteData + "\n送信前バイト長 : " + myNetData.sendByteData.Length);
-            Debug.Log("送信後バイト情報 : " + myNetData.receivedByteData + "\n送信後バイト長 : ");
-            //Debug.Log(receiveNum);
+            Debug.Log(receivedData.mainPacketData.inGameData.test);
         }
     }
-
-    //送信は
+    
     private void LateUpdate()
     {
         //SendValue();
@@ -126,36 +118,41 @@ public class OSCManager : MonoBehaviour
         {
             server.Dispose();
         }
-
         
     }
 
-    private void ReadValue(OscMessageValues values)
-    {
-        byte[] testData = new byte[0];
-
-        values.ReadBlobElement(0, ref myNetData.receivedByteData);
-
-        receivedData.mainPacketData = netInstance.ByteToStruct<SendDataCreator.PacketDataForPerFrame>(myNetData.receivedByteData);
-
-
-        //receiveNum += values.ReadIntElement(0);
-    }
-
+    /// <summary>
+    /// データ送信
+    /// </summary>
     private void SendValue()
     {
-        myNetData.sendByteData = netInstance.StructToByte(myNetData.mainPacketData);
-        client.Send(myNetData.mainPacketData.comData.receiveAddress, myNetData.sendByteData, myNetData.sendByteData.Length);
+        //送信データのバイト配列化
+        myNetData.byteData = netInstance.StructToByte(myNetData.mainPacketData);
+
+        //データの送信
+        client.Send(myNetData.mainPacketData.comData.receiveAddress, myNetData.byteData, myNetData.byteData.Length);
     }
 
+    /// <summary>
+    /// サーバ側でデータをキャッチすれば呼び出されます
+    /// </summary>
+    /// <param name="values">受信したデータ</param>
+    /// <remarks>サブスレッド動作のためUnity用のメソッドは動作しません！！！</remarks>
+    private void ReadValue(OscMessageValues values)
+    {
+        //受信データのコピー
+        values.ReadBlobElement(0, ref receivedData.byteData);
+
+        //データの構造体化
+        receivedData.mainPacketData = netInstance.ByteToStruct<SendDataCreator.PacketDataForPerFrame>(receivedData.byteData);
+    }
+
+    /// <summary>
+    /// サーバ側でデータをキャッチすれば呼び出されます
+    /// </summary>
+    /// <remarks>メインスレッド動作のためUnity用のメソッドも動作</remarks>
     private void MainThreadMethod()
     {
-        Debug.Log($"OscCore received = " + receiveNum);
-    }
 
-    public void test()
-    {
-        //netda
-        
     }
 }                         
