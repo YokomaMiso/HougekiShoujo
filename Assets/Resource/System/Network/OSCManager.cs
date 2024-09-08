@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using OscCore;
 
+
 public class OSCManager : MonoBehaviour
 {
     //////////////////////////////
@@ -10,12 +11,11 @@ public class OSCManager : MonoBehaviour
     //////////////////////////////
 
     //自身のネットワークデータ
-    SendDataCreator.PlayerNetData myNetData = default;
-
+    SendDataCreator.PlayerNetData myNetData = new SendDataCreator.PlayerNetData();
+    
+    SendDataCreator.PlayerNetData receivedData = new SendDataCreator.PlayerNetData();
+    
     SendDataCreator netInstance = new SendDataCreator();
-
-    //1フレーム前の全プレイヤーデータ格納用
-    List<SendDataCreator.PlayerNetData> beforeNetData = new List<SendDataCreator.PlayerNetData>();
 
 
     ///////// OSCcore周り ////////
@@ -34,11 +34,12 @@ public class OSCManager : MonoBehaviour
     [SerializeField]
     int otherPort = 8001;
 
-
     //現フレームの全プレイヤーデータ格納用
     //List<Player> nowFramePlayerData = new List<Player>();
 
     int receiveNum = 0;
+
+    //byte[] testData = new byte[99999];
 
     //////////////////////
     //////// 関数 ////////
@@ -49,6 +50,11 @@ public class OSCManager : MonoBehaviour
     {
         //netData[0].mainPacketData
 
+        myNetData = default;
+        myNetData.mainPacketData = default;
+        myNetData.receivedByteData = new byte[0];
+        myNetData.sendByteData = null;
+        receivedData = default;
 
         myNetData.mainPacketData.comData.myIP = "255.255.255.255";
         myNetData.mainPacketData.comData.targetIP = "255.255.255.255";
@@ -76,16 +82,34 @@ public class OSCManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //デバック用で任意のタイミングで送れるようにしておく
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            client.Send(myNetData.mainPacketData.comData.receiveAddress, 1);
-            //SendValue();
+            //client.Send(myNetData.mainPacketData.comData.receiveAddress, 1);
+            SendValue();
         }
 
         if(Input.GetKeyDown(KeyCode.M))
         {
-            Debug.Log(receiveNum);
+            myNetData.mainPacketData.inGameData.num += 1;
+            myNetData.mainPacketData.inGameData.test = "HelloWorld!";
+
         }
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log(receivedData.mainPacketData.inGameData.num);
+
+            //Debug.Log("送信前バイト情報 : " + myNetData.sendByteData + "\n送信前バイト長 : " + myNetData.sendByteData.Length);
+            Debug.Log("送信後バイト情報 : " + myNetData.receivedByteData + "\n送信後バイト長 : ");
+            //Debug.Log(receiveNum);
+        }
+    }
+
+    //送信は
+    private void LateUpdate()
+    {
+        //SendValue();
     }
 
     private void OnEnable()
@@ -108,18 +132,30 @@ public class OSCManager : MonoBehaviour
 
     private void ReadValue(OscMessageValues values)
     {
-        //values.ReadBlobElement(0, ref myNetData.receiveData);
-        receiveNum += values.ReadIntElement(0);
+        byte[] testData = new byte[0];
+
+        values.ReadBlobElement(0, ref myNetData.receivedByteData);
+
+        receivedData.mainPacketData = netInstance.ByteToStruct<SendDataCreator.PacketDataForPerFrame>(myNetData.receivedByteData);
+
+
+        //receiveNum += values.ReadIntElement(0);
     }
 
     private void SendValue()
     {
-        myNetData.sendData = netInstance.StructToByte(myNetData);
-        client.Send(myNetData.mainPacketData.comData.receiveAddress, myNetData.sendData, myNetData.sendData.Length);
+        myNetData.sendByteData = netInstance.StructToByte(myNetData.mainPacketData);
+        client.Send(myNetData.mainPacketData.comData.receiveAddress, myNetData.sendByteData, myNetData.sendByteData.Length);
     }
 
     private void MainThreadMethod()
     {
         Debug.Log($"OscCore received = " + receiveNum);
     }
-}
+
+    public void test()
+    {
+        //netda
+        
+    }
+}                         

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -10,16 +11,18 @@ public class SendDataCreator
     /// <summary>
     /// データ送受信時に使うデータを全てまとめたやつ
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public struct PlayerNetData
     {
         public PacketDataForPerFrame mainPacketData;
-        public byte[] sendData;
-        public byte[] receiveData;
+        public byte[] sendByteData;
+        public byte[] receivedByteData;
     }
 
     /// <summary>
     /// 毎フレーム送るべきデータ群構造体
     /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
     public struct PacketDataForPerFrame
     {
         public UsersBaseData comData;
@@ -29,22 +32,30 @@ public class SendDataCreator
     /// <summary>
     /// 通信時に必須なデータ事項構造体
     /// </summary>
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct UsersBaseData
     {
         public int myPort;       //送信ポート番号
         public int targetPort;    //受信ポート番号
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
         public string myIP;           //ユーザIP
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
         public string targetIP;       //ユーザIP
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
         public string sendAddress;    //送信アドレス
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
         public string receiveAddress; //受信アドレス
     }
 
     /// <summary>
     /// インゲーム内の通信させたいデータ格納用
     /// </summary>
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct GameData
     {
-
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
+        public string test;
+        public int num;
     }
 
     //////////////////////////////
@@ -68,15 +79,26 @@ public class SendDataCreator
     /// </summary>
     /// <param name="_data">外部で作成されたインスタンスを指定します</param>
     /// <returns>渡したインスタンスをバイト配列として返します</returns>
-    public byte[] StructToByte(PlayerNetData _data)
+    public byte[] StructToByte<T>(T _data)where T : struct
     {
-        int size = Marshal.SizeOf(_data.mainPacketData);
+        int size = Marshal.SizeOf(_data);
 
         byte[] bytes = new byte[size];
 
         GCHandle gchw = GCHandle.Alloc(bytes, GCHandleType.Pinned);
-        Marshal.StructureToPtr(_data, gchw.AddrOfPinnedObject(), false);
-        gchw.Free();
+        
+
+        try
+        {
+            IntPtr ptr = gchw.AddrOfPinnedObject();
+            Marshal.StructureToPtr(_data, ptr, true);
+        }
+        finally
+        {
+            gchw.Free();
+        }
+
+        Debug.Log("バイト配列は " + bytes.Length);
 
         return bytes;
     }
@@ -85,17 +107,22 @@ public class SendDataCreator
     /// バイト配列から構造体に組み直します
     /// </summary>
     /// <returns>組まれた構造体です</returns>
-    public PacketDataForPerFrame ByteToStruct()
+    public T ByteToStruct<T>(byte[] _data) where T : struct
     {
-        PacketDataForPerFrame _data = new PacketDataForPerFrame();
-        int size = Marshal.SizeOf(_data);
+        T strData = default(T);
 
-        byte[] buffer = new byte[size];
+        GCHandle gch = GCHandle.Alloc(_data, GCHandleType.Pinned);
 
-        GCHandle gch = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-        _data = (PacketDataForPerFrame)Marshal.PtrToStructure(gch.AddrOfPinnedObject(), typeof(PacketDataForPerFrame));
-        gch.Free();
+        try
+        {
+            IntPtr ptr = gch.AddrOfPinnedObject();
+            strData = Marshal.PtrToStructure<T>(ptr);
+        }
+        finally
+        {
+            gch.Free();
+        }
 
-        return _data;
+        return strData;
     }
 }
