@@ -12,10 +12,13 @@ public class GameManager : MonoBehaviour
     GameObject[] playerInstance;
     const int playerMaxNum = 2;
 
-    [SerializeField] PlayerData[] playerDatas;
+    public PlayerData[] playerDatas;
+    int characterNum = 0;
+    public void SetCharacterNum(int _num) { characterNum = _num; }
 
     //âºç¿ïW
     Vector3[] pos = new Vector3[2] { Vector3.forward * 3, Vector3.left * 3 };
+
     public void CreatePlayer()
     {
         playerInstance = new GameObject[playerMaxNum];
@@ -31,7 +34,7 @@ public class GameManager : MonoBehaviour
 
             Player nowPlayer = playerInstance[i].GetComponent<Player>();
             nowPlayer.SetPlayerID(i);
-            nowPlayer.SetPlayerData(playerDatas[1]);
+            nowPlayer.SetPlayerData(playerDatas[characterNum]);
         }
     }
 

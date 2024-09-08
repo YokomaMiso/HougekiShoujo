@@ -2,20 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MortarProjectileBehavior : MonoBehaviour
+public class MortarProjectileBehavior : ProjectileBehavior
 {
-    Player ownerPlayer;
-    public void SetPlayer(Player _player) { ownerPlayer = _player; }
-
-    [SerializeField] GameObject explosion;
-    [SerializeField] Animator imageAnimator;
-
     [SerializeField] RuntimeAnimatorController projectileUp;
     [SerializeField] RuntimeAnimatorController projectileDown;
 
-    [SerializeField] float lifeTime = 3;
-
-    float timer = 0;
     Vector3 defaultPosition;
     Vector3 targetPoint;
 
@@ -25,14 +16,9 @@ public class MortarProjectileBehavior : MonoBehaviour
         defaultPosition = this.transform.position;
     }
 
-    void Update()
+    protected override void Update()
     {
-        imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
-
-        float deltaTime = Managers.instance.timeManager.GetDeltaTime();
-
-        timer += deltaTime;
-        if (timer > lifeTime) { Destroy(gameObject); }
+        base.Update();
 
         float timeRate = timer / lifeTime;
 
@@ -43,17 +29,5 @@ public class MortarProjectileBehavior : MonoBehaviour
         float currentVertical = Mathf.Sin(timeRate * Mathf.PI) * 15;
 
         transform.position = currentHorizon + Vector3.up * currentVertical;
-    }
-
-    private void OnDestroy()
-    {
-        Vector3 spawnPos = transform.position;
-        spawnPos.y = 2;
-        GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
-        obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
-
-        OwnerID id;
-        id = obj.AddComponent<OwnerID>();
-        id.SetID(this.transform.GetComponent<OwnerID>().GetID());
     }
 }

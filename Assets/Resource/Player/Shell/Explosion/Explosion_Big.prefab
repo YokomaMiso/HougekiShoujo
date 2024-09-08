@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab109b4220be3594f929145190fa1dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageAnimator: {fileID: 8277721792466392800}
+  imageAnimator: {fileID: 4607915284047989637}
   hitTag: Player
+  cameraShakeRate: 1
 --- !u!135 &1166596283970069200
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -79,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3775975727048791887}
   - component: {fileID: 2940895855444103798}
-  - component: {fileID: 8277721792466392800}
+  - component: {fileID: 4607915284047989637}
   - component: {fileID: 1783421479792590752}
   m_Layer: 0
   m_Name: Image
@@ -155,7 +156,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8277721792466392800
+--- !u!95 &4607915284047989637
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

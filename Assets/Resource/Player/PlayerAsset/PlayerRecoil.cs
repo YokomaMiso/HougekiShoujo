@@ -7,12 +7,17 @@ public class PlayerRecoil : MonoBehaviour
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-    const float recoilTime = 1;
+    float recoilTime = 1;
     float timer;
     bool isRecoil;
 
     public void SetRecoil() { isRecoil = true; }
     public bool GetIsRecoil() { return isRecoil; }
+
+    void Start()
+    {
+        recoilTime = ownerPlayer.GetPlayerData().GetShell().GetRecoilTime();
+    }
 
     void Update()
     {

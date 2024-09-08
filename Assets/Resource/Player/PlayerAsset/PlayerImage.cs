@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 using UnityEngine;
 
 public class PlayerImage : MonoBehaviour
@@ -7,18 +8,25 @@ public class PlayerImage : MonoBehaviour
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-    [SerializeField] SpriteRenderer charaSprite;
-    [SerializeField] RuntimeAnimatorController idleAnimationController;
-    [SerializeField] RuntimeAnimatorController runAnimationController;
-    [SerializeField] RuntimeAnimatorController reloadAnimationController;
-    [SerializeField] RuntimeAnimatorController aimAnimationController;
-    [SerializeField] RuntimeAnimatorController recoilAnimationController;
+    SpriteRenderer charaSprite;
+    CharacterAnimData animData;
 
-    int[] animSpeed = new int[5] { 1, 2, 1, 1, 1 };
+    Material MaterialData;
+
+    int[] animSpeed = new int[5] { 1, 1, 1, 1, 1 };
 
 
     void Start()
     {
+        animData = ownerPlayer.GetPlayerData().GetCharacterAnimData();
+        charaSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        MaterialData = ownerPlayer.GetPlayerData().GetMaterial();
+
+        if (charaSprite != null)
+        {
+            charaSprite.shadowCastingMode = ShadowCastingMode.On;
+            charaSprite.material = MaterialData;
+        }
 
     }
 
@@ -26,25 +34,29 @@ public class PlayerImage : MonoBehaviour
     {
         int num = (int)ownerPlayer.playerState;
 
-        RuntimeAnimatorController applyController = idleAnimationController;
+        RuntimeAnimatorController applyController;
         switch (ownerPlayer.playerState)
         {
-            case PLAYER_STATE.IDLE:
-                applyController = idleAnimationController;
+            default://case PLAYER_STATE.IDLE:
+                applyController = animData.GetIdleAnim();
                 break;
             case PLAYER_STATE.RUN:
-                applyController = runAnimationController;
+                applyController = animData.GetRunAnim(0);
                 break;
             case PLAYER_STATE.RELOADING:
-                applyController = reloadAnimationController;
+                applyController = animData.GetReloadAnim();
                 break;
             case PLAYER_STATE.AIMING:
-                applyController = aimAnimationController;
+                float time = charaSprite.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
+                applyController = animData.GetAimAnim(ownerPlayer.AnimNumFromVector());
+                charaSprite.GetComponent<Animator>().ForceStateNormalizedTime(time);
+                //charaSprite.GetComponent<Animator>().Play(0, -1, time);
                 break;
             case PLAYER_STATE.ATTACKING:
-                applyController = recoilAnimationController;
+                applyController = animData.GetRecoilAnim(0);
                 break;
         }
+
         charaSprite.GetComponent<Animator>().runtimeAnimatorController = applyController;
         charaSprite.GetComponent<Animator>().speed = animSpeed[num] * Managers.instance.timeManager.TimeRate();
     }

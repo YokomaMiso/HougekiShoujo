@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING }
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     PlayerReload playerReload;
     PlayerAim playerAim;
     PlayerRecoil playerRecoil;
+    PlayerSubAction playerSubAction;
     PlayerImage playerImage;
 
     int playerID;
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
     public PLAYER_STATE playerState = PLAYER_STATE.IDLE;
     public CANON_STATE canonState = CANON_STATE.EMPTY;
     public int GetCanonState() { return (int)canonState; }
+    public float GetSubWeaponReload() { return playerSubAction.ReloadTime(); }
 
     bool IsMine() { return playerID == Managers.instance.playerID; }
 
@@ -36,6 +39,21 @@ public class Player : MonoBehaviour
         if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
     }
     public bool GetAlive() { return alive; }
+
+    Vector3 inputVector;
+    public Vector3 GetInputVector() { return inputVector; }
+    public int AnimNumFromVector()
+    {
+        Vector3 normalizedVector = Vector3.Normalize(inputVector);
+        if (normalizedVector.x < 0) { normalizedVector.x *= -1; }
+        float angle = Mathf.Atan2(normalizedVector.x, normalizedVector.z) * Mathf.Rad2Deg;
+
+        if (angle < 22.5f) { return 0; }
+        else if (angle < 22.5f + 45) { return 1; }
+        else if (angle < 22.5f + 45 * 2) { return 2; }
+        else if (angle < 22.5f + 45 * 3) { return 3; }
+        else { return 4; }
+    }
 
     void Start()
     {
@@ -52,6 +70,9 @@ public class Player : MonoBehaviour
 
             playerRecoil = gameObject.GetComponent<PlayerRecoil>();
             playerRecoil.SetPlayer(this);
+
+            playerSubAction = gameObject.GetComponent<PlayerSubAction>();
+            playerSubAction.SetPlayer(this);
         }
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
@@ -63,6 +84,8 @@ public class Player : MonoBehaviour
 
         //DEBUG
         //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }
+        //if (Input.GetKeyDown(KeyCode.X)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(2, 5); }
+        //if (Input.GetKeyDown(KeyCode.Z)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(1.0f/2, 5); }
 
         if (IsMine()) { OwnPlayerBehavior(); }
         else { }
@@ -74,6 +97,8 @@ public class Player : MonoBehaviour
 
         if (InAction())
         {
+            playerMove.MoveStop();
+
             switch (playerState)
             {
                 case PLAYER_STATE.RELOADING:
@@ -124,13 +149,13 @@ public class Player : MonoBehaviour
                     {
                         if (GetCanonState() == inputNum)
                         {
-                            playerAim.AimStart(playerData.GetShell());
+                            playerAim.AimStart();
                             playerState = PLAYER_STATE.AIMING;
                         }
                     }
                     break;
                 case 1:
-
+                    playerSubAction.UseSubWeapon();
                     break;
             }
         }
@@ -183,6 +208,8 @@ public class Player : MonoBehaviour
     void DirectionChange(Vector3 _movement)
     {
         if (_movement.x == 0) { return; }
+
+        inputVector = _movement;
 
         Vector3 imageScale = Vector3.one;
         if (_movement.x < 0) { imageScale.x *= -1; }

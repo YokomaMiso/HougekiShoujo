@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: ShellData3
   m_EditorClassIdentifier: 
   shellIcon: {fileID: 21300000, guid: 3f1676d13a9d08e4e8977b4bc523c1f9, type: 3}
-  type: 2
+  shellType: 2
   projectile: {fileID: 1008518316061016973, guid: d1e9b76a44427f44d9463411c190d4a8,
     type: 3}
+  explosion: {fileID: 3179393461812120061, guid: 751adc5820fa7a94e866de748bdcb3b0,
+    type: 3}
+  shellExplain: "\u3046\u3063\u3072\u3087\u30FC\u3044\n\u4E0A\u7A7A\u304B\u3089\u9060\u8DDD\u96E2\u653B\u6483\u304C\u3067\u304D\u308B\u8FEB\u6483\u7832\n\u30EA\u30ED\u30FC\u30C9\u304C\u3068\u3066\u3082\u9045\u304F\u3001\u6271\u3044\u3065\u3089\u3044"
+  reloadTime: 3.5
+  recoilTime: 2
+  aimRange: 20

@@ -6,14 +6,16 @@ public class ExplosionBehavior : MonoBehaviour
 {
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
+    public Player GetPlayer() { return ownerPlayer; }
 
-    [SerializeField] Animator imageAnimator;
-    [SerializeField, Tag] string hitTag;
+    [SerializeField] protected Animator imageAnimator;
+    [SerializeField, Tag] protected string hitTag;
+    [SerializeField, Range(0.0f, 1.0f)] float cameraShakeRate = 1.0f;
 
-    float lifeTime;
-    float timer;
+    protected float lifeTime;
+    protected float timer;
 
-    void Start()
+    protected virtual void Start()
     {
         imageAnimator.speed = 1;
         lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
@@ -22,12 +24,11 @@ public class ExplosionBehavior : MonoBehaviour
         float weight = distance.magnitude / 5;
         if (weight < 1) { weight = 1; }
 
-        float shakeValue = 1.0f / weight;
+        float shakeValue = 1.0f / weight * cameraShakeRate;
         Camera.main.GetComponent<CameraMove>().SetCameraShake(shakeValue);
-
     }
 
-    void Update()
+    protected virtual void Update()
     {
         imageAnimator.speed = 2 * Managers.instance.timeManager.TimeRate();
 
@@ -38,7 +39,7 @@ public class ExplosionBehavior : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == hitTag)
         {
