@@ -12,25 +12,35 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] Material[] attackAreaMat;
 
     Vector3 aimVector = Vector3.zero;
-    Shell nowShell;
-    SHELL_TYPE nowShellType;
+    Shell shellData;
+
     public void SetPlayer(Player _player, GameObject _aoeArea, GameObject _attackArea)
     {
         ownerPlayer = _player;
+        shellData = ownerPlayer.GetPlayerData().GetShell();
 
-        aoeArea = _aoeArea;
-        attackArea = _attackArea;
+        if (ownerPlayer.IsMine())
+        {
+            attackArea = _attackArea;
+            float aimRange = shellData.GetAimRange();
+            attackArea.transform.localScale = new Vector3(aimRange, aimRange, 1);
+            attackArea.GetComponent<MeshRenderer>().sortingOrder = 1;
+            attackArea.SetActive(false);
 
-        aoeArea.GetComponent<MeshRenderer>().sortingOrder = 1;
-        attackArea.SetActive(false);
-        aoeArea.SetActive(false);
+            aoeArea = _aoeArea;
+            float explosionRadius = shellData.GetExplosion().GetComponent<SphereCollider>().radius;
+            float explosionScale = shellData.GetExplosion().transform.localScale.x;
+            float explosionRange = explosionRadius * 2 * explosionScale;
+            aoeArea.transform.localScale = new Vector3(explosionRange, explosionRange, 1);
+            aoeArea.GetComponent<MeshRenderer>().sortingOrder = 2;
+            aoeArea.SetActive(false);
+        }
     }
-    public void AimStart(Shell _shell)
+    public void AimStart()
     {
-        nowShell = _shell;
-        nowShellType = nowShell.GetShellType();
+        if (!ownerPlayer.IsMine()) { return; }
 
-        switch (nowShellType)
+        switch (shellData.GetShellType())
         {
             case SHELL_TYPE.BLAST:
                 attackArea.SetActive(true);
@@ -40,55 +50,72 @@ public class PlayerAim : MonoBehaviour
                 attackArea.SetActive(true);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[1];
                 break;
-            case SHELL_TYPE.MORTOR:
+            case SHELL_TYPE.MORTAR:
                 attackArea.SetActive(true);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[2];
                 aoeArea.SetActive(true);
                 break;
         }
+
+        Camera.main.GetComponent<CameraMove>().SetCameraFar(shellData.GetAimRange() / 2);
     }
 
     public Vector3 AimMove()
     {
-        Vector3 movement = Vector3.zero;
-        movement += Vector3.right * Input.GetAxis("Horizontal");
-        movement += Vector3.forward * Input.GetAxis("Vertical");
-
-        if (movement != Vector3.zero)
+        if (ownerPlayer.IsMine())
         {
-            switch (nowShellType)
+            Vector3 movement = Vector3.zero;
+            movement += Vector3.right * Input.GetAxis("Horizontal");
+            movement += Vector3.forward * Input.GetAxis("Vertical");
+
+            if (movement != Vector3.zero)
             {
-                case SHELL_TYPE.BLAST:
-                    attackAreaMat[0].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
-                    aimVector = movement;
-                    break;
+                switch (shellData.GetShellType())
+                {
+                    case SHELL_TYPE.BLAST:
+                        attackAreaMat[0].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
+                        aimVector = movement;
+                        break;
 
-                case SHELL_TYPE.CANON:
-                    attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
-                    aimVector = movement;
-                    break;
+                    case SHELL_TYPE.CANON:
+                        attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
+                        aimVector = movement;
+                        break;
 
-                case SHELL_TYPE.MORTOR:
-                    float limit = attackArea.transform.localScale.x / 2;
-                    aimVector += movement * 5 * TimeManager.deltaTime;
-                    if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
-                    aoeArea.transform.position = attackArea.transform.position + aimVector;
-                    break;
+                    case SHELL_TYPE.MORTAR:
+                        float limit = attackArea.transform.localScale.x / 2;
+                        aimVector += movement * Managers.instance.GetOptionData().mortarSensitive * Managers.instance.timeManager.GetDeltaTime();
+                        if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
+                        aoeArea.transform.position = attackArea.transform.position + aimVector;
+                        break;
+                }
             }
+
+            OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerStickValue = aimVector;
         }
+        else
+        {
+            aimVector = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue;
+        }
+
         return aimVector;
     }
 
     public void Fire(Vector3 _scale)
     {
-        GameObject projectile = nowShell.GetProjectile();
+        GameObject projectile = shellData.GetProjectile();
         GameObject obj;
         float angle;
 
-        switch (nowShellType)
+        switch (shellData.GetShellType())
         {
-            case SHELL_TYPE.BLAST:
-
+            default: //SHELL_TYPE.BLAST
+                angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
+                const float blastDistance = 1.5f;
+                Vector3 applyPos = aimVector.normalized;
+                if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
+                obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
+                obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
                 break;
 
             case SHELL_TYPE.CANON:
@@ -96,28 +123,40 @@ public class PlayerAim : MonoBehaviour
                 obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
                 angle = Mathf.Atan2(aimVector.z, aimVector.x) * Mathf.Rad2Deg;
                 obj.GetComponent<CanonProjectileBehavior>().SetAngle(angle);
+                obj.GetComponent<CanonProjectileBehavior>().SetPlayer(ownerPlayer);
                 break;
 
-            case SHELL_TYPE.MORTOR:
+            case SHELL_TYPE.MORTAR:
                 Vector3 spawnPos = transform.position + Vector3.up + (aimVector.normalized * 0.5f);
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;
                 obj.GetComponent<MortarProjectileBehavior>().ProjectileStart(transform.position + aimVector);
+                obj.GetComponent<MortarProjectileBehavior>().SetPlayer(ownerPlayer);
                 break;
+        }
+        if (ownerPlayer.IsMine())
+        {
+            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+            OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = true;
         }
     }
 
     void Update()
     {
+        if (!ownerPlayer.IsMine()) { return; }
+
         if (ownerPlayer.playerState != PLAYER_STATE.AIMING)
         {
             aimVector = Vector3.zero;
-            attackAreaMat[0].SetFloat("_Direction", 0);
-            attackAreaMat[1].SetFloat("_Direction", 0);
-            aoeArea.transform.localPosition = Vector3.zero;
+            if (ownerPlayer.IsMine())
+            {
+                attackAreaMat[0].SetFloat("_Direction", 0);
+                attackAreaMat[1].SetFloat("_Direction", 0);
+                aoeArea.transform.localPosition = Vector3.zero;
 
-            attackArea.SetActive(false);
-            aoeArea.SetActive(false);
+                attackArea.SetActive(false);
+                aoeArea.SetActive(false);
+            }
             return;
         }
     }

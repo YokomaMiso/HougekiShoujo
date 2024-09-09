@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MortarProjectileBehavior : MonoBehaviour
+public class MortarProjectileBehavior : ProjectileBehavior
 {
-    [SerializeField] GameObject explosion;
-    [SerializeField] Animator imageAnimator;
-
     [SerializeField] RuntimeAnimatorController projectileUp;
     [SerializeField] RuntimeAnimatorController projectileDown;
 
-    [SerializeField] float lifeTime = 3;
-
-    float timer = 0;
     Vector3 defaultPosition;
     Vector3 targetPoint;
 
@@ -22,12 +16,9 @@ public class MortarProjectileBehavior : MonoBehaviour
         defaultPosition = this.transform.position;
     }
 
-    void Update()
+    protected override void Update()
     {
-        imageAnimator.speed = 1 * TimeManager.TimeRate();
-
-        timer += TimeManager.deltaTime;
-        if (timer > lifeTime) { Destroy(gameObject); }
+        base.Update();
 
         float timeRate = timer / lifeTime;
 
@@ -38,12 +29,5 @@ public class MortarProjectileBehavior : MonoBehaviour
         float currentVertical = Mathf.Sin(timeRate * Mathf.PI) * 15;
 
         transform.position = currentHorizon + Vector3.up * currentVertical;
-    }
-
-    private void OnDestroy()
-    {
-        Vector3 spawnPos = transform.position;
-        spawnPos.y = 2;
-        Instantiate(explosion, spawnPos, Quaternion.identity);
     }
 }

@@ -6,14 +6,18 @@ using UnityEngine.UI;
 
 public class OptionCanvasBehavior : MonoBehaviour
 {
+    GameManager gameManager;
+    public void SetGameManager(GameManager _gameManager) { gameManager = _gameManager; }
+
     OptionData optionData;
     int selectNum = 0;
     bool isCanSelect = true;
     float timer = 0;
+    const float cursorTimer = 0.15f;
 
     void Start()
     {
-        optionData = Managers.optionData;
+        optionData = Managers.instance.GetOptionData();
         transform.GetChild(0).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
         transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
         transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.sfxVolume);
@@ -25,7 +29,7 @@ public class OptionCanvasBehavior : MonoBehaviour
     Color SelectColor(bool _select)
     {
         Color color = Color.white;
-        if (_select) { color = new Color(1, 1, 0.8f); }
+        if (_select) { color = Color.yellow; }
 
         return color;
     }
@@ -42,7 +46,7 @@ public class OptionCanvasBehavior : MonoBehaviour
         float value = Input.GetAxis("Vertical");
 
         //ƒJ[ƒ\ƒ‹ˆÚ“®
-        if (Mathf.Abs(value) > 0.7f)
+        if (Mathf.Abs(value) > 0.9f)
         {
             if (isCanSelect)
             {
@@ -70,7 +74,7 @@ public class OptionCanvasBehavior : MonoBehaviour
     {
         float value = Input.GetAxis("Horizontal");
 
-        if (Mathf.Abs(value) > 0.7f)
+        if (Mathf.Abs(value) > 0.6f)
         {
             if (timer == 0)
             {
@@ -90,7 +94,7 @@ public class OptionCanvasBehavior : MonoBehaviour
             }
 
             timer += Time.deltaTime;
-            if (timer > 0.3f) { timer = 0; }
+            if (timer > cursorTimer) { timer = 0; }
         }
         else
         {
@@ -107,10 +111,9 @@ public class OptionCanvasBehavior : MonoBehaviour
         {
             if (selectNum == 5)
             {
-                Managers.optionData = optionData;
-
-                SaveManager.SaveOptionData();
-                GameManager.ChangeState(GameManager.prevState);
+                Managers.instance.SaveOptionData(optionData);
+                Managers.instance.canvasManager.ChangeCanvas(Managers.instance.prevState);
+                Managers.instance.ChangeState(Managers.instance.prevState);
                 Destroy(gameObject);
             }
         }

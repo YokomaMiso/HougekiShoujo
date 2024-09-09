@@ -7,62 +7,64 @@ using UnityEngine.UI;
 public class DisplayShellIcon : MonoBehaviour
 {
     Player ownerPlayer;
-    [SerializeField] Sprite iconFrame;
-
-    Image[] icons;
-    Vector3[] iconPos;
-
-    const int iconFrameNum = PlayerData.maxShellCount;
+    Image shellIcon;
+    Image iconFrame;
+    Image subIcon;
+    Text subText;
 
     void Start()
     {
-        icons = new Image[PlayerData.maxShellCount + 1];
-        iconPos = new Vector3[PlayerData.maxShellCount];
+        shellIcon = transform.GetChild(0).GetComponent<Image>();
+        subIcon = transform.GetChild(1).GetComponent<Image>();
+        subText = subIcon.transform.GetChild(0).GetComponent<Text>();
+        iconFrame = transform.GetChild(2).GetComponent<Image>();
 
-        //仮の処理　プレイヤーを探す
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in players)
-        {
-            if (!player.GetComponent<Player>()) { continue; }
+        ownerPlayer = Managers.instance.gameManager.GetPlayer(Managers.instance.playerID).GetComponent<Player>();
+        shellIcon.sprite = ownerPlayer.GetPlayerData().GetShell().GetShellIcon();
+        subIcon.sprite = ownerPlayer.GetPlayerData().GetSubWeapon().GetIcon();
 
-            ownerPlayer = player.GetComponent<Player>();
-            if (ownerPlayer.GetPlayerID() == 0)
-            {
-                for (int i = 0; i < PlayerData.maxShellCount; i++)
-                {
-                    icons[i] = transform.GetChild(i).GetComponent<Image>();
-                    icons[i].sprite = ownerPlayer.GetPlayerData().GetShell(i).GetSprite();
-                    iconPos[i] = icons[i].transform.position;
-                }
-                break;
-            }
-        }
-
-        icons[iconFrameNum] = transform.GetChild(iconFrameNum).GetComponent<Image>();
-        icons[iconFrameNum].sprite = null;
-        icons[iconFrameNum].color = Color.clear;
+        iconFrame.color = Color.clear;
     }
 
     void Update()
     {
         CheckPlayerShell();
+        CheckPlayerSubWeapon();
     }
 
     void CheckPlayerShell()
     {
-       int canonState = ownerPlayer.GetCanonState();
+        int canonState = ownerPlayer.GetCanonState();
 
         switch (canonState)
         {
             case -1:
-                icons[iconFrameNum].sprite = null;
-                icons[iconFrameNum].color = Color.clear;
+                iconFrame.color = Color.clear;
                 break;
             default:
-                icons[iconFrameNum].sprite = iconFrame;
-                icons[iconFrameNum].color = Color.white;
-                icons[iconFrameNum].transform.position = iconPos[canonState];
+                iconFrame.color = Color.white;
                 break;
         }
+    }
+
+    void CheckPlayerSubWeapon()
+    {
+        float reloadTime = ownerPlayer.GetSubWeaponReload();
+
+        if (reloadTime <= 0)
+        {
+            subIcon.color = Color.white;
+            subText.color = Color.clear;
+        }
+        else
+        {
+            subIcon.color = Color.black;
+            subText.color = Color.white;
+            subText.text = reloadTime.ToString("f0");
+        }
+
+
+
+
     }
 }

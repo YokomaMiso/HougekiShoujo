@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2569756816433642799}
-  - component: {fileID: 8423477297467753621}
   - component: {fileID: 7802420278830233084}
+  - component: {fileID: 1166596283970069200}
   m_Layer: 0
   m_Name: Explosion_Big
   m_TagString: Untagged
@@ -34,8 +34,23 @@ Transform:
   - {fileID: 3775975727048791887}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8423477297467753621
-BoxCollider:
+--- !u!114 &7802420278830233084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179393461812120061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab109b4220be3594f929145190fa1dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageAnimator: {fileID: 4607915284047989637}
+  hitTag: Player
+  cameraShakeRate: 1
+--- !u!135 &1166596283970069200
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -49,25 +64,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7802420278830233084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179393461812120061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab109b4220be3594f929145190fa1dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageAnimator: {fileID: 8277721792466392800}
+  m_Radius: 0.75
+  m_Center: {x: 0, y: -0.375, z: 0}
 --- !u!1 &7495808424539395539
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3775975727048791887}
   - component: {fileID: 2940895855444103798}
-  - component: {fileID: 8277721792466392800}
+  - component: {fileID: 4607915284047989637}
   - component: {fileID: 1783421479792590752}
   m_Layer: 0
   m_Name: Image
@@ -154,7 +156,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8277721792466392800
+--- !u!95 &4607915284047989637
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -187,3 +189,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3998d9d47195c4fbb7c0288316a9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FixedAngles: {x: 0, y: 0, z: 0}

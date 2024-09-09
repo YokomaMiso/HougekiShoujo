@@ -8,29 +8,23 @@ using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    public static SaveManager instance;
-    
+
     [SerializeField] PlayerData defaultPlayerData;
-    static PlayerData initializePlayerData;
 
     [SerializeField] OptionData defaultOptionData;
-    static OptionData initializeOptionData;
 
-    static string saveDataFilePath;
-    static string optionDataFilePath;
-    static string fileExtension;
+    string saveDataFilePath;
+    string optionDataFilePath;
+    string fileExtension;
     struct SaveData
     {
         public PlayerData playerData;
     }
     void Awake()
     {
-        instance = this;
         saveDataFilePath = Application.persistentDataPath + "/savedata";
         optionDataFilePath = Application.persistentDataPath + "/optiondata";
         fileExtension = ".json";
-        initializePlayerData = defaultPlayerData;
-        initializeOptionData = defaultOptionData;
     }
     void Start()
     {
@@ -102,14 +96,11 @@ public class SaveManager : MonoBehaviour
         }
     }
     */
-    public static void SaveOptionData()
+    public void SaveOptionData(OptionData _receiveData)
     {
         StreamWriter writer;
 
-        OptionData od;
-        od = Managers.optionData;
-
-        string jsonstr = JsonUtility.ToJson(od);
+        string jsonstr = JsonUtility.ToJson(_receiveData);
 
         string loadPath = optionDataFilePath + fileExtension;
 
@@ -118,8 +109,10 @@ public class SaveManager : MonoBehaviour
         writer.Flush();
         writer.Close();
     }
-    public static void LoadOptionData()
+    public OptionData LoadOptionData()
     {
+        OptionData returnData;
+
         string loadPath = saveDataFilePath + fileExtension;
         //ファイルが存在している
         if (File.Exists(loadPath))
@@ -130,14 +123,15 @@ public class SaveManager : MonoBehaviour
             string datastr = reader.ReadToEnd();
             reader.Close();
 
-            od = JsonUtility.FromJson<OptionData>(datastr);
-            Managers.optionData = od;
+            returnData = JsonUtility.FromJson<OptionData>(datastr);
         }
         //ファイルが存在しない
         else
         {
-            Managers.optionData = initializeOptionData;
-            SaveOptionData();
+            returnData = defaultOptionData;
+            SaveOptionData(returnData);
         }
+
+        return returnData;
     }
 }

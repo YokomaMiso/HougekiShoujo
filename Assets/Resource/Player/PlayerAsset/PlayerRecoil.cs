@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class PlayerRecoil : MonoBehaviour
 {
-    const float recoilTime = 1;
+    Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
+    float recoilTime = 1;
     float timer;
     bool isRecoil;
 
     public void SetRecoil() { isRecoil = true; }
     public bool GetIsRecoil() { return isRecoil; }
 
+    void Start()
+    {
+        recoilTime = ownerPlayer.GetPlayerData().GetShell().GetRecoilTime();
+    }
+
     void Update()
     {
         if (isRecoil)
         {
-            timer += TimeManager.deltaTime;
+            timer += Managers.instance.timeManager.GetDeltaTime();
             if (timer > recoilTime)
             {
                 isRecoil = false;

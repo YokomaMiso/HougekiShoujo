@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class ExplosionBehavior : MonoBehaviour
 {
-    [SerializeField] Animator imageAnimator;
+    Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+    public Player GetPlayer() { return ownerPlayer; }
 
-    float lifeTime;
-    float timer;
+    [SerializeField] protected Animator imageAnimator;
+    [SerializeField, Tag] protected string hitTag;
+    [SerializeField, Range(0.0f, 1.0f)] float cameraShakeRate = 1.0f;
 
-    void Start()
+    protected float lifeTime;
+    protected float timer;
+
+    protected virtual void Start()
     {
         imageAnimator.speed = 1;
         lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
@@ -18,19 +24,26 @@ public class ExplosionBehavior : MonoBehaviour
         float weight = distance.magnitude / 5;
         if (weight < 1) { weight = 1; }
 
-        float shakeValue = 1.0f / weight;
+        float shakeValue = 1.0f / weight * cameraShakeRate;
         Camera.main.GetComponent<CameraMove>().SetCameraShake(shakeValue);
-
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        imageAnimator.speed = 2 * TimeManager.TimeRate();
+        imageAnimator.speed = 2 * Managers.instance.timeManager.TimeRate();
 
-        timer += TimeManager.deltaTime;
+        timer += Managers.instance.timeManager.GetDeltaTime();
         if (timer >= lifeTime)
         {
             Destroy(gameObject);
+        }
+    }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == hitTag)
+        {
+            other.GetComponent<Player>().SetDead();
         }
     }
 }

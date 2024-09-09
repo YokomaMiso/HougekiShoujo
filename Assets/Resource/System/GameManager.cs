@@ -1,36 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public enum GAME_STATE { TITLE = 0, LOAD, OPTION, CONSOLE, IN_GAME, };
 
 public class GameManager : MonoBehaviour
 {
-    public static GAME_STATE state = GAME_STATE.TITLE;
-    public static GAME_STATE prevState = GAME_STATE.TITLE;
+    [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject otherPlayerPrefab;
+    GameObject[] playerInstance;
+    const int playerMaxNum = 2;
 
-    public static GameObject[] canvases;
-    [SerializeField] GameObject titleCanvas;
-    [SerializeField] GameObject loadCanvas;
-    [SerializeField] GameObject optionCanvas;
-    [SerializeField] GameObject consoleCanvas;
-    [SerializeField] GameObject ingameCanvas;
+    public PlayerData[] playerDatas;
+    int characterNum = 0;
+    public void SetCharacterNum(int _num) { characterNum = _num; }
 
-    void Start()
+    //仮座標
+    Vector3[] pos = new Vector3[2] { Vector3.forward * 3, Vector3.left * 3 };
+
+    public void CreatePlayer()
     {
-        canvases = new GameObject[5];
-        canvases[0] = titleCanvas;
-        canvases[1] = loadCanvas;
-        canvases[2] = optionCanvas;
-        canvases[3] = consoleCanvas;
-        canvases[4] = ingameCanvas;
-        ChangeState(GAME_STATE.TITLE);
+        playerInstance = new GameObject[playerMaxNum];
+        //仮のプレイヤー生成処理
+        for (int i = 0; i < playerMaxNum; i++)
+        {
+            if (i == Managers.instance.playerID)
+            {
+                playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
+                Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
+            }
+            else { playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity); }
+
+            Player nowPlayer = playerInstance[i].GetComponent<Player>();
+            nowPlayer.SetPlayerID(i);
+            nowPlayer.SetPlayerData(playerDatas[characterNum]);
+        }
     }
 
-    public static void ChangeState(GAME_STATE _state)
+    public GameObject GetPlayer(int _num)
     {
-        Instantiate(canvases[(int)_state]);
-        prevState = state;
-        state = _state;
+        if (playerInstance == null) { return null; }
+        if (_num >= playerInstance.Length) { return null; }
+
+        return playerInstance[_num];
+    }
+
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == (int)GAME_STATE.IN_GAME)
+        {
+            for (int i = 0; i < playerMaxNum; i++)
+            {
+                if (!playerInstance[i].GetComponent<Player>().GetAlive())
+                {
+                    Managers.instance.ChangeScene(GAME_STATE.ROOM);
+                    Managers.instance.ChangeState(GAME_STATE.ROOM);
+                }
+        }
+        }
     }
 }

@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class PlayerReload : MonoBehaviour
 {
-    [SerializeField] float reloadTime = 2;
+    Player ownerPlayer;
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
+    float reloadTime = 2;
     float timer;
     int shellNum = -1;
+
+    void Start()
+    {
+        reloadTime = ownerPlayer.GetPlayerData().GetShell().GetReloadTime();    
+    }
+
     public int ReloadBehavior()
     {
-        timer += TimeManager.deltaTime;
-        if (timer > reloadTime) 
+        timer += Managers.instance.timeManager.GetDeltaTime();
+        if (timer > reloadTime)
         {
             timer = 0;
             return shellNum;
@@ -19,7 +28,7 @@ public class PlayerReload : MonoBehaviour
         return -1;
     }
 
-    public void Reload(int _num) { shellNum = _num;  }
+    public void Reload(int _num) { shellNum = _num; }
     public bool Reloading() { return timer != 0; }
     public void ReloadCancel() { timer = 0; }
 
