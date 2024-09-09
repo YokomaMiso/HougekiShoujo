@@ -66,6 +66,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         CharaSelect();
         PlayerBannerController();
         GameStart();
+        OpenOption();
     }
 
     void CharaSelect()
@@ -124,6 +125,20 @@ public class RoomCanvasBehavior : MonoBehaviour
     void PlayerBannerController()
     {
         bannerSelecter.transform.localPosition = bannerPos[Managers.instance.playerID];
+    }
+
+    void OpenOption()
+    {
+        if (Input.GetButtonDown("Menu"))
+        {
+            Debug.Log("aaaa");
+
+            Managers.instance.ChangeScene(GAME_STATE.OPTION);
+            Managers.instance.ChangeState(GAME_STATE.OPTION);
+            Managers.instance.canvasManager.ChangeCanvas(GAME_STATE.OPTION);
+            Destroy(gameObject);
+            return;
+        }
     }
 
     void GameStart()
