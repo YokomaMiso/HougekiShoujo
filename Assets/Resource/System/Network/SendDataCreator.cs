@@ -55,6 +55,10 @@ public class SendDataCreator
     public struct GameData
     {
         public Vector3 playerPos;
+        public Vector3 playerStickValue;
+        public PLAYER_STATE playerState;
+        public bool fire;
+        public bool useSub;
     }
 
     //////////////////////////////

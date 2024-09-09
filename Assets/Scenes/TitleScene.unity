@@ -536,8 +536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f9137985e630d449039fc1f3ecedc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  port: 8000
-  otherPort: 8001
+  port: 8001
+  otherPort: 8000
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
