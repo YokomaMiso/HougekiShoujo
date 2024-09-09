@@ -57,19 +57,25 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        if (IsMine())
-        {
-            playerReload = gameObject.GetComponent<PlayerReload>();
-            playerReload.SetPlayer(this);
-
-            playerRecoil = gameObject.GetComponent<PlayerRecoil>();
-            playerRecoil.SetPlayer(this);
-        }
         playerMove = gameObject.GetComponent<PlayerMove>();
         playerMove.SetPlayer(this);
 
         playerAim = gameObject.GetComponent<PlayerAim>();
-        playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
+
+        if (IsMine())
+        {
+            playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
+        }
+        else
+        {
+            playerAim.SetPlayer(this, null, null);
+        }
+
+        playerReload = gameObject.GetComponent<PlayerReload>();
+        playerReload.SetPlayer(this);
+
+        playerRecoil = gameObject.GetComponent<PlayerRecoil>();
+        playerRecoil.SetPlayer(this);
 
         playerSubAction = gameObject.GetComponent<PlayerSubAction>();
         playerSubAction.SetPlayer(this);
@@ -93,7 +99,7 @@ public class Player : MonoBehaviour
 
     void OwnPlayerBehavior()
     {
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = true;
+        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = false;
         OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.useSub = false;
 
         int inputNum = InputCheck();
@@ -164,7 +170,7 @@ public class Player : MonoBehaviour
         }
 
         OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
-        OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerState = playerState;
+        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerState = playerState;
     }
 
     void OtherPlayerBehavior()

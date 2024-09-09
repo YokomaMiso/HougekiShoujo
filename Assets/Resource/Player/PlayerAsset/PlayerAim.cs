@@ -143,6 +143,8 @@ public class PlayerAim : MonoBehaviour
 
     void Update()
     {
+        if (!ownerPlayer.IsMine()) { return; }
+
         if (ownerPlayer.playerState != PLAYER_STATE.AIMING)
         {
             aimVector = Vector3.zero;
