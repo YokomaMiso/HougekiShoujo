@@ -88,6 +88,8 @@ public class Player : MonoBehaviour
     {
         if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
 
+        if (!Managers.instance.gameManager.play) { return; }
+
         //DEBUG
         //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }
         //if (Input.GetKeyDown(KeyCode.X)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(2, 5); }

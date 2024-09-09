@@ -19,6 +19,19 @@ public class GameManager : MonoBehaviour
     //âºç¿ïW
     Vector3[] pos = new Vector3[2] { Vector3.forward * 3, Vector3.left * 3 };
 
+    public bool play = false;
+    public int roundCount = 1;
+    public float roundTimer = 100;
+    public int[] roundWinCount = new int[2];
+
+    public bool start;
+    const float startDelay = 3;
+    public float startTimer;
+
+    public bool end;
+    const float endDelay = 3;
+    public float endTimer;
+
     public void CreatePlayer()
     {
         playerInstance = new GameObject[playerMaxNum];
@@ -46,18 +59,63 @@ public class GameManager : MonoBehaviour
         return playerInstance[_num];
     }
 
+    void Init()
+    {
+        play = false;
+        roundCount = 1;
+        roundTimer = 100;
+        for (int i = 0; i < roundWinCount.Length; i++) { roundWinCount[i] = 0; }
+
+        start = false;
+        startTimer = 0;
+
+        end = false;
+        endTimer = 0;
+    }
+
+    void EndBehavior()
+    {
+        if (!end) { return; }
+
+        endTimer += Managers.instance.timeManager.GetDeltaTime();
+        if (endTimer < endDelay) { return; }
+
+        Managers.instance.ChangeScene(GAME_STATE.ROOM);
+        Managers.instance.ChangeState(GAME_STATE.ROOM);
+        Init();
+    }
+
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == (int)GAME_STATE.IN_GAME)
+        if (SceneManager.GetActiveScene().buildIndex != (int)GAME_STATE.IN_GAME) { return; }
+
+        if (!play)
         {
+            if (!start)
+            {
+                startTimer += Managers.instance.timeManager.GetDeltaTime();
+                if (startTimer > startDelay) 
+                {
+                    play = true;
+                    start = true;
+                }
+            }
+        }
+        else
+        {
+            roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+
             for (int i = 0; i < playerMaxNum; i++)
             {
                 if (!playerInstance[i].GetComponent<Player>().GetAlive())
                 {
-                    Managers.instance.ChangeScene(GAME_STATE.ROOM);
-                    Managers.instance.ChangeState(GAME_STATE.ROOM);
+                    play = false;
+                    end = true;
                 }
+            }
         }
-        }
+
+        EndBehavior();
     }
+
 }
