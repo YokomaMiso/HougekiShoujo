@@ -19,6 +19,8 @@ public class OSCManager : MonoBehaviour
     SendDataCreator netInstance = new SendDataCreator();
 
 
+
+
     ///////// OSCcoreŽü‚è ////////
 
     OscClient client;
@@ -46,6 +48,8 @@ public class OSCManager : MonoBehaviour
     void Start()
     {
         OSCinstance = this;
+
+        Managers.instance.playerID = port - 8000;
 
         myNetData = default;
         myNetData.mainPacketData = default;
@@ -106,7 +110,7 @@ public class OSCManager : MonoBehaviour
     
     private void LateUpdate()
     {
-        //SendValue();
+        SendValue();
     }
 
     private void OnEnable()
