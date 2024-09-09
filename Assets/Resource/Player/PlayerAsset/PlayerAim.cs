@@ -103,6 +103,8 @@ public class PlayerAim : MonoBehaviour
 
     public void Fire(Vector3 _scale)
     {
+        if (!ownerPlayer.IsMine()) { aimVector = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue; }
+
         GameObject projectile = shellData.GetProjectile();
         GameObject obj;
         float angle;
