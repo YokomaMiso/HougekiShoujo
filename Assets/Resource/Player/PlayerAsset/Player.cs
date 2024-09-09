@@ -88,7 +88,10 @@ public class Player : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Z)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(1.0f/2, 5); }
 
         if (IsMine()) { OwnPlayerBehavior(); }
-        else { }
+        else
+        {
+            transform.position = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerPos;
+        }
     }
 
     void OwnPlayerBehavior()
@@ -159,6 +162,8 @@ public class Player : MonoBehaviour
                     break;
             }
         }
+
+        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
     }
 
     bool InAction()

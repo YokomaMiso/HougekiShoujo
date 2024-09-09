@@ -54,9 +54,11 @@ public class SendDataCreator
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct GameData
     {
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
-        public string test;
-        public int num;
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)] //stringŽg—pŽž‚Í20byteŒÅ’è
+        //public string test;
+        //public int num;
+
+        public Vector3 playerPos;
     }
 
     //////////////////////////////

@@ -79,12 +79,12 @@ public class OSCManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //デバック用で任意のタイミングで送れるようにしておく
         if(Input.GetKeyDown(KeyCode.Space))
         {
             SendValue();
         }
-
         if(Input.GetKeyDown(KeyCode.M))
         {
             myNetData.mainPacketData.inGameData.num += 1;
@@ -97,11 +97,12 @@ public class OSCManager : MonoBehaviour
             Debug.Log(receivedData.mainPacketData.inGameData.num);
             Debug.Log(receivedData.mainPacketData.inGameData.test);
         }
+        */
     }
-    
+
     private void LateUpdate()
     {
-        //SendValue();
+        SendValue();
     }
 
     private void OnEnable()
