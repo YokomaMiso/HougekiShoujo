@@ -19,22 +19,27 @@ public class PlayerAim : MonoBehaviour
         ownerPlayer = _player;
         shellData = ownerPlayer.GetPlayerData().GetShell();
 
-        attackArea = _attackArea;
-        float aimRange = shellData.GetAimRange();
-        attackArea.transform.localScale = new Vector3(aimRange, aimRange, 1);
-        attackArea.GetComponent<MeshRenderer>().sortingOrder = 1;
-        attackArea.SetActive(false);
+        if (ownerPlayer.IsMine())
+        {
+            attackArea = _attackArea;
+            float aimRange = shellData.GetAimRange();
+            attackArea.transform.localScale = new Vector3(aimRange, aimRange, 1);
+            attackArea.GetComponent<MeshRenderer>().sortingOrder = 1;
+            attackArea.SetActive(false);
 
-        aoeArea = _aoeArea;
-        float explosionRadius = shellData.GetExplosion().GetComponent<SphereCollider>().radius;
-        float explosionScale = shellData.GetExplosion().transform.localScale.x;
-        float explosionRange = explosionRadius * 2 * explosionScale;
-        aoeArea.transform.localScale = new Vector3(explosionRange, explosionRange, 1);
-        aoeArea.GetComponent<MeshRenderer>().sortingOrder = 2;
-        aoeArea.SetActive(false);
+            aoeArea = _aoeArea;
+            float explosionRadius = shellData.GetExplosion().GetComponent<SphereCollider>().radius;
+            float explosionScale = shellData.GetExplosion().transform.localScale.x;
+            float explosionRange = explosionRadius * 2 * explosionScale;
+            aoeArea.transform.localScale = new Vector3(explosionRange, explosionRange, 1);
+            aoeArea.GetComponent<MeshRenderer>().sortingOrder = 2;
+            aoeArea.SetActive(false);
+        }
     }
     public void AimStart()
     {
+        if (!ownerPlayer.IsMine()) { return; }
+
         switch (shellData.GetShellType())
         {
             case SHELL_TYPE.BLAST:
@@ -57,32 +62,42 @@ public class PlayerAim : MonoBehaviour
 
     public Vector3 AimMove()
     {
-        Vector3 movement = Vector3.zero;
-        movement += Vector3.right * Input.GetAxis("Horizontal");
-        movement += Vector3.forward * Input.GetAxis("Vertical");
-
-        if (movement != Vector3.zero)
+        if (ownerPlayer.IsMine())
         {
-            switch (shellData.GetShellType())
+            Vector3 movement = Vector3.zero;
+            movement += Vector3.right * Input.GetAxis("Horizontal");
+            movement += Vector3.forward * Input.GetAxis("Vertical");
+
+            if (movement != Vector3.zero)
             {
-                case SHELL_TYPE.BLAST:
-                    attackAreaMat[0].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
-                    aimVector = movement;
-                    break;
+                switch (shellData.GetShellType())
+                {
+                    case SHELL_TYPE.BLAST:
+                        attackAreaMat[0].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
+                        aimVector = movement;
+                        break;
 
-                case SHELL_TYPE.CANON:
-                    attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
-                    aimVector = movement;
-                    break;
+                    case SHELL_TYPE.CANON:
+                        attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
+                        aimVector = movement;
+                        break;
 
-                case SHELL_TYPE.MORTAR:
-                    float limit = attackArea.transform.localScale.x / 2;
-                    aimVector += movement * Managers.instance.GetOptionData().mortarSensitive * Managers.instance.timeManager.GetDeltaTime();
-                    if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
-                    aoeArea.transform.position = attackArea.transform.position + aimVector;
-                    break;
+                    case SHELL_TYPE.MORTAR:
+                        float limit = attackArea.transform.localScale.x / 2;
+                        aimVector += movement * Managers.instance.GetOptionData().mortarSensitive * Managers.instance.timeManager.GetDeltaTime();
+                        if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
+                        aoeArea.transform.position = attackArea.transform.position + aimVector;
+                        break;
+                }
             }
+
+            OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerStickValue = aimVector;
         }
+        else
+        {
+            aimVector = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue;
+        }
+
         return aimVector;
     }
 
@@ -119,21 +134,29 @@ public class PlayerAim : MonoBehaviour
                 obj.GetComponent<MortarProjectileBehavior>().SetPlayer(ownerPlayer);
                 break;
         }
-
-        Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+        if (ownerPlayer.IsMine())
+        {
+            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+            OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = true;
+        }
     }
 
     void Update()
     {
+        if (!ownerPlayer.IsMine()) { return; }
+
         if (ownerPlayer.playerState != PLAYER_STATE.AIMING)
         {
             aimVector = Vector3.zero;
-            attackAreaMat[0].SetFloat("_Direction", 0);
-            attackAreaMat[1].SetFloat("_Direction", 0);
-            aoeArea.transform.localPosition = Vector3.zero;
+            if (ownerPlayer.IsMine())
+            {
+                attackAreaMat[0].SetFloat("_Direction", 0);
+                attackAreaMat[1].SetFloat("_Direction", 0);
+                aoeArea.transform.localPosition = Vector3.zero;
 
-            attackArea.SetActive(false);
-            aoeArea.SetActive(false);
+                attackArea.SetActive(false);
+                aoeArea.SetActive(false);
+            }
             return;
         }
     }

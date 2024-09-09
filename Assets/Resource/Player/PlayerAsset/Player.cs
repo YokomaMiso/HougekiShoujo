@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public int GetCanonState() { return (int)canonState; }
     public float GetSubWeaponReload() { return playerSubAction.ReloadTime(); }
 
-    bool IsMine() { return playerID == Managers.instance.playerID; }
+    public bool IsMine() { return playerID == Managers.instance.playerID; }
 
     bool alive = true;
     public void SetDead()
@@ -57,23 +57,29 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerMove = gameObject.GetComponent<PlayerMove>();
+        playerMove.SetPlayer(this);
+
+        playerAim = gameObject.GetComponent<PlayerAim>();
+
         if (IsMine())
         {
-            playerMove = gameObject.GetComponent<PlayerMove>();
-            playerMove.SetPlayer(this);
-
-            playerReload = gameObject.GetComponent<PlayerReload>();
-            playerReload.SetPlayer(this);
-
-            playerAim = gameObject.GetComponent<PlayerAim>();
             playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
-
-            playerRecoil = gameObject.GetComponent<PlayerRecoil>();
-            playerRecoil.SetPlayer(this);
-
-            playerSubAction = gameObject.GetComponent<PlayerSubAction>();
-            playerSubAction.SetPlayer(this);
         }
+        else
+        {
+            playerAim.SetPlayer(this, null, null);
+        }
+
+        playerReload = gameObject.GetComponent<PlayerReload>();
+        playerReload.SetPlayer(this);
+
+        playerRecoil = gameObject.GetComponent<PlayerRecoil>();
+        playerRecoil.SetPlayer(this);
+
+        playerSubAction = gameObject.GetComponent<PlayerSubAction>();
+        playerSubAction.SetPlayer(this);
+
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
     }
@@ -88,14 +94,14 @@ public class Player : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Z)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(1.0f/2, 5); }
 
         if (IsMine()) { OwnPlayerBehavior(); }
-        else
-        {
-            transform.position = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerPos;
-        }
+        else { OtherPlayerBehavior(); }
     }
 
     void OwnPlayerBehavior()
     {
+        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = false;
+        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.useSub = false;
+
         int inputNum = InputCheck();
 
         if (InAction())
@@ -164,6 +170,32 @@ public class Player : MonoBehaviour
         }
 
         OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
+        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerState = playerState;
+    }
+
+    void OtherPlayerBehavior()
+    {
+        playerState = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerState;
+        transform.position = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerPos;
+        Vector3 stickValue = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue;
+
+        bool fire = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.fire;
+        bool useSub = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.useSub;
+
+        switch (playerState)
+        {
+            case PLAYER_STATE.RUN:
+            case PLAYER_STATE.AIMING:
+                //移動に応じてキャラグラフィックの向き変更
+                DirectionChange(stickValue);
+                break;
+            case PLAYER_STATE.ATTACKING:
+                break;
+        }
+
+        if (fire) { playerAim.Fire(transform.localScale); }
+        if (useSub) { playerSubAction.UseSubWeapon(); }
+
     }
 
     bool InAction()
