@@ -38,8 +38,11 @@ public class OSCManager : MonoBehaviour
     // とりあえずシングルトンで運用（調停や証明書周りが決まってきたら修正）
     public static OSCManager OSCinstance;
 
-    //[SerializeField]
-    //int port = 8000;
+    [SerializeField]
+    bool isManual = true;
+
+    [SerializeField]
+    int port = 8000;
 
     //[SerializeField]
     //int otherPort = 8001;
@@ -60,7 +63,16 @@ public class OSCManager : MonoBehaviour
         receivedData = default;
         receivedData.byteData = new byte[0];
 
-        myNetData.mainPacketData.comData.myPort = PortAssignor();
+        if(isManual)
+        {
+            myNetData.mainPacketData.comData.myPort = port;
+        }
+        else
+        {
+            myNetData.mainPacketData.comData.myPort = PortAssignor();
+        }
+
+        
         Managers.instance.playerID = myNetData.mainPacketData.comData.myPort - 8000;
         
         Debug.Log("私のポート番号は : " + myNetData.mainPacketData.comData.myPort);
