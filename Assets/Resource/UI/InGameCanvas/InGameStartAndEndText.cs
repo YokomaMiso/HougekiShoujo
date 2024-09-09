@@ -42,7 +42,7 @@ public class InGameStartAndEndText : MonoBehaviour
             timer = Managers.instance.gameManager.startTimer;
 
             if (timer > 2) { GetComponent<Text>().text = "Fight!"; timer = 2; }
-            else { GetComponent<Text>().text = "Round" + Managers.instance.gameManager.roundCount.ToString(); }
+            else { GetComponent<Text>().text = "Round " + Managers.instance.gameManager.roundCount.ToString(); }
 
             if (timer > 1) { timer = 1; }
             rectTransform.localPosition = Vector3.Lerp(firstPos, lastPos, timer);
