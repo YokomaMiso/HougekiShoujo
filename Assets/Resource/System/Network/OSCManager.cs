@@ -45,6 +45,7 @@ public class OSCManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OSCinstance = this;
 
         myNetData = default;
         myNetData.mainPacketData = default;
@@ -79,30 +80,33 @@ public class OSCManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        //デバック用で任意のタイミングで送れるようにしておく
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            SendValue();
-        }
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            myNetData.mainPacketData.inGameData.num += 1;
-            myNetData.mainPacketData.inGameData.test = "HelloWorld!";
+        ////デバック用で任意のタイミングで送れるようにしておく
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    SendValue();
+        //}
 
-        }
+        //if(Input.GetKeyDown(KeyCode.M))
+        //{
+        //    myNetData.mainPacketData.inGameData.num += 1;
+        //    myNetData.mainPacketData.inGameData.test = "HelloWorld!";
+        //    myNetData.mainPacketData.inGameData.vc3 += new Vector3(1.0f, 0.5f, 0.1f);
 
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log(receivedData.mainPacketData.inGameData.num);
-            Debug.Log(receivedData.mainPacketData.inGameData.test);
-        }
-        */
+
+
+        //}
+
+        //if(Input.GetKeyDown(KeyCode.P))
+        //{
+        //    Debug.Log(receivedData.mainPacketData.inGameData.num);
+        //    Debug.Log(receivedData.mainPacketData.inGameData.test);
+        //    Debug.Log(receivedData.mainPacketData.inGameData.vc3);
+        //}
     }
-
+    
     private void LateUpdate()
     {
-        SendValue();
+        //SendValue();
     }
 
     private void OnEnable()
