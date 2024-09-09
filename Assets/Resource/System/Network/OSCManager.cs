@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System.Linq;
 using UnityEngine;
 using OscCore;
-
 
 public class OSCManager : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class OSCManager : MonoBehaviour
     OscClient client;
     OscServer server;
 
+    //使用するポート番号の始め
+    const int startPort = 8000;
+
 
     ////////////////////////////////
     //////// デバック用変数 ////////
@@ -34,11 +38,11 @@ public class OSCManager : MonoBehaviour
     // とりあえずシングルトンで運用（調停や証明書周りが決まってきたら修正）
     public static OSCManager OSCinstance;
 
-    [SerializeField]
-    int port = 8000;
+    //[SerializeField]
+    //int port = 8000;
 
-    [SerializeField]
-    int otherPort = 8001;
+    //[SerializeField]
+    //int otherPort = 8001;
 
     //////////////////////
     //////// 関数 ////////
@@ -49,8 +53,6 @@ public class OSCManager : MonoBehaviour
     {
         OSCinstance = this;
 
-        Managers.instance.playerID = port - 8000;
-
         myNetData = default;
         myNetData.mainPacketData = default;
         myNetData.byteData = null;
@@ -58,12 +60,26 @@ public class OSCManager : MonoBehaviour
         receivedData = default;
         receivedData.byteData = new byte[0];
 
+        myNetData.mainPacketData.comData.myPort = PortAssignor();
+        Managers.instance.playerID = myNetData.mainPacketData.comData.myPort - 8000;
+        
+        Debug.Log("私のポート番号は : " + myNetData.mainPacketData.comData.myPort);
+        Debug.Log("私のプレイヤー番号は : " + Managers.instance.playerID);
+
         myNetData.mainPacketData.comData.myIP = "255.255.255.255";
         myNetData.mainPacketData.comData.targetIP = "255.255.255.255";
-        myNetData.mainPacketData.comData.myPort = port;
-        myNetData.mainPacketData.comData.targetPort = otherPort;
+        //myNetData.mainPacketData.comData.targetPort = otherPort;
         myNetData.mainPacketData.comData.receiveAddress = "/example";
         myNetData.mainPacketData.comData.sendAddress = "/example";
+
+        if(myNetData.mainPacketData.comData.myPort == startPort)
+        {
+            myNetData.mainPacketData.comData.targetPort = 8001;
+        }
+        else
+        {
+            myNetData.mainPacketData.comData.targetPort = 8000;
+        }
 
 
         if (client == null)
@@ -163,5 +179,32 @@ public class OSCManager : MonoBehaviour
     private void MainThreadMethod()
     {
 
+    }
+
+    /// <summary>
+    /// 8000以降のポート番号を確認し使用されていないポートを自身に割り当てます
+    /// </summary>
+    private int PortAssignor()
+    {
+        IPGlobalProperties ipPropertie = IPGlobalProperties.GetIPGlobalProperties();
+
+        IEnumerable<System.Net.IPEndPoint> connection = ipPropertie.GetActiveTcpConnections().Select(x => x.LocalEndPoint);
+        System.Net.IPEndPoint[] tcpListener = ipPropertie.GetActiveTcpListeners();
+        System.Net.IPEndPoint[] udpListener = ipPropertie.GetActiveUdpListeners();
+
+        HashSet<int> activePorts = new HashSet<int>(connection
+        .Concat(udpListener)
+        .Where(x => x.Port >= startPort)
+        .Select(x => x.Port));
+
+        for (int port = startPort; port <= 65535; port++)
+        {
+            if (!activePorts.Contains(port))
+            {
+                return port;
+            }
+        }
+
+        return -1;
     }
 }                         
