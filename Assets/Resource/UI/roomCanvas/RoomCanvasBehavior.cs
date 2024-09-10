@@ -29,6 +29,9 @@ public class RoomCanvasBehavior : MonoBehaviour
     Image subWeaponIcon;
     Text subWeaponText;
 
+    int charaSelectNum = 0;
+    const int maxCharaCount = 3;
+
     float timer = 0;
     const float charaChangeTimer = 0.5f;
 
@@ -69,6 +72,13 @@ public class RoomCanvasBehavior : MonoBehaviour
         subWeaponIcon = charaSelect.transform.GetChild(2).GetComponent<Image>();
         subWeaponText = subWeaponIcon.transform.GetChild(0).GetComponent<Text>();
 
+        //DEBUG
+        //rm.bannerNum[0] = 0;
+        //rm.bannerNum[2] = 2;
+        //rm.bannerNum[3] = 3;
+        //rm.bannerNum[4] = 4;
+        //rm.bannerNum[5] = 5;
+
         //é©ï™ÇÃèäëÆÉ`Å[ÉÄÇêUÇËï™ÇØÇÈ
         rm.PlayerBannerDivider();
     }
@@ -76,22 +86,10 @@ public class RoomCanvasBehavior : MonoBehaviour
     void Update()
     {
         CharaSelect();
-        PlayerBannerMove();
+        TeamSelect();
         PlayerBannerDisplayUpdate();
         GameStart();
         OpenOption();
-    }
-
-    void PlayerBannerMove()
-    {
-        int teamID = -1;
-
-        if (Input.GetKeyDown(KeyCode.J)) { teamID = (int)TEAM_NUM.A; }
-        else if (Input.GetKeyDown(KeyCode.K)) { teamID = (int)TEAM_NUM.B; }
-
-        if (teamID < 0) { return; }
-
-        rm.PlayerBannerChanger(teamID);
     }
 
     void PlayerBannerDisplayUpdate()
@@ -106,22 +104,36 @@ public class RoomCanvasBehavior : MonoBehaviour
             if (rm.bannerNum[i] != rm.empty)
             {
                 playerBanners.transform.GetChild(rm.bannerNum[i]).gameObject.SetActive(true);
+                playerBanners.transform.GetChild(rm.bannerNum[i]).GetComponent<PlayerBannerBehavior>().BannerIconUpdate();
                 playerBanners.transform.GetChild(rm.bannerNum[i]).transform.localPosition = bannerPos[i];
                 if (rm.bannerNum[i] == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
             }
         }
     }
 
+    void TeamSelect()
+    {
+        int teamID = -1;
+
+        if (Input.GetKeyDown(KeyCode.J)) { teamID = (int)TEAM_NUM.A; }
+        else if (Input.GetKeyDown(KeyCode.K)) { teamID = (int)TEAM_NUM.B; }
+
+        if (teamID < 0) { return; }
+
+        rm.PlayerBannerChanger(teamID);
+    }
+
     void CharaSelect()
     {
+        int myID = Managers.instance.playerID;
         float input = Input.GetAxis("Horizontal");
 
         if (Mathf.Abs(input) > 0.9f)
         {
             if (timer == 0)
             {
-                if (input > 0) { rm.CharaSelect(Managers.instance.playerID, 1); }
-                else { rm.CharaSelect(Managers.instance.playerID, -1); }
+                if (input > 0) { rm.CharaSelect(myID, 1); }
+                else { rm.CharaSelect(myID, 1); }
             }
 
             timer += Time.deltaTime;
@@ -132,7 +144,7 @@ public class RoomCanvasBehavior : MonoBehaviour
             timer = 0;
         }
 
-        int charaID = rm.selectedCharacterID[Managers.instance.playerID];
+        int charaID = rm.selectedCharacterID[myID];
         PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 
         CharaDisplayUpdate(nowPlayerData);
