@@ -35,7 +35,6 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     int[] bannerNum = new int[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
     int myNum;
-    int testNum;
     const int empty = -1;
 
     Vector3[] bannerPos = new Vector3[8]
