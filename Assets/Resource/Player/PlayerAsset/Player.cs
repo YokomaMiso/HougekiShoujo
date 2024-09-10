@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING }
+public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING, DEAD }
 public enum CANON_STATE { EMPTY = -1, RELOADED = 0 }
 
 public class Player : MonoBehaviour
@@ -36,10 +36,17 @@ public class Player : MonoBehaviour
     public void SetDead()
     {
         alive = false;
+        playerState = PLAYER_STATE.DEAD;
+        deadPos = transform.position;
         if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
         if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
     }
     public bool GetAlive() { return alive; }
+
+    float deadTimer = 0;
+    const float deadBehaviorTime = 3;
+    Vector3 deadPos;
+    readonly Vector3 deadTargetPos = new Vector3(0, 90, 9);
 
     Vector3 inputVector;
     public Vector3 GetInputVector() { return inputVector; }
@@ -88,19 +95,19 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (!Managers.instance.gameManager.play) { return; }
-
-        //DEBUG
-        //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }
-        //if (Input.GetKeyDown(KeyCode.X)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(2, 5); }
-        //if (Input.GetKeyDown(KeyCode.Z)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(1.0f/2, 5); }
-
-        if (IsMine()) 
+        if (Managers.instance.gameManager.play)
         {
-            if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
-            OwnPlayerBehavior(); 
+            if (IsMine())
+            {
+                //if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
+                OwnPlayerBehavior();
+            }
+            else { OtherPlayerBehavior(); }
         }
-        else { OtherPlayerBehavior(); }
+        else
+        {
+            if (!alive) { DeadBehavior(); }
+        }
     }
 
     void OwnPlayerBehavior()
@@ -110,71 +117,77 @@ public class Player : MonoBehaviour
 
         int inputNum = InputCheck();
 
-        if (InAction())
+        if (alive)
         {
-            playerMove.MoveStop();
-
-            switch (playerState)
+            if (InAction())
             {
-                case PLAYER_STATE.RELOADING:
-                    int reloadNum = playerReload.ReloadBehavior();
-                    if (reloadNum == -1) { playerState = PLAYER_STATE.RELOADING; }
-                    else
-                    {
-                        canonState = (CANON_STATE)reloadNum;
-                        playerState = PLAYER_STATE.IDLE;
-                    }
-                    break;
-                case PLAYER_STATE.AIMING:
-                    if (inputNum == -1)
-                    {
-                        //エイムの移動
-                        Vector3 movement;
-                        movement = playerAim.AimMove();
-                        //移動に応じてキャラグラフィックの向き変更
-                        DirectionChange(movement);
-                    }
-                    else if (inputNum - 2 == GetCanonState())
-                    {
-                        playerAim.Fire(playerImage.transform.localScale);
-                        playerState = PLAYER_STATE.ATTACKING;
-                        playerRecoil.SetRecoil();
-                        canonState = CANON_STATE.EMPTY;
-                    }
-                    break;
-                case PLAYER_STATE.ATTACKING:
-                    if (!playerRecoil.GetIsRecoil()) { playerState = PLAYER_STATE.IDLE; }
-                    break;
+                playerMove.MoveStop();
+
+                switch (playerState)
+                {
+                    case PLAYER_STATE.RELOADING:
+                        int reloadNum = playerReload.ReloadBehavior();
+                        if (reloadNum == -1) { playerState = PLAYER_STATE.RELOADING; }
+                        else
+                        {
+                            canonState = (CANON_STATE)reloadNum;
+                            playerState = PLAYER_STATE.IDLE;
+                        }
+                        break;
+                    case PLAYER_STATE.AIMING:
+                        if (inputNum == -1)
+                        {
+                            //エイムの移動
+                            Vector3 movement;
+                            movement = playerAim.AimMove();
+                            //移動に応じてキャラグラフィックの向き変更
+                            DirectionChange(movement);
+                        }
+                        else if (inputNum - 2 == GetCanonState())
+                        {
+                            playerAim.Fire(playerImage.transform.localScale);
+                            playerState = PLAYER_STATE.ATTACKING;
+                            playerRecoil.SetRecoil();
+                            canonState = CANON_STATE.EMPTY;
+                        }
+                        break;
+                    case PLAYER_STATE.ATTACKING:
+                        if (!playerRecoil.GetIsRecoil()) { playerState = PLAYER_STATE.IDLE; }
+                        break;
+                }
+            }
+            else
+            {
+                switch (inputNum)
+                {
+                    case -1:
+                        MoveBehavior();
+                        break;
+                    case 0:
+                        if (canonState == CANON_STATE.EMPTY)
+                        {
+                            playerReload.Reload(inputNum);
+                            playerState = PLAYER_STATE.RELOADING;
+                        }
+                        else
+                        {
+                            if (GetCanonState() == inputNum)
+                            {
+                                playerAim.AimStart();
+                                playerState = PLAYER_STATE.AIMING;
+                            }
+                        }
+                        break;
+                    case 1:
+                        playerSubAction.UseSubWeapon();
+                        break;
+                }
             }
         }
         else
         {
-            switch (inputNum)
-            {
-                case -1:
-                    MoveBehavior();
-                    break;
-                case 0:
-                    if (canonState == CANON_STATE.EMPTY)
-                    {
-                        playerReload.Reload(inputNum);
-                        playerState = PLAYER_STATE.RELOADING;
-                    }
-                    else
-                    {
-                        if (GetCanonState() == inputNum)
-                        {
-                            playerAim.AimStart();
-                            playerState = PLAYER_STATE.AIMING;
-                        }
-                    }
-                    break;
-                case 1:
-                    playerSubAction.UseSubWeapon();
-                    break;
-            }
+            DeadBehavior();
         }
-
         OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
         OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerState = playerState;
     }
@@ -188,17 +201,21 @@ public class Player : MonoBehaviour
         bool fire = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.fire;
         bool useSub = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.useSub;
 
-        switch (playerState)
+        if (alive)
         {
-            case PLAYER_STATE.RUN:
-            case PLAYER_STATE.AIMING:
-                //移動に応じてキャラグラフィックの向き変更
-                DirectionChange(stickValue);
-                break;
-            case PLAYER_STATE.ATTACKING:
-                break;
+            switch (playerState)
+            {
+                case PLAYER_STATE.RUN:
+                case PLAYER_STATE.AIMING:
+                    //移動に応じてキャラグラフィックの向き変更
+                    DirectionChange(stickValue);
+                    break;
+            }
         }
-
+        else
+        {
+            DeadBehavior();
+        }
         if (fire) { playerAim.Fire(transform.localScale); }
         if (useSub) { playerSubAction.UseSubWeapon(); }
 
@@ -257,5 +274,18 @@ public class Player : MonoBehaviour
         Vector3 imageScale = Vector3.one;
         if (_movement.x < 0) { imageScale.x *= -1; }
         playerImage.transform.localScale = imageScale;
+    }
+
+    void DeadBehavior()
+    {
+        if (deadTimer > deadBehaviorTime) { return; }
+
+        deadTimer += Managers.instance.timeManager.GetDeltaTime();
+        if (deadTimer > deadBehaviorTime)
+        {
+            playerImage.gameObject.SetActive(false);
+            return;
+        }
+        transform.position = Vector3.Lerp(deadPos, deadTargetPos, deadTimer / deadBehaviorTime);
     }
 }

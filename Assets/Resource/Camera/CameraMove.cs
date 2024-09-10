@@ -31,7 +31,7 @@ public class CameraMove : MonoBehaviour
         {
             CameraShakeUpdate();
             FarUpdate();
-            Move(player.transform.position);
+            if (player.GetAlive()) { Move(player.transform.position); }
         }
     }
 

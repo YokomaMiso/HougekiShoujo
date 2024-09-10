@@ -29,9 +29,6 @@ public class RoomCanvasBehavior : MonoBehaviour
     Image subWeaponIcon;
     Text subWeaponText;
 
-    int charaSelectNum = 0;
-    const int maxCharaCount = 3;
-
     float timer = 0;
     const float charaChangeTimer = 0.5f;
 
@@ -133,7 +130,7 @@ public class RoomCanvasBehavior : MonoBehaviour
             if (timer == 0)
             {
                 if (input > 0) { rm.CharaSelect(myID, 1); }
-                else { rm.CharaSelect(myID, 1); }
+                else { rm.CharaSelect(myID, -1); }
             }
 
             timer += Time.deltaTime;
