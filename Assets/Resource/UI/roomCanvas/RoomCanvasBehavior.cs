@@ -32,7 +32,7 @@ public class RoomCanvasBehavior : MonoBehaviour
     float timer = 0;
     const float charaChangeTimer = 0.5f;
 
-    Vector3[] bannerPos = new Vector3[8]
+    readonly Vector3[] bannerPos = new Vector3[8]
     {
         new Vector3(-680,240,0),
         new Vector3(680,240,0),
