@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     PlayerAim playerAim;
     PlayerRecoil playerRecoil;
     PlayerSubAction playerSubAction;
+    PlayerDead playerDead;
     PlayerImage playerImage;
 
     int playerID;
@@ -37,16 +38,12 @@ public class Player : MonoBehaviour
     {
         alive = false;
         playerState = PLAYER_STATE.DEAD;
-        deadPos = transform.position;
+        playerDead.SetDeadPos(transform.position);
         if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
         if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
     }
+    public float GetDeadTimer() { return playerDead.deadTimer; }
     public bool GetAlive() { return alive; }
-
-    float deadTimer = 0;
-    const float deadBehaviorTime = 3;
-    Vector3 deadPos;
-    readonly Vector3 deadTargetPos = new Vector3(0, 90, 9);
 
     Vector3 inputVector;
     public Vector3 GetInputVector() { return inputVector; }
@@ -56,11 +53,15 @@ public class Player : MonoBehaviour
         if (normalizedVector.x < 0) { normalizedVector.x *= -1; }
         float angle = Mathf.Atan2(normalizedVector.x, normalizedVector.z) * Mathf.Rad2Deg;
 
-        if (angle < 22.5f) { return 0; }
-        else if (angle < 22.5f + 45) { return 1; }
-        else if (angle < 22.5f + 45 * 2) { return 2; }
-        else if (angle < 22.5f + 45 * 3) { return 3; }
-        else { return 4; }
+        const float borderAngle = 45f;  //45度ずつで返却する番号を変える
+        const float defaultAngle = borderAngle / 2; //22.5度からスタート
+
+        //22.5fまで…0, 67.5fまで…1, 112.5fまで…2, 157.5fまで…3, それ以上…4 
+        for (int i = 0; i < 4; i++)
+        {
+            if (angle < defaultAngle + borderAngle * i) { return i; }
+        }
+        return 4;
     }
 
     void Start()
@@ -88,13 +89,15 @@ public class Player : MonoBehaviour
         playerSubAction = gameObject.GetComponent<PlayerSubAction>();
         playerSubAction.SetPlayer(this);
 
+        playerDead = gameObject.GetComponent<PlayerDead>();
+        playerDead.SetPlayer(this);
+
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
     }
 
     void Update()
     {
-
         if (Managers.instance.gameManager.play)
         {
             if (IsMine())
@@ -106,7 +109,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (!alive) { DeadBehavior(); }
+            if (!alive) { playerDead.DeadBehavior(); }
         }
     }
 
@@ -186,7 +189,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            DeadBehavior();
+            playerDead.DeadBehavior();
         }
         OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
         OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerState = playerState;
@@ -214,7 +217,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            DeadBehavior();
+            playerDead.DeadBehavior();
         }
         if (fire) { playerAim.Fire(transform.localScale); }
         if (useSub) { playerSubAction.UseSubWeapon(); }
@@ -274,18 +277,5 @@ public class Player : MonoBehaviour
         Vector3 imageScale = Vector3.one;
         if (_movement.x < 0) { imageScale.x *= -1; }
         playerImage.transform.localScale = imageScale;
-    }
-
-    void DeadBehavior()
-    {
-        if (deadTimer > deadBehaviorTime) { return; }
-
-        deadTimer += Managers.instance.timeManager.GetDeltaTime();
-        if (deadTimer > deadBehaviorTime)
-        {
-            playerImage.gameObject.SetActive(false);
-            return;
-        }
-        transform.position = Vector3.Lerp(deadPos, deadTargetPos, deadTimer / deadBehaviorTime);
     }
 }
