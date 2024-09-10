@@ -9,6 +9,8 @@ public enum TEAM_NUM { A = 0, B = 1 };
 
 public class RoomCanvasBehavior : MonoBehaviour
 {
+    RoomManager rm;
+
     GameObject charaSelect;
     GameObject teamsBG;
     GameObject bannerSelecter;
@@ -27,15 +29,8 @@ public class RoomCanvasBehavior : MonoBehaviour
     Image subWeaponIcon;
     Text subWeaponText;
 
-    int charaSelectNum = 0;
-    const int maxCharaCount = 3;
-
     float timer = 0;
     const float charaChangeTimer = 0.5f;
-
-    int[] bannerNum = new int[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
-    int myNum;
-    const int empty = -1;
 
     Vector3[] bannerPos = new Vector3[8]
     {
@@ -54,6 +49,8 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void Start()
     {
+        rm = Managers.instance.roomManager;
+
         charaSelect = transform.GetChild(0).gameObject;
         teamsBG = transform.GetChild(1).gameObject;
         bannerSelecter = transform.GetChild(2).gameObject;
@@ -73,98 +70,44 @@ public class RoomCanvasBehavior : MonoBehaviour
         subWeaponText = subWeaponIcon.transform.GetChild(0).GetComponent<Text>();
 
         //自分の所属チームを振り分ける
-        PlayerBannerDivider();
+        rm.PlayerBannerDivider();
     }
 
     void Update()
     {
         CharaSelect();
-        if (Input.GetKeyDown(KeyCode.J)) { PlayerBannerChanger((int)TEAM_NUM.A); }
-        else if (Input.GetKeyDown(KeyCode.K)) { PlayerBannerChanger((int)TEAM_NUM.B); }
+        PlayerBannerMove();
         PlayerBannerDisplayUpdate();
         GameStart();
         OpenOption();
     }
 
-    //チームの振り分けを行う関数
-    void PlayerBannerDivider()
+    void PlayerBannerMove()
     {
-        //移動したいチームに空きがあれば番号を振る
-        for (int i = 0; i < bannerNum.Length; i++)
-        {
-            if (bannerNum[i] == empty)
-            {
-                bannerNum[i] = Managers.instance.playerID;
-                myNum = i;
-                break;
-            }
-        }
-    }
-    //チーム移動を行う関数
-    void PlayerBannerChanger(int _num)
-    {
-        //自分のチームを呼び出そうとしたら早期リターン
-        if (myNum % 2 == _num) { return; }
+        int teamID = -1;
 
-        bool canMove = false;
-        int nextNum = 0;
-        //移動したいチームに空きがあれば番号を振る
-        for (int i = 0; i < bannerNum.Length; i++)
-        {
-            if (i % 2 == _num && bannerNum[i] == empty)
-            {
-                bannerNum[i] = Managers.instance.playerID;
-                canMove = true;
-                nextNum = i;
-                break;
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.J)) { teamID = (int)TEAM_NUM.A; }
+        else if (Input.GetKeyDown(KeyCode.K)) { teamID = (int)TEAM_NUM.B; }
 
-        //移動しようとしたチームに空きがなければ何もせず早期リターン
-        if (!canMove) { return; }
+        if (teamID < 0) { return; }
 
-        //チームの移動に成功したら、前居た自分の位置をクリアする
-        bannerNum[myNum] = empty;
-        //自分の位置の番号を更新
-        myNum = nextNum;
+        rm.PlayerBannerChanger(teamID);
     }
 
-
-    void TidyUpPlayerBanner()
-    {
-        for (int i = 0; i < bannerNum.Length - 2; i++)
-        {
-            //中身が空なら
-            if (bannerNum[i] == empty)
-            {
-                //１つ下の中身が空じゃないなら
-                if (bannerNum[i + 2] != empty)
-                {
-                    //１つ下の情報を自分の中身に入れ替える
-                    bannerNum[i] = bannerNum[i + 2];
-                    bannerNum[i + 2] = empty;
-                    //自分の番号だった場合、番号を更新する
-                    if (myNum == i) { myNum = i - 2; }
-                }
-            }
-        }
-    }
     void PlayerBannerDisplayUpdate()
     {
-        TidyUpPlayerBanner();
-
         for (int i = 0; i < playerBanners.transform.childCount; i++)
         {
             playerBanners.transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < bannerNum.Length; i++)
+        for (int i = 0; i < rm.bannerNum.Length; i++)
         {
-            if (bannerNum[i] != empty)
+            if (rm.bannerNum[i] != rm.empty)
             {
-                playerBanners.transform.GetChild(bannerNum[i]).gameObject.SetActive(true);
-                playerBanners.transform.GetChild(bannerNum[i]).transform.localPosition = bannerPos[i];
-                if (bannerNum[i] == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
+                playerBanners.transform.GetChild(rm.bannerNum[i]).gameObject.SetActive(true);
+                playerBanners.transform.GetChild(rm.bannerNum[i]).transform.localPosition = bannerPos[i];
+                if (rm.bannerNum[i] == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
             }
         }
     }
@@ -177,8 +120,8 @@ public class RoomCanvasBehavior : MonoBehaviour
         {
             if (timer == 0)
             {
-                if (input > 0) { charaSelectNum = (charaSelectNum + 1) % maxCharaCount; }
-                else { charaSelectNum = (charaSelectNum + (maxCharaCount - 1)) % maxCharaCount; }
+                if (input > 0) { rm.CharaSelect(Managers.instance.playerID, 1); }
+                else { rm.CharaSelect(Managers.instance.playerID, -1); }
             }
 
             timer += Time.deltaTime;
@@ -189,8 +132,8 @@ public class RoomCanvasBehavior : MonoBehaviour
             timer = 0;
         }
 
-        Managers.instance.gameManager.SetCharacterNum(charaSelectNum);
-        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaSelectNum];
+        int charaID = rm.selectedCharacterID[Managers.instance.playerID];
+        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 
         CharaDisplayUpdate(nowPlayerData);
         ShellDisplayUpdate(nowPlayerData);

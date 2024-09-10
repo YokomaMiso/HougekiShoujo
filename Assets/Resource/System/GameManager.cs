@@ -13,11 +13,17 @@ public class GameManager : MonoBehaviour
     const int playerMaxNum = 2;
 
     public PlayerData[] playerDatas;
-    int characterNum = 0;
-    public void SetCharacterNum(int _num) { characterNum = _num; }
 
     //âºç¿ïW
-    Vector3[] pos = new Vector3[2] { Vector3.forward * 3, Vector3.left * 3 };
+    Vector3[] pos = new Vector3[playerMaxNum] 
+    {
+        //new Vector3(-3,0,-10), 
+        //new Vector3(-3,0,10),
+        new Vector3(0,0,-10),
+        new Vector3(0,0,10),
+        //new Vector3(3,0,-10),
+        //new Vector3(3,0,10),
+    };
 
     public bool play = false;
     public int roundCount = 1;
@@ -47,7 +53,7 @@ public class GameManager : MonoBehaviour
 
             Player nowPlayer = playerInstance[i].GetComponent<Player>();
             nowPlayer.SetPlayerID(i);
-            nowPlayer.SetPlayerData(playerDatas[characterNum]);
+            nowPlayer.SetPlayerData(playerDatas[Managers.instance.roomManager.selectedCharacterID[i]]);
         }
     }
 
