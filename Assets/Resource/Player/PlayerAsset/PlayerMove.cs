@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         float currentSpeed = speed * NowSpeedRate() * Managers.instance.timeManager.TimeRate();
         ownerPlayer.GetComponent<Rigidbody>().velocity = movement * currentSpeed;
 
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerStickValue = movement;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = movement;
 
         return movement;
     }

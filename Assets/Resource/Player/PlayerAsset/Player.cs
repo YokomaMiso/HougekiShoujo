@@ -53,10 +53,10 @@ public class Player : MonoBehaviour
         if (normalizedVector.x < 0) { normalizedVector.x *= -1; }
         float angle = Mathf.Atan2(normalizedVector.x, normalizedVector.z) * Mathf.Rad2Deg;
 
-        const float borderAngle = 45f;  //45“x‚¸‚Â‚Å•Ô‹p‚·‚é”Ô†‚ð•Ï‚¦‚é
-        const float defaultAngle = borderAngle / 2; //22.5“x‚©‚çƒXƒ^[ƒg
+        const float borderAngle = 45f;  //45åº¦ãšã¤ã§è¿”å´ã™ã‚‹ç•ªå·ã‚’å¤‰ãˆã‚‹
+        const float defaultAngle = borderAngle / 2; //22.5åº¦ã‹ã‚‰ã‚¹ã‚¿ãƒ¼ãƒˆ
 
-        //22.5f‚Ü‚Åc0, 67.5f‚Ü‚Åc1, 112.5f‚Ü‚Åc2, 157.5f‚Ü‚Åc3, ‚»‚êˆÈãc4 
+        //22.5fã¾ã§â€¦0, 67.5fã¾ã§â€¦1, 112.5fã¾ã§â€¦2, 157.5fã¾ã§â€¦3, ãã‚Œä»¥ä¸Šâ€¦4 
         for (int i = 0; i < 4; i++)
         {
             if (angle < defaultAngle + borderAngle * i) { return i; }
@@ -131,8 +131,8 @@ public class Player : MonoBehaviour
 
     void OwnPlayerBehavior()
     {
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = false;
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.useSub = false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
 
         int inputNum = InputCheck();
 
@@ -156,10 +156,10 @@ public class Player : MonoBehaviour
                     case PLAYER_STATE.AIMING:
                         if (inputNum == -1)
                         {
-                            //ƒGƒCƒ€‚ÌˆÚ“®
+                            //ã‚¨ã‚¤ãƒ ã®ç§»å‹•
                             Vector3 movement;
                             movement = playerAim.AimMove();
-                            //ˆÚ“®‚É‰ž‚¶‚ÄƒLƒƒƒ‰ƒOƒ‰ƒtƒBƒbƒN‚ÌŒü‚«•ÏX
+                            //ç§»å‹•ã«å¿œã˜ã¦ã‚­ãƒ£ãƒ©ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã®å‘ãå¤‰æ›´
                             DirectionChange(movement);
                         }
                         else if (inputNum - 2 == GetCanonState())
@@ -207,18 +207,18 @@ public class Player : MonoBehaviour
         {
             playerDead.DeadBehavior();
         }
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerState = playerState;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos = transform.position;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerState = playerState;
     }
 
     void OtherPlayerBehavior()
     {
-        playerState = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerState;
-        transform.position = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerPos;
-        Vector3 stickValue = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue;
+        playerState = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerState;
+        transform.position = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerPos;
+        Vector3 stickValue = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue;
 
-        bool fire = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.fire;
-        bool useSub = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.useSub;
+        bool fire = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.fire;
+        bool useSub = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.useSub;
 
         if (alive)
         {
@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
             {
                 case PLAYER_STATE.RUN:
                 case PLAYER_STATE.AIMING:
-                    //ˆÚ“®‚É‰ž‚¶‚ÄƒLƒƒƒ‰ƒOƒ‰ƒtƒBƒbƒN‚ÌŒü‚«•ÏX
+                    //ç§»å‹•ã«å¿œã˜ã¦ã‚­ãƒ£ãƒ©ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã®å‘ãå¤‰æ›´
                     DirectionChange(stickValue);
                     break;
             }
@@ -273,11 +273,11 @@ public class Player : MonoBehaviour
     }
     void MoveBehavior()
     {
-        //ˆÚ“®‚Ì“K—p
+        //ç§»å‹•ã®é©ç”¨
         Vector3 movement;
         movement = playerMove.Move();
 
-        //ˆÚ“®‚É‰ž‚¶‚ÄƒOƒ‰ƒtƒBƒbƒN‚ÌŒü‚«•ÏX
+        //ç§»å‹•ã«å¿œã˜ã¦ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã®å‘ãå¤‰æ›´
         DirectionChange(movement);
 
         if (movement == Vector3.zero) { playerState = PLAYER_STATE.IDLE; }
