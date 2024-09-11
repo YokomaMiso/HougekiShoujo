@@ -15,22 +15,22 @@ public class RoomManager : MonoBehaviour
     {
         OSCManager.OSCinstance.SendRoomData();
     }
-    public void Init()
+    public unsafe void Init()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
-        for (int i = 0; i < oscRoomData.readyPlayers.Length; i++) { oscRoomData.readyPlayers[i] = false; }
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++) { oscRoomData.readyPlayers[i] = false; }
         oscRoomData.gameStart = false;
 
         OSCManager.OSCinstance.roomData = oscRoomData;
     }
 
     //チームの振り分けを行う関数
-    public void PlayerBannerDivider()
+    public unsafe void PlayerBannerDivider()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
 
         //移動したいチームに空きがあれば番号を振る
-        for (int i = 0; i < oscRoomData.bannerNum.Length; i++)
+        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
             if (oscRoomData.bannerNum[i] == empty)
             {
@@ -46,7 +46,7 @@ public class RoomManager : MonoBehaviour
         SendDataToServer();
     }
     //チーム移動を行う関数
-    public void PlayerBannerChanger(int _num)
+    public unsafe void PlayerBannerChanger(int _num)
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
 
@@ -56,7 +56,7 @@ public class RoomManager : MonoBehaviour
         bool canMove = false;
         int nextNum = 0;
         //移動したいチームに空きがあれば番号を振る
-        for (int i = 0; i < oscRoomData.bannerNum.Length; i++)
+        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
             if (i % 2 == _num && oscRoomData.bannerNum[i] == empty)
             {
@@ -89,11 +89,11 @@ public class RoomManager : MonoBehaviour
         SendDataToServer();
     }
 
-    bool TidyUpPlayerBanner(RoomData _roomData)
-    { 
+    unsafe bool TidyUpPlayerBanner(RoomData _roomData)
+    {
         bool isTidied = false;
 
-        for (int i = 0; i < _roomData.bannerNum.Length - 2; i++)
+        for (int i = 0; i < MachingRoomData.bannerMaxCount - 2; i++)
         {
             //中身が空なら
             if (_roomData.bannerNum[i] == empty)
@@ -115,7 +115,7 @@ public class RoomManager : MonoBehaviour
         return isTidied;
     }
 
-    public void CharaSelect(int _playerID, int value)
+    public unsafe void CharaSelect(int _playerID, int value)
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
 
@@ -130,7 +130,7 @@ public class RoomManager : MonoBehaviour
         SendDataToServer();
     }
 
-    public void PressSubmit()
+    public unsafe void PressSubmit()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
 
@@ -144,7 +144,7 @@ public class RoomManager : MonoBehaviour
         if (oscRoomData.hostPlayer == myID)
         {
             int readyCount = 0;
-            for (int i = 0; i < oscRoomData.readyPlayers.Length; i++)
+            for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
             {
                 if (oscRoomData.readyPlayers[i] && i != myID) { readyCount++; }
             }
@@ -165,7 +165,7 @@ public class RoomManager : MonoBehaviour
         OSCManager.OSCinstance.roomData = oscRoomData;
         SendDataToServer();
     }
-    public void PressCancel()
+    public unsafe void PressCancel()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
 

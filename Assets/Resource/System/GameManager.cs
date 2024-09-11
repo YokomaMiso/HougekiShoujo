@@ -57,7 +57,10 @@ public class GameManager : MonoBehaviour
 
             Player nowPlayer = playerInstance[i].GetComponent<Player>();
             nowPlayer.SetPlayerID(i);
-            nowPlayer.SetPlayerData(playerDatas[OSCManager.OSCinstance.receiveRoomData.selectedCharacterID[i]]);
+            unsafe
+            {
+                nowPlayer.SetPlayerData(playerDatas[OSCManager.OSCinstance.receiveRoomData.selectedCharacterID[i]]);
+            }
         }
     }
 

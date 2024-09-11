@@ -14,7 +14,7 @@ public class OSCManager : MonoBehaviour
 
     //自身のインゲームデータ
     public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
-    
+
     //送られてきた相手のインゲームデータ
     public IngameData.PlayerNetData receivedIngameData = new IngameData.PlayerNetData();
 
@@ -189,7 +189,7 @@ public class OSCManager : MonoBehaviour
         //}
         //
         //mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
-        
+
 
     }
 
@@ -221,25 +221,25 @@ public class OSCManager : MonoBehaviour
 
         //Debug.Log(testNum);
 
-        
+
         //Debug.Log("ハンドシェイク用データ" + handshakeBytes.Length);
         //Debug.Log("部屋情報" + roomDataBytes.Length);
         //Debug.Log("受信バイトサイズ" + receiveLong);
 
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log("ホストプレイヤーID : " + roomData.hostPlayer);
         }
 
-        if(Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             SendMachingData();
         }
     }
-    
+
     private void LateUpdate()
     {
-        if(Managers.instance.state == GAME_STATE.IN_GAME)
+        if (Managers.instance.state == GAME_STATE.IN_GAME)
         {
             SendIngameValue();
         }
@@ -248,33 +248,35 @@ public class OSCManager : MonoBehaviour
     private void OnEnable()
     {
 
-        
-        
+
+
 
     }
 
     private void OnDisable()
     {
-        if(mainServer != null)
+        if (mainServer != null)
         {
             mainServer.Dispose();
         }
 
-        if(tempServer != null)
+        if (tempServer != null)
         {
             tempServer.Dispose();
         }
-        
+
     }
 
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
     {
-        _roomData.bannerNum = new int[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
-        _roomData.selectedCharacterID = new int[6] { 0, 0, 0, 0, 0, 0 };
-        _roomData.readyPlayers = new bool[6] { false, false, false, false, false, false };
-        _roomData.hostPlayer = 0;
-        _roomData.gameStart = false;
-        
+        unsafe
+        {
+            for (int i = 0; i < 8; i++) { _roomData.bannerNum[i] = -1; }
+            for (int i = 0; i < 6; i++) { _roomData.selectedCharacterID[i] = 0; }
+            for (int i = 0; i < 6; i++) { _roomData.readyPlayers[i] = false; }
+            _roomData.hostPlayer = 0;
+            _roomData.gameStart = false;
+        }
 
         return _roomData;
     }
@@ -324,7 +326,7 @@ public class OSCManager : MonoBehaviour
     private void SendFirstHandshake()
     {
         byte[] bytes = netInstance.StructToByte(firstData);
-        
+
         tempClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, bytes, bytes.Length);
 
         Debug.Log("1way送信");
@@ -368,7 +370,7 @@ public class OSCManager : MonoBehaviour
         receiveLong = _receiveBytes.Length;
 
         //送信されてきたバイト配列サイズがハンドシェイク用と同じならハンドシェイクデータとして取り扱う
-        if(_receiveBytes.Length == 1048)
+        if (_receiveBytes.Length == 1048)
         {
             testNum = 1;
             receivedFirstData = netInstance.ByteToStruct<HandshakeData.SendUserData>(_receiveBytes);
@@ -480,7 +482,7 @@ public class OSCManager : MonoBehaviour
 
         _sendBytes = netInstance.StructToByte(roomData);
 
-        if(isServer)
+        if (isServer)
         {
             mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
         }
@@ -488,7 +490,7 @@ public class OSCManager : MonoBehaviour
         {
             tempClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
         }
-        
+
 
         return;
     }
@@ -499,4 +501,4 @@ public class OSCManager : MonoBehaviour
 
         return;
     }
-}                         
+}

@@ -71,12 +71,14 @@ public class RoomCanvasBehavior : MonoBehaviour
         subWeaponText = subWeaponIcon.transform.GetChild(0).GetComponent<Text>();
 
         //DEBUG
-        OSCManager.OSCinstance.receiveRoomData.bannerNum[0] = 0;
-        OSCManager.OSCinstance.receiveRoomData.bannerNum[2] = 2;
-        OSCManager.OSCinstance.receiveRoomData.bannerNum[3] = 3;
-        OSCManager.OSCinstance.receiveRoomData.bannerNum[4] = 4;
-        OSCManager.OSCinstance.receiveRoomData.bannerNum[5] = 5;
-
+        unsafe
+        {
+            //OSCManager.OSCinstance.receiveRoomData.bannerNum[0] = 0;
+            //OSCManager.OSCinstance.receiveRoomData.bannerNum[2] = 2;
+            //OSCManager.OSCinstance.receiveRoomData.bannerNum[3] = 3;
+            //OSCManager.OSCinstance.receiveRoomData.bannerNum[4] = 4;
+            //OSCManager.OSCinstance.receiveRoomData.bannerNum[5] = 5;
+        }
         //©•ª‚ÌŠ‘®ƒ`[ƒ€‚ğU‚è•ª‚¯‚é
         if (rm.myNum == -1) { rm.PlayerBannerDivider(); }
     }
@@ -92,7 +94,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         OpenOption();
     }
 
-    void PlayerBannerDisplayUpdate()
+    unsafe void PlayerBannerDisplayUpdate()
     {
         for (int i = 0; i < playerBanners.transform.childCount; i++)
         {
@@ -100,7 +102,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
 
         RoomData roomData = OSCManager.OSCinstance.receiveRoomData;
-        for (int i = 0; i < OSCManager.OSCinstance.receiveRoomData.bannerNum.Length; i++)
+        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
             if (roomData.bannerNum[i] != rm.empty)
             {
@@ -112,7 +114,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
     }
 
-    void TeamSelect()
+    unsafe void TeamSelect()
     {
         if (OSCManager.OSCinstance.receiveRoomData.readyPlayers[Managers.instance.playerID]) { return; }
 
@@ -126,7 +128,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         rm.PlayerBannerChanger(teamID);
     }
 
-    void CharaSelect()
+    unsafe void CharaSelect()
     {
         int myID = Managers.instance.playerID;
         float input = Input.GetAxis("Horizontal");
