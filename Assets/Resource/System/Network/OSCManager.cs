@@ -29,7 +29,7 @@ public class OSCManager : MonoBehaviour
 
     public MachingRoomData.RoomData roomData = new MachingRoomData.RoomData();
     public MachingRoomData.RoomData receiveRoomData = new MachingRoomData.RoomData();
-    
+
     public SendDataCreator netInstance = new SendDataCreator();
 
     //自分がサーバかどうか
@@ -91,6 +91,9 @@ public class OSCManager : MonoBehaviour
         /////////////////////////////
         //////////初期通信処理///////
         /////////////////////////////
+
+        roomData = initRoomData(roomData);
+        receiveRoomData = initRoomData(receiveRoomData);
 
         handshakeBytes = netInstance.StructToByte(firstData);
         roomDataBytes = netInstance.StructToByte(roomData);
@@ -186,8 +189,7 @@ public class OSCManager : MonoBehaviour
         //}
         //
         //mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
-
-        roomData.test = 0;
+        
 
     }
 
@@ -226,13 +228,11 @@ public class OSCManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log("ルームデータ : " + roomData.test);
+            Debug.Log("ホストプレイヤーID : " + roomData.hostPlayer);
         }
 
         if(Input.GetKeyDown(KeyCode.M))
         {
-            roomData.test += 1;
-
             SendMachingData();
         }
     }
@@ -265,6 +265,18 @@ public class OSCManager : MonoBehaviour
             tempServer.Dispose();
         }
         
+    }
+
+    MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
+    {
+        _roomData.bannerNum = new int[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
+        _roomData.selectedCharacterID = new int[6] { 0, 0, 0, 0, 0, 0 };
+        _roomData.readyPlayers = new bool[6] { false, false, false, false, false, false };
+        _roomData.hostPlayer = 0;
+        _roomData.gameStart = false;
+        
+
+        return _roomData;
     }
 
     //////////////////////////
@@ -349,6 +361,7 @@ public class OSCManager : MonoBehaviour
 
         resServerData.toClientPort = 8001;
         resServerData.serverIP = "255.255.255.255";
+
 
         value.ReadBlobElement(0, ref _receiveBytes);
 
@@ -476,6 +489,13 @@ public class OSCManager : MonoBehaviour
             tempClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
         }
         
+
+        return;
+    }
+
+    public void SendRoomData()
+    {
+        SendMachingData();
 
         return;
     }

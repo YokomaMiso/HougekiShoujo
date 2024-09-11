@@ -11,5 +11,6 @@ public class ResponseServerData
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
         public string serverIP;
         public int toClientPort;
+        public int serverPlayerID;
     }
 }
