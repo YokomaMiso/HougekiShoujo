@@ -58,6 +58,7 @@ MonoBehaviour:
   saveManager: {fileID: 0}
   timeManager: {fileID: 0}
   canvasManager: {fileID: 0}
+  roomManager: {fileID: 0}
 --- !u!114 &2265797116704708556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +75,7 @@ MonoBehaviour:
     type: 3}
   otherPlayerPrefab: {fileID: 2522134910337228876, guid: 433860aee1d671f4d87fe700b3b61c74,
     type: 3}
+  allPlayerCount: 2
   playerDatas:
   - {fileID: 11400000, guid: 4263fdabccc477f44a3fe0d41781cf02, type: 2}
   - {fileID: 11400000, guid: c856c19e79586664899c176953f21bd5, type: 2}
@@ -81,6 +83,7 @@ MonoBehaviour:
   play: 0
   roundCount: 1
   roundTimer: 100
+  deadPlayerCount: 0000000000000000
   roundWinCount: 0000000000000000
   start: 0
   startTimer: 0
@@ -147,6 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797a944ba771fa1448597c0600337743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bannerNum: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  selectedCharacterID: 000000000000000000000000000000000000000000000000
+  readyPlayers: 000000000000
+  hostPlayer: 0
+  gameStart: 0
+  myNum: -1
 --- !u!114 &7942510688574649445
 MonoBehaviour:
   m_ObjectHideFlags: 0

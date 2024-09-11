@@ -14,6 +14,13 @@ public class PlayerAim : MonoBehaviour
     Vector3 aimVector = Vector3.zero;
     Shell shellData;
 
+    public void Init()
+    {
+        aimVector = Vector3.zero;
+        attackArea.SetActive(false);
+        aoeArea.SetActive(false);
+    }
+
     public void SetPlayer(Player _player, GameObject _aoeArea, GameObject _attackArea)
     {
         ownerPlayer = _player;

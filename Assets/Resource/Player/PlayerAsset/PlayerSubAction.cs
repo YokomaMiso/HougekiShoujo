@@ -15,6 +15,11 @@ public class PlayerSubAction : MonoBehaviour
     SubWeapon subWeaponData;
     float reloadTimer;
 
+    public void Init()
+    {
+        reloadTimer = 0;
+    }
+
     void Update()
     {
         if (CanUse()) { return; }
