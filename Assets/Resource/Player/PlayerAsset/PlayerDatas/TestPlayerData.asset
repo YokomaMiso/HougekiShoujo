@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
   m_Name: TestPlayerData
   m_EditorClassIdentifier: 
-  id: 0
+  charaName: 
   characterAnimData: {fileID: 11400000, guid: 7795e22e14e28714699f56646211d174, type: 2}
   moveSpeed: 0
   shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
   subWeapon: {fileID: 0}
-  material: {fileID: 2100000, guid: f0372cdcea2de2048b1b146980f4908f, type: 2}
+  material: {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}

@@ -11,6 +11,11 @@ public class PlayerReload : MonoBehaviour
     float timer;
     int shellNum = -1;
 
+    public void Init()
+    {
+        timer = 0;
+    }
+
     void Start()
     {
         reloadTime = ownerPlayer.GetPlayerData().GetShell().GetReloadTime();    

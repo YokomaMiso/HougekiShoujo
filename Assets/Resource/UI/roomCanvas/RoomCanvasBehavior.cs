@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TEAM_NUM { A = 0, B = 1 };
+
 public class RoomCanvasBehavior : MonoBehaviour
 {
+    RoomManager rm;
+
     GameObject charaSelect;
     GameObject teamsBG;
     GameObject bannerSelecter;
@@ -24,24 +29,28 @@ public class RoomCanvasBehavior : MonoBehaviour
     Image subWeaponIcon;
     Text subWeaponText;
 
-    int charaSelectNum = 0;
-    const int maxCharaCount = 3;
-
     float timer = 0;
     const float charaChangeTimer = 0.5f;
 
-    Vector3[] bannerPos = new Vector3[6]
+    readonly Vector3[] bannerPos = new Vector3[8]
     {
         new Vector3(-680,240,0),
-        new Vector3(-680,40,0),
-        new Vector3(-680,-160,0),
         new Vector3(680,240,0),
-        new Vector3(680,40,0),
-        new Vector3(680,-160,0),
+
+        new Vector3(-680,80,0),
+        new Vector3(680,80,0),
+
+        new Vector3(-680,-80,0),
+        new Vector3(680,-80,0),
+
+        new Vector3(-680,-240,0),
+        new Vector3(680,-240,0),
     };
 
     void Start()
     {
+        rm = Managers.instance.roomManager;
+
         charaSelect = transform.GetChild(0).gameObject;
         teamsBG = transform.GetChild(1).gameObject;
         bannerSelecter = transform.GetChild(2).gameObject;
@@ -49,7 +58,7 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         charaVisual = charaSelect.transform.GetChild(0).GetComponent<Image>();
         nameBar = charaVisual.transform.GetChild(0).GetComponent<Image>();
-        nameText= nameBar.transform.GetChild(0).GetComponent<Text>();
+        nameText = nameBar.transform.GetChild(0).GetComponent<Text>();
 
         rollDisplay = charaVisual.transform.GetChild(1).GetComponent<Image>();
         rollText = charaVisual.transform.GetChild(2).GetComponent<Text>();
@@ -59,26 +68,73 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         subWeaponIcon = charaSelect.transform.GetChild(2).GetComponent<Image>();
         subWeaponText = subWeaponIcon.transform.GetChild(0).GetComponent<Text>();
+
+        //DEBUG
+        rm.bannerNum[0] = 0;
+        rm.bannerNum[2] = 2;
+        rm.bannerNum[3] = 3;
+        rm.bannerNum[4] = 4;
+        rm.bannerNum[5] = 5;
+
+        //é©ï™ÇÃèäëÆÉ`Å[ÉÄÇêUÇËï™ÇØÇÈ
+        if (rm.myNum == -1) { rm.PlayerBannerDivider(); }
     }
 
     void Update()
     {
         CharaSelect();
-        PlayerBannerController();
+        TeamSelect();
+        PlayerBannerDisplayUpdate();
+        PressSubmit();
+        PressCancel();
         GameStart();
         OpenOption();
     }
 
+    void PlayerBannerDisplayUpdate()
+    {
+        for (int i = 0; i < playerBanners.transform.childCount; i++)
+        {
+            playerBanners.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < rm.bannerNum.Length; i++)
+        {
+            if (rm.bannerNum[i] != rm.empty)
+            {
+                playerBanners.transform.GetChild(rm.bannerNum[i]).gameObject.SetActive(true);
+                playerBanners.transform.GetChild(rm.bannerNum[i]).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(rm.bannerNum[i], rm.readyPlayers[rm.bannerNum[i]]);
+                playerBanners.transform.GetChild(rm.bannerNum[i]).transform.localPosition = bannerPos[i];
+                if (rm.bannerNum[i] == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
+            }
+        }
+    }
+
+    void TeamSelect()
+    {
+        if (rm.readyPlayers[Managers.instance.playerID]) { return; }
+
+        int teamID = -1;
+
+        if (Input.GetButtonDown("LB")) { teamID = (int)TEAM_NUM.A; }
+        else if (Input.GetButtonDown("RB")) { teamID = (int)TEAM_NUM.B; }
+
+        if (teamID < 0) { return; }
+
+        rm.PlayerBannerChanger(teamID);
+    }
+
     void CharaSelect()
     {
+        int myID = Managers.instance.playerID;
         float input = Input.GetAxis("Horizontal");
 
         if (Mathf.Abs(input) > 0.9f)
         {
             if (timer == 0)
             {
-                if (input > 0) { charaSelectNum = (charaSelectNum + 1) % maxCharaCount; }
-                else { charaSelectNum = (charaSelectNum + (maxCharaCount - 1)) % maxCharaCount; }
+                if (input > 0) { rm.CharaSelect(myID, 1); }
+                else { rm.CharaSelect(myID, -1); }
             }
 
             timer += Time.deltaTime;
@@ -89,8 +145,8 @@ public class RoomCanvasBehavior : MonoBehaviour
             timer = 0;
         }
 
-        Managers.instance.gameManager.SetCharacterNum(charaSelectNum);
-        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaSelectNum];
+        int charaID = rm.selectedCharacterID[myID];
+        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 
         CharaDisplayUpdate(nowPlayerData);
         ShellDisplayUpdate(nowPlayerData);
@@ -122,17 +178,10 @@ public class RoomCanvasBehavior : MonoBehaviour
     }
 
 
-    void PlayerBannerController()
-    {
-        bannerSelecter.transform.localPosition = bannerPos[Managers.instance.playerID];
-    }
-
     void OpenOption()
     {
         if (Input.GetButtonDown("Menu"))
         {
-            Debug.Log("aaaa");
-
             Managers.instance.ChangeScene(GAME_STATE.OPTION);
             Managers.instance.ChangeState(GAME_STATE.OPTION);
             Managers.instance.canvasManager.ChangeCanvas(GAME_STATE.OPTION);
@@ -141,15 +190,28 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
     }
 
-    void GameStart()
+    void PressSubmit()
     {
         if (Input.GetButtonDown("Submit"))
         {
-            GAME_STATE sendState = GAME_STATE.IN_GAME;
-
-            Managers.instance.ChangeScene(sendState);
-            Managers.instance.ChangeState(sendState);
-            Destroy(gameObject);
+            rm.PressSubmit();
         }
+    }
+    void PressCancel()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            rm.PressCancel();
+        }
+    }
+    void GameStart()
+    {
+        if (!rm.gameStart) { return; }
+
+        GAME_STATE sendState = GAME_STATE.IN_GAME;
+
+        Managers.instance.ChangeScene(sendState);
+        Managers.instance.ChangeState(sendState);
+        Destroy(gameObject);
     }
 }

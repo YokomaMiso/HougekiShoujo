@@ -26,6 +26,7 @@ public class Managers : MonoBehaviour
     public SaveManager saveManager;
     public TimeManager timeManager;
     public CanvasManager canvasManager;
+    public RoomManager roomManager;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class Managers : MonoBehaviour
         saveManager = GetComponent<SaveManager>();
         timeManager = GetComponent<TimeManager>();
         canvasManager = GetComponent<CanvasManager>();
+        roomManager = GetComponent<RoomManager>();
     }
 
     public void ChangeScene(GAME_STATE _state)
