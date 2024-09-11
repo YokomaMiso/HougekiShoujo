@@ -10,12 +10,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject otherPlayerPrefab;
     GameObject[] playerInstance;
-    const int playerMaxNum = 2;
+    public int playerMaxNum = 2;
 
     public PlayerData[] playerDatas;
 
     //âºç¿ïW
-    Vector3[] pos = new Vector3[playerMaxNum] 
+    Vector3[] pos = new Vector3[2] 
     {
         //new Vector3(-3,0,-10), 
         //new Vector3(-3,0,10),

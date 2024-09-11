@@ -12,12 +12,13 @@ public class PlayerBannerBehavior : MonoBehaviour
         string text = "Player " + (num + 1).ToString();
         transform.GetChild(2).GetComponent<Text>().text = text;
     }
-    public void BannerIconUpdate()
+    public void BannerIconUpdate(int _playerID, bool _ready)
     {
-        if (num < 0) { return; } 
+        if (num < 0) { return; }
 
         int charaID = Managers.instance.roomManager.selectedCharacterID[num];
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
         transform.GetChild(1).GetComponent<Image>().sprite = icon;
+        transform.GetChild(3).gameObject.SetActive(_ready);
     }
 }

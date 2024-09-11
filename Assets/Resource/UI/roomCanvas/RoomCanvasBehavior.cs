@@ -85,6 +85,8 @@ public class RoomCanvasBehavior : MonoBehaviour
         CharaSelect();
         TeamSelect();
         PlayerBannerDisplayUpdate();
+        PressSubmit();
+        PressCancel();
         GameStart();
         OpenOption();
     }
@@ -101,7 +103,7 @@ public class RoomCanvasBehavior : MonoBehaviour
             if (rm.bannerNum[i] != rm.empty)
             {
                 playerBanners.transform.GetChild(rm.bannerNum[i]).gameObject.SetActive(true);
-                playerBanners.transform.GetChild(rm.bannerNum[i]).GetComponent<PlayerBannerBehavior>().BannerIconUpdate();
+                playerBanners.transform.GetChild(rm.bannerNum[i]).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(rm.bannerNum[i], rm.readyPlayers[rm.bannerNum[i]]);
                 playerBanners.transform.GetChild(rm.bannerNum[i]).transform.localPosition = bannerPos[i];
                 if (rm.bannerNum[i] == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
             }
@@ -110,10 +112,12 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void TeamSelect()
     {
+        if (rm.readyPlayers[Managers.instance.playerID]) { return; }
+
         int teamID = -1;
 
-        if (Input.GetKeyDown(KeyCode.J)) { teamID = (int)TEAM_NUM.A; }
-        else if (Input.GetKeyDown(KeyCode.K)) { teamID = (int)TEAM_NUM.B; }
+        if (Input.GetButtonDown("LB")) { teamID = (int)TEAM_NUM.A; }
+        else if (Input.GetButtonDown("RB")) { teamID = (int)TEAM_NUM.B; }
 
         if (teamID < 0) { return; }
 
@@ -178,8 +182,6 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (Input.GetButtonDown("Menu"))
         {
-            Debug.Log("aaaa");
-
             Managers.instance.ChangeScene(GAME_STATE.OPTION);
             Managers.instance.ChangeState(GAME_STATE.OPTION);
             Managers.instance.canvasManager.ChangeCanvas(GAME_STATE.OPTION);
@@ -188,15 +190,28 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
     }
 
-    void GameStart()
+    void PressSubmit()
     {
         if (Input.GetButtonDown("Submit"))
         {
-            GAME_STATE sendState = GAME_STATE.IN_GAME;
-
-            Managers.instance.ChangeScene(sendState);
-            Managers.instance.ChangeState(sendState);
-            Destroy(gameObject);
+            rm.PressSubmit();
         }
+    }
+    void PressCancel()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            rm.PressCancel();
+        }
+    }
+    void GameStart()
+    {
+        if (!rm.gameStart) { return; }
+
+        GAME_STATE sendState = GAME_STATE.IN_GAME;
+
+        Managers.instance.ChangeScene(sendState);
+        Managers.instance.ChangeState(sendState);
+        Destroy(gameObject);
     }
 }

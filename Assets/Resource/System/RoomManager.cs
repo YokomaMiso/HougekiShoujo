@@ -2,13 +2,18 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class RoomManager : MonoBehaviour
 {
+    /*サーバーと同期させる変数*/
     public int[] bannerNum = new int[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
-    public int myNum;
     public int[] selectedCharacterID = new int[6] { 0, 0, 0, 0, 0, 0 };
+    public bool[] readyPlayers = new bool[6] { false, false, false, false, false, false };
+    public int hostPlayer;
+    public bool gameStart;
+
+    /*内部的な処理*/
+    public int myNum;
     public readonly int maxCharaCount = 3;
     public readonly int empty = -1;
 
@@ -94,7 +99,7 @@ public class RoomManager : MonoBehaviour
                     //自分の番号だった場合、番号を更新する
                     if (myNum == i) { myNum = i - 2; }
 
-                    isTidied=true;
+                    isTidied = true;
                 }
             }
         }
@@ -110,5 +115,48 @@ public class RoomManager : MonoBehaviour
         else { calc = (calc + (maxCharaCount - 1)) % maxCharaCount; }
 
         selectedCharacterID[_playerID] = calc;
+    }
+
+    public void PressSubmit()
+    {
+        int myID = Managers.instance.playerID;
+
+        //自分がホストなら
+        if (hostPlayer == myID)
+        {
+            int readyCount = 0;
+            for (int i = 0; i < readyPlayers.Length; i++)
+            {
+                if (readyPlayers[i] && i != myID) { readyCount++; }
+            }
+
+            //本番はここをONにする
+            //if (readyCount >= Managers.instance.gameManager.playerMaxNum)
+            //{
+                gameStart = true;
+            //}
+        }
+        else
+        {
+            if (!readyPlayers[myID])
+            {
+                readyPlayers[myID] = true;
+            }
+        }
+    }
+    public void PressCancel()
+    {
+        int myID = Managers.instance.playerID;
+
+        if (hostPlayer == myID)
+        {
+        }
+        else
+        {
+            if (readyPlayers[myID])
+            {
+                readyPlayers[myID] = false;
+            }
+        }
     }
 }
