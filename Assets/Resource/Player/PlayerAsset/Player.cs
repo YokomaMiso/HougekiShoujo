@@ -105,8 +105,8 @@ public class Player : MonoBehaviour
 
     void OwnPlayerBehavior()
     {
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = false;
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.useSub = false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
 
         int inputNum = InputCheck();
 
@@ -175,18 +175,18 @@ public class Player : MonoBehaviour
             }
         }
 
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerState = playerState;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos = transform.position;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerState = playerState;
     }
 
     void OtherPlayerBehavior()
     {
-        playerState = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerState;
-        transform.position = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerPos;
-        Vector3 stickValue = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue;
+        playerState = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerState;
+        transform.position = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerPos;
+        Vector3 stickValue = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue;
 
-        bool fire = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.fire;
-        bool useSub = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.useSub;
+        bool fire = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.fire;
+        bool useSub = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.useSub;
 
         switch (playerState)
         {
