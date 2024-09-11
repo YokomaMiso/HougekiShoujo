@@ -119,6 +119,10 @@ public class RoomManager : MonoBehaviour
 
     public void PressSubmit()
     {
+        //DEBUG
+        gameStart = true;
+        return;
+        
         int myID = Managers.instance.playerID;
 
         //自分がホストなら
@@ -130,11 +134,10 @@ public class RoomManager : MonoBehaviour
                 if (readyPlayers[i] && i != myID) { readyCount++; }
             }
 
-            //本番はここをONにする
-            //if (readyCount >= Managers.instance.gameManager.playerMaxNum)
-            //{
+            if (readyCount >= Managers.instance.gameManager.playerMaxNum)
+            {
                 gameStart = true;
-            //}
+            }
         }
         else
         {
@@ -150,6 +153,7 @@ public class RoomManager : MonoBehaviour
 
         if (hostPlayer == myID)
         {
+
         }
         else
         {
