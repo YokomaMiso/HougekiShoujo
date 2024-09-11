@@ -2,16 +2,10 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MachingRoomData;
 
 public class RoomManager : MonoBehaviour
 {
-    /*サーバーと同期させる変数*/
-    public int[] bannerNum = new int[8] { -1, -1, -1, -1, -1, -1, -1, -1 };
-    public int[] selectedCharacterID = new int[6] { 0, 0, 0, 0, 0, 0 };
-    public bool[] readyPlayers = new bool[6] { false, false, false, false, false, false };
-    public int hostPlayer;
-    public bool gameStart;
-
     /*内部的な処理*/
     public int myNum = -1;
     public readonly int maxCharaCount = 3;
@@ -21,48 +15,57 @@ public class RoomManager : MonoBehaviour
     {
         //受信処理
     }
-    void SendDataToServer(int _playerID, int _bannerID, int _characterID)
+    void SendDataToServer(int _playerID, int _bannerID, int _characterID,bool _ready)
     {
         //送信処理を行う
     }
 
     public void Init()
     {
-        for (int i = 0; i < readyPlayers.Length; i++) { readyPlayers[i] = false; }
-        gameStart = false;
+        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        for (int i = 0; i < oscRoomData.readyPlayers.Length; i++) { oscRoomData.readyPlayers[i] = false; }
+        oscRoomData.gameStart = false;
+
+        OSCManager.OSCinstance.roomData = oscRoomData;
     }
 
     //チームの振り分けを行う関数
     public void PlayerBannerDivider()
     {
+        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+
         //移動したいチームに空きがあれば番号を振る
-        for (int i = 0; i < bannerNum.Length; i++)
+        for (int i = 0; i < oscRoomData.bannerNum.Length; i++)
         {
-            if (bannerNum[i] == empty)
+            if (oscRoomData.bannerNum[i] == empty)
             {
-                bannerNum[i] = Managers.instance.playerID;
+                oscRoomData.bannerNum[i] = Managers.instance.playerID;
                 myNum = i;
                 break;
             }
         }
 
+        OSCManager.OSCinstance.roomData = oscRoomData;
+
         int myID = Managers.instance.playerID;
-        SendDataToServer(myID, myNum, selectedCharacterID[myID]);
+        //SendDataToServer(myID, myNum, oscRoomData.selectedCharacterID[myID]);
     }
     //チーム移動を行う関数
     public void PlayerBannerChanger(int _num)
     {
+        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+
         //自分のチームを呼び出そうとしたら早期リターン
         if (myNum % 2 == _num) { return; }
 
         bool canMove = false;
         int nextNum = 0;
         //移動したいチームに空きがあれば番号を振る
-        for (int i = 0; i < bannerNum.Length; i++)
+        for (int i = 0; i < oscRoomData.bannerNum.Length; i++)
         {
-            if (i % 2 == _num && bannerNum[i] == empty)
+            if (i % 2 == _num && oscRoomData.bannerNum[i] == empty)
             {
-                bannerNum[i] = Managers.instance.playerID;
+                oscRoomData.bannerNum[i] = Managers.instance.playerID;
                 canMove = true;
                 nextNum = i;
                 break;
@@ -70,38 +73,42 @@ public class RoomManager : MonoBehaviour
         }
 
         //移動しようとしたチームに空きがなければ何もせず早期リターン
-        if (!canMove) { return; }
-
-        //チームの移動に成功したら、前居た自分の位置をクリアする
-        bannerNum[myNum] = empty;
-        //自分の位置の番号を更新
-        myNum = nextNum;
-
-        while (true)
+        if (canMove)
         {
-            //配列の整理整頓
-            if (!TidyUpPlayerBanner()) { break; }
+
+            //チームの移動に成功したら、前居た自分の位置をクリアする
+            oscRoomData.bannerNum[myNum] = empty;
+            //自分の位置の番号を更新
+            myNum = nextNum;
+
+            while (true)
+            {
+                //配列の整理整頓
+                if (!TidyUpPlayerBanner(oscRoomData)) { break; }
+            }
         }
 
+        OSCManager.OSCinstance.roomData = oscRoomData;
+
         int myID = Managers.instance.playerID;
-        SendDataToServer(myID, myNum, selectedCharacterID[myID]);
+        //SendDataToServer(myID, myNum, oscRoomData.selectedCharacterID[myID]);
     }
 
-    bool TidyUpPlayerBanner()
-    {
+    bool TidyUpPlayerBanner(RoomData _roomData)
+    { 
         bool isTidied = false;
 
-        for (int i = 0; i < bannerNum.Length - 2; i++)
+        for (int i = 0; i < _roomData.bannerNum.Length - 2; i++)
         {
             //中身が空なら
-            if (bannerNum[i] == empty)
+            if (_roomData.bannerNum[i] == empty)
             {
                 //１つ下の中身が空じゃないなら
-                if (bannerNum[i + 2] != empty)
+                if (_roomData.bannerNum[i + 2] != empty)
                 {
                     //１つ下の情報を自分の中身に入れ替える
-                    bannerNum[i] = bannerNum[i + 2];
-                    bannerNum[i + 2] = empty;
+                    _roomData.bannerNum[i] = _roomData.bannerNum[i + 2];
+                    _roomData.bannerNum[i + 2] = empty;
                     //自分の番号だった場合、番号を更新する
                     if (myNum == i) { myNum = i - 2; }
 
@@ -115,58 +122,70 @@ public class RoomManager : MonoBehaviour
 
     public void CharaSelect(int _playerID, int value)
     {
-        int calc = selectedCharacterID[_playerID];
+        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+
+        int calc = oscRoomData.selectedCharacterID[_playerID];
 
         if (value > 0) { calc = (calc + 1) % maxCharaCount; }
         else { calc = (calc + (maxCharaCount - 1)) % maxCharaCount; }
 
-        selectedCharacterID[_playerID] = calc;
+        oscRoomData.selectedCharacterID[_playerID] = calc;
+
+        OSCManager.OSCinstance.roomData = oscRoomData;
     }
 
     public void PressSubmit()
     {
+        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+
         //DEBUG
-        gameStart = true;
-        return;
+        //oscRoomData.gameStart = true;
+        //return;
 
         int myID = Managers.instance.playerID;
 
         //自分がホストなら
-        if (hostPlayer == myID)
+        if (oscRoomData.hostPlayer == myID)
         {
             int readyCount = 0;
-            for (int i = 0; i < readyPlayers.Length; i++)
+            for (int i = 0; i < oscRoomData.readyPlayers.Length; i++)
             {
-                if (readyPlayers[i] && i != myID) { readyCount++; }
+                if (oscRoomData.readyPlayers[i] && i != myID) { readyCount++; }
             }
 
             if (readyCount >= Managers.instance.gameManager.allPlayerCount)
             {
-                gameStart = true;
+                oscRoomData.gameStart = true;
             }
         }
         else
         {
-            if (!readyPlayers[myID])
+            if (!oscRoomData.readyPlayers[myID])
             {
-                readyPlayers[myID] = true;
+                oscRoomData.readyPlayers[myID] = true;
             }
         }
+
+        OSCManager.OSCinstance.roomData = oscRoomData;
     }
     public void PressCancel()
     {
+        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+
         int myID = Managers.instance.playerID;
 
-        if (hostPlayer == myID)
+        if (oscRoomData.hostPlayer == myID)
         {
 
         }
         else
         {
-            if (readyPlayers[myID])
+            if (oscRoomData.readyPlayers[myID])
             {
-                readyPlayers[myID] = false;
+                oscRoomData.readyPlayers[myID] = false;
             }
         }
+
+        OSCManager.OSCinstance.roomData = oscRoomData;
     }
 }
