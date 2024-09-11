@@ -70,11 +70,11 @@ public class RoomCanvasBehavior : MonoBehaviour
         subWeaponText = subWeaponIcon.transform.GetChild(0).GetComponent<Text>();
 
         //DEBUG
-        //rm.bannerNum[0] = 0;
-        //rm.bannerNum[2] = 2;
-        //rm.bannerNum[3] = 3;
-        //rm.bannerNum[4] = 4;
-        //rm.bannerNum[5] = 5;
+        rm.bannerNum[0] = 0;
+        rm.bannerNum[2] = 2;
+        rm.bannerNum[3] = 3;
+        rm.bannerNum[4] = 4;
+        rm.bannerNum[5] = 5;
 
         //©•ª‚ÌŠ‘®ƒ`[ƒ€‚ğU‚è•ª‚¯‚é
         if (rm.myNum == -1) { rm.PlayerBannerDivider(); }
