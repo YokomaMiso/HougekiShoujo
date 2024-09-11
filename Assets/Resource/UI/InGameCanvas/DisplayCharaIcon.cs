@@ -41,7 +41,7 @@ public class DisplayCharaIcon : MonoBehaviour
 
     readonly Color[] iconBGColor = new Color[2];
 
-    void Start()
+    unsafe void Start()
     {
         iconBGColor[0] = ColorCordToRGB("#8fdee5");
         iconBGColor[1] = ColorCordToRGB("#ff1f1f");

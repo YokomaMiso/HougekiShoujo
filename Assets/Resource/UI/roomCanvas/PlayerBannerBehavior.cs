@@ -12,7 +12,7 @@ public class PlayerBannerBehavior : MonoBehaviour
         string text = "Player " + (num + 1).ToString();
         transform.GetChild(3).GetComponent<Text>().text = text;
     }
-    public void BannerIconUpdate(int _playerID, bool _ready)
+    public unsafe void BannerIconUpdate(int _playerID, bool _ready)
     {
         if (num < 0) { return; }
 
