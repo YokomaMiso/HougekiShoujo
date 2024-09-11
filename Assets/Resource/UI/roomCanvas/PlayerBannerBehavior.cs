@@ -10,7 +10,7 @@ public class PlayerBannerBehavior : MonoBehaviour
     {
         num = _num;
         string text = "Player " + (num + 1).ToString();
-        transform.GetChild(2).GetComponent<Text>().text = text;
+        transform.GetChild(3).GetComponent<Text>().text = text;
     }
     public void BannerIconUpdate(int _playerID, bool _ready)
     {
@@ -18,7 +18,7 @@ public class PlayerBannerBehavior : MonoBehaviour
 
         int charaID = Managers.instance.roomManager.selectedCharacterID[num];
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
-        transform.GetChild(1).GetComponent<Image>().sprite = icon;
-        transform.GetChild(3).gameObject.SetActive(_ready);
+        transform.GetChild(2).GetComponent<Image>().sprite = icon;
+        transform.GetChild(4).gameObject.SetActive(_ready);
     }
 }
