@@ -11,15 +11,10 @@ public class RoomManager : MonoBehaviour
     public readonly int maxCharaCount = 3;
     public readonly int empty = -1;
 
-    void ReceiveDataFromServer()
+    void SendDataToServer()
     {
-        //受信処理
+        OSCManager.OSCinstance.SendRoomData();
     }
-    void SendDataToServer(int _playerID, int _bannerID, int _characterID,bool _ready)
-    {
-        //送信処理を行う
-    }
-
     public void Init()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
@@ -48,7 +43,7 @@ public class RoomManager : MonoBehaviour
         OSCManager.OSCinstance.roomData = oscRoomData;
 
         int myID = Managers.instance.playerID;
-        //SendDataToServer(myID, myNum, oscRoomData.selectedCharacterID[myID]);
+        SendDataToServer();
     }
     //チーム移動を行う関数
     public void PlayerBannerChanger(int _num)
@@ -91,7 +86,7 @@ public class RoomManager : MonoBehaviour
         OSCManager.OSCinstance.roomData = oscRoomData;
 
         int myID = Managers.instance.playerID;
-        //SendDataToServer(myID, myNum, oscRoomData.selectedCharacterID[myID]);
+        SendDataToServer();
     }
 
     bool TidyUpPlayerBanner(RoomData _roomData)
@@ -132,6 +127,7 @@ public class RoomManager : MonoBehaviour
         oscRoomData.selectedCharacterID[_playerID] = calc;
 
         OSCManager.OSCinstance.roomData = oscRoomData;
+        SendDataToServer();
     }
 
     public void PressSubmit()
@@ -167,6 +163,7 @@ public class RoomManager : MonoBehaviour
         }
 
         OSCManager.OSCinstance.roomData = oscRoomData;
+        SendDataToServer();
     }
     public void PressCancel()
     {
@@ -187,5 +184,6 @@ public class RoomManager : MonoBehaviour
         }
 
         OSCManager.OSCinstance.roomData = oscRoomData;
+        SendDataToServer();
     }
 }
