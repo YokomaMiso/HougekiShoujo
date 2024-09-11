@@ -64,6 +64,22 @@ public class Player : MonoBehaviour
         return 4;
     }
 
+    public void RoundInit()
+    {
+        playerState = PLAYER_STATE.IDLE;
+        canonState = CANON_STATE.EMPTY;
+        inputVector = Vector3.zero;
+        alive = true;
+
+        //playerMove.Init();
+        playerReload.Init();
+        playerAim.Init();
+        playerRecoil.Init();
+        playerSubAction.Init();
+        playerDead.Init();
+        //playerImage;
+    }
+
     void Start()
     {
         playerMove = gameObject.GetComponent<PlayerMove>();

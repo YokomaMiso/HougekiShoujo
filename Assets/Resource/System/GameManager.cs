@@ -10,12 +10,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject otherPlayerPrefab;
     GameObject[] playerInstance;
-    public int playerMaxNum = 2;
+    const int playerMaxNum = 2;
+    public int allPlayerCount = playerMaxNum;
 
     public PlayerData[] playerDatas;
 
     //âºç¿ïW
-    Vector3[] pos = new Vector3[2] 
+    Vector3[] pos = new Vector3[playerMaxNum]
     {
         //new Vector3(-3,0,-10), 
         //new Vector3(-3,0,10),
@@ -28,6 +29,9 @@ public class GameManager : MonoBehaviour
     public bool play = false;
     public int roundCount = 1;
     public float roundTimer = 100;
+    const int endWinCount = 3;
+    const int endDeadCount = playerMaxNum / 2;
+    public int[] deadPlayerCount = new int[2];
     public int[] roundWinCount = new int[2];
 
     public bool start;
@@ -88,7 +92,31 @@ public class GameManager : MonoBehaviour
 
         Managers.instance.ChangeScene(GAME_STATE.ROOM);
         Managers.instance.ChangeState(GAME_STATE.ROOM);
+        Managers.instance.roomManager.Init();
         Init();
+    }
+
+    bool DeadCheck()
+    {
+        int[] deadCount = new int[2] { 0, 0 };
+
+        for (int i = 0; i < playerMaxNum; i++)
+        {
+            if (!playerInstance[i].GetComponent<Player>().GetAlive())
+            {
+                deadCount[i % 2]++;
+            }
+        }
+
+        bool returnValue = false;
+
+        for (int i = 0; i < deadPlayerCount.Length; i++)
+        {
+            deadPlayerCount[i] = deadCount[i];
+            if (deadPlayerCount[i] >= endDeadCount) { returnValue = true; break; }
+        }
+
+        return returnValue;
     }
 
     void Update()
@@ -100,7 +128,7 @@ public class GameManager : MonoBehaviour
             if (!start)
             {
                 startTimer += Managers.instance.timeManager.GetDeltaTime();
-                if (startTimer > startDelay) 
+                if (startTimer > startDelay)
                 {
                     play = true;
                     start = true;
@@ -111,13 +139,10 @@ public class GameManager : MonoBehaviour
         {
             roundTimer -= Managers.instance.timeManager.GetDeltaTime();
 
-            for (int i = 0; i < playerMaxNum; i++)
+            if (DeadCheck())
             {
-                if (!playerInstance[i].GetComponent<Player>().GetAlive())
-                {
-                    play = false;
-                    end = true;
-                }
+                play = false;
+                end = true;
             }
         }
 

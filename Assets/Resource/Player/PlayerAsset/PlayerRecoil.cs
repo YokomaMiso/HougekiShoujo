@@ -14,6 +14,12 @@ public class PlayerRecoil : MonoBehaviour
     public void SetRecoil() { isRecoil = true; }
     public bool GetIsRecoil() { return isRecoil; }
 
+    public void Init()
+    {
+        timer = 0;
+        isRecoil = false;
+    }
+
     void Start()
     {
         recoilTime = ownerPlayer.GetPlayerData().GetShell().GetRecoilTime();

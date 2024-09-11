@@ -13,7 +13,7 @@ public class RoomManager : MonoBehaviour
     public bool gameStart;
 
     /*内部的な処理*/
-    public int myNum;
+    public int myNum = -1;
     public readonly int maxCharaCount = 3;
     public readonly int empty = -1;
 
@@ -24,6 +24,12 @@ public class RoomManager : MonoBehaviour
     void SendDataToServer(int _playerID, int _bannerID, int _characterID)
     {
         //送信処理を行う
+    }
+
+    public void Init()
+    {
+        for (int i = 0; i < readyPlayers.Length; i++) { readyPlayers[i] = false; }
+        gameStart = false;
     }
 
     //チームの振り分けを行う関数
@@ -122,7 +128,7 @@ public class RoomManager : MonoBehaviour
         //DEBUG
         gameStart = true;
         return;
-        
+
         int myID = Managers.instance.playerID;
 
         //自分がホストなら
@@ -134,7 +140,7 @@ public class RoomManager : MonoBehaviour
                 if (readyPlayers[i] && i != myID) { readyCount++; }
             }
 
-            if (readyCount >= Managers.instance.gameManager.playerMaxNum)
+            if (readyCount >= Managers.instance.gameManager.allPlayerCount)
             {
                 gameStart = true;
             }

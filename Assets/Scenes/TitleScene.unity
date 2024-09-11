@@ -446,7 +446,7 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1001 &755782039
+--- !u!1001 &536266490
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -463,11 +463,6 @@ PrefabInstance:
         type: 3}
       propertyPath: port
       value: 8001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7942510688574649445, guid: 9131d9bffb3c6af45bd3f5021df3316b,
-        type: 3}
-      propertyPath: otherPort
-      value: 8000
       objectReference: {fileID: 0}
     - target: {fileID: 8387198423615264865, guid: 9131d9bffb3c6af45bd3f5021df3316b,
         type: 3}
@@ -581,4 +576,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 217902384}
-  - {fileID: 755782039}
+  - {fileID: 536266490}

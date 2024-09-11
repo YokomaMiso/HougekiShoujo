@@ -77,7 +77,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         //rm.bannerNum[5] = 5;
 
         //©•ª‚ÌŠ‘®ƒ`[ƒ€‚ğU‚è•ª‚¯‚é
-        rm.PlayerBannerDivider();
+        if (rm.myNum == -1) { rm.PlayerBannerDivider(); }
     }
 
     void Update()

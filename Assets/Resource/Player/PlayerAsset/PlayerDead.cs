@@ -12,6 +12,12 @@ public class PlayerDead : MonoBehaviour
     Vector3 deadPos;
     public readonly Vector3 deadTargetPos = new Vector3(0, 150, -9);
 
+    public void Init()
+    {
+        deadTimer = 0;
+        deadPos = Vector3.zero;
+    }
+
     public void SetDeadPos(Vector3 _pos) { deadPos = _pos; }
 
     public void DeadBehavior()
