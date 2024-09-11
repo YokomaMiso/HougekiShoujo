@@ -5,47 +5,58 @@ using UnityEngine.UI;
 
 public class InGameStartAndEndText : MonoBehaviour
 {
-    Vector3 firstPos = new Vector3(1520, 0, 0);
-    Vector3 lastPos = new Vector3(0, 0, 0);
-
-    float timer = 0;
+    Vector2 pos = new Vector3(0, 0, 0);
 
     RectTransform rectTransform;
 
     void Start()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         rectTransform = GetComponent<RectTransform>();
-        rectTransform.localPosition = firstPos;
+        rectTransform.localPosition = pos;
     }
 
     void Update()
     {
         if (Managers.instance.gameManager.play)
         {
-            timer = 0;
             GetComponent<Text>().color = Color.clear;
             return;
         }
 
-        GetComponent<Text>().color = Color.white;
 
         if (Managers.instance.gameManager.start)
         {
             GetComponent<Text>().text = "Game Set";
-
-            timer = Managers.instance.gameManager.endTimer;
-            if (timer > 1) { timer = 1; }
-            rectTransform.localPosition = Vector3.Lerp(firstPos, lastPos, timer);
+            float timer = Managers.instance.gameManager.endTimer;
         }
         else
         {
-            timer = Managers.instance.gameManager.startTimer;
+            float timer = Managers.instance.gameManager.startTimer;
 
-            if (timer > 2) { GetComponent<Text>().text = "Fight!"; timer = 2; }
-            else { GetComponent<Text>().text = "Round " + Managers.instance.gameManager.roundCount.ToString(); }
+            if (4.0f > timer && timer > 3.5f)
+            {
+                const float maxTime = 4.0f;
+                float seed = (maxTime - timer) * 20;
+                float[] randoms = new float[2] { Random.Range(-seed, seed), Random.Range(-seed, seed) };
 
-            if (timer > 1) { timer = 1; }
-            rectTransform.localPosition = Vector3.Lerp(firstPos, lastPos, timer);
+                rectTransform.localPosition = new Vector2(randoms[0] * randoms[0], randoms[1] * randoms[1]);
+                GetComponent<Text>().text = "Fight!";
+                GetComponent<Text>().color = Color.white;
+            }
+            else if (3.5f > timer && timer > 2.5f)
+            {
+                GetComponent<Text>().text = "Round " + Managers.instance.gameManager.roundCount.ToString();
+                GetComponent<Text>().color = Color.white;
+            }
+            else
+            {
+                GetComponent<Text>().color = Color.clear;
+            }
         }
     }
 }

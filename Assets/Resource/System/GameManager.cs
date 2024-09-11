@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public int[] roundWinCount = new int[2];
 
     public bool start;
-    const float startDelay = 3;
+    const float startDelay = 4;
     public float startTimer;
 
     public bool end;
