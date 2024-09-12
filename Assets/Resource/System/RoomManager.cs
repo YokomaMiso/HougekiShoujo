@@ -28,7 +28,10 @@ public class RoomManager : MonoBehaviour
     //チームの振り分けを行う関数
     public void PlayerBannerDivider()
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        RoomData oscRoomData;
+        int id = Managers.instance.playerID;
+        if (id == 0) { oscRoomData = OSCManager.OSCinstance.roomData; }
+        else { oscRoomData = OSCManager.OSCinstance.receiveRoomData; }
 
         //移動したいチームに空きがあれば番号を振る
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
@@ -49,7 +52,7 @@ public class RoomManager : MonoBehaviour
     //チーム移動を行う関数
     public void PlayerBannerChanger(int _num)
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData; 
 
         //自分のチームを呼び出そうとしたら早期リターン
         if (myNum % 2 == _num) { return; }
@@ -119,7 +122,6 @@ public class RoomManager : MonoBehaviour
     public void CharaSelect(int _playerID, int value)
     {
         RoomData oscRoomData = OSCManager.OSCinstance.roomData;
-
         int calc = oscRoomData.GetSelectedCharacterID(_playerID);
 
         if (value > 0) { calc = (calc + 1) % maxCharaCount; }

@@ -344,6 +344,8 @@ public class OSCManager : MonoBehaviour
 
         resServerData = netInstance.ByteToStruct<ResponseServerData.ResData>(_bytes);
 
+        receiveRoomData = resServerData.serverRoomData;
+
         //このメソッドが呼び出されている時点でサーバからの返答が来ているためtrueにする
         isServerResponse = true;
 
@@ -361,7 +363,6 @@ public class OSCManager : MonoBehaviour
 
         resServerData.toClientPort = 8001;
         resServerData.serverIP = "255.255.255.255";
-        resServerData.serverRoomData = roomData;
 
         value.ReadBlobElement(0, ref _receiveBytes);
 
@@ -378,6 +379,8 @@ public class OSCManager : MonoBehaviour
                 mainClient = new OscClient(receivedFirstData.IP, receivedFirstData.tempPort);
             }
 
+            resServerData.serverRoomData = roomData;
+
             _sendBytes = netInstance.StructToByte(resServerData);
 
             mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
@@ -385,17 +388,17 @@ public class OSCManager : MonoBehaviour
         else
         {
             testNum = 2;
-            roomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
+            receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
 
             //必ずハンドシェイク時に上の処理を通るのでこっちが動作する場合バグ
             if (mainClient == null)
             {
-                mainClient = new OscClient(receivedFirstData.IP, receivedFirstData.tempPort);
+                //mainClient = new OscClient(receivedFirstData.IP, receivedFirstData.tempPort);
             }
 
-            _sendBytes = netInstance.StructToByte(roomData);
+            //_sendBytes = netInstance.StructToByte(roomData);
 
-            mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
+            //mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
         }
 
         return;
@@ -427,12 +430,16 @@ public class OSCManager : MonoBehaviour
             //ハンドシェイク確認用パケット破棄前にサーバがなくなるとバグるためここに記述
             CancelInvoke("SendFirstHandshake");
             Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
+
+            Managers.instance.playerID = 0;
             StartServer();
         }
         else
         {
             CancelInvoke("SendFirstHandshake");
             Debug.Log("サーバが存在しました、クライアント処理へ移行");
+
+            Managers.instance.playerID = 1;
             StartClient();
         }
     }

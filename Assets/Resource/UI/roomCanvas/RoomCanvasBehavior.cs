@@ -150,7 +150,9 @@ public class RoomCanvasBehavior : MonoBehaviour
             timer = 0;
         }
 
-        int charaID = OSCManager.OSCinstance.receiveRoomData.GetSelectedCharacterID(myID);
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
+
+        int charaID = oscRoomData.GetSelectedCharacterID(myID);
         PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 
         CharaDisplayUpdate(nowPlayerData);
