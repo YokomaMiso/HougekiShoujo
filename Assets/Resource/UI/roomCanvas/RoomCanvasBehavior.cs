@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -101,24 +102,22 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
-            RoomData roomData;
-            if (i == rm.myNum) { roomData = OSCManager.OSCinstance.roomData; }
-            else { roomData = OSCManager.OSCinstance.receiveRoomData; }
+            bool isMine = (i == rm.myNum);
+            RoomData roomData = rm.ReadRoomData(isMine);
 
             if (roomData.GetBannerNum(i) != rm.empty)
             {
-                //Debug.Log(roomData.GetBannerNum(i));
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).gameObject.SetActive(true);
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData.GetBannerNum(i), roomData);
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).transform.localPosition = bannerPos[i];
-                if (roomData.GetBannerNum(i) == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
+                if (isMine) { bannerSelecter.transform.localPosition = bannerPos[i]; }
             }
         }
     }
 
     void TeamSelect()
     {
-        if (OSCManager.OSCinstance.roomData.GetReadyPlayers(Managers.instance.playerID)) { return; }
+        if (rm.ReadRoomData(true).GetReadyPlayers(Managers.instance.playerID)) { return; }
 
         int teamID = -1;
 
@@ -151,9 +150,7 @@ public class RoomCanvasBehavior : MonoBehaviour
             timer = 0;
         }
 
-        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
-
-        int charaID = oscRoomData.GetSelectedCharacterID(myID);
+        int charaID = rm.ReadRoomData(true).GetSelectedCharacterID(myID);
         PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 
         CharaDisplayUpdate(nowPlayerData);
@@ -214,14 +211,9 @@ public class RoomCanvasBehavior : MonoBehaviour
     }
     void GameStart()
     {
-        //bool start;
-        //if (Managers.instance.playerID == 0) { start = OSCManager.OSCinstance.roomData.gameStart; }
-        //else { start = OSCManager.OSCinstance.receiveRoomData.gameStart; }
         bool start = OSCManager.OSCinstance.roomData.gameStart || OSCManager.OSCinstance.receiveRoomData.gameStart;
 
         if (!start) { return; }
-
-        Debug.Log("ÉVÅ[ÉìïœÇÌÇ¡ÇΩÇÊ");
 
         GAME_STATE sendState = GAME_STATE.IN_GAME;
 
