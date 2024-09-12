@@ -99,9 +99,12 @@ public class RoomCanvasBehavior : MonoBehaviour
             playerBanners.transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        RoomData roomData = OSCManager.OSCinstance.receiveRoomData;
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
+            RoomData roomData;
+            if (i == rm.myNum) { roomData = OSCManager.OSCinstance.roomData; }
+            else { roomData = OSCManager.OSCinstance.receiveRoomData; }
+
             if (roomData.GetBannerNum(i) != rm.empty)
             {
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).gameObject.SetActive(true);
