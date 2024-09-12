@@ -213,7 +213,13 @@ public class RoomCanvasBehavior : MonoBehaviour
     }
     void GameStart()
     {
-        if (!OSCManager.OSCinstance.receiveRoomData.gameStart) { return; }
+        bool start;
+        if (Managers.instance.playerID == 0) { start = OSCManager.OSCinstance.roomData.gameStart; }
+        else { start = OSCManager.OSCinstance.receiveRoomData.gameStart; }
+
+        if (!start) { return; }
+
+        Debug.Log("ÉVÅ[ÉìïœÇÌÇ¡ÇΩÇÊ");
 
         GAME_STATE sendState = GAME_STATE.IN_GAME;
 
