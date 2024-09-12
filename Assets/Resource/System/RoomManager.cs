@@ -18,7 +18,7 @@ public class RoomManager : MonoBehaviour
     }
     public void Init()
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++) { oscRoomData.SetReadyPlayers(i, false); }
         oscRoomData.gameStart = false;
 
@@ -28,7 +28,7 @@ public class RoomManager : MonoBehaviour
     //チームの振り分けを行う関数
     public void PlayerBannerDivider()
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
 
         //移動したいチームに空きがあれば番号を振る
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
@@ -42,7 +42,6 @@ public class RoomManager : MonoBehaviour
         }
 
         OSCManager.OSCinstance.roomData = oscRoomData;
-        OSCManager.OSCinstance.receiveRoomData = oscRoomData;
 
         int myID = Managers.instance.playerID;
         SendDataToServer();
@@ -50,7 +49,7 @@ public class RoomManager : MonoBehaviour
     //チーム移動を行う関数
     public void PlayerBannerChanger(int _num)
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
 
         //自分のチームを呼び出そうとしたら早期リターン
         if (myNum % 2 == _num) { return; }
@@ -119,7 +118,7 @@ public class RoomManager : MonoBehaviour
 
     public void CharaSelect(int _playerID, int value)
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
 
         int calc = oscRoomData.GetSelectedCharacterID(_playerID);
 
@@ -134,7 +133,7 @@ public class RoomManager : MonoBehaviour
 
     public void PressSubmit()
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
 
         //DEBUG
         if (Managers.instance.onDebug)
@@ -173,7 +172,7 @@ public class RoomManager : MonoBehaviour
     }
     public void PressCancel()
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
 
         int myID = Managers.instance.playerID;
 
