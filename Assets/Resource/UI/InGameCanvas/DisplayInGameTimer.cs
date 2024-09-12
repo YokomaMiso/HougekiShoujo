@@ -5,20 +5,31 @@ using UnityEngine.UI;
 
 public class DisplayInGameTimer : MonoBehaviour
 {
+    Image hourglassImage;
     Text timerText;
+    [SerializeField] Sprite[] hourglassSprites;
+
     void Start()
     {
-        timerText = GetComponent<Text>();
+        hourglassImage = GetComponent<Image>();
+        timerText = transform.GetChild(0).GetComponent<Text>();
     }
 
     void Update()
     {
         float timer = Managers.instance.gameManager.roundTimer;
-        if (timer > 99) { timer = 99; }
+        if (timer > 60) { timer = 60; }
 
-        string minute = Mathf.FloorToInt(timer / 60).ToString();
-        string second = Mathf.FloorToInt(timer % 60).ToString().PadLeft(2, '0');
+        int spriteNum = 0;
+        if (Mathf.FloorToInt(timer) % 10 == 0)
+        {
+            float rate = Mathf.CeilToInt(timer) - timer;
+            spriteNum = (int)((hourglassSprites.Length - 1) * rate);
+        }
 
-        timerText.text = minute + ":" + second;
+        hourglassImage.sprite = hourglassSprites[spriteNum];
+
+        string second = Mathf.FloorToInt(timer % 60).ToString("f0").PadLeft(2, '0');
+        timerText.text = second;
     }
 }
