@@ -108,7 +108,7 @@ public class RoomCanvasBehavior : MonoBehaviour
             if (roomData.GetBannerNum(i) != rm.empty)
             {
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).gameObject.SetActive(true);
-                playerBanners.transform.GetChild(roomData.GetBannerNum(i)).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData.GetBannerNum(i), roomData.GetReadyPlayers(roomData.GetBannerNum(i)));
+                playerBanners.transform.GetChild(roomData.GetBannerNum(i)).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData.GetBannerNum(i), roomData);
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).transform.localPosition = bannerPos[i];
                 if (roomData.GetBannerNum(i) == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
             }
@@ -117,7 +117,7 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void TeamSelect()
     {
-        if (OSCManager.OSCinstance.receiveRoomData.GetReadyPlayers(Managers.instance.playerID)) { return; }
+        if (OSCManager.OSCinstance.roomData.GetReadyPlayers(Managers.instance.playerID)) { return; }
 
         int teamID = -1;
 
