@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
     //チーム移動を行う関数
     public void PlayerBannerChanger(int _num)
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.roomData; 
+        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
 
         //自分のチームを呼び出そうとしたら早期リターン
         if (myNum % 2 == _num) { return; }
@@ -135,7 +135,6 @@ public class RoomManager : MonoBehaviour
 
     public void PressSubmit()
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
 
         //DEBUG
         if (Managers.instance.onDebug)
@@ -145,24 +144,32 @@ public class RoomManager : MonoBehaviour
             return;
         }
 
+        RoomData oscRoomData;
         int myID = Managers.instance.playerID;
 
         //自分がホストなら
-        if (oscRoomData.hostPlayer == myID)
+        if (0 == myID)
         {
+            oscRoomData = OSCManager.OSCinstance.receiveRoomData;
+
             int readyCount = 0;
             for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
             {
-                if (oscRoomData.GetReadyPlayers(i) && i != myID) { readyCount++; }
+                if (oscRoomData.GetReadyPlayers(i)) { readyCount++; }
             }
 
-            if (readyCount >= Managers.instance.gameManager.allPlayerCount)
+            Debug.Log(readyCount);
+            
+            if (readyCount >= Managers.instance.gameManager.allPlayerCount - 1)
             {
                 oscRoomData.gameStart = true;
+                Debug.Log("シーン変えるよ");
             }
         }
         else
         {
+            oscRoomData = OSCManager.OSCinstance.roomData;
+
             if (!oscRoomData.GetReadyPlayers(myID))
             {
                 oscRoomData.SetReadyPlayers(myID, true);

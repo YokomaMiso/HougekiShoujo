@@ -43,6 +43,9 @@ public class OSCManager : MonoBehaviour
     OscClient Client;
     OscServer Server;
     OscServer mainServer;
+    OscServer ingameServer;
+
+    bool isReceiveIngame = false;
 
     //使用するポート番号の始め
     const int startPort = 8000;
@@ -236,6 +239,23 @@ public class OSCManager : MonoBehaviour
             Debug.Log(Client.Destination);
             SendMachingData();
         }
+
+        if (Managers.instance.gameManager.play && isReceiveIngame == false)
+        {
+            isReceiveIngame = true;
+            if (Managers.instance.playerID == 0)
+            {
+                mainServer.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingServer);
+                mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
+            }
+            else
+            {
+                mainServer.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingClient);
+                mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
+            }
+
+        }
+
     }
 
     private void LateUpdate()
@@ -289,7 +309,7 @@ public class OSCManager : MonoBehaviour
         myNetIngameData.byteData = netInstance.StructToByte(myNetIngameData.mainPacketData);
 
         //データの送信
-        //mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, myNetIngameData.byteData, myNetIngameData.byteData.Length);
+        Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, myNetIngameData.byteData, myNetIngameData.byteData.Length);
     }
 
     /// <summary>
@@ -379,14 +399,14 @@ public class OSCManager : MonoBehaviour
             StartClient();
         }
     }
-    
+
     //サーバが存在したため受信データをまとめる
     private void StartClient()
     {
         Server.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
         Server.Dispose();
 
-        if(mainServer == null)
+        if (mainServer == null)
         {
             mainServer = new OscServer(8001);
         }
@@ -466,7 +486,7 @@ public class OSCManager : MonoBehaviour
         {
             testNum = 2;
             receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
-            
+
             Client = new OscClient("255.255.255.255", 8001);
 
             //_sendBytes = netInstance.StructToByte(roomData);
