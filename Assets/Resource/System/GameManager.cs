@@ -45,27 +45,28 @@ public class GameManager : MonoBehaviour
     public void CreatePlayer()
     {
         playerInstance = new GameObject[playerMaxNum];
+        RoomManager rm = Managers.instance.roomManager;
+        int myNum = rm.myNum;
+
         //âºÇÃÉvÉåÉCÉÑÅ[ê∂ê¨èàóù
         for (int i = 0; i < playerMaxNum; i++)
         {
-            MachingRoomData.RoomData oscRoomData;
-            if (i == Managers.instance.playerID)
-            {
-                oscRoomData = OSCManager.OSCinstance.roomData;
+            MachingRoomData.RoomData oscRoomData = rm.ReadRoomData(i == myNum);
 
+            if (i == myNum)
+            {
                 playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
                 Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
             }
-            else 
+            else
             {
-                oscRoomData = OSCManager.OSCinstance.receiveRoomData;
-
-                playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity); 
+                playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity);
             }
 
+            int bannerNum = oscRoomData.GetBannerNum(i);
             Player nowPlayer = playerInstance[i].GetComponent<Player>();
-            nowPlayer.SetPlayerID(i);
-            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(i)]);
+            nowPlayer.SetPlayerID(bannerNum);
+            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(bannerNum)]);
         }
     }
 

@@ -48,7 +48,9 @@ public class DisplayCharaIcon : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            int nowPlayerID = OSCManager.OSCinstance.receiveRoomData.GetBannerNum(i);
+            RoomManager rm = Managers.instance.roomManager;
+            MachingRoomData.RoomData roomData = rm.ReadRoomData(i == rm.myNum);
+            int nowPlayerID = roomData.GetBannerNum(i);
 
             if (nowPlayerID == -1)
             {
@@ -56,7 +58,7 @@ public class DisplayCharaIcon : MonoBehaviour
             }
             else
             {
-                int charaID = OSCManager.OSCinstance.receiveRoomData.GetSelectedCharacterID(nowPlayerID);
+                int charaID = roomData.GetSelectedCharacterID(nowPlayerID);
                 Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
                 transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = icon;
                 transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
