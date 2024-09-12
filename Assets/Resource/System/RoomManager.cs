@@ -28,7 +28,7 @@ public class RoomManager : MonoBehaviour
     //チームの振り分けを行う関数
     public void PlayerBannerDivider()
     {
-        RoomData oscRoomData = OSCManager.OSCinstance.roomData;
+        RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
 
         //移動したいチームに空きがあれば番号を振る
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
