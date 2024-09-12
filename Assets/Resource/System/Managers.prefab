@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920a068138514e64bb8a379f64afbcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onDebug: 0
   optionData: {fileID: 11400000, guid: b1541ee7568dc4744a860ae65a90629c, type: 2}
   state: 0
   prevState: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4263fdabccc477f44a3fe0d41781cf02, type: 2}
   play: 0
   roundCount: 1
-  roundTimer: 100
+  roundTimer: 60
   deadPlayerCount: 0000000000000000
   roundWinCount: 0000000000000000
   start: 0
@@ -150,11 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797a944ba771fa1448597c0600337743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bannerNum: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-  selectedCharacterID: 000000000000000000000000000000000000000000000000
-  readyPlayers: 000000000000
-  hostPlayer: 0
-  gameStart: 0
   myNum: -1
 --- !u!114 &7942510688574649445
 MonoBehaviour:

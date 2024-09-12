@@ -16,6 +16,9 @@ public class DisplayInGameTimer : MonoBehaviour
         float timer = Managers.instance.gameManager.roundTimer;
         if (timer > 99) { timer = 99; }
 
-        timerText.text = timer.ToString("f0");
+        string minute = Mathf.FloorToInt(timer / 60).ToString();
+        string second = Mathf.FloorToInt(timer % 60).ToString().PadLeft(2, '0');
+
+        timerText.text = minute + ":" + second;
     }
 }
