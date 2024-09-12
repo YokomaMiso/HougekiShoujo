@@ -40,10 +40,8 @@ public class OSCManager : MonoBehaviour
 
     ///////// OSCcore周り ////////
 
-    OscClient tempClient;
-    OscServer tempServer;
-
-    OscClient mainClient;
+    OscClient Client;
+    OscServer Server;
     OscServer mainServer;
 
     //使用するポート番号の始め
@@ -81,6 +79,8 @@ public class OSCManager : MonoBehaviour
     byte[] roomDataBytes = new byte[0];
     int receiveLong = 0;
 
+    bool handshaked = false;
+
     //////////////////////
     //////// 関数 ////////
     //////////////////////
@@ -108,20 +108,20 @@ public class OSCManager : MonoBehaviour
         //一時的にサーバからの返答を受け付けるポート番号取得
         firstData.tempPort = GetRandomTempPort();
 
-        if (tempClient == null)
+        if (Client == null)
         {
             //8000番（サーバ役のポート番号）へ宛てたクライアントを作成
-            tempClient = new OscClient(myNetIngameData.mainPacketData.comData.targetIP, startPort);
+            Client = new OscClient(myNetIngameData.mainPacketData.comData.targetIP, startPort);
 
         }
 
-        if (tempServer == null)
+        if (Server == null)
         {
             //一時ポート番号で作成
-            tempServer = new OscServer(firstData.tempPort);
+            Server = new OscServer(firstData.tempPort);
         }
 
-        tempServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
+        Server.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
 
         Debug.Log("ハンドシェイク開始");
 
@@ -219,12 +219,12 @@ public class OSCManager : MonoBehaviour
         //    Debug.Log(receivedData.mainPacketData.inGameData.vc3);
         //}
 
-        //Debug.Log(testNum);
+        Debug.Log(testNum);
 
 
         //Debug.Log("ハンドシェイク用データ" + handshakeBytes.Length);
         //Debug.Log("部屋情報" + roomDataBytes.Length);
-        //Debug.Log("受信バイトサイズ" + receiveLong);
+        Debug.Log("受信バイトサイズ" + receiveLong);
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -233,6 +233,7 @@ public class OSCManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
+            Debug.Log(Client.Destination);
             SendMachingData();
         }
     }
@@ -255,14 +256,10 @@ public class OSCManager : MonoBehaviour
 
     private void OnDisable()
     {
-        if (mainServer != null)
-        {
-            mainServer.Dispose();
-        }
 
-        if (tempServer != null)
+        if (Server != null)
         {
-            tempServer.Dispose();
+            Server.Dispose();
         }
 
     }
@@ -292,7 +289,7 @@ public class OSCManager : MonoBehaviour
         myNetIngameData.byteData = netInstance.StructToByte(myNetIngameData.mainPacketData);
 
         //データの送信
-        mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, myNetIngameData.byteData, myNetIngameData.byteData.Length);
+        //mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, myNetIngameData.byteData, myNetIngameData.byteData.Length);
     }
 
     /// <summary>
@@ -325,7 +322,7 @@ public class OSCManager : MonoBehaviour
     {
         byte[] bytes = netInstance.StructToByte(firstData);
 
-        tempClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, bytes, bytes.Length);
+        Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, bytes, bytes.Length);
 
         Debug.Log("1way送信");
 
@@ -353,69 +350,6 @@ public class OSCManager : MonoBehaviour
     }
 
     /// <summary>
-    /// サーバ役になった際のクライアントハンドシェイク受信用
-    /// </summary>
-    /// <param name="value"></param>
-    private void ReceiveMachingServer(OscMessageValues value)
-    {
-        byte[] _receiveBytes = new byte[0];
-        byte[] _sendBytes = new byte[0];
-
-        resServerData.toClientPort = 8001;
-        resServerData.serverIP = "255.255.255.255";
-
-        value.ReadBlobElement(0, ref _receiveBytes);
-
-        receiveLong = _receiveBytes.Length;
-
-        //送信されてきたバイト配列サイズがハンドシェイク用と同じならハンドシェイクデータとして取り扱う
-        if (_receiveBytes.Length == 1048)
-        {
-            testNum = 1;
-            receivedFirstData = netInstance.ByteToStruct<HandshakeData.SendUserData>(_receiveBytes);
-
-            if (mainClient == null)
-            {
-                mainClient = new OscClient(receivedFirstData.IP, receivedFirstData.tempPort);
-            }
-
-            resServerData.serverRoomData = roomData;
-
-            _sendBytes = netInstance.StructToByte(resServerData);
-
-            mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
-        }
-        else
-        {
-            testNum = 2;
-            receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
-
-            //必ずハンドシェイク時に上の処理を通るのでこっちが動作する場合バグ
-            if (mainClient == null)
-            {
-                //mainClient = new OscClient(receivedFirstData.IP, receivedFirstData.tempPort);
-            }
-
-            //_sendBytes = netInstance.StructToByte(roomData);
-
-            //mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
-        }
-
-        return;
-    }
-
-    private void ReceiveMachingClient(OscMessageValues value)
-    {
-        byte[] _recieveByte = new byte[0];
-
-        value.ReadBlobElement(0, ref _recieveByte);
-
-        receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_recieveByte);
-
-        return;
-    }
-
-    /// <summary>
     /// ハンドシェイク送信時の反応確認用
     /// </summary>
     /// <returns></returns>
@@ -432,6 +366,7 @@ public class OSCManager : MonoBehaviour
             Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
 
             Managers.instance.playerID = 0;
+            Client = new OscClient("255.255.255.255", 8001);
             StartServer();
         }
         else
@@ -440,23 +375,34 @@ public class OSCManager : MonoBehaviour
             Debug.Log("サーバが存在しました、クライアント処理へ移行");
 
             Managers.instance.playerID = 1;
+            Client = new OscClient("255.255.255.255", 8000);
             StartClient();
         }
     }
-
+    
     //サーバが存在したため受信データをまとめる
     private void StartClient()
     {
-        tempServer.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
-        tempServer.Dispose();
+        Server.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
+        Server.Dispose();
 
-        if (mainServer == null)
+        if(mainServer == null)
         {
-            //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
-            mainServer = new OscServer(resServerData.toClientPort);
+            mainServer = new OscServer(8001);
         }
 
         mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingClient);
+
+        return;
+    }
+
+    private void ReceiveMachingClient(OscMessageValues value)
+    {
+        byte[] _recieveByte = new byte[0];
+
+        value.ReadBlobElement(0, ref _recieveByte);
+
+        receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_recieveByte);
 
         return;
     }
@@ -467,8 +413,8 @@ public class OSCManager : MonoBehaviour
         isServer = true;
         isServerResponse = true;
 
-        tempServer.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
-        tempServer.Dispose();
+        Server.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
+        Server.Dispose();
 
         if (mainServer == null)
         {
@@ -481,6 +427,56 @@ public class OSCManager : MonoBehaviour
         return;
     }
 
+    /// <summary>
+    /// サーバ役になった際のクライアントハンドシェイク受信用
+    /// </summary>
+    /// <param name="value"></param>
+    private void ReceiveMachingServer(OscMessageValues value)
+    {
+        byte[] _receiveBytes = new byte[0];
+        byte[] _sendBytes = new byte[0];
+
+        resServerData.toClientPort = 8001;
+        resServerData.serverIP = "255.255.255.255";
+
+        value.ReadBlobElement(0, ref _receiveBytes);
+
+        receiveLong = _receiveBytes.Length;
+
+        //送信されてきたバイト配列サイズがハンドシェイク用と同じならハンドシェイクデータとして取り扱う
+        if (handshaked == false) //_receiveBytes.Length == 1048
+        {
+            handshaked = true;
+
+            testNum = 1;
+            receivedFirstData = netInstance.ByteToStruct<HandshakeData.SendUserData>(_receiveBytes);
+
+            Client = new OscClient(receivedFirstData.IP, receivedFirstData.tempPort);
+
+            resServerData.serverRoomData = roomData;
+
+            _sendBytes = netInstance.StructToByte(resServerData);
+
+            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
+
+            //3wayができたらそちらへ移行
+            Client = new OscClient("255.255.255.255", 8001);
+        }
+        else //if(_receiveBytes.Length == 1112)
+        {
+            testNum = 2;
+            receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
+            
+            Client = new OscClient("255.255.255.255", 8001);
+
+            //_sendBytes = netInstance.StructToByte(roomData);
+
+            //mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
+        }
+
+        return;
+    }
+
     void SendMachingData()
     {
         byte[] _sendBytes = new byte[0];
@@ -489,11 +485,11 @@ public class OSCManager : MonoBehaviour
 
         if (isServer)
         {
-            mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
+            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
         }
         else
         {
-            tempClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
+            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
         }
 
 
