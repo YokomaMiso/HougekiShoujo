@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     public bool play = false;
     public int roundCount = 1;
-    public float roundTimer = 100;
+    public float roundTimer = 60;
     const int endWinCount = 3;
     const int endDeadCount = playerMaxNum / 2;
     public int[] deadPlayerCount = new int[2];
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     {
         play = false;
         roundCount = 1;
-        roundTimer = 100;
+        roundTimer = 60;
         for (int i = 0; i < roundWinCount.Length; i++) { roundWinCount[i] = 0; }
 
         start = false;
