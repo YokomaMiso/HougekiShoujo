@@ -85,10 +85,10 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         CharaSelect();
         TeamSelect();
-        PlayerBannerDisplayUpdate();
         PressSubmit();
         PressCancel();
         GameStart();
+        PlayerBannerDisplayUpdate();
         OpenOption();
     }
 
@@ -107,6 +107,7 @@ public class RoomCanvasBehavior : MonoBehaviour
 
             if (roomData.GetBannerNum(i) != rm.empty)
             {
+                //Debug.Log(roomData.GetBannerNum(i));
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).gameObject.SetActive(true);
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData.GetBannerNum(i), roomData);
                 playerBanners.transform.GetChild(roomData.GetBannerNum(i)).transform.localPosition = bannerPos[i];
@@ -213,9 +214,10 @@ public class RoomCanvasBehavior : MonoBehaviour
     }
     void GameStart()
     {
-        bool start;
-        if (Managers.instance.playerID == 0) { start = OSCManager.OSCinstance.roomData.gameStart; }
-        else { start = OSCManager.OSCinstance.receiveRoomData.gameStart; }
+        //bool start;
+        //if (Managers.instance.playerID == 0) { start = OSCManager.OSCinstance.roomData.gameStart; }
+        //else { start = OSCManager.OSCinstance.receiveRoomData.gameStart; }
+        bool start = OSCManager.OSCinstance.roomData.gameStart || OSCManager.OSCinstance.receiveRoomData.gameStart;
 
         if (!start) { return; }
 

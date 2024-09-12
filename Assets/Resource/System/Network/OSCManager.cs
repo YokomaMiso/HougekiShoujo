@@ -227,7 +227,7 @@ public class OSCManager : MonoBehaviour
 
         //Debug.Log("ハンドシェイク用データ" + handshakeBytes.Length);
         //Debug.Log("部屋情報" + roomDataBytes.Length);
-        Debug.Log("受信バイトサイズ" + receiveLong);
+        //Debug.Log("受信バイトサイズ" + receiveLong);
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -253,9 +253,7 @@ public class OSCManager : MonoBehaviour
                 mainServer.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingClient);
                 mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
             }
-
         }
-
     }
 
     private void LateUpdate()
@@ -487,11 +485,11 @@ public class OSCManager : MonoBehaviour
             testNum = 2;
             receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
 
-            Client = new OscClient("255.255.255.255", 8001);
+            //Client = new OscClient("255.255.255.255", 8001);
 
-            //_sendBytes = netInstance.StructToByte(roomData);
+            _sendBytes = netInstance.StructToByte(roomData);
 
-            //mainClient.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
+            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
         }
 
         return;
