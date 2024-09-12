@@ -361,7 +361,7 @@ public class OSCManager : MonoBehaviour
 
         resServerData.toClientPort = 8001;
         resServerData.serverIP = "255.255.255.255";
-
+        resServerData.serverRoomData = roomData;
 
         value.ReadBlobElement(0, ref _receiveBytes);
 

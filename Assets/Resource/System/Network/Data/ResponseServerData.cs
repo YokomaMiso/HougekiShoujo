@@ -12,5 +12,6 @@ public class ResponseServerData
         public string serverIP;
         public int toClientPort;
         public int serverPlayerID;
+        public MachingRoomData.RoomData serverRoomData;
     }
 }
