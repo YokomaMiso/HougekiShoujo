@@ -16,7 +16,7 @@ public class PlayerBannerBehavior : MonoBehaviour
     {
         if (num < 0) { return; }
 
-        int charaID = OSCManager.OSCinstance.receiveRoomData.selectedCharacterID[num];
+        int charaID = OSCManager.OSCinstance.receiveRoomData.GetSelectedCharacterID(num);
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
         transform.GetChild(2).GetComponent<Image>().sprite = icon;
         transform.GetChild(4).gameObject.SetActive(_ready);
