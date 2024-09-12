@@ -13,12 +13,13 @@ public class RoomManager : MonoBehaviour
 
     void SendDataToServer()
     {
+        if (Managers.instance.onDebug) { return; }
         OSCManager.OSCinstance.SendRoomData();
     }
     public void Init()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
-        for (int i = 0; i < MachingRoomData.playerMaxCount; i++) { oscRoomData.SetReadyPlayers(i,false); }
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++) { oscRoomData.SetReadyPlayers(i, false); }
         oscRoomData.gameStart = false;
 
         OSCManager.OSCinstance.roomData = oscRoomData;
@@ -41,6 +42,7 @@ public class RoomManager : MonoBehaviour
         }
 
         OSCManager.OSCinstance.roomData = oscRoomData;
+        OSCManager.OSCinstance.receiveRoomData = oscRoomData;
 
         int myID = Managers.instance.playerID;
         SendDataToServer();
@@ -60,7 +62,7 @@ public class RoomManager : MonoBehaviour
         {
             if (i % 2 == _num && oscRoomData.GetBannerNum(i) == empty)
             {
-                oscRoomData.SetBannerNum(i,Managers.instance.playerID);
+                oscRoomData.SetBannerNum(i, Managers.instance.playerID);
                 canMove = true;
                 nextNum = i;
                 break;
@@ -99,11 +101,11 @@ public class RoomManager : MonoBehaviour
             if (_roomData.GetBannerNum(i) == empty)
             {
                 //１つ下の中身が空じゃないなら
-                if (_roomData.GetBannerNum(i+2) != empty)
+                if (_roomData.GetBannerNum(i + 2) != empty)
                 {
                     //１つ下の情報を自分の中身に入れ替える
-                    _roomData.SetBannerNum(i,_roomData.GetBannerNum(i + 2));
-                    _roomData.SetBannerNum(i+2, MachingRoomData.bannerEmpty);
+                    _roomData.SetBannerNum(i, _roomData.GetBannerNum(i + 2));
+                    _roomData.SetBannerNum(i + 2, MachingRoomData.bannerEmpty);
                     //自分の番号だった場合、番号を更新する
                     if (myNum == i) { myNum = i - 2; }
 
@@ -124,7 +126,7 @@ public class RoomManager : MonoBehaviour
         if (value > 0) { calc = (calc + 1) % maxCharaCount; }
         else { calc = (calc + (maxCharaCount - 1)) % maxCharaCount; }
 
-        oscRoomData.SetSelectedCharacterID(_playerID,calc);
+        oscRoomData.SetSelectedCharacterID(_playerID, calc);
 
         OSCManager.OSCinstance.roomData = oscRoomData;
         SendDataToServer();
@@ -135,8 +137,12 @@ public class RoomManager : MonoBehaviour
         RoomData oscRoomData = OSCManager.OSCinstance.receiveRoomData;
 
         //DEBUG
-        //oscRoomData.gameStart = true;
-        //return;
+        if (Managers.instance.onDebug)
+        {
+            OSCManager.OSCinstance.roomData.gameStart = true;
+            OSCManager.OSCinstance.receiveRoomData.gameStart = true;
+            return;
+        }
 
         int myID = Managers.instance.playerID;
 
