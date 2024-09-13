@@ -80,7 +80,7 @@ MonoBehaviour:
   playerDatas:
   - {fileID: 11400000, guid: 4263fdabccc477f44a3fe0d41781cf02, type: 2}
   - {fileID: 11400000, guid: c856c19e79586664899c176953f21bd5, type: 2}
-  - {fileID: 11400000, guid: 4263fdabccc477f44a3fe0d41781cf02, type: 2}
+  - {fileID: 11400000, guid: ea5e95e04c0f14c4990e57486f7b9d47, type: 2}
   play: 0
   roundCount: 1
   roundTimer: 60
@@ -164,5 +164,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f9137985e630d449039fc1f3ecedc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isManual: 1
-  port: 8000
+  myPort: 8000
+  otherPort: 8001
