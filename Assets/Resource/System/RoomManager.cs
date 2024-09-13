@@ -11,11 +11,6 @@ public class RoomManager : MonoBehaviour
     public readonly int maxCharaCount = 3;
     public readonly int empty = -1;
 
-    void SendDataToServer()
-    {
-        //if (Managers.instance.onDebug) { return; }
-        //OSCManager.OSCinstance.SendRoomData();
-    }
     public void Init()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.roomData;
@@ -37,7 +32,8 @@ public class RoomManager : MonoBehaviour
     //チームの振り分けを行う関数
     public void PlayerBannerDivider()
     {
-        RoomData oscRoomData = ReadRoomData(false);
+        bool host = Managers.instance.playerID == 0;
+        RoomData oscRoomData = ReadRoomData(host);
 
         //移動したいチームに空きがあれば番号を振る
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
