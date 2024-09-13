@@ -22,11 +22,15 @@ public class RoomManager : MonoBehaviour
 
     public RoomData ReadRoomData(bool _isMine)
     {
-        RoomData returnData;
-        if (_isMine) { returnData = OSCManager.OSCinstance.roomData; }
-        else { returnData = OSCManager.OSCinstance.receiveRoomData; }
+        if (_isMine)
+        {
+            return OSCManager.OSCinstance.roomData;
+        }
+        else
+        {
+            return OSCManager.OSCinstance.receiveRoomData;
+        }
 
-        return returnData;
     }
 
     //ƒ`[ƒ€‚ÌU‚è•ª‚¯‚ğs‚¤ŠÖ”

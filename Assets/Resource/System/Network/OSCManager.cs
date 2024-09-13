@@ -95,6 +95,8 @@ using System.Runtime.InteropServices;
 //        //////////èâä˙í êMèàóù///////
 //        /////////////////////////////
 
+
+
 //        roomData = initRoomData(roomData);
 //        receiveRoomData = initRoomData(receiveRoomData);
 
@@ -262,6 +264,12 @@ using System.Runtime.InteropServices;
 //        {
 //            SendIngameValue();
 //        }
+
+//        if(Managers.instance.state == GAME_STATE.ROOM)
+//        {
+//            SendRoomData();
+//        }
+
 //    }
 
 //    private void OnEnable()
@@ -592,7 +600,7 @@ public class OSCManager : MonoBehaviour
             server = new OscServer(myPort);
         }
 
-        if(myPort == 8000)
+        if (myPort == 8000)
         {
             Managers.instance.playerID = 0;
         }
