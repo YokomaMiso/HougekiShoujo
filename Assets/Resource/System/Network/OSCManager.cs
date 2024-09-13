@@ -574,6 +574,8 @@ public class OSCManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OSCinstance = this;
+
         roomData = default;
         receiveRoomData = default;
 
