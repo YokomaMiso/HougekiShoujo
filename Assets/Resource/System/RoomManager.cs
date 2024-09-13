@@ -142,9 +142,10 @@ public class RoomManager : MonoBehaviour
             return;
         }
 
+        RoomData oscRoomData = ReadRoomData(true);
+
         int myID = Managers.instance.playerID;
         bool host = (myID == 0);
-        RoomData oscRoomData = ReadRoomData(host);
 
         //Ž©•ª‚ªƒzƒXƒg‚È‚ç
         if (host)
@@ -173,9 +174,10 @@ public class RoomManager : MonoBehaviour
 
     public void PressCancel()
     {
+        RoomData oscRoomData = ReadRoomData(true);
+
         int myID = Managers.instance.playerID;
         bool host = (myID == 0);
-        RoomData oscRoomData = ReadRoomData(host);
 
         if (host)
         {

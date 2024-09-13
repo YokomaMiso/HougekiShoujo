@@ -105,11 +105,16 @@ public class RoomCanvasBehavior : MonoBehaviour
             bool isMine = (i == rm.myNum);
             RoomData roomData = rm.ReadRoomData(isMine);
 
+            if (isMine) 
+            {
+                Debug.Log(roomData.GetBannerNum(i)); 
+                Debug.Log(roomData.GetReadyPlayers(roomData.GetBannerNum(i)));
+            }
             if (roomData.GetBannerNum(i) != rm.empty)
             {
-                playerBanners.transform.GetChild(roomData.GetBannerNum(i)).gameObject.SetActive(true);
-                playerBanners.transform.GetChild(roomData.GetBannerNum(i)).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData.GetBannerNum(i), roomData);
-                playerBanners.transform.GetChild(roomData.GetBannerNum(i)).transform.localPosition = bannerPos[i];
+                playerBanners.transform.GetChild(i).gameObject.SetActive(true);
+                playerBanners.transform.GetChild(i).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData.GetBannerNum(i), roomData);
+                playerBanners.transform.GetChild(i).transform.localPosition = bannerPos[i];
                 if (isMine) { bannerSelecter.transform.localPosition = bannerPos[i]; }
             }
         }
