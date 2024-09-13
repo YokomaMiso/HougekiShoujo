@@ -612,7 +612,7 @@ public class OSCManager : MonoBehaviour
         //デバック用で任意のタイミングで送れるようにしておく
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SendValue();
+            
         }
 
         Debug.Log(testNum);
@@ -621,7 +621,14 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        SendValue();
+        if(Managers.instance.state == GAME_STATE.ROOM || Managers.instance.state == GAME_STATE.TITLE)
+        {
+            SendValue(roomData);
+        }
+        if(Managers.instance.state == GAME_STATE.IN_GAME)
+        {
+            SendValue(myNetIngameData);
+        }
     }
 
     private void OnDisable()
@@ -636,12 +643,12 @@ public class OSCManager : MonoBehaviour
     /// <summary>
     /// データ送信
     /// </summary>
-    private void SendValue()
+    private void SendValue<T>(T _struct)where T : struct
     {
         byte[] _sendBytes = new byte[0];
 
         //送信データのバイト配列化
-        _sendBytes = netInstance.StructToByte(roomData);
+        _sendBytes = netInstance.StructToByte(_struct);
 
         //データの送信
         client.Send(address, _sendBytes, _sendBytes.Length);
@@ -655,13 +662,22 @@ public class OSCManager : MonoBehaviour
     private void ReadValue(OscMessageValues values)
     {
         byte[] _receiveBytes = new byte[0];
-        testNum++;
 
         //受信データのコピー
         values.ReadBlobElement(0, ref _receiveBytes);
 
-        //データの構造体化
-        receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
+        if (Managers.instance.state == GAME_STATE.ROOM || Managers.instance.state == GAME_STATE.TITLE)
+        {
+            //データの構造体化
+            receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
+        }
+        if (Managers.instance.state == GAME_STATE.IN_GAME)
+        {
+            //データの構造体化
+            receivedIngameData = netInstance.ByteToStruct<IngameData.PlayerNetData>(_receiveBytes);
+        }
+
+        
     }
 
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
