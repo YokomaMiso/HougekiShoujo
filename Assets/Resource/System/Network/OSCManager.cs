@@ -524,9 +524,20 @@ using System.Runtime.InteropServices;
 
 public class OSCManager : MonoBehaviour
 {
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct AllData
+    {
+        public IngameData.PlayerNetData pData;
+        public MachingRoomData.RoomData rData;
+    }
+
     //////////////////////////////
     //////// 本番使用変数 ////////
     //////////////////////////////
+    ///
+
+    AllData allData = new AllData();
 
     //自身のインゲームデータ
     public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
@@ -576,6 +587,8 @@ public class OSCManager : MonoBehaviour
     {
         OSCinstance = this;
 
+        allData.rData = initRoomData(allData.rData);
+
         roomData = default;
         receiveRoomData = default;
 
@@ -594,7 +607,7 @@ public class OSCManager : MonoBehaviour
             server = new OscServer(myPort);
         }
 
-        if(myPort == 8000)
+        if (myPort == 8000)
         {
             Managers.instance.playerID = 0;
         }
@@ -612,7 +625,7 @@ public class OSCManager : MonoBehaviour
         //デバック用で任意のタイミングで送れるようにしておく
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+
         }
 
         Debug.Log(testNum);
@@ -621,14 +634,18 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(Managers.instance.state == GAME_STATE.ROOM || Managers.instance.state == GAME_STATE.TITLE)
+        if (Managers.instance.state == GAME_STATE.ROOM || Managers.instance.state == GAME_STATE.TITLE)
         {
-            SendValue(roomData);
+
         }
-        if(Managers.instance.state == GAME_STATE.IN_GAME)
+        if (Managers.instance.state == GAME_STATE.IN_GAME)
         {
-            SendValue(myNetIngameData);
+
         }
+
+        SendValue(roomData);
+
+        SendValue(myNetIngameData);
     }
 
     private void OnDisable()
@@ -643,8 +660,11 @@ public class OSCManager : MonoBehaviour
     /// <summary>
     /// データ送信
     /// </summary>
-    private void SendValue<T>(T _struct)where T : struct
+    private void SendValue<T>(T _struct) where T : struct
     {
+        allData.rData = roomData;
+        allData.pData = myNetIngameData;
+
         byte[] _sendBytes = new byte[0];
 
         //送信データのバイト配列化
@@ -666,18 +686,11 @@ public class OSCManager : MonoBehaviour
         //受信データのコピー
         values.ReadBlobElement(0, ref _receiveBytes);
 
-        if (Managers.instance.state == GAME_STATE.ROOM || Managers.instance.state == GAME_STATE.TITLE)
-        {
-            //データの構造体化
-            receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
-        }
-        if (Managers.instance.state == GAME_STATE.IN_GAME)
-        {
-            //データの構造体化
-            receivedIngameData = netInstance.ByteToStruct<IngameData.PlayerNetData>(_receiveBytes);
-        }
+        //データの構造体化
+        allData = netInstance.ByteToStruct<AllData>(_receiveBytes);
 
-        
+        receiveRoomData = allData.rData;
+        receivedIngameData = allData.pData;
     }
 
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
@@ -699,5 +712,12 @@ public class OSCManager : MonoBehaviour
     private void MainThreadMethod()
     {
 
+    }
+
+    public void SendRoomData()
+    {
+        SendValue(roomData);
+
+        return;
     }
 }
