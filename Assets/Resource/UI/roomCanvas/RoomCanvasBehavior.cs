@@ -105,15 +105,13 @@ public class RoomCanvasBehavior : MonoBehaviour
             bool isMine = (i == rm.myNum);
             RoomData roomData = rm.ReadRoomData(isMine);
 
-            if (isMine) 
+            if (isMine)
             {
-                Debug.Log(roomData.GetBannerNum(i)); 
-                Debug.Log(roomData.GetReadyPlayers(roomData.GetBannerNum(i)));
             }
             if (roomData.GetBannerNum(i) != rm.empty)
             {
                 playerBanners.transform.GetChild(i).gameObject.SetActive(true);
-                playerBanners.transform.GetChild(i).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData.GetBannerNum(i), roomData);
+                playerBanners.transform.GetChild(i).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData);
                 playerBanners.transform.GetChild(i).transform.localPosition = bannerPos[i];
                 if (isMine) { bannerSelecter.transform.localPosition = bannerPos[i]; }
             }
@@ -143,8 +141,8 @@ public class RoomCanvasBehavior : MonoBehaviour
         {
             if (timer == 0)
             {
-                if (input > 0) { rm.CharaSelect(myID, 1); }
-                else { rm.CharaSelect(myID, -1); }
+                if (input > 0) { rm.CharaSelect(1); }
+                else { rm.CharaSelect(-1); }
             }
 
             timer += Time.deltaTime;
@@ -216,7 +214,9 @@ public class RoomCanvasBehavior : MonoBehaviour
     }
     void GameStart()
     {
-        bool start = OSCManager.OSCinstance.roomData.gameStart || OSCManager.OSCinstance.receiveRoomData.gameStart;
+        RoomData oscRoomData = rm.ReadRoomData(Managers.instance.playerID == 0);
+
+        bool start = oscRoomData.gameStart;
 
         if (!start) { return; }
 

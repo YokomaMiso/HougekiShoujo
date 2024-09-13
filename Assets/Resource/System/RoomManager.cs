@@ -22,15 +22,8 @@ public class RoomManager : MonoBehaviour
 
     public RoomData ReadRoomData(bool _isMine)
     {
-        RoomData returnData;
-        string debugText;
-
-        if (_isMine) { returnData= OSCManager.OSCinstance.roomData; debugText = "自分"; }
-        else { returnData= OSCManager.OSCinstance.receiveRoomData; debugText = "相手"; }
-
-        Debug.Log(debugText + "0番目" + returnData.GetBannerNum(0));
-
-        return returnData;
+        if (_isMine) { return OSCManager.OSCinstance.roomData; }
+        else { return OSCManager.OSCinstance.receiveRoomData; }
     }
 
     //チームの振り分けを行う関数
@@ -55,7 +48,8 @@ public class RoomManager : MonoBehaviour
     //チーム移動を行う関数
     public void PlayerBannerChanger(int _num)
     {
-        RoomData oscRoomData = ReadRoomData(false);
+        RoomData othersRoomData = ReadRoomData(false);
+        RoomData myRoomData = ReadRoomData(true);
 
         //自分のチームを呼び出そうとしたら早期リターン
         if (myNum % 2 == _num) { return; }
@@ -65,9 +59,9 @@ public class RoomManager : MonoBehaviour
         //移動したいチームに空きがあれば番号を振る
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
-            if (i % 2 == _num && oscRoomData.GetBannerNum(i) == empty)
+            if (i % 2 == _num && othersRoomData.GetBannerNum(i) == empty)
             {
-                oscRoomData.SetBannerNum(i, Managers.instance.playerID);
+                myRoomData.SetBannerNum(i, Managers.instance.playerID);
                 canMove = true;
                 nextNum = i;
                 break;
@@ -78,18 +72,18 @@ public class RoomManager : MonoBehaviour
         if (canMove)
         {
             //チームの移動に成功したら、前居た自分の位置をクリアする
-            oscRoomData.SetBannerNum(myNum, MachingRoomData.bannerEmpty);
+            myRoomData.SetBannerNum(myNum, MachingRoomData.bannerEmpty);
             //自分の位置の番号を更新
             myNum = nextNum;
 
             while (true)
             {
                 //配列の整理整頓
-                if (!TidyUpPlayerBanner(oscRoomData)) { break; }
+                if (!TidyUpPlayerBanner(myRoomData)) { break; }
             }
         }
 
-        OSCManager.OSCinstance.roomData = oscRoomData;
+        OSCManager.OSCinstance.roomData = myRoomData;
     }
 
     bool TidyUpPlayerBanner(RoomData _roomData)
@@ -118,15 +112,15 @@ public class RoomManager : MonoBehaviour
         return isTidied;
     }
 
-    public void CharaSelect(int _playerID, int value)
+    public void CharaSelect(int value)
     {
         RoomData oscRoomData = ReadRoomData(true);
-        int calc = oscRoomData.GetSelectedCharacterID(_playerID);
+        int calc = oscRoomData.GetSelectedCharacterID(Managers.instance.playerID);
 
         if (value > 0) { calc = (calc + 1) % maxCharaCount; }
         else { calc = (calc + (maxCharaCount - 1)) % maxCharaCount; }
 
-        oscRoomData.SetSelectedCharacterID(_playerID, calc);
+        oscRoomData.SetSelectedCharacterID(Managers.instance.playerID, calc);
 
         OSCManager.OSCinstance.roomData = oscRoomData;
     }
@@ -144,34 +138,33 @@ public class RoomManager : MonoBehaviour
         int myID = Managers.instance.playerID;
         bool host = (myID == 0);
 
-        RoomData oscRoomData = ReadRoomData(!host);
+        RoomData myData = ReadRoomData(true);
 
         //自分がホストなら
         if (host)
         {
+            RoomData otherData = ReadRoomData(false);
+
             int readyCount = 0;
             for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
             {
-                if (oscRoomData.GetReadyPlayers(i)) { readyCount++; }
+                if (otherData.GetReadyPlayers(i)) { readyCount++; }
             }
-
+            
             if (readyCount >= Managers.instance.gameManager.allPlayerCount - 1)
             {
-                oscRoomData.gameStart = true;
-                OSCManager.OSCinstance.roomData = oscRoomData;
-                OSCManager.OSCinstance.SendRoomData();
+              myData.gameStart = true;
             }
         }
         else
         {
-            if (!oscRoomData.GetReadyPlayers(myID))
+            if (!myData.GetReadyPlayers(myID))
             {
-                oscRoomData.SetReadyPlayers(myID, true);
-                OSCManager.OSCinstance.roomData = oscRoomData;
+                myData.SetReadyPlayers(myID, true);
             }
         }
 
-        //OSCManager.OSCinstance.roomData = oscRoomData;
+        OSCManager.OSCinstance.roomData = myData;
     }
 
     public void PressCancel()
