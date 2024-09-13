@@ -13,7 +13,7 @@ public class IngameData
     public struct PlayerNetData
     {
         public PacketDataForPerFrame mainPacketData;
-        public byte[] byteData;
+        //public byte[] byteData;
     }
 
     /// <summary>

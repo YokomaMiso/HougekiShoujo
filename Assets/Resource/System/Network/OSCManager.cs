@@ -525,19 +525,14 @@ using System.Runtime.InteropServices;
 public class OSCManager : MonoBehaviour
 {
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct AllData
-    {
-        public IngameData.PlayerNetData pData;
-        public MachingRoomData.RoomData rData;
-    }
+    
 
     //////////////////////////////
     //////// 本番使用変数 ////////
     //////////////////////////////
     ///
 
-    AllData allData = new AllData();
+    public AllGameData.AllData allData = new AllGameData.AllData();
 
     //自身のインゲームデータ
     public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
@@ -587,6 +582,9 @@ public class OSCManager : MonoBehaviour
     {
         OSCinstance = this;
 
+        allData.pData = new IngameData.PlayerNetData();
+        allData.pData = default;
+        
         allData.rData = initRoomData(allData.rData);
 
         roomData = default;
@@ -643,9 +641,10 @@ public class OSCManager : MonoBehaviour
 
         }
 
-        SendValue(roomData);
+        allData.rData = roomData;
+        allData.pData = myNetIngameData;
 
-        SendValue(myNetIngameData);
+        SendValue(allData);
     }
 
     private void OnDisable()
@@ -662,9 +661,6 @@ public class OSCManager : MonoBehaviour
     /// </summary>
     private void SendValue<T>(T _struct) where T : struct
     {
-        allData.rData = roomData;
-        allData.pData = myNetIngameData;
-
         byte[] _sendBytes = new byte[0];
 
         //送信データのバイト配列化
@@ -687,7 +683,7 @@ public class OSCManager : MonoBehaviour
         values.ReadBlobElement(0, ref _receiveBytes);
 
         //データの構造体化
-        allData = netInstance.ByteToStruct<AllData>(_receiveBytes);
+        allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
         receiveRoomData = allData.rData;
         receivedIngameData = allData.pData;
@@ -716,7 +712,7 @@ public class OSCManager : MonoBehaviour
 
     public void SendRoomData()
     {
-        SendValue(roomData);
+        SendValue(allData);
 
         return;
     }
