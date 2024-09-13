@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject playerPrefab;
     [SerializeField] GameObject otherPlayerPrefab;
     GameObject[] playerInstance;
-    const int playerMaxNum = 2;
+    const int playerMaxNum = 6;
     public int allPlayerCount = playerMaxNum;
 
     public PlayerData[] playerDatas;
@@ -18,12 +18,12 @@ public class GameManager : MonoBehaviour
     //仮座標
     Vector3[] pos = new Vector3[playerMaxNum]
     {
-        //new Vector3(-3,0,-10), 
-        //new Vector3(-3,0,10),
-        new Vector3(0,0,-10),
-        new Vector3(0,0,10),
-        //new Vector3(3,0,-10),
-        //new Vector3(3,0,10),
+        new Vector3(-10,0,3),
+        new Vector3(10,0,3),
+        new Vector3(-10,0,0),
+        new Vector3(10,0,0),
+        new Vector3(-10,0,-3),
+        new Vector3(10,0,-3),
     };
 
     public bool play = false;
@@ -44,29 +44,57 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer()
     {
-        playerInstance = new GameObject[playerMaxNum];
+        //ゲームがスタートしたので、ルームデータのスタートは初期化する
+        OSCManager.OSCinstance.roomData.gameStart = false;
+
+        //プレイヤーの数を読み取る　初期値は１（自分）
+        int playerCount = 1;
+        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
+        {
+            if (OSCManager.OSCinstance.receiveRoomData.GetBannerNum(i) != MachingRoomData.bannerEmpty)
+            {
+                playerCount++;
+            }
+        }
+
+        Debug.Log("playerCount" + playerCount);
+
+        //生成する数はプレイヤーの数
+        playerInstance = new GameObject[playerCount];
+        int instantiateCount = 0;
         RoomManager rm = Managers.instance.roomManager;
         int myNum = rm.myNum;
 
         //仮のプレイヤー生成処理
-        for (int i = 0; i < playerMaxNum; i++)
+        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
+            //ルームデータを読み取る
             MachingRoomData.RoomData oscRoomData = rm.ReadRoomData(i == myNum);
 
+            //bannerに格納されているプレイヤーIDを読み取る
+            int nowPlayerID = oscRoomData.GetBannerNum(i);
+
+            //bannerが空だった場合は生成を行わない
+            if (nowPlayerID == MachingRoomData.bannerEmpty) { continue; }
+
+            //生成処理
+            //自分の番号なら、自分用のプレハブを生成
             if (i == myNum)
             {
-                playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
+                playerInstance[instantiateCount] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
                 Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
             }
+            //自分じゃないなら、他プレイヤー用のプレハブを生成
             else
             {
-                playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity);
+                playerInstance[instantiateCount] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity);
             }
 
-            int bannerNum = oscRoomData.GetBannerNum(i);
-            Player nowPlayer = playerInstance[i].GetComponent<Player>();
-            nowPlayer.SetPlayerID(bannerNum);
-            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(bannerNum)]);
+            Player nowPlayer = playerInstance[instantiateCount].GetComponent<Player>();
+            nowPlayer.SetPlayerID(nowPlayerID);
+            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(nowPlayerID)]);
+
+            instantiateCount++;
         }
     }
 
@@ -107,9 +135,10 @@ public class GameManager : MonoBehaviour
 
     bool DeadCheck()
     {
+        //チームごとの死亡カウント
         int[] deadCount = new int[2] { 0, 0 };
 
-        for (int i = 0; i < playerMaxNum; i++)
+        for (int i = 0; i < playerInstance.Length; i++)
         {
             if (!playerInstance[i].GetComponent<Player>().GetAlive())
             {
