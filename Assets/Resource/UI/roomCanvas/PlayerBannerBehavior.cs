@@ -17,7 +17,7 @@ public class PlayerBannerBehavior : MonoBehaviour
     {
         if (num < 0) { return; }
 
-        int charaID = _roomData.GetSelectedCharacterID(num);
+        int charaID = _roomData.GetSelectedCharacterID(_playerID);
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
         transform.GetChild(2).GetComponent<Image>().sprite = icon;
         transform.GetChild(4).gameObject.SetActive(_roomData.GetReadyPlayers(_playerID));
