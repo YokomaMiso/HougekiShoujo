@@ -603,7 +603,7 @@ public class OSCManager : MonoBehaviour
             Managers.instance.playerID = 1;
         }
 
-        server.TryAddMethodPair(broadcastAddress, ReadValue, MainThreadMethod);
+        server.TryAddMethodPair(address, ReadValue, MainThreadMethod);
     }
 
     // Update is called once per frame
@@ -621,7 +621,7 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        //SendValue();
+        SendValue();
     }
 
     private void OnDisable()

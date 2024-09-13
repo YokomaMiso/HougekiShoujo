@@ -22,15 +22,15 @@ public class RoomManager : MonoBehaviour
 
     public RoomData ReadRoomData(bool _isMine)
     {
-        if (_isMine)
-        {
-            return OSCManager.OSCinstance.roomData;
-        }
-        else
-        {
-            return OSCManager.OSCinstance.receiveRoomData;
-        }
+        RoomData returnData;
+        string debugText;
 
+        if (_isMine) { returnData= OSCManager.OSCinstance.roomData; debugText = "自分"; }
+        else { returnData= OSCManager.OSCinstance.receiveRoomData; debugText = "相手"; }
+
+        Debug.Log(debugText + "0番目" + returnData.GetBannerNum(0));
+
+        return returnData;
     }
 
     //チームの振り分けを行う関数
@@ -55,7 +55,7 @@ public class RoomManager : MonoBehaviour
     //チーム移動を行う関数
     public void PlayerBannerChanger(int _num)
     {
-        RoomData oscRoomData = ReadRoomData(true);
+        RoomData oscRoomData = ReadRoomData(false);
 
         //自分のチームを呼び出そうとしたら早期リターン
         if (myNum % 2 == _num) { return; }
@@ -77,7 +77,6 @@ public class RoomManager : MonoBehaviour
         //移動しようとしたチームに空きがなければ何もせず早期リターン
         if (canMove)
         {
-
             //チームの移動に成功したら、前居た自分の位置をクリアする
             oscRoomData.SetBannerNum(myNum, MachingRoomData.bannerEmpty);
             //自分の位置の番号を更新
@@ -142,10 +141,10 @@ public class RoomManager : MonoBehaviour
             return;
         }
 
-        RoomData oscRoomData = ReadRoomData(true);
-
         int myID = Managers.instance.playerID;
         bool host = (myID == 0);
+
+        RoomData oscRoomData = ReadRoomData(!host);
 
         //自分がホストなら
         if (host)
