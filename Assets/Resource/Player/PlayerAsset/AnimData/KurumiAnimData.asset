@@ -16,11 +16,11 @@ MonoBehaviour:
   idleFirstSprite: {fileID: 695127987, guid: 78ce578ae85a99244b38645af9994b40, type: 3}
   idleAnimationData: {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
   runAnimationData:
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
+  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
+  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
+  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
+  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
+  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
   reloadAnimationData: {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
   aimAnimationData:
   - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
