@@ -158,6 +158,8 @@ public class RoomManager : MonoBehaviour
             if (readyCount >= Managers.instance.gameManager.allPlayerCount - 1)
             {
                 oscRoomData.gameStart = true;
+                OSCManager.OSCinstance.roomData = oscRoomData;
+                OSCManager.OSCinstance.SendRoomData();
             }
         }
         else
@@ -165,10 +167,11 @@ public class RoomManager : MonoBehaviour
             if (!oscRoomData.GetReadyPlayers(myID))
             {
                 oscRoomData.SetReadyPlayers(myID, true);
+                OSCManager.OSCinstance.roomData = oscRoomData;
             }
         }
 
-        OSCManager.OSCinstance.roomData = oscRoomData;
+        //OSCManager.OSCinstance.roomData = oscRoomData;
     }
 
     public void PressCancel()
