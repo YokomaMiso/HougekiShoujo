@@ -157,7 +157,7 @@ public class RoomManager : MonoBehaviour
 
             if (readyCount >= Managers.instance.gameManager.allPlayerCount - 1)
             {
-                OSCManager.OSCinstance.roomData.gameStart = true;
+                oscRoomData.gameStart = true;
             }
         }
         else
