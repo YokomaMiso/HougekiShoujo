@@ -36,6 +36,8 @@ public class MachingRoomData
         public int hostPlayer;
         public bool gameStart;
 
+        public bool isInData;
+
         public void SetBannerNum(int _num, int _value)
         {
             switch (_num)
