@@ -7,26 +7,27 @@ public class DebugUI : MonoBehaviour
 {
     void Update()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 6; i++)
         {
-            Transform roomDataTransform=transform.GetChild(i);
-            MachingRoomData.RoomData roomData = Managers.instance.roomManager.ReadRoomData(i == 0);
+            MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(i);
+
+            Transform roomDataTransform;
+            if (i == Managers.instance.playerID) { roomDataTransform = transform.GetChild(0); }
+            else { roomDataTransform = transform.GetChild(1); }
+
+            int[] allBannerNum = Managers.instance.roomManager.GetAllBannerNum();
 
             Transform banner = roomDataTransform.GetChild(0);
-            for(int j = 0; j < MachingRoomData.bannerMaxCount;j++)
+            if (roomData.myBannerNum != MachingRoomData.bannerEmpty)
             {
-                banner.GetChild(j).GetComponent<Text>().text=roomData.GetBannerNum(j).ToString();
+                banner.GetChild(roomData.myBannerNum).GetComponent<Text>().text = roomData.GetBannerNum(roomData.myBannerNum).ToString();
             }
+
             Transform charaIDs = roomDataTransform.GetChild(1);
-            for (int j = 0; j < MachingRoomData.playerMaxCount; j++)
-            {
-                charaIDs.GetChild(j).GetComponent<Text>().text = roomData.GetSelectedCharacterID(j).ToString();
-            }
+            charaIDs.GetChild(i).GetComponent<Text>().text = roomData.GetSelectedCharacterID(i).ToString();
+
             Transform readys = roomDataTransform.GetChild(2);
-            for (int j = 0; j < MachingRoomData.playerMaxCount; j++)
-            {
-                readys.GetChild(j).GetComponent<Text>().text = roomData.GetReadyPlayers(j).ToString();
-            }
-        }
+            readys.GetChild(i).GetComponent<Text>().text = roomData.GetReadyPlayers(i).ToString();
     }
+}
 }
