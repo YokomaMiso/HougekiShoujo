@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
-  m_Name: PD_Character1
+  m_Name: PD_KonoeTsukasa
   m_EditorClassIdentifier: 
   charaName: "\u8FD1\u885B \u53F8"
   characterAnimData: {fileID: 11400000, guid: bbc7345adcf545f40ad96d4a1db983d1, type: 2}
