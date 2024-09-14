@@ -102,7 +102,7 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         int[] allBannerNum = rm.GetAllBannerNum();
 
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
+        for (int i = 0; i < MachingRoomData.bannerMaxCount - 2; i++)
         {
             if (allBannerNum[i] == MachingRoomData.bannerEmpty)
             {

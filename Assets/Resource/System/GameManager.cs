@@ -47,8 +47,8 @@ public class GameManager : MonoBehaviour
         //ゲームがスタートしたので、ルームデータのスタートは初期化する
         OSCManager.OSCinstance.roomData.gameStart = false;
 
-        //プレイヤーの数を読み取る　初期値は１（自分）
-        int playerCount = 1;
+        //プレイヤーの数を読み取る
+        int playerCount = 0;
         RoomManager rm = Managers.instance.roomManager;
         int[] allBannerNum = rm.GetAllBannerNum();
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < deadPlayerCount.Length; i++)
         {
             deadPlayerCount[i] = deadCount[i];
-            if (deadPlayerCount[i] >= endDeadCount) { returnValue = true; break; }
+            if (deadPlayerCount[i] >= Managers.instance.roomManager.nowPlayerCount / 2) { returnValue = true; break; }
         }
 
         return returnValue;
