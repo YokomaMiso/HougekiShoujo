@@ -22,7 +22,11 @@ public class PlayerMove : MonoBehaviour
 
     public Vector3 Move()
     {
-        if (!ownerPlayer.IsMine()) { return Vector3.zero; }
+        if (!ownerPlayer.IsMine()) 
+        {
+            NowSpeedRate();
+            return Vector3.zero; 
+        }
 
         Vector3 movement = Vector3.zero;
         movement += Vector3.right * Input.GetAxis("Horizontal");
@@ -31,7 +35,7 @@ public class PlayerMove : MonoBehaviour
         float currentSpeed = speed * NowSpeedRate() * Managers.instance.timeManager.TimeRate();
         ownerPlayer.GetComponent<Rigidbody>().velocity = movement * currentSpeed;
 
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerStickValue = movement;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = movement;
 
         return movement;
     }

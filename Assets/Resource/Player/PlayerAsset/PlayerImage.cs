@@ -13,8 +13,7 @@ public class PlayerImage : MonoBehaviour
 
     Material MaterialData;
 
-    int[] animSpeed = new int[5] { 1, 1, 1, 1, 1 };
-
+    int[] animSpeed = new int[6] { 1, 1, 1, 1, 1, 1 };
 
     void Start()
     {
@@ -54,6 +53,9 @@ public class PlayerImage : MonoBehaviour
                 break;
             case PLAYER_STATE.ATTACKING:
                 applyController = animData.GetRecoilAnim(0);
+                break;
+            case PLAYER_STATE.DEAD:
+                applyController = animData.GetDeadAnim();
                 break;
         }
 

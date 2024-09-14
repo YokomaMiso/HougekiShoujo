@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
-public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING }
+public enum PLAYER_STATE { IDLE = 0, RUN, RELOADING, AIMING, ATTACKING, DEAD }
 public enum CANON_STATE { EMPTY = -1, RELOADED = 0 }
 
 public class Player : MonoBehaviour
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     PlayerAim playerAim;
     PlayerRecoil playerRecoil;
     PlayerSubAction playerSubAction;
+    PlayerDead playerDead;
     PlayerImage playerImage;
 
     int playerID;
@@ -35,9 +37,12 @@ public class Player : MonoBehaviour
     public void SetDead()
     {
         alive = false;
+        playerState = PLAYER_STATE.DEAD;
+        playerDead.SetDeadPos(transform.position);
         if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
         if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
     }
+    public float GetDeadTimer() { return playerDead.deadTimer; }
     public bool GetAlive() { return alive; }
 
     Vector3 inputVector;
@@ -48,11 +53,31 @@ public class Player : MonoBehaviour
         if (normalizedVector.x < 0) { normalizedVector.x *= -1; }
         float angle = Mathf.Atan2(normalizedVector.x, normalizedVector.z) * Mathf.Rad2Deg;
 
-        if (angle < 22.5f) { return 0; }
-        else if (angle < 22.5f + 45) { return 1; }
-        else if (angle < 22.5f + 45 * 2) { return 2; }
-        else if (angle < 22.5f + 45 * 3) { return 3; }
-        else { return 4; }
+        const float borderAngle = 45f;  //45Â∫¶„Åö„Å§„ÅßËøîÂç¥„Åô„ÇãÁï™Âè∑„ÇíÂ§â„Åà„Çã
+        const float defaultAngle = borderAngle / 2; //22.5Â∫¶„Åã„Çâ„Çπ„Çø„Éº„Éà
+
+        //22.5f„Åæ„Åß‚Ä¶0, 67.5f„Åæ„Åß‚Ä¶1, 112.5f„Åæ„Åß‚Ä¶2, 157.5f„Åæ„Åß‚Ä¶3, „Åù„Çå‰ª•‰∏ä‚Ä¶4 
+        for (int i = 0; i < 4; i++)
+        {
+            if (angle < defaultAngle + borderAngle * i) { return i; }
+        }
+        return 4;
+    }
+
+    public void RoundInit()
+    {
+        playerState = PLAYER_STATE.IDLE;
+        canonState = CANON_STATE.EMPTY;
+        inputVector = Vector3.zero;
+        alive = true;
+
+        //playerMove.Init();
+        playerReload.Init();
+        playerAim.Init();
+        playerRecoil.Init();
+        playerSubAction.Init();
+        playerDead.Init();
+        //playerImage;
     }
 
     void Start()
@@ -80,119 +105,136 @@ public class Player : MonoBehaviour
         playerSubAction = gameObject.GetComponent<PlayerSubAction>();
         playerSubAction.SetPlayer(this);
 
+        playerDead = gameObject.GetComponent<PlayerDead>();
+        playerDead.SetPlayer(this);
+
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
     }
 
     void Update()
     {
-        if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
-
-        //DEBUG
-        //if (Input.GetKeyDown(KeyCode.X)) { TimeManager.slow = !TimeManager.slow; }
-        //if (Input.GetKeyDown(KeyCode.X)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(2, 5); }
-        //if (Input.GetKeyDown(KeyCode.Z)) { transform.AddComponent<SpeedBuff>().SetRateAndTime(1.0f/2, 5); }
-
-        if (IsMine()) { OwnPlayerBehavior(); }
-        else { OtherPlayerBehavior(); }
+        if (Managers.instance.gameManager.play)
+        {
+            if (IsMine())
+            {
+                //if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
+                OwnPlayerBehavior();
+            }
+            else { OtherPlayerBehavior(); }
+        }
+        else
+        {
+            if (!alive) { playerDead.DeadBehavior(); }
+        }
     }
 
     void OwnPlayerBehavior()
     {
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = false;
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.useSub = false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
 
         int inputNum = InputCheck();
 
-        if (InAction())
+        if (alive)
         {
-            playerMove.MoveStop();
+            if (InAction())
+            {
+                playerMove.MoveStop();
 
+                switch (playerState)
+                {
+                    case PLAYER_STATE.RELOADING:
+                        int reloadNum = playerReload.ReloadBehavior();
+                        if (reloadNum == -1) { playerState = PLAYER_STATE.RELOADING; }
+                        else
+                        {
+                            canonState = (CANON_STATE)reloadNum;
+                            playerState = PLAYER_STATE.IDLE;
+                        }
+                        break;
+                    case PLAYER_STATE.AIMING:
+                        if (inputNum == -1)
+                        {
+                            //„Ç®„Ç§„É†„ÅÆÁßªÂãï
+                            Vector3 movement;
+                            movement = playerAim.AimMove();
+                            //ÁßªÂãï„Å´Âøú„Åò„Å¶„Ç≠„É£„É©„Ç∞„É©„Éï„Ç£„ÉÉ„ÇØ„ÅÆÂêë„ÅçÂ§âÊõ¥
+                            DirectionChange(movement);
+                        }
+                        else if (inputNum - 2 == GetCanonState())
+                        {
+                            playerAim.Fire(playerImage.transform.localScale);
+                            playerState = PLAYER_STATE.ATTACKING;
+                            playerRecoil.SetRecoil();
+                            canonState = CANON_STATE.EMPTY;
+                        }
+                        break;
+                    case PLAYER_STATE.ATTACKING:
+                        if (!playerRecoil.GetIsRecoil()) { playerState = PLAYER_STATE.IDLE; }
+                        break;
+                }
+            }
+            else
+            {
+                switch (inputNum)
+                {
+                    case -1:
+                        MoveBehavior();
+                        break;
+                    case 0:
+                        if (canonState == CANON_STATE.EMPTY)
+                        {
+                            playerReload.Reload(inputNum);
+                            playerState = PLAYER_STATE.RELOADING;
+                        }
+                        else
+                        {
+                            if (GetCanonState() == inputNum)
+                            {
+                                playerAim.AimStart();
+                                playerState = PLAYER_STATE.AIMING;
+                            }
+                        }
+                        break;
+                    case 1:
+                        playerSubAction.UseSubWeapon();
+                        break;
+                }
+            }
+        }
+        else
+        {
+            playerDead.DeadBehavior();
+        }
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos = transform.position;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerState = playerState;
+    }
+
+    void OtherPlayerBehavior()
+    {
+        playerState = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerState;
+        transform.position = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerPos;
+        Vector3 stickValue = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue;
+
+        bool fire = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.fire;
+        bool useSub = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.useSub;
+
+        if (alive)
+        {
             switch (playerState)
             {
-                case PLAYER_STATE.RELOADING:
-                    int reloadNum = playerReload.ReloadBehavior();
-                    if (reloadNum == -1) { playerState = PLAYER_STATE.RELOADING; }
-                    else
-                    {
-                        canonState = (CANON_STATE)reloadNum;
-                        playerState = PLAYER_STATE.IDLE;
-                    }
-                    break;
+                case PLAYER_STATE.RUN:
                 case PLAYER_STATE.AIMING:
-                    if (inputNum == -1)
-                    {
-                        //ÉGÉCÉÄÇÃà⁄ìÆ
-                        Vector3 movement;
-                        movement = playerAim.AimMove();
-                        //à⁄ìÆÇ…âûÇ∂ÇƒÉLÉÉÉâÉOÉâÉtÉBÉbÉNÇÃå¸Ç´ïœçX
-                        DirectionChange(movement);
-                    }
-                    else if (inputNum - 2 == GetCanonState())
-                    {
-                        playerAim.Fire(playerImage.transform.localScale);
-                        playerState = PLAYER_STATE.ATTACKING;
-                        playerRecoil.SetRecoil();
-                        canonState = CANON_STATE.EMPTY;
-                    }
-                    break;
-                case PLAYER_STATE.ATTACKING:
-                    if (!playerRecoil.GetIsRecoil()) { playerState = PLAYER_STATE.IDLE; }
+                    //ÁßªÂãï„Å´Âøú„Åò„Å¶„Ç≠„É£„É©„Ç∞„É©„Éï„Ç£„ÉÉ„ÇØ„ÅÆÂêë„ÅçÂ§âÊõ¥
+                    DirectionChange(stickValue);
                     break;
             }
         }
         else
         {
-            switch (inputNum)
-            {
-                case -1:
-                    MoveBehavior();
-                    break;
-                case 0:
-                    if (canonState == CANON_STATE.EMPTY)
-                    {
-                        playerReload.Reload(inputNum);
-                        playerState = PLAYER_STATE.RELOADING;
-                    }
-                    else
-                    {
-                        if (GetCanonState() == inputNum)
-                        {
-                            playerAim.AimStart();
-                            playerState = PLAYER_STATE.AIMING;
-                        }
-                    }
-                    break;
-                case 1:
-                    playerSubAction.UseSubWeapon();
-                    break;
-            }
+            playerDead.DeadBehavior();
         }
-
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerPos = transform.position;
-        OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerState = playerState;
-    }
-
-    void OtherPlayerBehavior()
-    {
-        playerState = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerState;
-        transform.position = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerPos;
-        Vector3 stickValue = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue;
-
-        bool fire = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.fire;
-        bool useSub = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.useSub;
-
-        switch (playerState)
-        {
-            case PLAYER_STATE.RUN:
-            case PLAYER_STATE.AIMING:
-                //à⁄ìÆÇ…âûÇ∂ÇƒÉLÉÉÉâÉOÉâÉtÉBÉbÉNÇÃå¸Ç´ïœçX
-                DirectionChange(stickValue);
-                break;
-            case PLAYER_STATE.ATTACKING:
-                break;
-        }
-
         if (fire) { playerAim.Fire(transform.localScale); }
         if (useSub) { playerSubAction.UseSubWeapon(); }
 
@@ -231,11 +273,11 @@ public class Player : MonoBehaviour
     }
     void MoveBehavior()
     {
-        //à⁄ìÆÇÃìKóp
+        //ÁßªÂãï„ÅÆÈÅ©Áî®
         Vector3 movement;
         movement = playerMove.Move();
 
-        //à⁄ìÆÇ…âûÇ∂ÇƒÉOÉâÉtÉBÉbÉNÇÃå¸Ç´ïœçX
+        //ÁßªÂãï„Å´Âøú„Åò„Å¶„Ç∞„É©„Éï„Ç£„ÉÉ„ÇØ„ÅÆÂêë„ÅçÂ§âÊõ¥
         DirectionChange(movement);
 
         if (movement == Vector3.zero) { playerState = PLAYER_STATE.IDLE; }

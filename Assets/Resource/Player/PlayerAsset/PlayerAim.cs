@@ -14,6 +14,13 @@ public class PlayerAim : MonoBehaviour
     Vector3 aimVector = Vector3.zero;
     Shell shellData;
 
+    public void Init()
+    {
+        aimVector = Vector3.zero;
+        attackArea.SetActive(false);
+        aoeArea.SetActive(false);
+    }
+
     public void SetPlayer(Player _player, GameObject _aoeArea, GameObject _attackArea)
     {
         ownerPlayer = _player;
@@ -91,11 +98,11 @@ public class PlayerAim : MonoBehaviour
                 }
             }
 
-            OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.playerStickValue = aimVector;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
         }
         else
         {
-            aimVector = OSCManager.OSCinstance.receivedData.mainPacketData.inGameData.playerStickValue;
+            aimVector = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue;
         }
 
         return aimVector;
@@ -103,6 +110,8 @@ public class PlayerAim : MonoBehaviour
 
     public void Fire(Vector3 _scale)
     {
+        if (!ownerPlayer.IsMine()) { aimVector = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue; }
+
         GameObject projectile = shellData.GetProjectile();
         GameObject obj;
         float angle;
@@ -137,7 +146,7 @@ public class PlayerAim : MonoBehaviour
         if (ownerPlayer.IsMine())
         {
             Camera.main.GetComponent<CameraMove>().ResetCameraFar();
-            OSCManager.OSCinstance.myNetData.mainPacketData.inGameData.fire = true;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = true;
         }
     }
 
