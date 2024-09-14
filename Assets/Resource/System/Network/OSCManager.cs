@@ -524,13 +524,9 @@ using System.Runtime.InteropServices;
 
 public class OSCManager : MonoBehaviour
 {
-
-    
-
     //////////////////////////////
     //////// 本番使用変数 ////////
     //////////////////////////////
-    ///
 
     public AllGameData.AllData allData = new AllGameData.AllData();
 
@@ -555,6 +551,8 @@ public class OSCManager : MonoBehaviour
     ///////// OSCcore周り ////////
 
     OscClient client;
+    List<OscClient> clientList = new List<OscClient>();
+
     OscServer server;
 
 
@@ -572,6 +570,10 @@ public class OSCManager : MonoBehaviour
     int otherPort = 8001;
 
     int testNum = 0;
+
+    //ゲーム内で必要な送受信データリスト
+    //　要素数＝プレイヤーID
+    public List<AllGameData.AllData> playerDataList = new List<AllGameData.AllData>();
 
     //////////////////////
     //////// 関数 ////////
@@ -593,25 +595,57 @@ public class OSCManager : MonoBehaviour
         roomData = initRoomData(roomData);
         receiveRoomData = initRoomData(receiveRoomData);
 
-        if (client == null)
-        {
-            client = new OscClient(broadcastAddress, otherPort);
+        // insert to playerID
+        Managers.instance.playerID = myPort - 8000;
 
+        //自分のデータに自分のポートを保存
+        myNetIngameData.mainPacketData.comData.myPort = myPort;
+        myNetIngameData.PlayerID = Managers.instance.playerID;
+        roomData.isInData = true;
+        
+        //自分のデータだった時だけポート番号を入れる
+        for (int i = 0; i <= 5; i++)
+        {
+            if(i == Managers.instance.playerID)
+            {
+                allData.pData.mainPacketData.comData.myPort = myNetIngameData.mainPacketData.comData.myPort;
+                allData.pData.PlayerID = myNetIngameData.PlayerID;
+                allData.rData = initRoomData(allData.rData);
+                allData.rData.isInData = roomData.isInData;
+                playerDataList.Add(allData);
+            }
+            else
+            {
+                allData.pData.mainPacketData.comData.myPort = -1;
+                allData.pData.PlayerID = -1;
+                allData.rData = initRoomData(allData.rData);
+                allData.rData.isInData = false;
+                playerDataList.Add(allData);
+            }
+        }
+
+        //もし自分がサーバ役ならクライアント五人分の送信データを作成
+        if(Managers.instance.playerID == 0)
+        {
+            for(int i = 1; i <= 5; i++)
+            {
+                OscClient _client = new OscClient(broadcastAddress, 8000 + i);
+
+                clientList.Add(_client);
+            }
+        }
+        //そうでない（クライアント）ならサーバへのみ宛てたデータの作成
+        else
+        {
+            OscClient _client = new OscClient(broadcastAddress, 8000);
+
+            clientList.Add(_client);
         }
 
         if (server == null)
         {
             //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
             server = new OscServer(myPort);
-        }
-
-        if (myPort == 8000)
-        {
-            Managers.instance.playerID = 0;
-        }
-        else
-        {
-            Managers.instance.playerID = 1;
         }
 
         server.TryAddMethodPair(address, ReadValue, MainThreadMethod);
@@ -626,25 +660,32 @@ public class OSCManager : MonoBehaviour
 
         }
 
-        Debug.Log(testNum);
+        //Debug.Log(testNum);
 
     }
 
     private void LateUpdate()
     {
-        if (Managers.instance.state == GAME_STATE.ROOM || Managers.instance.state == GAME_STATE.TITLE)
-        {
-
-        }
-        if (Managers.instance.state == GAME_STATE.IN_GAME)
-        {
-
-        }
-
         allData.rData = roomData;
         allData.pData = myNetIngameData;
 
-        SendValue(allData);
+        playerDataList[Managers.instance.playerID] = allData;
+
+        //存在するプレイヤー（固定で６回）の分送信する
+        //foreach (AllGameData.AllData _data in playerDataList)
+        //{
+        //    SendValue(_data);
+        //}
+
+        for (int i = 0; i < playerDataList.Count; i++)
+        {
+            AllGameData.AllData _data = new AllGameData.AllData();
+            _data.rData = initRoomData(_data.rData);
+
+            _data = playerDataList[i];
+
+            SendValue(_data);
+        }
     }
 
     private void OnDisable()
@@ -666,8 +707,13 @@ public class OSCManager : MonoBehaviour
         //送信データのバイト配列化
         _sendBytes = netInstance.StructToByte(_struct);
 
-        //データの送信
-        client.Send(address, _sendBytes, _sendBytes.Length);
+
+        //サーバなら五回、クライアントなら一回
+        foreach (OscClient _client in clientList)
+        {
+            //データの送信
+            _client.Send(address, _sendBytes, _sendBytes.Length);
+        }
     }
 
     /// <summary>
@@ -683,10 +729,18 @@ public class OSCManager : MonoBehaviour
         values.ReadBlobElement(0, ref _receiveBytes);
 
         //データの構造体化
-        allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
+        AllGameData.AllData _allData = new AllGameData.AllData();
+        _allData.rData = initRoomData(_allData.rData);
+        _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
-        receiveRoomData = allData.rData;
-        receivedIngameData = allData.pData;
+
+        if(_allData.pData.PlayerID != -1)
+        {
+            playerDataList[_allData.pData.PlayerID] = _allData;
+        }
+        
+        //receiveRoomData = allData.rData;
+        //receivedIngameData = allData.pData;
     }
 
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
@@ -710,10 +764,29 @@ public class OSCManager : MonoBehaviour
 
     }
 
-    public void SendRoomData()
+    public MachingRoomData.RoomData GetRoomData(int _num)
     {
-        SendValue(allData);
+        AllGameData.AllData _alldata = playerDataList[_num];
 
-        return;
+        return _alldata.rData;
+    }
+
+    public IngameData.PlayerNetData GetIngameData(int _num)
+    {
+        AllGameData.AllData _alldata = playerDataList[_num];
+
+        return _alldata.pData;
+    }
+
+    public AllGameData.AllData GetAllData(int _num)
+    {
+        AllGameData.AllData _alldata = playerDataList[_num];
+
+        return _alldata;
+    }
+
+    public int GetPlayerID(int _num)
+    {
+        return playerDataList[_num].pData.PlayerID;
     }
 }
