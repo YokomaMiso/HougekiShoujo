@@ -67,10 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91cce0e66e93d0042a3f0fd2f16ef420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageAnimator: {fileID: 0}
-  lifeTime: Infinity
-  explosion: {fileID: 3179393461812120061, guid: 2b9475fd54d3d8d448f9e1fd33952adc,
-    type: 3}
+  empExplosion: {fileID: 11400000, guid: e75236b4d2abedc4692e89f0c67fd1cc, type: 2}
 --- !u!1 &2008790680177907739
 GameObject:
   m_ObjectHideFlags: 0
