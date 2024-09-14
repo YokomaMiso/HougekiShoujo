@@ -7,8 +7,6 @@ public enum GAME_STATE { TITLE = 0, ROOM, IN_GAME, OPTION, };
 
 public class Managers : MonoBehaviour
 {
-   public bool onDebug;
-
     /*ƒVƒ“ƒOƒ‹ƒgƒ“*/
     public static Managers instance;
 
