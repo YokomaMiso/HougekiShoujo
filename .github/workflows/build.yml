@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - 'main/**'
 jobs:
   build:
     name: Run the Windows build
@@ -61,5 +62,5 @@ jobs:
       - name: Upload the Windows Build
         uses: actions/upload-artifact@v3
         with:
-          name: Build-${{ steps.vars.outputs.sha_short }}
+          name: Build-${{ github.ref_name }}-${{ steps.vars.outputs.sha_short }}
           path: build
