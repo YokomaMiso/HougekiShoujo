@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviour
     public int myNum = -1;
     public readonly int maxCharaCount = 3;
     public readonly int empty = -1;
+    public int nowPlayerCount = 1;
 
     public void Init()
     {
@@ -18,6 +19,17 @@ public class RoomManager : MonoBehaviour
         oscRoomData.gameStart = false;
 
         OSCManager.OSCinstance.roomData = oscRoomData;
+    }
+
+    public void Update()
+    {
+        int cnt = 0;
+        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
+        {
+            RoomData roomData = ReadRoomData(i == myNum);
+            if (roomData.GetBannerNum(i) != MachingRoomData.bannerEmpty) { cnt++; }
+        }
+        nowPlayerCount = cnt;
     }
 
     public RoomData ReadRoomData(bool _isMine)
@@ -127,14 +139,6 @@ public class RoomManager : MonoBehaviour
 
     public void PressSubmit()
     {
-        //DEBUG
-        if (Managers.instance.onDebug)
-        {
-            OSCManager.OSCinstance.roomData.gameStart = true;
-            OSCManager.OSCinstance.receiveRoomData.gameStart = true;
-            return;
-        }
-
         int myID = Managers.instance.playerID;
         bool host = (myID == 0);
 
@@ -150,10 +154,12 @@ public class RoomManager : MonoBehaviour
             {
                 if (otherData.GetReadyPlayers(i)) { readyCount++; }
             }
-            
-            if (readyCount >= Managers.instance.gameManager.allPlayerCount - 1)
+
+            //if (readyCount >= Managers.instance.gameManager.allPlayerCount - 1)
+            //自分以外の全プレイヤーがREADY中なら
+            if (readyCount >= nowPlayerCount - 1)
             {
-              myData.gameStart = true;
+                myData.gameStart = true;
             }
         }
         else

@@ -29,14 +29,14 @@ public class DisplayCharaIcon : MonoBehaviour
     };
     readonly Vector2[] iconPos = new Vector2[6]
     {
-        new Vector2(-760,480),
-        new Vector2(760,480),
+        new Vector2(-765,460),
+        new Vector2(765,460),
 
-        new Vector2(-680,400),
-        new Vector2(680,400),
+        new Vector2(-660,380),
+        new Vector2(660,380),
 
-        new Vector2(-760,320),
-        new Vector2(760,320),
+        new Vector2(-775,290),
+        new Vector2(775,290),
     };
 
     readonly Color[] iconBGColor = new Color[2];
