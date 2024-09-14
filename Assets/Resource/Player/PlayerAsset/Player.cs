@@ -213,12 +213,12 @@ public class Player : MonoBehaviour
 
     void OtherPlayerBehavior()
     {
-        playerState = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerState;
-        transform.position = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerPos;
-        Vector3 stickValue = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue;
+        playerState = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerState;
+        transform.position = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
+        Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
-        bool fire = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.fire;
-        bool useSub = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.useSub;
+        bool fire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
+        bool useSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
 
         if (alive)
         {

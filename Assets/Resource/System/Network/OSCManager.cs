@@ -534,13 +534,13 @@ public class OSCManager : MonoBehaviour
     public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
 
     //送られてきた相手のインゲームデータ
-    public IngameData.PlayerNetData receivedIngameData = new IngameData.PlayerNetData();
+    //public IngameData.PlayerNetData receivedIngameData = new IngameData.PlayerNetData();
 
     //自身のネットワークデータ
     public MachingRoomData.RoomData roomData = new MachingRoomData.RoomData();
 
     //送られてきた相手のデータ
-    public MachingRoomData.RoomData receiveRoomData = new MachingRoomData.RoomData();
+    //public MachingRoomData.RoomData receiveRoomData = new MachingRoomData.RoomData();
 
     SendDataCreator netInstance = new SendDataCreator();
 
@@ -590,10 +590,10 @@ public class OSCManager : MonoBehaviour
         allData.rData = initRoomData(allData.rData);
 
         roomData = default;
-        receiveRoomData = default;
+        //receiveRoomData = default;
 
         roomData = initRoomData(roomData);
-        receiveRoomData = initRoomData(receiveRoomData);
+        //receiveRoomData = initRoomData(receiveRoomData);
 
         // insert to playerID
         Managers.instance.playerID = myPort - 8000;
@@ -745,6 +745,7 @@ public class OSCManager : MonoBehaviour
 
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
     {
+        _roomData.myBannerNum = -1;
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetBannerNum(i, MachingRoomData.bannerEmpty); }
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetSelectedCharacterID(i, 0); }
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetReadyPlayers(i, false); }

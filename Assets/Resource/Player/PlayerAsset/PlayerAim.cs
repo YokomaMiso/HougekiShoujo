@@ -102,7 +102,7 @@ public class PlayerAim : MonoBehaviour
         }
         else
         {
-            aimVector = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue;
+            aimVector = OSCManager.OSCinstance.GetIngameData(ownerPlayer.GetPlayerID()).mainPacketData.inGameData.playerStickValue;
         }
 
         return aimVector;
@@ -110,7 +110,7 @@ public class PlayerAim : MonoBehaviour
 
     public void Fire(Vector3 _scale)
     {
-        if (!ownerPlayer.IsMine()) { aimVector = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue; }
+        if (!ownerPlayer.IsMine()) { aimVector = OSCManager.OSCinstance.GetIngameData(ownerPlayer.GetPlayerID()).mainPacketData.inGameData.playerStickValue; }
 
         GameObject projectile = shellData.GetProjectile();
         GameObject obj;
