@@ -21,14 +21,14 @@ public abstract class ProjectileBehavior : MonoBehaviour
         TimeSetting();
 
         timer += deltaTime;
-        if (timer > lifeTime) { Destroy(gameObject); }
+        if (timer > lifeTime) { SpawnExplosion(); Destroy(gameObject); }
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
-        spawnPos.y = 2;
         GameObject explosion = ownerPlayer.GetPlayerData().GetShell().GetExplosion();
+        spawnPos.y = explosion.transform.localScale.y;
         GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
     }

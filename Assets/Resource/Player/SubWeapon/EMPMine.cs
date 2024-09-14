@@ -10,7 +10,7 @@ public class EMPMine : ProjectileBehavior
     {
         TagSetting();
     }
-    protected override void OnDestroy()
+    protected override void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
         spawnPos.y = 2;
@@ -25,6 +25,7 @@ public class EMPMine : ProjectileBehavior
 
         if (other.tag == hitTags[0])
         {
+            SpawnExplosion();
             Destroy(gameObject);
         }
     }
