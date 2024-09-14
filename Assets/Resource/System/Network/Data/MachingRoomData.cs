@@ -13,6 +13,7 @@ public class MachingRoomData
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct RoomData
     {
+        public int myBannerNum;
         public int bannerNum0;
         public int bannerNum1;
         public int bannerNum2;

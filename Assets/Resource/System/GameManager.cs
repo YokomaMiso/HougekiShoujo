@@ -49,9 +49,11 @@ public class GameManager : MonoBehaviour
 
         //プレイヤーの数を読み取る　初期値は１（自分）
         int playerCount = 1;
+        RoomManager rm = Managers.instance.roomManager;
+        int[] allBannerNum = rm.GetAllBannerNum();
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
-            if (OSCManager.OSCinstance.receiveRoomData.GetBannerNum(i) != MachingRoomData.bannerEmpty)
+            if (allBannerNum[i] != MachingRoomData.bannerEmpty)
             {
                 playerCount++;
             }
@@ -62,20 +64,18 @@ public class GameManager : MonoBehaviour
         //生成する数はプレイヤーの数
         playerInstance = new GameObject[playerCount];
         int instantiateCount = 0;
-        RoomManager rm = Managers.instance.roomManager;
-        int myNum = rm.myNum;
+        int myNum = OSCManager.OSCinstance.roomData.myBannerNum;
 
         //仮のプレイヤー生成処理
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
+            if (allBannerNum[i] == MachingRoomData.bannerEmpty) { continue; }
+
             //ルームデータを読み取る
-            MachingRoomData.RoomData oscRoomData = rm.ReadRoomData(i == myNum);
+            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
 
             //bannerに格納されているプレイヤーIDを読み取る
-            int nowPlayerID = oscRoomData.GetBannerNum(i);
-
-            //bannerが空だった場合は生成を行わない
-            if (nowPlayerID == MachingRoomData.bannerEmpty) { continue; }
+            int nowPlayerID = oscRoomData.myBannerNum;
 
             //生成処理
             //自分の番号なら、自分用のプレハブを生成

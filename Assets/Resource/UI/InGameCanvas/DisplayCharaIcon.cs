@@ -46,24 +46,26 @@ public class DisplayCharaIcon : MonoBehaviour
         iconBGColor[0] = ColorCordToRGB("#8fdee5");
         iconBGColor[1] = ColorCordToRGB("#ff1f1f");
 
+        RoomManager rm = Managers.instance.roomManager;
+        int[] allBannerNum = rm.GetAllBannerNum();
+
         for (int i = 0; i < transform.childCount; i++)
         {
-            RoomManager rm = Managers.instance.roomManager;
-            MachingRoomData.RoomData roomData = rm.ReadRoomData(i == rm.myNum);
-            int nowPlayerID = roomData.GetBannerNum(i);
-
-            if (nowPlayerID == -1)
+            if (allBannerNum[i] == MachingRoomData.bannerEmpty) 
             {
                 transform.GetChild(i).gameObject.SetActive(false);
+                continue; 
             }
-            else
-            {
+            MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
+
+            int nowPlayerID = roomData.GetBannerNum(i);
+
+                
                 int charaID = roomData.GetSelectedCharacterID(nowPlayerID);
                 Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
                 transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = icon;
                 transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
                 transform.GetChild(i).transform.localPosition = iconStartPos[i];
-            }
         }
     }
     void Update()
