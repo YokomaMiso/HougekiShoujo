@@ -48,7 +48,7 @@ public class PlayerImage : MonoBehaviour
             case PLAYER_STATE.AIMING:
                 float time = charaSprite.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
                 applyController = animData.GetAimAnim(ownerPlayer.AnimNumFromVector());
-                charaSprite.GetComponent<Animator>().ForceStateNormalizedTime(time);
+                charaSprite.GetComponent<Animator>().ForceStateNormalizedTime(time+Managers.instance.timeManager.GetDeltaTime());
                 //charaSprite.GetComponent<Animator>().Play(0, -1, time);
                 break;
             case PLAYER_STATE.ATTACKING:

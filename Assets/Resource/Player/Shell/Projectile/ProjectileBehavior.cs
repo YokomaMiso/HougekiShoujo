@@ -39,7 +39,7 @@ public abstract class ProjectileBehavior : MonoBehaviour
     {
         Vector3 spawnPos = transform.position;
         GameObject explosionInstance = explosion.GetBody();
-        spawnPos.y = explosion.GetScale();
+        spawnPos.y = explosion.GetScale()/2;
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
