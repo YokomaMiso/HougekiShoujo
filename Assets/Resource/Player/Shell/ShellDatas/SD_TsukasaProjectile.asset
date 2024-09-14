@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
-  m_Name: ShellData
+  m_Name: SD_TsukasaProjectile
   m_EditorClassIdentifier: 
   shellIcon: {fileID: 21300000, guid: b38587745ad23ab4fb065cd0a9514118, type: 3}
   shellType: 0
   projectile: {fileID: 3179393461812120061, guid: 5fbefd8f387895448bc643a35cd119ea,
     type: 3}
-  explosion: {fileID: 3179393461812120061, guid: 5fbefd8f387895448bc643a35cd119ea,
-    type: 3}
+  projectileAnim: {fileID: 9100000, guid: 81c0c6dd80912384abc8b8352d447bb1, type: 2}
+  explosion: {fileID: 11400000, guid: 4b8b2b4cf67e7c647b6b78c0ac1e5a50, type: 2}
   shellExplain: "\u306A\u3093\u3061\u3083\u3089\n\u5C04\u7A0B\u304C\u77ED\u304F\u3001\u767A\u5C04\u5F8C\u3059\u3050\u306B\u7206\u767A\u3059\u308B\n\u30EA\u30ED\u30FC\u30C9\u6642\u9593\u304C\u77ED\u304F\u3001\u63A5\u8FD1\u6226\u306B\u5F37\u3044"
   reloadTime: 1.5
   recoilTime: 1
   aimRange: 5
+  lifeTime: 0

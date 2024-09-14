@@ -8,16 +8,25 @@ public class ExplosionBehavior : MonoBehaviour
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
     public Player GetPlayer() { return ownerPlayer; }
 
-    [SerializeField] protected Animator imageAnimator;
-    [SerializeField, Tag] protected string hitTag;
+    protected Animator imageAnimator;
+    protected string hitTag = "Player";
     [SerializeField, Range(0.0f, 1.0f)] float cameraShakeRate = 1.0f;
 
     protected float lifeTime;
     protected float timer;
 
+    public void SetData(Explosion _data) 
+    {
+        imageAnimator = transform.GetChild(0).GetComponent<Animator>();
+
+        float scale = _data.GetScale();
+        transform.localScale = new Vector3(scale, scale, scale);
+
+        imageAnimator.runtimeAnimatorController = _data.GetAnim();
+    }
+
     protected virtual void Start()
     {
-        imageAnimator.speed = 1;
         lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
 
         Vector3 distance = transform.position - Camera.main.transform.position;

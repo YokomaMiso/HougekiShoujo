@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7802420278830233084}
   - component: {fileID: 1166596283970069200}
   m_Layer: 0
-  m_Name: Explosion_KurumiMortar
+  m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 3179393461812120061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3775975727048791887}
@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab109b4220be3594f929145190fa1dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageAnimator: {fileID: 4607915284047989637}
+  imageAnimator: {fileID: 8277721792466392800}
   hitTag: Player
-  cameraShakeRate: 1
+  cameraShakeRate: 0.5
 --- !u!135 &1166596283970069200
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -80,7 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3775975727048791887}
   - component: {fileID: 2940895855444103798}
-  - component: {fileID: 4607915284047989637}
+  - component: {fileID: 8277721792466392800}
   - component: {fileID: 1783421479792590752}
   m_Layer: 0
   m_Name: Image
@@ -98,7 +98,7 @@ Transform:
   m_GameObject: {fileID: 7495808424539395539}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4607915284047989637
+--- !u!95 &8277721792466392800
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

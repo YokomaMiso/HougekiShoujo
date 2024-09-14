@@ -7,13 +7,24 @@ public abstract class ProjectileBehavior : MonoBehaviour
     protected Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-    [SerializeField] protected Animator imageAnimator;
-    [SerializeField] protected float lifeTime;
+    protected Animator imageAnimator;
+    protected float lifeTime;
     protected float timer = 0;
+    protected Explosion explosion;
+
 
     protected string playerTag = "Player";
     protected string groundTag = "Ground";
-    protected string[] hitTags;
+    public string[] hitTags;
+
+    public void SetData(Shell _data)
+    {
+        imageAnimator = transform.GetChild(0).GetComponent<Animator>();
+        imageAnimator.runtimeAnimatorController = _data.GetAnim();
+        lifeTime = _data.GetLifeTime();
+        explosion = _data.GetExplosion();
+        TagSetting();
+    }
 
     protected virtual void Update()
     {
@@ -27,23 +38,27 @@ public abstract class ProjectileBehavior : MonoBehaviour
     protected virtual void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
-        GameObject explosion = ownerPlayer.GetPlayerData().GetShell().GetExplosion();
-        spawnPos.y = explosion.transform.localScale.y;
-        GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
+        GameObject explosionInstance = explosion.GetBody();
+        spawnPos.y = explosion.GetScale();
+        GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
+        obj.GetComponent<ExplosionBehavior>().SetData(explosion);
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        bool check = false;
-        for (int i = 0; i < hitTags.Length; i++)
+        if (other.tag == hitTags[0])
         {
-            if (other.tag == hitTags[i]) { check = true; break; }
+            if (other.GetComponent<Player>() != ownerPlayer)
+            {
+                SpawnExplosion();
+                Destroy(gameObject);
+            }
         }
-
-        if (check)
+        else if (other.tag == hitTags[1])
         {
-            if (other.GetComponent<Player>() != ownerPlayer) { Destroy(gameObject); }
+            SpawnExplosion();
+            Destroy(gameObject);
         }
     }
 

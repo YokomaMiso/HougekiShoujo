@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class CanonProjectileBehavior : ProjectileBehavior
 {
-    [SerializeField] RuntimeAnimatorController animatorController;
     [SerializeField] float speed = 10;
     float angle = 0;
 
     void Start()
     {
-        imageAnimator.runtimeAnimatorController = animatorController;
     }
 
     protected override void Update()
