@@ -35,8 +35,8 @@ public class PlayerAim : MonoBehaviour
             attackArea.SetActive(false);
 
             aoeArea = _aoeArea;
-            float explosionRadius = shellData.GetExplosion().GetComponent<SphereCollider>().radius;
-            float explosionScale = shellData.GetExplosion().transform.localScale.x;
+            float explosionRadius = shellData.GetExplosion().GetBody().GetComponent<SphereCollider>().radius;
+            float explosionScale = shellData.GetExplosion().GetScale();
             float explosionRange = explosionRadius * 2 * explosionScale;
             aoeArea.transform.localScale = new Vector3(explosionRange, explosionRange, 1);
             aoeArea.GetComponent<MeshRenderer>().sortingOrder = 2;
@@ -125,24 +125,29 @@ public class PlayerAim : MonoBehaviour
                 if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
                 obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
                 obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
+                obj.GetComponent<ExplosionBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell().GetExplosion());
                 break;
 
             case SHELL_TYPE.CANON:
                 angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
                 obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
                 angle = Mathf.Atan2(aimVector.z, aimVector.x) * Mathf.Rad2Deg;
-                obj.GetComponent<CanonProjectileBehavior>().SetAngle(angle);
                 obj.GetComponent<CanonProjectileBehavior>().SetPlayer(ownerPlayer);
+                obj.GetComponent<CanonProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
+                obj.GetComponent<CanonProjectileBehavior>().SetAngle(angle);
                 break;
 
             case SHELL_TYPE.MORTAR:
                 Vector3 spawnPos = transform.position + Vector3.up + (aimVector.normalized * 0.5f);
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;
-                obj.GetComponent<MortarProjectileBehavior>().ProjectileStart(transform.position + aimVector);
                 obj.GetComponent<MortarProjectileBehavior>().SetPlayer(ownerPlayer);
+                obj.GetComponent<MortarProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
+                obj.GetComponent<MortarProjectileBehavior>().ProjectileStart(transform.position + aimVector);
                 break;
         }
+
+
         if (ownerPlayer.IsMine())
         {
             Camera.main.GetComponent<CameraMove>().ResetCameraFar();
