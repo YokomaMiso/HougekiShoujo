@@ -67,12 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d15f8133a0551e47b840a39f3254c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 3179393461812120061, guid: 751adc5820fa7a94e866de748bdcb3b0,
-    type: 3}
   imageAnimator: {fileID: 527189571875228936}
+  lifeTime: 1.5
   projectileUp: {fileID: 9100000, guid: 1381823669389d947ae186ee4adff5a3, type: 2}
   projectileDown: {fileID: 9100000, guid: e6088b49fd1baa340bcef127bca07a42, type: 2}
-  lifeTime: 3
 --- !u!1 &2008790680177907739
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,3 +190,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3998d9d47195c4fbb7c0288316a9f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FixedAngles: {x: 0, y: 0, z: 0}

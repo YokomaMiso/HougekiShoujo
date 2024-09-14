@@ -8,9 +8,8 @@ public class CanonProjectileBehavior : ProjectileBehavior
     [SerializeField] float speed = 10;
     float angle = 0;
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
         imageAnimator.runtimeAnimatorController = animatorController;
     }
 
