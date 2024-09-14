@@ -15,17 +15,11 @@ public abstract class ProjectileBehavior : MonoBehaviour
     protected string groundTag = "Ground";
     protected string[] hitTags;
 
-    protected virtual void Start()
-    {
-        imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
-        hitTags = new string[2];
-        hitTags[0] = playerTag;
-        hitTags[1] = groundTag;
-    }
-
     protected virtual void Update()
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
+        TimeSetting();
+
         timer += deltaTime;
         if (timer > lifeTime) { Destroy(gameObject); }
     }
@@ -51,5 +45,17 @@ public abstract class ProjectileBehavior : MonoBehaviour
         {
             if (other.GetComponent<Player>() != ownerPlayer) { Destroy(gameObject); }
         }
+    }
+
+    protected virtual void TagSetting()
+    {
+        hitTags = new string[2];
+        hitTags[0] = playerTag;
+        hitTags[1] = groundTag;
+    }
+
+    protected virtual void TimeSetting()
+    {
+        imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
     }
 }

@@ -6,10 +6,9 @@ public class EMPMine : ProjectileBehavior
 {
     float angle = 0;
 
-    protected override void Start()
+    void Start()
     {
-        hitTags = new string[1];
-        hitTags[0] = playerTag;
+        TagSetting();
     }
     protected override void OnDestroy()
     {
@@ -29,4 +28,11 @@ public class EMPMine : ProjectileBehavior
             Destroy(gameObject);
         }
     }
+
+    protected override void TagSetting()
+    {
+        hitTags = new string[1];
+        hitTags[0] = playerTag;
+    }
+
 }
