@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
             if (i == myNum)
             {
                 playerInstance[instantiateCount] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
-                Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
+                Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[instantiateCount].GetComponent<Player>());
             }
             //自分じゃないなら、他プレイヤー用のプレハブを生成
             else
