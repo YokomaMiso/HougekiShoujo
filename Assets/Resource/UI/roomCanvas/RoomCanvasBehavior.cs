@@ -100,7 +100,8 @@ public class RoomCanvasBehavior : MonoBehaviour
             playerBanners.transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        int[] allBannerNum = rm.GetAllBannerNum();
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
 
         for (int i = 0; i < MachingRoomData.bannerMaxCount - 2; i++)
         {

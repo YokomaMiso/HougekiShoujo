@@ -32,7 +32,7 @@ public class RoomManager : MonoBehaviour
         nowPlayerCount = cnt;
     }
 
-    public int[] GetAllBannerNum()
+    public int GetBannerNumFromAllPlayer(int _num)
     {
         int[] allBannerNum = new int[8];
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { allBannerNum[i] = -1; }
@@ -48,13 +48,14 @@ public class RoomManager : MonoBehaviour
             }
         }
 
-        return allBannerNum;
+        return allBannerNum[_num];
     }
 
     //チームの振り分けを行う関数
     public void PlayerBannerDivider()
     {
-        int[] allBannerNum = GetAllBannerNum();
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = GetBannerNumFromAllPlayer(i); }
 
         RoomData myRoomData = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID);
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) 
@@ -77,7 +78,9 @@ public class RoomManager : MonoBehaviour
         //自分のチームを呼び出そうとしたら早期リターン
         if (myRoomData.myBannerNum % 2 == _num) { return; }
 
-        int[] allBannerNum = GetAllBannerNum();
+        int myNowBannerNum = myRoomData.myBannerNum;
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = GetBannerNumFromAllPlayer(i); }
 
         bool canMove = false;
         int nextNum = 0;
@@ -89,6 +92,7 @@ public class RoomManager : MonoBehaviour
                 myRoomData.SetBannerNum(i, Managers.instance.playerID);
                 canMove = true;
                 nextNum = i;
+
                 break;
             }
         }
@@ -97,9 +101,13 @@ public class RoomManager : MonoBehaviour
         if (canMove)
         {
             //チームの移動に成功したら、前居た自分の位置をクリアする
-            myRoomData.SetBannerNum(myRoomData.myBannerNum, MachingRoomData.bannerEmpty);
+            myRoomData.SetBannerNum(myNowBannerNum, MachingRoomData.bannerEmpty);
+            Debug.Log("banner" + myNowBannerNum + "番目は" + myRoomData.GetBannerNum(myNowBannerNum));
+
             //自分の位置の番号を更新
             myRoomData.myBannerNum = nextNum;
+
+            Debug.Log("banner" + myRoomData.myBannerNum + "番目は" + myRoomData.GetBannerNum(myNowBannerNum));
 
             while (true)
             {

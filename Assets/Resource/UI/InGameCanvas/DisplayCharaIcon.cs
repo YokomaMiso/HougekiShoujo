@@ -47,7 +47,8 @@ public class DisplayCharaIcon : MonoBehaviour
         iconBGColor[1] = ColorCordToRGB("#ff1f1f");
 
         RoomManager rm = Managers.instance.roomManager;
-        int[] allBannerNum = rm.GetAllBannerNum();
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
 
         for (int i = 0; i < transform.childCount; i++)
         {
