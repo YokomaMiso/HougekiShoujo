@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7802420278830233084}
   - component: {fileID: 1166596283970069200}
   m_Layer: 0
-  m_Name: Explosion_Small
+  m_Name: Explosion_TsukasaBlast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
