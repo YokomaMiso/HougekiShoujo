@@ -15,9 +15,9 @@ public abstract class ProjectileBehavior : MonoBehaviour
 
     protected string playerTag = "Player";
     protected string groundTag = "Ground";
-    public string[] hitTags;
+    protected string[] hitTags;
 
-    public void SetData(Shell _data)
+    public virtual void SetData(Shell _data)
     {
         imageAnimator = transform.GetChild(0).GetComponent<Animator>();
         imageAnimator.runtimeAnimatorController = _data.GetAnim();

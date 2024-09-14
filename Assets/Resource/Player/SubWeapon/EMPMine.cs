@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class EMPMine : ProjectileBehavior
 {
-    float angle = 0;
+    [SerializeField] Explosion empExplosion;
 
     void Start()
     {
         TagSetting();
+        lifeTime = Mathf.Infinity;
     }
+    protected override void TimeSetting()
+    {
+    }
+
     protected override void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
         spawnPos.y = 2;
-        GameObject explosion = ownerPlayer.GetPlayerData().GetSubWeapon().GetExplosion();
+        GameObject explosion = empExplosion.GetBody();
         GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
+        obj.GetComponent<ExplosionBehavior>().SetData(empExplosion);
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
         if (timer < 3) { return; }
+
+        Debug.Log(timer);
 
         if (other.tag == hitTags[0])
         {
