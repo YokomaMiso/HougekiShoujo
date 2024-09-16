@@ -64,7 +64,7 @@ public class PlayerReload : MonoBehaviour
     }
     public void ResetSpeedRate(int _num) { speedRate[_num] = defaultSpeedRate; }
 
-    float NowSpeedRate()
+    public float NowSpeedRate()
     {
         float multiplyAllRate = 1.0f;
         for (int i = 0; i < speedRate.Length; i++) { multiplyAllRate *= speedRate[i]; }

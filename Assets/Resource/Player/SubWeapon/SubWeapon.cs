@@ -9,7 +9,6 @@ public class SubWeapon : ScriptableObject
     [SerializeField, Header("SubWeapon Icon")] Sprite subWeaponIcon;
     [SerializeField, Header("Sub Type")] SUB_TYPE subType;
     [SerializeField, Header("Installation")] GameObject Installation;
-    [SerializeField, Header("Explosion")] GameObject explosion;
     [SerializeField, Header("Explain"), TextArea(1, 3)] string subWeaponExplain;
 
     [SerializeField, Header("Reload Time")] float reloadTime;
@@ -19,7 +18,6 @@ public class SubWeapon : ScriptableObject
     public Sprite GetIcon() { return subWeaponIcon; }
     public SUB_TYPE GetSubType() { return subType; }
     public GameObject GetMine() {  return Installation; }
-    public GameObject GetExplosion() {  return explosion; }
     public string GetSubWeaponExplain() {  return subWeaponExplain; }
     public float GetReloadTime() {  return reloadTime; }
     public float GetSpeedRate() { return speedRate; }
