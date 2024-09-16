@@ -29,9 +29,9 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
   - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
   recoilAnimationData:
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
-  - {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
+  - {fileID: 9100000, guid: b3b58cde855c51341ada4bf0b463443c, type: 2}
+  - {fileID: 9100000, guid: b3b58cde855c51341ada4bf0b463443c, type: 2}
+  - {fileID: 9100000, guid: b3b58cde855c51341ada4bf0b463443c, type: 2}
+  - {fileID: 9100000, guid: b3b58cde855c51341ada4bf0b463443c, type: 2}
+  - {fileID: 9100000, guid: b3b58cde855c51341ada4bf0b463443c, type: 2}
   deadAnimationData: {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
