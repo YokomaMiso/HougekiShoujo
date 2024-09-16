@@ -40,7 +40,7 @@ public class PlayerSubAction : MonoBehaviour
                 float lifeTime = subWeaponData.GetLifeTime();
                 transform.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, lifeTime);
                 break;
-            case SUB_TYPE.MINE:
+            case SUB_TYPE.INSTALLATION:
                 GameObject obj = Instantiate(subWeaponData.GetMine(), transform.position + Vector3.up, Quaternion.identity);
                 obj.GetComponent<EMPMine>().SetPlayer(ownerPlayer);
                 break;
