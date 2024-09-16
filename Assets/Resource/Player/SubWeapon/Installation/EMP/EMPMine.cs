@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class EMPMine : ProjectileBehavior
+public class EMPMine : InstallationBehavior
 {
     [SerializeField] Explosion empExplosion;
 
     void Start()
     {
-        TagSetting();
         lifeTime = Mathf.Infinity;
     }
     protected override void TimeSetting()
     {
     }
 
-    protected override void SpawnExplosion()
+    protected override void InstallationAction()
     {
         Vector3 spawnPos = transform.position;
         spawnPos.y = 2;
@@ -27,21 +27,12 @@ public class EMPMine : ProjectileBehavior
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (timer < 3) { return; }
+        if (timer < 1.5f) { return; }
 
-        Debug.Log(timer);
-
-        if (other.tag == hitTags[0])
+        if (other.GetComponent<Player>())
         {
-            SpawnExplosion();
+            InstallationAction();
             Destroy(gameObject);
         }
     }
-
-    protected override void TagSetting()
-    {
-        hitTags = new string[1];
-        hitTags[0] = playerTag;
-    }
-
 }
