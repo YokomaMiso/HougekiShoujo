@@ -2,21 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReloadBuff : MonoBehaviour
+public class ReloadBuff : Buff
 {
     PlayerReload playerReload;
-    int buffNum;
-
-    float speedRate = 2.0f;
-    float lifeTime = 3.0f;
-
-    float timer = 0;
-
-    public void SetRateAndTime(float _rate, float _time)
-    {
-        speedRate = _rate;
-        lifeTime = _time;
-    }
 
     void Start()
     {
@@ -32,13 +20,8 @@ public class ReloadBuff : MonoBehaviour
         Destroy(this);
     }
 
-    void Update()
+    protected override void BuffBehavior()
     {
-        timer += Managers.instance.timeManager.GetDeltaTime();
-        if (timer > lifeTime)
-        {
-            playerReload.ResetSpeedRate(buffNum);
-            Destroy(this);
-        }
+        playerReload.ResetSpeedRate(buffNum);
     }
 }

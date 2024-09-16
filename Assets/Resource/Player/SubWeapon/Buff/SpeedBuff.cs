@@ -2,21 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedBuff : MonoBehaviour
+public class SpeedBuff : Buff
 {
     PlayerMove playerMove;
-    int buffNum;
-
-    float speedRate = 1.0f;
-    float lifeTime = 3.0f;
-
-    float timer = 0;
-
-    public void SetRateAndTime(float _rate, float _time)
-    {
-        speedRate = _rate;
-        lifeTime = _time;
-    }
 
     void Start()
     {
@@ -32,13 +20,9 @@ public class SpeedBuff : MonoBehaviour
         Destroy(this);
     }
 
-    void Update()
+    protected override void BuffBehavior()
     {
-        timer += Managers.instance.timeManager.GetDeltaTime();
-        if (timer > lifeTime)
-        {
-            playerMove.ResetSpeedRate(buffNum);
-            Destroy(this);
-        }
+        playerMove.ResetSpeedRate(buffNum);
+
     }
 }
