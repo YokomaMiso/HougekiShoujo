@@ -64,6 +64,8 @@ public class Player : MonoBehaviour
         return 4;
     }
 
+    public float GetReloadAnimSpeedRate() { return playerReload.NowSpeedRate(); }
+
     public void RoundInit()
     {
         playerState = PLAYER_STATE.IDLE;

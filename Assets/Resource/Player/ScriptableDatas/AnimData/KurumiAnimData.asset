@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
   - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
   - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
-  reloadAnimationData: {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: a85ea0bbbe9d3514bbbd1e4dc944817b, type: 2}
   aimAnimationData:
   - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
   - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}

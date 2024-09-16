@@ -13,8 +13,6 @@ public class PlayerImage : MonoBehaviour
 
     Material MaterialData;
 
-    int[] animSpeed = new int[6] { 1, 1, 1, 1, 1, 1 };
-
     void Start()
     {
         animData = ownerPlayer.GetPlayerData().GetCharacterAnimData();
@@ -32,6 +30,7 @@ public class PlayerImage : MonoBehaviour
     void Update()
     {
         int num = (int)ownerPlayer.playerState;
+        float animSpeedRate = 1.0f;
 
         RuntimeAnimatorController applyController;
         switch (ownerPlayer.playerState)
@@ -43,12 +42,13 @@ public class PlayerImage : MonoBehaviour
                 applyController = animData.GetRunAnim(0);
                 break;
             case PLAYER_STATE.RELOADING:
+                animSpeedRate = ownerPlayer.GetReloadAnimSpeedRate();
                 applyController = animData.GetReloadAnim();
                 break;
             case PLAYER_STATE.AIMING:
                 float time = charaSprite.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
                 applyController = animData.GetAimAnim(ownerPlayer.AnimNumFromVector());
-                charaSprite.GetComponent<Animator>().ForceStateNormalizedTime(time+Managers.instance.timeManager.GetDeltaTime());
+                charaSprite.GetComponent<Animator>().ForceStateNormalizedTime(time + Managers.instance.timeManager.GetDeltaTime());
                 //charaSprite.GetComponent<Animator>().Play(0, -1, time);
                 break;
             case PLAYER_STATE.ATTACKING:
@@ -60,6 +60,6 @@ public class PlayerImage : MonoBehaviour
         }
 
         charaSprite.GetComponent<Animator>().runtimeAnimatorController = applyController;
-        charaSprite.GetComponent<Animator>().speed = animSpeed[num] * Managers.instance.timeManager.TimeRate();
+        charaSprite.GetComponent<Animator>().speed = animSpeedRate * Managers.instance.timeManager.TimeRate();
     }
 }
