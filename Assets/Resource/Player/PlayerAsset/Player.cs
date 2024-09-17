@@ -226,7 +226,7 @@ public class Player : MonoBehaviour
         transform.position = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
         Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
-        //if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
+        if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
         bool nowFire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
         bool nowSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
 
