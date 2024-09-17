@@ -110,10 +110,7 @@ public class PlayerAim : MonoBehaviour
 
     public void Fire(Vector3 _scale)
     {
-        if (ownerPlayer.GetPlayerID() == Managers.instance.playerID)
-        {
-            aimVector = OSCManager.OSCinstance.GetIngameData(ownerPlayer.GetPlayerID()).mainPacketData.inGameData.playerStickValue;
-        }
+        if (!ownerPlayer.IsMine()) { aimVector = OSCManager.OSCinstance.GetIngameData(ownerPlayer.GetPlayerID()).mainPacketData.inGameData.playerStickValue; }
 
         GameObject projectile = shellData.GetProjectile();
         GameObject obj;
