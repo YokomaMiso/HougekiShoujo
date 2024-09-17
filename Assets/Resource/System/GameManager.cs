@@ -178,13 +178,11 @@ public class GameManager : MonoBehaviour
         else
         {
             roundTimer -= Managers.instance.timeManager.GetDeltaTime();
-            /*
             if (DeadCheck())
             {
                 play = false;
                 end = true;
             }
-            */
         }
 
         EndBehavior();

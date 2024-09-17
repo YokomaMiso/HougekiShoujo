@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62ed411256c0a3545ac11d57b7bb9940, type: 3}
-  m_Name: KurumiAnimData
+  m_Name: AD_KurumiAnimData
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: a40596ef82ebac8468202209f5e1f3d2, type: 3}
   idleFirstSprite: {fileID: 695127987, guid: 78ce578ae85a99244b38645af9994b40, type: 3}
