@@ -52,21 +52,20 @@ public class DisplayCharaIcon : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (allBannerNum[i] == MachingRoomData.bannerEmpty) 
+            if (allBannerNum[i] == MachingRoomData.bannerEmpty)
             {
                 transform.GetChild(i).gameObject.SetActive(false);
-                continue; 
+                continue;
             }
             MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
 
-            int nowPlayerID = roomData.GetBannerNum(i);
+            int nowPlayerID = roomData.myBannerNum;
 
-                
-                int charaID = roomData.GetSelectedCharacterID(nowPlayerID);
-                Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
-                transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = icon;
-                transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
-                transform.GetChild(i).transform.localPosition = iconStartPos[i];
+            int charaID = roomData.GetSelectedCharacterID(nowPlayerID);
+            Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
+            transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = icon;
+            transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
+            transform.GetChild(i).transform.localPosition = iconStartPos[i];
         }
     }
     void Update()

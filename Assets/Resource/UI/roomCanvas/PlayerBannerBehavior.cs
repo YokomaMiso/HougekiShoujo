@@ -16,14 +16,12 @@ public class PlayerBannerBehavior : MonoBehaviour
     {
         if (num < 0) { return; }
 
-        int playerID = _roomData.GetBannerNum(num);
-        
-        int charaID = _roomData.GetSelectedCharacterID(playerID);
+        int charaID = _roomData.GetSelectedCharacterID(_roomData.myID);
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
         transform.GetChild(2).GetComponent<Image>().sprite = icon;
         
-        string text = "Player " + (playerID + 1).ToString();
+        string text = "Player " + (_roomData.myID + 1).ToString();
         transform.GetChild(3).GetComponent<Text>().text = text;
-        transform.GetChild(4).gameObject.SetActive(_roomData.GetReadyPlayers(playerID));
+        transform.GetChild(4).gameObject.SetActive(_roomData.GetReadyPlayers(_roomData.myID));
     }
 }
