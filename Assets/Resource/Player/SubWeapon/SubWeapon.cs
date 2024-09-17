@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum SUB_TYPE { BUFF = 0, INSTALLATION, BLINK };
+public enum BUFF_TYPE {NONE=0, SPEED, RELOAD };
 
 [CreateAssetMenu(fileName = "SubWeaponData", menuName = "Create/PlayerData/SubWeaponData", order = 1)]
 public class SubWeapon : ScriptableObject
 {
     [SerializeField, Header("SubWeapon Icon")] Sprite subWeaponIcon;
     [SerializeField, Header("Sub Type")] SUB_TYPE subType;
+    [SerializeField, Header("Buff Type")] BUFF_TYPE buffType;
     [SerializeField, Header("Installation")] GameObject Installation;
     [SerializeField, Header("Explain"), TextArea(1, 3)] string subWeaponExplain;
 
@@ -17,9 +19,10 @@ public class SubWeapon : ScriptableObject
 
     public Sprite GetIcon() { return subWeaponIcon; }
     public SUB_TYPE GetSubType() { return subType; }
-    public GameObject GetMine() {  return Installation; }
-    public string GetSubWeaponExplain() {  return subWeaponExplain; }
-    public float GetReloadTime() {  return reloadTime; }
+    public BUFF_TYPE GetBuffType() { return buffType; }
+    public GameObject GetMine() { return Installation; }
+    public string GetSubWeaponExplain() { return subWeaponExplain; }
+    public float GetReloadTime() { return reloadTime; }
     public float GetSpeedRate() { return speedRate; }
     public float GetLifeTime() { return lifeTime; }
 }

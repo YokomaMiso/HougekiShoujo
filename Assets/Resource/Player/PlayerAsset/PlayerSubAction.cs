@@ -38,7 +38,15 @@ public class PlayerSubAction : MonoBehaviour
             case SUB_TYPE.BUFF:
                 float speedRate = subWeaponData.GetSpeedRate();
                 float lifeTime = subWeaponData.GetLifeTime();
-                transform.AddComponent<Buff>().SetRateAndTime(speedRate, lifeTime);
+                switch (subWeaponData.GetBuffType())
+                {
+                    case BUFF_TYPE.SPEED:
+                        transform.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, lifeTime);
+                        break;
+                    case BUFF_TYPE.RELOAD:
+                        transform.AddComponent<ReloadBuff>().SetRateAndTime(speedRate, lifeTime);
+                        break;
+                }
                 break;
             case SUB_TYPE.INSTALLATION:
                 GameObject obj = Instantiate(subWeaponData.GetMine(), transform.position + Vector3.up, Quaternion.identity);
