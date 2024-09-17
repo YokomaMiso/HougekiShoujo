@@ -11,18 +11,16 @@ public class PlayerImage : MonoBehaviour
     SpriteRenderer charaSprite;
     CharacterAnimData animData;
 
-    Material MaterialData;
 
     void Start()
     {
         animData = ownerPlayer.GetPlayerData().GetCharacterAnimData();
         charaSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        MaterialData = ownerPlayer.GetPlayerData().GetMaterial();
 
         if (charaSprite != null)
         {
             charaSprite.shadowCastingMode = ShadowCastingMode.On;
-            charaSprite.material = MaterialData;
+            charaSprite.material = ownerPlayer.GetOutLineMat();
         }
 
     }

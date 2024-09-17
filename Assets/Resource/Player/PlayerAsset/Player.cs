@@ -87,6 +87,10 @@ public class Player : MonoBehaviour
         //playerImage;
     }
 
+    Material outLine;
+    public void SetOutLineMat(Material _mat) { outLine = _mat; }
+    public Material GetOutLineMat() {  return outLine; }
+
     void Start()
     {
         playerMove = gameObject.GetComponent<PlayerMove>();
