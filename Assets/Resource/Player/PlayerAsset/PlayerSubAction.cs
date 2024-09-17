@@ -50,6 +50,6 @@ public class PlayerSubAction : MonoBehaviour
         }
 
         reloadTimer = subWeaponData.GetReloadTime();
-        if (ownerPlayer.IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = true; }
+        if (ownerPlayer.IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = !OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub; }
     }
 }

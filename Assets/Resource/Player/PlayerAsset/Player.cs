@@ -34,8 +34,7 @@ public class Player : MonoBehaviour
     public bool IsMine() { return playerID == Managers.instance.playerID; }
 
     bool alive = true;
-    public void
-        SetDead()
+    public void SetDead()
     {
         alive = false;
         playerState = PLAYER_STATE.DEAD;
@@ -136,9 +135,6 @@ public class Player : MonoBehaviour
 
     void OwnPlayerBehavior()
     {
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
-
         int inputNum = InputCheck();
 
         if (alive)
@@ -227,8 +223,8 @@ public class Player : MonoBehaviour
         Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
         alive = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive;
-        if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire) { fire = true; }
-        if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub) { useSub = true; }
+        bool nowFire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
+        bool nowSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
 
         if (alive)
         {
@@ -243,10 +239,19 @@ public class Player : MonoBehaviour
         }
         else
         {
-            playerDead.DeadBehavior();
+            SetDead();
         }
-        if (fire) { playerAim.Fire(transform.localScale); }
-        if (useSub) { playerSubAction.UseSubWeapon(); }
+
+        if (fire != nowFire)
+        {
+            playerAim.Fire(transform.localScale);
+            fire = nowFire;
+        }
+        if (useSub != nowSub)
+        {
+            playerSubAction.UseSubWeapon();
+            useSub = nowSub;
+        }
 
     }
 
