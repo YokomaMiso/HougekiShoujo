@@ -95,7 +95,9 @@ public class DisplayCharaIcon : MonoBehaviour
         {
             if (allBannerNum[i] == MachingRoomData.bannerEmpty) { continue; }
 
-            IngameData.GameData gameData = OSCManager.OSCinstance.GetIngameData(allBannerNum[i]).mainPacketData.inGameData;
+            IngameData.GameData gameData;
+            if (i == Managers.instance.playerID) { gameData= OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+            else { gameData = OSCManager.OSCinstance.GetIngameData(allBannerNum[i]).mainPacketData.inGameData; }
             if (gameData.alive) { continue; }
 
             transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.gray * 0.5f;
