@@ -121,16 +121,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Managers.instance.gameManager.play)
         {
             if (IsMine())
             {
-                OwnPlayerBehavior();
+                if (Managers.instance.gameManager.play) { OwnPlayerBehavior(); }
                 if (!alive) { playerDead.DeadBehavior(); }
             }
             else
             {
-                OtherPlayerBehavior();
+                if (Managers.instance.gameManager.play) { OtherPlayerBehavior(); }
                 if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
             }
         }
