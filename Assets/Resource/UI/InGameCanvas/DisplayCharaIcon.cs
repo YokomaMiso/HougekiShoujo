@@ -81,7 +81,27 @@ public class DisplayCharaIcon : MonoBehaviour
         if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
         if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
         if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
+
+        DisplayIconUpdate();
     }
+
+    void DisplayIconUpdate()
+    {
+        RoomManager rm = Managers.instance.roomManager;
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (allBannerNum[i] == MachingRoomData.bannerEmpty) { continue; }
+
+            IngameData.GameData gameData = OSCManager.OSCinstance.GetIngameData(allBannerNum[i]).mainPacketData.inGameData;
+            if (gameData.alive) { continue; }
+
+            transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.gray * 0.5f;
+        }
+    }
+
     void FirstBehavior(float _rate, int _num)
     {
         for (int i = _num; i < _num + 2; i++)
