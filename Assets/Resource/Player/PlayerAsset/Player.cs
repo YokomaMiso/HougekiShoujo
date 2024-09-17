@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 
     Material outLine;
     public void SetOutLineMat(Material _mat) { outLine = _mat; }
-    public Material GetOutLineMat() {  return outLine; }
+    public Material GetOutLineMat() { return outLine; }
 
     void Start()
     {
@@ -131,6 +131,12 @@ public class Player : MonoBehaviour
             if (IsMine())
             {
                 if (Managers.instance.gameManager.play) { OwnPlayerBehavior(); }
+                else 
+                {
+                    playerState = PLAYER_STATE.IDLE;
+                    if (alive) { playerMove.MoveStop(); }
+                }
+
                 if (!alive) { playerDead.DeadBehavior(); }
             }
             else
