@@ -101,6 +101,8 @@ public class Player : MonoBehaviour
         else
         {
             playerAim.SetPlayer(this, null, null);
+            fire = OSCManager.OSCinstance.GetIngameData(playerID).mainPacketData.inGameData.fire;
+            useSub = OSCManager.OSCinstance.GetIngameData(playerID).mainPacketData.inGameData.useSub;
         }
 
         playerReload = gameObject.GetComponent<PlayerReload>();
@@ -279,11 +281,13 @@ public class Player : MonoBehaviour
     {
         int reloadValue = -1;
         //if (Input.GetButtonDown("X")) { reloadValue = 0; }
-        if (Input.GetButtonDown("Y")) { reloadValue = 0; }
+        //if (Input.GetButtonDown("Y")) { reloadValue = 0; }
+        if (Input.GetButtonDown("Submit")) { reloadValue = 0; }
         if (Input.GetButtonDown("Cancel")) { reloadValue = 1; }
 
         //if (Input.GetButtonUp("X")) { reloadValue = 3; }
-        if (Input.GetButtonUp("Y")) { reloadValue = 2; }
+        //if (Input.GetButtonUp("Y")) { reloadValue = 2; }
+        if (Input.GetButtonUp("Submit")) { reloadValue = 2; }
         if (Input.GetButtonUp("Cancel")) { reloadValue = 3; }
 
         return reloadValue;
