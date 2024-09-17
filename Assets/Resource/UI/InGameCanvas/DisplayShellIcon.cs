@@ -11,17 +11,26 @@ public class DisplayShellIcon : MonoBehaviour
     Image iconFrame;
     Image subIcon;
     Text subText;
+    Image cancelIcon;
+
+    Sprite shellIconSprite;
+    Sprite subIconSprite;
 
     void Start()
     {
+        ownerPlayer = Managers.instance.gameManager.GetPlayer(Managers.instance.playerID).GetComponent<Player>();
+
         shellIcon = transform.GetChild(0).GetComponent<Image>();
         subIcon = transform.GetChild(1).GetComponent<Image>();
         subText = subIcon.transform.GetChild(0).GetComponent<Text>();
+        cancelIcon = subIcon.transform.GetChild(1).GetComponent<Image>();
+        cancelIcon.gameObject.SetActive(false);
         iconFrame = transform.GetChild(2).GetComponent<Image>();
 
-        ownerPlayer = Managers.instance.gameManager.GetPlayer(Managers.instance.playerID).GetComponent<Player>();
-        shellIcon.sprite = ownerPlayer.GetPlayerData().GetShell().GetShellIcon();
-        subIcon.sprite = ownerPlayer.GetPlayerData().GetSubWeapon().GetIcon();
+        shellIconSprite = ownerPlayer.GetPlayerData().GetShell().GetShellIcon();
+        shellIcon.sprite = shellIconSprite;
+        subIconSprite = ownerPlayer.GetPlayerData().GetSubWeapon().GetIcon();
+        subIcon.sprite = subIconSprite;
 
         iconFrame.color = Color.clear;
     }
@@ -49,22 +58,33 @@ public class DisplayShellIcon : MonoBehaviour
 
     void CheckPlayerSubWeapon()
     {
-        float reloadTime = ownerPlayer.GetSubWeaponReload();
-
-        if (reloadTime <= 0)
+        switch (ownerPlayer.playerState)
         {
-            subIcon.color = Color.white;
-            subText.color = Color.clear;
+            case PLAYER_STATE.AIMING:
+                subText.color = Color.clear;
+                subIcon.color = Color.gray;
+
+                subIcon.sprite = shellIconSprite;
+                cancelIcon.gameObject.SetActive(true);
+                break;
+
+            default:
+                subIcon.sprite = subIconSprite;
+                cancelIcon.gameObject.SetActive(false);
+                float reloadTime = ownerPlayer.GetSubWeaponReload();
+
+                if (reloadTime <= 0)
+                {
+                    subIcon.color = Color.white;
+                    subText.color = Color.clear;
+                }
+                else
+                {
+                    subIcon.color = Color.black;
+                    subText.color = Color.white;
+                    subText.text = reloadTime.ToString("f0");
+                }
+                break;
         }
-        else
-        {
-            subIcon.color = Color.black;
-            subText.color = Color.white;
-            subText.text = reloadTime.ToString("f0");
-        }
-
-
-
-
     }
 }
