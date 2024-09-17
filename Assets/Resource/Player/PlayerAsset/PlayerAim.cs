@@ -151,7 +151,7 @@ public class PlayerAim : MonoBehaviour
         if (ownerPlayer.IsMine())
         {
             Camera.main.GetComponent<CameraMove>().ResetCameraFar();
-            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = true;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = !OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
         }
     }
