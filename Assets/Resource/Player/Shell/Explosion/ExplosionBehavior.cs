@@ -15,7 +15,7 @@ public class ExplosionBehavior : MonoBehaviour
     protected float lifeTime;
     protected float timer;
 
-    public void SetData(Explosion _data) 
+    public void SetData(Explosion _data)
     {
         imageAnimator = transform.GetChild(0).GetComponent<Animator>();
 
@@ -50,7 +50,8 @@ public class ExplosionBehavior : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.tag == hitTag)
+        Player player = other.GetComponent<Player>();
+        if (player && player.GetPlayerID() == Managers.instance.playerID)
         {
             other.GetComponent<Player>().SetDead();
         }

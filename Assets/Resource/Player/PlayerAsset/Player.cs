@@ -118,17 +118,15 @@ public class Player : MonoBehaviour
     {
         if (Managers.instance.gameManager.play)
         {
-            if (IsMine())
-            {
-                //if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
-                OwnPlayerBehavior();
-            }
+            if (IsMine()) { OwnPlayerBehavior(); }
             else { OtherPlayerBehavior(); }
         }
         else
         {
             if (!alive) { playerDead.DeadBehavior(); }
         }
+
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = alive;
     }
 
     void OwnPlayerBehavior()
@@ -224,6 +222,7 @@ public class Player : MonoBehaviour
         transform.position = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
         Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
+        alive = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive;
         bool fire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
         bool useSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
 

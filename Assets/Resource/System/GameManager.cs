@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
     {
         //ゲームがスタートしたので、ルームデータのスタートは初期化する
         OSCManager.OSCinstance.roomData.gameStart = false;
+        //プレイヤーの生存をtrueにする
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
         //プレイヤーの数を読み取る
         int playerCount = 0;

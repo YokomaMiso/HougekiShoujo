@@ -55,5 +55,6 @@ public class IngameData
         public PLAYER_STATE playerState;
         public bool fire;
         public bool useSub;
+        public bool alive;
     }
 }
