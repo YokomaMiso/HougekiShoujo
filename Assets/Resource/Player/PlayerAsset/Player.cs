@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     public void SetDead()
     {
         alive = false;
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false;
+        if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
         if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
@@ -226,11 +226,11 @@ public class Player : MonoBehaviour
         transform.position = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
         Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
-        if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
+        //if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
         bool nowFire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
         bool nowSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
 
-        if (alive)
+        if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive)
         {
             switch (playerState)
             {
@@ -240,10 +240,6 @@ public class Player : MonoBehaviour
                     DirectionChange(stickValue);
                     break;
             }
-        }
-        else
-        {
-            //SetDead();
         }
 
         if (fire != nowFire)
