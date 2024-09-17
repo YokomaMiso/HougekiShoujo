@@ -164,6 +164,11 @@ public class Player : MonoBehaviour
                             //移動に応じてキャラグラフィックの向き変更
                             DirectionChange(movement);
                         }
+                        else if (inputNum == 1)
+                        {
+                            playerState = PLAYER_STATE.IDLE;
+                            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+                        }
                         else if (inputNum - 2 == GetCanonState())
                         {
                             playerAim.Fire(playerImage.transform.localScale);
