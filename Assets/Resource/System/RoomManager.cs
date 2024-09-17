@@ -133,7 +133,9 @@ public class RoomManager : MonoBehaviour
 
     public void CharaSelect(int value)
     {
-        RoomData myRoomData = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID);
+        RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        if (myRoomData.GetReadyPlayers(myRoomData.myID)) { return; }
+
         int calc = myRoomData.GetSelectedCharacterID(Managers.instance.playerID);
 
         if (value > 0) { calc = (calc + 1) % maxCharaCount; }
@@ -161,7 +163,6 @@ public class RoomManager : MonoBehaviour
                 if (otherData.GetReadyPlayers(i)) { readyCount++; }
             }
 
-            //if (readyCount >= Managers.instance.gameManager.allPlayerCount - 1)
             //自分以外の全プレイヤーがREADY中なら
             if (readyCount >= nowPlayerCount - 1)
             {
