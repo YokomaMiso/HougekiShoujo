@@ -23,6 +23,8 @@ public class RoomManager : MonoBehaviour
 
     public void Update()
     {
+        TidyUpPlayerBanner();
+
         int cnt = 0;
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
@@ -58,14 +60,14 @@ public class RoomManager : MonoBehaviour
         for (int i = 0; i < 8; i++) { allBannerNum[i] = GetBannerNumFromAllPlayer(i); }
 
         RoomData myRoomData = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID);
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) 
+        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
-            if(allBannerNum[i] == MachingRoomData.bannerEmpty)
+            if (allBannerNum[i] == MachingRoomData.bannerEmpty)
             {
-                myRoomData.SetBannerNum(i, Managers.instance.playerID);
+                //myRoomData.SetBannerNum(i, Managers.instance.playerID);
                 myRoomData.myBannerNum = i;
                 break;
-            } 
+            }
         }
 
         OSCManager.OSCinstance.roomData = myRoomData;
@@ -89,7 +91,7 @@ public class RoomManager : MonoBehaviour
         {
             if (i % 2 == _num && allBannerNum[i] == MachingRoomData.bannerEmpty)
             {
-                myRoomData.SetBannerNum(i, Managers.instance.playerID);
+                //myRoomData.SetBannerNum(i, Managers.instance.playerID);
                 canMove = true;
                 nextNum = i;
 
@@ -100,50 +102,33 @@ public class RoomManager : MonoBehaviour
         //移動しようとしたチームに空きがなければ何もせず早期リターン
         if (canMove)
         {
-            //チームの移動に成功したら、前居た自分の位置をクリアする
-            myRoomData.SetBannerNum(myNowBannerNum, MachingRoomData.bannerEmpty);
-            Debug.Log("banner" + myNowBannerNum + "番目は" + myRoomData.GetBannerNum(myNowBannerNum));
-
             //自分の位置の番号を更新
             myRoomData.myBannerNum = nextNum;
-
-            Debug.Log("banner" + myRoomData.myBannerNum + "番目は" + myRoomData.GetBannerNum(myNowBannerNum));
-
-            while (true)
-            {
-                //配列の整理整頓
-                if (!TidyUpPlayerBanner(myRoomData)) { break; }
-            }
         }
 
         OSCManager.OSCinstance.roomData = myRoomData;
     }
 
-    bool TidyUpPlayerBanner(RoomData _roomData)
+    void TidyUpPlayerBanner()
     {
-        bool isTidied = false;
-        RoomData myRoomData = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID);
+        RoomData myRoomData = OSCManager.OSCinstance.roomData;
 
-        for (int i = 0; i < MachingRoomData.bannerMaxCount - 2; i++)
+        //自分がチームの一番上に存在するなら早期リターン
+        if (myRoomData.myBannerNum < 2) { return; }
+
+        int[] allPlayerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allPlayerNum[i] = Managers.instance.roomManager.GetBannerNumFromAllPlayer(i); }
+
+        int targetNum = myRoomData.myBannerNum - 2;
+        if (allPlayerNum[targetNum] == MachingRoomData.bannerEmpty)
         {
-            //中身が空なら
-            if (_roomData.GetBannerNum(i) == empty)
-            {
-                //１つ下の中身が空じゃないなら
-                if (_roomData.GetBannerNum(i + 2) != empty)
-                {
-                    //１つ下の情報を自分の中身に入れ替える
-                    _roomData.SetBannerNum(i, _roomData.GetBannerNum(i + 2));
-                    _roomData.SetBannerNum(i + 2, MachingRoomData.bannerEmpty);
-                    //自分の番号だった場合、番号を更新する
-                    if (myRoomData.myBannerNum == i) { myRoomData.myBannerNum = i - 2; }
-
-                    isTidied = true;
-                }
-            }
+            myRoomData.myBannerNum = targetNum;
+            OSCManager.OSCinstance.roomData = myRoomData;
+            //整理整頓がされたら再帰的に自分自身を呼び出す
+            TidyUpPlayerBanner();
         }
 
-        return isTidied;
+        return;
     }
 
     public void CharaSelect(int value)

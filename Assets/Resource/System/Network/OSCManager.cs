@@ -597,6 +597,7 @@ public class OSCManager : MonoBehaviour
 
         // insert to playerID
         Managers.instance.playerID = myPort - 8000;
+        roomData.myID = Managers.instance.playerID;
 
         //自分のデータに自分のポートを保存
         myNetIngameData.mainPacketData.comData.myPort = myPort;
@@ -746,7 +747,7 @@ public class OSCManager : MonoBehaviour
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
     {
         _roomData.myBannerNum = -1;
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetBannerNum(i, MachingRoomData.bannerEmpty); }
+        //for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetBannerNum(i, MachingRoomData.bannerEmpty); }
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetSelectedCharacterID(i, 0); }
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetReadyPlayers(i, false); }
         _roomData.hostPlayer = 0;

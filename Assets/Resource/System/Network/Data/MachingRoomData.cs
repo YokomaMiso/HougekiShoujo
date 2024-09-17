@@ -13,7 +13,9 @@ public class MachingRoomData
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct RoomData
     {
+        public int myID;
         public int myBannerNum;
+        /*
         public int bannerNum0;
         public int bannerNum1;
         public int bannerNum2;
@@ -22,6 +24,7 @@ public class MachingRoomData
         public int bannerNum5;
         public int bannerNum6;
         public int bannerNum7;
+        */
         public int selectedCharacterID1;
         public int selectedCharacterID2;
         public int selectedCharacterID3;
@@ -39,6 +42,7 @@ public class MachingRoomData
 
         public bool isInData;
 
+        /*
         public void SetBannerNum(int _num, int _value)
         {
             switch (_num)
@@ -67,6 +71,7 @@ public class MachingRoomData
                 case 7: return bannerNum7;
             }
         }
+        */
 
         public void SetSelectedCharacterID(int _num, int _value)
         {
