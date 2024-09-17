@@ -215,7 +215,6 @@ public class Player : MonoBehaviour
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos = transform.position;
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerState = playerState;
     }
-
     void OtherPlayerBehavior()
     {
         playerState = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerState;

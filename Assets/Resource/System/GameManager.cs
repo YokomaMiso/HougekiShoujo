@@ -78,9 +78,6 @@ public class GameManager : MonoBehaviour
             //ルームデータを読み取る
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
 
-            //bannerに格納されているプレイヤーIDを読み取る
-            int nowPlayerID = oscRoomData.myBannerNum;
-
             //生成処理
             //自分の番号なら、自分用のプレハブを生成
             if (i == myNum)
@@ -95,8 +92,8 @@ public class GameManager : MonoBehaviour
             }
 
             Player nowPlayer = playerInstance[instantiateCount].GetComponent<Player>();
-            nowPlayer.SetPlayerID(nowPlayerID);
-            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(nowPlayerID)]);
+            nowPlayer.SetPlayerID(oscRoomData.myID);
+            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(oscRoomData.myID)]);
 
             instantiateCount++;
         }
