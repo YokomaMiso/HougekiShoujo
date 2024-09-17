@@ -34,7 +34,8 @@ public class Player : MonoBehaviour
     public bool IsMine() { return playerID == Managers.instance.playerID; }
 
     bool alive = true;
-    public void SetDead()
+    public void
+        SetDead()
     {
         alive = false;
         playerState = PLAYER_STATE.DEAD;
@@ -65,6 +66,10 @@ public class Player : MonoBehaviour
     }
 
     public float GetReloadAnimSpeedRate() { return playerReload.NowSpeedRate(); }
+
+    //For Other
+    bool fire;
+    bool useSub;
 
     public void RoundInit()
     {
@@ -222,8 +227,8 @@ public class Player : MonoBehaviour
         Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
         alive = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive;
-        bool fire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
-        bool useSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
+        if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire) { fire = true; }
+        if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub) { useSub = true; }
 
         if (alive)
         {
