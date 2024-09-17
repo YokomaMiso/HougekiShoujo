@@ -586,7 +586,7 @@ public class OSCManager : MonoBehaviour
 
         allData.pData = new IngameData.PlayerNetData();
         allData.pData = default;
-        
+
         allData.rData = initRoomData(allData.rData);
 
         roomData = default;
@@ -603,22 +603,23 @@ public class OSCManager : MonoBehaviour
         myNetIngameData.mainPacketData.comData.myPort = myPort;
         myNetIngameData.PlayerID = Managers.instance.playerID;
         roomData.isInData = true;
-        
+
         //自分のデータだった時だけポート番号を入れる
         for (int i = 0; i <= 5; i++)
         {
-            if(i == Managers.instance.playerID)
+            if (i == Managers.instance.playerID)
             {
                 allData.pData.mainPacketData.comData.myPort = myNetIngameData.mainPacketData.comData.myPort;
                 allData.pData.PlayerID = myNetIngameData.PlayerID;
                 allData.rData = initRoomData(allData.rData);
                 allData.rData.isInData = roomData.isInData;
+                allData.rData.myID = myNetIngameData.PlayerID;
                 playerDataList.Add(allData);
             }
             else
             {
                 allData.pData.mainPacketData.comData.myPort = -1;
-                allData.pData.PlayerID = -1;
+                allData.pData.PlayerID = i;
                 allData.rData = initRoomData(allData.rData);
                 allData.rData.isInData = false;
                 playerDataList.Add(allData);
@@ -626,9 +627,9 @@ public class OSCManager : MonoBehaviour
         }
 
         //もし自分がサーバ役ならクライアント五人分の送信データを作成
-        if(Managers.instance.playerID == 0)
+        if (Managers.instance.playerID == 0)
         {
-            for(int i = 1; i <= 5; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 OscClient _client = new OscClient(broadcastAddress, 8000 + i);
 
@@ -735,11 +736,11 @@ public class OSCManager : MonoBehaviour
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
 
-        if(_allData.pData.PlayerID != -1)
+        if (_allData.pData.PlayerID != -1)
         {
             playerDataList[_allData.pData.PlayerID] = _allData;
         }
-        
+
         //receiveRoomData = allData.rData;
         //receivedIngameData = allData.pData;
     }
