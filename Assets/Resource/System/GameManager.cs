@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerData[] playerDatas;
 
+    [SerializeField] Material[] outLineMat;
+
     //âºç¿ïW
     Vector3[] pos = new Vector3[playerMaxNum]
     {
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
             Player nowPlayer = playerInstance[instantiateCount].GetComponent<Player>();
             nowPlayer.SetPlayerID(oscRoomData.myID);
             nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(oscRoomData.myID)]);
+            nowPlayer.SetOutLineMat(outLineMat[i % 2]);
 
             instantiateCount++;
         }
@@ -177,6 +180,7 @@ public class GameManager : MonoBehaviour
         else
         {
             roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+
             if (DeadCheck())
             {
                 play = false;
