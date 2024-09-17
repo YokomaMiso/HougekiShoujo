@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public void SetDead()
     {
         alive = false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false;
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
         if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
@@ -122,15 +123,17 @@ public class Player : MonoBehaviour
     {
         if (Managers.instance.gameManager.play)
         {
-            if (IsMine()) { OwnPlayerBehavior(); }
-            else { OtherPlayerBehavior(); }
+            if (IsMine())
+            {
+                OwnPlayerBehavior();
+                if (!alive) { playerDead.DeadBehavior(); }
+            }
+            else
+            {
+                OtherPlayerBehavior();
+                if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
+            }
         }
-        else
-        {
-            if (!alive) { playerDead.DeadBehavior(); }
-        }
-
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = alive;
     }
 
     void OwnPlayerBehavior()
@@ -239,7 +242,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            SetDead();
+            //SetDead();
         }
 
         if (fire != nowFire)
