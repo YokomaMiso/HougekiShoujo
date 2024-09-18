@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
     {
         play = false;
         roundTimer = 60;
+        roundCount = 0;
         for (int i = 0; i < roundWinCount.Length; i++) { roundWinCount[i] = 0; }
 
         start = false;
