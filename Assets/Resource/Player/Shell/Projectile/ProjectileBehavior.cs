@@ -32,6 +32,11 @@ public abstract class ProjectileBehavior : MonoBehaviour
         TagSetting();
     }
 
+    protected virtual void Start()
+    {
+        if (angle != 0) { imageAnimator.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * angle; }
+    }
+
     protected virtual void Update()
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
@@ -45,7 +50,7 @@ public abstract class ProjectileBehavior : MonoBehaviour
     {
         Vector3 spawnPos = transform.position;
         GameObject explosionInstance = explosion.GetBody();
-        spawnPos.y = explosion.GetScale()/2;
+        spawnPos.y = explosion.GetScale() / 2;
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
@@ -80,13 +85,12 @@ public abstract class ProjectileBehavior : MonoBehaviour
         imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
     }
 
-    public virtual void SetAngle(float _angle)
+    public void SetAngle(float _angle)
     {
         angle = _angle;
-        imageAnimator.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * angle;
     }
 
-    public virtual void ProjectileStart(Vector3 _point)
+    public void ProjectileStart(Vector3 _point)
     {
         targetPoint = _point;
         defaultPosition = this.transform.position;
