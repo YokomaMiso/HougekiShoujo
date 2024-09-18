@@ -85,6 +85,15 @@ public class Player : MonoBehaviour
         playerSubAction.Init();
         playerDead.Init();
         //playerImage;
+
+        fire = false;
+        useSub = false;
+
+        if (IsMine())
+        {
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
+        }
     }
 
     Material outLine;
