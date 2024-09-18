@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 'main/**'
+      - 'build/**'
 jobs:
   build:
     name: Run the Windows build

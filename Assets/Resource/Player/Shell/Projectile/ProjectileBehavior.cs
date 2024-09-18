@@ -7,49 +7,70 @@ public abstract class ProjectileBehavior : MonoBehaviour
     protected Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
-    [SerializeField] protected Animator imageAnimator;
-    [SerializeField] protected float lifeTime;
+    protected Animator imageAnimator;
+    protected float lifeTime;
     protected float timer = 0;
+    protected Explosion explosion;
+
 
     protected string playerTag = "Player";
     protected string groundTag = "Ground";
     protected string[] hitTags;
 
-    protected virtual void Start()
+    public virtual void SetData(Shell _data)
     {
-        imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
-        hitTags = new string[2];
-        hitTags[0] = playerTag;
-        hitTags[1] = groundTag;
+        imageAnimator = transform.GetChild(0).GetComponent<Animator>();
+        imageAnimator.runtimeAnimatorController = _data.GetAnim();
+        lifeTime = _data.GetLifeTime();
+        explosion = _data.GetExplosion();
+        TagSetting();
     }
 
     protected virtual void Update()
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
+        TimeSetting();
+
         timer += deltaTime;
-        if (timer > lifeTime) { Destroy(gameObject); }
+        if (timer > lifeTime) { SpawnExplosion(); Destroy(gameObject); }
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
-        spawnPos.y = 2;
-        GameObject explosion = ownerPlayer.GetPlayerData().GetShell().GetExplosion();
-        GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
+        GameObject explosionInstance = explosion.GetBody();
+        spawnPos.y = explosion.GetScale()/2;
+        GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
+        obj.GetComponent<ExplosionBehavior>().SetData(explosion);
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        bool check = false;
-        for (int i = 0; i < hitTags.Length; i++)
+        if (other.tag == hitTags[0])
         {
-            if (other.tag == hitTags[i]) { check = true; break; }
+            if (other.GetComponent<Player>() != ownerPlayer)
+            {
+                SpawnExplosion();
+                Destroy(gameObject);
+            }
         }
+        else if (other.tag == hitTags[1])
+        {
+            SpawnExplosion();
+            Destroy(gameObject);
+        }
+    }
 
-        if (check)
-        {
-            if (other.GetComponent<Player>() != ownerPlayer) { Destroy(gameObject); }
-        }
+    protected virtual void TagSetting()
+    {
+        hitTags = new string[2];
+        hitTags[0] = playerTag;
+        hitTags[1] = groundTag;
+    }
+
+    protected virtual void TimeSetting()
+    {
+        imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
     }
 }

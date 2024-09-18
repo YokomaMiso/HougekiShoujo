@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerData[] playerDatas;
 
+    [SerializeField] Material[] outLineMat;
+
     //仮座標
     Vector3[] pos = new Vector3[playerMaxNum]
     {
@@ -46,11 +48,15 @@ public class GameManager : MonoBehaviour
     {
         //ゲームがスタートしたので、ルームデータのスタートは初期化する
         OSCManager.OSCinstance.roomData.gameStart = false;
+        //プレイヤーの生存をtrueにする
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
         //プレイヤーの数を読み取る
         int playerCount = 0;
         RoomManager rm = Managers.instance.roomManager;
-        int[] allBannerNum = rm.GetAllBannerNum();
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
+
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
         {
             if (allBannerNum[i] != MachingRoomData.bannerEmpty)
@@ -74,9 +80,6 @@ public class GameManager : MonoBehaviour
             //ルームデータを読み取る
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
 
-            //bannerに格納されているプレイヤーIDを読み取る
-            int nowPlayerID = oscRoomData.myBannerNum;
-
             //生成処理
             //自分の番号なら、自分用のプレハブを生成
             if (i == myNum)
@@ -91,8 +94,9 @@ public class GameManager : MonoBehaviour
             }
 
             Player nowPlayer = playerInstance[instantiateCount].GetComponent<Player>();
-            nowPlayer.SetPlayerID(nowPlayerID);
-            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(nowPlayerID)]);
+            nowPlayer.SetPlayerID(oscRoomData.myID);
+            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(oscRoomData.myID)]);
+            nowPlayer.SetOutLineMat(outLineMat[i % 2]);
 
             instantiateCount++;
         }

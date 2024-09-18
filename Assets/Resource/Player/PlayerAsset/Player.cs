@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public void SetDead()
     {
         alive = false;
+        if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
         if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
@@ -64,6 +65,12 @@ public class Player : MonoBehaviour
         return 4;
     }
 
+    public float GetReloadAnimSpeedRate() { return playerReload.NowSpeedRate(); }
+
+    //For Other
+    bool fire;
+    bool useSub;
+
     public void RoundInit()
     {
         playerState = PLAYER_STATE.IDLE;
@@ -80,6 +87,10 @@ public class Player : MonoBehaviour
         //playerImage;
     }
 
+    Material outLine;
+    public void SetOutLineMat(Material _mat) { outLine = _mat; }
+    public Material GetOutLineMat() { return outLine; }
+
     void Start()
     {
         playerMove = gameObject.GetComponent<PlayerMove>();
@@ -94,6 +105,8 @@ public class Player : MonoBehaviour
         else
         {
             playerAim.SetPlayer(this, null, null);
+            fire = OSCManager.OSCinstance.GetIngameData(playerID).mainPacketData.inGameData.fire;
+            useSub = OSCManager.OSCinstance.GetIngameData(playerID).mainPacketData.inGameData.useSub;
         }
 
         playerReload = gameObject.GetComponent<PlayerReload>();
@@ -114,26 +127,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Managers.instance.gameManager.play)
         {
             if (IsMine())
             {
-                //if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
-                OwnPlayerBehavior();
+                if (Managers.instance.gameManager.play) { OwnPlayerBehavior(); }
+                else 
+                {
+                    playerState = PLAYER_STATE.IDLE;
+                    if (alive) { playerMove.MoveStop(); }
+                }
+
+                if (!alive) { playerDead.DeadBehavior(); }
             }
-            else { OtherPlayerBehavior(); }
-        }
-        else
-        {
-            if (!alive) { playerDead.DeadBehavior(); }
+            else
+            {
+                if (Managers.instance.gameManager.play) { OtherPlayerBehavior(); }
+                if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
+            }
         }
     }
 
     void OwnPlayerBehavior()
     {
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
-
         int inputNum = InputCheck();
 
         if (alive)
@@ -161,6 +176,11 @@ public class Player : MonoBehaviour
                             movement = playerAim.AimMove();
                             //移動に応じてキャラグラフィックの向き変更
                             DirectionChange(movement);
+                        }
+                        else if (inputNum == 1)
+                        {
+                            playerState = PLAYER_STATE.IDLE;
+                            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
                         }
                         else if (inputNum - 2 == GetCanonState())
                         {
@@ -210,17 +230,17 @@ public class Player : MonoBehaviour
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos = transform.position;
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerState = playerState;
     }
-
     void OtherPlayerBehavior()
     {
         playerState = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerState;
         transform.position = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
         Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
-        bool fire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
-        bool useSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
+        if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
+        bool nowFire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
+        bool nowSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
 
-        if (alive)
+        if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive)
         {
             switch (playerState)
             {
@@ -231,12 +251,17 @@ public class Player : MonoBehaviour
                     break;
             }
         }
-        else
+
+        if (fire != nowFire)
         {
-            playerDead.DeadBehavior();
+            playerAim.Fire(transform.localScale);
+            fire = nowFire;
         }
-        if (fire) { playerAim.Fire(transform.localScale); }
-        if (useSub) { playerSubAction.UseSubWeapon(); }
+        if (useSub != nowSub)
+        {
+            playerSubAction.UseSubWeapon();
+            useSub = nowSub;
+        }
 
     }
 
@@ -262,11 +287,13 @@ public class Player : MonoBehaviour
     {
         int reloadValue = -1;
         //if (Input.GetButtonDown("X")) { reloadValue = 0; }
-        if (Input.GetButtonDown("Y")) { reloadValue = 0; }
+        //if (Input.GetButtonDown("Y")) { reloadValue = 0; }
+        if (Input.GetButtonDown("Submit")) { reloadValue = 0; }
         if (Input.GetButtonDown("Cancel")) { reloadValue = 1; }
 
         //if (Input.GetButtonUp("X")) { reloadValue = 3; }
-        if (Input.GetButtonUp("Y")) { reloadValue = 2; }
+        //if (Input.GetButtonUp("Y")) { reloadValue = 2; }
+        if (Input.GetButtonUp("Submit")) { reloadValue = 2; }
         if (Input.GetButtonUp("Cancel")) { reloadValue = 3; }
 
         return reloadValue;

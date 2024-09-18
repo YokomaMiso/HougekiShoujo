@@ -9,8 +9,6 @@ using UnityEngine.SceneManagement;
 public class SaveManager : MonoBehaviour
 {
 
-    [SerializeField] PlayerData defaultPlayerData;
-
     [SerializeField] OptionData defaultOptionData;
 
     string saveDataFilePath;

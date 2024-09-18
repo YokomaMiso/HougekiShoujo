@@ -47,25 +47,25 @@ public class DisplayCharaIcon : MonoBehaviour
         iconBGColor[1] = ColorCordToRGB("#ff1f1f");
 
         RoomManager rm = Managers.instance.roomManager;
-        int[] allBannerNum = rm.GetAllBannerNum();
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (allBannerNum[i] == MachingRoomData.bannerEmpty) 
+            if (allBannerNum[i] == MachingRoomData.bannerEmpty)
             {
                 transform.GetChild(i).gameObject.SetActive(false);
-                continue; 
+                continue;
             }
             MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
 
-            int nowPlayerID = roomData.GetBannerNum(i);
+            int nowPlayerID = roomData.myBannerNum;
 
-                
-                int charaID = roomData.GetSelectedCharacterID(nowPlayerID);
-                Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
-                transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = icon;
-                transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
-                transform.GetChild(i).transform.localPosition = iconStartPos[i];
+            int charaID = roomData.GetSelectedCharacterID(nowPlayerID);
+            Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
+            transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = icon;
+            transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
+            transform.GetChild(i).transform.localPosition = iconStartPos[i];
         }
     }
     void Update()
@@ -81,7 +81,29 @@ public class DisplayCharaIcon : MonoBehaviour
         if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
         if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
         if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
+
+        DisplayIconUpdate();
     }
+
+    void DisplayIconUpdate()
+    {
+        RoomManager rm = Managers.instance.roomManager;
+        int[] allBannerNum = new int[8];
+        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (allBannerNum[i] == MachingRoomData.bannerEmpty) { continue; }
+
+            IngameData.GameData gameData;
+            if (i == Managers.instance.playerID) { gameData= OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+            else { gameData = OSCManager.OSCinstance.GetIngameData(allBannerNum[i]).mainPacketData.inGameData; }
+            if (gameData.alive) { continue; }
+
+            transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.gray * 0.5f;
+        }
+    }
+
     void FirstBehavior(float _rate, int _num)
     {
         for (int i = _num; i < _num + 2; i++)

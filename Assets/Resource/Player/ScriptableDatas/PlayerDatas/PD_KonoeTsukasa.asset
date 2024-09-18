@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_KonoeTsukasa
+  m_EditorClassIdentifier: 
+  charaName: "\u8FD1\u885B \u53F8"
+  characterAnimData: {fileID: 11400000, guid: bbc7345adcf545f40ad96d4a1db983d1, type: 2}
+  moveSpeed: 5
+  shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
+  subWeapon: {fileID: 11400000, guid: f5a84c731abf50a47b0c9d6f12cb9677, type: 2}
+  material: {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}
