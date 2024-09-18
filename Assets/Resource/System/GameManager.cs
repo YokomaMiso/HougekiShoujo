@@ -154,6 +154,8 @@ public class GameManager : MonoBehaviour
 
         bool gameEnd = false;
 
+        roundCount++;
+
         int state = 0;
         if (deadPlayerCount[0] >= endDeadCount) { state = 1; }
         if (deadPlayerCount[1] >= endDeadCount) { state += 2; }

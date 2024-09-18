@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
         if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
     }
     public float GetDeadTimer() { return playerDead.deadTimer; }
+    public void SetAlive() { alive = true; playerState = PLAYER_STATE.IDLE; }
     public bool GetAlive() { return alive; }
 
     Vector3 inputVector;
@@ -93,6 +94,7 @@ public class Player : MonoBehaviour
         {
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
         }
     }
 
@@ -140,7 +142,7 @@ public class Player : MonoBehaviour
             if (IsMine())
             {
                 if (Managers.instance.gameManager.play) { OwnPlayerBehavior(); }
-                else 
+                else
                 {
                     playerState = PLAYER_STATE.IDLE;
                     if (alive) { playerMove.MoveStop(); }
