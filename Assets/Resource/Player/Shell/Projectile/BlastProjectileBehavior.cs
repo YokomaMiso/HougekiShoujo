@@ -10,6 +10,9 @@ public class BlastProjectileBehavior : ProjectileBehavior
         explosion = _data.GetExplosion();
         TagSetting();
     }
+    protected override void TimeSetting()
+    {
+    }
 
     protected override void SpawnExplosion()
     {

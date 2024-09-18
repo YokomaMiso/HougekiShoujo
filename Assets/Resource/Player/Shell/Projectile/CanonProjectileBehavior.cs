@@ -6,10 +6,6 @@ public class CanonProjectileBehavior : ProjectileBehavior
 {
     [SerializeField] float speed = 10;
 
-    void Start()
-    {
-    }
-
     protected override void Update()
     {
         base.Update();
