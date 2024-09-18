@@ -528,30 +528,32 @@ public class OSCManager : MonoBehaviour
     //////// 本番使用変数 ////////
     //////////////////////////////
 
+    //送信データ構造体
     public AllGameData.AllData allData = new AllGameData.AllData();
 
-    //自身のインゲームデータ
+    //自身のローカルインゲームデータ
     public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
-
-    //送られてきた相手のインゲームデータ
-    //public IngameData.PlayerNetData receivedIngameData = new IngameData.PlayerNetData();
-
-    //自身のネットワークデータ
+    
+    //自身のローカルマッチングシーンデータ
     public MachingRoomData.RoomData roomData = new MachingRoomData.RoomData();
 
-    //送られてきた相手のデータ
-    //public MachingRoomData.RoomData receiveRoomData = new MachingRoomData.RoomData();
-
+    //構造体変換処理があるため生成
     SendDataCreator netInstance = new SendDataCreator();
 
-    string broadcastAddress = "255.255.255.255";
+    //最大プレイヤー人数
+    const int maxPlayer = 6;
 
-    string address = "/example";
+    const string broadcastAddress = "255.255.255.255";
+
+    string address = "/main";
 
     ///////// OSCcore周り ////////
-
-    OscClient client;
+    
+    //送信先保存リスト
+    //クライアントならホスト宛ての1つ、ホストならクライアント5人分が入る
+    //ハンドシェイク時はホストからの応答を確認するため必ず一つだけ入る
     List<OscClient> clientList = new List<OscClient>();
+
 
     OscServer server;
 
@@ -566,9 +568,6 @@ public class OSCManager : MonoBehaviour
     [SerializeField]
     int myPort = 8000;
 
-    [SerializeField]
-    int otherPort = 8001;
-
     int testNum = 0;
 
     //ゲーム内で必要な送受信データリスト
@@ -582,33 +581,35 @@ public class OSCManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //自分のインスタンス
         OSCinstance = this;
 
+        //インゲーム用データの初期化代入
         allData.pData = new IngameData.PlayerNetData();
         allData.pData = default;
 
+        //ルームデータの初期化
         allData.rData = initRoomData(allData.rData);
 
+        //ロ－カル用も同様に
         roomData = default;
-        //receiveRoomData = default;
-
         roomData = initRoomData(roomData);
-        //receiveRoomData = initRoomData(receiveRoomData);
 
-        // insert to playerID
+        //playerIDの割り当て
         Managers.instance.playerID = myPort - 8000;
         roomData.myID = Managers.instance.playerID;
 
-        //自分のデータに自分のポートを保存
+        //自分のデータに自分のポートとplayerIDを保存、データ初期化判定をtrueに
         myNetIngameData.mainPacketData.comData.myPort = myPort;
         myNetIngameData.PlayerID = Managers.instance.playerID;
         roomData.isInData = true;
 
         //自分のデータだった時だけポート番号を入れる
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i < maxPlayer; i++)
         {
             if (i == Managers.instance.playerID)
             {
+                //自分のplayerIDがデータリストの引数と同じならローカル用の自身のデータを送信用データにコピーする
                 allData.pData.mainPacketData.comData.myPort = myNetIngameData.mainPacketData.comData.myPort;
                 allData.pData.PlayerID = myNetIngameData.PlayerID;
                 allData.rData = initRoomData(allData.rData);
@@ -618,6 +619,7 @@ public class OSCManager : MonoBehaviour
             }
             else
             {
+                //もし自分以外のデータなら一旦居ないものとして扱う
                 allData.pData.mainPacketData.comData.myPort = -1;
                 allData.pData.PlayerID = i;
                 allData.rData = initRoomData(allData.rData);
@@ -654,6 +656,7 @@ public class OSCManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    //インゲームデータ処理中に送信されるろまずいのでUpdateは基本不使用
     void Update()
     {
         //デバック用で任意のタイミングで送れるようにしておく
@@ -668,19 +671,17 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        //インゲームデータから送信用データへコピー
         allData.rData = roomData;
         allData.pData = myNetIngameData;
 
+        //そのデータを送信用リストへ更にコピー
         playerDataList[Managers.instance.playerID] = allData;
 
-        //存在するプレイヤー（固定で６回）の分送信する
-        //foreach (AllGameData.AllData _data in playerDataList)
-        //{
-        //    SendValue(_data);
-        //}
-
+        //送信用データリストにある分送信
         for (int i = 0; i < playerDataList.Count; i++)
         {
+            //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
             AllGameData.AllData _data = new AllGameData.AllData();
             _data.rData = initRoomData(_data.rData);
 
@@ -700,8 +701,10 @@ public class OSCManager : MonoBehaviour
     }
 
     /// <summary>
-    /// データ送信
+    /// データ送信関数
     /// </summary>
+    /// <typeparam name="T">構造体及び値型のデータ</typeparam>
+    /// <param name="_struct">実際に送信したい構造体データ</param>
     private void SendValue<T>(T _struct) where T : struct
     {
         byte[] _sendBytes = new byte[0];
@@ -735,20 +738,21 @@ public class OSCManager : MonoBehaviour
         _allData.rData = initRoomData(_allData.rData);
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
-
+        //受信したプレイヤーデータがゲーム内に存在する場合データリストにセットする
         if (_allData.pData.PlayerID != -1)
         {
             playerDataList[_allData.pData.PlayerID] = _allData;
         }
-
-        //receiveRoomData = allData.rData;
-        //receivedIngameData = allData.pData;
     }
 
+    /// <summary>
+    /// ルームデータの初期化処理
+    /// </summary>
+    /// <param name="_roomData">初期化したいルームデータ</param>
+    /// <returns>ルームデータの初期化値</returns>
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
     {
         _roomData.myBannerNum = -1;
-        //for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetBannerNum(i, MachingRoomData.bannerEmpty); }
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetSelectedCharacterID(i, 0); }
         for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetReadyPlayers(i, false); }
         _roomData.hostPlayer = 0;
@@ -767,6 +771,11 @@ public class OSCManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// ルームデータのゲッター
+    /// </summary>
+    /// <param name="_num">取得したいプレイヤーID</param>
+    /// <returns>指定したプレイヤーIDのルームデータ</returns>
     public MachingRoomData.RoomData GetRoomData(int _num)
     {
         AllGameData.AllData _alldata = playerDataList[_num];
@@ -774,6 +783,11 @@ public class OSCManager : MonoBehaviour
         return _alldata.rData;
     }
 
+    /// <summary>
+    /// インゲームデータのゲッター
+    /// </summary>
+    /// <param name="_num">取得したいプレイヤーID</param>
+    /// <returns>指定したプレイヤーIDのインゲームデータ</returns>
     public IngameData.PlayerNetData GetIngameData(int _num)
     {
         AllGameData.AllData _alldata = playerDataList[_num];
@@ -781,6 +795,11 @@ public class OSCManager : MonoBehaviour
         return _alldata.pData;
     }
 
+    /// <summary>
+    /// 全通信データのゲッター
+    /// </summary>
+    /// <param name="_num">取得したいプレイヤーID</param>
+    /// <returns>指定したプレイヤーIDの全データ</returns>
     public AllGameData.AllData GetAllData(int _num)
     {
         AllGameData.AllData _alldata = playerDataList[_num];
@@ -788,6 +807,11 @@ public class OSCManager : MonoBehaviour
         return _alldata;
     }
 
+    /// <summary>
+    /// 指定したプレイヤーIDの取得
+    /// </summary>
+    /// <param name="_num">取得したいプレイヤーID</param>
+    /// <returns>プレイヤーID</returns>
     public int GetPlayerID(int _num)
     {
         return playerDataList[_num].pData.PlayerID;
