@@ -105,6 +105,13 @@ public class Player : MonoBehaviour
     public void SetOutLineMat(Material _mat) { outLine = _mat; }
     public Material GetOutLineMat() { return outLine; }
 
+    //ミニマップ
+    Material miniMap;
+    public void SetMiniMapMat(Material _mat) { miniMap = _mat; }
+    public Material GetMiniMapMat() { return miniMap; }
+
+    int MaxPlayer = 6;
+
     void Start()
     {
         playerMove = gameObject.GetComponent<PlayerMove>();
@@ -139,6 +146,12 @@ public class Player : MonoBehaviour
         playerImage.SetPlayer(this);
 
         myCollider=GetComponent<Collider>();
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (OSCManager.OSCinstance.GetRoomData(i).myBannerNum == -1) { MaxPlayer--; }
+            Debug.Log("MaxPlayer: " + MaxPlayer);
+        }
     }
 
     void Update()
@@ -146,7 +159,11 @@ public class Player : MonoBehaviour
         {
             if (IsMine())
             {
-                if (Managers.instance.gameManager.play) { OwnPlayerBehavior(); }
+                if (Managers.instance.gameManager.play)
+                {
+                    OwnPlayerBehavior();
+                    BindPlayerPosInShader();
+                }
                 else
                 {
                     playerState = PLAYER_STATE.IDLE;
@@ -336,5 +353,36 @@ public class Player : MonoBehaviour
         Vector3 imageScale = Vector3.one;
         if (_movement.x < 0) { imageScale.x *= -1; }
         playerImage.transform.localScale = imageScale;
+    }
+
+    void BindPlayerPosInShader()
+    {
+        //マップスケールの計算式将来で修正します
+        int PlayerCount = 0;
+        Vector4[] playerPositions = new Vector4[MaxPlayer];
+        for (int num = 0; num < 6; num++)
+        {
+            if (num == Managers.instance.playerID)
+            {
+                Vector3 playerPos = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos;
+                playerPos.x = (playerPos.x + 50) / 100;
+                playerPos.z = (playerPos.z + 52) / 100;
+
+                playerPositions[PlayerCount] = new Vector4(playerPos.x, 0, playerPos.z, 1);
+                PlayerCount++;
+            }
+            else
+            {
+                Vector3 playerPos = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
+            }
+        }
+
+        float[] playerTeams = new float[] { 1 };
+
+        if (miniMap != null)
+        {
+            miniMap.SetVectorArray("_PlayerPositions", playerPositions);
+            miniMap.SetFloatArray("_PlayerTeam", playerTeams);
+        }
     }
 }
