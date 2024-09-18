@@ -70,18 +70,20 @@ public class DisplayCharaIcon : MonoBehaviour
     }
     void Update()
     {
-        float timer = Managers.instance.gameManager.startTimer;
+        if (Managers.instance.gameManager.roundCount == 1)
+        {
+            float timer = Managers.instance.gameManager.startTimer;
 
-        if (0.5f <= timer && timer < 0.65f) { FirstBehavior((timer - 0.5f) / 0.15f, 0); }
-        if (0.65f <= timer && timer < 0.8f) { FirstBehavior((timer - 0.65f) / 0.15f, 2); FirstBehavior(1, 0); }
-        if (0.8f <= timer && timer < 0.95f) { FirstBehavior((timer - 0.8f) / 0.15f, 4); FirstBehavior(1, 2); }
-        if (0.95f <= timer && timer < 1.5f) { FirstBehavior(1, 4); }
+            if (0.5f <= timer && timer < 0.65f) { FirstBehavior((timer - 0.5f) / 0.15f, 0); }
+            if (0.65f <= timer && timer < 0.8f) { FirstBehavior((timer - 0.65f) / 0.15f, 2); FirstBehavior(1, 0); }
+            if (0.8f <= timer && timer < 0.95f) { FirstBehavior((timer - 0.8f) / 0.15f, 4); FirstBehavior(1, 2); }
+            if (0.95f <= timer && timer < 1.5f) { FirstBehavior(1, 4); }
 
-        if (1.5f <= timer && timer < 1.65f) { SecondBehavior((timer - 1.5f) / 0.15f, 0); }
-        if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
-        if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
-        if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
-
+            if (1.5f <= timer && timer < 1.65f) { SecondBehavior((timer - 1.5f) / 0.15f, 0); }
+            if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
+            if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
+            if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
+        }
         DisplayIconUpdate();
     }
 
