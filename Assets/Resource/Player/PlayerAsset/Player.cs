@@ -360,10 +360,21 @@ public class Player : MonoBehaviour
         //マップスケールの計算式将来で修正します
         int PlayerCount = 0;
         Vector4[] playerPositions = new Vector4[MaxPlayer];
+        float[] playerTeams = new float[MaxPlayer];
         for (int num = 0; num < 6; num++)
         {
+            if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum == -1) { continue; }
+
             if (num == Managers.instance.playerID)
             {
+                if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum%2==0) 
+                {
+                    playerTeams[PlayerCount] = 1;
+                }
+                else
+                {
+                    playerTeams[PlayerCount] = 0;
+                }
                 Vector3 playerPos = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos;
                 playerPos.x = (playerPos.x + 50) / 100;
                 playerPos.z = (playerPos.z + 52) / 100;
@@ -377,7 +388,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        float[] playerTeams = new float[] { 1 };
+        
 
         if (miniMap != null)
         {
