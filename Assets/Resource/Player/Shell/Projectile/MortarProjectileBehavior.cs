@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class MortarProjectileBehavior : ProjectileBehavior
 {
-    Vector3 defaultPosition;
-    Vector3 targetPoint;
-
-    public void ProjectileStart(Vector3 _point)
-    {
-        targetPoint = _point;
-        defaultPosition = this.transform.position;
-    }
 
     protected override void Update()
     {

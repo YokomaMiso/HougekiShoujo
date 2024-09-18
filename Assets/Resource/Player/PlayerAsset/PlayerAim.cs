@@ -124,29 +124,24 @@ public class PlayerAim : MonoBehaviour
                 Vector3 applyPos = aimVector.normalized;
                 if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
                 obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
-                obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
-                obj.GetComponent<ExplosionBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell().GetExplosion());
                 break;
 
             case SHELL_TYPE.CANON:
                 angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
                 obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
                 angle = Mathf.Atan2(aimVector.z, aimVector.x) * Mathf.Rad2Deg;
-                obj.GetComponent<CanonProjectileBehavior>().SetPlayer(ownerPlayer);
-                obj.GetComponent<CanonProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
-                obj.GetComponent<CanonProjectileBehavior>().SetAngle(angle);
+                obj.GetComponent<ProjectileBehavior>().SetAngle(angle);
                 break;
 
             case SHELL_TYPE.MORTAR:
                 Vector3 spawnPos = transform.position + Vector3.up + (aimVector.normalized * 0.5f);
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;
-                obj.GetComponent<MortarProjectileBehavior>().SetPlayer(ownerPlayer);
-                obj.GetComponent<MortarProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
-                obj.GetComponent<MortarProjectileBehavior>().ProjectileStart(transform.position + aimVector);
+                obj.GetComponent<ProjectileBehavior>().ProjectileStart(transform.position + aimVector);
                 break;
         }
-
+        obj.GetComponent<ProjectileBehavior>().SetPlayer(ownerPlayer);
+        obj.GetComponent<ProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
 
         if (ownerPlayer.IsMine())
         {
