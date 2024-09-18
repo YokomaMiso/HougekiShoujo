@@ -83,6 +83,8 @@ MonoBehaviour:
   outLineMat:
   - {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}
   - {fileID: 2100000, guid: 19fd21ca5640c2242852074a796b5117, type: 2}
+  MiniMapMat:
+  - {fileID: 2100000, guid: 38808b3945d7eb0468962effda25a7d2, type: 2}
   play: 0
   roundCount: 1
   roundTimer: 60

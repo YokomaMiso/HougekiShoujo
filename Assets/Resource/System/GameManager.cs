@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public PlayerData[] playerDatas;
 
     [SerializeField] Material[] outLineMat;
+    [SerializeField] Material[] MiniMapMat;
+
 
     //âºç¿ïW
     Vector3[] pos = new Vector3[playerMaxNum]
@@ -97,6 +99,7 @@ public class GameManager : MonoBehaviour
             nowPlayer.SetPlayerID(oscRoomData.myID);
             nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(oscRoomData.myID)]);
             nowPlayer.SetOutLineMat(outLineMat[i % 2]);
+            nowPlayer.SetMiniMapMat(MiniMapMat[0]);
 
             //instantiateCount++;
         }
