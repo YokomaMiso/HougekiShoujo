@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class Blink : MonoBehaviour
 {
@@ -9,25 +10,45 @@ public class Blink : MonoBehaviour
         Player player = GetComponent<Player>();
         if (!player) { Destroy(this); return; }
 
+        //長さ
         float length = 5;
-
+        //プレイヤーの座標値
+        Vector3 playerPos = transform.position + Vector3.up * 1.1f;
+        //プレイヤーの入力
         Vector3 targetVec = player.GetInputVector();
-        RaycastHit hit;
-        RaycastHit hit2;
+        //ワープする座標
+        Vector3 warpPos = playerPos + targetVec * length;
 
-        Vector3 warpPos = transform.position + targetVec * length;
-        if (Physics.Raycast(warpPos - targetVec, targetVec, out hit, 1))
+        bool isHit = false;
+
+        //ワープ座標に壁があるかどうか球体の例を作る
+        RaycastHit[] sphereHits;
+        sphereHits = Physics.SphereCastAll(warpPos, 0.5f, targetVec, 0.1f);
+        for (int i = 0; i < sphereHits.Length; i++)
         {
-            if (hit.collider.tag == "Ground")
+            if (sphereHits[i].collider.tag == "Ground") { Debug.Log("なんかあるよ"); isHit = true; break; }
+        }
+
+        if (isHit)
+        {
+            //プレイヤーから飛ばすレイ
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(playerPos, targetVec, length);
+
+            //Groundタグと当たっていたら
+            for (int i = 0; i < hits.Length; i++)
             {
-                if (Physics.Raycast(transform.position, targetVec, out hit2, length))
+                if (hits[i].collider.tag == "Ground")
                 {
-                    transform.position = hit2.point;
+                    //ワープ座標を変更
+                    warpPos = hits[i].point - targetVec;
+                    Debug.Log("当たってるよ");
+                    break;
                 }
             }
         }
 
-        transform.position += targetVec * length;
+        transform.position = warpPos - Vector3.up * 1.1f;
         Destroy(this);
     }
 }
