@@ -12,10 +12,16 @@ public abstract class ProjectileBehavior : MonoBehaviour
     protected float timer = 0;
     protected Explosion explosion;
 
-
     protected string playerTag = "Player";
     protected string groundTag = "Ground";
     protected string[] hitTags;
+
+    //Canon
+    protected float angle = 0;
+
+    //Mortar
+    protected Vector3 defaultPosition;
+    protected Vector3 targetPoint;
 
     public virtual void SetData(Shell _data)
     {
@@ -73,4 +79,17 @@ public abstract class ProjectileBehavior : MonoBehaviour
     {
         imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
     }
+
+    public virtual void SetAngle(float _angle)
+    {
+        angle = _angle;
+        imageAnimator.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * angle;
+    }
+
+    public virtual void ProjectileStart(Vector3 _point)
+    {
+        targetPoint = _point;
+        defaultPosition = this.transform.position;
+    }
+
 }
