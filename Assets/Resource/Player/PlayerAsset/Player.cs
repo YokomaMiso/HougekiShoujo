@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     PlayerDead playerDead;
     PlayerImage playerImage;
 
+    Collider myCollider;
+
     int playerID;
     public void SetPlayerID(int _id) { playerID = _id; }
     public int GetPlayerID() { return playerID; }
@@ -40,8 +42,7 @@ public class Player : MonoBehaviour
         if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
-        if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
-        if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
+        if (myCollider) { myCollider.enabled = false; }
     }
     public float GetDeadTimer() { return playerDead.deadTimer; }
     public void SetAlive() { alive = true; playerState = PLAYER_STATE.IDLE; }
@@ -96,6 +97,8 @@ public class Player : MonoBehaviour
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
         }
+
+        myCollider.enabled = true;
     }
 
     Material outLine;
@@ -134,6 +137,8 @@ public class Player : MonoBehaviour
 
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
+
+        myCollider=GetComponent<Collider>();
     }
 
     void Update()

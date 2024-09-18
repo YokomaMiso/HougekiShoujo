@@ -17,8 +17,11 @@ public class PlayerAim : MonoBehaviour
     public void Init()
     {
         aimVector = Vector3.zero;
-        attackArea.SetActive(false);
-        aoeArea.SetActive(false);
+        if (ownerPlayer.IsMine())
+        {
+            attackArea.SetActive(false);
+            aoeArea.SetActive(false);
+        }
     }
 
     public void SetPlayer(Player _player, GameObject _aoeArea, GameObject _attackArea)
