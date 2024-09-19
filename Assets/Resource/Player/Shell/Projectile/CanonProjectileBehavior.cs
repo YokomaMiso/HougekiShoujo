@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CanonProjectileBehavior : ProjectileBehavior
 {
-    [SerializeField] float speed = 10;
-
     protected override void Update()
     {
         base.Update();

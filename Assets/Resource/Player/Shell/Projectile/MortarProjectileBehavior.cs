@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MortarProjectileBehavior : ProjectileBehavior
 {
-
     protected override void Update()
     {
         float timeRate = timer / lifeTime;

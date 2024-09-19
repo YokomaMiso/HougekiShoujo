@@ -171,6 +171,8 @@ public class Player : MonoBehaviour
                 }
 
                 if (!alive) { playerDead.DeadBehavior(); }
+
+                SetNetPos();
             }
             else
             {
@@ -260,6 +262,11 @@ public class Player : MonoBehaviour
         {
             playerDead.DeadBehavior();
         }
+
+    }
+
+    void SetNetPos()
+    {
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos = transform.position;
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerState = playerState;
     }

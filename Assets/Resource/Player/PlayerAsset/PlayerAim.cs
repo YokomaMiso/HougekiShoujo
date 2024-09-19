@@ -59,11 +59,16 @@ public class PlayerAim : MonoBehaviour
             case SHELL_TYPE.CANON:
                 attackArea.SetActive(true);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[1];
+                aoeArea.SetActive(true);
+                aoeArea.GetComponent<MeshRenderer>().material.SetFloat("_Degree", 360);
                 break;
             case SHELL_TYPE.MORTAR:
                 attackArea.SetActive(true);
+                attackAreaMat[2].SetFloat("_Degree", 360);
+                attackAreaMat[2].SetColor("_baseColor", Color.cyan*0.5f);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[2];
                 aoeArea.SetActive(true);
+                aoeArea.GetComponent<MeshRenderer>().material.SetFloat("_Degree", 360);
                 break;
         }
 
@@ -90,6 +95,8 @@ public class PlayerAim : MonoBehaviour
                     case SHELL_TYPE.CANON:
                         attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
                         aimVector = movement;
+                        float aimRange = shellData.GetAimRange();
+                        aoeArea.transform.position = attackArea.transform.position + aimVector.normalized * aimRange / 2;
                         break;
 
                     case SHELL_TYPE.MORTAR:
