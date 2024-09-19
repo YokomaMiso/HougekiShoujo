@@ -3,8 +3,7 @@ Shader "CustomShader/MiniMapWithOutline"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _CutBlack("CutBlack", Range(0, 0.05)) = 0.01
-        _PlayerTeam("PlayerTeam", Float) = 1
+        _CutBlack("CutBlack", Range(0, 0.05)) = 0.01    
         _PlayerSize("PlayerSize",Range(0.001,0.01))=0.01
         _MaxPlayer("MaxPlayer",Float)=6
         _TeamAColor("TeamAColor",Color)=(0.1255, 0.3137, 0.8941, 1)

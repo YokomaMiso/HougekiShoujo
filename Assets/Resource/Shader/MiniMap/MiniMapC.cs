@@ -20,7 +20,7 @@ public class MiniMapC : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             if (OSCManager.OSCinstance.GetRoomData(i).myBannerNum == -1) { MaxPlayer--; }
-            Debug.Log("MaxPlayer: " + MaxPlayer);
+
         }
     }
 
@@ -34,7 +34,6 @@ public class MiniMapC : MonoBehaviour
     void BindPlayerPosInShader()
     {
         //マップスケールの計算式将来で修正します
-        int PlayerCount = 0;
         Vector4[] playerPositions = new Vector4[MaxPlayer];
         float[] playerTeams = new float[MaxPlayer];
         for (int num = 0; num < MaxPlayer; num++)
@@ -48,26 +47,29 @@ public class MiniMapC : MonoBehaviour
             {
                 if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum % 2 == 0)
                 {
-                    playerTeams[PlayerCount] = 1;
+                    playerTeams[num] = 1;
                 }
                 else
                 {
-                    playerTeams[PlayerCount] = 0;
+                    playerTeams[num] = 0;
                 }
                 Vector3 playerPos = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos;
                 playerPos.x = (playerPos.x + 50) / 100;
                 playerPos.z = (playerPos.z + 52) / 100;
 
-                playerPositions[PlayerCount] = new Vector4(playerPos.x, 0, playerPos.z, 1);
-                PlayerCount++;
+                playerPositions[num] = new Vector4(playerPos.x, 0, playerPos.z, 1);
             }
             else
             {
-                //Vector3 playerPos = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
+                Vector3 playerPos = OSCManager.OSCinstance.GetIngameData(num).mainPacketData.inGameData.playerPos;
+                playerPos.x = (playerPos.x + 50) / 100;
+                playerPos.z = (playerPos.z + 52) / 100;
+
+                playerPositions[num] = new Vector4(playerPos.x, 0, playerPos.z, 1);
             }
         }
 
-
+        //Debug.Log("MaxPlayer: " + playerPositions[1]);
 
         if (miniMap != null)
         {
