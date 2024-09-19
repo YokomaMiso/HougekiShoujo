@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
 
-        myCollider=GetComponent<Collider>();
+        myCollider = GetComponent<Collider>();
 
         for (int i = 0; i < 6; i++)
         {
@@ -370,11 +370,15 @@ public class Player : MonoBehaviour
         float[] playerTeams = new float[MaxPlayer];
         for (int num = 0; num < 6; num++)
         {
-            if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum == -1) { continue; }
+            MachingRoomData.RoomData roomData;
+
+            if (num == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
+            else { roomData = OSCManager.OSCinstance.GetRoomData(num); }
+            if (roomData.myBannerNum == -1) { continue; }
 
             if (num == Managers.instance.playerID)
             {
-                if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum%2==0) 
+                if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum % 2 == 0)
                 {
                     playerTeams[PlayerCount] = 1;
                 }
@@ -395,7 +399,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        
+
 
         if (miniMap != null)
         {

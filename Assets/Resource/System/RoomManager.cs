@@ -8,7 +8,6 @@ using static MachingRoomData;
 public class RoomManager : MonoBehaviour
 {
     /*“à•”“I‚Èˆ—*/
-    public readonly int maxCharaCount = 3;
     public readonly int empty = -1;
     public int nowPlayerCount = 1;
 
@@ -137,6 +136,8 @@ public class RoomManager : MonoBehaviour
         if (myRoomData.GetReadyPlayers(myRoomData.myID)) { return; }
 
         int calc = myRoomData.GetSelectedCharacterID(Managers.instance.playerID);
+
+        int maxCharaCount = Managers.instance.gameManager.playerDatas.Length;
 
         if (value > 0) { calc = (calc + 1) % maxCharaCount; }
         else { calc = (calc + (maxCharaCount - 1)) % maxCharaCount; }
