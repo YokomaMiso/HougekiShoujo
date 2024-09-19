@@ -16,11 +16,13 @@ public class MiniMapC : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         for (int i = 0; i < 6; i++)
         {
             //if (OSCManager.OSCinstance.GetRoomData(i).myBannerNum == -1) { MaxPlayer--; }
 
         }
+        */
     }
 
     // Update is called once per frame
@@ -33,22 +35,34 @@ public class MiniMapC : MonoBehaviour
     void BindPlayerPosInShader()
     {
         //¥Þ¥Ã¥×¥¹¥±©`¥EÎÓ‹ËãÊ½½«À´¤ÇÐÞÕý¤·¤Þ¤¹
-        Vector4[] playerPositions = new Vector4[MachingRoomData.bannerMaxCount];
-        float[] playerTeams = new float[MachingRoomData.bannerMaxCount];
-        for (int num = 0; num < MachingRoomData.bannerMaxCount; num++)
+        int playerCount = Managers.instance.gameManager.GetPlayerCount();
+        Vector4[] playerPositions = new Vector4[playerCount];
+        float[] playerTeams = new float[playerCount];
+
+        int arrayIndex = 0;
+
+        for (int num = 0; num < playerCount; num++)
         {
-            MachingRoomData.RoomData roomData;
-            if (num == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
-            else { roomData = OSCManager.OSCinstance.GetRoomData(num); }
-            if (roomData.myBannerNum == -1) { continue; }
+            //MachingRoomData.RoomData roomData;
+            //if (num == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
+            //else { roomData = OSCManager.OSCinstance.GetRoomData(num); }
+            //if (roomData.myBannerNum == -1) { continue; }
 
-            playerTeams[num] = roomData.myBannerNum % 2;
+            //Is there Player in now number?
+            GameObject nowPlayer = Managers.instance.gameManager.GetPlayer(num);
+            if (nowPlayer == null) { continue; }
 
-            Vector3 playerPos = Managers.instance.gameManager.GetPlayer(num).transform.position;
+            //Set color from number
+            playerTeams[arrayIndex] = num % 2;
+
+            //Set position from Player instance
+            Vector3 playerPos = nowPlayer.transform.position;
             playerPos.x = (playerPos.x + 50) / 100;
             playerPos.z = (playerPos.z + 52) / 100;
 
-            playerPositions[num] = new Vector4(playerPos.x, 0, playerPos.z, 1);
+            playerPositions[arrayIndex] = new Vector4(playerPos.x, 0, playerPos.z, 1);
+
+            arrayIndex++;
             /*
             if (num == Managers.instance.playerID)
             {
