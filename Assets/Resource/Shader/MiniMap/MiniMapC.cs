@@ -63,7 +63,7 @@ public class MiniMapC : MonoBehaviour
             }
             else
             {
-                Vector3 playerPos = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
+                //Vector3 playerPos = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
             }
         }
 
