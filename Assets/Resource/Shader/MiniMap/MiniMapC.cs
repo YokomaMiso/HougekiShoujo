@@ -5,21 +5,20 @@ using UnityEngine;
 public class MiniMapC : MonoBehaviour
 {
 
-    MachingRoomData.RoomData roomData;
 
     //¥ß¥Ë¥Þ¥Ã¥×
     public Material miniMap;
     public void SetMiniMapMat(Material _mat) { miniMap = _mat; }
     public Material GetMiniMapMat() { return miniMap; }
 
-    int MaxPlayer = 6;
+    //int MaxPlayer = 6;
 
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < 6; i++)
         {
-            if (OSCManager.OSCinstance.GetRoomData(i).myBannerNum == -1) { MaxPlayer--; }
+            //if (OSCManager.OSCinstance.GetRoomData(i).myBannerNum == -1) { MaxPlayer--; }
 
         }
     }
@@ -33,26 +32,26 @@ public class MiniMapC : MonoBehaviour
 
     void BindPlayerPosInShader()
     {
-        //¥Þ¥Ã¥×¥¹¥±©`¥ë¤ÎÓ‹ËãÊ½½«À´¤ÇÐÞÕý¤·¤Þ¤¹
-        Vector4[] playerPositions = new Vector4[MaxPlayer];
-        float[] playerTeams = new float[MaxPlayer];
-        for (int num = 0; num < MaxPlayer; num++)
+        //¥Þ¥Ã¥×¥¹¥±©`¥EÎÓ‹ËãÊ½½«À´¤ÇÐÞÕý¤·¤Þ¤¹
+        Vector4[] playerPositions = new Vector4[MachingRoomData.bannerMaxCount];
+        float[] playerTeams = new float[MachingRoomData.bannerMaxCount];
+        for (int num = 0; num < MachingRoomData.bannerMaxCount; num++)
         {
-
+            MachingRoomData.RoomData roomData;
             if (num == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
             else { roomData = OSCManager.OSCinstance.GetRoomData(num); }
             if (roomData.myBannerNum == -1) { continue; }
 
+            playerTeams[num] = roomData.myBannerNum % 2;
+
+            Vector3 playerPos = Managers.instance.gameManager.GetPlayer(num).transform.position;
+            playerPos.x = (playerPos.x + 50) / 100;
+            playerPos.z = (playerPos.z + 52) / 100;
+
+            playerPositions[num] = new Vector4(playerPos.x, 0, playerPos.z, 1);
+            /*
             if (num == Managers.instance.playerID)
             {
-                if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum % 2 == 0)
-                {
-                    playerTeams[num] = 1;
-                }
-                else
-                {
-                    playerTeams[num] = 0;
-                }
                 Vector3 playerPos = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos;
                 playerPos.x = (playerPos.x + 50) / 100;
                 playerPos.z = (playerPos.z + 52) / 100;
@@ -67,6 +66,7 @@ public class MiniMapC : MonoBehaviour
 
                 playerPositions[num] = new Vector4(playerPos.x, 0, playerPos.z, 1);
             }
+            */
         }
 
         //Debug.Log("MaxPlayer: " + playerPositions[1]);
