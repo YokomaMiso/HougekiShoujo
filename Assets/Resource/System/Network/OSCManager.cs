@@ -545,6 +545,8 @@ public class OSCManager : MonoBehaviour
 
     const string broadcastAddress = "255.255.255.255";
 
+    const int startPort = 8000;
+
     string address = "/main";
 
     ///////// OSCcoreü‚è ////////
@@ -556,6 +558,12 @@ public class OSCManager : MonoBehaviour
 
 
     OscServer server;
+
+    //©•ª‚ªƒT[ƒo‚©‚Ç‚¤‚©
+    bool isServer = false;
+    bool isServerResponse = false;
+
+    const float waitHandshakeResponseTime = 4f;
 
 
     ////////////////////////////////
