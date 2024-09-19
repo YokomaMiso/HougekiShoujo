@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a2370ac2bc84a10429a96bc0d6dea133
+guid: 7b1eb2397700e724ea6530907eb37c0b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chikane_Idle_Right_0
+      name: Chikane_Run_Right_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1c947ee390429643b0f96796a2627a3
-      internalID: -342649498
+      spriteID: b0154625b1a359a4488666e852111b16
+      internalID: 1537180837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chikane_Idle_Right_1
+      name: Chikane_Run_Right_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27c384de519552941af376bdffd9e708
-      internalID: -1316213707
+      spriteID: 6e5a0124ba1103d4cb3a9c0539f9b632
+      internalID: 448599626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chikane_Idle_Right_2
+      name: Chikane_Run_Right_2
       rect:
         serializedVersion: 2
         x: 256
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6587d7ca16a01b84593101d4581c9f8d
-      internalID: 1726155883
+      spriteID: 9d5eb9ed78e0be34cba14a484ce0e64f
+      internalID: -455543894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chikane_Idle_Right_3
+      name: Chikane_Run_Right_3
       rect:
         serializedVersion: 2
         x: 0
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6489e4e9dcab12499248f90393199f9
-      internalID: -1422203455
+      spriteID: 0ed18331933a49d4c950158045469c5e
+      internalID: -571385583
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chikane_Idle_Right_4
+      name: Chikane_Run_Right_4
       rect:
         serializedVersion: 2
         x: 128
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a968e15345c9c6f429f83327d4a432c4
-      internalID: -467295007
+      spriteID: 1c9fab0eda3528f4da85ecc82bc94102
+      internalID: -305441957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chikane_Idle_Right_5
+      name: Chikane_Run_Right_5
       rect:
         serializedVersion: 2
         x: 256
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2337cb72b7f539e4c92bb1b86f299b52
-      internalID: -797699109
+      spriteID: 86ad0169c9d68554eb04bb98a202fec5
+      internalID: 224334616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chikane_Idle_Right_6
+      name: Chikane_Run_Right_6
       rect:
         serializedVersion: 2
         x: 0
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 445abe4c34b57764cbfddd45705e531d
-      internalID: -1822921460
+      spriteID: 2722e518f7395074db1e54349ab2ea32
+      internalID: -549513931
       vertices: []
       indices: 
       edges: []
@@ -267,13 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Chikane_Idle_Right_0: -342649498
-      Chikane_Idle_Right_1: -1316213707
-      Chikane_Idle_Right_2: 1726155883
-      Chikane_Idle_Right_3: -1422203455
-      Chikane_Idle_Right_4: -467295007
-      Chikane_Idle_Right_5: -797699109
-      Chikane_Idle_Right_6: -1822921460
+      Chikane_Run_Right_0: 1537180837
+      Chikane_Run_Right_1: 448599626
+      Chikane_Run_Right_2: -455543894
+      Chikane_Run_Right_3: -571385583
+      Chikane_Run_Right_4: -305441957
+      Chikane_Run_Right_5: 224334616
+      Chikane_Run_Right_6: -549513931
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
