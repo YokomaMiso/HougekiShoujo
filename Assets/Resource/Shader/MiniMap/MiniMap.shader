@@ -8,6 +8,8 @@ Shader "CustomShader/MiniMapWithOutline"
         _PlayerTeam("PlayerTeam", Float) = 1
         _PlayerSize("PlayerSize",Range(0.001,0.01))=0.01
         _MaxPlayer("MaxPlayer",Float)=6
+        _TeamAColor("TeamAColor",Color)=(0.1255, 0.3137, 0.8941, 1)
+        _TeamBColor("TeamBColor",Color)=(1, 0, 0, 1)
 
         _PixelationAmount("Pixelation Amount", Float) = 100
         _OutlineColor("Outline Color", Color) = (0, 0, 0, 1) 
@@ -110,6 +112,8 @@ Shader "CustomShader/MiniMapWithOutline"
             float _PlayerTeam[6];
             float _PlayerSize;
             float _MaxPlayer;
+            float4 _TeamAColor;
+            float4 _TeamBColor;
 
             v2f vert(appdata v)
             {
@@ -136,9 +140,9 @@ Shader "CustomShader/MiniMapWithOutline"
                     if (distance < _PlayerSize)
                     {
                         if (_PlayerTeam[idx] == 1) 
-                            playerColor = fixed4(0, 1, 0, 1);
+                            playerColor = _TeamAColor;
                         else 
-                            playerColor = fixed4(1, 0, 0, 1);
+                            playerColor = _TeamBColor;
                     }
                 }
 
