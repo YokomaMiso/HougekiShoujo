@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class MortarProjectileBehavior : ProjectileBehavior
 {
+    float addAngle = 0;
+    protected override void Start()
+    {
+        base.Start();
+        if (transform.GetChild(0).localScale.x < 0) { addAngle = 180; }
+    }
+
     protected override void Update()
     {
         float timeRate = timer / lifeTime;
 
-        if (timeRate < 0.5f) { imageAnimator.transform.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * 90; }
-        else { imageAnimator.transform.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * -90; }
+        if (timeRate < 0.5f) { imageAnimator.transform.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * (90 + addAngle); }
+        else { imageAnimator.transform.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * -(90 + addAngle); }
 
         base.Update();
 
