@@ -18,6 +18,7 @@ public abstract class ProjectileBehavior : MonoBehaviour
 
     //Canon
     protected float angle = 0;
+    protected float speed = 5;
 
     //Mortar
     protected Vector3 defaultPosition;
@@ -29,6 +30,7 @@ public abstract class ProjectileBehavior : MonoBehaviour
         imageAnimator.runtimeAnimatorController = _data.GetAnim();
         lifeTime = _data.GetLifeTime();
         explosion = _data.GetExplosion();
+        speed=_data.GetSpeed();
         TagSetting();
     }
 

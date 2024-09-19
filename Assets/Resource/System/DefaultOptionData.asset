@@ -16,4 +16,4 @@ MonoBehaviour:
   bgmVolume: 0.5
   sfxVolume: 0.5
   cameraShakeOn: 1
-  mortarSensitive: 5
+  mortarSensitive: 10
