@@ -18,6 +18,7 @@ public class Shell : ScriptableObject
     [SerializeField, Header("Recoil Time")] float recoilTime;
     [SerializeField, Header("Projectile Speed")] float projectileSpeed;
     [SerializeField, Header("Aim Range")] float aimRange;
+    [SerializeField, Header("Aim Degree")] float aimDegree;
     [SerializeField, Header("Life Time")] float lifeTime;
 
     public Sprite GetShellIcon() { return shellIcon; }
@@ -41,5 +42,6 @@ public class Shell : ScriptableObject
                 return projectileSpeed * lifeTime * 2;
         }
     }
+    public float GetAOEDegree() { return aimDegree; }
     public float GetLifeTime() { return lifeTime; }
 }
