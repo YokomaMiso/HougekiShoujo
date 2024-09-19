@@ -23,4 +23,5 @@ MonoBehaviour:
   recoilTime: 1.5
   projectileSpeed: 10
   aimRange: 0
+  aimDegree: 360
   lifeTime: 0.75

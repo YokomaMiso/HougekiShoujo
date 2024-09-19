@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChikaneBlastProjectileBehavior : ProjectileBehavior
 {
     int state = 0;
-    const int spawnCount = 3;
+    const int spawnCount = 6;
     float[] timeBorder = null;
 
     protected override void Start()
@@ -30,13 +30,15 @@ public class ChikaneBlastProjectileBehavior : ProjectileBehavior
 
     protected override void SpawnExplosion()
     {
-        Vector3 offset = transform.right * 1.5f;
+        Vector3 offsetValue = Vector3.right * 2.0f;
+        float offsetAngle = 360.0f / spawnCount;
 
         for (int i = 0; i < spawnCount; i++)
         {
-            Vector3 spawnPos = transform.position + offset - (offset * i);
+            Vector3 offset = Quaternion.Euler(0, offsetAngle * i, 0) * offsetValue;
+            Vector3 spawnPos = ownerPlayer.transform.position + offset;
             GameObject explosionInstance = explosion.GetBody();
-            GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
+            GameObject obj = Instantiate(explosionInstance, spawnPos + Vector3.up, Quaternion.identity);
             obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
             obj.GetComponent<ExplosionBehavior>().SetData(explosion);
         }
