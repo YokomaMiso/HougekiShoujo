@@ -53,7 +53,7 @@ public class MiniMapC : MonoBehaviour
             if (nowPlayer == null) { continue; }
 
             //Set color from number
-            playerTeams[arrayIndex] = num % 2;
+            playerTeams[arrayIndex] = (num + 1) % 2;
 
             //Set position from Player instance
             Vector3 playerPos = nowPlayer.transform.position;
