@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     public PlayerData[] playerDatas;
 
     [SerializeField] Material[] outLineMat;
-    [SerializeField] Material[] MiniMapMat;
 
 
     //âºç¿ïW
@@ -99,7 +98,6 @@ public class GameManager : MonoBehaviour
             nowPlayer.SetPlayerID(oscRoomData.myID);
             nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(oscRoomData.myID)]);
             nowPlayer.SetOutLineMat(outLineMat[i % 2]);
-            nowPlayer.SetMiniMapMat(MiniMapMat[0]);
 
             //instantiateCount++;
         }
@@ -224,15 +222,15 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            roundTimer -= Managers.instance.timeManager.GetDeltaTime();
-            if (DeadCheck())
-            {
-                play = false;
-                end = true;
-            }
-        }
+        //else
+        //{
+        //    roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+        //    if (DeadCheck())
+        //    {
+        //        play = false;
+        //        end = true;
+        //    }
+        //}
 
         EndBehavior();
     }
