@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using System.Net.NetworkInformation;
 using System.Linq;
 using UnityEngine;
@@ -563,6 +565,8 @@ public class OSCManager : MonoBehaviour
     bool isServer = false;
     bool isServerResponse = false;
 
+    bool isFinishHandshake = false;
+
     const float waitHandshakeResponseTime = 4f;
 
 
@@ -603,6 +607,9 @@ public class OSCManager : MonoBehaviour
         roomData = default;
         roomData = initRoomData(roomData);
 
+
+        //以下Start処理はハンドシェイク完了後に行うため以降予定
+
         //playerIDの割り当て
         Managers.instance.playerID = myPort - 8000;
         roomData.myID = Managers.instance.playerID;
@@ -627,7 +634,7 @@ public class OSCManager : MonoBehaviour
             }
             else
             {
-                //もし自分以外のデータなら一旦居ないものとして扱う
+                //もし自分以外のデータなら一旦居ないものとして扱いデータをセットする
                 allData.pData.mainPacketData.comData.myPort = -1;
                 allData.pData.PlayerID = i;
                 allData.rData = initRoomData(allData.rData);
@@ -679,23 +686,28 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        //インゲームデータから送信用データへコピー
-        allData.rData = roomData;
-        allData.pData = myNetIngameData;
 
-        //そのデータを送信用リストへ更にコピー
-        playerDataList[Managers.instance.playerID] = allData;
-
-        //送信用データリストにある分送信
-        for (int i = 0; i < playerDataList.Count; i++)
+        //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
+        if (isFinishHandshake)
         {
-            //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
-            AllGameData.AllData _data = new AllGameData.AllData();
-            _data.rData = initRoomData(_data.rData);
+            //インゲームデータから送信用データへコピー
+            allData.rData = roomData;
+            allData.pData = myNetIngameData;
 
-            _data = playerDataList[i];
+            //そのデータを送信用リストへ更にコピー
+            playerDataList[Managers.instance.playerID] = allData;
 
-            SendValue(_data);
+            //送信用データリストにある分送信
+            for (int i = 0; i < playerDataList.Count; i++)
+            {
+                //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+                AllGameData.AllData _data = new AllGameData.AllData();
+                _data.rData = initRoomData(_data.rData);
+
+                _data = playerDataList[i];
+
+                SendValue(_data);
+            }
         }
     }
 
@@ -712,7 +724,41 @@ public class OSCManager : MonoBehaviour
     ///////////////　ハンドシェイク用関数　/////////////
     ////////////////////////////////////////////////////
 
+    private string GetLocalIPAddress()
+    {
+        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+
+        foreach (IPAddress ip in host.AddressList)
+        {
+            return ip.ToString();
+        }
+
+        Debug.LogError("コンピュータ内にIPv4が存在しません");
+        return null;
+    }
+
     private void CreateTempNet()
+    {
+        //サーバがいるかどうか応答を確認するためのクライアントを作成する
+        OscClient _client = new OscClient(broadcastAddress, startPort);
+
+        clientList.Add(_client);
+
+        //一時ポート番号でサーバからの応答を待機
+        int tempPort = GetRandomTempPort();
+
+        server = new OscServer(tempPort);
+
+        return;
+    }
+
+    private void StartToServer()
+    {
+
+        return;
+    }
+
+    private void StartToClient()
     {
 
         return;
@@ -720,7 +766,7 @@ public class OSCManager : MonoBehaviour
 
     private int GetRandomTempPort()
     {
-        return Random.Range(8006, 9000);
+        return UnityEngine.Random.Range(8006, 9000);
     }
 
     ////////////////////////////////////////////////////
