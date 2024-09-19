@@ -105,12 +105,9 @@ public class Player : MonoBehaviour
     public void SetOutLineMat(Material _mat) { outLine = _mat; }
     public Material GetOutLineMat() { return outLine; }
 
-    //ミニマップ
-    Material miniMap;
-    public void SetMiniMapMat(Material _mat) { miniMap = _mat; }
-    public Material GetMiniMapMat() { return miniMap; }
+    
 
-    int MaxPlayer = 6;
+    
 
     void Start()
     {
@@ -147,11 +144,7 @@ public class Player : MonoBehaviour
 
         myCollider = GetComponent<Collider>();
 
-        for (int i = 0; i < 6; i++)
-        {
-            if (OSCManager.OSCinstance.GetRoomData(i).myBannerNum == -1) { MaxPlayer--; }
-            Debug.Log("MaxPlayer: " + MaxPlayer);
-        }
+        
     }
 
     void Update()
@@ -162,7 +155,7 @@ public class Player : MonoBehaviour
                 if (Managers.instance.gameManager.play)
                 {
                     OwnPlayerBehavior();
-                    BindPlayerPosInShader();
+                    
                 }
                 else
                 {
@@ -362,49 +355,5 @@ public class Player : MonoBehaviour
         playerImage.transform.localScale = imageScale;
     }
 
-    void BindPlayerPosInShader()
-    {
-        //マップスケールの計算式将来で修正します
-        int PlayerCount = 0;
-        Vector4[] playerPositions = new Vector4[MaxPlayer];
-        float[] playerTeams = new float[MaxPlayer];
-        for (int num = 0; num < 6; num++)
-        {
-            MachingRoomData.RoomData roomData;
-
-            if (num == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
-            else { roomData = OSCManager.OSCinstance.GetRoomData(num); }
-            if (roomData.myBannerNum == -1) { continue; }
-
-            if (num == Managers.instance.playerID)
-            {
-                if (OSCManager.OSCinstance.GetRoomData(num).myBannerNum % 2 == 0)
-                {
-                    playerTeams[PlayerCount] = 1;
-                }
-                else
-                {
-                    playerTeams[PlayerCount] = 0;
-                }
-                Vector3 playerPos = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos;
-                playerPos.x = (playerPos.x + 50) / 100;
-                playerPos.z = (playerPos.z + 52) / 100;
-
-                playerPositions[PlayerCount] = new Vector4(playerPos.x, 0, playerPos.z, 1);
-                PlayerCount++;
-            }
-            else
-            {
-                Vector3 playerPos = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
-            }
-        }
-
-
-
-        if (miniMap != null)
-        {
-            miniMap.SetVectorArray("_PlayerPositions", playerPositions);
-            miniMap.SetFloatArray("_PlayerTeam", playerTeams);
-        }
-    }
+    
 }

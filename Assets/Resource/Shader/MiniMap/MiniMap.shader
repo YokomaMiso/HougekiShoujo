@@ -4,7 +4,6 @@ Shader "CustomShader/MiniMapWithOutline"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _CutBlack("CutBlack", Range(0, 0.05)) = 0.01
-        _PlayerPositions("Player Positions", Vector) = (0,0,0,0)
         _PlayerTeam("PlayerTeam", Float) = 1
         _PlayerSize("PlayerSize",Range(0.001,0.01))=0.01
         _MaxPlayer("MaxPlayer",Float)=6
