@@ -112,6 +112,20 @@ public class GameManager : MonoBehaviour
         return playerInstance[_num];
     }
 
+    public int GetPlayerCount()
+    {
+        int returnNum = 0;
+        for(int i = 0; i < playerInstance.Length; i++)
+        {
+            if (playerInstance[i] == null) { continue; }
+            returnNum++;
+        }
+
+
+        return returnNum;
+    }
+
+
     void Init()
     {
         play = false;
@@ -222,15 +236,15 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        //else
-        //{
-        //    roundTimer -= Managers.instance.timeManager.GetDeltaTime();
-        //    if (DeadCheck())
-        //    {
-        //        play = false;
-        //        end = true;
-        //    }
-        //}
+        else
+        {
+            roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+            if (DeadCheck())
+            {
+                play = false;
+                end = true;
+            }
+        }
 
         EndBehavior();
     }
