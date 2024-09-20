@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour
         roundTimer = 60;
 
         start = false;
-        startTimer = 0;
+        startTimer = 2;
 
         end = false;
         endTimer = 0;
