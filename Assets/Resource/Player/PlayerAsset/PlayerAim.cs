@@ -127,20 +127,21 @@ public class PlayerAim : MonoBehaviour
         GameObject obj;
         float angle;
 
+        Vector3 applyPos = aimVector.normalized;
+        if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
+
         switch (shellData.GetShellType())
         {
             default: //SHELL_TYPE.BLAST
                 angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
                 const float blastDistance = 1.5f;
-                Vector3 applyPos = aimVector.normalized;
-                if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
                 obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
                 break;
 
             case SHELL_TYPE.CANON:
-                angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
+                angle = Mathf.Atan2(applyPos.x, applyPos.z) * Mathf.Rad2Deg;
                 obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
-                angle = Mathf.Atan2(aimVector.z, aimVector.x) * Mathf.Rad2Deg;
+                angle = Mathf.Atan2(applyPos.z, applyPos.x) * Mathf.Rad2Deg;
                 obj.GetComponent<ProjectileBehavior>().SetAngle(angle);
                 break;
 
