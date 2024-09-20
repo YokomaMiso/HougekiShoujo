@@ -17,7 +17,7 @@ MonoBehaviour:
   idleAnimationData: {fileID: 9100000, guid: 78e783a1168478f4780a7a2cac24295c, type: 2}
   runAnimationData:
   - {fileID: 9100000, guid: e5fe418d1fb755645a40964d05ff4240, type: 2}
-  reloadAnimationData: {fileID: 9100000, guid: 78e783a1168478f4780a7a2cac24295c, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: 3df39da41517db54ead9a3e54c4f4db7, type: 2}
   aimAnimationData:
   - {fileID: 9100000, guid: 3df39da41517db54ead9a3e54c4f4db7, type: 2}
   - {fileID: 9100000, guid: 3df39da41517db54ead9a3e54c4f4db7, type: 2}
@@ -25,5 +25,5 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 3df39da41517db54ead9a3e54c4f4db7, type: 2}
   - {fileID: 9100000, guid: 3df39da41517db54ead9a3e54c4f4db7, type: 2}
   recoilAnimationData:
-  - {fileID: 9100000, guid: 78e783a1168478f4780a7a2cac24295c, type: 2}
+  - {fileID: 9100000, guid: 155b6435b61722f44a374dd56b00e10f, type: 2}
   deadAnimationData: {fileID: 9100000, guid: 78e783a1168478f4780a7a2cac24295c, type: 2}
