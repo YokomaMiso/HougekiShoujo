@@ -15,10 +15,13 @@ public class ChikaneBlastProjectileBehavior : ProjectileBehavior
     protected override void Start()
     {
         base.Start();
-        timeBorder = new float[3];
-        timeBorder[0] = 0.3f;
-        timeBorder[1] = 0.5f;
-        timeBorder[2] = 0.7f;
+        timeBorder = new float[maxState];
+        const float baseSpawnTime = 0.5f;
+        const float spawnBetween = 0.1f;
+        for (int i = 0; i < maxState; i++)
+        {
+            timeBorder[i] = baseSpawnTime + spawnBetween * i;
+        }
 
         if (ownerPlayer.NowDirection() < 0) { direction = -1; }
         inputVector = ownerPlayer.GetInputVector().normalized;
@@ -42,7 +45,7 @@ public class ChikaneBlastProjectileBehavior : ProjectileBehavior
         //Vector3 offsetValue = Quaternion.Euler(0, spawnAngle, 0) * inputVector * 2.0f;
         Vector3 offsetValue = inputVector * 2.0f;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < spawnCount / maxState; i++)
         {
             int spawnNum = i + state * 2;
 
