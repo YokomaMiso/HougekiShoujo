@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Linq;
 using UnityEngine;
 using OscCore;
-using System.Runtime.InteropServices;
 
 //public class OSCManager : MonoBehaviour
 //{
@@ -547,6 +548,8 @@ public class OSCManager : MonoBehaviour
 
     const string broadcastAddress = "255.255.255.255";
 
+    int tempPort;
+
     const int startPort = 8000;
 
     string address = "/main";
@@ -611,63 +614,76 @@ public class OSCManager : MonoBehaviour
         //以下Start処理はハンドシェイク完了後に行うため以降予定
 
         //playerIDの割り当て
-        Managers.instance.playerID = myPort - 8000;
-        roomData.myID = Managers.instance.playerID;
-
-        //自分のデータに自分のポートとplayerIDを保存、データ初期化判定をtrueに
-        myNetIngameData.mainPacketData.comData.myPort = myPort;
-        myNetIngameData.PlayerID = Managers.instance.playerID;
-        roomData.isInData = true;
+        //Managers.instance.playerID = myPort - 8000;
+        //roomData.myID = Managers.instance.playerID;
+        //
+        ////自分のデータに自分のポートとplayerIDを保存、データ初期化判定をtrueに
+        //myNetIngameData.mainPacketData.comData.myPort = myPort;
+        //myNetIngameData.PlayerID = Managers.instance.playerID;
+        //roomData.isInData = true;
 
         //自分のデータだった時だけポート番号を入れる
         for (int i = 0; i < maxPlayer; i++)
         {
-            if (i == Managers.instance.playerID)
-            {
-                //自分のplayerIDがデータリストの引数と同じならローカル用の自身のデータを送信用データにコピーする
-                allData.pData.mainPacketData.comData.myPort = myNetIngameData.mainPacketData.comData.myPort;
-                allData.pData.PlayerID = myNetIngameData.PlayerID;
-                allData.rData = initRoomData(allData.rData);
-                allData.rData.isInData = roomData.isInData;
-                allData.rData.myID = myNetIngameData.PlayerID;
-                playerDataList.Add(allData);
-            }
-            else
-            {
-                //もし自分以外のデータなら一旦居ないものとして扱いデータをセットする
-                allData.pData.mainPacketData.comData.myPort = -1;
-                allData.pData.PlayerID = i;
-                allData.rData = initRoomData(allData.rData);
-                allData.rData.isInData = false;
-                playerDataList.Add(allData);
-            }
+            //if (i == Managers.instance.playerID)
+            //{
+            //    //自分のplayerIDがデータリストの引数と同じならローカル用の自身のデータを送信用データにコピーする
+            //    allData.pData.mainPacketData.comData.myPort = myNetIngameData.mainPacketData.comData.myPort;
+            //    allData.pData.PlayerID = myNetIngameData.PlayerID;
+            //    allData.rData = initRoomData(allData.rData);
+            //    allData.rData.isInData = roomData.isInData;
+            //    allData.rData.myID = myNetIngameData.PlayerID;
+            //    playerDataList.Add(allData);
+            //}
+            //else
+            //{
+            //    //もし自分以外のデータなら一旦居ないものとして扱いデータをセットする
+            //    allData.pData.mainPacketData.comData.myPort = -1;
+            //    allData.pData.PlayerID = i;
+            //    allData.rData = initRoomData(allData.rData);
+            //    allData.rData.isInData = false;
+            //    playerDataList.Add(allData);
+            //}
+
+            //全て初期値で最大人数分のデータをセットする
+            allData.pData.mainPacketData.comData.myPort = -1;
+            allData.pData.PlayerID = i;
+            allData.rData = initRoomData(allData.rData);
+            allData.rData.isInData = false;
+            playerDataList.Add(allData);
         }
+
+        //allData.pData.PlayerID = 0;
+        //allData.rData.myID = 0;
+        //playerDataList[0]
 
         //もし自分がサーバ役ならクライアント五人分の送信データを作成
-        if (Managers.instance.playerID == 0)
-        {
-            for (int i = 1; i <= 5; i++)
-            {
-                OscClient _client = new OscClient(broadcastAddress, 8000 + i);
+        //if (Managers.instance.playerID == 0)
+        //{
+        //    for (int i = 1; i <= 5; i++)
+        //    {
+        //        OscClient _client = new OscClient(broadcastAddress, 8000 + i);
+        //
+        //        clientList.Add(_client);
+        //    }
+        //}
+        ////そうでない（クライアント）ならサーバへのみ宛てたデータの作成
+        //else
+        //{
+        //    OscClient _client = new OscClient(broadcastAddress, 8000);
+        //
+        //    clientList.Add(_client);
+        //}
+        //
+        //if (server == null)
+        //{
+        //    //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
+        //    server = new OscServer(myPort);
+        //}
+        
+        //server.TryAddMethodPair(address, ReadValue, MainThreadMethod);
 
-                clientList.Add(_client);
-            }
-        }
-        //そうでない（クライアント）ならサーバへのみ宛てたデータの作成
-        else
-        {
-            OscClient _client = new OscClient(broadcastAddress, 8000);
-
-            clientList.Add(_client);
-        }
-
-        if (server == null)
-        {
-            //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
-            server = new OscServer(myPort);
-        }
-
-        server.TryAddMethodPair(address, ReadValue, MainThreadMethod);
+        CreateTempNet();
     }
 
     // Update is called once per frame
@@ -680,34 +696,42 @@ public class OSCManager : MonoBehaviour
 
         }
 
-        //Debug.Log(testNum);
+        Debug.Log(Managers.instance.playerID);
 
     }
 
     private void LateUpdate()
     {
+        allData.rData = roomData;
+        allData.pData = myNetIngameData;
+        playerDataList[Managers.instance.playerID] = allData;
+
 
         //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
-        if (isFinishHandshake)
+        if (false)
         {
+            Debug.Log("インゲームデータ送信");
+
+            /*
             //インゲームデータから送信用データへコピー
             allData.rData = roomData;
             allData.pData = myNetIngameData;
 
             //そのデータを送信用リストへ更にコピー
             playerDataList[Managers.instance.playerID] = allData;
+            */
 
-            //送信用データリストにある分送信
-            for (int i = 0; i < playerDataList.Count; i++)
-            {
-                //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
-                AllGameData.AllData _data = new AllGameData.AllData();
-                _data.rData = initRoomData(_data.rData);
-
-                _data = playerDataList[i];
-
-                SendValue(_data);
-            }
+            //送信用データリストにある分送信を試みる
+            //for (int i = 0; i < playerDataList.Count; i++)
+            //{
+            //    //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+            //    AllGameData.AllData _data = new AllGameData.AllData();
+            //    _data.rData = initRoomData(_data.rData);
+            //
+            //    _data = playerDataList[i];
+            //
+            //    SendValue(_data);
+            //}
         }
     }
 
@@ -745,17 +769,68 @@ public class OSCManager : MonoBehaviour
         clientList.Add(_client);
 
         //一時ポート番号でサーバからの応答を待機
-        int tempPort = GetRandomTempPort();
+        tempPort = GetRandomTempPort();
 
         server = new OscServer(tempPort);
+
+        //server.TryAddMethod(address, ReadValue);
+
+        //1秒ごとにハンドシェイクのデータ送信を試みる
+        InvokeRepeating("SendFirstHandshake", 0f, 1f);
+
+        //上のハンドシェイクを指定時間試したらタイムアウトさせる必要があるためこの中で上処理を止める
+        //もし返答がなければこの中でサーバを作成する
+        StartCoroutine(CheckForResponse());
 
         return;
     }
 
-    private void StartToServer()
+    private void SendFirstHandshake()
     {
+        AllGameData.AllData _data = new AllGameData.AllData();
+        _data.rData = initRoomData(_data.rData);
+
+        _data.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
+        _data.pData.mainPacketData.comData.myPort = tempPort;
+        
+        SendValue(_data);
 
         return;
+    }
+
+    IEnumerator CheckForResponse()
+    {
+        yield return new WaitForSeconds(waitHandshakeResponseTime);
+
+            Debug.Log("コルーチン作動");
+
+            if (roomData.isHandshaking)
+            {
+                //ハンドシェイク確認用パケット破棄前にサーバがなくなるとバグるためここに記述
+                CancelInvoke("SendFirstHandshake");
+                Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
+
+                Managers.instance.playerID = 0;
+                myNetIngameData.PlayerID = Managers.instance.playerID;
+                roomData.myID = Managers.instance.playerID;
+
+                allData.pData = myNetIngameData;
+                allData.rData = roomData;
+
+                playerDataList[0] = allData;
+
+                clientList.Clear();
+
+                //server = OscServer.GetOrCreate(startPort);
+                isServer = true;
+            }
+            else
+            {
+                CancelInvoke("SendFirstHandshake");
+                Debug.Log("サーバが存在しました、クライアント処理へ移行");
+
+                isServer = false;
+            }
     }
 
     private void StartToClient()
@@ -794,6 +869,18 @@ public class OSCManager : MonoBehaviour
         }
     }
 
+    private void SendValueTarget<T>(T _struct, OscClient _client) where T : struct
+    {
+        byte[] _sendBytes = new byte[0];
+
+        //送信データのバイト配列化
+        _sendBytes = netInstance.StructToByte(_struct);
+
+        
+        //データの送信
+        _client.Send(address, _sendBytes, _sendBytes.Length);
+    }
+
     /// <summary>
     /// サーバ側でデータをキャッチすれば呼び出されます
     /// </summary>
@@ -810,11 +897,54 @@ public class OSCManager : MonoBehaviour
         AllGameData.AllData _allData = new AllGameData.AllData();
         _allData.rData = initRoomData(_allData.rData);
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
+        
 
-        //受信したプレイヤーデータがゲーム内に存在する場合データリストにセットする
-        if (_allData.pData.PlayerID != -1)
+        if (isServer)
         {
-            playerDataList[_allData.pData.PlayerID] = _allData;
+            //受信したプレイヤーデータがゲーム内に存在する場合データリストにセットする
+            if (_allData.rData.myID != -1 && !_allData.rData.isHandshaking)
+            {
+                playerDataList[_allData.pData.PlayerID] = _allData;
+            }
+            else if (_allData.rData.myID == -1 && _allData.rData.isHandshaking)
+            {
+                for (int i = 0; i < playerDataList.Count; i++)
+                {
+                    if (playerDataList[i].pData.PlayerID == -1)
+                    {
+                        AllGameData.AllData _handshakeAllData = new AllGameData.AllData();
+                        _handshakeAllData.rData = initRoomData(_handshakeAllData.rData);
+
+                        _handshakeAllData.pData.mainPacketData.comData.targetIP = GetLocalIPAddress();
+                        _handshakeAllData.pData.mainPacketData.comData.targetPort = startPort + i;
+                        _handshakeAllData.pData.PlayerID = i;
+                        _handshakeAllData.rData.myID = i;
+                        _handshakeAllData.rData.isHandshaking = false;
+
+                        playerDataList[i] = _handshakeAllData;
+
+                        OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, _allData.pData.mainPacketData.comData.myPort);
+
+                        clientList.Add(_client);
+
+                        SendValueTarget(_handshakeAllData, _client);
+
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (_allData.rData.myID != -1 && !_allData.rData.isHandshaking)
+            {
+                playerDataList[_allData.pData.PlayerID] = _allData;
+
+                myNetIngameData = _allData.pData;
+                roomData = _allData.rData;
+
+                Managers.instance.playerID = _allData.rData.myID;
+            }
         }
     }
 
@@ -831,6 +961,8 @@ public class OSCManager : MonoBehaviour
         _roomData.hostPlayer = 0;
         _roomData.gameStart = false;
         _roomData.isInData = true;
+        _roomData.isHandshaking = true;
+        //_roomData.myID = -1;
 
         return _roomData;
     }
