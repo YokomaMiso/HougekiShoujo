@@ -360,5 +360,8 @@ public class Player : MonoBehaviour
         playerImage.transform.localScale = imageScale;
     }
 
-    
+    public float NowDirection()
+    {
+        return playerImage.transform.localScale.x;
+    }
 }
