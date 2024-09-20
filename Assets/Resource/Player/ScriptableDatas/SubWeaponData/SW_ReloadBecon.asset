@@ -15,7 +15,7 @@ MonoBehaviour:
   subWeaponIcon: {fileID: 21300000, guid: a45aa24d3ad3e66429ea146820781a5a, type: 3}
   subType: 1
   buffType: 0
-  Installation: {fileID: 1008518316061016973, guid: 0c4fce637059148479ee62bd8f6004a1,
+  installation: {fileID: 1008518316061016973, guid: 0c4fce637059148479ee62bd8f6004a1,
     type: 3}
   subWeaponExplain: "\u30EA\u30ED\u30FC\u30C9\u30D3\u30FC\u30B3\u30F3\n10\u79D2\u6301\u7D9A\u3059\u308B\u30D3\u30FC\u30B3\u30F3\u3092\u8A2D\u7F6E\n\uFF18\u79D2\u9593\u30EA\u30ED\u30FC\u30C9\u304C\u901F\u304F\u306A\u308B"
   installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
