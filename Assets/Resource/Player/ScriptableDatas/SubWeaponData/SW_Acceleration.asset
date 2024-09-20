@@ -15,8 +15,10 @@ MonoBehaviour:
   subWeaponIcon: {fileID: 21300000, guid: b9b666ef23dfbd34e8a745cf8d989064, type: 3}
   subType: 0
   buffType: 1
-  Installation: {fileID: 0}
+  installation: {fileID: 0}
   subWeaponExplain: "\u30A2\u30AF\u30BB\u30E9\u30EC\u30FC\u30BF\n\uFF15\u79D2\u9593\u3001\u81EA\u8EAB\u306E\u79FB\u52D5\u901F\u5EA6\u304C\u4E0A\u6607\u3059\u308B\n\u4F7F\u7528\u5F8C\u300115\u79D2\u306E\u5F85\u6A5F\u6642\u9593\u304C\u5FC5\u8981"
-  reloadTime: 15
+  installationStartAnim: {fileID: 0}
+  installationLoopAnim: {fileID: 0}
+  reloadTime: 25
   speedRate: 1.5
   lifeTime: 5

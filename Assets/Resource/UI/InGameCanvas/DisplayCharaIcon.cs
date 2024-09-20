@@ -70,18 +70,20 @@ public class DisplayCharaIcon : MonoBehaviour
     }
     void Update()
     {
-        float timer = Managers.instance.gameManager.startTimer;
+        if (Managers.instance.gameManager.roundCount == 1)
+        {
+            float timer = Managers.instance.gameManager.startTimer;
 
-        if (0.5f <= timer && timer < 0.65f) { FirstBehavior((timer - 0.5f) / 0.15f, 0); }
-        if (0.65f <= timer && timer < 0.8f) { FirstBehavior((timer - 0.65f) / 0.15f, 2); FirstBehavior(1, 0); }
-        if (0.8f <= timer && timer < 0.95f) { FirstBehavior((timer - 0.8f) / 0.15f, 4); FirstBehavior(1, 2); }
-        if (0.95f <= timer && timer < 1.5f) { FirstBehavior(1, 4); }
+            if (0.5f <= timer && timer < 0.65f) { FirstBehavior((timer - 0.5f) / 0.15f, 0); }
+            if (0.65f <= timer && timer < 0.8f) { FirstBehavior((timer - 0.65f) / 0.15f, 2); FirstBehavior(1, 0); }
+            if (0.8f <= timer && timer < 0.95f) { FirstBehavior((timer - 0.8f) / 0.15f, 4); FirstBehavior(1, 2); }
+            if (0.95f <= timer && timer < 1.5f) { FirstBehavior(1, 4); }
 
-        if (1.5f <= timer && timer < 1.65f) { SecondBehavior((timer - 1.5f) / 0.15f, 0); }
-        if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
-        if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
-        if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
-
+            if (1.5f <= timer && timer < 1.65f) { SecondBehavior((timer - 1.5f) / 0.15f, 0); }
+            if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
+            if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
+            if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
+        }
         DisplayIconUpdate();
     }
 
@@ -96,11 +98,18 @@ public class DisplayCharaIcon : MonoBehaviour
             if (allBannerNum[i] == MachingRoomData.bannerEmpty) { continue; }
 
             IngameData.GameData gameData;
-            if (i == Managers.instance.playerID) { gameData= OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+            if (i == Managers.instance.playerID) { gameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
             else { gameData = OSCManager.OSCinstance.GetIngameData(allBannerNum[i]).mainPacketData.inGameData; }
-            if (gameData.alive) { continue; }
-
-            transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.gray * 0.5f;
+            if (gameData.alive)
+            {
+                transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.white;
+                transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
+            }
+            else
+            {
+                transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.gray * 0.5f;
+                transform.GetChild(i).GetComponent<Image>().color = Color.gray;
+            }
         }
     }
 

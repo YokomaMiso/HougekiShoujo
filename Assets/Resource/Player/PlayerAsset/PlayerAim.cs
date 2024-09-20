@@ -17,8 +17,11 @@ public class PlayerAim : MonoBehaviour
     public void Init()
     {
         aimVector = Vector3.zero;
-        attackArea.SetActive(false);
-        aoeArea.SetActive(false);
+        if (ownerPlayer.IsMine())
+        {
+            attackArea.SetActive(false);
+            aoeArea.SetActive(false);
+        }
     }
 
     public void SetPlayer(Player _player, GameObject _aoeArea, GameObject _attackArea)
@@ -51,16 +54,22 @@ public class PlayerAim : MonoBehaviour
         {
             case SHELL_TYPE.BLAST:
                 attackArea.SetActive(true);
+                attackAreaMat[0].SetFloat("_Degree", shellData.GetAOEDegree());
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[0];
                 break;
             case SHELL_TYPE.CANON:
                 attackArea.SetActive(true);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[1];
+                aoeArea.SetActive(true);
+                aoeArea.GetComponent<MeshRenderer>().material.SetFloat("_Degree", 360);
                 break;
             case SHELL_TYPE.MORTAR:
                 attackArea.SetActive(true);
+                attackAreaMat[2].SetFloat("_Degree", 360);
+                attackAreaMat[2].SetColor("_baseColor", Color.cyan * 0.5f);
                 attackArea.GetComponent<MeshRenderer>().material = attackAreaMat[2];
                 aoeArea.SetActive(true);
+                aoeArea.GetComponent<MeshRenderer>().material.SetFloat("_Degree", 360);
                 break;
         }
 
@@ -87,6 +96,8 @@ public class PlayerAim : MonoBehaviour
                     case SHELL_TYPE.CANON:
                         attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
                         aimVector = movement;
+                        float aimRange = shellData.GetAimRange();
+                        aoeArea.transform.position = attackArea.transform.position + aimVector.normalized * aimRange / 2;
                         break;
 
                     case SHELL_TYPE.MORTAR:
@@ -116,37 +127,33 @@ public class PlayerAim : MonoBehaviour
         GameObject obj;
         float angle;
 
+        Vector3 applyPos = aimVector.normalized;
+        if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
+
         switch (shellData.GetShellType())
         {
             default: //SHELL_TYPE.BLAST
                 angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
                 const float blastDistance = 1.5f;
-                Vector3 applyPos = aimVector.normalized;
-                if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
                 obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
-                obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
-                obj.GetComponent<ExplosionBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell().GetExplosion());
                 break;
 
             case SHELL_TYPE.CANON:
-                angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
+                angle = Mathf.Atan2(applyPos.x, applyPos.z) * Mathf.Rad2Deg;
                 obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
-                angle = Mathf.Atan2(aimVector.z, aimVector.x) * Mathf.Rad2Deg;
-                obj.GetComponent<CanonProjectileBehavior>().SetPlayer(ownerPlayer);
-                obj.GetComponent<CanonProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
-                obj.GetComponent<CanonProjectileBehavior>().SetAngle(angle);
+                angle = Mathf.Atan2(applyPos.z, applyPos.x) * Mathf.Rad2Deg;
+                obj.GetComponent<ProjectileBehavior>().SetAngle(angle);
                 break;
 
             case SHELL_TYPE.MORTAR:
                 Vector3 spawnPos = transform.position + Vector3.up + (aimVector.normalized * 0.5f);
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;
-                obj.GetComponent<MortarProjectileBehavior>().SetPlayer(ownerPlayer);
-                obj.GetComponent<MortarProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
-                obj.GetComponent<MortarProjectileBehavior>().ProjectileStart(transform.position + aimVector);
+                obj.GetComponent<ProjectileBehavior>().ProjectileStart(transform.position + aimVector);
                 break;
         }
-
+        obj.GetComponent<ProjectileBehavior>().SetPlayer(ownerPlayer);
+        obj.GetComponent<ProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
 
         if (ownerPlayer.IsMine())
         {

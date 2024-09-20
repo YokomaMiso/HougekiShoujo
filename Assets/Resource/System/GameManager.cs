@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Material[] outLineMat;
 
+
     //仮座標
     Vector3[] pos = new Vector3[playerMaxNum]
     {
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     public int roundCount = 1;
     public float roundTimer = 60;
     const int endWinCount = 3;
-    const int endDeadCount = playerMaxNum / 2;
+    const int endDeadCount = 1;//playerMaxNum / 2;
     public int[] deadPlayerCount = new int[2];
     public int[] roundWinCount = new int[2];
 
@@ -68,8 +69,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("playerCount" + playerCount);
 
         //生成する数はプレイヤーの数
-        playerInstance = new GameObject[playerCount];
-        int instantiateCount = 0;
+        playerInstance = new GameObject[playerMaxNum];
+        //int instantiateCount = 0;
         int myNum = OSCManager.OSCinstance.roomData.myBannerNum;
 
         //仮のプレイヤー生成処理
@@ -84,22 +85,23 @@ public class GameManager : MonoBehaviour
             //自分の番号なら、自分用のプレハブを生成
             if (i == myNum)
             {
-                playerInstance[instantiateCount] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
-                Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[instantiateCount].GetComponent<Player>());
+                playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
+                Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
             }
             //自分じゃないなら、他プレイヤー用のプレハブを生成
             else
             {
-                playerInstance[instantiateCount] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity);
+                playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity);
             }
 
-            Player nowPlayer = playerInstance[instantiateCount].GetComponent<Player>();
+            Player nowPlayer = playerInstance[i].GetComponent<Player>();
             nowPlayer.SetPlayerID(oscRoomData.myID);
             nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(oscRoomData.myID)]);
             nowPlayer.SetOutLineMat(outLineMat[i % 2]);
 
-            instantiateCount++;
+            //instantiateCount++;
         }
+
     }
 
     public GameObject GetPlayer(int _num)
@@ -110,11 +112,25 @@ public class GameManager : MonoBehaviour
         return playerInstance[_num];
     }
 
+    public int GetPlayerCount()
+    {
+        int returnNum = 0;
+        for(int i = 0; i < playerInstance.Length; i++)
+        {
+            if (playerInstance[i] == null) { continue; }
+            returnNum++;
+        }
+
+
+        return returnNum;
+    }
+
+
     void Init()
     {
         play = false;
-        roundCount = 1;
         roundTimer = 60;
+        roundCount = 1;
         for (int i = 0; i < roundWinCount.Length; i++) { roundWinCount[i] = 0; }
 
         start = false;
@@ -124,6 +140,27 @@ public class GameManager : MonoBehaviour
         endTimer = 0;
     }
 
+    void RoundInit()
+    {
+        play = false;
+        roundTimer = 60;
+
+        start = false;
+        startTimer = 2;
+
+        end = false;
+        endTimer = 0;
+
+        for (int i = 0; i < MachingRoomData.bannerMaxCount - 2; i++)
+        {
+            if (GetPlayer(i) != null)
+            {
+                playerInstance[i].GetComponent<Player>().RoundInit();
+                playerInstance[i].transform.position = pos[i];
+            }
+        }
+    }
+
     void EndBehavior()
     {
         if (!end) { return; }
@@ -131,19 +168,43 @@ public class GameManager : MonoBehaviour
         endTimer += Managers.instance.timeManager.GetDeltaTime();
         if (endTimer < endDelay) { return; }
 
-        Managers.instance.ChangeScene(GAME_STATE.ROOM);
-        Managers.instance.ChangeState(GAME_STATE.ROOM);
-        Managers.instance.roomManager.Init();
-        Init();
+        bool gameEnd = false;
+
+        roundCount++;
+
+        int state = 0;
+        if (deadPlayerCount[0] >= endDeadCount) { state = 1; }
+        if (deadPlayerCount[1] >= endDeadCount) { state += 2; }
+        
+        if (state == 1) { roundWinCount[1]++; }
+        else if (state == 2) { roundWinCount[0]++; }
+
+        for (int i = 0; i < 2; i++) { if (roundWinCount[i] >= endWinCount) { gameEnd = true; } }
+
+        if (!gameEnd)
+        {
+            RoundInit();
+        }
+        else
+        {
+            Managers.instance.ChangeScene(GAME_STATE.ROOM);
+            Managers.instance.ChangeState(GAME_STATE.ROOM);
+            Managers.instance.roomManager.Init();
+            Init();
+        }
     }
 
     bool DeadCheck()
     {
+        //return false;
+
         //チームごとの死亡カウント
         int[] deadCount = new int[2] { 0, 0 };
 
         for (int i = 0; i < playerInstance.Length; i++)
         {
+            if (GetPlayer(i) == null) { continue; }
+
             if (!playerInstance[i].GetComponent<Player>().GetAlive())
             {
                 deadCount[i % 2]++;
@@ -180,7 +241,6 @@ public class GameManager : MonoBehaviour
         else
         {
             roundTimer -= Managers.instance.timeManager.GetDeltaTime();
-
             if (DeadCheck())
             {
                 play = false;

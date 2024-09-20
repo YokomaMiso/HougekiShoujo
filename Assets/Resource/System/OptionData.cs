@@ -9,5 +9,5 @@ public class OptionData : ScriptableObject
     public float bgmVolume = 0.5f;
     public float sfxVolume = 0.5f;
     public bool cameraShakeOn = true;
-    public float mortarSensitive = 5.0f;
+    public float mortarSensitive = 25.0f;
 }

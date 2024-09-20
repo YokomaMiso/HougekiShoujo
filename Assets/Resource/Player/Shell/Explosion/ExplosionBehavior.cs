@@ -15,7 +15,7 @@ public class ExplosionBehavior : MonoBehaviour
     protected float lifeTime;
     protected float timer;
 
-    public void SetData(Explosion _data)
+    public virtual void SetData(Explosion _data)
     {
         imageAnimator = transform.GetChild(0).GetComponent<Animator>();
 

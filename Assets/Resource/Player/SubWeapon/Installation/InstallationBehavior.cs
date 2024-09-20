@@ -14,6 +14,19 @@ public class InstallationBehavior : MonoBehaviour
 
     protected string playerTag = "Player";
 
+    protected bool applyLoop = false;
+    protected float changeToLoopAnimTime = 1.5f;
+    protected RuntimeAnimatorController startAnim;
+    protected RuntimeAnimatorController loopAnim;
+    protected virtual void Start()
+    {
+        lifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime();
+        startAnim = ownerPlayer.GetPlayerData().GetSubWeapon().GetInstallationStartAnim();
+        loopAnim = ownerPlayer.GetPlayerData().GetSubWeapon().GetInstallationLoopAnim();
+
+        imageAnimator = transform.GetChild(0).GetComponent<Animator>();
+        imageAnimator.runtimeAnimatorController = startAnim;
+    }
     protected virtual void Update()
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();

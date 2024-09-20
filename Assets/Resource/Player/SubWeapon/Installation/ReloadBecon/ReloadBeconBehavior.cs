@@ -9,15 +9,36 @@ public class ReloadBeconBehavior : InstallationBehavior
     float reloadSpeedRate;
     float buffLifeTime;
 
-    void Start()
+    protected override void Start()
     {
-        lifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime();
+        base.Start();
         reloadSpeedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
         buffLifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime() - 2.0f;
+        changeToLoopAnimTime = 1.5f;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (applyLoop) { return; }
+        if (timer > changeToLoopAnimTime)
+        {
+            imageAnimator.runtimeAnimatorController = loopAnim;
+            transform.GetChild(1).gameObject.SetActive(true);
+            applyLoop = true;
+        }
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
+
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (timer < changeToLoopAnimTime) { return; }
+
         Player player = other.GetComponent<Player>();
         if (!player) { return; }
 
