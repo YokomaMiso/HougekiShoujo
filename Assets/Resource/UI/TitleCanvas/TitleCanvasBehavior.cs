@@ -10,6 +10,8 @@ public class TitleCanvasBehavior : MonoBehaviour
     int selectNum = 0;
     bool isCanSelect = true;
 
+    [SerializeField,Header("Œˆ’è‰¹")] AudioClip submitSFX;
+
     void Update()
     {
         CursorMove();

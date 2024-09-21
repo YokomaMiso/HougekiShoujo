@@ -43,7 +43,12 @@ public class PlayerReload : MonoBehaviour
         return -1;
     }
 
-    public void Reload(int _num) { shellNum = _num; }
+    public void Reload(int _num) 
+    {
+        shellNum = _num;
+        //SoundArray.PlaySFX(ownerPlayer.GetPlayerData().GetVoiceData().GetReloadVoice());
+        //SoundArray.PlaySFX(ownerPlayer.GetPlayerData().GetSFXData().GetReloadSFX());
+    }
     public bool Reloading() { return timer != 0; }
     public void ReloadCancel() { timer = 0; }
 

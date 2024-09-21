@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum CHARACTER_ID { MAEDE = 0, AAA, III, UUU, EEE, MAX_NUM };
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Create/PlayerData/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
