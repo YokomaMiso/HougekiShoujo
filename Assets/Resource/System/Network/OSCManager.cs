@@ -1,13 +1,10 @@
+using OscCore;
 using System.Collections;
 using System.Collections.Generic;
-using System;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using UnityEngine;
-using OscCore;
 
 public class OSCManager : MonoBehaviour
 {
@@ -245,14 +242,44 @@ public class OSCManager : MonoBehaviour
 
     private string GetLocalIPAddress()
     {
-        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+        IPAddress ipv4Address = null;
 
-        foreach (IPAddress ip in host.AddressList)
+        // イーサネットのIPv4アドレスを探す
+        ipv4Address = GetIPv4AddressByType(NetworkInterfaceType.Ethernet);
+        if (ipv4Address != null)
         {
-            return ip.ToString();
+            return ipv4Address.ToString();
         }
 
-        Debug.LogError("コンピュータ内にIPv4が存在しません");
+        // Wi-FiのIPv4アドレスを探す
+        ipv4Address = GetIPv4AddressByType(NetworkInterfaceType.Wireless80211);
+        if (ipv4Address != null)
+        {
+            return ipv4Address.ToString();
+        }
+
+        // 両方存在しない場合はブロードキャストアドレスを返す
+        return "255.255.255.255";
+    }
+
+    private IPAddress GetIPv4AddressByType(NetworkInterfaceType type)
+    {
+        foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+        {
+            if (ni.NetworkInterfaceType == type && ni.OperationalStatus == OperationalStatus.Up)
+            {
+                var ipProperties = ni.GetIPProperties();
+                var ipv4Address = ipProperties.UnicastAddresses
+                    .Where(ua => ua.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    .Select(ua => ua.Address)
+                    .FirstOrDefault();
+
+                if (ipv4Address != null)
+                {
+                    return ipv4Address;
+                }
+            }
+        }
         return null;
     }
 
