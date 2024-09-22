@@ -33,11 +33,11 @@ public class IngameData
     public struct UsersBaseData
     {
         public int myPort;        //送信ポート番号
-        public int targetPort;    //受信ポート番号
+        //public int targetPort;    //受信ポート番号
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]  //送信データがstringの場合必須　SizeConstに代入した値分のバイト長で固定
         public string myIP;           //ユーザIP
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
-        public string targetIP;       //ユーザIP
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 20)]
+        //public string targetIP;       //ユーザIP
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]
         public string sendAddress;    //送信アドレス
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 15)]

@@ -41,6 +41,7 @@ public class MachingRoomData
         public bool gameStart;
 
         public bool isInData;
+        public bool isHandshaking;
 
         /*
         public void SetBannerNum(int _num, int _value)
