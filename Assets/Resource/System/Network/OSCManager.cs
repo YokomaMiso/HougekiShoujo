@@ -145,39 +145,40 @@ public class OSCManager : MonoBehaviour
 
         sendDataTimer += Time.deltaTime;
 
-        if (sendStartTimer >= 2f)
-        {
-            if (sendDataTimer >= fixedDeltaTime)
-            {
-                Debug.Log("インゲームデータ送信");
-                sendDataTimer += Time.deltaTime;
+        if (!isFinishHandshake) { return; }
 
-                //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
-                if (isFinishHandshake)
-                {
-                    //送信用データリストにある分送信を試みる
-                    for (int i = 0; i < playerDataList.Count; i++)
-                    {
-                        //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
-                        AllGameData.AllData _data = new AllGameData.AllData();
-                        _data.rData = initRoomData(_data.rData);
-                        _data = playerDataList[i];
-
-                        if (roomData.myID != -1)
-                        {
-                            SendValue(_data);
-                        }
-                    }
-                }
-
-                sendDataTimer = 0;
-            }
-
-        }
-        else
+        if (sendStartTimer <= 2f)
         {
             sendStartTimer += Time.deltaTime;
+            return;
         }
+
+        if (sendDataTimer >= fixedDeltaTime)
+        {
+            Debug.Log("インゲームデータ送信");
+            sendDataTimer += Time.deltaTime;
+
+            //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
+            if (isFinishHandshake)
+            {
+                //送信用データリストにある分送信を試みる
+                for (int i = 0; i < playerDataList.Count; i++)
+                {
+                    //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+                    AllGameData.AllData _data = new AllGameData.AllData();
+                    _data.rData = initRoomData(_data.rData);
+                    _data = playerDataList[i];
+
+                    if (roomData.myID != -1)
+                    {
+                        SendValue(_data);
+                    }
+                }
+            }
+
+            sendDataTimer = 0;
+        }
+
     }
 
     private void OnDisable()
@@ -326,7 +327,7 @@ public class OSCManager : MonoBehaviour
             tempServer.Dispose();
 
             mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
-            
+
             isServer = false;
 
             isFinishHandshake = true;
@@ -428,7 +429,7 @@ public class OSCManager : MonoBehaviour
                         _handshakeAllData.rData.isHandshaking = false;
 
                         playerDataList[i] = _handshakeAllData;
-                        
+
                         OscClient _tempClient = new OscClient(broadcastAddress, _allData.pData.mainPacketData.comData.myPort);
 
                         SendValueTarget(_handshakeAllData, _tempClient);
