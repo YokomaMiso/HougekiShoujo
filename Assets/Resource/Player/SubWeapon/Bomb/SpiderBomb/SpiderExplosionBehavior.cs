@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SlimeExplosionBehavior : ExplosionBehavior
+public class SpiderExplosionBehavior : ExplosionBehavior
 {
     bool[] hitedPlayer = new bool[6];
 

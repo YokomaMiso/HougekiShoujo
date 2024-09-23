@@ -47,8 +47,6 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer()
     {
-        //ゲームがスタートしたので、ルームデータのスタートは初期化する
-        OSCManager.OSCinstance.roomData.gameStart = false;
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
@@ -138,6 +136,8 @@ public class GameManager : MonoBehaviour
 
         end = false;
         endTimer = 0;
+
+        OSCManager.OSCinstance.roomData.gameStart = false;
     }
 
     void RoundInit()
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     bool DeadCheck()
     {
-        return false;
+        //return false;
 
         //チームごとの死亡カウント
         int[] deadCount = new int[2] { 0, 0 };

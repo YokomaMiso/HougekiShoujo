@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     PlayerAim playerAim;
     PlayerRecoil playerRecoil;
     PlayerSubAction playerSubAction;
+    PlayerRadioChat playerRadioChat;
     PlayerDead playerDead;
     PlayerImage playerImage;
 
@@ -135,6 +136,9 @@ public class Player : MonoBehaviour
 
         playerSubAction = gameObject.GetComponent<PlayerSubAction>();
         playerSubAction.SetPlayer(this);
+
+        playerRadioChat = gameObject.GetComponent<PlayerRadioChat>();
+        playerRadioChat.SetPlayer(this);
 
         playerDead = gameObject.GetComponent<PlayerDead>();
         playerDead.SetPlayer(this);
