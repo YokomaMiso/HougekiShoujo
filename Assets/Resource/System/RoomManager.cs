@@ -118,13 +118,13 @@ public class RoomManager : MonoBehaviour
         int[] allPlayerNum = new int[8];
         for (int i = 0; i < 8; i++) { allPlayerNum[i] = Managers.instance.roomManager.GetBannerNumFromAllPlayer(i); }
 
+        //自分の１つ上が空いてるなら
         int targetNum = myRoomData.myBannerNum - 2;
         if (allPlayerNum[targetNum] == MachingRoomData.bannerEmpty)
         {
+            //移動する
             myRoomData.myBannerNum = targetNum;
             OSCManager.OSCinstance.roomData = myRoomData;
-            //整理整頓がされたら再帰的に自分自身を呼び出す
-            TidyUpPlayerBanner();
         }
 
         return;
