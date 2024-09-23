@@ -169,7 +169,7 @@ public class OSCManager : MonoBehaviour
                     _data.rData = initRoomData(_data.rData);
                     _data = playerDataList[i];
 
-                    if (roomData.myID != -1)
+                    if (_data.rData.myID != -1)
                     {
                         SendValue(_data);
                     }
