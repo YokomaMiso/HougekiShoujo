@@ -93,79 +93,17 @@ public class OSCManager : MonoBehaviour
         //ロ－カル用も同様に
         roomData = default;
         roomData = initRoomData(roomData);
-
-
-        //以下Start処理はハンドシェイク完了後に行うため以降予定
-
-        //playerIDの割り当て
-        //Managers.instance.playerID = myPort - 8000;
-        //roomData.myID = Managers.instance.playerID;
-        //
-        ////自分のデータに自分のポートとplayerIDを保存、データ初期化判定をtrueに
-        //myNetIngameData.mainPacketData.comData.myPort = myPort;
-        //myNetIngameData.PlayerID = Managers.instance.playerID;
-        //roomData.isInData = true;
+        
 
         //自分のデータだった時だけポート番号を入れる
         for (int i = 0; i < maxPlayer; i++)
         {
-            //if (i == Managers.instance.playerID)
-            //{
-            //    //自分のplayerIDがデータリストの引数と同じならローカル用の自身のデータを送信用データにコピーする
-            //    allData.pData.mainPacketData.comData.myPort = myNetIngameData.mainPacketData.comData.myPort;
-            //    allData.pData.PlayerID = myNetIngameData.PlayerID;
-            //    allData.rData = initRoomData(allData.rData);
-            //    allData.rData.isInData = roomData.isInData;
-            //    allData.rData.myID = myNetIngameData.PlayerID;
-            //    playerDataList.Add(allData);
-            //}
-            //else
-            //{
-            //    //もし自分以外のデータなら一旦居ないものとして扱いデータをセットする
-            //    allData.pData.mainPacketData.comData.myPort = -1;
-            //    allData.pData.PlayerID = i;
-            //    allData.rData = initRoomData(allData.rData);
-            //    allData.rData.isInData = false;
-            //    playerDataList.Add(allData);
-            //}
-
             //全て初期値で最大人数分のデータをセットする
-            //allData.pData.mainPacketData.comData.myPort = -1;
             allData.pData.PlayerID = i;
             allData.rData = initRoomData(allData.rData);
             allData.rData.isInData = false;
             playerDataList.Add(allData);
         }
-
-        //allData.pData.PlayerID = 0;
-        //allData.rData.myID = 0;
-        //playerDataList[0]
-
-        //もし自分がサーバ役ならクライアント五人分の送信データを作成
-        //if (Managers.instance.playerID == 0)
-        //{
-        //    for (int i = 1; i <= 5; i++)
-        //    {
-        //        OscClient _client = new OscClient(broadcastAddress, 8000 + i);
-        //
-        //        clientList.Add(_client);
-        //    }
-        //}
-        ////そうでない（クライアント）ならサーバへのみ宛てたデータの作成
-        //else
-        //{
-        //    OscClient _client = new OscClient(broadcastAddress, 8000);
-        //
-        //    clientList.Add(_client);
-        //}
-        //
-        //if (server == null)
-        //{
-        //    //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
-        //    server = new OscServer(myPort);
-        //}
-        
-        //server.TryAddMethodPair(address, ReadValue, MainThreadMethod);
 
         CreateTempNet();
     }
@@ -181,10 +119,7 @@ public class OSCManager : MonoBehaviour
         }
 
         Debug.Log("PlayerID is " + Managers.instance.playerID);
-        Debug.Log("Port is " + myNetIngameData.mainPacketData.comData.myPort);
         Debug.Log("IPAddress is " + GetLocalIPAddress());
-        Debug.Log(testS);
-        Debug.Log(testNum);
 
     }
 
@@ -199,15 +134,6 @@ public class OSCManager : MonoBehaviour
         if (isFinishHandshake)
         {
             Debug.Log("インゲームデータ送信");
-
-            /*
-            //インゲームデータから送信用データへコピー
-            allData.rData = roomData;
-            allData.pData = myNetIngameData;
-
-            //そのデータを送信用リストへ更にコピー
-            playerDataList[Managers.instance.playerID] = allData;
-            */
 
             //送信用データリストにある分送信を試みる
             for (int i = 0; i < playerDataList.Count; i++)
@@ -312,7 +238,7 @@ public class OSCManager : MonoBehaviour
         AllGameData.AllData _data = new AllGameData.AllData();
         _data.rData = initRoomData(_data.rData);
 
-        _data.pData.mainPacketData.comData.myIP = broadcastAddress; //GetLocalIPAddress();
+        _data.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
         _data.pData.mainPacketData.comData.myPort = tempPort;
         _data.rData.myID = -1;
 
@@ -322,7 +248,6 @@ public class OSCManager : MonoBehaviour
         {
             SendValue(_data);
         }
-        
 
         return;
     }
@@ -375,12 +300,6 @@ public class OSCManager : MonoBehaviour
 
                 isFinishHandshake = true;
             }
-    }
-
-    private void StartToClient()
-    {
-
-        return;
     }
 
     private int GetRandomTempPort()
@@ -465,7 +384,7 @@ public class OSCManager : MonoBehaviour
                         AllGameData.AllData _handshakeAllData = new AllGameData.AllData();
                         _handshakeAllData.rData = initRoomData(_handshakeAllData.rData);
 
-                        _handshakeAllData.pData.mainPacketData.comData.myIP = broadcastAddress; //GetLocalIPAddress();
+                        _handshakeAllData.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
                         _handshakeAllData.pData.mainPacketData.comData.myPort = startPort + i;
                         _handshakeAllData.pData.PlayerID = i;
                         _handshakeAllData.rData.myID = i;
@@ -475,11 +394,11 @@ public class OSCManager : MonoBehaviour
 
                         playerDataList[i] = _handshakeAllData;
 
-                        OscClient _tempClient = new OscClient("255.255.255.255", testNum);
+                        OscClient _tempClient = new OscClient(_allData.pData.mainPacketData.comData.myIP, testNum);
 
                         SendValueTarget(_handshakeAllData, _tempClient);
 
-                        OscClient _client = new OscClient("255.255.255.255", startPort + i);
+                        OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort + i);
                         clientList.Add(_client);
 
                         break;
@@ -497,6 +416,10 @@ public class OSCManager : MonoBehaviour
                 roomData = _allData.rData;
 
                 //roomData.isHandshaking = false;
+
+                clientList.Clear();
+
+                OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort);
 
                 Managers.instance.playerID = _allData.rData.myID;
                 roomData.myID = _allData.rData.myID;
