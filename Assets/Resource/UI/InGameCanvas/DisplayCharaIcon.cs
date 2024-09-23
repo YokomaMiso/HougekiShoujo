@@ -41,6 +41,9 @@ public class DisplayCharaIcon : MonoBehaviour
 
     readonly Color[] iconBGColor = new Color[2];
 
+    RADIO_CHAT_ID[] prevRadioChatID = new RADIO_CHAT_ID[8] { RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE };
+    [SerializeField] GameObject serifWindow;
+
     void Start()
     {
         iconBGColor[0] = ColorCordToRGB("#8fdee5");
@@ -104,6 +107,12 @@ public class DisplayCharaIcon : MonoBehaviour
             {
                 transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.white;
                 transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
+                if (prevRadioChatID[allBannerNum[i]] != gameData.playerChatID)
+                {
+                    GameObject window = Instantiate(serifWindow, transform.GetChild(i).GetChild(0));
+                    window.GetComponent<CharaSerifBehavior>().SetSerif(i, (int)gameData.playerChatID);
+                    prevRadioChatID[allBannerNum[i]] = gameData.playerChatID;
+                }
             }
             else
             {

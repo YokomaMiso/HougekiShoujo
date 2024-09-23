@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     bool DeadCheck()
     {
-        return false;
+        //return false;
 
         //チームごとの死亡カウント
         int[] deadCount = new int[2] { 0, 0 };
