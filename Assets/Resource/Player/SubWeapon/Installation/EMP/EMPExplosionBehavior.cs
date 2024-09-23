@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class EMPExplosionBehavior : ExplosionBehavior
 {
+    protected override void Start()
+    {
+        lifeTime = 0.3f;
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
         if (other.tag == hitTag)
