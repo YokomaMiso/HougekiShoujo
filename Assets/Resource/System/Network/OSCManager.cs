@@ -1,7 +1,6 @@
 using OscCore;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -157,12 +156,6 @@ public class OSCManager : MonoBehaviour
                 //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
                 if (isFinishHandshake)
                 {
-                    //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
-                    AllGameData.AllData _data = new AllGameData.AllData();
-                    _data.rData = initRoomData(_data.rData);
-                    Debug.Log("インゲームデータ送信");
-
-                    _data = playerDataList[i];
                     //送信用データリストにある分送信を試みる
                     for (int i = 0; i < playerDataList.Count; i++)
                     {
@@ -442,11 +435,8 @@ public class OSCManager : MonoBehaviour
                         _handshakeAllData.rData.myID = i;
                         _handshakeAllData.rData.isHandshaking = false;
 
-                        testNum = _allData.pData.mainPacketData.comData.myPort;
-
                         playerDataList[i] = _handshakeAllData;
-
-                        OscClient _tempClient = new OscClient(broadcastAddress, testNum);
+                        
                         OscClient _tempClient = new OscClient(broadcastAddress, _allData.pData.mainPacketData.comData.myPort);
 
                         SendValueTarget(_handshakeAllData, _tempClient);
