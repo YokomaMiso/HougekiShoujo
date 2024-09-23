@@ -26,4 +26,4 @@ MonoBehaviour:
   - {fileID: 9100000, guid: ded9fb6e10f219f4899f34f1a34f5eb6, type: 2}
   recoilAnimationData:
   - {fileID: 9100000, guid: 623ec09593121a040980fa04cc8311e2, type: 2}
-  deadAnimationData: {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: 99caea50fe463a44c8bde6307dbc3d82, type: 2}
