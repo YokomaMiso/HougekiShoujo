@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ea82a71e064af341b9c69f4636d1777, type: 3}
-  m_Name: ED_SlimeExplosion
+  m_Name: ED_SpiderExplosion
   m_EditorClassIdentifier: 
   explosionBody: {fileID: 3179393461812120061, guid: aa605430ed708074da3a32a1be70db33,
     type: 3}
   scale: 3
-  explosionAnim: {fileID: 9100000, guid: 3433a992f19fd944aa85306224306bfc, type: 2}
+  explosionAnim: {fileID: 9100000, guid: 9aab5769b65f468448bbbb9c1ec843e8, type: 2}
