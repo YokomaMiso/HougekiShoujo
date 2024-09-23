@@ -430,11 +430,11 @@ public class OSCManager : MonoBehaviour
 
                         playerDataList[i] = _handshakeAllData;
 
-                        OscClient _tempClient = new OscClient(broadcastAddress, _allData.pData.mainPacketData.comData.myPort);
+                        OscClient _tempClient = new OscClient(_allData.pData.mainPacketData.comData.myIP, _allData.pData.mainPacketData.comData.myPort);
 
                         SendValueTarget(_handshakeAllData, _tempClient);
 
-                        OscClient _client = new OscClient(broadcastAddress, startPort + i);
+                        OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort + i);
                         clientList.Add(_client);
 
                         break;
