@@ -411,18 +411,21 @@ public class OSCManager : MonoBehaviour
             if (!isFinishHandshake)
             {
                 //testS = "クライアントとしてハンドシェイク受信";
+                Managers.instance.playerID = _allData.rData.myID;
+                roomData.myID = _allData.rData.myID;
 
                 myNetIngameData = _allData.pData;
                 roomData = _allData.rData;
 
-                //roomData.isHandshaking = false;
+                allData.pData = myNetIngameData;
+                allData.rData = roomData;
+
+                playerDataList[Managers.instance.playerID] = allData;
 
                 clientList.Clear();
 
                 OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort);
 
-                Managers.instance.playerID = _allData.rData.myID;
-                roomData.myID = _allData.rData.myID;
             }
             else
             {
