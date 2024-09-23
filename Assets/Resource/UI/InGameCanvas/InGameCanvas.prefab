@@ -2190,6 +2190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253c59f5589763a4f826024744c93186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serifWindow: {fileID: 2264529309454844271, guid: e1cda63bc62952a4f8cc6d9d28455d8c,
+    type: 3}
 --- !u!1001 &2050773505472852388
 PrefabInstance:
   m_ObjectHideFlags: 0

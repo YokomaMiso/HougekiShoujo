@@ -54,5 +54,6 @@ public class IngameData
         public bool fire;
         public bool useSub;
         public bool alive;
+        public RADIO_CHAT_ID playerChatID;
     }
 }
