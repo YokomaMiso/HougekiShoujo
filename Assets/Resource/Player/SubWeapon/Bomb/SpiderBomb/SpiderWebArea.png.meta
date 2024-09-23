@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c870cbc1e2490c45ad1c7815714cfa5
+guid: ced1181ec962c7e42a0155b78403d0e3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,133 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlimeArea_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f2934e629dc3604b9247b4d93ce1a5e
-      internalID: 232621601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeArea_1
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9debf9ad9897ba84aadfd109c7bb3b6b
-      internalID: -502603582
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeArea_2
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8035c9aa66259d4f91fa036810fdf1a
-      internalID: 172620314
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeArea_3
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0b58d523d1bf044b86e952eba29a32c
-      internalID: 489883086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeArea_4
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea1a27b7ecce8f64fa877a593b8e4aea
-      internalID: 635486616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeArea_5
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 496aad7ae88fa3d44882748b0b6ba009
-      internalID: -2142203394
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SlimeArea_6
+      name: SpiderWebArea_0
       rect:
         serializedVersion: 2
         x: 0
@@ -250,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f78ebbdaf76569545932fe47c28c4c01
-      internalID: 1683108953
+      spriteID: 9f0a736ab7c8bf44a87740edc047fb99
+      internalID: 1543156176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_7
+      name: SpiderWebArea_1
       rect:
         serializedVersion: 2
         x: 256
@@ -271,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f29f847067f1179419de593baebfd6bc
-      internalID: 268274026
+      spriteID: f401afb542135ca439271336223ae71c
+      internalID: 1123326826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_8
+      name: SpiderWebArea_2
       rect:
         serializedVersion: 2
         x: 512
@@ -292,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd07b3bde1464b44a8b0f9b0f18411d1
-      internalID: 135017759
+      spriteID: 16b75105c73522c4b933012cbbc1f1b3
+      internalID: 1189760693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_9
+      name: SpiderWebArea_3
       rect:
         serializedVersion: 2
         x: 768
@@ -313,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e80ef548f79efb74092910b5eee4631f
-      internalID: -1989525233
+      spriteID: c000e723c77cd7949a19f9d66078a520
+      internalID: -1588963405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_10
+      name: SpiderWebArea_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -334,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b569520024e4364da17d49c84d153c9
-      internalID: -1515632371
+      spriteID: 32438ddb915a1544aba852e56f968cfd
+      internalID: 2008096698
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_11
+      name: SpiderWebArea_5
       rect:
         serializedVersion: 2
         x: 1280
@@ -355,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e979de4919d9f61479c7682234d4c960
-      internalID: -1217307697
+      spriteID: 0cc7d8c4fd23d734ea153c68d7fefcfd
+      internalID: -671836060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_12
+      name: SpiderWebArea_6
       rect:
         serializedVersion: 2
         x: 0
@@ -376,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89c9300ce4659eb479eb93b2e9260154
-      internalID: 595750859
+      spriteID: 0f59b6e6d116cd5408d38c3416fb9315
+      internalID: -746341804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_13
+      name: SpiderWebArea_7
       rect:
         serializedVersion: 2
         x: 256
@@ -397,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71950075ebc661347b70acb172a236a9
-      internalID: -32236599
+      spriteID: 886fe86de7ac9314db26fecaf25d7933
+      internalID: -716309656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_14
+      name: SpiderWebArea_8
       rect:
         serializedVersion: 2
         x: 512
@@ -418,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 337f2ed5befbd474f83cd9e9ffdea1aa
-      internalID: 943101464
+      spriteID: edfc598fdf369df4d8ae467923be4a95
+      internalID: 219401464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_15
+      name: SpiderWebArea_9
       rect:
         serializedVersion: 2
         x: 768
@@ -439,14 +313,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce8c58b722adbd441bf7906a8a25b9bb
-      internalID: 30769571
+      spriteID: 2c6b0245c86f9924d9a4dd43a4f00814
+      internalID: 2031723053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_16
+      name: SpiderWebArea_10
       rect:
         serializedVersion: 2
         x: 1024
@@ -460,14 +334,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6df51d6362f6fb4190d956eb409438c
-      internalID: -1666696036
+      spriteID: df71bf229162ef048bd481bd3837fd03
+      internalID: 1859982875
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_17
+      name: SpiderWebArea_11
       rect:
         serializedVersion: 2
         x: 1280
@@ -481,14 +355,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 726fd4368fe82ec4a883823dcad571a6
-      internalID: 1757915877
+      spriteID: f9bcf40e7ff75004da386da058ac76cf
+      internalID: -1707303328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_18
+      name: SpiderWebArea_12
       rect:
         serializedVersion: 2
         x: 0
@@ -502,14 +376,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 852835a73d8925f48b61be247f5736d5
-      internalID: 690194140
+      spriteID: c55fedcaa849faf49ac7e701eb0597a4
+      internalID: 69267365
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_19
+      name: SpiderWebArea_13
       rect:
         serializedVersion: 2
         x: 256
@@ -523,14 +397,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed0e62b3cb1c28446922be06518145ac
-      internalID: 9544129
+      spriteID: d3500ae2aa57bd54199e7f4a19fb3fd1
+      internalID: 139917407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_20
+      name: SpiderWebArea_14
       rect:
         serializedVersion: 2
         x: 512
@@ -544,14 +418,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 191175797f2d12648ba53ebbf6006656
-      internalID: 230397117
+      spriteID: 83bcee465a1cf2448bdd4490c629980a
+      internalID: -1536758783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_21
+      name: SpiderWebArea_15
       rect:
         serializedVersion: 2
         x: 768
@@ -565,14 +439,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0faabcca4e6cd74dbb1026ef7398d9b
-      internalID: 2013225687
+      spriteID: ba8d80da8410e2149872b812f0924fc6
+      internalID: 1197116549
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_22
+      name: SpiderWebArea_16
       rect:
         serializedVersion: 2
         x: 1024
@@ -586,14 +460,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51931350d178d8e4aa71d5b85e3e7add
-      internalID: 1970752987
+      spriteID: c1cf9a47375759243a69040f8c4c37bd
+      internalID: -634292168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_23
+      name: SpiderWebArea_17
       rect:
         serializedVersion: 2
         x: 1280
@@ -607,14 +481,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1554d5dcfa36e2d4da1c56f1e94d4ef0
-      internalID: 460800997
+      spriteID: 85370737616372d4f9d12fcba225aefe
+      internalID: -1694706209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_24
+      name: SpiderWebArea_18
       rect:
         serializedVersion: 2
         x: 0
@@ -628,14 +502,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 143ac5189af5b3c4cae21886a2aa8318
-      internalID: 1462308978
+      spriteID: 3494e4890109732429f2fe10878bc572
+      internalID: -1032050371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_25
+      name: SpiderWebArea_19
       rect:
         serializedVersion: 2
         x: 256
@@ -649,14 +523,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a49d8853f5f77124ba581564bbf1533d
-      internalID: -201649135
+      spriteID: b5356a3a95cf61b4db6152967e304981
+      internalID: 278199024
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_26
+      name: SpiderWebArea_20
       rect:
         serializedVersion: 2
         x: 512
@@ -670,14 +544,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ac13a5b69d637841befeabf1fd2f8e6
-      internalID: -812190329
+      spriteID: 7cbc922c481e013459ea1610c80280a2
+      internalID: -2092883134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_27
+      name: SpiderWebArea_21
       rect:
         serializedVersion: 2
         x: 768
@@ -691,14 +565,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e660545bc348c84d9a64ae5ea23a88a
-      internalID: -150162728
+      spriteID: 98f9f087020bf2549a13223bdaec060c
+      internalID: 1967539125
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_28
+      name: SpiderWebArea_22
       rect:
         serializedVersion: 2
         x: 1024
@@ -712,14 +586,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6a22cfb384b6e8469b1bdf6adf59291
-      internalID: 819844152
+      spriteID: d543c8980523f8f449be7c973b9d45b5
+      internalID: -1999988098
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_29
+      name: SpiderWebArea_23
       rect:
         serializedVersion: 2
         x: 1280
@@ -733,14 +607,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 685ca5b0c8925c44197140216ceb0173
-      internalID: 629479433
+      spriteID: b94768615dc34da4c8c06a3f9339ba8a
+      internalID: -2107058929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_30
+      name: SpiderWebArea_24
       rect:
         serializedVersion: 2
         x: 0
@@ -754,14 +628,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b737dd2c509c52140884bcafc3a6313e
-      internalID: -1202405002
+      spriteID: 65b21c91285d88d4ba1227bbec5bd237
+      internalID: 1694756245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_31
+      name: SpiderWebArea_25
       rect:
         serializedVersion: 2
         x: 256
@@ -775,14 +649,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b21e0c81fceb52441afc1970a15d9eaf
-      internalID: 1791418327
+      spriteID: e08ad9a37514da34db628a87f8938520
+      internalID: 610036639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_32
+      name: SpiderWebArea_26
       rect:
         serializedVersion: 2
         x: 512
@@ -796,14 +670,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb12d21513dfa8c45856794a08efe4e9
-      internalID: 1273295379
+      spriteID: 13260f486e7221c4a983dfa5b30da03e
+      internalID: 1881119290
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_33
+      name: SpiderWebArea_27
       rect:
         serializedVersion: 2
         x: 768
@@ -817,14 +691,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78500b1ad3bd59641a5d410623637713
-      internalID: -1546183183
+      spriteID: 42d9f8fbab21c234aaea08af4ce7e4f2
+      internalID: 1368547784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_34
+      name: SpiderWebArea_28
       rect:
         serializedVersion: 2
         x: 1024
@@ -838,14 +712,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7ef6a25a9f5398478677e521803c16e
-      internalID: 29537730
+      spriteID: bb4df332ca2fefb45a8457a40d7a476f
+      internalID: 1234961722
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlimeArea_35
+      name: SpiderWebArea_29
       rect:
         serializedVersion: 2
         x: 1280
@@ -859,8 +733,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 835f12f94baf11d4098b491f73a41209
-      internalID: 389140427
+      spriteID: e1f0fede16cbcd345848eac3b648c90a
+      internalID: 1581150669
       vertices: []
       indices: 
       edges: []
@@ -868,7 +742,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b0f6b2a2ac8461a4c8d072139b5a7e0c
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -876,42 +750,36 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SlimeArea_0: 232621601
-      SlimeArea_1: -502603582
-      SlimeArea_10: -1515632371
-      SlimeArea_11: -1217307697
-      SlimeArea_12: 595750859
-      SlimeArea_13: -32236599
-      SlimeArea_14: 943101464
-      SlimeArea_15: 30769571
-      SlimeArea_16: -1666696036
-      SlimeArea_17: 1757915877
-      SlimeArea_18: 690194140
-      SlimeArea_19: 9544129
-      SlimeArea_2: 172620314
-      SlimeArea_20: 230397117
-      SlimeArea_21: 2013225687
-      SlimeArea_22: 1970752987
-      SlimeArea_23: 460800997
-      SlimeArea_24: 1462308978
-      SlimeArea_25: -201649135
-      SlimeArea_26: -812190329
-      SlimeArea_27: -150162728
-      SlimeArea_28: 819844152
-      SlimeArea_29: 629479433
-      SlimeArea_3: 489883086
-      SlimeArea_30: -1202405002
-      SlimeArea_31: 1791418327
-      SlimeArea_32: 1273295379
-      SlimeArea_33: -1546183183
-      SlimeArea_34: 29537730
-      SlimeArea_35: 389140427
-      SlimeArea_4: 635486616
-      SlimeArea_5: -2142203394
-      SlimeArea_6: 1683108953
-      SlimeArea_7: 268274026
-      SlimeArea_8: 135017759
-      SlimeArea_9: -1989525233
+      SpiderWebArea_0: 1543156176
+      SpiderWebArea_1: 1123326826
+      SpiderWebArea_10: 1859982875
+      SpiderWebArea_11: -1707303328
+      SpiderWebArea_12: 69267365
+      SpiderWebArea_13: 139917407
+      SpiderWebArea_14: -1536758783
+      SpiderWebArea_15: 1197116549
+      SpiderWebArea_16: -634292168
+      SpiderWebArea_17: -1694706209
+      SpiderWebArea_18: -1032050371
+      SpiderWebArea_19: 278199024
+      SpiderWebArea_2: 1189760693
+      SpiderWebArea_20: -2092883134
+      SpiderWebArea_21: 1967539125
+      SpiderWebArea_22: -1999988098
+      SpiderWebArea_23: -2107058929
+      SpiderWebArea_24: 1694756245
+      SpiderWebArea_25: 610036639
+      SpiderWebArea_26: 1881119290
+      SpiderWebArea_27: 1368547784
+      SpiderWebArea_28: 1234961722
+      SpiderWebArea_29: 1581150669
+      SpiderWebArea_3: -1588963405
+      SpiderWebArea_4: 2008096698
+      SpiderWebArea_5: -671836060
+      SpiderWebArea_6: -746341804
+      SpiderWebArea_7: -716309656
+      SpiderWebArea_8: 219401464
+      SpiderWebArea_9: 2031723053
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
