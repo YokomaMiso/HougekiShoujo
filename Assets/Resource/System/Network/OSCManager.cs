@@ -1,6 +1,7 @@
 using OscCore;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -17,7 +18,7 @@ public class OSCManager : MonoBehaviour
 
     //自身のローカルインゲームデータ
     public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
-    
+
     //自身のローカルマッチングシーンデータ
     public MachingRoomData.RoomData roomData = new MachingRoomData.RoomData();
 
@@ -34,12 +35,12 @@ public class OSCManager : MonoBehaviour
     const int startPort = 8000;
 
     [SerializeField]
-    const float sendPerSecond = 60.0f;
+    float sendPerSecond = 60.0f;
 
     string address = "/main";
 
     ///////// OSCcore周り ////////
-    
+
     //送信先保存リスト
     //クライアントならホスト宛ての1つ、ホストならクライアント5人分が入る
     //ハンドシェイク時はホストからの応答を確認するため必ず一つだけ入る
@@ -55,7 +56,7 @@ public class OSCManager : MonoBehaviour
 
     bool isFinishHandshake = false;
 
-    const float waitHandshakeResponseTime = 4f;
+    const float waitHandshakeResponseTime = 2f;
 
 
     ////////////////////////////////
@@ -96,7 +97,7 @@ public class OSCManager : MonoBehaviour
         //ロ－カル用も同様に
         roomData = default;
         roomData = initRoomData(roomData);
-        
+
 
         //自分のデータだった時だけポート番号を入れる
         for (int i = 0; i < maxPlayer; i++)
@@ -124,7 +125,18 @@ public class OSCManager : MonoBehaviour
         Debug.Log("PlayerID is " + Managers.instance.playerID);
         Debug.Log("IPAddress is " + GetLocalIPAddress());
 
+        foreach (AllGameData.AllData data in playerDataList)
+        {
+            Debug.Log(data.rData.myID);
+        }
+
+        Debug.Log(testNum);
+
     }
+
+
+    float sendDataTimer;
+    float sendStartTimer;
 
     private void LateUpdate()
     {
@@ -133,29 +145,49 @@ public class OSCManager : MonoBehaviour
         playerDataList[Managers.instance.playerID] = allData;
 
         float fixedDeltaTime = 1.0f / sendPerSecond;
-        float timeSinceLastUpdate = Time.deltaTime;
 
-        while (timeSinceLastUpdate >= fixedDeltaTime)
+        sendDataTimer += Time.deltaTime;
+
+        if (sendStartTimer >= 2f)
         {
-            //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
-            if (isFinishHandshake)
+            if (sendDataTimer >= fixedDeltaTime)
             {
                 Debug.Log("インゲームデータ送信");
+                sendDataTimer += Time.deltaTime;
 
-                //送信用データリストにある分送信を試みる
-                for (int i = 0; i < playerDataList.Count; i++)
+                //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
+                if (isFinishHandshake)
                 {
                     //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
                     AllGameData.AllData _data = new AllGameData.AllData();
                     _data.rData = initRoomData(_data.rData);
+                    Debug.Log("インゲームデータ送信");
 
                     _data = playerDataList[i];
+                    //送信用データリストにある分送信を試みる
+                    for (int i = 0; i < playerDataList.Count; i++)
+                    {
+                        //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+                        AllGameData.AllData _data = new AllGameData.AllData();
+                        _data.rData = initRoomData(_data.rData);
 
-                    SendValue(_data);
+                        SendValue(_data);
+                        _data = playerDataList[i];
+
+                        if (roomData.myID != -1)
+                        {
+                            SendValue(_data);
+                        }
+                    }
                 }
+
+                sendDataTimer = 0;
             }
 
-            timeSinceLastUpdate -= fixedDeltaTime;
+        }
+        else
+        {
+            sendStartTimer += Time.deltaTime;
         }
     }
 
@@ -166,7 +198,7 @@ public class OSCManager : MonoBehaviour
             tempServer.Dispose();
         }
 
-        if(mainServer != null)
+        if (mainServer != null)
         {
             mainServer.Dispose();
         }
@@ -254,8 +286,10 @@ public class OSCManager : MonoBehaviour
 
         Debug.Log("ハンドシェイクの送信");
 
-        if(roomData.isHandshaking == true)
+
+        if (roomData.isHandshaking == true)
         {
+            Debug.Log("ハンドシェイクの送信");
             SendValue(_data);
         }
 
@@ -294,6 +328,8 @@ public class OSCManager : MonoBehaviour
             isServer = true;
 
             isFinishHandshake = true;
+
+            mainServer.TryAddMethod(address, ReadValue);
         }
         else
         {
@@ -306,9 +342,12 @@ public class OSCManager : MonoBehaviour
 
             mainServer.TryAddMethod(address, ReadValue);
 
+
             isServer = false;
 
             isFinishHandshake = true;
+
+            mainServer.TryAddMethod(address, ReadValue);
         }
     }
 
@@ -349,7 +388,7 @@ public class OSCManager : MonoBehaviour
         //送信データのバイト配列化
         _sendBytes = netInstance.StructToByte(_struct);
 
-        
+
         //データの送信
         _client.Send(address, _sendBytes, _sendBytes.Length);
     }
@@ -370,7 +409,7 @@ public class OSCManager : MonoBehaviour
         AllGameData.AllData _allData = new AllGameData.AllData();
         _allData.rData = initRoomData(_allData.rData);
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
-        
+
 
         if (isServer)
         {
@@ -385,12 +424,16 @@ public class OSCManager : MonoBehaviour
             else if (_allData.rData.myID == -1 && _allData.rData.isHandshaking)
             {
                 //testS = "サーバとしてコネクション受信";
-                
+
+
+                testNum++;
 
                 for (int i = 0; i < playerDataList.Count; i++)
                 {
                     if (playerDataList[i].rData.myID == -1)
                     {
+
+
                         AllGameData.AllData _handshakeAllData = new AllGameData.AllData();
                         _handshakeAllData.rData = initRoomData(_handshakeAllData.rData);
 
@@ -405,6 +448,7 @@ public class OSCManager : MonoBehaviour
                         playerDataList[i] = _handshakeAllData;
 
                         OscClient _tempClient = new OscClient(broadcastAddress, testNum);
+                        OscClient _tempClient = new OscClient(broadcastAddress, _allData.pData.mainPacketData.comData.myPort);
 
                         SendValueTarget(_handshakeAllData, _tempClient);
 
