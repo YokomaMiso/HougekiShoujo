@@ -36,7 +36,7 @@ public class SpiderExplosionBehavior : ExplosionBehavior
 
         if (hitedPlayer[nowPlayer.GetPlayerID()]) { return; }
 
-        other.AddComponent<SpeedBuff>().SetRateAndTime(0.5f, 5.0f);
+        other.AddComponent<SpeedBuff>().SetRateAndTime(0.7f, 5.0f);
         hitedPlayer[nowPlayer.GetPlayerID()] = true;
     }
 }
