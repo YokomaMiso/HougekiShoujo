@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f6e3cc1458cdf4991505f7913d910e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageAnimator: {fileID: 8277721792466392800}
-  hitTag: Player
   cameraShakeRate: 0
 --- !u!135 &1166596283970069200
 SphereCollider:
@@ -145,7 +143,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -778642289, guid: 796b9d91dc8f391479cbf45665851195, type: 3}
+  m_Sprite: {fileID: 399532953, guid: 0dd9e0fe19c49164fbe1f2bff99c1f80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,7 +164,7 @@ Animator:
   m_GameObject: {fileID: 7495808424539395539}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 984e6306e325e6249be4ebe7a8d02916, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1debd54c5a654e541bd1dc8a2006c7fb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
