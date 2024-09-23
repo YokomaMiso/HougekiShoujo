@@ -33,6 +33,9 @@ public class OSCManager : MonoBehaviour
 
     const int startPort = 8000;
 
+    [SerializeField]
+    const float sendPerSecond = 60.0f;
+
     string address = "/main";
 
     ///////// OSCcore周り ////////
@@ -129,23 +132,30 @@ public class OSCManager : MonoBehaviour
         allData.pData = myNetIngameData;
         playerDataList[Managers.instance.playerID] = allData;
 
+        float fixedDeltaTime = 1.0f / sendPerSecond;
+        float timeSinceLastUpdate = Time.deltaTime;
 
-        //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
-        if (isFinishHandshake)
+        while (timeSinceLastUpdate >= fixedDeltaTime)
         {
-            Debug.Log("インゲームデータ送信");
-
-            //送信用データリストにある分送信を試みる
-            for (int i = 0; i < playerDataList.Count; i++)
+            //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
+            if (isFinishHandshake)
             {
-                //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
-                AllGameData.AllData _data = new AllGameData.AllData();
-                _data.rData = initRoomData(_data.rData);
-            
-                _data = playerDataList[i];
-            
-                SendValue(_data);
+                Debug.Log("インゲームデータ送信");
+
+                //送信用データリストにある分送信を試みる
+                for (int i = 0; i < playerDataList.Count; i++)
+                {
+                    //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+                    AllGameData.AllData _data = new AllGameData.AllData();
+                    _data.rData = initRoomData(_data.rData);
+
+                    _data = playerDataList[i];
+
+                    SendValue(_data);
+                }
             }
+
+            timeSinceLastUpdate -= fixedDeltaTime;
         }
     }
 
@@ -256,50 +266,50 @@ public class OSCManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitHandshakeResponseTime);
 
-            Debug.Log("コルーチン作動");
+        Debug.Log("コルーチン作動");
 
-            if (roomData.isHandshaking)
-            {
-                //ハンドシェイク確認用パケット破棄前にサーバがなくなるとバグるためここに記述
-                CancelInvoke("SendFirstHandshake");
-                Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
+        if (roomData.isHandshaking)
+        {
+            //ハンドシェイク確認用パケット破棄前にサーバがなくなるとバグるためここに記述
+            CancelInvoke("SendFirstHandshake");
+            Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
 
-                Managers.instance.playerID = 0;
-                myNetIngameData.PlayerID = Managers.instance.playerID;
-                roomData.myID = Managers.instance.playerID;
+            Managers.instance.playerID = 0;
+            myNetIngameData.PlayerID = Managers.instance.playerID;
+            roomData.myID = Managers.instance.playerID;
 
-                allData.pData = myNetIngameData;
-                allData.rData = roomData;
+            allData.pData = myNetIngameData;
+            allData.rData = roomData;
 
-                playerDataList[0] = allData;
+            playerDataList[0] = allData;
 
-                clientList.Clear();
+            clientList.Clear();
 
-                tempServer.Dispose();
+            tempServer.Dispose();
 
-                mainServer = new OscServer(startPort);
+            mainServer = new OscServer(startPort);
 
-                mainServer.TryAddMethod(address, ReadValue);
+            mainServer.TryAddMethod(address, ReadValue);
 
-                isServer = true;
+            isServer = true;
 
-                isFinishHandshake = true;
-            }
-            else
-            {
-                CancelInvoke("SendFirstHandshake");
-                Debug.Log("サーバが存在しました、クライアント処理へ移行");
+            isFinishHandshake = true;
+        }
+        else
+        {
+            CancelInvoke("SendFirstHandshake");
+            Debug.Log("サーバが存在しました、クライアント処理へ移行");
 
-                tempServer.Dispose();
+            tempServer.Dispose();
 
-                mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
+            mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
 
-                mainServer.TryAddMethod(address, ReadValue);
+            mainServer.TryAddMethod(address, ReadValue);
 
-                isServer = false;
+            isServer = false;
 
-                isFinishHandshake = true;
-            }
+            isFinishHandshake = true;
+        }
     }
 
     private int GetRandomTempPort()
