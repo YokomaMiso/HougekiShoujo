@@ -130,7 +130,6 @@ public class OSCManager : MonoBehaviour
         }
 
         Debug.Log(testNum);
-
     }
 
     float sendDataTimer;
@@ -162,8 +161,6 @@ public class OSCManager : MonoBehaviour
                         //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
                         AllGameData.AllData _data = new AllGameData.AllData();
                         _data.rData = initRoomData(_data.rData);
-
-                        SendValue(_data);
                         _data = playerDataList[i];
 
                         if (roomData.myID != -1)
@@ -315,8 +312,6 @@ public class OSCManager : MonoBehaviour
 
             mainServer = new OscServer(startPort);
 
-            mainServer.TryAddMethod(address, ReadValue);
-
             isServer = true;
 
             isFinishHandshake = true;
@@ -331,10 +326,7 @@ public class OSCManager : MonoBehaviour
             tempServer.Dispose();
 
             mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
-
-            mainServer.TryAddMethod(address, ReadValue);
-
-
+            
             isServer = false;
 
             isFinishHandshake = true;
