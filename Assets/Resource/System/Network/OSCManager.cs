@@ -34,7 +34,7 @@ public class OSCManager : MonoBehaviour
     const int startPort = 8000;
 
     [SerializeField]
-    const float sendPerSecond = 60.0f;
+    float sendPerSecond = 60.0f;
 
     string address = "/main";
 
@@ -126,6 +126,8 @@ public class OSCManager : MonoBehaviour
 
     }
 
+    float sendDataTimer;
+
     private void LateUpdate()
     {
         allData.rData = roomData;
@@ -133,9 +135,10 @@ public class OSCManager : MonoBehaviour
         playerDataList[Managers.instance.playerID] = allData;
 
         float fixedDeltaTime = 1.0f / sendPerSecond;
-        float timeSinceLastUpdate = Time.deltaTime;
 
-        while (timeSinceLastUpdate >= fixedDeltaTime)
+        sendDataTimer += Time.deltaTime;
+
+        if (sendDataTimer >= fixedDeltaTime)
         {
             //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
             if (isFinishHandshake)
@@ -155,7 +158,7 @@ public class OSCManager : MonoBehaviour
                 }
             }
 
-            timeSinceLastUpdate -= fixedDeltaTime;
+            sendDataTimer = 0;
         }
     }
 
