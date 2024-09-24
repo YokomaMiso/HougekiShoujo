@@ -109,7 +109,11 @@ public class DisplayCharaIcon : MonoBehaviour
                 transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
                 if (prevRadioChatID[allBannerNum[i]] != gameData.playerChatID)
                 {
-                    if (gameData.playerChatID <= RADIO_CHAT_ID.SUPPORT)
+                    if(gameData.playerChatID == RADIO_CHAT_ID.NONE)
+                    {
+
+                    }
+                    else if (gameData.playerChatID <= RADIO_CHAT_ID.SUPPORT)
                     {
                         GameObject window = Instantiate(serifWindow, transform.GetChild(i).GetChild(0));
                         window.GetComponent<CharaSerifBehavior>().SetSerif(i, (int)gameData.playerChatID);
