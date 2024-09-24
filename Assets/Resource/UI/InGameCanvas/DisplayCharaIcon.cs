@@ -41,8 +41,10 @@ public class DisplayCharaIcon : MonoBehaviour
 
     readonly Color[] iconBGColor = new Color[2];
 
-    RADIO_CHAT_ID[] prevRadioChatID = new RADIO_CHAT_ID[8] { RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE };
+    RADIO_CHAT_ID[] prevRadioChatID = new RADIO_CHAT_ID[6] { RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE };
     [SerializeField] GameObject serifWindow;
+
+    int[] iconNums = new int[6] { -1, -1, -1, -1, -1, -1 };
 
     void Start()
     {
@@ -51,11 +53,12 @@ public class DisplayCharaIcon : MonoBehaviour
 
         RoomManager rm = Managers.instance.roomManager;
 
+        int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < transform.childCount; i++)
         {
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
 
-            if (oscRoomData.myID == MachingRoomData.bannerEmpty)
+            if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty)
             {
                 transform.GetChild(i).gameObject.SetActive(false);
                 continue;
@@ -64,7 +67,9 @@ public class DisplayCharaIcon : MonoBehaviour
             Sprite icon = Managers.instance.gameManager.playerDatas[oscRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
             transform.GetChild(i).GetChild(0).GetComponent<Image>().sprite = icon;
             transform.GetChild(i).GetComponent<Image>().color = iconBGColor[oscRoomData.myTeamNum];
-            transform.GetChild(i).transform.localPosition = iconStartPos[i];
+            iconNums[i] = oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 2;
+            transform.GetChild(i).transform.localPosition = iconStartPos[iconNums[i]];
+            teamCount[oscRoomData.myTeamNum]++;
         }
     }
     void Update()
@@ -100,7 +105,7 @@ public class DisplayCharaIcon : MonoBehaviour
             if (gameData.alive)
             {
                 transform.GetChild(i).GetChild(0).GetComponent<Image>().color = Color.white;
-                transform.GetChild(i).GetComponent<Image>().color = iconBGColor[i % 2];
+                transform.GetChild(i).GetComponent<Image>().color = iconBGColor[oscRoomData.myTeamNum];
                 if (prevRadioChatID[i] != gameData.playerChatID)
                 {
                     if(gameData.playerChatID == RADIO_CHAT_ID.NONE)
@@ -110,7 +115,7 @@ public class DisplayCharaIcon : MonoBehaviour
                     else if (gameData.playerChatID <= RADIO_CHAT_ID.SUPPORT)
                     {
                         GameObject window = Instantiate(serifWindow, transform.GetChild(i).GetChild(0));
-                        window.GetComponent<CharaSerifBehavior>().SetSerif(i, (int)gameData.playerChatID);
+                        window.GetComponent<CharaSerifBehavior>().SetSerif(oscRoomData.myTeamNum, (int)gameData.playerChatID);
                     }
                     else
                     {
@@ -131,7 +136,8 @@ public class DisplayCharaIcon : MonoBehaviour
     {
         for (int i = _num; i < _num + 2; i++)
         {
-            Vector2 pos = Vector2.Lerp(iconStartPos[i], iconLineUpPos[i], _rate);
+            if (iconNums[i] == -1) { continue; }
+            Vector2 pos = Vector2.Lerp(iconStartPos[iconNums[i]], iconLineUpPos[iconNums[i]], _rate);
             transform.GetChild(i).transform.localPosition = pos;
         }
     }
@@ -140,7 +146,8 @@ public class DisplayCharaIcon : MonoBehaviour
     {
         for (int i = _num; i < _num + 2; i++)
         {
-            Vector2 pos = Vector2.Lerp(iconLineUpPos[i], iconPos[i], _rate);
+            if (iconNums[i] == -1) { continue; }
+            Vector2 pos = Vector2.Lerp(iconLineUpPos[iconNums[i]], iconPos[iconNums[i]], _rate);
             transform.GetChild(i).transform.localPosition = pos;
         }
     }

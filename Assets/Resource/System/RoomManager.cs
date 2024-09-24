@@ -9,7 +9,6 @@ public class RoomManager : MonoBehaviour
 {
     /*内部的な処理*/
     public readonly int empty = -1;
-    public int nowPlayerCount = 1;
 
     public void Init()
     {
@@ -83,23 +82,20 @@ public class RoomManager : MonoBehaviour
 
     public void PressSubmit()
     {
-        int myID = Managers.instance.playerID;
-        bool host = (myID == 0);
-
-        RoomData myRoomData = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID);
+        RoomData myRoomData = OSCManager.OSCinstance.roomData;
 
         //自分がホストなら
-        if (host)
+        if (myRoomData.myID == 0)
         {
             int readyCount = 0;
-            for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
+            for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
             {
                 RoomData otherData = OSCManager.OSCinstance.GetRoomData(i);
                 if (otherData.ready) { readyCount++; }
             }
 
             //自分以外の全プレイヤーがREADY中なら
-            if (readyCount >= nowPlayerCount - 1) { myRoomData.gameStart = true; }
+            if (readyCount >= myRoomData.playerCount - 1) { myRoomData.gameStart = true; }
         }
         else
         {
