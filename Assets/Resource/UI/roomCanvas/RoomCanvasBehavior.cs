@@ -86,8 +86,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
-
-            if (oscRoomData.myID == MachingRoomData.bannerEmpty)
+            if (oscRoomData.myTeamNum < 0)
             {
                 playerBanners.transform.GetChild(i).gameObject.SetActive(false);
                 continue;
