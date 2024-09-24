@@ -16,6 +16,8 @@ public class MachingRoomData
 
         //For Server
         public int playerCount;
+        public int teamACount;
+        public int teamBCount;
         public bool gameStart;
         
         //For Network
