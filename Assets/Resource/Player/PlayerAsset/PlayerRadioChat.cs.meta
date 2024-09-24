@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ae8844448b7928b4d946645dee597077
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - emotePrefab: {fileID: 2522134910337228876, guid: e2635b3d3c59752458cbe02e36d149dc,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

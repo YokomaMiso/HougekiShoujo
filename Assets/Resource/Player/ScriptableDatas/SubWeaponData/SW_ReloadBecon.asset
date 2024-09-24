@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
+  m_Name: SW_ReloadBecon
+  m_EditorClassIdentifier: 
+  subWeaponIcon: {fileID: 21300000, guid: a45aa24d3ad3e66429ea146820781a5a, type: 3}
+  subType: 1
+  buffType: 0
+  installation: {fileID: 1008518316061016973, guid: 0c4fce637059148479ee62bd8f6004a1,
+    type: 3}
+  subWeaponExplain: "\u30EA\u30ED\u30FC\u30C9\u30D3\u30FC\u30B3\u30F3\n10\u79D2\u6301\u7D9A\u3059\u308B\u30D3\u30FC\u30B3\u30F3\u3092\u8A2D\u7F6E\n\uFF18\u79D2\u9593\u30EA\u30ED\u30FC\u30C9\u304C\u901F\u304F\u306A\u308B"
+  installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
+    type: 2}
+  installationLoopAnim: {fileID: 9100000, guid: ab12581ac6d1fa04c984951dbe8d22bd,
+    type: 2}
+  reloadTime: 30
+  speedRate: 1.5
+  lifeTime: 10

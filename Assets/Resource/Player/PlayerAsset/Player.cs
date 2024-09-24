@@ -16,8 +16,11 @@ public class Player : MonoBehaviour
     PlayerAim playerAim;
     PlayerRecoil playerRecoil;
     PlayerSubAction playerSubAction;
+    PlayerRadioChat playerRadioChat;
     PlayerDead playerDead;
     PlayerImage playerImage;
+
+    Collider myCollider;
 
     int playerID;
     public void SetPlayerID(int _id) { playerID = _id; }
@@ -37,12 +40,13 @@ public class Player : MonoBehaviour
     public void SetDead()
     {
         alive = false;
+        if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
-        if (GetComponent<Collider>()) { Destroy(GetComponent<Collider>()); }
-        if (GetComponent<Rigidbody>()) { Destroy(GetComponent<Rigidbody>()); }
+        if (myCollider) { myCollider.enabled = false; }
     }
     public float GetDeadTimer() { return playerDead.deadTimer; }
+    public void SetAlive() { alive = true; playerState = PLAYER_STATE.IDLE; }
     public bool GetAlive() { return alive; }
 
     Vector3 inputVector;
@@ -64,6 +68,14 @@ public class Player : MonoBehaviour
         return 4;
     }
 
+    public float GetReloadAnimSpeedRate() { return playerReload.NowSpeedRate(); }
+
+    public void PlayEmote(RADIO_CHAT_ID _ID) { playerRadioChat.DisplayEmote(_ID); }
+
+    //For Other
+    bool fire;
+    bool useSub;
+
     public void RoundInit()
     {
         playerState = PLAYER_STATE.IDLE;
@@ -78,7 +90,27 @@ public class Player : MonoBehaviour
         playerSubAction.Init();
         playerDead.Init();
         //playerImage;
+
+        fire = false;
+        useSub = false;
+
+        if (IsMine())
+        {
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
+        }
+
+        myCollider.enabled = true;
     }
+
+    Material outLine;
+    public void SetOutLineMat(Material _mat) { outLine = _mat; }
+    public Material GetOutLineMat() { return outLine; }
+
+    
+
+    
 
     void Start()
     {
@@ -94,6 +126,8 @@ public class Player : MonoBehaviour
         else
         {
             playerAim.SetPlayer(this, null, null);
+            fire = OSCManager.OSCinstance.GetIngameData(playerID).mainPacketData.inGameData.fire;
+            useSub = OSCManager.OSCinstance.GetIngameData(playerID).mainPacketData.inGameData.useSub;
         }
 
         playerReload = gameObject.GetComponent<PlayerReload>();
@@ -105,35 +139,49 @@ public class Player : MonoBehaviour
         playerSubAction = gameObject.GetComponent<PlayerSubAction>();
         playerSubAction.SetPlayer(this);
 
+        playerRadioChat = gameObject.GetComponent<PlayerRadioChat>();
+        playerRadioChat.SetPlayer(this);
+
         playerDead = gameObject.GetComponent<PlayerDead>();
         playerDead.SetPlayer(this);
 
         playerImage = transform.GetChild(0).GetComponent<PlayerImage>();
         playerImage.SetPlayer(this);
+
+        myCollider = GetComponent<Collider>();
     }
 
     void Update()
     {
-        if (Managers.instance.gameManager.play)
         {
             if (IsMine())
             {
-                //if (Managers.instance.state != GAME_STATE.IN_GAME) { return; }
-                OwnPlayerBehavior();
+                if (Managers.instance.gameManager.play)
+                {
+                    OwnPlayerBehavior();
+                    
+                }
+                else
+                {
+                    playerState = PLAYER_STATE.IDLE;
+                    if (alive) { playerMove.MoveStop(); }
+                }
+
+                if (!alive) { playerDead.DeadBehavior(); }
+
+                SetNetPos();
             }
-            else { OtherPlayerBehavior(); }
-        }
-        else
-        {
-            if (!alive) { playerDead.DeadBehavior(); }
+            else
+            {
+                GetNetPosForOtherPlayer();
+                if (Managers.instance.gameManager.play) { OtherPlayerBehavior(); }
+                if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
+            }
         }
     }
 
     void OwnPlayerBehavior()
     {
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
-
         int inputNum = InputCheck();
 
         if (alive)
@@ -161,6 +209,11 @@ public class Player : MonoBehaviour
                             movement = playerAim.AimMove();
                             //移動に応じてキャラグラフィックの向き変更
                             DirectionChange(movement);
+                        }
+                        else if (inputNum == 1)
+                        {
+                            playerState = PLAYER_STATE.IDLE;
+                            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
                         }
                         else if (inputNum - 2 == GetCanonState())
                         {
@@ -207,20 +260,29 @@ public class Player : MonoBehaviour
         {
             playerDead.DeadBehavior();
         }
+
+    }
+
+    void SetNetPos()
+    {
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerPos = transform.position;
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerState = playerState;
+    }
+    void GetNetPosForOtherPlayer()
+    {
+        playerState = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerState;
+        transform.position = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerPos;
     }
 
     void OtherPlayerBehavior()
     {
-        playerState = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerState;
-        transform.position = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerPos;
-        Vector3 stickValue = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.playerStickValue;
+        Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
 
-        bool fire = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.fire;
-        bool useSub = OSCManager.OSCinstance.receivedIngameData.mainPacketData.inGameData.useSub;
+        if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
+        bool nowFire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
+        bool nowSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
 
-        if (alive)
+        if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive)
         {
             switch (playerState)
             {
@@ -231,12 +293,17 @@ public class Player : MonoBehaviour
                     break;
             }
         }
-        else
+
+        if (fire != nowFire)
         {
-            playerDead.DeadBehavior();
+            playerAim.Fire(transform.localScale);
+            fire = nowFire;
         }
-        if (fire) { playerAim.Fire(transform.localScale); }
-        if (useSub) { playerSubAction.UseSubWeapon(); }
+        if (useSub != nowSub)
+        {
+            playerSubAction.UseSubWeapon();
+            useSub = nowSub;
+        }
 
     }
 
@@ -262,11 +329,13 @@ public class Player : MonoBehaviour
     {
         int reloadValue = -1;
         //if (Input.GetButtonDown("X")) { reloadValue = 0; }
-        if (Input.GetButtonDown("Y")) { reloadValue = 0; }
+        //if (Input.GetButtonDown("Y")) { reloadValue = 0; }
+        if (Input.GetButtonDown("Submit")) { reloadValue = 0; }
         if (Input.GetButtonDown("Cancel")) { reloadValue = 1; }
 
         //if (Input.GetButtonUp("X")) { reloadValue = 3; }
-        if (Input.GetButtonUp("Y")) { reloadValue = 2; }
+        //if (Input.GetButtonUp("Y")) { reloadValue = 2; }
+        if (Input.GetButtonUp("Submit")) { reloadValue = 2; }
         if (Input.GetButtonUp("Cancel")) { reloadValue = 3; }
 
         return reloadValue;
@@ -293,5 +362,10 @@ public class Player : MonoBehaviour
         Vector3 imageScale = Vector3.one;
         if (_movement.x < 0) { imageScale.x *= -1; }
         playerImage.transform.localScale = imageScale;
+    }
+
+    public float NowDirection()
+    {
+        return playerImage.transform.localScale.x;
     }
 }

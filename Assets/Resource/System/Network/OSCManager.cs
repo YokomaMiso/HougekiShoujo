@@ -1,769 +1,512 @@
+using OscCore;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using UnityEngine;
-using OscCore;
-using System.Runtime.InteropServices;
-
-//public class OSCManager : MonoBehaviour
-//{
-//    //////////////////////////////
-//    //////// –{”Ôg—p•Ï” ////////
-//    //////////////////////////////
-
-//    //©g‚ÌƒCƒ“ƒQ[ƒ€ƒf[ƒ^
-//    public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
-
-//    //‘—‚ç‚ê‚Ä‚«‚½‘Šè‚ÌƒCƒ“ƒQ[ƒ€ƒf[ƒ^
-//    public IngameData.PlayerNetData receivedIngameData = new IngameData.PlayerNetData();
-
-//    //ƒnƒ“ƒhƒVƒFƒCƒN‚Éƒuƒ[ƒhƒLƒƒƒXƒg‚Å‘—M‚·‚éƒf[ƒ^
-//    public HandshakeData.SendUserData firstData = new HandshakeData.SendUserData();
-
-//    //ƒT[ƒo–ğ‚É‚È‚Á‚½‚Ìƒnƒ“ƒhƒVƒFƒCƒNƒf[ƒ^‚Ìó‚¯M
-//    public HandshakeData.SendUserData receivedFirstData = new HandshakeData.SendUserData();
-
-//    //Ú‘±Šm”F‚ÌƒT[ƒo‚©‚ç‚Ì•Ô“šƒf[ƒ^
-//    public ResponseServerData.ResData resServerData = new ResponseServerData.ResData();
-
-//    public MachingRoomData.RoomData roomData = new MachingRoomData.RoomData();
-//    public MachingRoomData.RoomData receiveRoomData = new MachingRoomData.RoomData();
-
-//    public SendDataCreator netInstance = new SendDataCreator();
-
-//    //©•ª‚ªƒT[ƒo‚©‚Ç‚¤‚©
-//    bool isServer = false;
-//    bool isServerResponse = false;
-
-//    const float waitHandshakeResponseTime = 4f;
-
-//    ///////// OSCcoreü‚è ////////
-
-//    OscClient Client;
-//    OscServer Server;
-//    OscServer mainServer;
-//    OscServer ingameServer;
-
-//    bool isReceiveIngame = false;
-
-//    //g—p‚·‚éƒ|[ƒg”Ô†‚Ìn‚ß
-//    const int startPort = 8000;
-
-
-//    enum NetworkState
-//    {
-//        HandShaking,
-//        Maching,
-//        InGame
-//    }
-
-//    NetworkState nowNetState = NetworkState.HandShaking;
-
-//    ////////////////////////////////
-//    //////// ƒfƒoƒbƒN—p•Ï” ////////
-//    ////////////////////////////////
-
-//    // ‚Æ‚è‚ ‚¦‚¸ƒVƒ“ƒOƒ‹ƒgƒ“‚Å‰^—pi’²’â‚âØ–¾‘ü‚è‚ªŒˆ‚Ü‚Á‚Ä‚«‚½‚çC³j
-//    public static OSCManager OSCinstance;
-
-//    [SerializeField]
-//    bool isManual = true;
-
-//    [SerializeField]
-//    int port = 8000;
-
-//    //[SerializeField]
-//    //int otherPort = 8001;
-
-//    int testNum = 0;
-
-//    byte[] handshakeBytes = new byte[0];
-//    byte[] roomDataBytes = new byte[0];
-//    int receiveLong = 0;
-
-//    bool handshaked = false;
-
-//    //////////////////////
-//    //////// ŠÖ” ////////
-//    //////////////////////
-
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-//        /////////////////////////////
-//        //////////‰Šú’ÊMˆ—///////
-//        /////////////////////////////
-
-//        roomData = initRoomData(roomData);
-//        receiveRoomData = initRoomData(receiveRoomData);
-
-//        handshakeBytes = netInstance.StructToByte(firstData);
-//        roomDataBytes = netInstance.StructToByte(roomData);
-
-//        //ƒT[ƒo‚ª‚¢‚½ê‡‚Ìƒf[ƒ^ƒZƒbƒg
-//        myNetIngameData.mainPacketData.comData.targetIP = "255.255.255.255";
-//        myNetIngameData.mainPacketData.comData.receiveAddress = "/example";
-
-//        //ˆê’U©g‚ÌIP‚àƒuƒ[ƒhƒLƒƒƒXƒgƒAƒhƒŒƒX‚É
-//        firstData.IP = "255.255.255.255";
-
-//        //ˆê“I‚ÉƒT[ƒo‚©‚ç‚Ì•Ô“š‚ğó‚¯•t‚¯‚éƒ|[ƒg”Ô†æ“¾
-//        firstData.tempPort = GetRandomTempPort();
-
-//        if (Client == null)
-//        {
-//            //8000”ÔiƒT[ƒo–ğ‚Ìƒ|[ƒg”Ô†j‚Öˆ¶‚Ä‚½ƒNƒ‰ƒCƒAƒ“ƒg‚ğì¬
-//            Client = new OscClient(myNetIngameData.mainPacketData.comData.targetIP, startPort);
-
-//        }
-
-//        if (Server == null)
-//        {
-//            //ˆêƒ|[ƒg”Ô†‚Åì¬
-//            Server = new OscServer(firstData.tempPort);
-//        }
-
-//        Server.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
-
-//        Debug.Log("ƒnƒ“ƒhƒVƒFƒCƒNŠJn");
-
-//        //1•b‚²‚Æ‚Éƒnƒ“ƒhƒVƒFƒCƒN‚Ìƒf[ƒ^‘—M‚ğ‚İ‚é
-//        InvokeRepeating("SendFirstHandshake", 0f, 1f);
-
-//        //ã‚Ìƒnƒ“ƒhƒVƒFƒCƒN‚ğw’èŠÔ‚µ‚½‚çƒ^ƒCƒ€ƒAƒEƒg‚³‚¹‚é•K—v‚ª‚ ‚é‚½‚ß‚±‚Ì’†‚Åãˆ—‚ğ~‚ß‚é
-//        //‚à‚µ•Ô“š‚ª‚È‚¯‚ê‚Î‚±‚Ì’†‚ÅƒT[ƒo‚ğì¬‚·‚é
-//        StartCoroutine(CheckForResponse());
-
-//        /////////////////////////////
-//        ////////OSCcore“àˆ—////////
-//        /////////////////////////////
-
-//        OSCinstance = this;
-
-//        //myNetIngameData = default;
-//        //myNetIngameData.mainPacketData = default;
-//        //myNetIngameData.byteData = null;
-//        //
-//        //receivedIngameData = default;
-//        //receivedIngameData.byteData = new byte[0];
-//        //
-//        //if(isManual)
-//        //{
-//        //    myNetIngameData.mainPacketData.comData.myPort = port;
-//        //}
-//        //else
-//        //{
-//        //    //myNetIngameData.mainPacketData.comData.myPort = PortAssignor();
-//        //}
-//        //
-//        //
-//        //Managers.instance.playerID = myNetIngameData.mainPacketData.comData.myPort - 8000;
-//        //
-//        //Debug.Log("„‚Ìƒ|[ƒg”Ô†‚Í : " + myNetIngameData.mainPacketData.comData.myPort);
-//        //Debug.Log("„‚ÌƒvƒŒƒCƒ„[”Ô†‚Í : " + Managers.instance.playerID);
-//        //
-//        ////myNetData.mainPacketData.comData.myIP = "255.255.255.255";
-//        ////myNetData.mainPacketData.comData.targetIP = "255.255.255.255";
-//        ////myNetData.mainPacketData.comData.targetPort = otherPort;
-//        //
-//        //myNetIngameData.mainPacketData.comData.sendAddress = "/example";
-//        //
-//        //if(myNetIngameData.mainPacketData.comData.myPort == startPort)
-//        //{
-//        //    myNetIngameData.mainPacketData.comData.targetPort = 8001;
-//        //}
-//        //else
-//        //{
-//        //    myNetIngameData.mainPacketData.comData.targetPort = 8000;
-//        //}
-//        //
-//        //
-//        //if (mainClient == null)
-//        //{
-//        //    mainClient = new OscClient(myNetIngameData.mainPacketData.comData.targetIP, myNetIngameData.mainPacketData.comData.targetPort);
-//        //
-//        //}
-//        //
-//        //if (mainServer == null)
-//        //{
-//        //    //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
-//        //    mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
-//        //}
-//        //
-//        //mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
-
-
-//    }
-
-//    // Update is called once per frame
-//    void Update()
-//    {
-//        ////ƒfƒoƒbƒN—p‚Å”CˆÓ‚Ìƒ^ƒCƒ~ƒ“ƒO‚Å‘—‚ê‚é‚æ‚¤‚É‚µ‚Ä‚¨‚­
-//        //if(Input.GetKeyDown(KeyCode.Space))
-//        //{
-//        //    SendValue();
-//        //}
-
-//        //if(Input.GetKeyDown(KeyCode.M))
-//        //{
-//        //    myNetData.mainPacketData.inGameData.num += 1;
-//        //    myNetData.mainPacketData.inGameData.test = "HelloWorld!";
-//        //    myNetData.mainPacketData.inGameData.vc3 += new Vector3(1.0f, 0.5f, 0.1f);
-
-
-
-//        //}
-
-//        //if(Input.GetKeyDown(KeyCode.P))
-//        //{
-//        //    Debug.Log(receivedData.mainPacketData.inGameData.num);
-//        //    Debug.Log(receivedData.mainPacketData.inGameData.test);
-//        //    Debug.Log(receivedData.mainPacketData.inGameData.vc3);
-//        //}
-
-//        Debug.Log(testNum);
-
-
-//        //Debug.Log("ƒnƒ“ƒhƒVƒFƒCƒN—pƒf[ƒ^" + handshakeBytes.Length);
-//        //Debug.Log("•”‰®î•ñ" + roomDataBytes.Length);
-//        //Debug.Log("óMƒoƒCƒgƒTƒCƒY" + receiveLong);
-
-//        if (Input.GetKeyDown(KeyCode.P))
-//        {
-//            Debug.Log("ƒzƒXƒgƒvƒŒƒCƒ„[ID : " + roomData.hostPlayer);
-//        }
-
-//        if (Input.GetKeyDown(KeyCode.M))
-//        {
-//            Debug.Log(Client.Destination);
-//            SendMachingData();
-//        }
-
-//        if (Managers.instance.gameManager.play && isReceiveIngame == false)
-//        {
-//            isReceiveIngame = true;
-//            if (Managers.instance.playerID == 0)
-//            {
-//                mainServer.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingServer);
-//                mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
-//            }
-//            else
-//            {
-//                mainServer.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingClient);
-//                mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReadIngameValue);
-//            }
-//        }
-//    }
-
-//    private void LateUpdate()
-//    {
-//        if (Managers.instance.state == GAME_STATE.IN_GAME)
-//        {
-//            SendIngameValue();
-//        }
-//    }
-
-//    private void OnEnable()
-//    {
-
-
-
-
-//    }
-
-//    private void OnDisable()
-//    {
-
-//        if (Server != null)
-//        {
-//            Server.Dispose();
-//        }
-
-//    }
-
-//    MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
-//    {
-//        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetBannerNum(i, MachingRoomData.bannerEmpty); }
-//        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetSelectedCharacterID(i, 0); }
-//        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetReadyPlayers(i, false); }
-//        _roomData.hostPlayer = 0;
-//        _roomData.gameStart = false;
-
-
-//        return _roomData;
-//    }
-
-//    //////////////////////////
-//    //////ƒCƒ“ƒQ[ƒ€ŠÖ”//////
-//    //////////////////////////
-
-//    /// <summary>
-//    /// ƒf[ƒ^‘—M
-//    /// </summary>
-//    private void SendIngameValue()
-//    {
-//        //‘—Mƒf[ƒ^‚ÌƒoƒCƒg”z—ñ‰»
-//        myNetIngameData.byteData = netInstance.StructToByte(myNetIngameData.mainPacketData);
-
-//        //ƒf[ƒ^‚Ì‘—M
-//        Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, myNetIngameData.byteData, myNetIngameData.byteData.Length);
-//    }
-
-//    /// <summary>
-//    /// ƒT[ƒo‘¤‚Åƒf[ƒ^‚ğƒLƒƒƒbƒ`‚·‚ê‚ÎŒÄ‚Ño‚³‚ê‚Ü‚·
-//    /// </summary>
-//    /// <param name="values">óM‚µ‚½ƒf[ƒ^</param>
-//    /// <remarks>ƒTƒuƒXƒŒƒbƒh“®ì‚Ì‚½‚ßUnity—p‚Ìƒƒ\ƒbƒh‚Í“®ì‚µ‚Ü‚¹‚ñIII</remarks>
-//    private void ReadIngameValue(OscMessageValues values)
-//    {
-//        //óMƒf[ƒ^‚ÌƒRƒs[
-//        values.ReadBlobElement(0, ref receivedIngameData.byteData);
-
-//        //ƒf[ƒ^‚Ì\‘¢‘Ì‰»
-//        receivedIngameData.mainPacketData = netInstance.ByteToStruct<IngameData.PacketDataForPerFrame>(receivedIngameData.byteData);
-
-//        return;
-//    }
-
-//    //////////////////////////////
-//    ///////////‰Šú’ÊMŠÖ”///////
-//    //////////////////////////////
-
-//    int GetRandomTempPort()
-//    {
-//        return Random.Range(8006, 9000);
-//    }
-
-//    //ƒnƒ“ƒhƒVƒFƒCƒN‘—MŠÖ”
-//    private void SendFirstHandshake()
-//    {
-//        byte[] bytes = netInstance.StructToByte(firstData);
-
-//        Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, bytes, bytes.Length);
-
-//        Debug.Log("1way‘—M");
-
-//        return;
-//    }
-
-//    /// <summary>
-//    /// ƒuƒ[ƒhƒLƒƒƒXƒg‘—M‚ÌƒT[ƒo‚©‚ç‚Ì•Ô“š—p
-//    /// </summary>
-//    /// <param name="value"></param>
-//    private void ReceiveHandshakeForClient(OscMessageValues value)
-//    {
-//        byte[] _bytes = new byte[0];
-
-//        value.ReadBlobElement(0, ref _bytes);
-
-//        resServerData = netInstance.ByteToStruct<ResponseServerData.ResData>(_bytes);
-
-//        receiveRoomData = resServerData.serverRoomData;
-
-//        //‚±‚Ìƒƒ\ƒbƒh‚ªŒÄ‚Ño‚³‚ê‚Ä‚¢‚é“_‚ÅƒT[ƒo‚©‚ç‚Ì•Ô“š‚ª—ˆ‚Ä‚¢‚é‚½‚ßtrue‚É‚·‚é
-//        isServerResponse = true;
-
-//        return;
-//    }
-
-//    /// <summary>
-//    /// ƒnƒ“ƒhƒVƒFƒCƒN‘—M‚Ì”½‰Šm”F—p
-//    /// </summary>
-//    /// <returns></returns>
-//    IEnumerator CheckForResponse()
-//    {
-//        yield return new WaitForSeconds(waitHandshakeResponseTime);
-
-//        Debug.Log("ƒRƒ‹[ƒ`ƒ“ì“®");
-
-//        if (!isServerResponse)
-//        {
-//            //ƒnƒ“ƒhƒVƒFƒCƒNŠm”F—pƒpƒPƒbƒg”jŠü‘O‚ÉƒT[ƒo‚ª‚È‚­‚È‚é‚ÆƒoƒO‚é‚½‚ß‚±‚±‚É‹Lq
-//            CancelInvoke("SendFirstHandshake");
-//            Debug.Log("ƒT[ƒo‚©‚ç‚Ì•Ô“š‚ª‚ ‚è‚Ü‚¹‚ñAƒT[ƒoˆ—‚ÖˆÚs");
-
-//            Managers.instance.playerID = 0;
-//            Client = new OscClient("255.255.255.255", 8001);
-//            StartServer();
-//        }
-//        else
-//        {
-//            CancelInvoke("SendFirstHandshake");
-//            Debug.Log("ƒT[ƒo‚ª‘¶İ‚µ‚Ü‚µ‚½AƒNƒ‰ƒCƒAƒ“ƒgˆ—‚ÖˆÚs");
-
-//            Managers.instance.playerID = 1;
-//            Client = new OscClient("255.255.255.255", 8000);
-//            StartClient();
-//        }
-//    }
-
-//    //ƒT[ƒo‚ª‘¶İ‚µ‚½‚½‚ßóMƒf[ƒ^‚ğ‚Ü‚Æ‚ß‚é
-//    private void StartClient()
-//    {
-//        Server.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
-//        Server.Dispose();
-
-//        if (mainServer == null)
-//        {
-//            mainServer = new OscServer(8001);
-//        }
-
-//        mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingClient);
-
-//        return;
-//    }
-
-//    private void ReceiveMachingClient(OscMessageValues value)
-//    {
-//        byte[] _recieveByte = new byte[0];
-
-//        value.ReadBlobElement(0, ref _recieveByte);
-
-//        receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_recieveByte);
-
-//        return;
-//    }
-
-//    //ƒT[ƒo•sİ‚É©•ª‚ªƒT[ƒo‚É‚È‚éˆ—
-//    void StartServer()
-//    {
-//        isServer = true;
-//        isServerResponse = true;
-
-//        Server.RemoveMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveHandshakeForClient);
-//        Server.Dispose();
-
-//        if (mainServer == null)
-//        {
-//            //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
-//            mainServer = new OscServer(startPort);
-//        }
-
-//        mainServer.TryAddMethod(myNetIngameData.mainPacketData.comData.receiveAddress, ReceiveMachingServer);
-
-//        return;
-//    }
-
-//    /// <summary>
-//    /// ƒT[ƒo–ğ‚É‚È‚Á‚½Û‚ÌƒNƒ‰ƒCƒAƒ“ƒgƒnƒ“ƒhƒVƒFƒCƒNóM—p
-//    /// </summary>
-//    /// <param name="value"></param>
-//    private void ReceiveMachingServer(OscMessageValues value)
-//    {
-//        byte[] _receiveBytes = new byte[0];
-//        byte[] _sendBytes = new byte[0];
-
-//        resServerData.toClientPort = 8001;
-//        resServerData.serverIP = "255.255.255.255";
-
-//        value.ReadBlobElement(0, ref _receiveBytes);
-
-//        receiveLong = _receiveBytes.Length;
-
-//        //‘—M‚³‚ê‚Ä‚«‚½ƒoƒCƒg”z—ñƒTƒCƒY‚ªƒnƒ“ƒhƒVƒFƒCƒN—p‚Æ“¯‚¶‚È‚çƒnƒ“ƒhƒVƒFƒCƒNƒf[ƒ^‚Æ‚µ‚Äæ‚èˆµ‚¤
-//        if (handshaked == false) //_receiveBytes.Length == 1048
-//        {
-//            handshaked = true;
-
-//            testNum = 1;
-//            receivedFirstData = netInstance.ByteToStruct<HandshakeData.SendUserData>(_receiveBytes);
-
-//            Client = new OscClient(receivedFirstData.IP, receivedFirstData.tempPort);
-
-//            resServerData.serverRoomData = roomData;
-
-//            _sendBytes = netInstance.StructToByte(resServerData);
-
-//            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
-
-//            //3way‚ª‚Å‚«‚½‚ç‚»‚¿‚ç‚ÖˆÚs
-//            Client = new OscClient("255.255.255.255", 8001);
-//        }
-//        else //if(_receiveBytes.Length == 1112)
-//        {
-//            testNum = 2;
-//            receiveRoomData = netInstance.ByteToStruct<MachingRoomData.RoomData>(_receiveBytes);
-
-//            //Client = new OscClient("255.255.255.255", 8001);
-
-//            _sendBytes = netInstance.StructToByte(roomData);
-
-//            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
-//        }
-
-//        return;
-//    }
-
-//    void SendMachingData()
-//    {
-//        byte[] _sendBytes = new byte[0];
-
-//        _sendBytes = netInstance.StructToByte(roomData);
-
-//        if (isServer)
-//        {
-//            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
-//        }
-//        else
-//        {
-//            Client.Send(myNetIngameData.mainPacketData.comData.receiveAddress, _sendBytes, _sendBytes.Length);
-//        }
-
-
-//        return;
-//    }
-
-//    public void SendRoomData()
-//    {
-//        SendMachingData();
-
-//        return;
-//    }
-//}
 
 public class OSCManager : MonoBehaviour
 {
     //////////////////////////////
-    //////// –{”Ôg—p•Ï” ////////
+    //////// æœ¬ç•ªä½¿ç”¨å¤‰æ•° ////////
     //////////////////////////////
 
+    //é€ä¿¡ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“
     public AllGameData.AllData allData = new AllGameData.AllData();
 
-    //©g‚ÌƒCƒ“ƒQ[ƒ€ƒf[ƒ^
+    //è‡ªèº«ã®ãƒ­ãƒ¼ã‚«ãƒ«ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿
     public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
 
-    //‘—‚ç‚ê‚Ä‚«‚½‘Šè‚ÌƒCƒ“ƒQ[ƒ€ƒf[ƒ^
-    public IngameData.PlayerNetData receivedIngameData = new IngameData.PlayerNetData();
-
-    //©g‚Ìƒlƒbƒgƒ[ƒNƒf[ƒ^
+    //è‡ªèº«ã®ãƒ­ãƒ¼ã‚«ãƒ«ãƒãƒƒãƒãƒ³ã‚°ã‚·ãƒ¼ãƒ³ãƒ‡ãƒ¼ã‚¿
     public MachingRoomData.RoomData roomData = new MachingRoomData.RoomData();
 
-    //‘—‚ç‚ê‚Ä‚«‚½‘Šè‚Ìƒf[ƒ^
-    public MachingRoomData.RoomData receiveRoomData = new MachingRoomData.RoomData();
-
+    //æ§‹é€ ä½“å¤‰æ›å‡¦ç†ãŒã‚ã‚‹ãŸã‚ç”Ÿæˆ
     SendDataCreator netInstance = new SendDataCreator();
 
-    string broadcastAddress = "255.255.255.255";
+    //æœ€å¤§ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼äººæ•°
+    const int maxPlayer = 6;
 
-    string address = "/example";
+    const string broadcastAddress = "255.255.255.255";
 
-    ///////// OSCcoreü‚è ////////
+    int tempPort;
 
-    OscClient client;
+    const int startPort = 8000;
+
+    [SerializeField]
+    float sendPerSecond = 60.0f;
+
+    string address = "/main";
+
+    ///////// OSCcoreå‘¨ã‚Š ////////
+
+    //é€ä¿¡å…ˆä¿å­˜ãƒªã‚¹ãƒˆ
+    //ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãªã‚‰ãƒ›ã‚¹ãƒˆå®›ã¦ã®1ã¤ã€ãƒ›ã‚¹ãƒˆãªã‚‰ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆ5äººåˆ†ãŒå…¥ã‚‹
+    //ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯æ™‚ã¯ãƒ›ã‚¹ãƒˆã‹ã‚‰ã®å¿œç­”ã‚’ç¢ºèªã™ã‚‹ãŸã‚å¿…ãšä¸€ã¤ã ã‘å…¥ã‚‹
     List<OscClient> clientList = new List<OscClient>();
 
-    OscServer server;
+
+    OscServer tempServer;
+    OscServer mainServer;
+
+    //è‡ªåˆ†ãŒã‚µãƒ¼ãƒã‹ã©ã†ã‹
+    bool isServer = false;
+    bool isServerResponse = false;
+
+    bool isFinishHandshake = false;
+
+    const float waitHandshakeResponseTime = 2f;
 
 
     ////////////////////////////////
-    //////// ƒfƒoƒbƒN—p•Ï” ////////
+    //////// ãƒ‡ãƒãƒƒã‚¯ç”¨å¤‰æ•° ////////
     ////////////////////////////////
 
-    // ‚Æ‚è‚ ‚¦‚¸ƒVƒ“ƒOƒ‹ƒgƒ“‚Å‰^—pi’²’â‚âØ–¾‘ü‚è‚ªŒˆ‚Ü‚Á‚Ä‚«‚½‚çC³j
+    // ã¨ã‚Šã‚ãˆãšã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã§é‹ç”¨ï¼ˆèª¿åœã‚„è¨¼æ˜æ›¸å‘¨ã‚ŠãŒæ±ºã¾ã£ã¦ããŸã‚‰ä¿®æ­£ï¼‰
     public static OSCManager OSCinstance;
 
     [SerializeField]
     int myPort = 8000;
 
-    [SerializeField]
-    int otherPort = 8001;
-
     int testNum = 0;
 
-    //ƒQ[ƒ€“à‚Å•K—v‚È‘—óMƒf[ƒ^ƒŠƒXƒg
-    //@—v‘f”ƒvƒŒƒCƒ„[ID
+    //ã‚²ãƒ¼ãƒ å†…ã§å¿…è¦ãªé€å—ä¿¡ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆ
+    //ã€€è¦ç´ æ•°ï¼ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ID
     public List<AllGameData.AllData> playerDataList = new List<AllGameData.AllData>();
 
+    string testS;
+
     //////////////////////
-    //////// ŠÖ” ////////
+    //////// é–¢æ•° ////////
     //////////////////////
 
     // Start is called before the first frame update
     void Start()
     {
+        //è‡ªåˆ†ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
         OSCinstance = this;
 
+        //ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ç”¨ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–ä»£å…¥
         allData.pData = new IngameData.PlayerNetData();
         allData.pData = default;
-        
+
+        //ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–
         allData.rData = initRoomData(allData.rData);
 
+        //ãƒ­ï¼ã‚«ãƒ«ç”¨ã‚‚åŒæ§˜ã«
         roomData = default;
-        receiveRoomData = default;
-
         roomData = initRoomData(roomData);
-        receiveRoomData = initRoomData(receiveRoomData);
 
-        // insert to playerID
-        Managers.instance.playerID = myPort - 8000;
 
-        //©•ª‚Ìƒf[ƒ^‚É©•ª‚Ìƒ|[ƒg‚ğ•Û‘¶
-        myNetIngameData.mainPacketData.comData.myPort = myPort;
-        myNetIngameData.PlayerID = Managers.instance.playerID;
-        roomData.isInData = true;
-        
-        //©•ª‚Ìƒf[ƒ^‚¾‚Á‚½‚¾‚¯ƒ|[ƒg”Ô†‚ğ“ü‚ê‚é
-        for (int i = 0; i <= 5; i++)
+        //è‡ªåˆ†ã®ãƒ‡ãƒ¼ã‚¿ã ã£ãŸæ™‚ã ã‘ãƒãƒ¼ãƒˆç•ªå·ã‚’å…¥ã‚Œã‚‹
+        for (int i = 0; i < maxPlayer; i++)
         {
-            if(i == Managers.instance.playerID)
-            {
-                allData.pData.mainPacketData.comData.myPort = myNetIngameData.mainPacketData.comData.myPort;
-                allData.pData.PlayerID = myNetIngameData.PlayerID;
-                allData.rData = initRoomData(allData.rData);
-                allData.rData.isInData = roomData.isInData;
-                playerDataList.Add(allData);
-            }
-            else
-            {
-                allData.pData.mainPacketData.comData.myPort = -1;
-                allData.pData.PlayerID = -1;
-                allData.rData = initRoomData(allData.rData);
-                allData.rData.isInData = false;
-                playerDataList.Add(allData);
-            }
+            //å…¨ã¦åˆæœŸå€¤ã§æœ€å¤§äººæ•°åˆ†ã®ãƒ‡ãƒ¼ã‚¿ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
+            allData.pData.PlayerID = i;
+            allData.rData = initRoomData(allData.rData);
+            allData.rData.isInData = false;
+            playerDataList.Add(allData);
         }
 
-        //‚à‚µ©•ª‚ªƒT[ƒo–ğ‚È‚çƒNƒ‰ƒCƒAƒ“ƒgŒÜl•ª‚Ì‘—Mƒf[ƒ^‚ğì¬
-        if(Managers.instance.playerID == 0)
-        {
-            for(int i = 1; i <= 5; i++)
-            {
-                OscClient _client = new OscClient(broadcastAddress, 8000 + i);
-
-                clientList.Add(_client);
-            }
-        }
-        //‚»‚¤‚Å‚È‚¢iƒNƒ‰ƒCƒAƒ“ƒgj‚È‚çƒT[ƒo‚Ö‚Ì‚İˆ¶‚Ä‚½ƒf[ƒ^‚Ìì¬
-        else
-        {
-            OscClient _client = new OscClient(broadcastAddress, 8000);
-
-            clientList.Add(_client);
-        }
-
-        if (server == null)
-        {
-            //server = OscServer.GetOrCreate(myNetData.mainPacketData.comData.myPort);
-            server = new OscServer(myPort);
-        }
-
-        server.TryAddMethodPair(address, ReadValue, MainThreadMethod);
+        CreateTempNet();
     }
 
     // Update is called once per frame
+    //ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿å‡¦ç†ä¸­ã«é€ä¿¡ã•ã‚Œã‚‹ã‚ã¾ãšã„ã®ã§Updateã¯åŸºæœ¬ä¸ä½¿ç”¨
     void Update()
     {
-        //ƒfƒoƒbƒN—p‚Å”CˆÓ‚Ìƒ^ƒCƒ~ƒ“ƒO‚Å‘—‚ê‚é‚æ‚¤‚É‚µ‚Ä‚¨‚­
+        //ãƒ‡ãƒãƒƒã‚¯ç”¨ã§ä»»æ„ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§é€ã‚Œã‚‹ã‚ˆã†ã«ã—ã¦ãŠã
         if (Input.GetKeyDown(KeyCode.Space))
         {
 
         }
 
-        //Debug.Log(testNum);
+        Debug.Log("PlayerID is " + Managers.instance.playerID);
+        Debug.Log("IPAddress is " + GetLocalIPAddress());
 
+        foreach (AllGameData.AllData data in playerDataList)
+        {
+            Debug.Log(data.rData.myID);
+        }
+
+        Debug.Log(testNum);
     }
+
+    float sendDataTimer;
+    float sendStartTimer;
 
     private void LateUpdate()
     {
         allData.rData = roomData;
         allData.pData = myNetIngameData;
-
         playerDataList[Managers.instance.playerID] = allData;
 
-        //‘¶İ‚·‚éƒvƒŒƒCƒ„[iŒÅ’è‚Å‚U‰ñj‚Ì•ª‘—M‚·‚é
-        //foreach (AllGameData.AllData _data in playerDataList)
-        //{
-        //    SendValue(_data);
-        //}
+        float fixedDeltaTime = 1.0f / sendPerSecond;
 
-        for (int i = 0; i < playerDataList.Count; i++)
+        sendDataTimer += Time.deltaTime;
+
+        if (!isFinishHandshake) { return; }
+
+        if (sendStartTimer <= 2f)
         {
-            AllGameData.AllData _data = new AllGameData.AllData();
-            _data.rData = initRoomData(_data.rData);
-
-            _data = playerDataList[i];
-
-            SendValue(_data);
+            sendStartTimer += Time.deltaTime;
+            return;
         }
+
+        if (sendDataTimer >= fixedDeltaTime)
+        {
+            Debug.Log("ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿é€ä¿¡");
+            sendDataTimer += Time.deltaTime;
+
+            //ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ãŒå®Œäº†ã—ã¦ã„ã‚Œã°æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã‚’é€ä¿¡ã™ã‚‹
+            if (isFinishHandshake)
+            {
+                //é€ä¿¡ç”¨ãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆã«ã‚ã‚‹åˆ†é€ä¿¡ã‚’è©¦ã¿ã‚‹
+                for (int i = 0; i < playerDataList.Count; i++)
+                {
+                    //ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã¯åˆæœŸåŒ–ãŒè¡Œã‚ã‚Œã¦ã„ãªã„ã¨å‚ç…§ã‚¨ãƒ©ãƒ¼ãŒèµ·ãã‚‹ãŸã‚ä»®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã—ä»£å…¥
+                    AllGameData.AllData _data = new AllGameData.AllData();
+                    _data.rData = initRoomData(_data.rData);
+                    _data = playerDataList[i];
+
+                    if (_data.rData.myID != -1)
+                    {
+                        SendValue(_data);
+                    }
+                }
+            }
+
+            sendDataTimer = 0;
+        }
+
     }
 
     private void OnDisable()
     {
-        if (server != null)
+        if (tempServer != null)
         {
-            server.Dispose();
+            tempServer.Dispose();
         }
 
+        if (mainServer != null)
+        {
+            mainServer.Dispose();
+        }
     }
 
+    ////////////////////////////////////////////////////
+    ///////////////ã€€ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ç”¨é–¢æ•°ã€€/////////////
+    ////////////////////////////////////////////////////
+
+    private string GetLocalIPAddress()
+    {
+        IPAddress ipv4Address = null;
+
+        // ã‚¤ãƒ¼ã‚µãƒãƒƒãƒˆã®IPv4ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ¢ã™
+        ipv4Address = GetIPv4AddressByType(NetworkInterfaceType.Ethernet);
+        if (ipv4Address != null)
+        {
+            return ipv4Address.ToString();
+        }
+
+        // Wi-Fiã®IPv4ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ¢ã™
+        ipv4Address = GetIPv4AddressByType(NetworkInterfaceType.Wireless80211);
+        if (ipv4Address != null)
+        {
+            return ipv4Address.ToString();
+        }
+
+        // ä¸¡æ–¹å­˜åœ¨ã—ãªã„å ´åˆã¯ãƒ–ãƒ­ãƒ¼ãƒ‰ã‚­ãƒ£ã‚¹ãƒˆã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¿”ã™
+        return "255.255.255.255";
+    }
+
+    private IPAddress GetIPv4AddressByType(NetworkInterfaceType type)
+    {
+        foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+        {
+            if (ni.NetworkInterfaceType == type && ni.OperationalStatus == OperationalStatus.Up)
+            {
+                var ipProperties = ni.GetIPProperties();
+                var ipv4Address = ipProperties.UnicastAddresses
+                    .Where(ua => ua.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    .Select(ua => ua.Address)
+                    .FirstOrDefault();
+
+                if (ipv4Address != null)
+                {
+                    return ipv4Address;
+                }
+            }
+        }
+        return null;
+    }
+
+    private void CreateTempNet()
+    {
+        //ã‚µãƒ¼ãƒãŒã„ã‚‹ã‹ã©ã†ã‹å¿œç­”ã‚’ç¢ºèªã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã‚’ä½œæˆã™ã‚‹
+        OscClient _client = new OscClient(broadcastAddress, startPort);
+
+        clientList.Add(_client);
+
+        //ä¸€æ™‚ãƒãƒ¼ãƒˆç•ªå·ã§ã‚µãƒ¼ãƒã‹ã‚‰ã®å¿œç­”ã‚’å¾…æ©Ÿ
+        tempPort = GetRandomTempPort();
+
+        tempServer = new OscServer(tempPort);
+
+        tempServer.TryAddMethod(address, ReadValue);
+
+        //1ç§’ã”ã¨ã«ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ã®ãƒ‡ãƒ¼ã‚¿é€ä¿¡ã‚’è©¦ã¿ã‚‹
+        InvokeRepeating("SendFirstHandshake", 0f, 1f);
+
+        //ä¸Šã®ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ã‚’æŒ‡å®šæ™‚é–“è©¦ã—ãŸã‚‰ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆã•ã›ã‚‹å¿…è¦ãŒã‚ã‚‹ãŸã‚ã“ã®ä¸­ã§ä¸Šå‡¦ç†ã‚’æ­¢ã‚ã‚‹
+        //ã‚‚ã—è¿”ç­”ãŒãªã‘ã‚Œã°ã“ã®ä¸­ã§ã‚µãƒ¼ãƒã‚’ä½œæˆã™ã‚‹
+        StartCoroutine(CheckForResponse());
+
+        return;
+    }
+
+    private void SendFirstHandshake()
+    {
+        AllGameData.AllData _data = new AllGameData.AllData();
+        _data.rData = initRoomData(_data.rData);
+
+        _data.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
+        _data.pData.mainPacketData.comData.myPort = tempPort;
+        _data.rData.myID = -1;
+
+        Debug.Log("ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ã®é€ä¿¡");
+
+
+        if (roomData.isHandshaking == true)
+        {
+            Debug.Log("ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ã®é€ä¿¡");
+            SendValue(_data);
+        }
+
+        return;
+    }
+
+    IEnumerator CheckForResponse()
+    {
+        yield return new WaitForSeconds(waitHandshakeResponseTime);
+
+        Debug.Log("ã‚³ãƒ«ãƒ¼ãƒãƒ³ä½œå‹•");
+
+        if (roomData.isHandshaking)
+        {
+            //ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ç¢ºèªç”¨ãƒ‘ã‚±ãƒƒãƒˆç ´æ£„å‰ã«ã‚µãƒ¼ãƒãŒãªããªã‚‹ã¨ãƒã‚°ã‚‹ãŸã‚ã“ã“ã«è¨˜è¿°
+            CancelInvoke("SendFirstHandshake");
+            Debug.Log("ã‚µãƒ¼ãƒã‹ã‚‰ã®è¿”ç­”ãŒã‚ã‚Šã¾ã›ã‚“ã€ã‚µãƒ¼ãƒå‡¦ç†ã¸ç§»è¡Œ");
+
+            Managers.instance.playerID = 0;
+            myNetIngameData.PlayerID = Managers.instance.playerID;
+            roomData.myID = Managers.instance.playerID;
+
+            allData.pData = myNetIngameData;
+            allData.rData = roomData;
+
+            playerDataList[0] = allData;
+
+            clientList.Clear();
+
+            tempServer.Dispose();
+
+            mainServer = new OscServer(startPort);
+
+            isServer = true;
+
+            isFinishHandshake = true;
+
+            mainServer.TryAddMethod(address, ReadValue);
+        }
+        else
+        {
+            CancelInvoke("SendFirstHandshake");
+            Debug.Log("ã‚µãƒ¼ãƒãŒå­˜åœ¨ã—ã¾ã—ãŸã€ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå‡¦ç†ã¸ç§»è¡Œ");
+
+            tempServer.Dispose();
+
+            mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
+
+            isServer = false;
+
+            isFinishHandshake = true;
+
+            mainServer.TryAddMethod(address, ReadValue);
+        }
+    }
+
+    private int GetRandomTempPort()
+    {
+        return UnityEngine.Random.Range(8006, 9000);
+    }
+
+    ////////////////////////////////////////////////////
+    /////////////////ã€€æ¥ç¶šå®‰å®šå¾Œç”¨é–¢æ•°ã€€///////////////
+    ////////////////////////////////////////////////////
+
     /// <summary>
-    /// ƒf[ƒ^‘—M
+    /// ãƒ‡ãƒ¼ã‚¿é€ä¿¡é–¢æ•°
     /// </summary>
+    /// <typeparam name="T">æ§‹é€ ä½“åŠã³å€¤å‹ã®ãƒ‡ãƒ¼ã‚¿</typeparam>
+    /// <param name="_struct">å®Ÿéš›ã«é€ä¿¡ã—ãŸã„æ§‹é€ ä½“ãƒ‡ãƒ¼ã‚¿</param>
     private void SendValue<T>(T _struct) where T : struct
     {
         byte[] _sendBytes = new byte[0];
 
-        //‘—Mƒf[ƒ^‚ÌƒoƒCƒg”z—ñ‰»
+        //é€ä¿¡ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒˆé…åˆ—åŒ–
         _sendBytes = netInstance.StructToByte(_struct);
 
 
-        //ƒT[ƒo‚È‚çŒÜ‰ñAƒNƒ‰ƒCƒAƒ“ƒg‚È‚çˆê‰ñ
+        //ã‚µãƒ¼ãƒãªã‚‰äº”å›ã€ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆãªã‚‰ä¸€å›
         foreach (OscClient _client in clientList)
         {
-            //ƒf[ƒ^‚Ì‘—M
+            //ãƒ‡ãƒ¼ã‚¿ã®é€ä¿¡
             _client.Send(address, _sendBytes, _sendBytes.Length);
         }
     }
 
+    private void SendValueTarget<T>(T _struct, OscClient _client) where T : struct
+    {
+        byte[] _sendBytes = new byte[0];
+
+        //é€ä¿¡ãƒ‡ãƒ¼ã‚¿ã®ãƒã‚¤ãƒˆé…åˆ—åŒ–
+        _sendBytes = netInstance.StructToByte(_struct);
+
+
+        //ãƒ‡ãƒ¼ã‚¿ã®é€ä¿¡
+        _client.Send(address, _sendBytes, _sendBytes.Length);
+    }
+
     /// <summary>
-    /// ƒT[ƒo‘¤‚Åƒf[ƒ^‚ğƒLƒƒƒbƒ`‚·‚ê‚ÎŒÄ‚Ño‚³‚ê‚Ü‚·
+    /// ã‚µãƒ¼ãƒå´ã§ãƒ‡ãƒ¼ã‚¿ã‚’ã‚­ãƒ£ãƒƒãƒã™ã‚Œã°å‘¼ã³å‡ºã•ã‚Œã¾ã™
     /// </summary>
-    /// <param name="values">óM‚µ‚½ƒf[ƒ^</param>
-    /// <remarks>ƒTƒuƒXƒŒƒbƒh“®ì‚Ì‚½‚ßUnity—p‚Ìƒƒ\ƒbƒh‚Í“®ì‚µ‚Ü‚¹‚ñIII</remarks>
+    /// <param name="values">å—ä¿¡ã—ãŸãƒ‡ãƒ¼ã‚¿</param>
+    /// <remarks>ã‚µãƒ–ã‚¹ãƒ¬ãƒƒãƒ‰å‹•ä½œã®ãŸã‚Unityç”¨ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯å‹•ä½œã—ã¾ã›ã‚“ï¼ï¼ï¼</remarks>
     private void ReadValue(OscMessageValues values)
     {
         byte[] _receiveBytes = new byte[0];
 
-        //óMƒf[ƒ^‚ÌƒRƒs[
+        //å—ä¿¡ãƒ‡ãƒ¼ã‚¿ã®ã‚³ãƒ”ãƒ¼
         values.ReadBlobElement(0, ref _receiveBytes);
 
-        //ƒf[ƒ^‚Ì\‘¢‘Ì‰»
+        //ãƒ‡ãƒ¼ã‚¿ã®æ§‹é€ ä½“åŒ–
         AllGameData.AllData _allData = new AllGameData.AllData();
         _allData.rData = initRoomData(_allData.rData);
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
 
-        if(_allData.pData.PlayerID != -1)
+        if (isServer)
         {
-            playerDataList[_allData.pData.PlayerID] = _allData;
+            //testS = "ã‚µãƒ¼ãƒ";
+
+            //å—ä¿¡ã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ‡ãƒ¼ã‚¿ãŒã‚²ãƒ¼ãƒ å†…ã«å­˜åœ¨ã™ã‚‹å ´åˆãƒ‡ãƒ¼ã‚¿ãƒªã‚¹ãƒˆã«ã‚»ãƒƒãƒˆã™ã‚‹
+            if (!_allData.rData.isHandshaking)
+            {
+                testS = "ã‚µãƒ¼ãƒã¨ã—ã¦ã‚¤ãƒ³ã‚²ãƒ¼ãƒ å—ä¿¡";
+                playerDataList[_allData.pData.PlayerID] = _allData;
+            }
+            else if (_allData.rData.myID == -1 && _allData.rData.isHandshaking)
+            {
+                //testS = "ã‚µãƒ¼ãƒã¨ã—ã¦ã‚³ãƒã‚¯ã‚·ãƒ§ãƒ³å—ä¿¡";
+
+
+                testNum++;
+
+                for (int i = 0; i < playerDataList.Count; i++)
+                {
+                    if (playerDataList[i].rData.myID == -1)
+                    {
+
+
+                        AllGameData.AllData _handshakeAllData = new AllGameData.AllData();
+                        _handshakeAllData.rData = initRoomData(_handshakeAllData.rData);
+
+                        _handshakeAllData.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
+                        _handshakeAllData.pData.mainPacketData.comData.myPort = startPort + i;
+                        _handshakeAllData.pData.PlayerID = i;
+                        _handshakeAllData.rData.myID = i;
+                        _handshakeAllData.rData.isHandshaking = false;
+
+                        playerDataList[i] = _handshakeAllData;
+
+                        OscClient _tempClient = new OscClient(_allData.pData.mainPacketData.comData.myIP, _allData.pData.mainPacketData.comData.myPort);
+
+                        SendValueTarget(_handshakeAllData, _tempClient);
+
+                        OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort + i);
+                        clientList.Add(_client);
+
+                        break;
+                    }
+                }
+            }
         }
-        
-        //receiveRoomData = allData.rData;
-        //receivedIngameData = allData.pData;
+        else
+        {
+            if (!isFinishHandshake)
+            {
+                //testS = "ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã—ã¦ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯å—ä¿¡";
+                Managers.instance.playerID = _allData.rData.myID;
+                roomData.myID = _allData.rData.myID;
+
+                myNetIngameData = _allData.pData;
+                roomData = _allData.rData;
+
+                allData.pData = myNetIngameData;
+                allData.rData = roomData;
+
+                playerDataList[Managers.instance.playerID] = allData;
+
+                clientList.Clear();
+
+                OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort);
+
+                clientList.Add(_client);
+
+            }
+            else
+            {
+                testS = "ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆã¨ã—ã¦ã‚¤ãƒ³ã‚²ãƒ¼ãƒ å—ä¿¡";
+
+                playerDataList[_allData.pData.PlayerID] = _allData;
+            }
+        }
     }
 
+    /// <summary>
+    /// ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–å‡¦ç†
+    /// </summary>
+    /// <param name="_roomData">åˆæœŸåŒ–ã—ãŸã„ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿</param>
+    /// <returns>ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã®åˆæœŸåŒ–å€¤</returns>
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
     {
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetBannerNum(i, MachingRoomData.bannerEmpty); }
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetSelectedCharacterID(i, 0); }
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetReadyPlayers(i, false); }
-        _roomData.hostPlayer = 0;
+        _roomData.myID = -1;
+        _roomData.myTeamNum = -1;
+        _roomData.selectedCharacterID = 0;
+        _roomData.ready = false;
         _roomData.gameStart = false;
         _roomData.isInData = true;
+        _roomData.isHandshaking = true;
+        _roomData.myID = -1;
 
         return _roomData;
     }
 
     /// <summary>
-    /// ƒT[ƒo‘¤‚Åƒf[ƒ^‚ğƒLƒƒƒbƒ`‚·‚ê‚ÎŒÄ‚Ño‚³‚ê‚Ü‚·
+    /// ã‚µãƒ¼ãƒå´ã§ãƒ‡ãƒ¼ã‚¿ã‚’ã‚­ãƒ£ãƒƒãƒã™ã‚Œã°å‘¼ã³å‡ºã•ã‚Œã¾ã™
     /// </summary>
-    /// <remarks>ƒƒCƒ“ƒXƒŒƒbƒh“®ì‚Ì‚½‚ßUnity—p‚Ìƒƒ\ƒbƒh‚à“®ì</remarks>
+    /// <remarks>ãƒ¡ã‚¤ãƒ³ã‚¹ãƒ¬ãƒƒãƒ‰å‹•ä½œã®ãŸã‚Unityç”¨ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚‚å‹•ä½œ</remarks>
     private void MainThreadMethod()
     {
 
     }
 
+    /// <summary>
+    /// ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã®ã‚²ãƒƒã‚¿ãƒ¼
+    /// </summary>
+    /// <param name="_num">å–å¾—ã—ãŸã„ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ID</param>
+    /// <returns>æŒ‡å®šã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼IDã®ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿</returns>
     public MachingRoomData.RoomData GetRoomData(int _num)
     {
         AllGameData.AllData _alldata = playerDataList[_num];
@@ -771,6 +514,11 @@ public class OSCManager : MonoBehaviour
         return _alldata.rData;
     }
 
+    /// <summary>
+    /// ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã®ã‚²ãƒƒã‚¿ãƒ¼
+    /// </summary>
+    /// <param name="_num">å–å¾—ã—ãŸã„ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ID</param>
+    /// <returns>æŒ‡å®šã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼IDã®ã‚¤ãƒ³ã‚²ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿</returns>
     public IngameData.PlayerNetData GetIngameData(int _num)
     {
         AllGameData.AllData _alldata = playerDataList[_num];
@@ -778,6 +526,11 @@ public class OSCManager : MonoBehaviour
         return _alldata.pData;
     }
 
+    /// <summary>
+    /// å…¨é€šä¿¡ãƒ‡ãƒ¼ã‚¿ã®ã‚²ãƒƒã‚¿ãƒ¼
+    /// </summary>
+    /// <param name="_num">å–å¾—ã—ãŸã„ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ID</param>
+    /// <returns>æŒ‡å®šã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼IDã®å…¨ãƒ‡ãƒ¼ã‚¿</returns>
     public AllGameData.AllData GetAllData(int _num)
     {
         AllGameData.AllData _alldata = playerDataList[_num];
@@ -785,6 +538,11 @@ public class OSCManager : MonoBehaviour
         return _alldata;
     }
 
+    /// <summary>
+    /// æŒ‡å®šã—ãŸãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼IDã®å–å¾—
+    /// </summary>
+    /// <param name="_num">å–å¾—ã—ãŸã„ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ID</param>
+    /// <returns>ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ID</returns>
     public int GetPlayerID(int _num)
     {
         return playerDataList[_num].pData.PlayerID;

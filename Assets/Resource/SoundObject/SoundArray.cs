@@ -17,13 +17,22 @@ public class SoundArray : MonoBehaviour
         thisTransform = transform;
     }
 
-    public static void PlaySound(AudioClip _clip)
+    public static GameObject PlaySFX(AudioClip _clip)
     {
         GameObject obj = Instantiate(soundObject, thisTransform);
-        obj.GetComponent<SoundObject>().ReceiveSound(_clip);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip,false);
         soundArray.Add(obj);
-    }
 
+        return obj;
+    }
+    public static GameObject PlayBGM(AudioClip _clip)
+    {
+        GameObject obj = Instantiate(soundObject, thisTransform);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip,true);
+        soundArray.Add(obj);
+
+        return obj;
+    }
     public static void DestroyReport(GameObject _obj)
     {
         soundArray.Remove(_obj);

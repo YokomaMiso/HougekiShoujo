@@ -10,20 +10,17 @@ public class PlayerBannerBehavior : MonoBehaviour
     public void SetNum(int _num)
     {
         num = _num;
-
     }
     public void BannerIconUpdate(RoomData _roomData)
     {
-        if (num < 0) { return; }
+        if (_roomData.myID==MachingRoomData.bannerEmpty) { return; }
 
-        int playerID = _roomData.GetBannerNum(num);
-        
-        int charaID = _roomData.GetSelectedCharacterID(playerID);
+        int charaID = _roomData.selectedCharacterID;
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
         transform.GetChild(2).GetComponent<Image>().sprite = icon;
         
-        string text = "Player " + (playerID + 1).ToString();
+        string text = "Player " + (_roomData.myID + 1).ToString();
         transform.GetChild(3).GetComponent<Text>().text = text;
-        transform.GetChild(4).gameObject.SetActive(_roomData.GetReadyPlayers(playerID));
+        transform.GetChild(4).gameObject.SetActive(_roomData.ready);
     }
 }

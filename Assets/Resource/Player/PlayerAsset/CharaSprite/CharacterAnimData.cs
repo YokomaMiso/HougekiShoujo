@@ -26,5 +26,4 @@ public class CharacterAnimData : ScriptableObject
     public RuntimeAnimatorController[] GetRecoilAnims() { return recoilAnimationData; }
     public RuntimeAnimatorController GetRecoilAnim(int _num) { return recoilAnimationData[_num]; }
     public RuntimeAnimatorController GetDeadAnim() { return deadAnimationData; }
-
 }

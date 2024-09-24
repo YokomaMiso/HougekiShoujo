@@ -10,7 +10,7 @@ public class PlayerDead : MonoBehaviour
     public float deadTimer = 0;
     public readonly float deadBehaviorTime = 3;
     Vector3 deadPos;
-    public readonly Vector3 deadTargetPos = new Vector3(0, 150, -9);
+    public readonly Vector3 deadTargetPos = new Vector3(0, 50, -9);
 
     public void Init()
     {

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum CHARACTER_ID { MAEDE = 0, AAA, III, UUU, EEE, MAX_NUM };
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Create/PlayerData/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
@@ -16,8 +15,6 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Shell")] Shell shell;
     [Header("Weapon Data")]
     [SerializeField, Header("Sub Weapon")] SubWeapon subWeapon;
-    [Header("Material Data")]
-    [SerializeField, Header("Material")] Material material;
 
     public string GetCharaName() { return charaName; }
     public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
@@ -26,6 +23,4 @@ public class PlayerData : ScriptableObject
 
     public Shell GetShell() { return shell; }
     public SubWeapon GetSubWeapon() { return subWeapon; }
-    public Material GetMaterial() { return material; }
-
 }
