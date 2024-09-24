@@ -20,7 +20,7 @@ Shader "CustomShader/MiniMapWithOutline"
         Blend SrcAlpha OneMinusSrcAlpha
         Cull Off
 
-        // ¥Ô¥¯¥»¥ë»¯¡¢İ†¹ù¾€¡¢±³¾°Ïû¤¹
+        // ãƒ”ã‚¯ã‚»ãƒ«åŒ–ã€è¼ªéƒ­ç·šã€èƒŒæ™¯æ¶ˆã™
         Pass
         {
             CGPROGRAM
@@ -57,27 +57,27 @@ Shader "CustomShader/MiniMapWithOutline"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // ¥Ô¥¯¥»¥ë»¯
+                // ãƒ”ã‚¯ã‚»ãƒ«åŒ–
                 float2 pixelatedUV = floor(i.uv * _PixelationAmount) / _PixelationAmount;
                 fixed4 col = tex2D(_MainTex, pixelatedUV);
 
-                // ü\¤¤±³¾°¤òÏû¤¹
+                // é»’ã„èƒŒæ™¯ã‚’æ¶ˆã™
                 float isBlack = step(_CutBlack, col.r) + step(_CutBlack, col.g) + step(_CutBlack, col.b);
                 col.a *= isBlack < 3 ? 0 : 1;
 
-                // Şx—ÊË÷
+                // è¾ºæ¤œç´¢
                 float edge = 0.0;
                 float2 gradient = fwidth(i.uv);
                 float3 n1 = tex2D(_MainTex, i.uv + gradient).rgb;
                 float3 n2 = tex2D(_MainTex, i.uv - gradient).rgb;
 
-                // É«¤Î²î„e¤ÇŞx¤òÈ¡¤ë
+                // è‰²ã®å·®åˆ¥ã§è¾ºã‚’å–ã‚‹
                 edge = length(n1 - n2);
 
-                // Şx¤ò´_¶¨¤·¤¿¤é¡¢¥¢¥¦¥È¥é¥¤¥ó¥Ô¥¯¥»¥ë´_¶¨
+                // è¾ºã‚’ç¢ºå®šã—ãŸã‚‰ã€ã‚¢ã‚¦ãƒˆãƒ©ã‚¤ãƒ³ãƒ”ã‚¯ã‚»ãƒ«ç¢ºå®š
                 if (edge > _OutlineThickness)
                 {
-                    return _OutlineColor; // ¥¢¥¦¥È¥é¥¤¥ó¤ÎÉ«¤òÔO¶¨¤¹¤ë
+                    return _OutlineColor; // ã‚¢ã‚¦ãƒˆãƒ©ã‚¤ãƒ³ã®è‰²ã‚’è¨­å®šã™ã‚‹
                 }
 
                 return col;
@@ -85,7 +85,7 @@ Shader "CustomShader/MiniMapWithOutline"
             ENDCG
         }
 
-        // ¥×¥ì©`¥ä©`Ãè»­
+        // ãƒ—ãƒ¬ãƒ¼ãƒ¤ãƒ¼æç”»
         Pass
         {
             CGPROGRAM
@@ -137,7 +137,7 @@ Shader "CustomShader/MiniMapWithOutline"
                     
                     if (distance < _PlayerSize)
                     {
-                        if (_PlayerTeam[idx] == 1) 
+                        if (_PlayerTeam[idx] == 0) 
                             playerColor = _TeamAColor;
                         else 
                             playerColor = _TeamBColor;
