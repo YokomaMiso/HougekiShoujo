@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
         if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
+        Camera.main.GetComponent<CameraMove>().ResetCameraFar();
         if (myCollider) { myCollider.enabled = false; }
     }
     public float GetDeadTimer() { return playerDead.deadTimer; }
