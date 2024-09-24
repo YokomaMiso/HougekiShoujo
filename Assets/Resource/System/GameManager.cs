@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
-            Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], playerPosZ[teamCount[oscRoomData.myTeamNum]]);
+            Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], 0, playerPosZ[teamCount[oscRoomData.myTeamNum]]);
             //自分の番号なら、自分用のプレハブを生成
             if (i == Managers.instance.playerID)
             {
@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
 
             if (GetPlayer(i) != null)
             {
-                Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], playerPosZ[teamCount[oscRoomData.myTeamNum]]);
+                Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], 0, playerPosZ[teamCount[oscRoomData.myTeamNum]]);
                 playerInstance[i].GetComponent<Player>().RoundInit();
                 playerInstance[i].transform.position = spawnPos;
 
@@ -188,19 +188,21 @@ public class GameManager : MonoBehaviour
         {
             if (GetPlayer(i) == null) { continue; }
 
+            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
+
             if (!playerInstance[i].GetComponent<Player>().GetAlive())
             {
-                deadCount[i % 2]++;
+                deadCount[oscRoomData.myTeamNum]++;
             }
         }
 
         bool returnValue = false;
+        MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
 
-        for (int i = 0; i < deadPlayerCount.Length; i++)
-        {
-            deadPlayerCount[i] = deadCount[i];
-            if (deadPlayerCount[i] >= Managers.instance.roomManager.nowPlayerCount / 2) { returnValue = true; break; }
-        }
+        deadPlayerCount[0] = deadCount[0];
+        if (deadPlayerCount[0] >= hostRoomData.teamACount) { returnValue = true; }
+        deadPlayerCount[1] = deadCount[1];
+        if (deadPlayerCount[1] >= hostRoomData.teamBCount) { returnValue = true; }
 
         return returnValue;
     }
