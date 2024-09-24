@@ -6,7 +6,8 @@ public class CameraMove : MonoBehaviour
 {
     [SerializeField] float distance = 10;
     [SerializeField] float asistValue = 2;
-    Player player;
+    Player ownerPlayer;
+    Player nowPlayer;
 
     static readonly Vector3 ingameRotation = new Vector3(45, 0, 0);
     float initialTimer;
@@ -21,7 +22,7 @@ public class CameraMove : MonoBehaviour
     {
     }
 
-    public void SetPlayer(Player _player) { player = _player; }
+    public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
     void Update()
     {
@@ -31,8 +32,47 @@ public class CameraMove : MonoBehaviour
         {
             CameraShakeUpdate();
             FarUpdate();
-            if (player.GetAlive()) { Move(player.transform.position); }
+            if (ownerPlayer.GetAlive()) { Move(ownerPlayer.transform.position); }
+            else
+            {
+                TargetChange();
+                if (nowPlayer) { Move(nowPlayer.transform.position);}
+            }
         }
+    }
+
+    void TargetChange()
+    {
+        int changeNum = -1;
+        if (Input.GetButtonDown("RB")) { changeNum = 0; }
+        else if (Input.GetButtonDown("LB")) { changeNum = 1; }
+
+        if (changeNum == -1) { return; }
+
+        MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+
+        int[] targetID = new int[2] { -1, -1 };
+        int targetIndex = 0;
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
+        {
+            //if it is myData, return
+            if (i == Managers.instance.playerID) { continue; }
+            
+            //if it is empty, return
+            AllGameData.AllData oscAllData = OSCManager.OSCinstance.GetAllData(i);
+            if (oscAllData.rData.myID == MachingRoomData.bannerEmpty) { continue; }
+
+            //if another team, return
+            if (myRoomData.myTeamNum != oscAllData.rData.myTeamNum) { continue; }
+
+            //if it player is dead, return
+            if (!oscAllData.pData.mainPacketData.inGameData.alive) { continue; }
+
+            targetID[targetIndex] = i;
+            targetIndex++;
+        }
+
+        if (targetID[changeNum] != -1) { nowPlayer = Managers.instance.gameManager.GetPlayer(targetID[changeNum]); }
     }
 
     void InitialAngle()
@@ -44,7 +84,7 @@ public class CameraMove : MonoBehaviour
         transform.rotation = Quaternion.Euler(angle);
 
 
-        Vector3 playerPos = player.transform.position;
+        Vector3 playerPos = ownerPlayer.transform.position;
         Vector3 pos = Vector3.Lerp(new Vector3(1.0f, 1.5f, -2.0f), playerPos + new Vector3(0, distance, -distance), initialTimer);
         transform.position = pos;
     }
