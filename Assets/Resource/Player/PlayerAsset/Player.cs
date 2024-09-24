@@ -70,6 +70,8 @@ public class Player : MonoBehaviour
 
     public float GetReloadAnimSpeedRate() { return playerReload.NowSpeedRate(); }
 
+    public void PlayEmote(RADIO_CHAT_ID _ID) { playerRadioChat.DisplayEmote(_ID); }
+
     //For Other
     bool fire;
     bool useSub;
@@ -147,8 +149,6 @@ public class Player : MonoBehaviour
         playerImage.SetPlayer(this);
 
         myCollider = GetComponent<Collider>();
-
-        
     }
 
     void Update()

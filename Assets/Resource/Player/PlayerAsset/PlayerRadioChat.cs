@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RADIO_CHAT_ID { NONE = 0, HELP, BLITZ, SUPPORT ,MAX_NUM}
+public enum RADIO_CHAT_ID { NONE = 0, HELP, BLITZ, SUPPORT, APOLOGIZE, MAX_NUM }
 
 public class PlayerRadioChat : MonoBehaviour
 {
     Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
+
+    [SerializeField] GameObject emotePrefab;
 
     RADIO_CHAT_ID radioChatID;
 
@@ -24,8 +26,15 @@ public class PlayerRadioChat : MonoBehaviour
         if (horizontal < 0) { radioChatID = RADIO_CHAT_ID.HELP; }
         else if (horizontal > 0) { radioChatID = RADIO_CHAT_ID.SUPPORT; }
         else if (vertical > 0) { radioChatID = RADIO_CHAT_ID.BLITZ; }
+        else if (vertical < 0) { radioChatID = RADIO_CHAT_ID.APOLOGIZE; }
         else { return; }
 
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerChatID = radioChatID;
+    }
+
+    public void DisplayEmote(RADIO_CHAT_ID _ID)
+    {
+        GameObject obj = Instantiate(emotePrefab, transform);
+        obj.GetComponent<EmoteBehavior>().SetSpriteNum(_ID);
     }
 }
