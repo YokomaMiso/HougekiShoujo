@@ -48,6 +48,7 @@ public class IngameData
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct GameData
     {
+        //For Each
         public Vector3 playerPos;
         public Vector3 playerStickValue;
         public PLAYER_STATE playerState;
@@ -55,5 +56,19 @@ public class IngameData
         public bool useSub;
         public bool alive;
         public RADIO_CHAT_ID playerChatID;
+
+        //For Server
+        public bool play;
+        public bool start;
+        public bool end;
+
+        public int roundCount;
+        public float roundTimer;
+        public int deadPlayerCountTeamA;
+        public int deadPlayerCountTeamB;
+        public int winCountTeamA;
+        public int winCountTeamB;
+        public int winner;
+
     }
 }

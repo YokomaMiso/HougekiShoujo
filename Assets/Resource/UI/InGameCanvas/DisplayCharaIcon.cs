@@ -74,7 +74,9 @@ public class DisplayCharaIcon : MonoBehaviour
     }
     void Update()
     {
-        if (Managers.instance.gameManager.roundCount == 1)
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+        if (hostIngameData.roundCount == 1)
         {
             float timer = Managers.instance.gameManager.startTimer;
 

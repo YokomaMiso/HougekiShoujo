@@ -22,7 +22,9 @@ public class InGameStartText : MonoBehaviour
 
     void Update()
     {
-        if (Managers.instance.gameManager.play)
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+        if (hostIngameData.play)
         {
             GetComponent<Text>().color = Color.clear;
             return;
@@ -42,7 +44,7 @@ public class InGameStartText : MonoBehaviour
         }
         else if (3.5f > timer && timer > 2.5f)
         {
-            GetComponent<Text>().text = "Round " + Managers.instance.gameManager.roundCount.ToString();
+            GetComponent<Text>().text = "Round " + hostIngameData.roundCount.ToString();
             GetComponent<Text>().color = Color.white;
         }
         else

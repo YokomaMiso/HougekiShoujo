@@ -14,10 +14,12 @@ public class DisplayRound : MonoBehaviour
     }
     void Update()
     {
-        if (roundNumber!= Managers.instance.gameManager.roundCount)
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+        if (roundNumber != hostIngameData.roundCount)
         {
-            roundNumber = Managers.instance.gameManager.roundCount;
-            roundText.text=roundNumber.ToString();
+            roundNumber = hostIngameData.roundCount;
+            roundText.text = roundNumber.ToString();
         }
     }
 }

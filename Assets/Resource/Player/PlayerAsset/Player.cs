@@ -109,9 +109,9 @@ public class Player : MonoBehaviour
     public void SetOutLineMat(Material _mat) { outLine = _mat; }
     public Material GetOutLineMat() { return outLine; }
 
-    
 
-    
+
+
 
     void Start()
     {
@@ -154,30 +154,29 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+        if (IsMine())
         {
-            if (IsMine())
+            if (hostIngameData.play)
             {
-                if (Managers.instance.gameManager.play)
-                {
-                    OwnPlayerBehavior();
-                    
-                }
-                else
-                {
-                    playerState = PLAYER_STATE.IDLE;
-                    if (alive) { playerMove.MoveStop(); }
-                }
-
-                if (!alive) { playerDead.DeadBehavior(); }
-
-                SetNetPos();
+                OwnPlayerBehavior();
             }
             else
             {
-                GetNetPosForOtherPlayer();
-                if (Managers.instance.gameManager.play) { OtherPlayerBehavior(); }
-                if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
+                playerState = PLAYER_STATE.IDLE;
+                if (alive) { playerMove.MoveStop(); }
             }
+
+            if (!alive) { playerDead.DeadBehavior(); }
+
+            SetNetPos();
+        }
+        else
+        {
+            GetNetPosForOtherPlayer();
+            if (hostIngameData.play) { OtherPlayerBehavior(); }
+            if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
         }
     }
 
