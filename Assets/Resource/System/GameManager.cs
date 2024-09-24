@@ -51,37 +51,23 @@ public class GameManager : MonoBehaviour
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
         //プレイヤーの数を読み取る
-        int playerCount = 0;
+        int playerCount = OSCManager.OSCinstance.GetRoomData(0).playerCount;
         RoomManager rm = Managers.instance.roomManager;
-        int[] allBannerNum = new int[8];
-        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
-
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
-        {
-            if (allBannerNum[i] != MachingRoomData.bannerEmpty)
-            {
-                playerCount++;
-            }
-        }
-
-        Debug.Log("playerCount" + playerCount);
 
         //生成する数はプレイヤーの数
         playerInstance = new GameObject[playerMaxNum];
-        //int instantiateCount = 0;
-        int myNum = OSCManager.OSCinstance.roomData.myBannerNum;
 
         //仮のプレイヤー生成処理
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++)
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
-            if (allBannerNum[i] == MachingRoomData.bannerEmpty) { continue; }
-
             //ルームデータを読み取る
-            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
+            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
+
+            if (oscRoomData.myID == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
             //自分の番号なら、自分用のプレハブを生成
-            if (i == myNum)
+            if (i == Managers.instance.playerID)
             {
                 playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
                 Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
@@ -94,35 +80,24 @@ public class GameManager : MonoBehaviour
 
             Player nowPlayer = playerInstance[i].GetComponent<Player>();
             nowPlayer.SetPlayerID(oscRoomData.myID);
-            nowPlayer.SetPlayerData(playerDatas[oscRoomData.GetSelectedCharacterID(oscRoomData.myID)]);
-            nowPlayer.SetOutLineMat(outLineMat[i % 2]);
-
-            //instantiateCount++;
+            nowPlayer.SetPlayerData(playerDatas[oscRoomData.selectedCharacterID]);
+            nowPlayer.SetOutLineMat(outLineMat[oscRoomData.myTeamNum]);
         }
 
     }
 
-    public GameObject GetPlayer(int _num)
+    public Player GetPlayer(int _num)
     {
         if (playerInstance == null) { return null; }
         if (_num >= playerInstance.Length) { return null; }
 
-        return playerInstance[_num];
+        return playerInstance[_num].GetComponent<Player>();
     }
 
     public int GetPlayerCount()
     {
-        int returnNum = 0;
-        for(int i = 0; i < playerInstance.Length; i++)
-        {
-            if (playerInstance[i] == null) { continue; }
-            returnNum++;
-        }
-
-
-        return returnNum;
+        return OSCManager.OSCinstance.GetRoomData(0).playerCount;
     }
-
 
     void Init()
     {
@@ -137,7 +112,10 @@ public class GameManager : MonoBehaviour
         end = false;
         endTimer = 0;
 
-        OSCManager.OSCinstance.roomData.gameStart = false;
+        if (Managers.instance.playerID == 0)
+        {
+            OSCManager.OSCinstance.roomData.gameStart = false;
+        }
     }
 
     void RoundInit()
@@ -151,7 +129,7 @@ public class GameManager : MonoBehaviour
         end = false;
         endTimer = 0;
 
-        for (int i = 0; i < MachingRoomData.bannerMaxCount - 2; i++)
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
             if (GetPlayer(i) != null)
             {
@@ -175,7 +153,7 @@ public class GameManager : MonoBehaviour
         int state = 0;
         if (deadPlayerCount[0] >= endDeadCount) { state = 1; }
         if (deadPlayerCount[1] >= endDeadCount) { state += 2; }
-        
+
         if (state == 1) { roundWinCount[1]++; }
         else if (state == 2) { roundWinCount[0]++; }
 
@@ -196,7 +174,7 @@ public class GameManager : MonoBehaviour
 
     bool DeadCheck()
     {
-        return false;
+        //return false;
 
         //チームごとの死亡カウント
         int[] deadCount = new int[2] { 0, 0 };

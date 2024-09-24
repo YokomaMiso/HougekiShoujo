@@ -17,7 +17,7 @@ public class CharaSerifBehavior : MonoBehaviour
 
     public void SetSerif(int _teamNum, int _serifNum)
     {
-        if (OSCManager.OSCinstance.roomData.myBannerNum % 2 != _teamNum % 2)
+        if (OSCManager.OSCinstance.roomData.myTeamNum != _teamNum % 2)
         {
             Destroy(gameObject);
             return;
@@ -25,9 +25,9 @@ public class CharaSerifBehavior : MonoBehaviour
 
         serifText = transform.GetChild(0).GetComponent<Text>();
 
-        transform.localPosition = windowLocalPos[_teamNum];
-        transform.localScale = windowAndTextLocalScale[_teamNum];
-        serifText.transform.localScale = windowAndTextLocalScale[_teamNum];
+        transform.localPosition = windowLocalPos[_teamNum % 2];
+        transform.localScale = windowAndTextLocalScale[_teamNum % 2];
+        serifText.transform.localScale = windowAndTextLocalScale[_teamNum % 2];
 
         serifText.text = serifs[_serifNum];
     }

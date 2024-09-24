@@ -481,10 +481,10 @@ public class OSCManager : MonoBehaviour
     /// <returns>ルームデータの初期化値</returns>
     MachingRoomData.RoomData initRoomData(MachingRoomData.RoomData _roomData)
     {
-        _roomData.myBannerNum = -1;
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetSelectedCharacterID(i, 0); }
-        for (int i = 0; i < MachingRoomData.bannerMaxCount; i++) { _roomData.SetReadyPlayers(i, false); }
-        _roomData.hostPlayer = 0;
+        _roomData.myID = -1;
+        _roomData.myTeamNum = -1;
+        _roomData.selectedCharacterID = 0;
+        _roomData.ready = false;
         _roomData.gameStart = false;
         _roomData.isInData = true;
         _roomData.isHandshaking = true;
