@@ -21,24 +21,23 @@ public class RoomManager : MonoBehaviour
 
     public void Update()
     {
-        if (OSCManager.OSCinstance.roomData.myID == 0)
-        {
-            int cnt = 0;
-            int[] teamCount = new int[2];
+        if (OSCManager.OSCinstance.roomData.myID != 0) { return; }
 
-            for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
+        int cnt = 0;
+        int[] teamCount = new int[2];
+
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
+        {
+            RoomData roomData = OSCManager.OSCinstance.GetRoomData(i);
+            if (roomData.myID != MachingRoomData.bannerEmpty)
             {
-                RoomData roomData = OSCManager.OSCinstance.GetRoomData(i);
-                if (roomData.myID != MachingRoomData.bannerEmpty) 
-                {
-                    cnt++;
-                    if (roomData.myTeamNum >= 0) { teamCount[roomData.myTeamNum]++; }
-                }
+                cnt++;
+                if (roomData.myTeamNum >= 0) { teamCount[roomData.myTeamNum]++; }
             }
-            OSCManager.OSCinstance.roomData.teamACount = teamCount[0];
-            OSCManager.OSCinstance.roomData.teamBCount = teamCount[1];
-            OSCManager.OSCinstance.roomData.playerCount = cnt;
         }
+        OSCManager.OSCinstance.roomData.teamACount = teamCount[0];
+        OSCManager.OSCinstance.roomData.teamBCount = teamCount[1];
+        OSCManager.OSCinstance.roomData.playerCount = cnt;
     }
 
     //É`Å[ÉÄÇÃêUÇËï™ÇØÇçsÇ§ä÷êî
@@ -48,7 +47,7 @@ public class RoomManager : MonoBehaviour
         RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
 
         int applyTeam = 0;
-        if (hostRoomData.teamACount < hostRoomData.teamBCount) { applyTeam = 1; }
+        if (hostRoomData.teamACount > hostRoomData.teamBCount) { applyTeam = 1; }
 
         myRoomData.myTeamNum = applyTeam;
         OSCManager.OSCinstance.roomData = myRoomData;

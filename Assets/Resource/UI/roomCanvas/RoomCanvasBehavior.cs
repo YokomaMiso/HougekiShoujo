@@ -98,6 +98,7 @@ public class RoomCanvasBehavior : MonoBehaviour
             Vector3 applyPos = new Vector3(teamPosX[oscRoomData.myTeamNum], bannerPosY[teamCount[oscRoomData.myTeamNum]]);
             playerBanners.transform.GetChild(i).transform.localPosition = applyPos;
             if (i == Managers.instance.playerID) { bannerSelecter.transform.localPosition = applyPos; }
+            teamCount[oscRoomData.myTeamNum]++;
         }
     }
 

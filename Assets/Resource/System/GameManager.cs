@@ -19,15 +19,8 @@ public class GameManager : MonoBehaviour
 
 
     //仮座標
-    Vector3[] pos = new Vector3[playerMaxNum]
-    {
-        new Vector3(-10,0,3),
-        new Vector3(10,0,3),
-        new Vector3(-10,0,0),
-        new Vector3(10,0,0),
-        new Vector3(-10,0,-3),
-        new Vector3(10,0,-3),
-    };
+    readonly int[] teamPosX = new int[2] { -10, 10 };
+    readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
 
     public bool play = false;
     public int roundCount = 1;
@@ -57,31 +50,36 @@ public class GameManager : MonoBehaviour
         //生成する数はプレイヤーの数
         playerInstance = new GameObject[playerMaxNum];
 
+        int[] teamCount = new int[2] { 0, 0 };
+
         //仮のプレイヤー生成処理
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
             //ルームデータを読み取る
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
 
-            if (oscRoomData.myID == MachingRoomData.bannerEmpty) { continue; }
+            if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
+            Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], playerPosZ[teamCount[oscRoomData.myTeamNum]]);
             //自分の番号なら、自分用のプレハブを生成
             if (i == Managers.instance.playerID)
             {
-                playerInstance[i] = Instantiate(playerPrefab, pos[i], Quaternion.identity);
+                playerInstance[i] = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
                 Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
             }
             //自分じゃないなら、他プレイヤー用のプレハブを生成
             else
             {
-                playerInstance[i] = Instantiate(otherPlayerPrefab, pos[i], Quaternion.identity);
+                playerInstance[i] = Instantiate(otherPlayerPrefab, spawnPos, Quaternion.identity);
             }
 
             Player nowPlayer = playerInstance[i].GetComponent<Player>();
             nowPlayer.SetPlayerID(oscRoomData.myID);
             nowPlayer.SetPlayerData(playerDatas[oscRoomData.selectedCharacterID]);
             nowPlayer.SetOutLineMat(outLineMat[oscRoomData.myTeamNum]);
+
+            teamCount[oscRoomData.myTeamNum]++;
         }
 
     }
@@ -90,6 +88,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerInstance == null) { return null; }
         if (_num >= playerInstance.Length) { return null; }
+        if (playerInstance[_num] == null) { return null; }
 
         return playerInstance[_num].GetComponent<Player>();
     }
@@ -129,12 +128,18 @@ public class GameManager : MonoBehaviour
         end = false;
         endTimer = 0;
 
+        int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
+            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
+
             if (GetPlayer(i) != null)
             {
+                Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], playerPosZ[teamCount[oscRoomData.myTeamNum]]);
                 playerInstance[i].GetComponent<Player>().RoundInit();
-                playerInstance[i].transform.position = pos[i];
+                playerInstance[i].transform.position = spawnPos;
+
+                teamCount[oscRoomData.myTeamNum]++;
             }
         }
     }
