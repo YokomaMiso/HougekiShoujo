@@ -24,7 +24,7 @@ public class MiniMapC : MonoBehaviour
         for (int num = 0; num < playerCount; num++)
         {
             //Is there Player in now number?
-            GameObject nowPlayer = Managers.instance.gameManager.GetPlayer(num);
+            Player nowPlayer = Managers.instance.gameManager.GetPlayer(num);
             if (nowPlayer == null) { continue; }
 
             //Set color from number

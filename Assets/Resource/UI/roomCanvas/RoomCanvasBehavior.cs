@@ -34,20 +34,8 @@ public class RoomCanvasBehavior : MonoBehaviour
     float timer = 0;
     const float charaChangeTimer = 0.5f;
 
-    readonly Vector3[] bannerPos = new Vector3[8]
-    {
-        new Vector3(-680,240,0),
-        new Vector3(680,240,0),
-
-        new Vector3(-680,80,0),
-        new Vector3(680,80,0),
-
-        new Vector3(-680,-80,0),
-        new Vector3(680,-80,0),
-
-        new Vector3(-680,-240,0),
-        new Vector3(680,-240,0),
-    };
+    readonly int[] teamPosX = new int[2] { -680, 680 };
+    readonly int[] bannerPosY = new int[4] { 240, 80, -80, -240 };
 
     void Start()
     {
@@ -71,15 +59,8 @@ public class RoomCanvasBehavior : MonoBehaviour
         subWeaponIcon = charaSelect.transform.GetChild(2).GetComponent<Image>();
         subWeaponText = subWeaponIcon.transform.GetChild(0).GetComponent<Text>();
 
-        //DEBUG
-        //OSCManager.OSCinstance.receiveRoomData.SetBannerNum(0, 0);
-        //OSCManager.OSCinstance.receiveRoomData.SetBannerNum(2, 2);
-        //OSCManager.OSCinstance.receiveRoomData.SetBannerNum(3, 3);
-        //OSCManager.OSCinstance.receiveRoomData.SetBannerNum(4, 4);
-        //OSCManager.OSCinstance.receiveRoomData.SetBannerNum(5, 5);
-
         //é©ï™ÇÃèäëÆÉ`Å[ÉÄÇêUÇËï™ÇØÇÈ
-        if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).myBannerNum == -1) { rm.PlayerBannerDivider(); }
+        if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).myTeamNum == -1) { rm.PlayerBannerDivider(); }
     }
 
     void Update()
@@ -100,29 +81,30 @@ public class RoomCanvasBehavior : MonoBehaviour
             playerBanners.transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        int[] allBannerNum = new int[8];
-        for (int i = 0; i < 8; i++) { allBannerNum[i] = rm.GetBannerNumFromAllPlayer(i); }
+        int[] teamCount = new int[2] { 0, 0 };
 
-        for (int i = 0; i < MachingRoomData.bannerMaxCount - 2; i++)
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
-            if (allBannerNum[i] == MachingRoomData.bannerEmpty)
+            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
+
+            if (oscRoomData.myID == MachingRoomData.bannerEmpty)
             {
                 playerBanners.transform.GetChild(i).gameObject.SetActive(false);
                 continue;
             }
 
-            RoomData roomData = OSCManager.OSCinstance.GetRoomData(allBannerNum[i]);
-
             playerBanners.transform.GetChild(i).gameObject.SetActive(true);
-            playerBanners.transform.GetChild(i).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(roomData);
-            playerBanners.transform.GetChild(i).transform.localPosition = bannerPos[i];
-            if (allBannerNum[i] == Managers.instance.playerID) { bannerSelecter.transform.localPosition = bannerPos[i]; }
+            playerBanners.transform.GetChild(i).GetComponent<PlayerBannerBehavior>().BannerIconUpdate(oscRoomData);
+
+            Vector3 applyPos = new Vector3(teamPosX[oscRoomData.myTeamNum], bannerPosY[teamCount[oscRoomData.myTeamNum]]);
+            playerBanners.transform.GetChild(i).transform.localPosition = applyPos;
+            if (i == Managers.instance.playerID) { bannerSelecter.transform.localPosition = applyPos; }
         }
     }
 
     void TeamSelect()
     {
-        if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).GetReadyPlayers(Managers.instance.playerID)) { return; }
+        if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).ready) { return; }
 
         int teamID = -1;
 
@@ -155,7 +137,7 @@ public class RoomCanvasBehavior : MonoBehaviour
             timer = 0;
         }
 
-        int charaID = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).GetSelectedCharacterID(myID);
+        int charaID = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).selectedCharacterID;
         PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 
         CharaDisplayUpdate(nowPlayerData);

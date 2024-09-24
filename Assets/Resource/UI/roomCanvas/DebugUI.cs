@@ -15,15 +15,11 @@ public class DebugUI : MonoBehaviour
             Transform roomDataTransform = transform.GetChild(i);
 
             Transform banner = roomDataTransform.GetChild(0);
-            for (int j = 0; j < MachingRoomData.bannerMaxCount; j++)
-            {
-                banner.GetChild(j).GetComponent<Text>().text = (-1).ToString();
-            }
-
             Transform charaIDs = roomDataTransform.GetChild(1);
             Transform readys = roomDataTransform.GetChild(2);
             for (int j = 0; j < MachingRoomData.playerMaxCount; j++)
             {
+                banner.GetChild(j).GetComponent<Text>().text = (-1).ToString();
                 charaIDs.GetChild(j).GetComponent<Text>().text = 0.ToString();
                 readys.GetChild(j).GetComponent<Text>().text = false.ToString();
             }
@@ -44,21 +40,21 @@ public class DebugUI : MonoBehaviour
             Transform charaIDs = roomDataTransform.GetChild(1);
             Transform readys = roomDataTransform.GetChild(2);
 
-            if (isMine && roomData.myBannerNum != MachingRoomData.bannerEmpty)
+            if (isMine && roomData.myID != MachingRoomData.bannerEmpty)
             {
-                banner.GetChild(roomData.myBannerNum).GetComponent<Text>().text = Managers.instance.playerID.ToString();
+                banner.GetChild(roomData.myID).GetComponent<Text>().text = Managers.instance.playerID.ToString();
             }
             else
             {
-                if (roomData.myBannerNum != MachingRoomData.bannerEmpty)
+                if (roomData.myID != MachingRoomData.bannerEmpty)
                 {
                     //banner.GetChild(roomData.myBannerNum).GetComponent<Text>().text = roomData.myBannerNum.ToString();
-                    banner.GetChild(roomData.myBannerNum).GetComponent<Text>().text = i.ToString();
+                    banner.GetChild(roomData.myID).GetComponent<Text>().text = i.ToString();
                 }
             }
-            charaIDs.GetChild(i).GetComponent<Text>().text = roomData.GetSelectedCharacterID(i).ToString();
+            charaIDs.GetChild(i).GetComponent<Text>().text = roomData.selectedCharacterID.ToString();
 
-            readys.GetChild(i).GetComponent<Text>().text = roomData.GetReadyPlayers(i).ToString();
+            readys.GetChild(i).GetComponent<Text>().text = roomData.ready.ToString();
         }
     }
 }
