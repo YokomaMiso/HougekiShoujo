@@ -13,23 +13,37 @@ public class PlayerRadioChat : MonoBehaviour
 
     RADIO_CHAT_ID radioChatID;
 
+    const float resetTime = 5.0f;
+    float timer;
+
     void Update()
     {
         if (!ownerPlayer.IsMine()) { return; }
         if (!ownerPlayer.GetAlive()) { return; }
 
-        float horizontal = Input.GetAxis("HorizontalArrow");
-        float vertical = Input.GetAxis("VerticalArrow");
+        if (radioChatID == RADIO_CHAT_ID.NONE)
+        {
+            float horizontal = Input.GetAxis("HorizontalArrow");
+            float vertical = Input.GetAxis("VerticalArrow");
 
-        if (Input.GetKeyDown(KeyCode.Space)) { horizontal = 1; }
+            if (Input.GetKeyDown(KeyCode.Space)) { horizontal = 1; }
 
-        if (horizontal < 0) { radioChatID = RADIO_CHAT_ID.HELP; }
-        else if (horizontal > 0) { radioChatID = RADIO_CHAT_ID.SUPPORT; }
-        else if (vertical > 0) { radioChatID = RADIO_CHAT_ID.BLITZ; }
-        else if (vertical < 0) { radioChatID = RADIO_CHAT_ID.APOLOGIZE; }
-        else { return; }
-
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerChatID = radioChatID;
+            if (horizontal < 0) { radioChatID = RADIO_CHAT_ID.HELP; }
+            else if (horizontal > 0) { radioChatID = RADIO_CHAT_ID.SUPPORT; }
+            else if (vertical > 0) { radioChatID = RADIO_CHAT_ID.BLITZ; }
+            else if (vertical < 0) { radioChatID = RADIO_CHAT_ID.APOLOGIZE; }
+            else { return; }
+        }
+        else
+        {
+            timer += Time.deltaTime;
+            if (timer > resetTime)
+            {
+                timer = 0;
+                radioChatID = RADIO_CHAT_ID.NONE;
+            }
+        }
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerChatID = radioChatID;
     }
 
     public void DisplayEmote(RADIO_CHAT_ID _ID)
