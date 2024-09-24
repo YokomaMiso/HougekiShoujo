@@ -26,8 +26,6 @@ public class PlayerRadioChat : MonoBehaviour
             float horizontal = Input.GetAxis("HorizontalArrow");
             float vertical = Input.GetAxis("VerticalArrow");
 
-            if (Input.GetKeyDown(KeyCode.Space)) { horizontal = 1; }
-
             if (horizontal < 0) { radioChatID = RADIO_CHAT_ID.HELP; }
             else if (horizontal > 0) { radioChatID = RADIO_CHAT_ID.SUPPORT; }
             else if (vertical > 0) { radioChatID = RADIO_CHAT_ID.BLITZ; }
