@@ -15,7 +15,7 @@ public class MiniMapC : MonoBehaviour
 
     void BindPlayerPosInShader()
     {
-        int playerCount = Managers.instance.gameManager.GetPlayerCount();
+        int playerCount = OSCManager.OSCinstance.GetRoomData(0).playerCount;
         Vector4[] playerPositions = new Vector4[playerCount];
         float[] playerTeams = new float[playerCount];
 
@@ -27,8 +27,10 @@ public class MiniMapC : MonoBehaviour
             Player nowPlayer = Managers.instance.gameManager.GetPlayer(num);
             if (nowPlayer == null) { continue; }
 
+            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(num);
+
             //Set color from number
-            playerTeams[arrayIndex] = (num + 1) % 2;
+            playerTeams[arrayIndex] = oscRoomData.myTeamNum;
 
             //Set position from Player instance
             Vector3 playerPos = nowPlayer.transform.position;
