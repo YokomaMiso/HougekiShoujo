@@ -75,7 +75,6 @@ public class FastChat : MonoBehaviour
         }
     }
 
-    // •ÅEª•√•»
     void ResetShaderValues()
     {
         if (fastChat != null)
@@ -92,28 +91,24 @@ public class FastChat : MonoBehaviour
 
     public int GetJoystickRegion()
     {
-        float joystickX = Input.GetAxis("RightStickHorizontal"); //”“•π•∆•£•√•Ø§ŒÀÆ∆Ω»ÅE¶
-        float joystickY = Input.GetAxis("RightStickVertical");   //”“•π•∆•£•√•Ø§Œ¥π÷±»ÅE¶
+        float joystickX = Input.GetAxis("RightStickHorizontal");
+        float joystickY = Input.GetAxis("RightStickVertical");
 
-
-        //÷––ƒ•æ©`•Û≈–∂®
         if (joystickX * joystickX + joystickY * joystickY < 0.1f * 0.1f)
         {
-            return -1; //÷–—ÅE®-1£©§Ú∑µ§π
+            return -1;
         }
 
-        //”“•π•∆•£•√•Ø§ŒΩ«∂»§Ú”ãÀÅE
         float angle = Mathf.Atan2(joystickY, joystickX) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360; //’˝“éªØ
+        if (angle < 0) angle += 360;
 
-        //360∂»§ÅE§ƒ§Œ˚e”Ú§À∑÷∏˚¿∑°¢§Ω§ÅEÀª˘§≈§§§∆˚e”Ú∑¨∫≈§Ú∑µ§π
-        int region = Mathf.FloorToInt(angle / 45.0f); //45∂»§¥§»§À˚e”Ú§Ú∑÷∏ÅE
+        int region = Mathf.FloorToInt(angle / 45.0f);
         Debug.Log("Atan" + region);
         Debug.Log("Atan" + region);
         Debug.Log("Atan" + region);
         Debug.Log("Atan" + region);
 
-        return region; //0°´7§Œ˚e”Ú∑¨∫≈§Ú∑µ§π
+        return region; 
     }
 
     void SetVisibility(bool isVisible)

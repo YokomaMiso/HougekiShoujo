@@ -109,7 +109,7 @@ Material:
     - _ReceiveShadows: 1
     - _Rotation: 0
     - _Scale: 3
-    - _SelectedRegion: -1
+    - _SelectedRegion: 7
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
