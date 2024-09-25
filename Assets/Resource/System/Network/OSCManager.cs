@@ -89,6 +89,7 @@ public class OSCManager : MonoBehaviour
         //インゲーム用データの初期化代入
         allData.pData = new IngameData.PlayerNetData();
         allData.pData = default;
+        allData.pData.mainPacketData.inGameData = initIngameData(allData.pData.mainPacketData.inGameData);
 
         //ルームデータの初期化
         allData.rData = initRoomData(allData.rData);
@@ -491,6 +492,28 @@ public class OSCManager : MonoBehaviour
         _roomData.myID = -1;
 
         return _roomData;
+    }
+
+    /// <summary>
+    /// インゲームデータの初期化処理
+    /// </summary>
+    /// <param name="_ingameData">初期化したいインゲームデータ</param>
+    /// <returns>インゲームデータの初期化値</returns>
+    IngameData.GameData initIngameData(IngameData.GameData _ingameData)
+    {
+        _ingameData.play = false;
+        _ingameData.start = false;
+        _ingameData.end = false;
+
+        _ingameData.roundCount = 1;
+        _ingameData.roundTimer = 60;
+        _ingameData.deadPlayerCountTeamA = 0;
+        _ingameData.deadPlayerCountTeamB = 0;
+        _ingameData.winCountTeamA = 0;
+        _ingameData.winCountTeamB = 0;
+        _ingameData.winner = -1;
+
+        return _ingameData;
     }
 
     /// <summary>

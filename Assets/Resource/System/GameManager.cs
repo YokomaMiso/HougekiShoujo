@@ -32,24 +32,6 @@ public class GameManager : MonoBehaviour
     public float endTimer;
 
 
-    public void Start()
-    {
-        IngameData.GameData myIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
-
-        myIngameData.play = false;
-        myIngameData.start = false;
-        myIngameData.end = false;
-
-        myIngameData.roundCount = 1;
-        myIngameData.roundTimer = 60;
-        myIngameData.deadPlayerCountTeamA = 0;
-        myIngameData.deadPlayerCountTeamB = 0;
-        myIngameData.winCountTeamA = 0;
-        myIngameData.winCountTeamB = 0;
-        myIngameData.winner = -1;
-
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = myIngameData;
-    }
     public void CreatePlayer()
     {
         //ÉvÉåÉCÉÑÅ[ÇÃê∂ë∂ÇtrueÇ…Ç∑ÇÈ
