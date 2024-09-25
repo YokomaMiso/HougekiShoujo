@@ -22,7 +22,11 @@ public class PlayerImage : MonoBehaviour
             charaSprite.shadowCastingMode = ShadowCastingMode.On;
             charaSprite.material = ownerPlayer.GetOutLineMat();
         }
+    }
 
+    public void Init()
+    {
+        charaSprite.color = Color.white;
     }
 
     void Update()
@@ -54,6 +58,7 @@ public class PlayerImage : MonoBehaviour
                 break;
             case PLAYER_STATE.DEAD:
                 applyController = animData.GetDeadAnim();
+                if (ownerPlayer.GetDeadTimer() >= 3) { charaSprite.color = Color.clear; }
                 break;
         }
 

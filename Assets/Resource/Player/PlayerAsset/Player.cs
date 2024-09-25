@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         playerRecoil.Init();
         playerSubAction.Init();
         playerDead.Init();
-        //playerImage;
+        playerImage.Init();
 
         fire = false;
         useSub = false;
