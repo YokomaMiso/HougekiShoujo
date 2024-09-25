@@ -154,22 +154,30 @@ public class GameManager : MonoBehaviour
 
     void EndBehavior()
     {
+        //ホストのデータ
         IngameData.GameData hostIngameData;
+        bool gameEnd = false;
 
+        //自分がホストなら
         if (Managers.instance.playerID == 0)
         {
+            //自分のデータをホストとして格納
             hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
 
+            //endなら早期リターン
             if (!hostIngameData.end) { return; }
 
-            hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+            //endTimerを足し算
             hostIngameData.endTimer += Managers.instance.timeManager.GetDeltaTime();
 
-            float endTimer = hostIngameData.endTimer;
-            if (endTimer < endDelay) { return; }
+            //endDelay以下なら早期リターン
+            if (hostIngameData.endTimer < endDelay) 
+            {
+                OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
+                return; 
+            }
 
-            bool gameEnd = false;
-
+            //どちらかのチームのwinCountが一定数を超えているなら
             if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
             if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
@@ -194,8 +202,6 @@ public class GameManager : MonoBehaviour
             if (nowRound == hostIngameData.roundCount) { return; }
 
             nowRound = hostIngameData.roundCount;
-
-            bool gameEnd = false;
 
             if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
             if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
