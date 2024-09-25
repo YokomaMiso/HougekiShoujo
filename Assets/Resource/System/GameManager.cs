@@ -270,7 +270,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+            if (Managers.instance.playerID == 0)
+            {
+                hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+            }
+
             if (DeadCheck())
             {
                 if (Managers.instance.playerID == 0)

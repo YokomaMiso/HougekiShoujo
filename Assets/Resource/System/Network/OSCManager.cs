@@ -98,6 +98,9 @@ public class OSCManager : MonoBehaviour
         roomData = default;
         roomData = initRoomData(roomData);
 
+        myNetIngameData = default;
+        myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+
 
         //自分のデータだった時だけポート番号を入れる
         for (int i = 0; i < maxPlayer; i++)
