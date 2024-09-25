@@ -57,6 +57,8 @@ public class OSCManager : MonoBehaviour
 
     const float waitHandshakeResponseTime = 2f;
 
+    const int timeoutSec = 3;
+
 
     ////////////////////////////////
     //////// デバック用変数 ////////
@@ -155,25 +157,41 @@ public class OSCManager : MonoBehaviour
 
         if (sendDataTimer >= fixedDeltaTime)
         {
-            Debug.Log("インゲームデータ送信");
             sendDataTimer += Time.deltaTime;
 
             //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
             if (isFinishHandshake)
             {
-                //送信用データリストにある分送信を試みる
-                for (int i = 0; i < playerDataList.Count; i++)
+                AllGameData.AllData _data = new AllGameData.AllData();
+                _data.rData = initRoomData(_data.rData);
+
+                if (isServer)
                 {
-                    //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
-                    AllGameData.AllData _data = new AllGameData.AllData();
-                    _data.rData = initRoomData(_data.rData);
-                    _data = playerDataList[i];
+                    //送信用データリストにある分送信を試みる
+                    for (int i = 0; i < playerDataList.Count; i++)
+                    {
+                        //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+                        
+                        _data = playerDataList[i];
+
+                        if (_data.rData.myID != -1)
+                        {
+                            Debug.Log("インゲームデータ送信(サーバ)");
+                            SendValue(_data);
+                        }
+                    }
+                }
+                else
+                {
+                    _data = playerDataList[Managers.instance.playerID];
 
                     if (_data.rData.myID != -1)
                     {
+                        Debug.Log("インゲームデータ送信(クライアント)");
                         SendValue(_data);
                     }
                 }
+                
             }
 
             sendDataTimer = 0;
@@ -498,6 +516,11 @@ public class OSCManager : MonoBehaviour
     /// </summary>
     /// <remarks>メインスレッド動作のためUnity用のメソッドも動作</remarks>
     private void MainThreadMethod()
+    {
+
+    }
+
+    private void TimeoutSortPlayer()
     {
 
     }
