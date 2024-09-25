@@ -26,6 +26,7 @@ public class MiniMapC : MonoBehaviour
             //Is there Player in now number?
             Player nowPlayer = Managers.instance.gameManager.GetPlayer(num);
             if (nowPlayer == null) { continue; }
+            if (!nowPlayer.GetAlive()) { continue; }
 
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(num);
 
