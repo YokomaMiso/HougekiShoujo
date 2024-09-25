@@ -171,10 +171,10 @@ public class GameManager : MonoBehaviour
             hostIngameData.endTimer += Managers.instance.timeManager.GetDeltaTime();
 
             //endDelay以下なら早期リターン
-            if (hostIngameData.endTimer < endDelay) 
+            if (hostIngameData.endTimer < endDelay)
             {
                 OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
-                return; 
+                return;
             }
 
             //どちらかのチームのwinCountが一定数を超えているなら
@@ -192,8 +192,6 @@ public class GameManager : MonoBehaviour
                 Managers.instance.roomManager.Init();
                 Init();
             }
-
-            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
         }
         else
         {
@@ -226,11 +224,9 @@ public class GameManager : MonoBehaviour
         //return false;
         IngameData.GameData hostIngameData;
 
-        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
-        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
+        hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; 
 
-        //if I'm not host, when return
-        if (Managers.instance.playerID != 0) { return _data; }
+        if (!hostIngameData.play) { return _data; }
 
         if (hostIngameData.winner != -1) { return _data; }
 
