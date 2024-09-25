@@ -36,13 +36,15 @@ public class CameraMove : MonoBehaviour
             else
             {
                 TargetChange();
-                if (nowPlayer) { Move(nowPlayer.transform.position);}
+                if (nowPlayer) { Move(nowPlayer.transform.position); }
             }
         }
     }
 
     void TargetChange()
     {
+        if (nowPlayer != null && !nowPlayer.GetAlive()) { nowPlayer = null; }
+
         int changeNum = -1;
         if (Input.GetButtonDown("RB")) { changeNum = 0; }
         else if (Input.GetButtonDown("LB")) { changeNum = 1; }
@@ -57,7 +59,7 @@ public class CameraMove : MonoBehaviour
         {
             //if it is myData, return
             if (i == Managers.instance.playerID) { continue; }
-            
+
             //if it is empty, return
             AllGameData.AllData oscAllData = OSCManager.OSCinstance.GetAllData(i);
             if (oscAllData.rData.myID == MachingRoomData.bannerEmpty) { continue; }
