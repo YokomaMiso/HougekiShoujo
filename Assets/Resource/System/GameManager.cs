@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     const float startDelay = 4;
     const float endDelay = 3;
 
+    //For Client
+    int nowRound = 1;
+
     public void CreatePlayer()
     {
         //ÉvÉåÉCÉÑÅ[ÇÃê∂ë∂ÇtrueÇ…Ç∑ÇÈ
@@ -86,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        nowRound = 1;
         if (Managers.instance.playerID == 0)
         {
             MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
@@ -151,41 +155,64 @@ public class GameManager : MonoBehaviour
     void EndBehavior()
     {
         IngameData.GameData hostIngameData;
-        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
-        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
-
-        if (!hostIngameData.end) { return; }
 
         if (Managers.instance.playerID == 0)
         {
             hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+
+            if (!hostIngameData.end) { return; }
+
+            hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
             hostIngameData.endTimer += Managers.instance.timeManager.GetDeltaTime();
-        }
 
-        float endTimer = hostIngameData.endTimer;
-        if (endTimer < endDelay) { return; }
+            float endTimer = hostIngameData.endTimer;
+            if (endTimer < endDelay) { return; }
 
-        bool gameEnd = false;
+            bool gameEnd = false;
 
-        if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
-        if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
+            if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
+            if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
-        if (!gameEnd)
-        {
-            RoundInit();
+            if (!gameEnd)
+            {
+                RoundInit();
+            }
+            else
+            {
+                Managers.instance.ChangeScene(GAME_STATE.ROOM);
+                Managers.instance.ChangeState(GAME_STATE.ROOM);
+                Managers.instance.roomManager.Init();
+                Init();
+            }
+
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
         }
         else
         {
-            Managers.instance.ChangeScene(GAME_STATE.ROOM);
-            Managers.instance.ChangeState(GAME_STATE.ROOM);
-            Managers.instance.roomManager.Init();
-            Init();
+            hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+            if (nowRound == hostIngameData.roundCount) { return; }
+
+            nowRound = hostIngameData.roundCount;
+
+            bool gameEnd = false;
+
+            if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
+            if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
+
+            if (!gameEnd)
+            {
+                RoundInit();
+            }
+            else
+            {
+                Managers.instance.ChangeScene(GAME_STATE.ROOM);
+                Managers.instance.ChangeState(GAME_STATE.ROOM);
+                Managers.instance.roomManager.Init();
+                Init();
+            }
         }
 
-        if (Managers.instance.playerID == 0)
-        {
-            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
-        }
     }
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
@@ -272,53 +299,37 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)GAME_STATE.IN_GAME) { return; }
 
+        EndBehavior();
 
-        IngameData.GameData hostIngameData;
-        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
-        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
+        //I'm not host, return
+        if (Managers.instance.playerID != 0) { return; }
 
-        Debug.Log("TeamA " + hostIngameData.winCountTeamA);
-        Debug.Log("TeamB " + hostIngameData.winCountTeamB);
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
 
         if (!hostIngameData.play)
         {
             if (!hostIngameData.start)
             {
-                if (Managers.instance.playerID == 0) { hostIngameData.startTimer += Managers.instance.timeManager.GetDeltaTime(); }
+                hostIngameData.startTimer += Managers.instance.timeManager.GetDeltaTime();
                 if (hostIngameData.startTimer > startDelay)
                 {
-                    if (Managers.instance.playerID == 0)
-                    {
-                        hostIngameData.play = true;
-                        hostIngameData.start = true;
-                    }
+                    hostIngameData.play = true;
+                    hostIngameData.start = true;
                 }
             }
         }
         else
         {
-            if (Managers.instance.playerID == 0)
-            {
-                hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
-            }
+            hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
 
             hostIngameData = DeadCheck(hostIngameData);
             if (hostIngameData.winner != -1)
             {
-                if (Managers.instance.playerID == 0)
-                {
-                    hostIngameData.play = false;
-                    hostIngameData.end = true;
-                }
+                hostIngameData.play = false;
+                hostIngameData.end = true;
             }
         }
 
-        if (Managers.instance.playerID == 0)
-        {
-            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
-        }
-
-        EndBehavior();
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
     }
-
 }
