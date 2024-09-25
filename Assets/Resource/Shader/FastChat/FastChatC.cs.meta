@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 89a6dda9aca79874cbd5d588ebb37035
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fastChat: {fileID: 2100000, guid: 9b71d526069f8624fb221cdb31c97745, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
