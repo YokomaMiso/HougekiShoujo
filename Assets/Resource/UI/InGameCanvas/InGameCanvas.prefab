@@ -1644,8 +1644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fastChat: {fileID: 2100000, guid: 9b71d526069f8624fb221cdb31c97745, type: 2}
-  scaleDuration: 0.5
-  rotationTurns: 0.00652
+  rotationTurns: 0
 --- !u!1 &6514821132723237251
 GameObject:
   m_ObjectHideFlags: 0

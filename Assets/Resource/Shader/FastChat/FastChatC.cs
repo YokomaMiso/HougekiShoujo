@@ -9,16 +9,16 @@ public class FastChat : MonoBehaviour
     public void SetFastChatMat(Material _mat) { fastChat = _mat; }
     public Material GetFastChatMat() { return fastChat; }
 
-    public float scaleDuration = 0.2f;         
-    public float rotationTurns = 3;              
+    const float scaleDuration = 0.2f;
+    //public float rotationTurns = 15;
 
     private bool isChatActive = false;
-    private float currentScale = 10.0f;              
-    private float currentRotation = 0.0f;           
-    private float scaleStartValue = 3.0f;           
-    private float scaleEndValue = 1.0f;            
+    private float currentScale = 10.0f;
+    private float currentRotation = 0.0f;
+    private float scaleStartValue = 2.0f;
+    private float scaleEndValue = 1.0f;
 
-    private float elapsedTime = 0f;                
+    private float elapsedTime = 0f;
 
     void Start()
     {
@@ -60,12 +60,10 @@ public class FastChat : MonoBehaviour
 
             float progress = Mathf.Clamp01(elapsedTime / scaleDuration);
 
-
-
             currentScale = Mathf.Lerp(scaleStartValue, scaleEndValue, progress);
             fastChat.SetFloat("_Scale", currentScale);
 
-            currentRotation = 360.0f * rotationTurns * progress;
+            currentRotation = 360.0f * Mathf.Deg2Rad * progress;
             fastChat.SetFloat("_Rotation", currentRotation);
 
 
@@ -91,24 +89,19 @@ public class FastChat : MonoBehaviour
 
     public int GetJoystickRegion()
     {
-        float joystickX = Input.GetAxis("RightStickHorizontal");
-        float joystickY = Input.GetAxis("RightStickVertical");
+        Vector3 joyStick = Vector3.zero;
+        joyStick.x = Input.GetAxis("RightStickHorizontal");
+        joyStick.y = Input.GetAxis("RightStickVertical");
 
-        if (joystickX * joystickX + joystickY * joystickY < 0.1f * 0.1f)
-        {
-            return -1;
-        }
+        if (joyStick.magnitude < 0.2f) { return -1; }
 
-        float angle = Mathf.Atan2(joystickY, joystickX) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(-joyStick.x, -joyStick.y) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
 
-        int region = Mathf.FloorToInt(angle / 45.0f);
-        Debug.Log("Atan" + region);
-        Debug.Log("Atan" + region);
-        Debug.Log("Atan" + region);
+        int region = Mathf.Clamp(Mathf.FloorToInt(angle / 45.0f), 0, 7);
         Debug.Log("Atan" + region);
 
-        return region; 
+        return region;
     }
 
     void SetVisibility(bool isVisible)

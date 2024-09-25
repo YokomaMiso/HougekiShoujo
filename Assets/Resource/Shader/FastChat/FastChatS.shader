@@ -71,9 +71,9 @@ Shader "CustomShader/FastChatS"
                 float2 uv = clamp(i.uv, 0.0, 1.0);
                 float angle=atan2(i.uv.y-0.5,i.uv.x-0.5)*180/3.14159;
 
-                angle=-angle;
+                //angle=-angle;
 
-                angle-=-157;
+                angle-=22.5*3;
 
                 if(angle<0)angle+=360;
 
