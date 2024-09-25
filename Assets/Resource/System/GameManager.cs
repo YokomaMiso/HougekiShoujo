@@ -223,10 +223,14 @@ public class GameManager : MonoBehaviour
             if (hostIngameData.deadPlayerCountTeamA < hostIngameData.deadPlayerCountTeamB)
             {
                 hostIngameData.winner = (int)TEAM_NUM.A;
+                hostIngameData.winCountTeamA++;
+                returnValue = true;
             }
             else
             {
                 hostIngameData.winner = (int)TEAM_NUM.B;
+                hostIngameData.winCountTeamB++;
+                returnValue = true;
             }
         }
         else
@@ -234,11 +238,13 @@ public class GameManager : MonoBehaviour
             if (deadCount[(int)TEAM_NUM.A] >= hostRoomData.teamACount)
             {
                 hostIngameData.winner = (int)TEAM_NUM.A;
+                hostIngameData.winCountTeamA++;
                 returnValue = true;
             }
             if (deadCount[(int)TEAM_NUM.B] >= hostRoomData.teamBCount)
             {
                 hostIngameData.winner = (int)TEAM_NUM.B;
+                hostIngameData.winCountTeamB++;
                 returnValue = true;
             }
         }
