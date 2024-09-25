@@ -195,6 +195,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
             hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
 
             if (nowRound == hostIngameData.roundCount) { return; }
@@ -204,7 +205,7 @@ public class GameManager : MonoBehaviour
             if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
             if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
-            if (!gameEnd)
+            if (hostRoomData.gameStart)
             {
                 RoundInit();
             }
