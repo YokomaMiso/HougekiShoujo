@@ -82,6 +82,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c856c19e79586664899c176953f21bd5, type: 2}
   - {fileID: 11400000, guid: ea5e95e04c0f14c4990e57486f7b9d47, type: 2}
   - {fileID: 11400000, guid: cce039a22e2b0b2469a3ecaced2e1ca1, type: 2}
+  - {fileID: 11400000, guid: fecd40e0b1b0fd64db7cfa4f7c93bec9, type: 2}
   outLineMat:
   - {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}
   - {fileID: 2100000, guid: 19fd21ca5640c2242852074a796b5117, type: 2}
@@ -154,7 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797a944ba771fa1448597c0600337743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nowPlayerCount: 1
 --- !u!114 &7942510688574649445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f9137985e630d449039fc1f3ecedc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sendPerSecond: 60
   myPort: 8000
-  otherPort: 8001
 --- !u!1001 &4956848352958072046
 PrefabInstance:
   m_ObjectHideFlags: 0
