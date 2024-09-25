@@ -28,7 +28,7 @@ public class InGameEndText : MonoBehaviour
 
         GetComponent<Text>().color = Color.white;
 
-        float timer = Managers.instance.gameManager.endTimer;
+        float timer = hostIngameData.endTimer;
 
         string[] displayTeam = new string[2] { "Team A ", "Team B " };
         string[] displayResult = new string[2] { "Get Round", "Win" };

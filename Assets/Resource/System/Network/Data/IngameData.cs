@@ -61,6 +61,8 @@ public class IngameData
         public bool play;
         public bool start;
         public bool end;
+        public float startTimer;
+        public float endTimer;
 
         public int roundCount;
         public float roundTimer;

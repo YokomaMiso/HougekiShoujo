@@ -507,6 +507,8 @@ public class OSCManager : MonoBehaviour
         _ingameData.play = false;
         _ingameData.start = false;
         _ingameData.end = false;
+        _ingameData.startTimer = 0;
+        _ingameData.endTimer = 0;
 
         _ingameData.roundCount = 1;
         _ingameData.roundTimer = 60;

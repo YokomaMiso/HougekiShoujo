@@ -22,15 +22,8 @@ public class GameManager : MonoBehaviour
     readonly int[] teamPosX = new int[2] { -10, 10 };
     readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
 
-    const int endWinCount = 3;
-    const int endDeadCount = 1;//playerMaxNum / 2;
-
     const float startDelay = 4;
-    public float startTimer;
-
     const float endDelay = 3;
-    public float endTimer;
-
 
     public void CreatePlayer()
     {
@@ -94,9 +87,6 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
-        startTimer = 0;
-        endTimer = 0;
-
         if (Managers.instance.playerID == 0)
         {
             MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
@@ -106,6 +96,8 @@ public class GameManager : MonoBehaviour
             hostIngameData.play = false;
             hostIngameData.start = false;
             hostIngameData.end = false;
+            hostIngameData.startTimer = 0;
+            hostIngameData.endTimer = 0;
 
             hostIngameData.roundCount = 1;
             hostIngameData.roundTimer = 60;
@@ -122,9 +114,6 @@ public class GameManager : MonoBehaviour
 
     void RoundInit()
     {
-        startTimer = 2;
-        endTimer = 0;
-
         if (Managers.instance.playerID == 0)
         {
             IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
@@ -132,6 +121,8 @@ public class GameManager : MonoBehaviour
             hostIngameData.play = false;
             hostIngameData.start = false;
             hostIngameData.end = false;
+            hostIngameData.startTimer = 2;
+            hostIngameData.endTimer = 0;
 
             hostIngameData.roundCount++;
             hostIngameData.roundTimer = 60;
@@ -160,11 +151,19 @@ public class GameManager : MonoBehaviour
 
     void EndBehavior()
     {
-        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         if (!hostIngameData.end) { return; }
 
-        endTimer += Managers.instance.timeManager.GetDeltaTime();
+        if (Managers.instance.playerID == 0)
+        {
+            hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+            hostIngameData.endTimer += Managers.instance.timeManager.GetDeltaTime();
+        }
+
+        float endTimer = hostIngameData.endTimer;
         if (endTimer < endDelay) { return; }
 
         bool gameEnd = false;
@@ -183,12 +182,19 @@ public class GameManager : MonoBehaviour
             Managers.instance.roomManager.Init();
             Init();
         }
+
+        if (Managers.instance.playerID == 0)
+        {
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
+        }
     }
 
     bool DeadCheck()
     {
         //return false;
-        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         //if I'm not host, when return
         if (Managers.instance.playerID != 0) { return hostIngameData.winner != -1; }
@@ -257,14 +263,16 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)GAME_STATE.IN_GAME) { return; }
 
-        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         if (!hostIngameData.play)
         {
             if (!hostIngameData.start)
             {
-                startTimer += Managers.instance.timeManager.GetDeltaTime();
-                if (startTimer > startDelay)
+                if (Managers.instance.playerID == 0) { hostIngameData.startTimer += Managers.instance.timeManager.GetDeltaTime(); }
+                if (hostIngameData.startTimer > startDelay)
                 {
                     if (Managers.instance.playerID == 0)
                     {

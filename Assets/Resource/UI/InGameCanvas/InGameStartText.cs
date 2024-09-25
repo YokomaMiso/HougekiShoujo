@@ -30,7 +30,7 @@ public class InGameStartText : MonoBehaviour
             return;
         }
 
-        float timer = Managers.instance.gameManager.startTimer;
+        float timer = hostIngameData.startTimer;
 
         if (4.0f > timer && timer > 3.5f)
         {
