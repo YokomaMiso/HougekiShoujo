@@ -512,8 +512,8 @@ public class OSCManager : MonoBehaviour
 
         _ingameData.roundCount = 1;
         _ingameData.roundTimer = 60;
-        _ingameData.deadPlayerCountTeamA = 0;
-        _ingameData.deadPlayerCountTeamB = 0;
+        _ingameData.alivePlayerCountTeamA = 0;
+        _ingameData.alivePlayerCountTeamB = 0;
         _ingameData.winCountTeamA = 0;
         _ingameData.winCountTeamB = 0;
         _ingameData.winner = -1;

@@ -188,7 +188,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    bool DeadCheck()
+    IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
         //return false;
         IngameData.GameData hostIngameData;
@@ -197,9 +197,9 @@ public class GameManager : MonoBehaviour
         else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         //if I'm not host, when return
-        if (Managers.instance.playerID != 0) { return hostIngameData.winner != -1; }
+        if (Managers.instance.playerID != 0) { return _data; }
 
-        if (hostIngameData.winner != -1) { return true; }
+        if (hostIngameData.winner != -1) { return _data; }
 
         //チームごとの生き残り数
         int[] aliveCount = new int[2] { 0, 0 };
@@ -229,8 +229,6 @@ public class GameManager : MonoBehaviour
         hostIngameData.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
         hostIngameData.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
 
-        bool returnValue = false;
-
         if (hostIngameData.roundTimer <= 0)
         {
             Debug.Log("時間切れだよ");
@@ -240,35 +238,34 @@ public class GameManager : MonoBehaviour
             {
                 hostIngameData.winner = (int)TEAM_NUM.A;
                 hostIngameData.winCountTeamA++;
-                returnValue = true;
             }
             else
             {
                 hostIngameData.winner = (int)TEAM_NUM.B;
                 hostIngameData.winCountTeamB++;
-                returnValue = true;
             }
         }
         else
         {
-            Debug.Log("死亡数でチェック通ったよ");
 
             if (aliveCount[(int)TEAM_NUM.A] <= 0)
             {
                 hostIngameData.winner = (int)TEAM_NUM.B;
                 hostIngameData.winCountTeamB++;
-                returnValue = true;
+                Debug.Log("Aチームの死亡数でチェック通ったよ");
+                Debug.Log("Bチームの勝利数 " + hostIngameData.winCountTeamB);
             }
             if (aliveCount[(int)TEAM_NUM.B] <= 0)
             {
                 hostIngameData.winner = (int)TEAM_NUM.A;
                 hostIngameData.winCountTeamA++;
-                returnValue = true;
+                Debug.Log("Bチームの死亡数でチェック通ったよ");
+                Debug.Log("Aチームの勝利数 " + hostIngameData.winCountTeamA);
             }
         }
 
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
-        return returnValue;
+        _data = hostIngameData;
+        return _data;
     }
 
     void Update()
@@ -305,7 +302,8 @@ public class GameManager : MonoBehaviour
                 hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
             }
 
-            if (DeadCheck())
+            hostIngameData = DeadCheck(hostIngameData);
+            if (hostIngameData.winner != -1)
             {
                 if (Managers.instance.playerID == 0)
                 {
