@@ -22,11 +22,13 @@ public class InGameEndText : MonoBehaviour
 
     void Update()
     {
-        if (!Managers.instance.gameManager.end) { GetComponent<Text>().color = Color.clear; return; }
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+        if (!hostIngameData.end) { GetComponent<Text>().color = Color.clear; return; }
 
         GetComponent<Text>().color = Color.white;
 
-        float timer = Managers.instance.gameManager.endTimer;
+        float timer = hostIngameData.endTimer;
 
         string[] displayTeam = new string[2] { "Team A ", "Team B " };
         string[] displayResult = new string[2] { "Get Round", "Win" };
@@ -34,15 +36,18 @@ public class InGameEndText : MonoBehaviour
         GameManager gm = Managers.instance.gameManager;
 
         bool gameEnd = false;
-        for (int i = 0; i < 2; i++) { if (gm.roundWinCount[i] >= 3) { gameEnd = true; } }
+        if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
+        if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
-        int teamIndex = 0;
-        if (gm.deadPlayerCount[0] > gm.deadPlayerCount[1]) { teamIndex = 1; }
+        int teamIndex = hostIngameData.winner;
 
         int resultIndex = 0;
         if (gameEnd) { resultIndex = 1; }
 
-        GetComponent<Text>().text = displayTeam[teamIndex] + displayResult[resultIndex];
-        GetComponent<Text>().color = Color.white;
+        if (teamIndex != -1)
+        {
+            GetComponent<Text>().text = displayTeam[teamIndex] + displayResult[resultIndex];
+            GetComponent<Text>().color = Color.white;
+        }
     }
 }

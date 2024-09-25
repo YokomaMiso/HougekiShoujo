@@ -17,26 +17,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Material[] outLineMat;
 
-
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
     readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
 
-    public bool play = false;
-    public int roundCount = 1;
-    public float roundTimer = 60;
-    const int endWinCount = 3;
-    const int endDeadCount = 1;//playerMaxNum / 2;
-    public int[] deadPlayerCount = new int[2];
-    public int[] roundWinCount = new int[2];
-
-    public bool start;
     const float startDelay = 4;
-    public float startTimer;
-
-    public bool end;
     const float endDelay = 3;
-    public float endTimer;
+
+    //For Client
+    int nowRound = 1;
 
     public void CreatePlayer()
     {
@@ -100,33 +89,52 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
-        play = false;
-        roundTimer = 60;
-        roundCount = 1;
-        for (int i = 0; i < roundWinCount.Length; i++) { roundWinCount[i] = 0; }
-
-        start = false;
-        startTimer = 0;
-
-        end = false;
-        endTimer = 0;
-
+        nowRound = 1;
         if (Managers.instance.playerID == 0)
         {
-            OSCManager.OSCinstance.roomData.gameStart = false;
+            MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
+            IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+
+            hostRoomData.gameStart = false;
+            hostIngameData.play = false;
+            hostIngameData.start = false;
+            hostIngameData.end = false;
+            hostIngameData.startTimer = 0;
+            hostIngameData.endTimer = 0;
+
+            hostIngameData.roundCount = 1;
+            hostIngameData.roundTimer = 60;
+            hostIngameData.alivePlayerCountTeamA = hostRoomData.teamACount;
+            hostIngameData.alivePlayerCountTeamB = hostRoomData.teamBCount;
+            hostIngameData.winCountTeamA = 0;
+            hostIngameData.winCountTeamB = 0;
+            hostIngameData.winner = -1;
+
+            OSCManager.OSCinstance.roomData = hostRoomData;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
         }
     }
 
     void RoundInit()
     {
-        play = false;
-        roundTimer = 60;
+        if (Managers.instance.playerID == 0)
+        {
+            IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
 
-        start = false;
-        startTimer = 2;
+            hostIngameData.play = false;
+            hostIngameData.start = false;
+            hostIngameData.end = false;
+            hostIngameData.startTimer = 2;
+            hostIngameData.endTimer = 0;
 
-        end = false;
-        endTimer = 0;
+            hostIngameData.roundCount++;
+            hostIngameData.roundTimer = 60;
+            hostIngameData.alivePlayerCountTeamA = 0;
+            hostIngameData.alivePlayerCountTeamB = 0;
+            hostIngameData.winner = -1;
+
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
+        }
 
         int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
@@ -146,94 +154,185 @@ public class GameManager : MonoBehaviour
 
     void EndBehavior()
     {
-        if (!end) { return; }
-
-        endTimer += Managers.instance.timeManager.GetDeltaTime();
-        if (endTimer < endDelay) { return; }
-
+        //ホストのデータ
+        IngameData.GameData hostIngameData;
         bool gameEnd = false;
 
-        roundCount++;
-
-        int state = 0;
-        if (deadPlayerCount[0] >= endDeadCount) { state = 1; }
-        if (deadPlayerCount[1] >= endDeadCount) { state += 2; }
-
-        if (state == 1) { roundWinCount[1]++; }
-        else if (state == 2) { roundWinCount[0]++; }
-
-        for (int i = 0; i < 2; i++) { if (roundWinCount[i] >= endWinCount) { gameEnd = true; } }
-
-        if (!gameEnd)
+        //自分がホストなら
+        if (Managers.instance.playerID == 0)
         {
-            RoundInit();
+            //自分のデータをホストとして格納
+            hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+
+            //endなら早期リターン
+            if (!hostIngameData.end) { return; }
+
+            //endTimerを足し算
+            hostIngameData.endTimer += Managers.instance.timeManager.GetDeltaTime();
+
+            //endDelay以下なら早期リターン
+            if (hostIngameData.endTimer < endDelay)
+            {
+                OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
+                return;
+            }
+
+            //どちらかのチームのwinCountが一定数を超えているなら
+            if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
+            if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
+
+            if (!gameEnd)
+            {
+                RoundInit();
+            }
+            else
+            {
+                Managers.instance.ChangeScene(GAME_STATE.ROOM);
+                Managers.instance.ChangeState(GAME_STATE.ROOM);
+                Managers.instance.roomManager.Init();
+                Init();
+            }
         }
         else
         {
-            Managers.instance.ChangeScene(GAME_STATE.ROOM);
-            Managers.instance.ChangeState(GAME_STATE.ROOM);
-            Managers.instance.roomManager.Init();
-            Init();
-        }
-    }
+            MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+            hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
 
-    bool DeadCheck()
-    {
-        //return false;
+            if (nowRound == hostIngameData.roundCount) { return; }
 
-        //チームごとの死亡カウント
-        int[] deadCount = new int[2] { 0, 0 };
+            nowRound = hostIngameData.roundCount;
 
-        for (int i = 0; i < playerInstance.Length; i++)
-        {
-            if (GetPlayer(i) == null) { continue; }
+            if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
+            if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
-            MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
-
-            if (!playerInstance[i].GetComponent<Player>().GetAlive())
+            if (hostRoomData.gameStart)
             {
-                deadCount[oscRoomData.myTeamNum]++;
+                RoundInit();
+            }
+            else
+            {
+                Managers.instance.ChangeScene(GAME_STATE.ROOM);
+                Managers.instance.ChangeState(GAME_STATE.ROOM);
+                Managers.instance.roomManager.Init();
+                Init();
             }
         }
 
-        bool returnValue = false;
-        MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+    }
 
-        deadPlayerCount[0] = deadCount[0];
-        if (deadPlayerCount[0] >= hostRoomData.teamACount) { returnValue = true; }
-        deadPlayerCount[1] = deadCount[1];
-        if (deadPlayerCount[1] >= hostRoomData.teamBCount) { returnValue = true; }
+    IngameData.GameData DeadCheck(IngameData.GameData _data)
+    {
+        //return false;
+        IngameData.GameData hostIngameData;
 
-        return returnValue;
+        hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; 
+
+        if (!hostIngameData.play) { return _data; }
+
+        if (hostIngameData.winner != -1) { return _data; }
+
+        //チームごとの生き残り数
+        int[] aliveCount = new int[2] { 0, 0 };
+
+        for (int i = 0; i < playerInstance.Length; i++)
+        {
+            MachingRoomData.RoomData oscRoomData;
+            IngameData.GameData nowIngameData;
+            if (Managers.instance.playerID == i)
+            {
+                oscRoomData = OSCManager.OSCinstance.roomData;
+                nowIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+            }
+            else
+            {
+                oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
+                nowIngameData = OSCManager.OSCinstance.GetIngameData(i).mainPacketData.inGameData;
+            }
+
+            if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
+
+            if (nowIngameData.alive) { aliveCount[oscRoomData.myTeamNum]++; }
+        }
+
+        MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
+
+        hostIngameData.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
+        hostIngameData.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
+
+        if (hostIngameData.roundTimer <= 0)
+        {
+            Debug.Log("時間切れだよ");
+
+            //if(hostRoomData.teamACount== hostRoomData.teamBCount) { }
+            if (hostIngameData.alivePlayerCountTeamA > hostIngameData.alivePlayerCountTeamB)
+            {
+                hostIngameData.winner = (int)TEAM_NUM.A;
+                hostIngameData.winCountTeamA++;
+            }
+            else
+            {
+                hostIngameData.winner = (int)TEAM_NUM.B;
+                hostIngameData.winCountTeamB++;
+            }
+        }
+        else
+        {
+
+            if (aliveCount[(int)TEAM_NUM.A] <= 0)
+            {
+                hostIngameData.winner = (int)TEAM_NUM.B;
+                hostIngameData.winCountTeamB++;
+                Debug.Log("Aチームの死亡数でチェック通ったよ");
+                Debug.Log("Bチームの勝利数 " + hostIngameData.winCountTeamB);
+            }
+            if (aliveCount[(int)TEAM_NUM.B] <= 0)
+            {
+                hostIngameData.winner = (int)TEAM_NUM.A;
+                hostIngameData.winCountTeamA++;
+                Debug.Log("Bチームの死亡数でチェック通ったよ");
+                Debug.Log("Aチームの勝利数 " + hostIngameData.winCountTeamA);
+            }
+        }
+
+        _data = hostIngameData;
+        return _data;
     }
 
     void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)GAME_STATE.IN_GAME) { return; }
 
-        if (!play)
+        EndBehavior();
+
+        //I'm not host, return
+        if (Managers.instance.playerID != 0) { return; }
+
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+
+        if (!hostIngameData.play)
         {
-            if (!start)
+            if (!hostIngameData.start)
             {
-                startTimer += Managers.instance.timeManager.GetDeltaTime();
-                if (startTimer > startDelay)
+                hostIngameData.startTimer += Managers.instance.timeManager.GetDeltaTime();
+                if (hostIngameData.startTimer > startDelay)
                 {
-                    play = true;
-                    start = true;
+                    hostIngameData.play = true;
+                    hostIngameData.start = true;
                 }
             }
         }
         else
         {
-            roundTimer -= Managers.instance.timeManager.GetDeltaTime();
-            if (DeadCheck())
+            hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+
+            hostIngameData = DeadCheck(hostIngameData);
+            if (hostIngameData.winner != -1)
             {
-                play = false;
-                end = true;
+                hostIngameData.play = false;
+                hostIngameData.end = true;
             }
         }
 
-        EndBehavior();
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
     }
-
 }

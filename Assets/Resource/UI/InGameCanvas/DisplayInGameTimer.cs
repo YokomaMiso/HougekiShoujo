@@ -17,7 +17,9 @@ public class DisplayInGameTimer : MonoBehaviour
 
     void Update()
     {
-        float timer = Managers.instance.gameManager.roundTimer;
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+        float timer = hostIngameData.roundTimer;
         if (timer > 60) { timer = 60; }
 
         int spriteNum = 0;
