@@ -169,8 +169,8 @@ public class GameManager : MonoBehaviour
 
         bool gameEnd = false;
 
-        if (hostIngameData.deadPlayerCountTeamA >= 3) { gameEnd = true; }
-        if (hostIngameData.deadPlayerCountTeamB >= 3) { gameEnd = true; }
+        if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
+        if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
         if (!gameEnd)
         {
