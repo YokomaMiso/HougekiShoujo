@@ -215,12 +215,14 @@ public class GameManager : MonoBehaviour
         hostIngameData.deadPlayerCountTeamA = deadCount[(int)TEAM_NUM.A];
         hostIngameData.deadPlayerCountTeamB = deadCount[(int)TEAM_NUM.B];
 
+        bool returnValue = false;
+
         if (hostIngameData.roundTimer <= 0)
         {
             //if(hostRoomData.teamACount== hostRoomData.teamBCount) { }
-            if(hostIngameData.deadPlayerCountTeamA < hostIngameData.deadPlayerCountTeamB) 
+            if (hostIngameData.deadPlayerCountTeamA < hostIngameData.deadPlayerCountTeamB)
             {
-                hostIngameData.winner = (int)TEAM_NUM.A; 
+                hostIngameData.winner = (int)TEAM_NUM.A;
             }
             else
             {
@@ -232,47 +234,55 @@ public class GameManager : MonoBehaviour
             if (deadCount[(int)TEAM_NUM.A] >= hostRoomData.teamACount)
             {
                 hostIngameData.winner = (int)TEAM_NUM.A;
-                return true;
+                returnValue = true;
             }
             if (deadCount[(int)TEAM_NUM.B] >= hostRoomData.teamBCount)
             {
                 hostIngameData.winner = (int)TEAM_NUM.B;
-                return true;
+                returnValue = true;
             }
         }
 
-        return false;
+        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
+        return returnValue;
     }
 
     void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)GAME_STATE.IN_GAME) { return; }
 
-        if (Managers.instance.playerID == 0)
-        {
-            IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
 
-            if (!hostIngameData.play)
+        if (!hostIngameData.play)
+        {
+            if (!hostIngameData.start)
             {
-                if (!hostIngameData.start)
+                startTimer += Managers.instance.timeManager.GetDeltaTime();
+                if (startTimer > startDelay)
                 {
-                    startTimer += Managers.instance.timeManager.GetDeltaTime();
-                    if (startTimer > startDelay)
+                    if (Managers.instance.playerID == 0)
                     {
                         hostIngameData.play = true;
                         hostIngameData.start = true;
                     }
                 }
             }
-            else
+        }
+        else
+        {
+            hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
+            if (DeadCheck())
             {
-                hostIngameData.roundTimer -= Managers.instance.timeManager.GetDeltaTime();
-                if (DeadCheck())
+                if (Managers.instance.playerID == 0)
                 {
                     hostIngameData.play = false;
                     hostIngameData.end = true;
                 }
             }
+        }
+
+        if (Managers.instance.playerID == 0)
+        {
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
         }
 
