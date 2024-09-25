@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
-        //return false;
+        //return _data;
         IngameData.GameData hostIngameData;
 
         hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; 
