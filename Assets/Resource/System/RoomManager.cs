@@ -14,6 +14,7 @@ public class RoomManager : MonoBehaviour
     {
         RoomData oscRoomData = OSCManager.OSCinstance.roomData;
         oscRoomData.gameStart = false;
+        oscRoomData.ready = false;
 
         OSCManager.OSCinstance.roomData = oscRoomData;
     }
