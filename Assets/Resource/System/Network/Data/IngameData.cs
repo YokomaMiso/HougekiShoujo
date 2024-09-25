@@ -66,8 +66,8 @@ public class IngameData
 
         public int roundCount;
         public float roundTimer;
-        public int deadPlayerCountTeamA;
-        public int deadPlayerCountTeamB;
+        public int alivePlayerCountTeamA;
+        public int alivePlayerCountTeamB;
         public int winCountTeamA;
         public int winCountTeamB;
         public int winner;
