@@ -166,16 +166,15 @@ public class OSCManager : MonoBehaviour
             //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
             if (isFinishHandshake)
             {
-                AllGameData.AllData _data = new AllGameData.AllData();
-                _data.rData = initRoomData(_data.rData);
-
                 if (isServer)
                 {
                     //送信用データリストにある分送信を試みる
                     for (int i = 0; i < playerDataList.Count; i++)
                     {
                         //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
-                        
+                        AllGameData.AllData _data = new AllGameData.AllData();
+                        _data.rData = initRoomData(_data.rData);
+
                         _data = playerDataList[i];
 
                         if (_data.rData.myID != -1)
@@ -187,6 +186,8 @@ public class OSCManager : MonoBehaviour
                 }
                 else
                 {
+                    AllGameData.AllData _data = new AllGameData.AllData();
+                    _data.rData = initRoomData(_data.rData);
                     _data = playerDataList[Managers.instance.playerID];
 
                     if (_data.rData.myID != -1)
