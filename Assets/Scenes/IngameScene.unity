@@ -409,8 +409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641149a620a56dc4c8ff14dc2e41e0f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 5
-  asistValue: 2
+  spectateAnnouncePrefab: {fileID: 4432466077039030639, guid: 297f590efdc620c48b7e387b63019654,
+    type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

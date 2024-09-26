@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    [SerializeField] float distance = 10;
-    [SerializeField] float asistValue = 2;
+    [SerializeField] GameObject spectateAnnouncePrefab;
+    GameObject spectateAnnounceInstance;
+
+    const float distance = 10;
     Player ownerPlayer;
-    Player nowPlayer;
+    Player[] teamPlayers;
+    int nowPlayer = -1;
 
     static readonly Vector3 ingameRotation = new Vector3(45, 0, 0);
     float initialTimer;
@@ -20,6 +23,14 @@ public class CameraMove : MonoBehaviour
 
     void Start()
     {
+        TargetSearch();
+
+        //初回、キャンバスが生成されていないなら
+        if (spectateAnnounceInstance == null)
+        {
+            spectateAnnounceInstance = Instantiate(spectateAnnouncePrefab);
+            spectateAnnounceInstance.GetComponent<SpectateCameraAnnounce>().Display(false);
+        }
     }
 
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
@@ -36,24 +47,22 @@ public class CameraMove : MonoBehaviour
             else
             {
                 TargetChange();
-                if (nowPlayer) { Move(nowPlayer.transform.position); }
+                if (nowPlayer >= 0 && teamPlayers[nowPlayer] && teamPlayers[nowPlayer].GetAlive())
+                {
+                    Move(teamPlayers[nowPlayer].transform.position);
+                }
             }
         }
     }
 
-    void TargetChange()
+    void TargetSearch()
     {
-        if (nowPlayer != null && !nowPlayer.GetAlive()) { nowPlayer = null; }
-
-        int changeNum = -1;
-        if (Input.GetButtonDown("RB")) { changeNum = 0; }
-        else if (Input.GetButtonDown("LB")) { changeNum = 1; }
-
-        if (changeNum == -1) { return; }
-
         MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
 
-        int[] targetID = new int[2] { -1, -1 };
+        if (myRoomData.myTeamNum == (int)TEAM_NUM.A) { teamPlayers = new Player[hostRoomData.teamACount - 1]; }
+        else { teamPlayers = new Player[hostRoomData.teamBCount - 1]; }
+
         int targetIndex = 0;
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
@@ -67,16 +76,51 @@ public class CameraMove : MonoBehaviour
             //if another team, return
             if (myRoomData.myTeamNum != oscAllData.rData.myTeamNum) { continue; }
 
-            //if it player is dead, return
-            if (!oscAllData.pData.mainPacketData.inGameData.alive) { continue; }
-
-            targetID[targetIndex] = i;
+            teamPlayers[targetIndex] = Managers.instance.gameManager.GetPlayer(i);
             targetIndex++;
         }
-
-        if (targetID[changeNum] != -1) { nowPlayer = Managers.instance.gameManager.GetPlayer(targetID[changeNum]); }
     }
 
+    void TargetChange()
+    {
+        //そもそも１人なら早期リターン
+        if (teamPlayers == null) { return; }
+
+        //カメラ切り替えが出来るかどうか
+        int canChangeCount = 0;
+        for (int i = 0; i < teamPlayers.Length; i++)
+        {
+            //nowPlayerで示しているならカウントは進めない
+            if (i == nowPlayer)
+            {
+                //もし死んでるならnowPlayerを元に戻す
+                if (!teamPlayers[i].GetAlive()) { nowPlayer = -1; }
+                continue;
+            }
+            //生存している味方を検索
+            if (teamPlayers[i].GetAlive()) { canChangeCount++; }
+        }
+
+        //アナウンスUIを表示
+        spectateAnnounceInstance.GetComponent<SpectateCameraAnnounce>().Display(canChangeCount > 0);
+
+        //canChangePlayerが１人でも入れば、カメラを切り替えることが出来る
+        if (canChangeCount > 0)
+        {
+            //LBが押されたら
+            if (Input.GetButtonDown("LB"))
+            {
+                for (int i = 0; i < teamPlayers.Length; i++)
+                {
+                    //nowPlayerで示しているならスルー
+                    if (i == nowPlayer) { continue; }
+                    //nowPlayerに現在の値を入れて抜ける
+                    nowPlayer = i;
+                    break;
+                }
+            }
+        }
+    }
     void InitialAngle()
     {
         initialTimer += Time.deltaTime;
