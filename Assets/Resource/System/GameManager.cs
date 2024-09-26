@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public PlayerData[] playerDatas;
 
     [SerializeField] Material[] outLineMat;
+    [SerializeField] GameObject killLogCanvasPrefab;
+    KillLogCanvas killLogCanvas;
 
     //âºç¿ïW
     readonly int[] teamPosX = new int[2] { -10, 10 };
@@ -71,6 +73,18 @@ public class GameManager : MonoBehaviour
             teamCount[oscRoomData.myTeamNum]++;
         }
 
+        CreateKillLogCanvas();
+    }
+
+    void CreateKillLogCanvas()
+    {
+        GameObject killLogCanvasInstance = Instantiate(killLogCanvasPrefab);
+        killLogCanvas = killLogCanvasInstance.GetComponent<KillLogCanvas>();
+    }
+
+    public void AddKillLog(Player _player)
+    {
+        killLogCanvas.AddKillLog(_player);
     }
 
     public Player GetPlayer(int _num)
@@ -222,10 +236,19 @@ public class GameManager : MonoBehaviour
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
+        /*
+        if (Input.GetButtonDown("RB"))
+        {
+            Managers.instance.ChangeScene(GAME_STATE.ROOM);
+            Managers.instance.ChangeState(GAME_STATE.ROOM);
+            Managers.instance.roomManager.Init();
+            Init();
+        }
+        */
         //return _data;
         IngameData.GameData hostIngameData;
 
-        hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; 
+        hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
 
         if (!hostIngameData.play) { return _data; }
 

@@ -53,7 +53,7 @@ public class ExplosionBehavior : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player && player.GetPlayerID() == Managers.instance.playerID)
         {
-            other.GetComponent<Player>().SetDead();
+            other.GetComponent<Player>().SetDead(ownerPlayer.GetPlayerID());
         }
     }
 }

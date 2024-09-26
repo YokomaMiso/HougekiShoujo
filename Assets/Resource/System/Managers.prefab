@@ -86,15 +86,8 @@ MonoBehaviour:
   outLineMat:
   - {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}
   - {fileID: 2100000, guid: 19fd21ca5640c2242852074a796b5117, type: 2}
-  play: 0
-  roundCount: 1
-  roundTimer: 60
-  deadPlayerCount: 0000000000000000
-  roundWinCount: 0000000000000000
-  start: 0
-  startTimer: 0
-  end: 0
-  endTimer: 0
+  killLogCanvasPrefab: {fileID: 4432466077039030639, guid: 833620ce40e2d5f4583f94e47425889c,
+    type: 3}
 --- !u!114 &5065934935842733564
 MonoBehaviour:
   m_ObjectHideFlags: 0

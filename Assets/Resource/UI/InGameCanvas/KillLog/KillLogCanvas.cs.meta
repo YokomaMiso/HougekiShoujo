@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0c58c80282d7ef145afdfbdd87f9e233
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - killLogPrefab: {fileID: 3097893030034543625, guid: f55a512a6d1412f469d37730f0c4ef64,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

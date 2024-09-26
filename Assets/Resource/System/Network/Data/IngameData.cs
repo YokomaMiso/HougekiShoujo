@@ -56,6 +56,7 @@ public class IngameData
         public bool useSub;
         public bool alive;
         public RADIO_CHAT_ID playerChatID;
+        public int killPlayerID;
 
         //For Server
         public bool play;
