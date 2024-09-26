@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class IngameData
@@ -57,6 +58,10 @@ public class IngameData
         public bool alive;
         public RADIO_CHAT_ID playerChatID;
         public int killPlayerID;
+        
+        public int killCount;
+        public int deathCount;
+        public int friendlyFireCount;
 
         //For Server
         public bool play;
@@ -72,6 +77,5 @@ public class IngameData
         public int winCountTeamA;
         public int winCountTeamB;
         public int winner;
-
     }
 }

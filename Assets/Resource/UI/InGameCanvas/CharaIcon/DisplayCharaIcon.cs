@@ -51,8 +51,6 @@ public class DisplayCharaIcon : MonoBehaviour
         iconBGColor[0] = ColorCordToRGB("#8fdee5");
         iconBGColor[1] = ColorCordToRGB("#ff1f1f");
 
-        RoomManager rm = Managers.instance.roomManager;
-
         int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < transform.childCount; i++)
         {

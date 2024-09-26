@@ -10,6 +10,8 @@ MonoImporter:
       type: 3}
   - killLogCanvasPrefab: {fileID: 4432466077039030639, guid: 833620ce40e2d5f4583f94e47425889c,
       type: 3}
+  - scoreBoardCanvasPrefab: {fileID: 4432466077039030639, guid: b44c6c4ed68b7024a8b27b7476c90273,
+      type: 3}
   executionOrder: -45
   icon: {instanceID: 0}
   userData: 

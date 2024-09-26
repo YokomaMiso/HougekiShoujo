@@ -88,6 +88,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 19fd21ca5640c2242852074a796b5117, type: 2}
   killLogCanvasPrefab: {fileID: 4432466077039030639, guid: 833620ce40e2d5f4583f94e47425889c,
     type: 3}
+  scoreBoardCanvasPrefab: {fileID: 4432466077039030639, guid: b44c6c4ed68b7024a8b27b7476c90273,
+    type: 3}
 --- !u!114 &5065934935842733564
 MonoBehaviour:
   m_ObjectHideFlags: 0
