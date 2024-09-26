@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 641149a620a56dc4c8ff14dc2e41e0f4
+guid: 038a8c3adca7c7848a45f800f16dc4c5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - spectateAnnouncePrefab: {fileID: 4432466077039030639, guid: 297f590efdc620c48b7e387b63019654,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
