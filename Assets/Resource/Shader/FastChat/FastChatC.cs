@@ -9,6 +9,9 @@ public class FastChat : MonoBehaviour
     public void SetFastChatMat(Material _mat) { fastChat = _mat; }
     public Material GetFastChatMat() { return fastChat; }
 
+    RawImage rawImage;
+    GameObject selecter;
+
     const float scaleDuration = 0.2f;
     //public float rotationTurns = 15;
 
@@ -22,12 +25,15 @@ public class FastChat : MonoBehaviour
 
     void Start()
     {
-        SetVisibility(false);
+        rawImage = transform.GetChild(0).GetComponent<RawImage>();
+        selecter = transform.GetChild(1).gameObject;
+        selecter.SetActive(false);
+        //SetVisibility(false);
     }
 
     void Update()
     {
-        ButtonCheck();
+        //ButtonCheck();
 
         if (isChatActive)
         {
@@ -52,6 +58,22 @@ public class FastChat : MonoBehaviour
         }
     }
 
+    public void ReceiverFromRadioChat(bool _start)
+    {
+        if (_start)
+        {
+            isChatActive = true;
+            SetVisibility(true);
+            elapsedTime = 0f;
+        }
+        else
+        {
+            isChatActive = false;
+            SetVisibility(false);
+            ResetShaderValues();
+        }
+    }
+
     void UpdateShader()
     {
         if (fastChat != null)
@@ -66,6 +88,7 @@ public class FastChat : MonoBehaviour
             currentRotation = 360.0f * Mathf.Deg2Rad * progress;
             fastChat.SetFloat("_Rotation", currentRotation);
 
+            selecter.SetActive(progress >= 1);
 
             int region = GetJoystickRegion();
             fastChat.SetFloat("_SelectedRegion", region);
@@ -106,7 +129,6 @@ public class FastChat : MonoBehaviour
 
     void SetVisibility(bool isVisible)
     {
-        RawImage rawImage = gameObject.GetComponent<RawImage>();
         if (rawImage != null)
         {
             rawImage.enabled = isVisible;
