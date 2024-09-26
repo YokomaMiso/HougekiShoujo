@@ -37,16 +37,20 @@ public class Player : MonoBehaviour
     public bool IsMine() { return playerID == Managers.instance.playerID; }
 
     bool alive = true;
-    public void SetDead()
+    public void SetDead(int _num)
     {
         alive = false;
         if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
+        playerDead.SetKillPlayerID(_num);
         Camera.main.GetComponent<CameraMove>().ResetCameraFar();
         if (myCollider) { myCollider.enabled = false; }
+        Managers.instance.gameManager.AddKillLog(this);
     }
     public float GetDeadTimer() { return playerDead.deadTimer; }
+
+    public int GetKiller() { return playerDead.GetKillPlayerID(); }
     public void SetAlive() { alive = true; playerState = PLAYER_STATE.IDLE; }
     public bool GetAlive() { return alive; }
 
@@ -276,11 +280,13 @@ public class Player : MonoBehaviour
 
     void OtherPlayerBehavior()
     {
-        Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
+        IngameData.GameData myIngameData = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData;
 
-        if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
-        bool nowFire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
-        bool nowSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
+        Vector3 stickValue = myIngameData.playerStickValue;
+
+        if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+        bool nowFire = myIngameData.fire;
+        bool nowSub = myIngameData.useSub;
 
         if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive)
         {
