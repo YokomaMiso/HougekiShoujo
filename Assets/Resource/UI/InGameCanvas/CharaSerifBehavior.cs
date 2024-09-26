@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CharaSerifBehavior : MonoBehaviour
 {
     const float lifeTime = 3;
-    string[] serifs = new string[(int)RADIO_CHAT_ID.MAX_NUM] { "", "ピンチ！助けて！", "前に出ます！", "援護します！", "" };
+    string[] serifs = new string[(int)RADIO_CHAT_ID.RETREAT + 1] { "", "ピンチ！助けて！", "前に出ます！", "援護します！", "後退します！" };
 
     readonly static Vector3[] windowLocalPos = new Vector3[2] { new Vector3(196, 0, 0), new Vector3(-196, 0, 0) };
     readonly static Vector3[] windowAndTextLocalScale = new Vector3[2] { new Vector3(1, 1, 1), new Vector3(-1, 1, 1) };
