@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject killLogCanvasPrefab;
     KillLogCanvas killLogCanvas;
 
+    [SerializeField] GameObject scoreBoardCanvasPrefab;
+    GameObject scoreBoardCanvas;
+
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
     readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
@@ -104,6 +107,13 @@ public class GameManager : MonoBehaviour
     void Init()
     {
         nowRound = 1;
+
+        //仮置きの処理
+        IngameData.GameData myIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+        myIngameData.killCount = 0;
+        myIngameData.deathCount = 0;
+        myIngameData.friendlyFireCount = 0;
+
         if (Managers.instance.playerID == 0)
         {
             MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
@@ -236,15 +246,6 @@ public class GameManager : MonoBehaviour
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
-        /*
-        if (Input.GetButtonDown("RB"))
-        {
-            Managers.instance.ChangeScene(GAME_STATE.ROOM);
-            Managers.instance.ChangeState(GAME_STATE.ROOM);
-            Managers.instance.roomManager.Init();
-            Init();
-        }
-        */
         //return _data;
         IngameData.GameData hostIngameData;
 
@@ -321,10 +322,39 @@ public class GameManager : MonoBehaviour
         return _data;
     }
 
+    void ShowScoreBoard()
+    {
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+
+        //ゲームが終了してるなら
+        if (hostIngameData.end)
+        {
+            //キャンバスの実体があるなら削除して早期リターン
+            if (scoreBoardCanvas != null)
+            {
+                Destroy(scoreBoardCanvas);
+                return;
+            }
+        }
+
+        //キャンバスの実体がないなら
+        if (scoreBoardCanvas == null)
+        {
+            //RB押下時にキャンバスを生成
+            if (Input.GetButtonDown("RB")) { scoreBoardCanvas = Instantiate(scoreBoardCanvasPrefab); }
+        }
+        else
+        {
+            //RBを離した時にキャンバスを削除
+            if (Input.GetButtonUp("RB")) { Destroy(scoreBoardCanvas); }
+        }
+    }
+
     void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex != (int)GAME_STATE.IN_GAME) { return; }
 
+        ShowScoreBoard();
         EndBehavior();
 
         //I'm not host, return
