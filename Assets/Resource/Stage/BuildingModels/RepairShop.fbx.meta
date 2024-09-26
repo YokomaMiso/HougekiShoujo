@@ -3,12 +3,17 @@ guid: 0dd64a087d8449c4f85cfa4793f2e8bc
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: elecShop
+    second: {fileID: 2100000, guid: f9a72cf682611e74faba2cf0e1c50bbc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
