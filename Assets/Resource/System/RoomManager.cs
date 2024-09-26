@@ -60,6 +60,11 @@ public class RoomManager : MonoBehaviour
         //自分のチームを呼び出そうとしたら早期リターン
         if (myRoomData.myTeamNum == _num) { return; }
 
+        RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+
+        int[] teamCount = new int[2] { hostRoomData.teamACount, hostRoomData.teamBCount };
+        if (teamCount[_num] >= 4) { return; }
+
         myRoomData.myTeamNum = _num;
         OSCManager.OSCinstance.roomData = myRoomData;
     }
@@ -88,6 +93,9 @@ public class RoomManager : MonoBehaviour
         //自分がホストなら
         if (myRoomData.myID == 0)
         {
+            if (myRoomData.teamACount >= 4) { return; }
+            if (myRoomData.teamBCount >= 4) { return; }
+
             int readyCount = 0;
             for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
             {
@@ -101,6 +109,11 @@ public class RoomManager : MonoBehaviour
         else
         {
             if (!myRoomData.ready) { myRoomData.ready = true; }
+            
+            RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+            int[] teamCount = new int[2] { hostRoomData.teamACount, hostRoomData.teamBCount };
+
+            if (teamCount[myRoomData.myTeamNum] >= 4) { myRoomData.ready = false; }
         }
 
         OSCManager.OSCinstance.roomData = myRoomData;
