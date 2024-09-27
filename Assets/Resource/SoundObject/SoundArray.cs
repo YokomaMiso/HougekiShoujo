@@ -17,10 +17,11 @@ public class SoundArray : MonoBehaviour
         thisTransform = transform;
     }
 
-    public static GameObject PlaySFX(AudioClip _clip)
+    public static GameObject PlaySFX(AudioClip _clip, Vector3 _pos = default(Vector3))
     {
         GameObject obj = Instantiate(soundObject, thisTransform);
-        obj.GetComponent<SoundObject>().ReceiveSound(_clip,false);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip, false);
+        obj.transform.position = _pos;
         soundArray.Add(obj);
 
         return obj;
@@ -28,13 +29,10 @@ public class SoundArray : MonoBehaviour
     public static GameObject PlayBGM(AudioClip _clip)
     {
         GameObject obj = Instantiate(soundObject, thisTransform);
-        obj.GetComponent<SoundObject>().ReceiveSound(_clip,true);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip, true);
         soundArray.Add(obj);
 
         return obj;
     }
-    public static void DestroyReport(GameObject _obj)
-    {
-        soundArray.Remove(_obj);
-    }
+    public static void DestroyReport(GameObject _obj) { soundArray.Remove(_obj); }
 }
