@@ -11,7 +11,7 @@ public class PlayerDead : MonoBehaviour
     public float deadTimer = 0;
     public readonly float deadBehaviorTime = 3;
     Vector3 deadPos;
-    public readonly Vector3 deadTargetPos = new Vector3(0, 50, -9);
+    public readonly Vector3 deadTargetPos = new Vector3(0, 90, -9);
 
     int killPlayerID = -1;
     public void SetKillPlayerID(int _num)
