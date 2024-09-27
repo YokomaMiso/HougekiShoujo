@@ -158,7 +158,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         if (IsMine())
         {
