@@ -10,10 +10,12 @@ public class TitleCanvasBehavior : MonoBehaviour
     int selectNum = 0;
     bool isCanSelect = true;
 
-    [SerializeField,Header("Œˆ’è‰¹")] AudioClip submitSFX;
+    [SerializeField, Header("Œˆ’è‰¹")] AudioClip submitSFX;
 
     void Update()
     {
+        if (Managers.instance.UsingOption()) { return; }
+
         CursorMove();
         CursorDisplay();
         DecideSelect();
@@ -58,12 +60,9 @@ public class TitleCanvasBehavior : MonoBehaviour
                 case 0:
                     Managers.instance.ChangeState(GAME_STATE.ROOM);
                     Managers.instance.ChangeScene(GAME_STATE.ROOM);
-                    Destroy(gameObject);
                     break;
                 case 1:
-                    Managers.instance.ChangeState(GAME_STATE.OPTION);
-                    Managers.instance.canvasManager.ChangeCanvas(GAME_STATE.OPTION);
-                    Destroy(gameObject);
+                    Managers.instance.CreateOptionCanvas();
                     break;
             }
         }
