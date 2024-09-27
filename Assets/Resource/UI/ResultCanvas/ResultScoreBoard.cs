@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreBoard : MonoBehaviour
+public class ResultScoreBoard : MonoBehaviour
 {
     [SerializeField] GameObject personalScorePrefab;
     [SerializeField] GameObject itemAnnouncePrefab;
@@ -12,7 +12,8 @@ public class ScoreBoard : MonoBehaviour
 
     readonly Color[] BGColor = new Color[2];
 
-    readonly int baseHeight = 320;
+    readonly int[] teamPosX = new int[2] { -480, 480 };
+    readonly int baseHeight = 140;
     readonly int heightSub = 140;
 
     int[] scoreNums = new int[6] { -1, -1, -1, -1, -1, -1 };
@@ -38,10 +39,6 @@ public class ScoreBoard : MonoBehaviour
             //ÉCÉìÉQÅ[ÉÄÉfÅ[É^ÇÃéÊìæ
             IngameData.GameData gameData = OSCManager.OSCinstance.GetIngameData(i).mainPacketData.inGameData;
 
-            //ï\é¶èáÇÃìoò^
-            scoreNums[i] = oscRoomData.myTeamNum * 3 + teamCount[oscRoomData.myTeamNum];
-            teamCount[oscRoomData.myTeamNum]++;
-
             //îwåiÇÃêFïœçX
             scoreInstance[i].transform.GetChild(0).GetComponent<Image>().color = BGColor[oscRoomData.myTeamNum];
 
@@ -62,11 +59,18 @@ public class ScoreBoard : MonoBehaviour
             scoreInstance[i].transform.GetChild(5).GetComponent<Text>().text = gameData.friendlyFireCount.ToString();
 
             //ç¿ïWÇÃïœçX
-            scoreInstance[i].transform.localPosition = Vector3.up * (baseHeight - heightSub * scoreNums[i]);
+            scoreInstance[i].transform.localPosition = new Vector3(teamPosX[i], baseHeight - heightSub * teamCount[oscRoomData.myTeamNum]);
+
+            //ï\é¶èáÇÃìoò^
+            scoreNums[i] = oscRoomData.myTeamNum * 3 + teamCount[oscRoomData.myTeamNum];
+            teamCount[oscRoomData.myTeamNum]++;
         }
 
-        GameObject announce = Instantiate(itemAnnouncePrefab, transform);
-        announce.transform.localPosition = Vector3.up * (baseHeight + heightSub);
+        for (int i = 0; i < 2; i++)
+        {
+            GameObject announce = Instantiate(itemAnnouncePrefab, transform);
+            announce.transform.localPosition = new Vector3(teamPosX[i], baseHeight + heightSub);
+        }
     }
 
     Color ColorCordToRGB(string hex)
