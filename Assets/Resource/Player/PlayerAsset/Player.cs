@@ -180,7 +180,7 @@ public class Player : MonoBehaviour
         {
             GetNetPosForOtherPlayer();
             IngameData.GameData myIngameData = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData;
-            if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+            if (hostIngameData.start && alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
 
             if (hostIngameData.play) { OtherPlayerBehavior(); }
             if (!alive) { playerDead.DeadBehavior(); }
