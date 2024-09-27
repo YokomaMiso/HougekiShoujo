@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResultCanvasBehavior : MonoBehaviour
 {
     float timer;
-    const float canSubmitTimer = 3;
+    const float canSubmitTimer = 1.5f;
 
     void Update()
     {
