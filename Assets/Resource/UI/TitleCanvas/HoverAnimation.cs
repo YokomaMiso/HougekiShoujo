@@ -7,7 +7,7 @@ public class HoverAnimation : MonoBehaviour
 {
     int index = 0;
     int indexForwardCount = 0;
-    const int indexForwardBorder= 3;
+    const int indexForwardBorder= 4;
 
     [SerializeField] Sprite[] sprites;
     Image image;
