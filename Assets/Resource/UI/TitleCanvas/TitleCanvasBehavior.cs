@@ -8,30 +8,38 @@ public class TitleCanvasBehavior : MonoBehaviour
     public void SetGameManager(GameManager _gameManager) { gameManager = _gameManager; }
 
     int selectNum = 0;
+    const int selectItemNum = 5;
     bool isCanSelect = true;
 
     [SerializeField, Header("決定音")] AudioClip submitSFX;
+
+    GameObject hoverFrame;
+
+    void Start()
+    {
+        hoverFrame = transform.GetChild(selectItemNum).gameObject;    
+    }
 
     void Update()
     {
         if (Managers.instance.UsingOption()) { return; }
 
         CursorMove();
-        CursorDisplay();
         DecideSelect();
     }
 
     void CursorMove()
     {
-        float value = Input.GetAxis("Vertical");
+        float value = Input.GetAxis("Horizontal");
 
         //カーソル移動
         if (Mathf.Abs(value) > 0.7f)
         {
             if (isCanSelect)
             {
-                if (value > 0) { selectNum = 0; }
-                else { selectNum = 1; }
+                if (value < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
+                else { selectNum = (selectNum + 1) % selectItemNum; }
+                hoverFrame.transform.localPosition = transform.GetChild(selectNum).transform.localPosition;
                 isCanSelect = false;
             }
         }
@@ -42,15 +50,6 @@ public class TitleCanvasBehavior : MonoBehaviour
         }
     }
 
-    void CursorDisplay()
-    {
-        for (int i = 0; i < 2; i++)
-        {
-            Color color = Color.white;
-            if (i == selectNum) { color = Color.yellow; }
-            transform.GetChild(i).GetComponent<Image>().color = color;
-        }
-    }
     void DecideSelect()
     {
         if (Input.GetButtonDown("Submit"))
@@ -64,7 +63,23 @@ public class TitleCanvasBehavior : MonoBehaviour
                 case 1:
                     Managers.instance.CreateOptionCanvas();
                     break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    End();
+                    break;
             }
         }
+    }
+
+    void End()
+    {
+       #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+       #else
+                    Application.Quit();//ゲームプレイ終了
+       #endif
     }
 }
