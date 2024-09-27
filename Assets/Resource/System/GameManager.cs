@@ -108,12 +108,6 @@ public class GameManager : MonoBehaviour
     {
         nowRound = 1;
 
-        //âºíuÇ´ÇÃèàóù
-        IngameData.GameData myIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
-        myIngameData.killCount = 0;
-        myIngameData.deathCount = 0;
-        myIngameData.friendlyFireCount = 0;
-
         if (Managers.instance.playerID == 0)
         {
             MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
@@ -211,8 +205,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Managers.instance.ChangeScene(GAME_STATE.ROOM);
-                Managers.instance.ChangeState(GAME_STATE.ROOM);
+                Managers.instance.ChangeScene(GAME_STATE.RESULT);
+                Managers.instance.ChangeState(GAME_STATE.RESULT);
                 Managers.instance.roomManager.Init();
                 Init();
             }
@@ -235,8 +229,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Managers.instance.ChangeScene(GAME_STATE.ROOM);
-                Managers.instance.ChangeState(GAME_STATE.ROOM);
+                Managers.instance.ChangeScene(GAME_STATE.RESULT);
+                Managers.instance.ChangeState(GAME_STATE.RESULT);
                 Managers.instance.roomManager.Init();
                 Init();
             }
