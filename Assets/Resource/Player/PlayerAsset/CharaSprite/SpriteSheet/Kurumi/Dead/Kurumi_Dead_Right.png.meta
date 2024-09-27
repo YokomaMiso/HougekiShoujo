@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7b8f7a1670e9ed241896c86cc3c3e26d
+guid: 602fd174ec8ea4142aa6425b61162729
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_0
+      name: Kurumi_Dead_Right_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fee1763a953dd548859cd934af7c4dd
-      internalID: -142908878
+      spriteID: 1e466d1b746ccdb42b8064d7e79a6023
+      internalID: 477898926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_1
+      name: Kurumi_Dead_Right_1
       rect:
         serializedVersion: 2
         x: 128
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e235196a37e5b64597fdcbe6b81d6c9
-      internalID: 1003487207
+      spriteID: 5074a0f17e676d04fbb2ae7ee4a59ad8
+      internalID: 352261331
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_2
+      name: Kurumi_Dead_Right_2
       rect:
         serializedVersion: 2
         x: 256
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 986b70d3f8469814da8e282547df2a38
-      internalID: -409274265
+      spriteID: 260a6d87790645d46b667a05bbf08705
+      internalID: -296944248
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_3
+      name: Kurumi_Dead_Right_3
       rect:
         serializedVersion: 2
         x: 384
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f764d8523ed0ae242871066d802f8901
-      internalID: -236242654
+      spriteID: 7d15490748d8c094492730beebfabe53
+      internalID: -1455683595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_4
+      name: Kurumi_Dead_Right_4
       rect:
         serializedVersion: 2
         x: 0
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ce3437feb4d5aa47b32eddaaeec09d2
-      internalID: 1808980095
+      spriteID: c9148a2638f72a9438f6f581d83ca748
+      internalID: -1193519699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_5
+      name: Kurumi_Dead_Right_5
       rect:
         serializedVersion: 2
         x: 128
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ee6513c6ed04e044ae09b56a48d7d90
-      internalID: 623013160
+      spriteID: e22ba9509b639854f95b8678bdcded75
+      internalID: 175557079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_6
+      name: Kurumi_Dead_Right_6
       rect:
         serializedVersion: 2
         x: 256
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e0cbedb32af12c498e832c90b1b5fb6
-      internalID: -405825364
+      spriteID: eb83fbf7fafa340468054f1ccba8d119
+      internalID: 1133506283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_7
+      name: Kurumi_Dead_Right_7
       rect:
         serializedVersion: 2
         x: 384
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 217f481a70e93f74a8486c15035344d9
-      internalID: 2111561367
+      spriteID: ec124f04664ff6e478cd55664a0c1c1a
+      internalID: -1675894193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_8
+      name: Kurumi_Dead_Right_8
       rect:
         serializedVersion: 2
         x: 0
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c04cf124104e53542a3eeead1f2d8152
-      internalID: 1600936814
+      spriteID: 01d7b51696582b44099e095a2b2e1793
+      internalID: -1031682365
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tsukasa_Dead_Right_9
+      name: Kurumi_Dead_Right_9
       rect:
         serializedVersion: 2
         x: 128
@@ -313,8 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef415343c057d8f40896bb25f7307363
-      internalID: -1073707643
+      spriteID: f2a1a1d3aa8940b479f4eddf11d5c4a4
+      internalID: -1095257557
       vertices: []
       indices: 
       edges: []
@@ -322,7 +322,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 78bf4c1d169399c4ea57526bcc5dc0ca
+    spriteID: 0c4c166fe200b954da3d42a84f17e065
     internalID: 0
     vertices: []
     indices: 
@@ -330,16 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tsukasa_Dead_Right_0: -142908878
-      Tsukasa_Dead_Right_1: 1003487207
-      Tsukasa_Dead_Right_2: -409274265
-      Tsukasa_Dead_Right_3: -236242654
-      Tsukasa_Dead_Right_4: 1808980095
-      Tsukasa_Dead_Right_5: 623013160
-      Tsukasa_Dead_Right_6: -405825364
-      Tsukasa_Dead_Right_7: 2111561367
-      Tsukasa_Dead_Right_8: 1600936814
-      Tsukasa_Dead_Right_9: -1073707643
+      Kurumi_Dead_Right_0: 477898926
+      Kurumi_Dead_Right_1: 352261331
+      Kurumi_Dead_Right_2: -296944248
+      Kurumi_Dead_Right_3: -1455683595
+      Kurumi_Dead_Right_4: -1193519699
+      Kurumi_Dead_Right_5: 175557079
+      Kurumi_Dead_Right_6: 1133506283
+      Kurumi_Dead_Right_7: -1675894193
+      Kurumi_Dead_Right_8: -1031682365
+      Kurumi_Dead_Right_9: -1095257557
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

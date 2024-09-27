@@ -23,7 +23,7 @@ public class PlayerReload : MonoBehaviour
 
     void Start()
     {
-        reloadTime = ownerPlayer.GetPlayerData().GetShell().GetReloadTime();    
+        reloadTime = ownerPlayer.GetPlayerData().GetShell().GetReloadTime();
     }
 
     void Update()
@@ -43,11 +43,12 @@ public class PlayerReload : MonoBehaviour
         return -1;
     }
 
-    public void Reload(int _num) 
+    public void Reload(int _num)
     {
         shellNum = _num;
         //SoundArray.PlaySFX(ownerPlayer.GetPlayerData().GetVoiceData().GetReloadVoice());
-        //SoundArray.PlaySFX(ownerPlayer.GetPlayerData().GetSFXData().GetReloadSFX());
+        GameObject obj =SoundArray.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetReloadSFX(), transform.position);
+        obj.GetComponent<AudioSource>().pitch = NowSpeedRate();
     }
     public bool Reloading() { return timer != 0; }
     public void ReloadCancel() { timer = 0; }
