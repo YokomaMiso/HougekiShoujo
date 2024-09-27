@@ -179,8 +179,11 @@ public class Player : MonoBehaviour
         else
         {
             GetNetPosForOtherPlayer();
+            IngameData.GameData myIngameData = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData;
+            if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+
             if (hostIngameData.play) { OtherPlayerBehavior(); }
-            if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
+            if (!alive) { playerDead.DeadBehavior(); }
         }
     }
 
@@ -260,11 +263,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            playerDead.DeadBehavior();
-        }
-
     }
 
     void SetNetPos()
@@ -284,7 +282,7 @@ public class Player : MonoBehaviour
 
         Vector3 stickValue = myIngameData.playerStickValue;
 
-        if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+        //if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
         bool nowFire = myIngameData.fire;
         bool nowSub = myIngameData.useSub;
 
