@@ -158,7 +158,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         if (IsMine())
         {
@@ -179,8 +181,11 @@ public class Player : MonoBehaviour
         else
         {
             GetNetPosForOtherPlayer();
+            IngameData.GameData myIngameData = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData;
+            if (hostIngameData.start && alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+
             if (hostIngameData.play) { OtherPlayerBehavior(); }
-            if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
+            if (!alive) { playerDead.DeadBehavior(); }
         }
     }
 
@@ -260,11 +265,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            playerDead.DeadBehavior();
-        }
-
     }
 
     void SetNetPos()
@@ -284,7 +284,7 @@ public class Player : MonoBehaviour
 
         Vector3 stickValue = myIngameData.playerStickValue;
 
-        if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+        //if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
         bool nowFire = myIngameData.fire;
         bool nowSub = myIngameData.useSub;
 
