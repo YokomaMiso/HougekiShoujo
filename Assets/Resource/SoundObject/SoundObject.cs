@@ -28,6 +28,7 @@ public class SoundObject : MonoBehaviour
         source = gameObject.AddComponent<AudioSource>();
         source.loop = isBGM;
         source.clip = clip;
+        source.volume = volume;
         source.Play();
     }
 
