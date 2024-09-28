@@ -241,13 +241,9 @@ public class GameManager : MonoBehaviour
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
         //return _data;
-        IngameData.GameData hostIngameData;
 
-        hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
-
-        if (!hostIngameData.play) { return _data; }
-
-        if (hostIngameData.winner != -1) { return _data; }
+        if (!_data.play) { return _data; }
+        if (_data.winner != -1) { return _data; }
 
         //チームごとの生き残り数
         int[] aliveCount = new int[2] { 0, 0 };
@@ -274,23 +270,23 @@ public class GameManager : MonoBehaviour
 
         MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
 
-        hostIngameData.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
-        hostIngameData.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
+        _data.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
+        _data.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
 
-        if (hostIngameData.roundTimer <= 0)
+        if (_data.roundTimer <= 0)
         {
             Debug.Log("時間切れだよ");
 
             //if(hostRoomData.teamACount== hostRoomData.teamBCount) { }
-            if (hostIngameData.alivePlayerCountTeamA > hostIngameData.alivePlayerCountTeamB)
+            if (_data.alivePlayerCountTeamA > _data.alivePlayerCountTeamB)
             {
-                hostIngameData.winner = (int)TEAM_NUM.A;
-                hostIngameData.winCountTeamA++;
+                _data.winner = (int)TEAM_NUM.A;
+                _data.winCountTeamA++;
             }
             else
             {
-                hostIngameData.winner = (int)TEAM_NUM.B;
-                hostIngameData.winCountTeamB++;
+                _data.winner = (int)TEAM_NUM.B;
+                _data.winCountTeamB++;
             }
         }
         else
@@ -298,21 +294,20 @@ public class GameManager : MonoBehaviour
 
             if (aliveCount[(int)TEAM_NUM.A] <= 0)
             {
-                hostIngameData.winner = (int)TEAM_NUM.B;
-                hostIngameData.winCountTeamB++;
+                _data.winner = (int)TEAM_NUM.B;
+                _data.winCountTeamB++;
                 Debug.Log("Aチームの死亡数でチェック通ったよ");
-                Debug.Log("Bチームの勝利数 " + hostIngameData.winCountTeamB);
+                Debug.Log("Bチームの勝利数 " + _data.winCountTeamB);
             }
             if (aliveCount[(int)TEAM_NUM.B] <= 0)
             {
-                hostIngameData.winner = (int)TEAM_NUM.A;
-                hostIngameData.winCountTeamA++;
+                _data.winner = (int)TEAM_NUM.A;
+                _data.winCountTeamA++;
                 Debug.Log("Bチームの死亡数でチェック通ったよ");
-                Debug.Log("Aチームの勝利数 " + hostIngameData.winCountTeamA);
+                Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
             }
         }
 
-        _data = hostIngameData;
         return _data;
     }
 
