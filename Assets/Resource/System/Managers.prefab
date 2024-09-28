@@ -53,8 +53,11 @@ MonoBehaviour:
   optionData: {fileID: 11400000, guid: b1541ee7568dc4744a860ae65a90629c, type: 2}
   optionCanvasPrefab: {fileID: 4432466077039030639, guid: 9153756e2b41858418c0a0d355e7a280,
     type: 3}
+  changeSceneCanvasPrefab: {fileID: 3921321195368664648, guid: 9455ed7b3ac539741ba60531ac760a1b,
+    type: 3}
   state: 0
   prevState: 0
+  nextState: 0
   playerID: 0
   gameManager: {fileID: 0}
   saveManager: {fileID: 0}

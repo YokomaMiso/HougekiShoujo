@@ -22,7 +22,7 @@ public class TitleCanvasBehavior : MonoBehaviour
 
     void Update()
     {
-        if (Managers.instance.UsingOption()) { return; }
+        if (Managers.instance.UsingCanvas()) { return; }
 
         CursorMove();
         DecideSelect();
