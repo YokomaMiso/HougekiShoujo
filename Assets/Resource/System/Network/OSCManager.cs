@@ -45,7 +45,6 @@ public class OSCManager : MonoBehaviour
     //ハンドシェイク時はホストからの応答を確認するため必ず一つだけ入る
     List<OscClient> clientList = new List<OscClient>();
 
-
     OscServer tempServer;
     OscServer mainServer;
 
@@ -598,5 +597,10 @@ public class OSCManager : MonoBehaviour
     public int GetPlayerID(int _num)
     {
         return playerDataList[_num].pData.PlayerID;
+    }
+
+    public bool GetIsFinishedHandshake()
+    {
+        return isFinishHandshake;
     }
 }
