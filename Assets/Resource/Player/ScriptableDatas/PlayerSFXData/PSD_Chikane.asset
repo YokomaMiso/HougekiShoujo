@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb239e671dab7cb45bb9374ffa27ee41, type: 3}
   m_Name: PSD_Chikane
   m_EditorClassIdentifier: 
-  reloadSFX: {fileID: 8300000, guid: f011f81b6abedde41a012854237ea911, type: 3}
+  reloadSFX: {fileID: 8300000, guid: 656ba9eb9a4510e44acc46e5bd1ac5e8, type: 3}
+  aimSFX: {fileID: 8300000, guid: a394c1da9443a694b9b3a4e753b8ce8b, type: 3}
+  fireSFX: {fileID: 8300000, guid: 37944658b33bfcb47afd6be7ae5e0241, type: 3}
+  flySFX: {fileID: 0}
+  explosionSFX: {fileID: 0}
