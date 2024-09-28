@@ -23,11 +23,11 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
   reloadAnimationData: {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
   aimAnimationData:
-  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
-  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
-  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
-  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
-  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
   recoilAnimationData:
   - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
   - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
