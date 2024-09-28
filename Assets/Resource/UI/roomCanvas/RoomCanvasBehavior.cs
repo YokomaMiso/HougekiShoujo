@@ -65,7 +65,7 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void Update()
     {
-        if (!Managers.instance.UsingOption())
+        if (!Managers.instance.UsingCanvas())
         {
             CharaSelect();
             TeamSelect();
