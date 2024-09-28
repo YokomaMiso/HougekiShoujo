@@ -209,6 +209,5 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         Managers.instance.ChangeScene(sendState);
         Managers.instance.ChangeState(sendState);
-        Destroy(gameObject);
     }
 }
