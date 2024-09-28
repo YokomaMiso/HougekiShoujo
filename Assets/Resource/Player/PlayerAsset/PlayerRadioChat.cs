@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RADIO_CHAT_ID { NONE = 0, HELP, BLITZ, SUPPORT, RETREAT, APOLOGIZE, LAUGH, WHAT, AAA, MAX_NUM }
+public enum RADIO_CHAT_ID { NONE = 0, HELP, BLITZ, SUPPORT, RETREAT, APOLOGIZE, LAUGH, WHAT, PROVOC, MAX_NUM }
 
 public class PlayerRadioChat : MonoBehaviour
 {
