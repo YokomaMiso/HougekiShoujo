@@ -36,8 +36,8 @@ public class LogoSplashCanvasBehavior : MonoBehaviour
         else if (timer <= fadeOutStart) { teamLogo.color = Color.white; }
         else if (timer <= splashSceneLifeTime)
         {
-            float rate = Mathf.Clamp01(1.0f - (timer - fadeOutStart));
-            teamLogo.color = new Color(1, 1, 1, rate);
+            //float rate = Mathf.Clamp01(1.0f - (timer - fadeOutStart));
+            //teamLogo.color = new Color(1, 1, 1, rate);
         }
         else
         {

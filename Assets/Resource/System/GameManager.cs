@@ -313,17 +313,17 @@ public class GameManager : MonoBehaviour
 
     void ShowScoreBoard()
     {
-        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         //ゲームが終了してるなら
         if (hostIngameData.end)
         {
-            //キャンバスの実体があるなら削除して早期リターン
-            if (scoreBoardCanvas != null)
-            {
-                Destroy(scoreBoardCanvas);
-                return;
-            }
+            //キャンバスの実体があるなら削除する
+            if (scoreBoardCanvas != null) { Destroy(scoreBoardCanvas); }
+            //早期リターン
+            return;
         }
 
         //キャンバスの実体がないなら
