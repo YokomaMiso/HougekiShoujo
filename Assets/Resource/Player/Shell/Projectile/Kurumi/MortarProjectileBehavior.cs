@@ -33,21 +33,6 @@ public class MortarProjectileBehavior : ProjectileBehavior
         float timeRate = timer / lifeTime;
         if(timeRate < 0.5f) { return; }
 
-        if (other.tag == playerTag)
-        {
-            if (other.GetComponent<Player>() != ownerPlayer)
-            {
-                SpawnExplosion();
-                Destroy(gameObject);
-            }
-        }
-        else if (other.tag == groundTag)
-        {
-            SpawnExplosion();
-            Destroy(gameObject);
-        }
-
-        //base.OnTriggerEnter(other);
-
+        base.OnTriggerEnter(other);
     }
 }
