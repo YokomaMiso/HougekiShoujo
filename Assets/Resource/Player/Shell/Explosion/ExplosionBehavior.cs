@@ -52,12 +52,18 @@ public class ExplosionBehavior : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
+        //当たったオブジェクトからPlayer型を取得
         Player player = other.GetComponent<Player>();
-        if (player && player.GetPlayerID() == Managers.instance.playerID)
-        {
-            other.GetComponent<Player>().SetDead(ownerPlayer.GetPlayerID());
-        }
+        
+        //Player型でなければ早期リターン
+        if (!player) { return; }
+
+        //自分のキャラクターじゃなければ早期リターン
+        if (player && player.GetPlayerID() != Managers.instance.playerID) { return; }
+        
+        //自分のキャラクターの死亡判定を行う
+        other.GetComponent<Player>().SetDead(ownerPlayer.GetPlayerID());
     }
 }

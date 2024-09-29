@@ -14,7 +14,6 @@ public abstract class ProjectileBehavior : MonoBehaviour
 
     protected string playerTag = "Player";
     protected string groundTag = "Ground";
-    protected string[] hitTags;
 
     //Canon
     protected float angle = 0;
@@ -31,7 +30,6 @@ public abstract class ProjectileBehavior : MonoBehaviour
         lifeTime = _data.GetLifeTime();
         explosion = _data.GetExplosion();
         speed = _data.GetSpeed();
-        TagSetting();
 
         if (_data.GetShellType() != SHELL_TYPE.BLAST) { SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFlySFX(), transform); }
     }
@@ -53,8 +51,10 @@ public abstract class ProjectileBehavior : MonoBehaviour
     protected virtual void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
+        if (spawnPos.y < 0) { spawnPos.y = 0; }
+        spawnPos.y += explosion.GetScale() / 2;
+        
         GameObject explosionInstance = explosion.GetBody();
-        spawnPos.y = explosion.GetScale() / 2;
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
@@ -62,7 +62,7 @@ public abstract class ProjectileBehavior : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.tag == hitTags[0])
+        if (other.tag == playerTag)
         {
             if (other.GetComponent<Player>() != ownerPlayer)
             {
@@ -70,18 +70,11 @@ public abstract class ProjectileBehavior : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else if (other.tag == hitTags[1])
+        else if (other.tag == groundTag)
         {
             SpawnExplosion();
             Destroy(gameObject);
         }
-    }
-
-    protected virtual void TagSetting()
-    {
-        hitTags = new string[2];
-        hitTags[0] = playerTag;
-        hitTags[1] = groundTag;
     }
 
     protected virtual void TimeSetting()

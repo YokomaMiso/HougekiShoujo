@@ -30,5 +30,24 @@ public class MortarProjectileBehavior : ProjectileBehavior
 
     protected override void OnTriggerEnter(Collider other)
     {
+        float timeRate = timer / lifeTime;
+        if(timeRate < 0.5f) { return; }
+
+        if (other.tag == playerTag)
+        {
+            if (other.GetComponent<Player>() != ownerPlayer)
+            {
+                SpawnExplosion();
+                Destroy(gameObject);
+            }
+        }
+        else if (other.tag == groundTag)
+        {
+            SpawnExplosion();
+            Destroy(gameObject);
+        }
+
+        //base.OnTriggerEnter(other);
+
     }
 }
