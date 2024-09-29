@@ -56,13 +56,13 @@ public class ExplosionBehavior : MonoBehaviour
     {
         //当たったオブジェクトからPlayer型を取得
         Player player = other.GetComponent<Player>();
-        
+
         //Player型でなければ早期リターン
         if (!player) { return; }
 
         //自分のキャラクターじゃなければ早期リターン
         if (player && player.GetPlayerID() != Managers.instance.playerID) { return; }
-        
+
         //自分のキャラクターの死亡判定を行う
         other.GetComponent<Player>().SetDead(ownerPlayer.GetPlayerID());
     }

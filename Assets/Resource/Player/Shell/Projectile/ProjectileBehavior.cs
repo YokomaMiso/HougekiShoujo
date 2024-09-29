@@ -51,8 +51,8 @@ public abstract class ProjectileBehavior : MonoBehaviour
     protected virtual void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
-        if (spawnPos.y < 0) { spawnPos.y = 0; }
-        spawnPos.y += explosion.GetScale() / 2;
+        //if (spawnPos.y < 0) { spawnPos.y = 0; }
+        //spawnPos.y += explosion.GetScale() / 2;
         
         GameObject explosionInstance = explosion.GetBody();
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
