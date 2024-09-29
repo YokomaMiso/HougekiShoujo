@@ -9,6 +9,7 @@ public class MachingRoomData
     public struct RoomData
     {
         //For Each
+        public string playerName;
         public int myID;
         public int myTeamNum;
         public int selectedCharacterID;

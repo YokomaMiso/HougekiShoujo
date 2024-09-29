@@ -31,8 +31,8 @@ public class KillLogBehavior : MonoBehaviour
 
         int killer = _player.GetKiller();
         int deadMan = _player.GetPlayerID();
-        killPlayer.text = "Player " + (killer + 1).ToString();
-        deadPlayer.text = "Player " + (deadMan + 1).ToString();
+        killPlayer.text = OSCManager.OSCinstance.GetRoomData(killer).playerName;
+        deadPlayer.text = OSCManager.OSCinstance.GetRoomData(deadMan).playerName;
 
         int killerTeam = OSCManager.OSCinstance.GetRoomData(killer).myTeamNum;
         int deadManTeam = OSCManager.OSCinstance.GetRoomData(deadMan).myTeamNum;

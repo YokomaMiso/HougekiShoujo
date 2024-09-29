@@ -50,7 +50,7 @@ public class ScoreBoard : MonoBehaviour
             scoreInstance[i].transform.GetChild(1).GetComponent<Image>().sprite = icon;
 
             //ñºëOÇÃïœçX
-            scoreInstance[i].transform.GetChild(2).GetComponent<Text>().text = "Player " + (oscRoomData.myID + 1).ToString();
+            scoreInstance[i].transform.GetChild(2).GetComponent<Text>().text = oscRoomData.playerName;
 
             //ÉLÉãêî
             scoreInstance[i].transform.GetChild(3).GetComponent<Text>().text = gameData.killCount.ToString();
