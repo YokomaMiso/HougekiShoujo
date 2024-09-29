@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1779472540161595878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -196,6 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotePrefab: {fileID: 2522134910337228876, guid: e2635b3d3c59752458cbe02e36d149dc,
     type: 3}
+  fastChatCanvasPrefab: {fileID: 0}
 --- !u!135 &1582690489312574683
 SphereCollider:
   m_ObjectHideFlags: 0

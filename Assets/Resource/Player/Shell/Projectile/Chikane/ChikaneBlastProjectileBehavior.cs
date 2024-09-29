@@ -32,7 +32,6 @@ public class ChikaneBlastProjectileBehavior : ProjectileBehavior
     {
         lifeTime = _data.GetLifeTime();
         explosion = _data.GetExplosion();
-        TagSetting();
     }
     protected override void TimeSetting()
     {
@@ -52,7 +51,7 @@ public class ChikaneBlastProjectileBehavior : ProjectileBehavior
             Vector3 offset = Quaternion.Euler(0, spawnAngle * spawnNum + offsetAngle, 0) * offsetValue;
             Vector3 spawnPos = ownerPlayer.transform.position + offset;
             GameObject explosionInstance = explosion.GetBody();
-            GameObject obj = Instantiate(explosionInstance, spawnPos + Vector3.up, Quaternion.identity);
+            GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
             obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
             obj.GetComponent<ExplosionBehavior>().SetData(explosion);
         }

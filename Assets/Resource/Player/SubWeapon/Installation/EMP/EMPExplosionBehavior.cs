@@ -10,7 +10,7 @@ public class EMPExplosionBehavior : ExplosionBehavior
         lifeTime = 0.3f;
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
         if (other.tag == hitTag)
         {

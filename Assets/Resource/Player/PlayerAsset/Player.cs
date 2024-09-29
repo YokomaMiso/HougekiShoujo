@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     bool alive = true;
     public void SetDead(int _num)
     {
+        if (!alive) { return; }
+
         alive = false;
         if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
         playerState = PLAYER_STATE.DEAD;

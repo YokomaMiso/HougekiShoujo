@@ -22,12 +22,7 @@ public class SpiderExplosionBehavior : ExplosionBehavior
         //lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
         lifeTime = 10;
     }
-
-    protected override void OnTriggerEnter(Collider other)
-    {
-    }
-
-    void OnTriggerStay(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
         if (other.tag != hitTag) { return; }
 
