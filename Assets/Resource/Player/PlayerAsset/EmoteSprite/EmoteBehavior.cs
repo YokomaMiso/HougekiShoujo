@@ -8,7 +8,7 @@ public class EmoteBehavior : MonoBehaviour
     int spriteNum = 0;
 
     SpriteRenderer image;
-    const float maxHeight = 3.0f;
+    const float maxHeight = 2.5f;
     const float lifeTime = 4.0f;
     const float fadeStart = 3.0f;
     const float arriveTargetPos = 0.5f;

@@ -30,9 +30,11 @@ public class MortarProjectileBehavior : ProjectileBehavior
 
     protected override void OnTriggerEnter(Collider other)
     {
+        /*
         float timeRate = timer / lifeTime;
         if(timeRate < 0.5f) { return; }
 
         base.OnTriggerEnter(other);
+        */
     }
 }
