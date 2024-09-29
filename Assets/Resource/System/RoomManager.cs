@@ -137,4 +137,11 @@ public class RoomManager : MonoBehaviour
 
         OSCManager.OSCinstance.roomData = myRoomData;
     }
+
+    public void BackToTitle()
+    {
+        Managers.instance.ChangeScene(GAME_STATE.TITLE);
+        Managers.instance.ChangeState(GAME_STATE.TITLE);
+        Init();
+    }
 }

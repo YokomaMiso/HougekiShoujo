@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,6 +47,8 @@ public class DisplayCharaIcon : MonoBehaviour
 
     int[] iconNums = new int[6] { -1, -1, -1, -1, -1, -1 };
 
+    bool attachedToPlacement = false;
+
     void Start()
     {
         iconBGColor[0] = ColorCordToRGB("#8fdee5");
@@ -74,7 +77,7 @@ public class DisplayCharaIcon : MonoBehaviour
     {
         IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
 
-        if (hostIngameData.roundCount == 1)
+        if (!attachedToPlacement)
         {
             float timer = hostIngameData.startTimer;
 
@@ -87,6 +90,12 @@ public class DisplayCharaIcon : MonoBehaviour
             if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
             if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
             if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
+
+            if (2.5f <= timer) 
+            {
+                InPlacement();
+                attachedToPlacement = true;
+            }
         }
         DisplayIconUpdate();
     }
@@ -151,6 +160,17 @@ public class DisplayCharaIcon : MonoBehaviour
             transform.GetChild(i).transform.localPosition = pos;
         }
     }
+
+    void InPlacement()
+    {
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
+        {
+            if (iconNums[i] == -1) { continue; }
+            Vector2 pos =  iconPos[iconNums[i]];
+            transform.GetChild(i).transform.localPosition = pos;
+        }
+    }
+
     Color ColorCordToRGB(string hex)
     {
         if (ColorUtility.TryParseHtmlString(hex, out Color color)) return color;
