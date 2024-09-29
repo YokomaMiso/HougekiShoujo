@@ -20,15 +20,18 @@ public class SoundObject : MonoBehaviour
         isBGM = _isBGM;
 
         OptionData oData = Managers.instance.optionData;
-        float volume = oData.masterVolume;
 
-        if (isBGM) { volume *= oData.bgmVolume; }
-        else { volume *= oData.sfxVolume; }
-
-        source = gameObject.AddComponent<AudioSource>();
+        source = gameObject.GetComponent<AudioSource>();
         source.loop = isBGM;
         source.clip = clip;
+
+        float volume = oData.masterVolume;
+        float pitch = 1.0f;
+        if (isBGM) { volume *= oData.bgmVolume; }
+        else { volume *= oData.sfxVolume; pitch *= Random.Range(0.8f, 1.2f); }
         source.volume = volume;
+        source.pitch = pitch;
+
         source.Play();
     }
 
@@ -36,10 +39,5 @@ public class SoundObject : MonoBehaviour
     {
         timer += Time.deltaTime;
         if (timer > lifeTime) { Destroy(gameObject); }
-    }
-
-    void OnDestroy()
-    {
-        SoundArray.DestroyReport(this.gameObject);
     }
 }

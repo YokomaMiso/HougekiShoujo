@@ -73,6 +73,7 @@ public class PlayerAim : MonoBehaviour
                 break;
         }
 
+        SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetAimSFX(), transform);
         Camera.main.GetComponent<CameraMove>().SetCameraFar(shellData.GetAimRange() / 2);
     }
 
@@ -152,6 +153,8 @@ public class PlayerAim : MonoBehaviour
                 obj.GetComponent<ProjectileBehavior>().ProjectileStart(transform.position + aimVector);
                 break;
         }
+        
+        SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFireSFX(), transform);
         obj.GetComponent<ProjectileBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
 

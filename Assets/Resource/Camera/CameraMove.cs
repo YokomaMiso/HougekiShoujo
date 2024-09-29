@@ -7,6 +7,8 @@ public class CameraMove : MonoBehaviour
     [SerializeField] GameObject spectateAnnouncePrefab;
     GameObject spectateAnnounceInstance;
 
+    GameObject audioListenerChild;
+
     const float distance = 10;
     Player ownerPlayer;
     Player[] teamPlayers;
@@ -23,6 +25,7 @@ public class CameraMove : MonoBehaviour
 
     void Start()
     {
+        audioListenerChild = transform.GetChild(0).gameObject;
         TargetSearch();
 
         //初回、キャンバスが生成されていないなら
@@ -131,6 +134,7 @@ public class CameraMove : MonoBehaviour
 
 
         Vector3 playerPos = ownerPlayer.transform.position;
+        audioListenerChild.transform.position = playerPos;
         Vector3 pos = Vector3.Lerp(new Vector3(1.0f, 1.5f, -2.0f), playerPos + new Vector3(0, distance, -distance), initialTimer);
         transform.position = pos;
     }
@@ -157,6 +161,7 @@ public class CameraMove : MonoBehaviour
     {
         Vector3 shakeVector3 = Random.insideUnitCircle * shakeValue;
         transform.position = _pos + new Vector3(0, distance, -distance) + shakeVector3;
+        audioListenerChild.transform.position = _pos;
     }
     public void SetCameraShake(float _shakeValue)
     {

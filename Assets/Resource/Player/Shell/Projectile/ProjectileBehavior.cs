@@ -30,8 +30,10 @@ public abstract class ProjectileBehavior : MonoBehaviour
         imageAnimator.runtimeAnimatorController = _data.GetAnim();
         lifeTime = _data.GetLifeTime();
         explosion = _data.GetExplosion();
-        speed=_data.GetSpeed();
+        speed = _data.GetSpeed();
         TagSetting();
+
+        if (_data.GetShellType() != SHELL_TYPE.BLAST) { SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFlySFX(), transform); }
     }
 
     protected virtual void Start()
