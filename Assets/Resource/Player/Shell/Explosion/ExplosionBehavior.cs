@@ -23,11 +23,15 @@ public class ExplosionBehavior : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, scale);
 
         imageAnimator.runtimeAnimatorController = _data.GetAnim();
+
     }
 
     protected virtual void Start()
     {
         lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
+
+        GameObject obj = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetExplosionSFX());
+        obj.transform.position = this.transform.position;
 
         Vector3 distance = transform.position - Camera.main.transform.position;
         float weight = distance.magnitude / 5;
