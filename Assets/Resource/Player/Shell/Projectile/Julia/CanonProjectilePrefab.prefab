@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6638852785523414993}
-  - component: {fileID: 4938746549023984517}
+  - component: {fileID: 5571280479716086417}
   - component: {fileID: 2577435145357630510}
   m_Layer: 0
   m_Name: CanonProjectilePrefab
@@ -34,8 +34,8 @@ Transform:
   - {fileID: 2790069042509766578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4938746549023984517
-BoxCollider:
+--- !u!136 &5571280479716086417
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -52,8 +52,10 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.6, z: 0.6}
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 1.5
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2577435145357630510
 MonoBehaviour:
@@ -67,14 +69,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c0b86d6f08b4e429ffef9309ddcb5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 3179393461812120061, guid: 751adc5820fa7a94e866de748bdcb3b0,
-    type: 3}
-  imageAnimator: {fileID: 527189571875228936}
-  animatorController: {fileID: 9100000, guid: 81c0c6dd80912384abc8b8352d447bb1, type: 2}
-  speed: 10
-  lifeTime: 2
-  playerTag: Player
-  groundTag: Ground
 --- !u!1 &2008790680177907739
 GameObject:
   m_ObjectHideFlags: 0
