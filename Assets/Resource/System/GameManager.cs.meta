@@ -12,6 +12,7 @@ MonoImporter:
       type: 3}
   - scoreBoardCanvasPrefab: {fileID: 4432466077039030639, guid: b44c6c4ed68b7024a8b27b7476c90273,
       type: 3}
+  - stageData: {fileID: 11400000, guid: fefdc19c9730bf24fa8f14543dbe39c3, type: 2}
   executionOrder: -45
   icon: {instanceID: 0}
   userData: 

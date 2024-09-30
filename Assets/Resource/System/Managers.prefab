@@ -93,6 +93,7 @@ MonoBehaviour:
     type: 3}
   scoreBoardCanvasPrefab: {fileID: 4432466077039030639, guid: b44c6c4ed68b7024a8b27b7476c90273,
     type: 3}
+  stageData: {fileID: 11400000, guid: fefdc19c9730bf24fa8f14543dbe39c3, type: 2}
 --- !u!114 &5065934935842733564
 MonoBehaviour:
   m_ObjectHideFlags: 0
