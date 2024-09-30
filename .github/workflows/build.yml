@@ -1,5 +1,5 @@
 # 横間味噌ゲームビルドファイル
-name: Run the ${{ matrix.targetPlatform }} build
+name: Run the build
 on:
   workflow_dispatch: {}
   # mainへデータがプッシュされる度に自動でビルド
@@ -32,7 +32,6 @@ jobs:
           git lfs pull
           git add .
           git reset --hard
-
       # ファイル名にgitのハッシュを含めたいので$GITHUB_OUTPUTに保存しておく
       - name: Set outputs
         id: vars
@@ -45,21 +44,20 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-
       # Unityプロジェクトのビルド
-      - name: Run the ${{ matrix.targetPlatform }} build
+      - name: Run the build
         uses: game-ci/unity-builder@v4
         env:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
-          targetPlatform: ${{ matrix.targetPlatform }}
+          targetPlatform: StandaloneWindows64
           unityVersion: 2022.3.16f1
 
       # 成果物をZIPにしてアップロードする
       - name: Upload the Build File
         uses: actions/upload-artifact@v3
         with:
-          name: Build-${{ github.ref_name }}-${{ matrix.targetPlatform }}
+          name: Build-${{ steps.vars.outputs.sha_short }}-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
