@@ -9,6 +9,7 @@ public class MachingRoomData
     public struct RoomData
     {
         //For Each
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
         public string playerName;
         public int myID;
         public int myTeamNum;
