@@ -58,7 +58,7 @@ public class OSCManager : MonoBehaviour
 
     const float waitHandshakeResponseTime = 2f;
 
-    const int timeoutSec = 3;
+    const float timeoutSec = 3f;
 
 
     ////////////////////////////////
@@ -141,7 +141,7 @@ public class OSCManager : MonoBehaviour
 
         Debug.Log(testNum);
 
-        TimeoutCheckPlayer();
+        TimeoutChecker();
     }
 
     float sendDataTimer;
@@ -434,6 +434,9 @@ public class OSCManager : MonoBehaviour
             {
                 testS = "サーバとしてインゲーム受信";
                 playerDataList[_allData.pData.PlayerID] = _allData;
+
+                //受信カウントをリセットする
+                connectTimeList[_allData.rData.myID] = 0f;
             }
             else if (_allData.rData.myID == -1 && _allData.rData.isHandshaking)
             {
@@ -517,7 +520,6 @@ public class OSCManager : MonoBehaviour
         _roomData.gameStart = false;
         _roomData.isInData = true;
         _roomData.isHandshaking = true;
-        _roomData.myID = -1;
 
         return _roomData;
     }
@@ -555,11 +557,11 @@ public class OSCManager : MonoBehaviour
 
     }
 
-    private void TimeoutCheckPlayer()
+    private void TimeoutChecker()
     {
         if (isServer)
         {
-            for (int i = 0; i < maxPlayer; i++)
+            for (int i = 1; i < maxPlayer; i++)
             {
                 //もしプレイヤーが存在し、タイムアウト時間に達していればそのプレイヤーを初期化する
                 if(playerDataList[i].rData.myID != -1 && connectTimeList[i] > timeoutSec)
@@ -570,9 +572,13 @@ public class OSCManager : MonoBehaviour
                     _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
 
                     playerDataList[i] = _allData;
-                }
 
-                connectTimeList[i] += Time.deltaTime;
+                    Debug.Log("プレイヤーID" + i + " がタイムアウトしました");
+                }
+                else if(playerDataList[i].rData.myID != -1)
+                {
+                    connectTimeList[i] += Time.deltaTime;
+                }
             }
         }
 
