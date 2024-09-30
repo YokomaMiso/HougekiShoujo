@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16ecd7d0030cd64699ab19c4894960f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blindCanvas: {fileID: 3921321195368664648, guid: 117adb081fc06844aa567a819e0d66e5,
+    type: 3}
   playerState: 0
   canonState: -1
 --- !u!114 &6191823321996411971
