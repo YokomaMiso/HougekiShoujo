@@ -44,10 +44,11 @@ public class OSCManager : MonoBehaviour
     //クライアントならホスト宛ての1つ、ホストならクライアント5人分が入る
     //ハンドシェイク時はホストからの応答を確認するため必ず一つだけ入る
     List<OscClient> clientList = new List<OscClient>();
-
+    List<float> connectTimeList = new List<float>();
 
     OscServer tempServer;
     OscServer mainServer;
+
 
     //自分がサーバかどうか
     bool isServer = false;
@@ -104,7 +105,7 @@ public class OSCManager : MonoBehaviour
         myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
 
 
-        //自分のデータだった時だけポート番号を入れる
+        //最大人数分のデータを作成
         for (int i = 0; i < maxPlayer; i++)
         {
             //全て初期値で最大人数分のデータをセットする
@@ -112,6 +113,9 @@ public class OSCManager : MonoBehaviour
             allData.rData = initRoomData(allData.rData);
             allData.rData.isInData = false;
             playerDataList.Add(allData);
+
+            //人数分受信時間を作る
+            connectTimeList.Add(0.0f);
         }
 
         CreateTempNet();
@@ -136,6 +140,8 @@ public class OSCManager : MonoBehaviour
         }
 
         Debug.Log(testNum);
+
+        TimeoutCheckPlayer();
     }
 
     float sendDataTimer;
@@ -549,9 +555,28 @@ public class OSCManager : MonoBehaviour
 
     }
 
-    private void TimeoutSortPlayer()
+    private void TimeoutCheckPlayer()
     {
+        if (isServer)
+        {
+            for (int i = 0; i < maxPlayer; i++)
+            {
+                //もしプレイヤーが存在し、タイムアウト時間に達していればそのプレイヤーを初期化する
+                if(playerDataList[i].rData.myID != -1 && connectTimeList[i] > timeoutSec)
+                {
+                    AllGameData.AllData _allData = new AllGameData.AllData();
 
+                    _allData.rData = initRoomData(_allData.rData);
+                    _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+                    playerDataList[i] = _allData;
+                }
+
+                connectTimeList[i] += Time.deltaTime;
+            }
+        }
+
+        return;
     }
 
     /// <summary>
