@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject scoreBoardCanvasPrefab;
     GameObject scoreBoardCanvas;
 
+    [SerializeField] StageData stageData;
+
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
     readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
@@ -34,6 +36,12 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer()
     {
+        //ステージ生成処理,サーバーが番号を持たないといけない
+        Instantiate(stageData.GetStageObject(0));
+
+        //int stageNum = Random.Range(0, 2);
+        //Instantiate(stageData.GetStageObject(stageNum));
+
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
