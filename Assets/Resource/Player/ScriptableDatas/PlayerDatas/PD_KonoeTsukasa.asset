@@ -16,5 +16,5 @@ MonoBehaviour:
   characterAnimData: {fileID: 11400000, guid: bbc7345adcf545f40ad96d4a1db983d1, type: 2}
   moveSpeed: 5
   shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
-  subWeapon: {fileID: 11400000, guid: 57cfe82bf8276d147894a9ed82c595d0, type: 2}
+  subWeapon: {fileID: 11400000, guid: ed7bb5eba41b87143a4c8c92438afe81, type: 2}
   playerSFXData: {fileID: 11400000, guid: f564a2fe6f4050d4e8539cf01ce3f3e8, type: 2}
