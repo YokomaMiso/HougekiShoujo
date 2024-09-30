@@ -14,6 +14,7 @@ public class RoomManager : MonoBehaviour
     {
         RoomData oscRoomData = OSCManager.OSCinstance.roomData;
         oscRoomData.gameStart = false;
+        oscRoomData.ready = false;
 
         OSCManager.OSCinstance.roomData = oscRoomData;
     }
@@ -59,6 +60,11 @@ public class RoomManager : MonoBehaviour
         //自分のチームを呼び出そうとしたら早期リターン
         if (myRoomData.myTeamNum == _num) { return; }
 
+        RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+
+        int[] teamCount = new int[2] { hostRoomData.teamACount, hostRoomData.teamBCount };
+        if (teamCount[_num] >= 4) { return; }
+
         myRoomData.myTeamNum = _num;
         OSCManager.OSCinstance.roomData = myRoomData;
     }
@@ -87,6 +93,9 @@ public class RoomManager : MonoBehaviour
         //自分がホストなら
         if (myRoomData.myID == 0)
         {
+            if (myRoomData.teamACount >= 4) { return; }
+            if (myRoomData.teamBCount >= 4) { return; }
+
             int readyCount = 0;
             for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
             {
@@ -95,11 +104,20 @@ public class RoomManager : MonoBehaviour
             }
 
             //自分以外の全プレイヤーがREADY中なら
-            if (readyCount >= myRoomData.playerCount - 1) { myRoomData.gameStart = true; }
+            if (readyCount >= myRoomData.playerCount - 1)
+            {
+                myRoomData.gameStart = true;
+                myRoomData.stageNum = Random.Range(0, Managers.instance.gameManager.stageData.GetStageLength());
+            }
         }
         else
         {
             if (!myRoomData.ready) { myRoomData.ready = true; }
+
+            RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+            int[] teamCount = new int[2] { hostRoomData.teamACount, hostRoomData.teamBCount };
+
+            if (teamCount[myRoomData.myTeamNum] >= 4) { myRoomData.ready = false; }
         }
 
         OSCManager.OSCinstance.roomData = myRoomData;
@@ -122,5 +140,12 @@ public class RoomManager : MonoBehaviour
         }
 
         OSCManager.OSCinstance.roomData = myRoomData;
+    }
+
+    public void BackToTitle()
+    {
+        Managers.instance.ChangeScene(GAME_STATE.TITLE);
+        Managers.instance.ChangeState(GAME_STATE.TITLE);
+        Init();
     }
 }

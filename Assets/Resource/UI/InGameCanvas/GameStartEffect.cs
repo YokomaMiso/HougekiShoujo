@@ -26,7 +26,8 @@ public class GameStartEffect : MonoBehaviour
 
     void Update()
     {
-        float timer = Managers.instance.gameManager.startTimer;
+        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        float timer = hostIngameData.startTimer;
 
         if (timer < 0.5f) { FirstBehavior(timer / 0.5f); }
         else if (1.0f > timer && timer > 0.5f) { FirstBehavior(1); }

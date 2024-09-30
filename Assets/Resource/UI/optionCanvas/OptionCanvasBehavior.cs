@@ -18,13 +18,13 @@ public class OptionCanvasBehavior : MonoBehaviour
     void Start()
     {
         optionData = Managers.instance.GetOptionData();
-        transform.GetChild(0).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
-        transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
-        transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.sfxVolume);
-        transform.GetChild(3).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
-        transform.GetChild(4).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
+        transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
+        transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
+        transform.GetChild(3).GetComponent<VolumeIndexSetting>().SetValue(optionData.sfxVolume);
+        transform.GetChild(4).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
+        transform.GetChild(5).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
 
-        transform.GetChild(0).GetChild(0).GetComponent<Image>().color = SelectColor(true);
+        transform.GetChild(1).GetChild(0).GetComponent<Image>().color = SelectColor(true);
     }
     Color SelectColor(bool _select)
     {
@@ -50,7 +50,7 @@ public class OptionCanvasBehavior : MonoBehaviour
         {
             if (isCanSelect)
             {
-                transform.GetChild(selectNum).GetChild(0).GetComponent<Image>().color = SelectColor(false);
+                transform.GetChild(selectNum + 1).GetChild(0).GetComponent<Image>().color = SelectColor(false);
 
                 if (value > 0) { selectNum -= 1; }
                 else { selectNum += 1; }
@@ -60,7 +60,7 @@ public class OptionCanvasBehavior : MonoBehaviour
 
                 isCanSelect = false;
 
-                transform.GetChild(selectNum).GetChild(0).GetComponent<Image>().color = SelectColor(true);
+                transform.GetChild(selectNum + 1).GetChild(0).GetComponent<Image>().color = SelectColor(true);
             }
         }
         //ëOÉtÉåÅ[ÉÄÇÃèÓïÒï€ë∂
@@ -81,14 +81,14 @@ public class OptionCanvasBehavior : MonoBehaviour
                 switch (selectNum)
                 {
                     case 3:
-                        transform.GetChild(selectNum).GetComponent<RadioBoxIndexSetting>().SetValue(value < 0);
+                        transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value < 0);
                         break;
                     case 5:
                         break;
                     default:
                         float applyValue = 1;
                         if (value < 0) { applyValue *= -1; }
-                        transform.GetChild(selectNum).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
+                        transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
                         break;
                 }
             }
@@ -101,19 +101,17 @@ public class OptionCanvasBehavior : MonoBehaviour
             timer = 0;
         }
 
-        optionData.masterVolume = transform.GetChild(0).GetComponent<VolumeIndexSetting>().GetValue();
-        optionData.bgmVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
-        optionData.sfxVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
-        optionData.cameraShakeOn = transform.GetChild(3).GetComponent<RadioBoxIndexSetting>().on;
-        optionData.mortarSensitive = transform.GetChild(4).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.bgmVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.sfxVolume = transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.cameraShakeOn = transform.GetChild(4).GetComponent<RadioBoxIndexSetting>().on;
+        optionData.mortarSensitive = transform.GetChild(5).GetComponent<VolumeIndexSetting>().GetValue();
 
         if (Input.GetButtonDown("Submit"))
         {
             if (selectNum == 5)
             {
                 Managers.instance.SaveOptionData(optionData);
-                Managers.instance.canvasManager.ChangeCanvas(Managers.instance.prevState);
-                Managers.instance.ChangeState(Managers.instance.prevState);
                 Destroy(gameObject);
             }
         }

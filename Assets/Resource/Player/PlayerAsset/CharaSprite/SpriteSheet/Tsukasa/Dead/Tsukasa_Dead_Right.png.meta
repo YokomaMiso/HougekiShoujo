@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e662cd6aab1821498eab47df5bd3a33
-      internalID: -1866947603
+      spriteID: c32778801f2ccdc47a0c3ff1ddffa3c7
+      internalID: -1387945669
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97ad70f06b962714dabf60d3c8126466
-      internalID: 1954837918
+      spriteID: 08c179c1f055f0946886bc63e7adb622
+      internalID: -926924417
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe34606a39d6b384ab31be2729329999
-      internalID: 561885648
+      spriteID: 7ea76861c7d42244888d1eb1cf89b224
+      internalID: -1882847733
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e66e9d8d6031d1648b77b64cddbc39a8
-      internalID: 812230421
+      spriteID: 65f02536e8c3f214fb62b9d6f299e403
+      internalID: 1216762316
       vertices: []
       indices: 
       edges: []
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1bba282fb1dec541a0086abf273a771
-      internalID: -1804440618
+      spriteID: 387a4c6ef320cb14fa8c08dfa5b1241b
+      internalID: -856023951
       vertices: []
       indices: 
       edges: []
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d737fc2644c89524289fec15c981028a
-      internalID: 198747043
+      spriteID: 69e165cff37529d4d92476a7abf8aae3
+      internalID: -2121254454
       vertices: []
       indices: 
       edges: []
@@ -250,8 +250,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 956a85d3ec7dc64439d77bb711e5e3db
-      internalID: 1680814269
+      spriteID: ac1d4d3487b7350458424f4b0d19f2f7
+      internalID: -278292645
       vertices: []
       indices: 
       edges: []
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4841bb691233cb8408f6cccbfddda33d
-      internalID: 756822018
+      spriteID: e45281ed060c1a44798c27dcf491c46e
+      internalID: 475117498
       vertices: []
       indices: 
       edges: []
@@ -292,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8f393ff54b1b8e4a9df16b8fcc0b28f
-      internalID: -1620332233
+      spriteID: 79de6f01c26001a4a9d04ee1d5241670
+      internalID: -490004336
       vertices: []
       indices: 
       edges: []
@@ -313,29 +313,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3198b58e0f408bb4e8a3a448039681a2
-      internalID: -1906871711
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tsukasa_Dead_Right_10
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ee96d6a5ad2fe946992c97c0bed9cf6
-      internalID: -631674845
+      spriteID: 4c1b48795e51fcc41a91e4ea74b5f41d
+      internalID: 465661835
       vertices: []
       indices: 
       edges: []
@@ -343,7 +322,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 853385301aa5b6e42bcc1ccf8650ae26
+    spriteID: 1222f2e21ccbd7a47b327a70fcf39be5
     internalID: 0
     vertices: []
     indices: 
@@ -351,17 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tsukasa_Dead_Right_0: -1866947603
-      Tsukasa_Dead_Right_1: 1954837918
-      Tsukasa_Dead_Right_10: -631674845
-      Tsukasa_Dead_Right_2: 561885648
-      Tsukasa_Dead_Right_3: 812230421
-      Tsukasa_Dead_Right_4: -1804440618
-      Tsukasa_Dead_Right_5: 198747043
-      Tsukasa_Dead_Right_6: 1680814269
-      Tsukasa_Dead_Right_7: 756822018
-      Tsukasa_Dead_Right_8: -1620332233
-      Tsukasa_Dead_Right_9: -1906871711
+      Tsukasa_Dead_Right_0: -1387945669
+      Tsukasa_Dead_Right_1: -926924417
+      Tsukasa_Dead_Right_2: -1882847733
+      Tsukasa_Dead_Right_3: 1216762316
+      Tsukasa_Dead_Right_4: -856023951
+      Tsukasa_Dead_Right_5: -2121254454
+      Tsukasa_Dead_Right_6: -278292645
+      Tsukasa_Dead_Right_7: 475117498
+      Tsukasa_Dead_Right_8: -490004336
+      Tsukasa_Dead_Right_9: 465661835
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -57,6 +57,8 @@ public class OSCManager : MonoBehaviour
 
     const float waitHandshakeResponseTime = 2f;
 
+    const int timeoutSec = 3;
+
 
     ////////////////////////////////
     //////// デバック用変数 ////////
@@ -89,6 +91,7 @@ public class OSCManager : MonoBehaviour
         //インゲーム用データの初期化代入
         allData.pData = new IngameData.PlayerNetData();
         allData.pData = default;
+        allData.pData.mainPacketData.inGameData = initIngameData(allData.pData.mainPacketData.inGameData);
 
         //ルームデータの初期化
         allData.rData = initRoomData(allData.rData);
@@ -96,6 +99,9 @@ public class OSCManager : MonoBehaviour
         //ロ－カル用も同様に
         roomData = default;
         roomData = initRoomData(roomData);
+
+        myNetIngameData = default;
+        myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
 
 
         //自分のデータだった時だけポート番号を入れる
@@ -155,25 +161,42 @@ public class OSCManager : MonoBehaviour
 
         if (sendDataTimer >= fixedDeltaTime)
         {
-            Debug.Log("インゲームデータ送信");
             sendDataTimer += Time.deltaTime;
 
             //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
             if (isFinishHandshake)
             {
-                //送信用データリストにある分送信を試みる
-                for (int i = 0; i < playerDataList.Count; i++)
+                if (isServer)
                 {
-                    //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+                    //送信用データリストにある分送信を試みる
+                    for (int i = 0; i < playerDataList.Count; i++)
+                    {
+                        //ルームデータは初期化が行われていないと参照エラーが起きるため仮インスタンスを作成し代入
+                        AllGameData.AllData _data = new AllGameData.AllData();
+                        _data.rData = initRoomData(_data.rData);
+
+                        _data = playerDataList[i];
+
+                        if (_data.rData.myID != -1)
+                        {
+                            Debug.Log("インゲームデータ送信(サーバ)");
+                            SendValue(_data);
+                        }
+                    }
+                }
+                else
+                {
                     AllGameData.AllData _data = new AllGameData.AllData();
                     _data.rData = initRoomData(_data.rData);
-                    _data = playerDataList[i];
+                    _data = playerDataList[Managers.instance.playerID];
 
                     if (_data.rData.myID != -1)
                     {
+                        Debug.Log("インゲームデータ送信(クライアント)");
                         SendValue(_data);
                     }
                 }
+                
             }
 
             sendDataTimer = 0;
@@ -494,10 +517,39 @@ public class OSCManager : MonoBehaviour
     }
 
     /// <summary>
+    /// インゲームデータの初期化処理
+    /// </summary>
+    /// <param name="_ingameData">初期化したいインゲームデータ</param>
+    /// <returns>インゲームデータの初期化値</returns>
+    IngameData.GameData initIngameData(IngameData.GameData _ingameData)
+    {
+        _ingameData.play = false;
+        _ingameData.start = false;
+        _ingameData.end = false;
+        _ingameData.startTimer = 0;
+        _ingameData.endTimer = 0;
+
+        _ingameData.roundCount = 1;
+        _ingameData.roundTimer = 60;
+        _ingameData.alivePlayerCountTeamA = 0;
+        _ingameData.alivePlayerCountTeamB = 0;
+        _ingameData.winCountTeamA = 0;
+        _ingameData.winCountTeamB = 0;
+        _ingameData.winner = -1;
+
+        return _ingameData;
+    }
+
+    /// <summary>
     /// サーバ側でデータをキャッチすれば呼び出されます
     /// </summary>
     /// <remarks>メインスレッド動作のためUnity用のメソッドも動作</remarks>
     private void MainThreadMethod()
+    {
+
+    }
+
+    private void TimeoutSortPlayer()
     {
 
     }

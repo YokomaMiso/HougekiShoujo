@@ -21,7 +21,7 @@ public class Blink : MonoBehaviour
 
         bool isHit = false;
 
-        //ワープ座標に壁があるかどうか球体の例を作る
+        //ワープ座標に壁があるかどうか球体のレイを作る
         RaycastHit[] sphereHits;
         sphereHits = Physics.SphereCastAll(warpPos, 0.5f, targetVec, 0.1f);
         for (int i = 0; i < sphereHits.Length; i++)
@@ -48,7 +48,7 @@ public class Blink : MonoBehaviour
             }
         }
 
-        transform.position = warpPos - Vector3.up * 1.1f;
+        transform.position = warpPos - Vector3.up * 0.5f;
         Destroy(this);
     }
 }

@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class IngameData
@@ -48,6 +49,7 @@ public class IngameData
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct GameData
     {
+        //For Each
         public Vector3 playerPos;
         public Vector3 playerStickValue;
         public PLAYER_STATE playerState;
@@ -55,5 +57,25 @@ public class IngameData
         public bool useSub;
         public bool alive;
         public RADIO_CHAT_ID playerChatID;
+        public int killPlayerID;
+        
+        public int killCount;
+        public int deathCount;
+        public int friendlyFireCount;
+
+        //For Server
+        public bool play;
+        public bool start;
+        public bool end;
+        public float startTimer;
+        public float endTimer;
+
+        public int roundCount;
+        public float roundTimer;
+        public int alivePlayerCountTeamA;
+        public int alivePlayerCountTeamB;
+        public int winCountTeamA;
+        public int winCountTeamB;
+        public int winner;
     }
 }

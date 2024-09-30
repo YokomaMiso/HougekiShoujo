@@ -17,3 +17,4 @@ MonoBehaviour:
   moveSpeed: 5
   shell: {fileID: 11400000, guid: bb631e357c6d78348adf725933bdd39a, type: 2}
   subWeapon: {fileID: 11400000, guid: f5a84c731abf50a47b0c9d6f12cb9677, type: 2}
+  playerSFXData: {fileID: 11400000, guid: df044055227ad2b4fbde61784f337fab, type: 2}

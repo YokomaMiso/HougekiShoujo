@@ -23,11 +23,15 @@ public class ExplosionBehavior : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, scale);
 
         imageAnimator.runtimeAnimatorController = _data.GetAnim();
+
     }
 
     protected virtual void Start()
     {
         lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
+
+        GameObject obj = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetExplosionSFX());
+        obj.transform.position = this.transform.position;
 
         Vector3 distance = transform.position - Camera.main.transform.position;
         float weight = distance.magnitude / 5;
@@ -48,12 +52,18 @@ public class ExplosionBehavior : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
+        //当たったオブジェクトからPlayer型を取得
         Player player = other.GetComponent<Player>();
-        if (player && player.GetPlayerID() == Managers.instance.playerID)
-        {
-            other.GetComponent<Player>().SetDead();
-        }
+
+        //Player型でなければ早期リターン
+        if (!player) { return; }
+
+        //自分のキャラクターじゃなければ早期リターン
+        if (player && player.GetPlayerID() != Managers.instance.playerID) { return; }
+
+        //自分のキャラクターの死亡判定を行う
+        other.GetComponent<Player>().SetDead(ownerPlayer.GetPlayerID());
     }
 }

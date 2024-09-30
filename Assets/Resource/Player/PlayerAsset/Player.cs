@@ -37,15 +37,25 @@ public class Player : MonoBehaviour
     public bool IsMine() { return playerID == Managers.instance.playerID; }
 
     bool alive = true;
-    public void SetDead()
+    public void SetDead(int _num)
     {
+        if (!alive) { return; }
+
         alive = false;
-        if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
+        if (IsMine())
+        {
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false;
+            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+        }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
+        playerDead.SetKillPlayerID(_num);
         if (myCollider) { myCollider.enabled = false; }
+        Managers.instance.gameManager.AddKillLog(this);
     }
     public float GetDeadTimer() { return playerDead.deadTimer; }
+
+    public int GetKiller() { return playerDead.GetKillPlayerID(); }
     public void SetAlive() { alive = true; playerState = PLAYER_STATE.IDLE; }
     public bool GetAlive() { return alive; }
 
@@ -89,7 +99,7 @@ public class Player : MonoBehaviour
         playerRecoil.Init();
         playerSubAction.Init();
         playerDead.Init();
-        //playerImage;
+        playerImage.Init();
 
         fire = false;
         useSub = false;
@@ -108,9 +118,9 @@ public class Player : MonoBehaviour
     public void SetOutLineMat(Material _mat) { outLine = _mat; }
     public Material GetOutLineMat() { return outLine; }
 
-    
 
-    
+
+
 
     void Start()
     {
@@ -153,30 +163,34 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
+
+        if (IsMine())
         {
-            if (IsMine())
+            if (hostIngameData.play)
             {
-                if (Managers.instance.gameManager.play)
-                {
-                    OwnPlayerBehavior();
-                    
-                }
-                else
-                {
-                    playerState = PLAYER_STATE.IDLE;
-                    if (alive) { playerMove.MoveStop(); }
-                }
-
-                if (!alive) { playerDead.DeadBehavior(); }
-
-                SetNetPos();
+                OwnPlayerBehavior();
             }
             else
             {
-                GetNetPosForOtherPlayer();
-                if (Managers.instance.gameManager.play) { OtherPlayerBehavior(); }
-                if (!OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { playerDead.DeadBehavior(); }
+                playerState = PLAYER_STATE.IDLE;
+                if (alive) { playerMove.MoveStop(); }
             }
+
+            if (!alive) { playerDead.DeadBehavior(); }
+
+            SetNetPos();
+        }
+        else
+        {
+            GetNetPosForOtherPlayer();
+            IngameData.GameData myIngameData = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData;
+            if (hostIngameData.start && alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+
+            if (hostIngameData.play) { OtherPlayerBehavior(); }
+            if (!alive) { playerDead.DeadBehavior(); }
         }
     }
 
@@ -256,11 +270,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            playerDead.DeadBehavior();
-        }
-
     }
 
     void SetNetPos()
@@ -276,11 +285,13 @@ public class Player : MonoBehaviour
 
     void OtherPlayerBehavior()
     {
-        Vector3 stickValue = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.playerStickValue;
+        IngameData.GameData myIngameData = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData;
 
-        if (alive && !OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive) { SetDead(); }
-        bool nowFire = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.fire;
-        bool nowSub = OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.useSub;
+        Vector3 stickValue = myIngameData.playerStickValue;
+
+        //if (alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
+        bool nowFire = myIngameData.fire;
+        bool nowSub = myIngameData.useSub;
 
         if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive)
         {

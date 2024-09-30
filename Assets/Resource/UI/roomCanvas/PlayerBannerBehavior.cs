@@ -13,14 +13,14 @@ public class PlayerBannerBehavior : MonoBehaviour
     }
     public void BannerIconUpdate(RoomData _roomData)
     {
-        if (_roomData.myID==MachingRoomData.bannerEmpty) { return; }
+        if (_roomData.myID == MachingRoomData.bannerEmpty) { return; }
 
         int charaID = _roomData.selectedCharacterID;
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
         transform.GetChild(2).GetComponent<Image>().sprite = icon;
-        
-        string text = "Player " + (_roomData.myID + 1).ToString();
-        transform.GetChild(3).GetComponent<Text>().text = text;
+
+        //string text = "Player " + (_roomData.myID + 1).ToString();
+        transform.GetChild(3).GetComponent<Text>().text = _roomData.playerName;
         transform.GetChild(4).gameObject.SetActive(_roomData.ready);
     }
 }

@@ -65,13 +65,17 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void Update()
     {
-        CharaSelect();
-        TeamSelect();
-        PressSubmit();
-        PressCancel();
-        GameStart();
+        if (!Managers.instance.UsingCanvas())
+        {
+            CharaSelect();
+            TeamSelect();
+            PressSubmit();
+            PressCancel();
+            GameStart();
+            OpenOption();
+        }
+
         PlayerBannerDisplayUpdate();
-        OpenOption();
     }
 
     void PlayerBannerDisplayUpdate()
@@ -174,10 +178,7 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (Input.GetButtonDown("Menu"))
         {
-            Managers.instance.ChangeScene(GAME_STATE.OPTION);
-            Managers.instance.ChangeState(GAME_STATE.OPTION);
-            Managers.instance.canvasManager.ChangeCanvas(GAME_STATE.OPTION);
-            Destroy(gameObject);
+            Managers.instance.CreateOptionCanvas();
             return;
         }
     }
@@ -193,7 +194,9 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            rm.PressCancel();
+            RoomData myRoomData = OSCManager.OSCinstance.roomData;
+            if (myRoomData.ready) { rm.PressCancel(); }
+            else { rm.BackToTitle(); }
         }
     }
     void GameStart()
@@ -208,6 +211,5 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         Managers.instance.ChangeScene(sendState);
         Managers.instance.ChangeState(sendState);
-        Destroy(gameObject);
     }
 }
