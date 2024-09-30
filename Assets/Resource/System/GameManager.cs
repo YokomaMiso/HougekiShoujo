@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject scoreBoardCanvasPrefab;
     GameObject scoreBoardCanvas;
 
-    [SerializeField] public StageData stageData;
+    [SerializeField] public AllStageData allStageData;
 
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
@@ -38,9 +38,11 @@ public class GameManager : MonoBehaviour
     {
         //ステージ生成処理,サーバーが番号を持たないといけない
         MachingRoomData.RoomData roomData;
-        if (Managers.instance.playerID == 0) { roomData=OSCManager.OSCinstance.roomData; }
+        if (Managers.instance.playerID == 0) { roomData = OSCManager.OSCinstance.roomData; }
         else { roomData = OSCManager.OSCinstance.GetRoomData(0); }
-        Instantiate(stageData.GetStageObject(roomData.stageNum));
+
+        StageData nowStageData = allStageData.GetStageData(roomData.stageNum);
+        Instantiate(nowStageData.GetStagePrefab());
 
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
@@ -63,7 +65,7 @@ public class GameManager : MonoBehaviour
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
-            Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], 0, playerPosZ[teamCount[oscRoomData.myTeamNum]]);
+            Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + oscRoomData.myTeamNum * 3);
             //自分の番号なら、自分用のプレハブを生成
             if (i == Managers.instance.playerID)
             {

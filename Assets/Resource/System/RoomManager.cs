@@ -107,7 +107,7 @@ public class RoomManager : MonoBehaviour
             if (readyCount >= myRoomData.playerCount - 1)
             {
                 myRoomData.gameStart = true;
-                myRoomData.stageNum = Random.Range(0, Managers.instance.gameManager.stageData.GetStageLength());
+                myRoomData.stageNum = Random.Range(0, Managers.instance.gameManager.allStageData.GetStageLength());
             }
         }
         else
