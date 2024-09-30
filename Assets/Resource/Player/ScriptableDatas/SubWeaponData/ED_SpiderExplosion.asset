@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea82a71e064af341b9c69f4636d1777, type: 3}
   m_Name: ED_SpiderExplosion
   m_EditorClassIdentifier: 
-  explosionBody: {fileID: 3179393461812120061, guid: d4c7205f0d0637f4d846a648636d89a1,
+  explosionBody: {fileID: 3179393461812120061, guid: aa605430ed708074da3a32a1be70db33,
     type: 3}
   scale: 3
   explosionAnim: {fileID: 9100000, guid: bf3557ab4e0b6804eb71618aa7ecf1d1, type: 2}
