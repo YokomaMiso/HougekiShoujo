@@ -59,7 +59,7 @@ public class ResultScoreBoard : MonoBehaviour
             scoreInstance[i].transform.GetChild(5).GetComponent<Text>().text = gameData.friendlyFireCount.ToString();
 
             //ç¿ïWÇÃïœçX
-            scoreInstance[i].transform.localPosition = new Vector3(teamPosX[i], baseHeight - heightSub * teamCount[oscRoomData.myTeamNum]);
+            scoreInstance[i].transform.localPosition = new Vector3(teamPosX[oscRoomData.myTeamNum], baseHeight - heightSub * teamCount[oscRoomData.myTeamNum]);
 
             //ï\é¶èáÇÃìoò^
             scoreNums[i] = oscRoomData.myTeamNum * 3 + teamCount[oscRoomData.myTeamNum];
