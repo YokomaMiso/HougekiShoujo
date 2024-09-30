@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     Collider myCollider;
 
+    [SerializeField] GameObject blindCanvas;
+
     int playerID;
     public void SetPlayerID(int _id) { playerID = _id; }
     public int GetPlayerID() { return playerID; }
@@ -163,6 +165,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButtonDown("Y")) { Instantiate(blindCanvas); }
+
         IngameData.GameData hostIngameData;
         if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
         else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
