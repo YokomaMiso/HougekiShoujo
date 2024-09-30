@@ -48,7 +48,7 @@ public class Blink : MonoBehaviour
             }
         }
 
-        transform.position = warpPos - Vector3.up * 1.1f;
+        transform.position = warpPos - Vector3.up * 0.5f;
         Destroy(this);
     }
 }
