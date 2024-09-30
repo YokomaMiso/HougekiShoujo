@@ -9,6 +9,7 @@ public class StageData : ScriptableObject
 {
     [SerializeField] GameObject[] stageObject;
 
+    public int GetStageLength() { return stageObject.Length; }
     public GameObject GetStageObject(int _num) 
     {
         if (_num > stageObject.Length) { _num = 0; }

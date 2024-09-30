@@ -17,6 +17,7 @@ public class MachingRoomData
         public bool ready;
 
         //For Server
+        public int stageNum;
         public int playerCount;
         public int teamACount;
         public int teamBCount;

@@ -104,12 +104,16 @@ public class RoomManager : MonoBehaviour
             }
 
             //自分以外の全プレイヤーがREADY中なら
-            if (readyCount >= myRoomData.playerCount - 1) { myRoomData.gameStart = true; }
+            if (readyCount >= myRoomData.playerCount - 1)
+            {
+                myRoomData.gameStart = true;
+                myRoomData.stageNum = Random.Range(0, Managers.instance.gameManager.stageData.GetStageLength());
+            }
         }
         else
         {
             if (!myRoomData.ready) { myRoomData.ready = true; }
-            
+
             RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
             int[] teamCount = new int[2] { hostRoomData.teamACount, hostRoomData.teamBCount };
 
