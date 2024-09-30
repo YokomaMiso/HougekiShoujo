@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject scoreBoardCanvasPrefab;
     GameObject scoreBoardCanvas;
 
-    [SerializeField] StageData stageData;
+    [SerializeField] public StageData stageData;
 
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
@@ -37,10 +37,10 @@ public class GameManager : MonoBehaviour
     public void CreatePlayer()
     {
         //ステージ生成処理,サーバーが番号を持たないといけない
-        Instantiate(stageData.GetStageObject(0));
-
-        //int stageNum = Random.Range(0, 2);
-        //Instantiate(stageData.GetStageObject(stageNum));
+        MachingRoomData.RoomData roomData;
+        if (Managers.instance.playerID == 0) { roomData=OSCManager.OSCinstance.roomData; }
+        else { roomData = OSCManager.OSCinstance.GetRoomData(0); }
+        Instantiate(stageData.GetStageObject(roomData.stageNum));
 
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
