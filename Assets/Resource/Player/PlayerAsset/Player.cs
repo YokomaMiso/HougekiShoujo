@@ -42,11 +42,14 @@ public class Player : MonoBehaviour
         if (!alive) { return; }
 
         alive = false;
-        if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
+        if (IsMine())
+        {
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false;
+            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+        }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
         playerDead.SetKillPlayerID(_num);
-        Camera.main.GetComponent<CameraMove>().ResetCameraFar();
         if (myCollider) { myCollider.enabled = false; }
         Managers.instance.gameManager.AddKillLog(this);
     }
