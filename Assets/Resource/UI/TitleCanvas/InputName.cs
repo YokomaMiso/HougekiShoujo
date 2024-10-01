@@ -25,7 +25,7 @@ public class InputName : MonoBehaviour
             string playerName = inputField.text;
             if (playerName == "") { playerName = "Player " + (Managers.instance.playerID + 1).ToString(); }
             OSCManager.OSCinstance.roomData.playerName = playerName;
-            parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_ROOM);
+            parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
         }
         else if (Input.GetButtonDown("Cancel"))
         {
