@@ -8,15 +8,34 @@ public class ConnectionCanvasBehavior : MonoBehaviour
     [SerializeField]
     Text stateText;
 
+    private void Start()
+    {
+        stateText = GetComponentInChildren<Text>();
+    }
+
     void Update()
     {
         //ハンドシェイクが終了していればルームシーンへ移行する
         if(OSCManager.OSCinstance.GetIsFinishedHandshake())
         {
-            stateText.text = "ルームシーンへ移行します";
+            if (Managers.instance.playerID != 0)
+            {
+                stateText.text = "部屋を発見しました、参加します";
+            }
+            else
+            {
+                stateText.text = "部屋が無かったため新しく作成します";
+            }
 
-            Managers.instance.ChangeScene(GAME_STATE.ROOM);
-            Managers.instance.ChangeState(GAME_STATE.ROOM);
+            Invoke("MoveToRoomScene", 2.0f);
         }
+    }
+
+    private void MoveToRoomScene()
+    {
+        Managers.instance.ChangeScene(GAME_STATE.ROOM);
+        Managers.instance.ChangeState(GAME_STATE.ROOM);
+
+        return;
     }
 }
