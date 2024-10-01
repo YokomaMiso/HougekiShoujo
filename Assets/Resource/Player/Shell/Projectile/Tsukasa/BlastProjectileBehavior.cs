@@ -8,7 +8,6 @@ public class BlastProjectileBehavior : ProjectileBehavior
     {
         lifeTime = _data.GetLifeTime();
         explosion = _data.GetExplosion();
-        TagSetting();
     }
     protected override void TimeSetting()
     {

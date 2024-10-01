@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1779472540161595878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16ecd7d0030cd64699ab19c4894960f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blindCanvas: {fileID: 3921321195368664648, guid: 117adb081fc06844aa567a819e0d66e5,
+    type: 3}
   playerState: 0
   canonState: -1
 --- !u!114 &6191823321996411971
@@ -220,7 +222,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
-  m_Center: {x: 0, y: 1.1, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &6176574917913946423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -395,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 7769733745417900706}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.51, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -478,7 +480,7 @@ Transform:
   m_GameObject: {fileID: 8161249377535324938}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5000001, z: 1.5000001}
   m_ConstrainProportionsScale: 1
   m_Children: []

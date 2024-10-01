@@ -38,10 +38,10 @@ public class PlayerImage : MonoBehaviour
         switch (ownerPlayer.playerState)
         {
             default://case PLAYER_STATE.IDLE:
-                applyController = animData.GetIdleAnim();
+                applyController = animData.GetIdleAnim((CANON_STATE)ownerPlayer.GetCanonState());
                 break;
             case PLAYER_STATE.RUN:
-                applyController = animData.GetRunAnim(0);
+                applyController = animData.GetRunAnim(0, (CANON_STATE)ownerPlayer.GetCanonState());
                 break;
             case PLAYER_STATE.RELOADING:
                 animSpeedRate = ownerPlayer.GetReloadAnimSpeedRate();

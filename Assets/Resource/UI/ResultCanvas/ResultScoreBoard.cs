@@ -47,7 +47,7 @@ public class ResultScoreBoard : MonoBehaviour
             scoreInstance[i].transform.GetChild(1).GetComponent<Image>().sprite = icon;
 
             //名前の変更
-            scoreInstance[i].transform.GetChild(2).GetComponent<Text>().text = "Player " + (oscRoomData.myID + 1).ToString();
+            scoreInstance[i].transform.GetChild(2).GetComponent<Text>().text = oscRoomData.playerName;
 
             //キル数
             scoreInstance[i].transform.GetChild(3).GetComponent<Text>().text = gameData.killCount.ToString();
@@ -59,7 +59,7 @@ public class ResultScoreBoard : MonoBehaviour
             scoreInstance[i].transform.GetChild(5).GetComponent<Text>().text = gameData.friendlyFireCount.ToString();
 
             //座標の変更
-            scoreInstance[i].transform.localPosition = new Vector3(teamPosX[i], baseHeight - heightSub * teamCount[oscRoomData.myTeamNum]);
+            scoreInstance[i].transform.localPosition = new Vector3(teamPosX[oscRoomData.myTeamNum], baseHeight - heightSub * teamCount[oscRoomData.myTeamNum]);
 
             //表示順の登録
             scoreNums[i] = oscRoomData.myTeamNum * 3 + teamCount[oscRoomData.myTeamNum];

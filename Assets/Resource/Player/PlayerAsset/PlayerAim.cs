@@ -73,6 +73,7 @@ public class PlayerAim : MonoBehaviour
                 break;
         }
 
+        SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetAimSFX(), transform);
         Camera.main.GetComponent<CameraMove>().SetCameraFar(shellData.GetAimRange() / 2);
     }
 
@@ -126,6 +127,7 @@ public class PlayerAim : MonoBehaviour
         GameObject projectile = shellData.GetProjectile();
         GameObject obj;
         float angle;
+        Vector3 spawnPos;
 
         Vector3 applyPos = aimVector.normalized;
         if (applyPos == Vector3.zero) { applyPos = Vector3.forward; }
@@ -135,23 +137,27 @@ public class PlayerAim : MonoBehaviour
             default: //SHELL_TYPE.BLAST
                 angle = Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg;
                 const float blastDistance = 1.5f;
-                obj = Instantiate(projectile, transform.position + applyPos * blastDistance + Vector3.up, Quaternion.Euler(0, angle, 0));
+                spawnPos = transform.position + applyPos * blastDistance;
+                obj = Instantiate(projectile, spawnPos, Quaternion.Euler(0, angle, 0));
                 break;
 
             case SHELL_TYPE.CANON:
                 angle = Mathf.Atan2(applyPos.x, applyPos.z) * Mathf.Rad2Deg;
-                obj = Instantiate(projectile, transform.position + Vector3.up, Quaternion.Euler(0, angle, 0));
+                spawnPos = transform.position + aimVector.normalized;
+                obj = Instantiate(projectile, spawnPos, Quaternion.Euler(0, angle, 0));
                 angle = Mathf.Atan2(applyPos.z, applyPos.x) * Mathf.Rad2Deg;
                 obj.GetComponent<ProjectileBehavior>().SetAngle(angle);
                 break;
 
             case SHELL_TYPE.MORTAR:
-                Vector3 spawnPos = transform.position + Vector3.up + (aimVector.normalized * 0.5f);
+                spawnPos = transform.position + (aimVector.normalized * 0.5f);
                 obj = Instantiate(projectile, spawnPos, Quaternion.identity);
                 obj.transform.GetChild(0).localScale = _scale;
                 obj.GetComponent<ProjectileBehavior>().ProjectileStart(transform.position + aimVector);
                 break;
         }
+
+        SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFireSFX(), transform);
         obj.GetComponent<ProjectileBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
 

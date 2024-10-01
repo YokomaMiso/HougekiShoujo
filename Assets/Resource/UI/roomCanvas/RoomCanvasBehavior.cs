@@ -65,7 +65,7 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void Update()
     {
-        if (!Managers.instance.UsingOption())
+        if (!Managers.instance.UsingCanvas())
         {
             CharaSelect();
             TeamSelect();
@@ -194,7 +194,9 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            rm.PressCancel();
+            RoomData myRoomData = OSCManager.OSCinstance.roomData;
+            if (myRoomData.ready) { rm.PressCancel(); }
+            else { rm.BackToTitle(); }
         }
     }
     void GameStart()
@@ -209,6 +211,5 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         Managers.instance.ChangeScene(sendState);
         Managers.instance.ChangeState(sendState);
-        Destroy(gameObject);
     }
 }

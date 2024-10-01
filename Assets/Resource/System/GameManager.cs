@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject scoreBoardCanvasPrefab;
     GameObject scoreBoardCanvas;
 
+    [SerializeField] public AllStageData allStageData;
+    [SerializeField] GameObject suddenDeathAreaPrefab;
+
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
     readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
@@ -34,6 +37,19 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer()
     {
+        //ホストのルームデータを読み取る
+        MachingRoomData.RoomData roomData;
+        if (Managers.instance.playerID == 0) { roomData = OSCManager.OSCinstance.roomData; }
+        else { roomData = OSCManager.OSCinstance.GetRoomData(0); }
+
+        //ステージ生成処理
+        StageData nowStageData = allStageData.GetStageData(roomData.stageNum);
+        GameObject stage = Instantiate(nowStageData.GetStagePrefab());
+
+        //サドンデスエリアの生成
+        GameObject sda = Instantiate(suddenDeathAreaPrefab, stage.transform);
+        sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();
+
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
@@ -55,7 +71,7 @@ public class GameManager : MonoBehaviour
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
-            Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], 0, playerPosZ[teamCount[oscRoomData.myTeamNum]]);
+            Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + oscRoomData.myTeamNum * 3);
             //自分の番号なら、自分用のプレハブを生成
             if (i == Managers.instance.playerID)
             {
@@ -241,13 +257,9 @@ public class GameManager : MonoBehaviour
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
         //return _data;
-        IngameData.GameData hostIngameData;
 
-        hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
-
-        if (!hostIngameData.play) { return _data; }
-
-        if (hostIngameData.winner != -1) { return _data; }
+        if (!_data.play) { return _data; }
+        if (_data.winner != -1) { return _data; }
 
         //チームごとの生き残り数
         int[] aliveCount = new int[2] { 0, 0 };
@@ -274,23 +286,23 @@ public class GameManager : MonoBehaviour
 
         MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
 
-        hostIngameData.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
-        hostIngameData.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
+        _data.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
+        _data.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
 
-        if (hostIngameData.roundTimer <= 0)
+        if (_data.roundTimer <= 0)
         {
             Debug.Log("時間切れだよ");
 
             //if(hostRoomData.teamACount== hostRoomData.teamBCount) { }
-            if (hostIngameData.alivePlayerCountTeamA > hostIngameData.alivePlayerCountTeamB)
+            if (_data.alivePlayerCountTeamA > _data.alivePlayerCountTeamB)
             {
-                hostIngameData.winner = (int)TEAM_NUM.A;
-                hostIngameData.winCountTeamA++;
+                _data.winner = (int)TEAM_NUM.A;
+                _data.winCountTeamA++;
             }
             else
             {
-                hostIngameData.winner = (int)TEAM_NUM.B;
-                hostIngameData.winCountTeamB++;
+                _data.winner = (int)TEAM_NUM.B;
+                _data.winCountTeamB++;
             }
         }
         else
@@ -298,37 +310,36 @@ public class GameManager : MonoBehaviour
 
             if (aliveCount[(int)TEAM_NUM.A] <= 0)
             {
-                hostIngameData.winner = (int)TEAM_NUM.B;
-                hostIngameData.winCountTeamB++;
+                _data.winner = (int)TEAM_NUM.B;
+                _data.winCountTeamB++;
                 Debug.Log("Aチームの死亡数でチェック通ったよ");
-                Debug.Log("Bチームの勝利数 " + hostIngameData.winCountTeamB);
+                Debug.Log("Bチームの勝利数 " + _data.winCountTeamB);
             }
             if (aliveCount[(int)TEAM_NUM.B] <= 0)
             {
-                hostIngameData.winner = (int)TEAM_NUM.A;
-                hostIngameData.winCountTeamA++;
+                _data.winner = (int)TEAM_NUM.A;
+                _data.winCountTeamA++;
                 Debug.Log("Bチームの死亡数でチェック通ったよ");
-                Debug.Log("Aチームの勝利数 " + hostIngameData.winCountTeamA);
+                Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
             }
         }
 
-        _data = hostIngameData;
         return _data;
     }
 
     void ShowScoreBoard()
     {
-        IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
         //ゲームが終了してるなら
         if (hostIngameData.end)
         {
-            //キャンバスの実体があるなら削除して早期リターン
-            if (scoreBoardCanvas != null)
-            {
-                Destroy(scoreBoardCanvas);
-                return;
-            }
+            //キャンバスの実体があるなら削除する
+            if (scoreBoardCanvas != null) { Destroy(scoreBoardCanvas); }
+            //早期リターン
+            return;
         }
 
         //キャンバスの実体がないなら

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6638852785523414993}
-  - component: {fileID: 4938746549023984517}
+  - component: {fileID: 3956515939282097893}
   - component: {fileID: 6892788985328393060}
   m_Layer: 0
   m_Name: MortarProjectilePrefab
@@ -34,8 +34,8 @@ Transform:
   - {fileID: 2790069042509766578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4938746549023984517
-BoxCollider:
+--- !u!136 &3956515939282097893
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -52,8 +52,10 @@ BoxCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6, y: 1, z: 0.6}
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 1.5
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6892788985328393060
 MonoBehaviour:
@@ -67,10 +69,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d15f8133a0551e47b840a39f3254c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageAnimator: {fileID: 527189571875228936}
-  lifeTime: 2.5
-  projectileUp: {fileID: 9100000, guid: 1381823669389d947ae186ee4adff5a3, type: 2}
-  projectileDown: {fileID: 9100000, guid: e6088b49fd1baa340bcef127bca07a42, type: 2}
 --- !u!1 &2008790680177907739
 GameObject:
   m_ObjectHideFlags: 0

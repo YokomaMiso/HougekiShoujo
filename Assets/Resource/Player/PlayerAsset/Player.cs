@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     Collider myCollider;
 
+    [SerializeField] GameObject blindCanvas;
+
     int playerID;
     public void SetPlayerID(int _id) { playerID = _id; }
     public int GetPlayerID() { return playerID; }
@@ -39,12 +41,17 @@ public class Player : MonoBehaviour
     bool alive = true;
     public void SetDead(int _num)
     {
+        if (!alive) { return; }
+
         alive = false;
-        if (IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false; }
+        if (IsMine())
+        {
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false;
+            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+        }
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
         playerDead.SetKillPlayerID(_num);
-        Camera.main.GetComponent<CameraMove>().ResetCameraFar();
         if (myCollider) { myCollider.enabled = false; }
         Managers.instance.gameManager.AddKillLog(this);
     }
@@ -158,6 +165,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetButtonDown("Y")) { Instantiate(blindCanvas); }
+
         IngameData.GameData hostIngameData;
         if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
         else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
