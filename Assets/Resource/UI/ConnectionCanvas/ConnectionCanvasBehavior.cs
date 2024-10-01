@@ -26,7 +26,7 @@ public class ConnectionCanvasBehavior : MonoBehaviour
             if (!changed)
             {
                 if (Managers.instance.playerID != 0) { stateText.text = "•”‰®‚ğ”­Œ©‚µ‚Ü‚µ‚½\nQ‰Á‚µ‚Ü‚·"; }
-                else { stateText.text = "•”‰®‚ª–³‚©‚Á‚½‚½‚ß\nV‚µ‚­ì¬‚µ‚Ü‚·"; }
+                else { stateText.text = "V‚µ‚¢•”‰®‚ğì¬‚µ‚Ü‚·"; }
                 Invoke("MoveToRoomScene", 2.0f);
             }
         }

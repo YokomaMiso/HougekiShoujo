@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5571280479716086417}
   - component: {fileID: 2577435145357630510}
   m_Layer: 0
-  m_Name: CanonProjectilePrefab
+  m_Name: KirameCanonProjectilePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
