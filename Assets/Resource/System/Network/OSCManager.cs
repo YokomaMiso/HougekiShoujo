@@ -630,4 +630,9 @@ public class OSCManager : MonoBehaviour
     {
         return playerDataList[_num].pData.PlayerID;
     }
+
+    public bool GetIsFinishedHandshake()
+    {
+        return isFinishHandshake;
+    }
 }
