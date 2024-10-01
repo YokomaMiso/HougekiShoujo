@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stagePrefab: {fileID: 5198325544041908592, guid: 172b2d528fb4db34792b58333884a673,
     type: 3}
-  stageSize: {x: 20, y: 0, z: 12}
+  stageSize: {x: 40, y: 0, z: 24}
   defaultPosition:
   - {x: -10, y: 0, z: 3}
   - {x: -10, y: 0, z: 0}

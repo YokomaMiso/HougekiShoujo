@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     GameObject scoreBoardCanvas;
 
     [SerializeField] public AllStageData allStageData;
+    [SerializeField] GameObject suddenDeathAreaPrefab;
 
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
@@ -36,13 +37,18 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer()
     {
-        //ステージ生成処理,サーバーが番号を持たないといけない
+        //ホストのルームデータを読み取る
         MachingRoomData.RoomData roomData;
         if (Managers.instance.playerID == 0) { roomData = OSCManager.OSCinstance.roomData; }
         else { roomData = OSCManager.OSCinstance.GetRoomData(0); }
 
+        //ステージ生成処理
         StageData nowStageData = allStageData.GetStageData(roomData.stageNum);
-        Instantiate(nowStageData.GetStagePrefab());
+        GameObject stage = Instantiate(nowStageData.GetStagePrefab());
+
+        //サドンデスエリアの生成
+        GameObject sda = Instantiate(suddenDeathAreaPrefab, stage.transform);
+        sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();
 
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
