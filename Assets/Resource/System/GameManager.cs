@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public AllStageData allStageData;
     [SerializeField] GameObject suddenDeathAreaPrefab;
+    SuddenDeathArea sdaInstance;
 
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         //サドンデスエリアの生成
         GameObject sda = Instantiate(suddenDeathAreaPrefab, stage.transform);
         sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();
+        sdaInstance = sda.GetComponent<SuddenDeathArea>();
 
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
@@ -123,6 +125,7 @@ public class GameManager : MonoBehaviour
     void Init()
     {
         nowRound = 1;
+        sdaInstance.Init();
 
         if (Managers.instance.playerID == 0)
         {
@@ -184,6 +187,8 @@ public class GameManager : MonoBehaviour
                 teamCount[oscRoomData.myTeamNum]++;
             }
         }
+
+        sdaInstance.Init();
     }
 
     void EndBehavior()
@@ -289,6 +294,7 @@ public class GameManager : MonoBehaviour
         _data.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
         _data.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
 
+        /*
         if (_data.roundTimer <= 0)
         {
             Debug.Log("時間切れだよ");
@@ -307,7 +313,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+        */
             if (aliveCount[(int)TEAM_NUM.A] <= 0)
             {
                 _data.winner = (int)TEAM_NUM.B;
@@ -322,7 +328,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Bチームの死亡数でチェック通ったよ");
                 Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
             }
-        }
+        //}
 
         return _data;
     }

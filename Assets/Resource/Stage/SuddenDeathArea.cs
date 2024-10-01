@@ -17,6 +17,8 @@ public class SuddenDeathArea : MonoBehaviour
         areaMat.SetFloat("_sizeRate", 1);
     }
 
+    public void Init() { timer = 0; }
+
     void Update()
     {
         IngameData.GameData hostIngameData;
