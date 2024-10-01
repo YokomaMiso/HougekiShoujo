@@ -79,6 +79,8 @@ public class OSCManager : MonoBehaviour
 
     string testS;
 
+    bool cutSend = false;
+
     //////////////////////
     //////// 関数 ////////
     //////////////////////
@@ -88,36 +90,7 @@ public class OSCManager : MonoBehaviour
     {
         //自分のインスタンス
         OSCinstance = this;
-
-        //インゲーム用データの初期化代入
-        allData.pData = new IngameData.PlayerNetData();
-        allData.pData = default;
-        allData.pData.mainPacketData.inGameData = initIngameData(allData.pData.mainPacketData.inGameData);
-
-        //ルームデータの初期化
-        allData.rData = initRoomData(allData.rData);
-
-        //ロ－カル用も同様に
-        roomData = default;
-        roomData = initRoomData(roomData);
-
-        myNetIngameData = default;
-        myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
-
-
-        //最大人数分のデータを作成
-        for (int i = 0; i < maxPlayer; i++)
-        {
-            //全て初期値で最大人数分のデータをセットする
-            allData.pData.PlayerID = i;
-            allData.rData = initRoomData(allData.rData);
-            allData.rData.isInData = false;
-            playerDataList.Add(allData);
-
-            //人数分受信時間を作る
-            connectTimeList.Add(0.0f);
-        }
-
+        
         CreateTempNet();
     }
 
@@ -125,11 +98,16 @@ public class OSCManager : MonoBehaviour
     //インゲームデータ処理中に送信されるろまずいのでUpdateは基本不使用
     void Update()
     {
-        //デバック用で任意のタイミングで送れるようにしておく
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space))
         {
-
+            cutSend = true;
+            Debug.Log("送信処理カット中");
         }
+        else
+        {
+            cutSend = false;
+        }
+
 
         Debug.Log("PlayerID is " + Managers.instance.playerID);
         Debug.Log("IPAddress is " + GetLocalIPAddress());
@@ -196,13 +174,36 @@ public class OSCManager : MonoBehaviour
                     _data.rData = initRoomData(_data.rData);
                     _data = playerDataList[Managers.instance.playerID];
 
+                    //もしサーバからタイムアウトを宣言されたらハンドシェイクからやり直す
+                    if(playerDataList[Managers.instance.playerID].rData.myID == -1)
+                    {
+                        isFinishHandshake = false;
+
+                        playerDataList.Clear();
+                        clientList.Clear();
+                        connectTimeList.Clear();
+
+                        mainServer.Dispose();
+
+                        CreateTempNet();
+
+                        Managers.instance.ChangeState(GAME_STATE.TITLE);
+                        Managers.instance.ChangeScene(GAME_STATE.TITLE);
+                        
+                        return;
+                    }
+
+                    if(cutSend)
+                    {
+                        return;
+                    }
+
                     if (_data.rData.myID != -1)
                     {
                         Debug.Log("インゲームデータ送信(クライアント)");
                         SendValue(_data);
                     }
                 }
-                
             }
 
             sendDataTimer = 0;
@@ -272,6 +273,35 @@ public class OSCManager : MonoBehaviour
 
     private void CreateTempNet()
     {
+        //インゲーム用データの初期化代入
+        allData.pData = new IngameData.PlayerNetData();
+        allData.pData = default;
+        allData.pData.mainPacketData.inGameData = initIngameData(allData.pData.mainPacketData.inGameData);
+
+        //ルームデータの初期化
+        allData.rData = initRoomData(allData.rData);
+
+        //ロ－カル用も同様に
+        roomData = default;
+        roomData = initRoomData(roomData);
+
+        myNetIngameData = default;
+        myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+
+
+        //最大人数分のデータを作成
+        for (int i = 0; i < maxPlayer; i++)
+        {
+            //全て初期値で最大人数分のデータをセットする
+            allData.pData.PlayerID = i;
+            allData.rData = initRoomData(allData.rData);
+            allData.rData.isInData = false;
+            playerDataList.Add(allData);
+
+            //人数分受信時間を作る
+            connectTimeList.Add(0.0f);
+        }
+
         //サーバがいるかどうか応答を確認するためのクライアントを作成する
         OscClient _client = new OscClient(broadcastAddress, startPort);
 
