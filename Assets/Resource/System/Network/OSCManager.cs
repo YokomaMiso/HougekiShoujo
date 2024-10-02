@@ -27,11 +27,11 @@ public class OSCManager : MonoBehaviour
     //最大プレイヤー人数
     const int maxPlayer = 6;
 
-    const string broadcastAddress = "255.255.255.255";
+    public const string broadcastAddress = "255.255.255.255";
+
+    public const int startPort = 8000;
 
     int tempPort;
-
-    const int startPort = 8000;
 
     [SerializeField]
     float sendPerSecond = 60.0f;
@@ -43,7 +43,7 @@ public class OSCManager : MonoBehaviour
     //送信先保存リスト
     //クライアントならホスト宛ての1つ、ホストならクライアント5人分が入る
     //ハンドシェイク時はホストからの応答を確認するため必ず一つだけ入る
-    List<OscClient> clientList = new List<OscClient>();
+    List<OscClientData> clientList = new List<OscClientData>();
     List<float> connectTimeList = new List<float>();
 
     OscServer tempServer;
@@ -174,25 +174,6 @@ public class OSCManager : MonoBehaviour
                     _data.rData = initRoomData(_data.rData);
                     _data = playerDataList[Managers.instance.playerID];
 
-                    //もしサーバからタイムアウトを宣言されたらハンドシェイクからやり直す
-                    if(playerDataList[Managers.instance.playerID].rData.myID == -1)
-                    {
-                        isFinishHandshake = false;
-
-                        playerDataList.Clear();
-                        clientList.Clear();
-                        connectTimeList.Clear();
-
-                        mainServer.Dispose();
-
-                        CreateTempNet();
-
-                        Managers.instance.ChangeState(GAME_STATE.TITLE);
-                        Managers.instance.ChangeScene(GAME_STATE.TITLE);
-                        
-                        return;
-                    }
-
                     if(cutSend)
                     {
                         return;
@@ -300,12 +281,13 @@ public class OSCManager : MonoBehaviour
 
             //人数分受信時間を作る
             connectTimeList.Add(0.0f);
+
+            //人数分のクライアント
+            clientList.Add(new OscClientData());
         }
 
         //サーバがいるかどうか応答を確認するためのクライアントを作成する
-        OscClient _client = new OscClient(broadcastAddress, startPort);
-
-        clientList.Add(_client);
+        clientList[0].Assign(broadcastAddress, startPort);
 
         //一時ポート番号でサーバからの応答を待機
         tempPort = GetRandomTempPort();
@@ -366,8 +348,8 @@ public class OSCManager : MonoBehaviour
 
             playerDataList[0] = allData;
 
-            clientList.Clear();
-
+            clientList[0].Release();
+            
             tempServer.Dispose();
 
             mainServer = new OscServer(startPort);
@@ -416,12 +398,14 @@ public class OSCManager : MonoBehaviour
         //送信データのバイト配列化
         _sendBytes = netInstance.StructToByte(_struct);
 
-
         //サーバなら五回、クライアントなら一回
-        foreach (OscClient _client in clientList)
+        foreach (OscClientData _clientData in clientList)
         {
-            //データの送信
-            _client.Send(address, _sendBytes, _sendBytes.Length);
+            if(_clientData.IsUsing())
+            {
+                //データの送信
+                _clientData.client.Send(address, _sendBytes, _sendBytes.Length);
+            }
         }
     }
 
@@ -496,8 +480,10 @@ public class OSCManager : MonoBehaviour
 
                         SendValueTarget(_handshakeAllData, _tempClient);
 
-                        OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort + i);
-                        clientList.Add(_client);
+                        //OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort + i);
+                        //clientList.Add(_client);
+
+                        clientList[i].Assign(_allData.pData.mainPacketData.comData.myIP, startPort + i);
 
                         break;
                     }
@@ -520,11 +506,13 @@ public class OSCManager : MonoBehaviour
 
                 playerDataList[Managers.instance.playerID] = allData;
 
-                clientList.Clear();
+                //clientList.Clear();
+                clientList[0].Release();
 
-                OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort);
+                //OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort);
 
-                clientList.Add(_client);
+                //clientList.Add(_client);
+                clientList[0].Assign(_allData.pData.mainPacketData.comData.myIP, startPort);
 
             }
             else
@@ -532,6 +520,9 @@ public class OSCManager : MonoBehaviour
                 testS = "クライアントとしてインゲーム受信";
 
                 playerDataList[_allData.pData.PlayerID] = _allData;
+
+                //受信カウントをリセットする
+                connectTimeList[0] = 0f;
             }
         }
     }
@@ -603,12 +594,44 @@ public class OSCManager : MonoBehaviour
 
                     playerDataList[i] = _allData;
 
+                    //clientList.Remove(clientList[i]);
+                    clientList[i].Release();
+
                     Debug.Log("プレイヤーID" + i + " がタイムアウトしました");
                 }
                 else if(playerDataList[i].rData.myID != -1)
                 {
                     connectTimeList[i] += Time.deltaTime;
                 }
+            }
+        }
+        else
+        {
+            //タイムアウト時間に達していれば自身を初期化させてタイトルまで戻す
+            if (connectTimeList[0] > timeoutSec)
+            {
+                AllGameData.AllData _allData = new AllGameData.AllData();
+
+                _allData.rData = initRoomData(_allData.rData);
+                _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+                playerDataList[0] = _allData;
+
+                myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+                roomData = initRoomData(roomData);
+
+                playerDataList.Clear();
+                clientList.Clear();
+                connectTimeList.Clear();
+
+                Debug.Log("接続がタイムアウトしました");
+
+                Managers.instance.ChangeScene(GAME_STATE.ROOM);
+                Managers.instance.ChangeState(GAME_STATE.ROOM);
+            }
+            else
+            {
+                connectTimeList[0] += Time.deltaTime;
             }
         }
 
