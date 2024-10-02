@@ -11,6 +11,8 @@ public class ConnectionCanvasBehavior : MonoBehaviour
     private void Start()
     {
         stateText = GetComponentInChildren<Text>();
+
+        OSCManager.OSCinstance.CreateTempNet();
     }
 
     void Update()

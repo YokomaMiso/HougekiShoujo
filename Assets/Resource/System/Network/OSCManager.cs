@@ -58,7 +58,7 @@ public class OSCManager : MonoBehaviour
 
     const float waitHandshakeResponseTime = 2f;
 
-    const float timeoutSec = 3f;
+    const float timeoutSec = 5f;
 
 
     ////////////////////////////////
@@ -91,7 +91,7 @@ public class OSCManager : MonoBehaviour
         //自分のインスタンス
         OSCinstance = this;
         
-        CreateTempNet();
+        //CreateTempNet();
     }
 
     // Update is called once per frame
@@ -119,7 +119,10 @@ public class OSCManager : MonoBehaviour
 
         Debug.Log(testNum);
 
-        TimeoutChecker();
+        if(isFinishHandshake)
+        {
+            TimeoutChecker();
+        }
     }
 
     float sendDataTimer;
@@ -127,6 +130,12 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (playerDataList.Count == 0)
+        {
+            Debug.Log("nullです");
+            return;
+        }
+
         allData.rData = roomData;
         allData.pData = myNetIngameData;
         playerDataList[Managers.instance.playerID] = allData;
@@ -252,7 +261,7 @@ public class OSCManager : MonoBehaviour
         return null;
     }
 
-    private void CreateTempNet()
+    public void CreateTempNet()
     {
         //インゲーム用データの初期化代入
         allData.pData = new IngameData.PlayerNetData();
@@ -580,58 +589,65 @@ public class OSCManager : MonoBehaviour
 
     private void TimeoutChecker()
     {
-        if (isServer)
+        if (Managers.instance.state >= GAME_STATE.ROOM && Managers.instance.state <= GAME_STATE.IN_GAME)
         {
-            for (int i = 1; i < maxPlayer; i++)
+            if (isServer)
             {
-                //もしプレイヤーが存在し、タイムアウト時間に達していればそのプレイヤーを初期化する
-                if(playerDataList[i].rData.myID != -1 && connectTimeList[i] > timeoutSec)
+                for (int i = 1; i < maxPlayer; i++)
+                {
+                    //もしプレイヤーが存在し、タイムアウト時間に達していればそのプレイヤーを初期化する
+                    if (playerDataList[i].rData.myID != -1 && connectTimeList[i] > timeoutSec)
+                    {
+                        AllGameData.AllData _allData = new AllGameData.AllData();
+
+                        _allData.rData = initRoomData(_allData.rData);
+                        _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+                        playerDataList[i] = _allData;
+
+                        //clientList.Remove(clientList[i]);
+                        clientList[i].Release();
+
+                        Debug.Log("プレイヤーID" + i + " がタイムアウトしました");
+                    }
+                    else if (playerDataList[i].rData.myID != -1)
+                    {
+                        connectTimeList[i] += Time.deltaTime;
+                    }
+                }
+            }
+            else
+            {
+                //タイムアウト時間に達していれば自身を初期化させてタイトルまで戻す
+                if (connectTimeList[0] > timeoutSec)
                 {
                     AllGameData.AllData _allData = new AllGameData.AllData();
 
                     _allData.rData = initRoomData(_allData.rData);
                     _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
 
-                    playerDataList[i] = _allData;
+                    playerDataList[0] = _allData;
 
-                    //clientList.Remove(clientList[i]);
-                    clientList[i].Release();
+                    myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+                    roomData = initRoomData(roomData);
 
-                    Debug.Log("プレイヤーID" + i + " がタイムアウトしました");
+                    sendStartTimer = 0f;
+
+                    isFinishHandshake = false;
+
+                    playerDataList.Clear();
+                    clientList.Clear();
+                    connectTimeList.Clear();
+
+                    Debug.Log("接続がタイムアウトしました");
+
+                    Managers.instance.ChangeScene(GAME_STATE.TITLE);
+                    Managers.instance.ChangeState(GAME_STATE.TITLE);
                 }
-                else if(playerDataList[i].rData.myID != -1)
+                else
                 {
-                    connectTimeList[i] += Time.deltaTime;
+                    connectTimeList[0] += Time.deltaTime;
                 }
-            }
-        }
-        else
-        {
-            //タイムアウト時間に達していれば自身を初期化させてタイトルまで戻す
-            if (connectTimeList[0] > timeoutSec)
-            {
-                AllGameData.AllData _allData = new AllGameData.AllData();
-
-                _allData.rData = initRoomData(_allData.rData);
-                _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
-
-                playerDataList[0] = _allData;
-
-                myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
-                roomData = initRoomData(roomData);
-
-                playerDataList.Clear();
-                clientList.Clear();
-                connectTimeList.Clear();
-
-                Debug.Log("接続がタイムアウトしました");
-
-                Managers.instance.ChangeScene(GAME_STATE.ROOM);
-                Managers.instance.ChangeState(GAME_STATE.ROOM);
-            }
-            else
-            {
-                connectTimeList[0] += Time.deltaTime;
             }
         }
 

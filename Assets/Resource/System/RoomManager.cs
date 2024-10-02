@@ -21,6 +21,11 @@ public class RoomManager : MonoBehaviour
 
     public void Update()
     {
+        if(Managers.instance.state != GAME_STATE.ROOM)
+        {
+            return;
+        }
+
         if (OSCManager.OSCinstance.roomData.myID != 0) { return; }
 
         int cnt = 0;
