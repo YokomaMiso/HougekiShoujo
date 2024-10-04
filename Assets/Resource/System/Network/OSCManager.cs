@@ -13,13 +13,13 @@ public class OSCManager : MonoBehaviour
     //////////////////////////////
 
     //送信データ構造体
-    public AllGameData.AllData allData = new AllGameData.AllData();
+    public AllGameData.AllData allData;
 
     //自身のローカルインゲームデータ
-    public IngameData.PlayerNetData myNetIngameData = new IngameData.PlayerNetData();
+    public IngameData.PlayerNetData myNetIngameData;
 
     //自身のローカルマッチングシーンデータ
-    public MachingRoomData.RoomData roomData = new MachingRoomData.RoomData();
+    public MachingRoomData.RoomData roomData;
 
     //構造体変換処理があるため生成
     SendDataCreator netInstance = new SendDataCreator();
@@ -111,6 +111,7 @@ public class OSCManager : MonoBehaviour
 
         Debug.Log("PlayerID is " + Managers.instance.playerID);
         Debug.Log("IPAddress is " + GetLocalIPAddress());
+        Debug.Log(testS);
 
         foreach (AllGameData.AllData data in playerDataList)
         {
@@ -154,8 +155,6 @@ public class OSCManager : MonoBehaviour
 
         if (sendDataTimer >= fixedDeltaTime)
         {
-            sendDataTimer += Time.deltaTime;
-
             //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
             if (isFinishHandshake)
             {
@@ -263,6 +262,18 @@ public class OSCManager : MonoBehaviour
 
     public void CreateTempNet()
     {
+        AllGameData.AllData allData = new AllGameData.AllData();
+        myNetIngameData = new IngameData.PlayerNetData();
+        roomData = new MachingRoomData.RoomData();
+
+        playerDataList.Clear();
+        clientList.Clear();
+        connectTimeList.Clear();
+
+        isServer = false;
+        isServerResponse = false;
+        isFinishHandshake = false;
+
         //インゲーム用データの初期化代入
         allData.pData = new IngameData.PlayerNetData();
         allData.pData = default;
@@ -323,8 +334,6 @@ public class OSCManager : MonoBehaviour
         _data.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
         _data.pData.mainPacketData.comData.myPort = tempPort;
         _data.rData.myID = -1;
-
-        Debug.Log("ハンドシェイクの送信");
 
 
         if (roomData.isHandshaking == true)
@@ -463,7 +472,7 @@ public class OSCManager : MonoBehaviour
             }
             else if (_allData.rData.myID == -1 && _allData.rData.isHandshaking)
             {
-                //testS = "サーバとしてコネクション受信";
+                testS = "サーバとしてコネクション受信";
 
 
                 testNum++;
@@ -635,9 +644,9 @@ public class OSCManager : MonoBehaviour
 
                     isFinishHandshake = false;
 
-                    playerDataList.Clear();
-                    clientList.Clear();
-                    connectTimeList.Clear();
+                    mainServer.Dispose();
+
+                    
 
                     Debug.Log("接続がタイムアウトしました");
 
