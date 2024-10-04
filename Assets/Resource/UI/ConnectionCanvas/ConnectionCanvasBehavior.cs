@@ -5,36 +5,49 @@ using UnityEngine.UI;
 
 public class ConnectionCanvasBehavior : MonoBehaviour
 {
-    [SerializeField]
     Text stateText;
+
+    bool changed;
+    float alphaValue = 0;
+    int alphaPlus = 2;
 
     private void Start()
     {
-        stateText = GetComponentInChildren<Text>();
-
+        stateText = transform.GetChild(2).GetComponent<Text>();
+        stateText.text = "éƒ¨å±‹ã‚’æ¢ã—ã¦ã„ã¾ã™â€¦";
+        stateText.color = Color.clear;
+        
         OSCManager.OSCinstance.CreateTempNet();
     }
 
     void Update()
     {
-        //ƒnƒ“ƒhƒVƒFƒCƒN‚ªI—¹‚µ‚Ä‚¢‚ê‚Îƒ‹[ƒ€ƒV[ƒ“‚ÖˆÚs‚·‚é
-        if(OSCManager.OSCinstance.GetIsFinishedHandshake())
+        //ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ãŒçµ‚äº†ã—ã¦ã„ã‚Œã°ãƒ«ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã¸ç§»è¡Œã™ã‚‹
+        if (OSCManager.OSCinstance.GetIsFinishedHandshake())
         {
-            if (Managers.instance.playerID != 0)
+            if (!changed)
             {
-                stateText.text = "•”‰®‚ğ”­Œ©‚µ‚Ü‚µ‚½AQ‰Á‚µ‚Ü‚·";
+                if (Managers.instance.playerID != 0) { stateText.text = "éƒ¨å±‹ã‚’ç™ºè¦‹ã—ã¾ã—ãŸ\nå‚åŠ ã—ã¾ã™"; }
+                else { stateText.text = "æ–°ã—ã„éƒ¨å±‹ã‚’ä½œæˆã—ã¾ã™"; }
+                Invoke("MoveToRoomScene", 2.0f);
             }
-            else
-            {
-                stateText.text = "•”‰®‚ª–³‚©‚Á‚½‚½‚ßV‚µ‚­ì¬‚µ‚Ü‚·";
-            }
-
-            Invoke("MoveToRoomScene", 2.0f);
         }
+
+        TextAlphaUpdate();
+    }
+
+    void TextAlphaUpdate()
+    {
+        alphaValue = Mathf.Clamp01(alphaValue + Time.deltaTime * alphaPlus);
+        stateText.color = new Color(1, 1, 1, alphaValue);
     }
 
     private void MoveToRoomScene()
     {
+        //stateText.text = "";
+        changed = true;
+        alphaPlus = -2;
+
         Managers.instance.ChangeScene(GAME_STATE.ROOM);
         Managers.instance.ChangeState(GAME_STATE.ROOM);
 

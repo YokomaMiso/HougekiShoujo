@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - submitSFX: {instanceID: 0}
+  - submitBGM: {instanceID: 0}
   - buttons: {fileID: 600517467208630858, guid: 545b428b4e374164d91acbe3a33a479f,
       type: 3}
   - inputName: {fileID: 1682089825833050959, guid: ca6073ca1afa62f4fa5cfdb81f5dec08,
