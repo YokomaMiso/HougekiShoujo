@@ -14,19 +14,21 @@ public class ConnectionCanvasBehavior : MonoBehaviour
     private void Start()
     {
         stateText = transform.GetChild(2).GetComponent<Text>();
-        stateText.text = "•”‰®‚ğ’T‚µ‚Ä‚¢‚Ü‚·c";
+        stateText.text = "éƒ¨å±‹ã‚’æ¢ã—ã¦ã„ã¾ã™â€¦";
         stateText.color = Color.clear;
+        
+        OSCManager.OSCinstance.CreateTempNet();
     }
 
     void Update()
     {
-        //ƒnƒ“ƒhƒVƒFƒCƒN‚ªI—¹‚µ‚Ä‚¢‚ê‚Îƒ‹[ƒ€ƒV[ƒ“‚ÖˆÚs‚·‚é
+        //ãƒãƒ³ãƒ‰ã‚·ã‚§ã‚¤ã‚¯ãŒçµ‚äº†ã—ã¦ã„ã‚Œã°ãƒ«ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã¸ç§»è¡Œã™ã‚‹
         if (OSCManager.OSCinstance.GetIsFinishedHandshake())
         {
             if (!changed)
             {
-                if (Managers.instance.playerID != 0) { stateText.text = "•”‰®‚ğ”­Œ©‚µ‚Ü‚µ‚½\nQ‰Á‚µ‚Ü‚·"; }
-                else { stateText.text = "V‚µ‚¢•”‰®‚ğì¬‚µ‚Ü‚·"; }
+                if (Managers.instance.playerID != 0) { stateText.text = "éƒ¨å±‹ã‚’ç™ºè¦‹ã—ã¾ã—ãŸ\nå‚åŠ ã—ã¾ã™"; }
+                else { stateText.text = "æ–°ã—ã„éƒ¨å±‹ã‚’ä½œæˆã—ã¾ã™"; }
                 Invoke("MoveToRoomScene", 2.0f);
             }
         }
