@@ -22,7 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject scoreBoardCanvasPrefab;
     GameObject scoreBoardCanvas;
 
-    [SerializeField] public StageData stageData;
+    [SerializeField] public AllStageData allStageData;
+    [SerializeField] GameObject suddenDeathAreaPrefab;
+    SuddenDeathArea sdaInstance;
 
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
@@ -36,11 +38,19 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer()
     {
-        //ステージ生成処理,サーバーが番号を持たないといけない
+        //ホストのルームデータを読み取る
         MachingRoomData.RoomData roomData;
-        if (Managers.instance.playerID == 0) { roomData=OSCManager.OSCinstance.roomData; }
+        if (Managers.instance.playerID == 0) { roomData = OSCManager.OSCinstance.roomData; }
         else { roomData = OSCManager.OSCinstance.GetRoomData(0); }
-        Instantiate(stageData.GetStageObject(roomData.stageNum));
+
+        //ステージ生成処理
+        StageData nowStageData = allStageData.GetStageData(roomData.stageNum);
+        GameObject stage = Instantiate(nowStageData.GetStagePrefab());
+
+        //サドンデスエリアの生成
+        GameObject sda = Instantiate(suddenDeathAreaPrefab, stage.transform);
+        sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();
+        sdaInstance = sda.GetComponent<SuddenDeathArea>();
 
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
@@ -63,7 +73,7 @@ public class GameManager : MonoBehaviour
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
-            Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], 0, playerPosZ[teamCount[oscRoomData.myTeamNum]]);
+            Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + oscRoomData.myTeamNum * 3);
             //自分の番号なら、自分用のプレハブを生成
             if (i == Managers.instance.playerID)
             {
@@ -115,6 +125,7 @@ public class GameManager : MonoBehaviour
     void Init()
     {
         nowRound = 1;
+        sdaInstance.Init();
 
         if (Managers.instance.playerID == 0)
         {
@@ -176,6 +187,8 @@ public class GameManager : MonoBehaviour
                 teamCount[oscRoomData.myTeamNum]++;
             }
         }
+
+        sdaInstance.Init();
     }
 
     void EndBehavior()
@@ -281,6 +294,7 @@ public class GameManager : MonoBehaviour
         _data.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
         _data.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
 
+        /*
         if (_data.roundTimer <= 0)
         {
             Debug.Log("時間切れだよ");
@@ -299,7 +313,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-
+        */
             if (aliveCount[(int)TEAM_NUM.A] <= 0)
             {
                 _data.winner = (int)TEAM_NUM.B;
@@ -314,7 +328,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Bチームの死亡数でチェック通ったよ");
                 Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
             }
-        }
+        //}
 
         return _data;
     }

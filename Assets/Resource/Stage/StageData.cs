@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "StageData", menuName = "Create/StageData", order = 1)]
+[CreateAssetMenu(fileName = "StageData", menuName = "Create/StageData/StageData", order = 1)]
 
 public class StageData : ScriptableObject
 {
-    [SerializeField] GameObject[] stageObject;
+    [SerializeField, Header("StagePrefab")] GameObject stagePrefab;
+    [SerializeField, Header("Stage Size")] Vector3 stageSize;
+    [SerializeField, Header("Stage Position")] Vector3[] defaultPosition;
 
-    public int GetStageLength() { return stageObject.Length; }
-    public GameObject GetStageObject(int _num) 
-    {
-        if (_num > stageObject.Length) { _num = 0; }
-        return stageObject[_num]; 
-    }
+    public GameObject GetStagePrefab() { return  stagePrefab; }
+    public Vector3 GetStageSize() {  return stageSize; }
+    public float GetStageRadius() { return Mathf.Sqrt((stageSize.x* stageSize.x)+(stageSize.z* stageSize.z)); }
+    public Vector3 GetDefaultPosition(int _num) { return defaultPosition[_num]; }
 }

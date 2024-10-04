@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public abstract class SceneChange : MonoBehaviour
@@ -14,6 +15,9 @@ public abstract class SceneChange : MonoBehaviour
     protected float timer;
     protected readonly float lifeTime = 0.5f;
 
+    int visibleNum = 0;
+    Color[] ribbonColor = new Color[2] { Color.white, Color.clear };
+
     GAME_STATE nextScene;
     public void SetNextScene(GAME_STATE _state) { nextScene = _state; }
 
@@ -23,7 +27,14 @@ public abstract class SceneChange : MonoBehaviour
         SetPosition();
     }
 
-    protected void SetChild() { for (int i = 0; i < 2; i++) { ribbons[i] = transform.GetChild(i).gameObject; } }
+    protected void SetChild()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            ribbons[i] = transform.GetChild(i).gameObject;
+            ribbons[i].GetComponent<Image>().color = ribbonColor[visibleNum];
+        }
+    }
     protected void TimerUpdate() { timer += Time.deltaTime; }
     protected void DestroyCheck(bool _change)
     {
@@ -46,4 +57,6 @@ public abstract class SceneChange : MonoBehaviour
             ribbons[i].transform.localPosition = currentPos;
         }
     }
+
+    public void RibbonsVisible(bool _visible) { if (!_visible) { visibleNum = 1; } }
 }

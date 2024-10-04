@@ -13,7 +13,7 @@ public class Blink : MonoBehaviour
         //長さ
         float length = 5;
         //プレイヤーの座標値
-        Vector3 playerPos = transform.position + Vector3.up * 1.1f;
+        Vector3 playerPos = transform.position + Vector3.up * 0.5f;
         //プレイヤーの入力
         Vector3 targetVec = player.GetInputVector();
         //ワープする座標

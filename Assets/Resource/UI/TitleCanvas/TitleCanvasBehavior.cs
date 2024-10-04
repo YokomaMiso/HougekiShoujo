@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TITLE_STATE { SELECT = 0, INPUT_NAME, CHANGE_TO_ROOM };
+public enum TITLE_STATE { SELECT = 0, INPUT_NAME, CHANGE_TO_CONNECTION };
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
     [SerializeField, Header("Œˆ’è‰¹")] AudioClip submitSFX;
+
+    [SerializeField, Header("TitleBGM")] AudioClip submitTitleBGM;
 
     [SerializeField] GameObject buttons;
     [SerializeField] GameObject inputName;
@@ -23,6 +25,8 @@ public class TitleCanvasBehavior : MonoBehaviour
         uis[1] = Instantiate(inputName, transform);
         uis[1].GetComponent<InputName>().SetParent(this);
         UIsUpdate();
+        PlayTitleBGM();
+    
     }
 
     void Update()
@@ -41,9 +45,9 @@ public class TitleCanvasBehavior : MonoBehaviour
             case TITLE_STATE.INPUT_NAME:
                 UIsUpdate();
                 break;
-            case TITLE_STATE.CHANGE_TO_ROOM:
-                Managers.instance.ChangeState(GAME_STATE.ROOM);
-                Managers.instance.ChangeScene(GAME_STATE.ROOM);
+            case TITLE_STATE.CHANGE_TO_CONNECTION:
+                Managers.instance.ChangeState(GAME_STATE.CONNECTION);
+                Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
                 break;
         }
     }
@@ -73,6 +77,12 @@ public class TitleCanvasBehavior : MonoBehaviour
         }
     }
 
+    void PlayTitleBGM()
+    {
+
+        SoundManager.PlayBGM(submitTitleBGM);
+    }
+
     public void End()
     {
 #if UNITY_EDITOR
@@ -82,3 +92,5 @@ public class TitleCanvasBehavior : MonoBehaviour
 #endif
     }
 }
+
+

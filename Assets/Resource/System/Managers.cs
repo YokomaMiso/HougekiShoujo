@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, ROOM, IN_GAME, RESULT, MAX_NUM };
+public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, CONNECTION, ROOM, IN_GAME, RESULT, MAX_NUM };
 
 public class Managers : MonoBehaviour
 {
@@ -77,10 +78,12 @@ public class Managers : MonoBehaviour
     {
         if (nextState == _state) { return; }
 
-        if (changeSceneCanvasInstance == null) 
+        if (changeSceneCanvasInstance == null)
         {
             changeSceneCanvasInstance = Instantiate(changeSceneCanvasPrefab);
-            changeSceneCanvasInstance.GetComponent<SceneChange>().SetNextScene(_state);
+            SceneChange sceneChange = changeSceneCanvasInstance.GetComponent<SceneChange>();
+            sceneChange.SetNextScene(_state);
+            sceneChange.RibbonsVisible(nextState != GAME_STATE.CONNECTION);
         }
         nextState = _state;
     }

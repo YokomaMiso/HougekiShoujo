@@ -93,7 +93,9 @@ MonoBehaviour:
     type: 3}
   scoreBoardCanvasPrefab: {fileID: 4432466077039030639, guid: b44c6c4ed68b7024a8b27b7476c90273,
     type: 3}
-  stageData: {fileID: 11400000, guid: fefdc19c9730bf24fa8f14543dbe39c3, type: 2}
+  allStageData: {fileID: 11400000, guid: 15fdd3986d21a1f45a8fe7cc6086cd50, type: 2}
+  suddenDeathAreaPrefab: {fileID: 6462634375772970539, guid: 88f0381d27d057f49a35d6d5a25a763f,
+    type: 3}
 --- !u!114 &5065934935842733564
 MonoBehaviour:
   m_ObjectHideFlags: 0
