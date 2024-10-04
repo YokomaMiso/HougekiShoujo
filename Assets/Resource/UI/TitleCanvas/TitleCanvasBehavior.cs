@@ -9,6 +9,8 @@ public class TitleCanvasBehavior : MonoBehaviour
 {
     [SerializeField, Header("Œˆ’è‰¹")] AudioClip submitSFX;
 
+    [SerializeField, Header("TitleBGM")] AudioClip submitTitleBGM;
+
     [SerializeField] GameObject buttons;
     [SerializeField] GameObject inputName;
     GameObject[] uis = new GameObject[2];
@@ -23,6 +25,8 @@ public class TitleCanvasBehavior : MonoBehaviour
         uis[1] = Instantiate(inputName, transform);
         uis[1].GetComponent<InputName>().SetParent(this);
         UIsUpdate();
+        PlayTitleBGM();
+    
     }
 
     void Update()
@@ -73,6 +77,12 @@ public class TitleCanvasBehavior : MonoBehaviour
         }
     }
 
+    void PlayTitleBGM()
+    {
+
+        SoundManager.PlayBGM(submitTitleBGM);
+    }
+
     public void End()
     {
 #if UNITY_EDITOR
@@ -82,3 +92,5 @@ public class TitleCanvasBehavior : MonoBehaviour
 #endif
     }
 }
+
+
