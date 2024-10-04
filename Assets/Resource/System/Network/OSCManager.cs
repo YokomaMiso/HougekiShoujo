@@ -171,7 +171,7 @@ public class OSCManager : MonoBehaviour
 
                         if (_data.rData.myID != -1)
                         {
-                            Debug.Log("インゲームデータ送信(サーバ)");
+                            Debug.Log("ID " + i + " へデータ送信");
                             SendValue(_data);
                         }
                     }
@@ -416,14 +416,19 @@ public class OSCManager : MonoBehaviour
         //送信データのバイト配列化
         _sendBytes = netInstance.StructToByte(_struct);
 
+        int i = 0;
+
         //サーバなら五回、クライアントなら一回
         foreach (OscClientData _clientData in clientList)
         {
             if(_clientData.IsUsing())
             {
+                Debug.Log(i + " へデータ送信");
+
                 //データの送信
                 _clientData.client.Send(address, _sendBytes, _sendBytes.Length);
             }
+            i++;
         }
     }
 
@@ -477,12 +482,10 @@ public class OSCManager : MonoBehaviour
 
                 testNum++;
 
-                for (int i = 0; i < playerDataList.Count; i++)
+                for (int i = 1; i < playerDataList.Count; i++)
                 {
                     if (playerDataList[i].rData.myID == -1)
                     {
-
-
                         AllGameData.AllData _handshakeAllData = new AllGameData.AllData();
                         _handshakeAllData.rData = initRoomData(_handshakeAllData.rData);
 
@@ -497,9 +500,6 @@ public class OSCManager : MonoBehaviour
                         OscClient _tempClient = new OscClient(_allData.pData.mainPacketData.comData.myIP, _allData.pData.mainPacketData.comData.myPort);
 
                         SendValueTarget(_handshakeAllData, _tempClient);
-
-                        //OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort + i);
-                        //clientList.Add(_client);
 
                         clientList[i].Assign(_allData.pData.mainPacketData.comData.myIP, startPort + i);
 
@@ -523,13 +523,9 @@ public class OSCManager : MonoBehaviour
                 allData.rData = roomData;
 
                 playerDataList[Managers.instance.playerID] = allData;
-
-                //clientList.Clear();
+                
                 clientList[0].Release();
-
-                //OscClient _client = new OscClient(_allData.pData.mainPacketData.comData.myIP, startPort);
-
-                //clientList.Add(_client);
+                
                 clientList[0].Assign(_allData.pData.mainPacketData.comData.myIP, startPort);
 
             }
@@ -614,10 +610,9 @@ public class OSCManager : MonoBehaviour
 
                         playerDataList[i] = _allData;
 
-                        //clientList.Remove(clientList[i]);
+                        connectTimeList[i] = 0.0f;
+                        
                         clientList[i].Release();
-
-                        Debug.Log("プレイヤーID" + i + " がタイムアウトしました");
                     }
                     else if (playerDataList[i].rData.myID != -1)
                     {
