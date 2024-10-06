@@ -9,7 +9,8 @@ public class TitleCanvasBehavior : MonoBehaviour
 {
     [SerializeField, Header("決定音")] AudioClip submitSFX;
 
-    [SerializeField, Header("TitleBGM")] AudioClip submitTitleBGM;
+    [SerializeField, Header("TitleBGM イントロ")] AudioClip titleBGMIntro;
+    [SerializeField, Header("TitleBGM ループ")] AudioClip titleBGMLoop;
 
     [SerializeField] GameObject buttons;
     [SerializeField] GameObject inputName;
@@ -25,7 +26,7 @@ public class TitleCanvasBehavior : MonoBehaviour
         uis[1] = Instantiate(inputName, transform);
         uis[1].GetComponent<InputName>().SetParent(this);
         UIsUpdate();
-        PlayTitleBGM();
+        //PlayTitleBGM();
     
     }
 
@@ -79,8 +80,7 @@ public class TitleCanvasBehavior : MonoBehaviour
 
     void PlayTitleBGM()
     {
-
-        SoundManager.PlayBGM(submitTitleBGM);
+        SoundManager.PlayBGM(titleBGMIntro);
     }
 
     public void End()
