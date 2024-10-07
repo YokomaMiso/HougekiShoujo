@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SOUND_TYPE { BGM = 0, SFX, VOICE };
-
 public class SoundObject : MonoBehaviour
 {
     int soundID = -1;
