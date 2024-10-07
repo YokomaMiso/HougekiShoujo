@@ -11,6 +11,8 @@ MonoImporter:
       type: 3}
   - inputName: {fileID: 1682089825833050959, guid: ca6073ca1afa62f4fa5cfdb81f5dec08,
       type: 3}
+  - creditCanvas: {fileID: 4918601816050111206, guid: bd5edb4fd9658b542b58e338bca06e2f,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
