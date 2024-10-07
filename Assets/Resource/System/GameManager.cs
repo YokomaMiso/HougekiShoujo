@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
         sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();
         sdaInstance = sda.GetComponent<SuddenDeathArea>();
 
+        //ステージBGMの再生
+        SoundManager.PlayBGMIntro(nowStageData.GetBGMIntro(), nowStageData.GetBGMLoop());
+
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
@@ -96,7 +99,6 @@ public class GameManager : MonoBehaviour
 
         CreateKillLogCanvas();
     }
-
     void CreateKillLogCanvas()
     {
         GameObject killLogCanvasInstance = Instantiate(killLogCanvasPrefab);
