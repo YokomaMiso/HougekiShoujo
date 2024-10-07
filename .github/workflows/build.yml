@@ -59,7 +59,7 @@ jobs:
       - name: Upload the Build File
         uses: actions/upload-artifact@v3
         with:
-          name: Build-${{ steps.vars.outputs.sha_short }}
+          name: Build-${{ github.sha }}
           path: build
 
   upload:
@@ -71,8 +71,12 @@ jobs:
       - name: Download Build Artifact
         uses: actions/download-artifact@v3
         with:
-          name: Build-${{ steps.vars.outputs.sha_short }}
+          name: Build-${{ github.sha }}
           path: build
+
+      - name: Compress files to ZIP
+        run: |
+          zip -r build-${{ github.sha }}.zip build
 
       #ドライブにもアップロードする
       - name: Upload to GoogleDrive
@@ -81,5 +85,5 @@ jobs:
           skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
           google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
           google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          upload-from: build
+          upload-from: 'build-${{ github.sha }}.zip'
           upload-to: /BuildWindows
