@@ -2,6 +2,9 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
+public enum SOUND_TYPE { BGM = 0, SFX, VOICE };
 
 public class SoundManager : MonoBehaviour
 {
