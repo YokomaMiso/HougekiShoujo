@@ -552,11 +552,6 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: c7b68922c0adff84f8d146c61e2805c4, type: 3}
     - target: {fileID: 5731931733700516001, guid: 9935455dab8a8074b9de2cf883de551b,
         type: 3}
-      propertyPath: submitSFX
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5731931733700516001, guid: 9935455dab8a8074b9de2cf883de551b,
-        type: 3}
       propertyPath: submitTitleBGM
       value: 
       objectReference: {fileID: 0}
