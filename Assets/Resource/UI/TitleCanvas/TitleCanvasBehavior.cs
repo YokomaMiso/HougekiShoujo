@@ -3,30 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TITLE_STATE { SELECT = 0, INPUT_NAME, CHANGE_TO_CONNECTION };
+public enum TITLE_STATE { SELECT = 0, INPUT_NAME, CREDIT, CHANGE_TO_CONNECTION };
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
     [SerializeField, Header("決定音")] AudioClip submitSFX;
 
-    [SerializeField, Header("TitleBGM")] AudioClip submitTitleBGM;
+    [SerializeField, Header("TitleBGM イントロ")] AudioClip titleBGMIntro;
+    [SerializeField, Header("TitleBGM ループ")] AudioClip titleBGMLoop;
 
     [SerializeField] GameObject buttons;
+    //[SerializeField] GameObject selectNetwork;
     [SerializeField] GameObject inputName;
-    GameObject[] uis = new GameObject[2];
+    [SerializeField] GameObject creditCanvas;
+    GameObject[] uis = new GameObject[3];
+
 
     TITLE_STATE state = TITLE_STATE.SELECT;
     public TITLE_STATE GetTitleState() { return state; }
 
     void Start()
     {
-        uis[0] = Instantiate(buttons,transform);
-        uis[0].GetComponent<TitleButtons>().SetParent(this);
-        uis[1] = Instantiate(inputName, transform);
-        uis[1].GetComponent<InputName>().SetParent(this);
+        uis[(int)TITLE_STATE.SELECT] = Instantiate(buttons, transform);
+        uis[(int)TITLE_STATE.SELECT].GetComponent<TitleButtons>().SetParent(this);
+        //uis[1] = Instantiate(selectNetwork, transform);
+        //uis[1].GetComponent<SelectNetwork>().SetParent(this);
+        uis[(int)TITLE_STATE.INPUT_NAME] = Instantiate(inputName, transform);
+        uis[(int)TITLE_STATE.INPUT_NAME].GetComponent<InputName>().SetParent(this);
+        uis[(int)TITLE_STATE.CREDIT] = Instantiate(creditCanvas, transform);
+        uis[(int)TITLE_STATE.CREDIT].GetComponent<CreditCanvasBehavior>().SetParent(this);
         UIsUpdate();
-        PlayTitleBGM();
-    
+        SoundManager.PlayBGMIntro(titleBGMIntro, titleBGMLoop);
     }
 
     void Update()
@@ -43,6 +50,7 @@ public class TitleCanvasBehavior : MonoBehaviour
         {
             case TITLE_STATE.SELECT:
             case TITLE_STATE.INPUT_NAME:
+            case TITLE_STATE.CREDIT:
                 UIsUpdate();
                 break;
             case TITLE_STATE.CHANGE_TO_CONNECTION:
@@ -70,17 +78,12 @@ public class TitleCanvasBehavior : MonoBehaviour
             case 2:
                 break;
             case 3:
+                ChangeTitleState(TITLE_STATE.CREDIT);
                 break;
             case 4:
                 End();
                 break;
         }
-    }
-
-    void PlayTitleBGM()
-    {
-
-        SoundManager.PlayBGM(submitTitleBGM);
     }
 
     public void End()

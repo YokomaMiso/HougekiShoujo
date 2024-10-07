@@ -10,13 +10,11 @@ public class TitleButtons : MonoBehaviour
     const int selectItemNum = 5;
     bool isCanSelect = true;
 
-    GameObject hoverFrame;
-
     public void SetParent(TitleCanvasBehavior _parent) { parent = _parent; }
 
     void Start()
     {
-        hoverFrame = transform.GetChild(selectItemNum).gameObject;
+        transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
     }
 
     void Update()
@@ -36,9 +34,10 @@ public class TitleButtons : MonoBehaviour
         {
             if (isCanSelect)
             {
+                transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
                 if (value < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
                 else { selectNum = (selectNum + 1) % selectItemNum; }
-                hoverFrame.transform.localPosition = transform.GetChild(selectNum).transform.localPosition;
+                transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
                 isCanSelect = false;
             }
         }
