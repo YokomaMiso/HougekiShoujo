@@ -26,7 +26,7 @@ public class TitleCanvasBehavior : MonoBehaviour
         uis[1] = Instantiate(inputName, transform);
         uis[1].GetComponent<InputName>().SetParent(this);
         UIsUpdate();
-        //PlayTitleBGM();
+        PlayTitleBGM();
     
     }
 
@@ -80,7 +80,7 @@ public class TitleCanvasBehavior : MonoBehaviour
 
     void PlayTitleBGM()
     {
-        SoundManager.PlayBGM(titleBGMIntro);
+        SoundManager.PlayBGMIntro(titleBGMIntro,titleBGMLoop);
     }
 
     public void End()
