@@ -41,7 +41,7 @@ public class SoundObject : MonoBehaviour
                 break;
 
             case SOUND_TYPE.VOICE:
-                volume *= SoundManager.sfxVolume;
+                volume *= SoundManager.voiceVolume;
                 lifeTime = clip.length;
                 break;
         }

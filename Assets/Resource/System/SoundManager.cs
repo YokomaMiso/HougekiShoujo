@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     public static float masterVolume = 1.0f;
     public static float bgmVolume = 0.5f;
     public static float sfxVolume = 0.5f;
+    public static float voiceVolume = 0.5f;
 
     void Start()
     {
@@ -27,6 +28,7 @@ public class SoundManager : MonoBehaviour
         masterVolume = oData.masterVolume;
         bgmVolume = oData.bgmVolume;
         sfxVolume = oData.sfxVolume;
+        voiceVolume = oData.voiceVolume;
 
         soundObject = soundObjectPrefab;
         thisTransform = transform;
