@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TITLE_STATE { SELECT = 0, INPUT_NAME, CREDIT, CHANGE_TO_CONNECTION };
+public enum TITLE_STATE { STAY = -1, SELECT = 0, INPUT_NAME, CREDIT, CHANGE_TO_CONNECTION };
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class TitleCanvasBehavior : MonoBehaviour
     GameObject[] uis = new GameObject[3];
 
 
-    TITLE_STATE state = TITLE_STATE.SELECT;
+    TITLE_STATE state = TITLE_STATE.STAY;
     public TITLE_STATE GetTitleState() { return state; }
 
     void Start()
