@@ -126,6 +126,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        SoundManager.PlayVoice(playerData.GetPlayerVoiceData().GetGameStart());
+
         playerMove = gameObject.GetComponent<PlayerMove>();
         playerMove.SetPlayer(this);
 
