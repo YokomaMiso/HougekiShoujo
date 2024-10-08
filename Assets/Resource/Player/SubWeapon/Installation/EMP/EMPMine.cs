@@ -29,9 +29,10 @@ public class EMPMine : InstallationBehavior
     protected override void InstallationAction()
     {
         Vector3 spawnPos = transform.position;
-        spawnPos.y = 2;
-        GameObject explosion = empExplosion.GetBody();
-        GameObject obj = Instantiate(explosion, spawnPos, Quaternion.identity);
+
+        GameObject explosionInstance = explosion.GetBody();
+        GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
+
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(empExplosion);
     }

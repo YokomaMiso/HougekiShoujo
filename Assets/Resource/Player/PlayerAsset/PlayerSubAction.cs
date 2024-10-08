@@ -51,7 +51,7 @@ public class PlayerSubAction : MonoBehaviour
                 }
                 break;
             case SUB_TYPE.INSTALLATION:
-                obj = Instantiate(subWeaponData.GetInstallation(), transform.position + Vector3.up, Quaternion.identity);
+                obj = Instantiate(subWeaponData.GetInstallation(), transform.position, Quaternion.identity);
                 obj.GetComponent<InstallationBehavior>().SetPlayer(ownerPlayer);
                 break;
             case SUB_TYPE.BLINK:
