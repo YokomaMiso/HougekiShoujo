@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CreditCanvasBehavior : MonoBehaviour
 {
     TitleCanvasBehavior parent;
     public void SetParent(TitleCanvasBehavior _parent) { parent = _parent; }
 
+    RectTransform creditTexts;
+    const float limit = 1620;
+
+    void Start()
+    {
+        creditTexts = transform.GetChild(0).GetComponent<RectTransform>();
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Cancel")) { parent.ChangeTitleState(TITLE_STATE.SELECT); }
+
+        float movement = Input.GetAxis("Vertical") * Time.deltaTime * 800;
+        float nowPosY = Mathf.Clamp(creditTexts.localPosition.y - movement, -limit, limit);
+
+        creditTexts.localPosition = Vector3.up * nowPosY;
     }
 }
