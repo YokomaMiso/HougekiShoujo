@@ -44,6 +44,11 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
+
+      - name: Convert file encoding to UTF-8
+        run: |
+          find . -type f -name '*.cs' -exec iconv -f SHIFT-JIS -t UTF-8 {} -o {} \;
+
       # Unityプロジェクトのビルド
       - name: Run the build
         uses: game-ci/unity-builder@v4
