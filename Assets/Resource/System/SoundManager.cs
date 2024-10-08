@@ -38,7 +38,15 @@ public class SoundManager : MonoBehaviour
         if (nowBGMAudioSource == null) { return; }
         nowBGMAudioSource.volume = _volume;
     }
+    public static GameObject PlayVoice(AudioClip _clip, Transform _transform = null)
+    {
+        if (_transform == null) { _transform = Camera.main.transform.GetChild(0); }
 
+        GameObject obj = Instantiate(soundObject, _transform);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip, SOUND_TYPE.VOICE, false);
+
+        return obj;
+    }
     public static GameObject PlaySFX(AudioClip _clip, Transform _transform = null)
     {
         if (_transform == null) { _transform = Camera.main.transform.GetChild(0); }

@@ -30,6 +30,11 @@ public class TitleVideoBehavior : MonoBehaviour
             vp.clip = loopVideo;
             vp.Play();
             transform.root.GetComponent<TitleCanvasBehavior>().ChangeTitleState(TITLE_STATE.SELECT);
+
+            //int characterID = Random.Range(0,Managers.instance.gameManager.playerDatas.Length);
+            int characterID = 0;
+            SoundManager.PlayVoice(Managers.instance.gameManager.playerDatas[characterID].GetPlayerVoiceData().GetTitleCall());
+
             Destroy(this);
         }
     }
