@@ -375,6 +375,7 @@ public class OSCManager : MonoBehaviour
             isServer = true;
 
             isFinishHandshake = true;
+            roomData.playerName=Managers.instance.optionData.playerName;
 
             mainServer.TryAddMethod(address, ReadValue);
         }
@@ -390,6 +391,7 @@ public class OSCManager : MonoBehaviour
             isServer = false;
 
             isFinishHandshake = true;
+            roomData.playerName = Managers.instance.optionData.playerName;
 
             mainServer.TryAddMethod(address, ReadValue);
         }
