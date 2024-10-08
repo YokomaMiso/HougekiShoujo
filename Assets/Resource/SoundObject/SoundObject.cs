@@ -18,19 +18,17 @@ public class SoundObject : MonoBehaviour
     {
         clip = _clip;
 
-        OptionData oData = Managers.instance.optionData;
-
         source = gameObject.GetComponent<AudioSource>();
         source.loop = _loop;
         source.clip = clip;
 
-        float volume = oData.masterVolume;
+        float volume = SoundManager.masterVolume;
         float pitch = 1.0f;
 
         switch (_type)
         {
             case SOUND_TYPE.BGM:
-                volume *= oData.bgmVolume;
+                volume *= SoundManager.bgmVolume;
                 if (_loop) { lifeTime = Mathf.Infinity; }
                 else { lifeTime = clip.length; }
                 isBGM = true;
@@ -38,7 +36,7 @@ public class SoundObject : MonoBehaviour
 
             case SOUND_TYPE.SFX:
             case SOUND_TYPE.VOICE:
-                volume *= oData.sfxVolume;
+                volume *= SoundManager.sfxVolume;
                 pitch *= Random.Range(0.8f, 1.2f);
                 lifeTime = clip.length;
                 break;
@@ -61,7 +59,12 @@ public class SoundObject : MonoBehaviour
         if (timer >= lifeTime)
         {
             Destroy(gameObject);
-            if (loopBGMInstance) { loopBGMInstance.GetComponent<AudioSource>().Play(); }
+            if (loopBGMInstance) 
+            {
+                AudioSource loopSource = loopBGMInstance.GetComponent<AudioSource>();
+                loopSource.Play();
+                SoundManager.SetNowBGM(loopSource);
+            }
         }
     }
 }

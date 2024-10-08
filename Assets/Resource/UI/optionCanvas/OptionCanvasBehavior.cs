@@ -78,15 +78,30 @@ public class OptionCanvasBehavior : MonoBehaviour
         {
             if (timer == 0)
             {
+                float applyValue = 1;
+
                 switch (selectNum)
                 {
+                    case 0:
+                    case 1:
+                    case 2:
+                        if (value < 0) { applyValue *= -1; }
+                        transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
+                        SoundManager.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
+                        SoundManager.bgmVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
+                        SoundManager.sfxVolume = transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
+
+                        float nowVolume = SoundManager.masterVolume * SoundManager.bgmVolume;
+                        SoundManager.BGMVolumeChange(nowVolume);
+
+                        break;
                     case 3:
                         transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value < 0);
                         break;
                     case 5:
                         break;
+
                     default:
-                        float applyValue = 1;
                         if (value < 0) { applyValue *= -1; }
                         transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
                         break;
