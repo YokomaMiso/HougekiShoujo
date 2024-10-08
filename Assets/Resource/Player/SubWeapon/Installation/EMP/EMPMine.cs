@@ -10,6 +10,7 @@ public class EMPMine : InstallationBehavior
 
     protected override void Start()
     {
+        explosion = empExplosion;
         base.Start();
         changeToLoopAnimTime = 1.5f;
     }
