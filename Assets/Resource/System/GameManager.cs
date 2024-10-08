@@ -315,22 +315,68 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+                if (aliveCount[(int)TEAM_NUM.A] <= 0)
+                {
+                    _data.winner = (int)TEAM_NUM.B;
+                    _data.winCountTeamB++;
+                    Debug.Log("Aチームの死亡数でチェック通ったよ");
+                    Debug.Log("Bチームの勝利数 " + _data.winCountTeamB);
+                }
+                if (aliveCount[(int)TEAM_NUM.B] <= 0)
+                {
+                    _data.winner = (int)TEAM_NUM.A;
+                    _data.winCountTeamA++;
+                    Debug.Log("Bチームの死亡数でチェック通ったよ");
+                    Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
+                }
+        }
         */
-            if (aliveCount[(int)TEAM_NUM.A] <= 0)
+
+        if (aliveCount[(int)TEAM_NUM.A] <= 0)
+        {
+            _data.winner = (int)TEAM_NUM.B;
+            _data.winCountTeamB++;
+            Debug.Log("Aチームの死亡数でチェック通ったよ");
+            Debug.Log("Bチームの勝利数 " + _data.winCountTeamB);
+
+            for (int i = 0; i < playerInstance.Length; i++)
             {
-                _data.winner = (int)TEAM_NUM.B;
-                _data.winCountTeamB++;
-                Debug.Log("Aチームの死亡数でチェック通ったよ");
-                Debug.Log("Bチームの勝利数 " + _data.winCountTeamB);
+                MachingRoomData.RoomData roomData;
+                if (i == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
+                else { roomData = OSCManager.OSCinstance.roomData; }
+
+                if (roomData.myTeamNum != _data.winner) { continue; }
+
+                AudioClip clip;
+                if (_data.winCountTeamB >= 3) { clip = playerInstance[i].GetComponent<Player>().GetPlayerData().GetPlayerVoiceData().GetGameWin(); }
+                else { clip = playerInstance[i].GetComponent<Player>().GetPlayerData().GetPlayerVoiceData().GetRoundWin(); }
+
+                SoundManager.PlayVoice(clip);
             }
-            if (aliveCount[(int)TEAM_NUM.B] <= 0)
+        }
+        if (aliveCount[(int)TEAM_NUM.B] <= 0)
+        {
+            _data.winner = (int)TEAM_NUM.A;
+            _data.winCountTeamA++;
+            Debug.Log("Bチームの死亡数でチェック通ったよ");
+            Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
+
+            for (int i = 0; i < playerInstance.Length; i++)
             {
-                _data.winner = (int)TEAM_NUM.A;
-                _data.winCountTeamA++;
-                Debug.Log("Bチームの死亡数でチェック通ったよ");
-                Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
+                MachingRoomData.RoomData roomData;
+                if (i == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
+                else { roomData = OSCManager.OSCinstance.roomData; }
+
+                if (roomData.myTeamNum != _data.winner) { continue; }
+
+                AudioClip clip;
+                PlayerVoiceData pvd = playerDatas[roomData.selectedCharacterID].GetPlayerVoiceData();
+                if (_data.winCountTeamA >= 3) { clip = pvd.GetGameWin(); }
+                else { clip = pvd.GetRoundWin(); }
+
+                SoundManager.PlayVoice(clip);
             }
-        //}
+        }
 
         return _data;
     }

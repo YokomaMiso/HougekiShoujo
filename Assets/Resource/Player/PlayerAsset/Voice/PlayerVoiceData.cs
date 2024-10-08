@@ -36,7 +36,7 @@ public class PlayerVoiceData : ScriptableObject
     public AudioClip GetDamageTrap() { return damageTrap; }
     public AudioClip GetThanks() { return thanks; }
     public AudioClip GetRoundWin() { return roundWin; }
-    public AudioClip GetRoundGame() { return gameWin; }
+    public AudioClip GetGameWin() { return gameWin; }
 
 
 
