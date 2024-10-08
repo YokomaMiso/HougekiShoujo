@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class InputName : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class InputName : MonoBehaviour
     void Start()
     {
         inputField = transform.GetChild(1).GetComponent<InputField>();
+        inputField.text = Managers.instance.optionData.playerName;
         inputField.Select();
     }
 
@@ -24,6 +26,8 @@ public class InputName : MonoBehaviour
         {
             string playerName = inputField.text;
             if (playerName == "") { playerName = "Player " + (Managers.instance.playerID + 1).ToString(); }
+            Managers.instance.optionData.playerName = playerName;
+            Managers.instance.SaveOptionData(Managers.instance.optionData);
             OSCManager.OSCinstance.roomData.playerName = playerName;
             parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
         }
