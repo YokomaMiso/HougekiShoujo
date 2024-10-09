@@ -15,7 +15,7 @@ MonoBehaviour:
   playerName: Player
   masterVolume: 1
   bgmVolume: 0.5
-  sfxVolume: 0.8000001
+  sfxVolume: 0.8
   voiceVolume: 0.7
   cameraShakeOn: 1
   mortarSensitive: 35
