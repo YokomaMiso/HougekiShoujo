@@ -88,6 +88,10 @@ public class KillLogBehavior : MonoBehaviour
 
         if (killVoice == null) { return; }
         if (playKillVoice) { return; }
-        if (timer > killVoiceTime) { SoundManager.PlayVoice(killVoice); }
+        if (timer > killVoiceTime) 
+        {
+            SoundManager.PlayVoice(killVoice);
+            playKillVoice = true;
+        }
     }
 }
