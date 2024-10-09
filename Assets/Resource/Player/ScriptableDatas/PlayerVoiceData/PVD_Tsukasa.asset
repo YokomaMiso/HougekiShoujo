@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e2ee1207b008e4881a23804526a4a6, type: 3}
+  m_Name: PVD_Tsukasa
+  m_EditorClassIdentifier: 
+  titleCall: {fileID: 8300000, guid: becbc1413ddcda440961dbf4ebeddd11, type: 3}
+  selfPR: {fileID: 8300000, guid: f7468e231dc1aa84086403f4ce9e0cd3, type: 3}
+  ready: {fileID: 8300000, guid: b8617cb77e14c6b41a171e762e240e01, type: 3}
+  gameStart: {fileID: 8300000, guid: 47c04611a990847458fc851fda9416b8, type: 3}
+  reload: {fileID: 8300000, guid: 9df087fb8c0691246ba398120f49da77, type: 3}
+  useMain: {fileID: 8300000, guid: 249eb820e63a04b43b634565261fd002, type: 3}
+  useSub: {fileID: 8300000, guid: 7f35d058e8d31ea4a957ae3b45b212b5, type: 3}
+  kill: {fileID: 8300000, guid: 409b0d1b3def1754dbe25f0896105c15, type: 3}
+  friendlyFire: {fileID: 8300000, guid: 0e86c8ed087a18e4f85902230f065116, type: 3}
+  damage: {fileID: 8300000, guid: 286db7dc5fcec6046a5b2343fd95619f, type: 3}
+  damageFF: {fileID: 8300000, guid: 3477e87659fb365419d63afe8f854bbd, type: 3}
+  damageTrap: {fileID: 8300000, guid: 4cb2bf4e4e386344ba4664d467975ae1, type: 3}
+  thanks: {fileID: 8300000, guid: b7a74dc7dbf98874fb5114db27d6ab15, type: 3}
+  roundWin: {fileID: 8300000, guid: 8a69c851d87de1e46877b3d06678e80b, type: 3}
+  gameWin: {fileID: 8300000, guid: 09b3f93d79bea8a449d1cfe5e4e449e8, type: 3}

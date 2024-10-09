@@ -18,6 +18,8 @@ public class PlayerData : ScriptableObject
 
     [Header("SFX")]
     [SerializeField, Header("Player SFX Data")] PlayerSFXData playerSFXData;
+    [Header("Voice")]
+    [SerializeField, Header("Player SFX Data")] PlayerVoiceData playerVoiceData;
 
     public string GetCharaName() { return charaName; }
     public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
@@ -28,4 +30,5 @@ public class PlayerData : ScriptableObject
     public SubWeapon GetSubWeapon() { return subWeapon; }
 
     public PlayerSFXData GetPlayerSFXData() { return playerSFXData; }
+    public PlayerVoiceData GetPlayerVoiceData() {  return playerVoiceData; }
 }

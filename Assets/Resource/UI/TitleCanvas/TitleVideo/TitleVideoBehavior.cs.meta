@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 32674c712ad69d54f838a6d358807faf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - startVideo: {fileID: 32900000, guid: d03e69f5d6ad27a47bf31ab24c479b83, type: 3}
+  - loopVideo: {fileID: 32900000, guid: e7fda989730d4d343901b627f622e6c2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

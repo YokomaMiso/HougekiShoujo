@@ -18,3 +18,4 @@ MonoBehaviour:
   shell: {fileID: 11400000, guid: f634eb2d53fef924da4f41d1fe258b13, type: 2}
   subWeapon: {fileID: 11400000, guid: a883619b242c3154f89ca4828f58990d, type: 2}
   playerSFXData: {fileID: 11400000, guid: a594c46fc7684f847a520d6e099ab3c9, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: 4c52c730e8d06e44baf30f0a19937f15, type: 2}

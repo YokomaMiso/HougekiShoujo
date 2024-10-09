@@ -25,14 +25,14 @@ public class PlayerDead : MonoBehaviour
 
     void SetKDFScore(int _num)
     {
-        IngameData.GameData myGameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
-
         int myID = Managers.instance.playerID;
         int deadID = ownerPlayer.GetPlayerID();
         int killerID = _num;
 
         //死亡したプレイヤーか殺したプレイヤーが自分じゃないなら早期リターン
         if (myID != deadID && myID != killerID) { return; }
+
+        IngameData.GameData myGameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
 
         //自分が死んだならデス数を＋１
         if (deadID == myID) { myGameData.deathCount++; }

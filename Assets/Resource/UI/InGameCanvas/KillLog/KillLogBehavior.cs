@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class KillLogBehavior : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class KillLogBehavior : MonoBehaviour
     Color killColor;
     Color deadColor;
 
+    const float killVoiceTime = 0.5f;
+    bool playKillVoice;
+    AudioClip killVoice;
+
     public void SetText(Player _player)
     {
         killPlayer = transform.GetChild(0).GetComponent<Text>();
@@ -31,15 +36,36 @@ public class KillLogBehavior : MonoBehaviour
 
         int killer = _player.GetKiller();
         int deadMan = _player.GetPlayerID();
-        killPlayer.text = OSCManager.OSCinstance.GetRoomData(killer).playerName;
-        deadPlayer.text = OSCManager.OSCinstance.GetRoomData(deadMan).playerName;
 
-        int killerTeam = OSCManager.OSCinstance.GetRoomData(killer).myTeamNum;
-        int deadManTeam = OSCManager.OSCinstance.GetRoomData(deadMan).myTeamNum;
+        MachingRoomData.RoomData killerRoomData = OSCManager.OSCinstance.GetRoomData(killer);
+        MachingRoomData.RoomData deadManRoomData = OSCManager.OSCinstance.GetRoomData(deadMan);
+
+        killPlayer.text = killerRoomData.playerName;
+        deadPlayer.text = deadManRoomData.playerName;
+
+        int killerTeam = killerRoomData.myTeamNum;
+        int deadManTeam = deadManRoomData.myTeamNum;
         killColor = constColor[killerTeam];
         deadColor = constColor[deadManTeam];
         killPlayer.color = killColor;
         deadPlayer.color = deadColor;
+
+        //Ž©Œˆ‚È‚ç
+        if (killer == deadMan)
+        {
+            SoundManager.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage());
+        }
+        //FF‚È‚ç
+        else if (killerTeam == deadManTeam)
+        {
+            SoundManager.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamageFF());
+            killVoice = Managers.instance.gameManager.GetPlayer(killer).GetPlayerData().GetPlayerVoiceData().GetFriendlyFire();
+        }
+        else
+        {
+            SoundManager.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage());
+            killVoice = Managers.instance.gameManager.GetPlayer(killer).GetPlayerData().GetPlayerVoiceData().GetKill();
+        }
 
     }
     public void LogNumAdd() { logNum++; }
@@ -59,5 +85,10 @@ public class KillLogBehavior : MonoBehaviour
         deadPlayer.color = deadColor * multiplyRate;
 
         if (timer > lifeTime) { Destroy(gameObject); }
+
+
+        if (killVoice == null) { return; }
+        if (playKillVoice) { return; }
+        if (timer > killVoiceTime) { SoundManager.PlayVoice(killVoice); }
     }
 }

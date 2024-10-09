@@ -35,9 +35,13 @@ public class SoundObject : MonoBehaviour
                 break;
 
             case SOUND_TYPE.SFX:
-            case SOUND_TYPE.VOICE:
-                volume *= SoundManager.sfxVolume;
                 pitch *= Random.Range(0.8f, 1.2f);
+                volume *= SoundManager.sfxVolume;
+                lifeTime = clip.length;
+                break;
+
+            case SOUND_TYPE.VOICE:
+                volume *= SoundManager.voiceVolume;
                 lifeTime = clip.length;
                 break;
         }

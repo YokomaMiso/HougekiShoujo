@@ -31,6 +31,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 movement = Vector3.zero;
         movement += Vector3.right * Input.GetAxis("Horizontal");
         movement += Vector3.forward * Input.GetAxis("Vertical");
+        movement = movement.normalized;
 
         float currentSpeed = speed * NowSpeedRate() * Managers.instance.timeManager.TimeRate();
         ownerPlayer.GetComponent<Rigidbody>().velocity = movement * currentSpeed;

@@ -21,8 +21,9 @@ public class OptionCanvasBehavior : MonoBehaviour
         transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
         transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
         transform.GetChild(3).GetComponent<VolumeIndexSetting>().SetValue(optionData.sfxVolume);
-        transform.GetChild(4).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
-        transform.GetChild(5).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
+        transform.GetChild(4).GetComponent<VolumeIndexSetting>().SetValue(optionData.voiceVolume);
+        transform.GetChild(5).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
+        transform.GetChild(6).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
 
         transform.GetChild(1).GetChild(0).GetComponent<Image>().color = SelectColor(true);
     }
@@ -46,7 +47,7 @@ public class OptionCanvasBehavior : MonoBehaviour
         float value = Input.GetAxis("Vertical");
 
         //ƒJ[ƒ\ƒ‹ˆÚ“®
-        if (Mathf.Abs(value) > 0.9f)
+        if (Mathf.Abs(value) > 0.8f)
         {
             if (isCanSelect)
             {
@@ -56,7 +57,7 @@ public class OptionCanvasBehavior : MonoBehaviour
                 else { selectNum += 1; }
 
                 if (selectNum < 0) { selectNum = 0; }
-                if (selectNum > 5) { selectNum = 5; }
+                if (selectNum > 6) { selectNum = 6; }
 
                 isCanSelect = false;
 
@@ -74,7 +75,7 @@ public class OptionCanvasBehavior : MonoBehaviour
     {
         float value = Input.GetAxis("Horizontal");
 
-        if (Mathf.Abs(value) > 0.6f)
+        if (Mathf.Abs(value) > 0.8f)
         {
             if (timer == 0)
             {
@@ -85,20 +86,22 @@ public class OptionCanvasBehavior : MonoBehaviour
                     case 0:
                     case 1:
                     case 2:
+                    case 3:
                         if (value < 0) { applyValue *= -1; }
                         transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
                         SoundManager.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
                         SoundManager.bgmVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
                         SoundManager.sfxVolume = transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
+                        SoundManager.voiceVolume = transform.GetChild(4).GetComponent<VolumeIndexSetting>().GetValue();
 
                         float nowVolume = SoundManager.masterVolume * SoundManager.bgmVolume;
                         SoundManager.BGMVolumeChange(nowVolume);
 
                         break;
-                    case 3:
+                    case 4:
                         transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value < 0);
                         break;
-                    case 5:
+                    case 6:
                         break;
 
                     default:
@@ -119,12 +122,13 @@ public class OptionCanvasBehavior : MonoBehaviour
         optionData.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
         optionData.bgmVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
         optionData.sfxVolume = transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
-        optionData.cameraShakeOn = transform.GetChild(4).GetComponent<RadioBoxIndexSetting>().on;
-        optionData.mortarSensitive = transform.GetChild(5).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.voiceVolume = transform.GetChild(4).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.cameraShakeOn = transform.GetChild(5).GetComponent<RadioBoxIndexSetting>().on;
+        optionData.mortarSensitive = transform.GetChild(6).GetComponent<VolumeIndexSetting>().GetValue();
 
         if (Input.GetButtonDown("Submit"))
         {
-            if (selectNum == 5)
+            if (selectNum == 6)
             {
                 Managers.instance.SaveOptionData(optionData);
                 Destroy(gameObject);

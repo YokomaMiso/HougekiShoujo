@@ -126,6 +126,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        SoundManager.PlayVoice(playerData.GetPlayerVoiceData().GetGameStart());
+
         playerMove = gameObject.GetComponent<PlayerMove>();
         playerMove.SetPlayer(this);
 
@@ -165,8 +167,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Y")) { Instantiate(blindCanvas); }
-
         IngameData.GameData hostIngameData;
         if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
         else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }

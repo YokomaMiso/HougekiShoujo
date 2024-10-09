@@ -158,6 +158,7 @@ public class PlayerAim : MonoBehaviour
         }
 
         SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFireSFX(), transform);
+        SoundManager.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetUseMain(), transform);
         obj.GetComponent<ProjectileBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
 
