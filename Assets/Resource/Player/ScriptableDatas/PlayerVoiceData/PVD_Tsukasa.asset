@@ -17,8 +17,8 @@ MonoBehaviour:
   ready: {fileID: 8300000, guid: b8617cb77e14c6b41a171e762e240e01, type: 3}
   gameStart: {fileID: 8300000, guid: 47c04611a990847458fc851fda9416b8, type: 3}
   reload: {fileID: 8300000, guid: 9df087fb8c0691246ba398120f49da77, type: 3}
-  useMain: {fileID: 8300000, guid: 249eb820e63a04b43b634565261fd002, type: 3}
-  useSub: {fileID: 8300000, guid: 7f35d058e8d31ea4a957ae3b45b212b5, type: 3}
+  useMain: {fileID: 8300000, guid: 7f35d058e8d31ea4a957ae3b45b212b5, type: 3}
+  useSub: {fileID: 8300000, guid: 249eb820e63a04b43b634565261fd002, type: 3}
   kill: {fileID: 8300000, guid: 409b0d1b3def1754dbe25f0896105c15, type: 3}
   friendlyFire: {fileID: 8300000, guid: 0e86c8ed087a18e4f85902230f065116, type: 3}
   damage: {fileID: 8300000, guid: 286db7dc5fcec6046a5b2343fd95619f, type: 3}

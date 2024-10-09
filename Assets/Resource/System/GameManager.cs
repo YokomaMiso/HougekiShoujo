@@ -195,6 +195,17 @@ public class GameManager : MonoBehaviour
 
     void EndBehavior()
     {
+        /*
+        //Yボタンでゲームを抜ける
+        if (Input.GetButtonDown("Y"))
+        {
+            Managers.instance.ChangeScene(GAME_STATE.RESULT);
+            Managers.instance.ChangeState(GAME_STATE.RESULT);
+            Managers.instance.roomManager.Init();
+            Init();
+        }
+        */
+
         //ホストのデータ
         IngameData.GameData hostIngameData;
         bool gameEnd = false;
