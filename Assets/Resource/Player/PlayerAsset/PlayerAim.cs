@@ -50,6 +50,9 @@ public class PlayerAim : MonoBehaviour
     {
         if (!ownerPlayer.IsMine()) { return; }
 
+        aimVector = ownerPlayer.GetInputVector();
+        if (aimVector == Vector3.zero) { aimVector = Vector3.right * ownerPlayer.NowDirection(); }
+
         switch (shellData.GetShellType())
         {
             case SHELL_TYPE.BLAST:
@@ -84,30 +87,43 @@ public class PlayerAim : MonoBehaviour
             Vector3 movement = Vector3.zero;
             movement += Vector3.right * Input.GetAxis("Horizontal");
             movement += Vector3.forward * Input.GetAxis("Vertical");
+            movement = movement.normalized;
 
             if (movement != Vector3.zero)
             {
                 switch (shellData.GetShellType())
                 {
                     case SHELL_TYPE.BLAST:
-                        attackAreaMat[0].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
                         aimVector = movement;
                         break;
 
                     case SHELL_TYPE.CANON:
-                        attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg);
                         aimVector = movement;
-                        float aimRange = shellData.GetAimRange();
-                        aoeArea.transform.position = attackArea.transform.position + aimVector.normalized * aimRange / 2;
                         break;
 
                     case SHELL_TYPE.MORTAR:
                         float limit = attackArea.transform.localScale.x / 2;
                         aimVector += movement * Managers.instance.GetOptionData().mortarSensitive * Managers.instance.timeManager.GetDeltaTime();
                         if (aimVector.magnitude >= limit) { aimVector = aimVector.normalized * limit; }
-                        aoeArea.transform.position = attackArea.transform.position + aimVector;
                         break;
                 }
+            }
+
+            switch (shellData.GetShellType())
+            {
+                case SHELL_TYPE.BLAST:
+                    attackAreaMat[0].SetFloat("_Direction", Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg);
+                    break;
+
+                case SHELL_TYPE.CANON:
+                    attackAreaMat[1].SetFloat("_Direction", Mathf.Atan2(aimVector.x, aimVector.z) * Mathf.Rad2Deg);
+                    float aimRange = shellData.GetAimRange();
+                    aoeArea.transform.position = attackArea.transform.position + aimVector.normalized * aimRange / 2;
+                    break;
+
+                case SHELL_TYPE.MORTAR:
+                    aoeArea.transform.position = attackArea.transform.position + aimVector;
+                    break;
             }
 
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
