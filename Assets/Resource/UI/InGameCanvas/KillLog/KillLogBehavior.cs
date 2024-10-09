@@ -26,6 +26,7 @@ public class KillLogBehavior : MonoBehaviour
     const float killVoiceTime = 0.5f;
     bool playKillVoice;
     AudioClip killVoice;
+    Player killerPlayer;
 
     public void SetText(Player _player)
     {
@@ -52,18 +53,20 @@ public class KillLogBehavior : MonoBehaviour
         //Ž©Œˆ‚È‚ç
         if (killer == deadMan)
         {
-            SoundManager.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage());
+            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage(),Camera.main.transform);
         }
         //FF‚È‚ç
         else if (killerTeam == deadManTeam)
         {
-            SoundManager.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamageFF());
-            killVoice = Managers.instance.gameManager.GetPlayer(killer).GetPlayerData().GetPlayerVoiceData().GetFriendlyFire();
+            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamageFF(), Camera.main.transform);
+            killerPlayer = Managers.instance.gameManager.GetPlayer(killer);
+            killVoice = killerPlayer.GetPlayerData().GetPlayerVoiceData().GetFriendlyFire();
         }
         else
         {
-            SoundManager.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage());
-            killVoice = Managers.instance.gameManager.GetPlayer(killer).GetPlayerData().GetPlayerVoiceData().GetKill();
+            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage(), Camera.main.transform);
+            killerPlayer = Managers.instance.gameManager.GetPlayer(killer);
+            killVoice = killerPlayer.GetPlayerData().GetPlayerVoiceData().GetKill();
         }
 
     }
@@ -90,7 +93,7 @@ public class KillLogBehavior : MonoBehaviour
         if (playKillVoice) { return; }
         if (timer > killVoiceTime) 
         {
-            SoundManager.PlayVoice(killVoice);
+            killerPlayer.PlayVoice(killVoice, Camera.main.transform);
             playKillVoice = true;
         }
     }

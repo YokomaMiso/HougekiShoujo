@@ -46,7 +46,7 @@ public class PlayerReload : MonoBehaviour
     public void Reload(int _num)
     {
         shellNum = _num;
-        SoundManager.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetReload(), transform);
+        ownerPlayer.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetReload());
         GameObject obj = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetReloadSFX(), transform);
         obj.GetComponent<AudioSource>().pitch = NowSpeedRate() * Random.Range(0.9f, 1.1f);
     }

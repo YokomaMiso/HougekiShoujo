@@ -121,12 +121,20 @@ public class Player : MonoBehaviour
     public Material GetOutLineMat() { return outLine; }
 
 
+    GameObject voiceSoundObject;
+    public void PlayVoice(AudioClip _clip, Transform _transform = null)
+    {
+        if (voiceSoundObject != null) { Destroy(voiceSoundObject); }
 
+        if (_transform == null) { _transform = transform; }
+
+        voiceSoundObject = SoundManager.PlayVoice(_clip, _transform);
+    }
 
 
     void Start()
     {
-        SoundManager.PlayVoice(playerData.GetPlayerVoiceData().GetGameStart());
+        this.PlayVoice(playerData.GetPlayerVoiceData().GetGameStart(), Camera.main.transform);
 
         playerMove = gameObject.GetComponent<PlayerMove>();
         playerMove.SetPlayer(this);
