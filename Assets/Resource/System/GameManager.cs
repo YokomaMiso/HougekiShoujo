@@ -376,7 +376,7 @@ public class GameManager : MonoBehaviour
             {
                 MachingRoomData.RoomData roomData;
                 if (i == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
-                else { roomData = OSCManager.OSCinstance.roomData; }
+                else { roomData = OSCManager.OSCinstance.GetRoomData(i); }
 
                 if (roomData.myTeamNum != _data.winner) { continue; }
 
