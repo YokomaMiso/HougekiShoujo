@@ -18,9 +18,12 @@ public class TitleCanvasBehavior : MonoBehaviour
     [SerializeField] GameObject creditCanvas;
     GameObject[] uis = new GameObject[3];
 
-
-    TITLE_STATE state = TITLE_STATE.STAY;
+    TITLE_STATE state = TITLE_STATE.SELECT;
     public TITLE_STATE GetTitleState() { return state; }
+
+    float titleCallTimer;
+    const float titleCallTime = 0.5f;
+    bool titleCalled;
 
     void Start()
     {
@@ -38,7 +41,15 @@ public class TitleCanvasBehavior : MonoBehaviour
 
     void Update()
     {
-
+        if (titleCalled) { return; }
+        titleCallTimer += Time.deltaTime;
+        if (titleCallTimer > titleCallTime)
+        {
+            //int characterID = Random.Range(0,Managers.instance.gameManager.playerDatas.Length);
+            int characterID = 0;
+            SoundManager.PlayVoice(Managers.instance.gameManager.playerDatas[characterID].GetPlayerVoiceData().GetTitleCall());
+            titleCalled = true;
+        }
     }
 
     public void ChangeTitleState(TITLE_STATE _state)

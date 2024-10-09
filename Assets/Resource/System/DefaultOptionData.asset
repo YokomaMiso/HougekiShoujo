@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d7b9f86e52c68443875042abfd5a650, type: 3}
   m_Name: DefaultOptionData
   m_EditorClassIdentifier: 
+  playerName: Player
   masterVolume: 1
   bgmVolume: 0.5
-  sfxVolume: 0.5
+  sfxVolume: 0.8000001
+  voiceVolume: 0.7
   cameraShakeOn: 1
-  mortarSensitive: 10
+  mortarSensitive: 35
