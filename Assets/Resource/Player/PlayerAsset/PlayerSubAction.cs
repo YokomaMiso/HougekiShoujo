@@ -65,7 +65,7 @@ public class PlayerSubAction : MonoBehaviour
                 break;
         }
 
-        SoundManager.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetUseSub(), transform);
+        ownerPlayer.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetUseSub());
         reloadTimer = subWeaponData.GetReloadTime();
         if (ownerPlayer.IsMine()) { OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = !OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub; }
     }

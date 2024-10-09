@@ -362,7 +362,7 @@ public class GameManager : MonoBehaviour
                 if (_data.winCountTeamB >= 3) { clip = playerInstance[i].GetComponent<Player>().GetPlayerData().GetPlayerVoiceData().GetGameWin(); }
                 else { clip = playerInstance[i].GetComponent<Player>().GetPlayerData().GetPlayerVoiceData().GetRoundWin(); }
 
-                SoundManager.PlayVoice(clip);
+                GetPlayer(i).PlayVoice(clip, Camera.main.transform);
             }
         }
         if (aliveCount[(int)TEAM_NUM.B] <= 0)
@@ -385,7 +385,7 @@ public class GameManager : MonoBehaviour
                 if (_data.winCountTeamA >= 3) { clip = pvd.GetGameWin(); }
                 else { clip = pvd.GetRoundWin(); }
 
-                SoundManager.PlayVoice(clip);
+                GetPlayer(i).PlayVoice(clip, Camera.main.transform);
             }
         }
 
