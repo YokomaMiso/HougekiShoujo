@@ -38,6 +38,8 @@ public class RoomCanvasBehavior : MonoBehaviour
     readonly int[] teamPosX = new int[2] { -680, 680 };
     readonly int[] bannerPosY = new int[4] { 240, 80, -80, -240 };
 
+    bool joinedStartedRoom;
+
     void Start()
     {
         rm = Managers.instance.roomManager;
@@ -63,6 +65,11 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         //©•ª‚ÌŠ‘®ƒ`[ƒ€‚ğU‚è•ª‚¯‚é
         if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).myTeamNum == -1) { rm.PlayerBannerDivider(); }
+
+        if (Managers.instance.playerID != 0)
+        {
+            joinedStartedRoom = OSCManager.OSCinstance.GetRoomData(0).gameStart;
+        }
     }
 
     void Update()
@@ -210,9 +217,15 @@ public class RoomCanvasBehavior : MonoBehaviour
     }
     void GameStart()
     {
+
         RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
 
         bool start = hostRoomData.gameStart;
+        if (joinedStartedRoom) 
+        {
+            if (!start) { joinedStartedRoom = false; }
+            return; 
+        }
 
         if (!start) { return; }
 
