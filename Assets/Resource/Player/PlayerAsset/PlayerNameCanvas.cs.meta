@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 50c7ebbf4a056504f8b79e4de22dc26f
+guid: efecb7d1bcfaa6e4c990d236fdb436e2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - logoClip: {fileID: 8300000, guid: eb6ad00411054614fa3f78c18deeb376, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

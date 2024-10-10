@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c7ebbf4a056504f8b79e4de22dc26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logoClip: {fileID: 8300000, guid: eb6ad00411054614fa3f78c18deeb376, type: 3}
 --- !u!1 &6597819909778676772
 GameObject:
   m_ObjectHideFlags: 0
