@@ -49,9 +49,11 @@ public class DisplayShellIcon : MonoBehaviour
         {
             case -1:
                 iconFrame.color = Color.clear;
+                shellIcon.color = Color.gray;
                 break;
             default:
                 iconFrame.color = Color.white;
+                shellIcon.color = Color.white;
                 break;
         }
     }
