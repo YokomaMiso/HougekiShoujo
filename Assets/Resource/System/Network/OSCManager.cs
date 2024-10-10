@@ -471,11 +471,25 @@ public class OSCManager : MonoBehaviour
             //受信したプレイヤーデータがゲーム内に存在する場合データリストにセットする
             if (!_allData.rData.isHandshaking)
             {
+                if(_allData.rData.myID == -1)
+                {
+                    _allData.rData = initRoomData(_allData.rData);
+                    _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+                    playerDataList[_allData.pData.PlayerID] = _allData;
+
+                    connectTimeList[_allData.pData.PlayerID] = 0.0f;
+
+                    clientList[_allData.pData.PlayerID].Release();
+
+                    return;
+                }
+
                 testS = "サーバとしてインゲーム受信";
                 playerDataList[_allData.pData.PlayerID] = _allData;
 
                 //受信カウントをリセットする
-                connectTimeList[_allData.rData.myID] = 0f;
+                connectTimeList[_allData.pData.PlayerID] = 0f;
             }
             else if (_allData.rData.myID == -1 && _allData.rData.isHandshaking)
             {
@@ -727,9 +741,15 @@ public class OSCManager : MonoBehaviour
         }
         else
         {
-            InitClientNetwork();
+            AllGameData.AllData _data = new AllGameData.AllData();
+            _data.rData = initRoomData(_data.rData);
+            _data = playerDataList[Managers.instance.playerID];
 
-            SendValue(playerDataList[0]);
+            _data.rData.myID = -1;
+
+            SendValue(_data);
+
+            InitClientNetwork();
         }
 
         return;
