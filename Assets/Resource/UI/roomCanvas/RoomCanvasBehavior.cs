@@ -21,6 +21,7 @@ public class RoomCanvasBehavior : MonoBehaviour
     Image charaVisual;
     Image nameBar;
     Text nameText;
+    GameObject difficulity;
 
     Image rollDisplay;
     Text rollText;
@@ -49,6 +50,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         charaVisual = charaSelect.transform.GetChild(0).GetComponent<Image>();
         nameBar = charaVisual.transform.GetChild(0).GetComponent<Image>();
         nameText = nameBar.transform.GetChild(0).GetComponent<Text>();
+        difficulity = charaVisual.transform.GetChild(3).gameObject;
 
         rollDisplay = charaVisual.transform.GetChild(1).GetComponent<Image>();
         rollText = charaVisual.transform.GetChild(2).GetComponent<Text>();
@@ -160,6 +162,13 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         rollDisplay.color = rollColor[rollNumber];
         rollText.text = rollKanji[rollNumber];
+
+        for (int i = 0; i < 3; i++)
+        {
+            Color difficulityColor = Color.gray * 0.5f;
+            if (i < _playerData.GetDifficulity()) { difficulityColor = Color.yellow; }
+            difficulity.transform.GetChild(i).GetComponent<Image>().color = difficulityColor;
+        }
     }
 
     void ShellDisplayUpdate(PlayerData _playerData)

@@ -11,6 +11,7 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Anim Data")] CharacterAnimData characterAnimData;
     [Header("Status Data")]
     [SerializeField, Header("Move Speed")] float moveSpeed = 5;
+    [SerializeField, Header("Difficulity")] int difficulity = 1;
     [Header("Shell Data")]
     [SerializeField, Header("Shell")] Shell shell;
     [Header("Weapon Data")]
@@ -25,6 +26,7 @@ public class PlayerData : ScriptableObject
     public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
 
     public float GetMoveSpeed() {  return moveSpeed; }
+    public int GetDifficulity() {  return difficulity; }
 
     public Shell GetShell() { return shell; }
     public SubWeapon GetSubWeapon() { return subWeapon; }
