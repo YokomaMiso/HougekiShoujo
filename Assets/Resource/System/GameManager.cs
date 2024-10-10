@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
 
             if (GetPlayer(i) != null)
             {
-                Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 3);
+                Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 2);
                 playerInstance[i].GetComponent<Player>().RoundInit();
                 playerInstance[i].transform.position = spawnPos;
 

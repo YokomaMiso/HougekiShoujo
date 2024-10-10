@@ -14,11 +14,11 @@ public class StageData : ScriptableObject
     [SerializeField, Header("Stage BGM Intro")] AudioClip BGMIntro;
     [SerializeField, Header("Stage BGM Loop")] AudioClip BGMLoop;
 
-    public GameObject GetStagePrefab() { return  stagePrefab; }
-    public Vector3 GetStageSize() {  return stageSize; }
-    public float GetStageRadius() { return Mathf.Sqrt((stageSize.x* stageSize.x)+(stageSize.z* stageSize.z)); }
+    public GameObject GetStagePrefab() { return stagePrefab; }
+    public Vector3 GetStageSize() { return stageSize; }
+    public float GetStageRadius() { return Mathf.Sqrt((stageSize.x * stageSize.x) + (stageSize.z * stageSize.z)); }
     public Vector3 GetDefaultPosition(int _num) { return defaultPosition[_num]; }
 
-    public AudioClip GetBGMIntro() {  return BGMIntro; }
-    public AudioClip GetBGMLoop() {  return BGMLoop; }
+    public AudioClip GetBGMIntro() { return BGMIntro; }
+    public AudioClip GetBGMLoop() { return BGMLoop; }
 }
