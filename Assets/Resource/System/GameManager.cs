@@ -354,13 +354,14 @@ public class GameManager : MonoBehaviour
             {
                 MachingRoomData.RoomData roomData;
                 if (i == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
-                else { roomData = OSCManager.OSCinstance.roomData; }
+                else { roomData = OSCManager.OSCinstance.GetRoomData(i); }
 
                 if (roomData.myTeamNum != _data.winner) { continue; }
 
                 AudioClip clip;
-                if (_data.winCountTeamB >= 3) { clip = playerInstance[i].GetComponent<Player>().GetPlayerData().GetPlayerVoiceData().GetGameWin(); }
-                else { clip = playerInstance[i].GetComponent<Player>().GetPlayerData().GetPlayerVoiceData().GetRoundWin(); }
+                PlayerVoiceData pvd = playerDatas[roomData.selectedCharacterID].GetPlayerVoiceData();
+                if (_data.winCountTeamA >= 3) { clip = pvd.GetGameWin(); }
+                else { clip = pvd.GetRoundWin(); }
 
                 GetPlayer(i).PlayVoice(clip, Camera.main.transform);
             }
