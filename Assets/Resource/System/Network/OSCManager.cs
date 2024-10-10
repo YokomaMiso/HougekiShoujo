@@ -213,6 +213,11 @@ public class OSCManager : MonoBehaviour
 
     private void OnDisable()
     {
+        DisPacket();
+    }
+
+    private void DisPacket()
+    {
         if (tempServer != null)
         {
             tempServer.Dispose();
@@ -221,6 +226,16 @@ public class OSCManager : MonoBehaviour
         if (mainServer != null)
         {
             mainServer.Dispose();
+        }
+
+        if (clientList.Count > 0)
+        {
+            foreach (OscClientData _client in clientList)
+            {
+                _client.Release();
+            }
+
+            clientList.Clear();
         }
     }
 
@@ -273,6 +288,8 @@ public class OSCManager : MonoBehaviour
 
     public void CreateTempNet()
     {
+        DisPacket();
+
         AllGameData.AllData allData = new AllGameData.AllData();
         myNetIngameData = new IngameData.PlayerNetData();
         roomData = new MachingRoomData.RoomData();
@@ -575,6 +592,8 @@ public class OSCManager : MonoBehaviour
 
                     InitNetworkData();
 
+                    DisPacket();
+
                     isOutServer = true;
 
                     return;
@@ -675,6 +694,8 @@ public class OSCManager : MonoBehaviour
                     InitNetworkData();
 
                     Debug.Log("接続がタイムアウトしました");
+
+                    DisPacket();
 
                     Managers.instance.ChangeScene(GAME_STATE.TITLE);
                     Managers.instance.ChangeState(GAME_STATE.TITLE);
@@ -826,6 +847,8 @@ public class OSCManager : MonoBehaviour
 
             InitNetworkData();
         }
+
+        DisPacket();
 
         return;
     }
