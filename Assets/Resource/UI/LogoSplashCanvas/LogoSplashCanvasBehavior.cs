@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LogoSplashCanvasBehavior : MonoBehaviour
 {
     Image teamLogo;
+    [SerializeField] AudioClip logoClip;
 
     const float fadeInStart = 0.5f;
     const float alphaMaxTime = 1.5f;
@@ -13,6 +14,8 @@ public class LogoSplashCanvasBehavior : MonoBehaviour
     const float splashSceneLifeTime = 3.5f;
 
     float timer = 0;
+
+    bool playsound;
 
     void Start()
     {
@@ -26,6 +29,11 @@ public class LogoSplashCanvasBehavior : MonoBehaviour
 
         if (timer <= fadeInStart)
         {
+            if (!playsound)
+            {
+                SoundManager.PlaySFXForUI(logoClip);
+                playsound = true;
+            }
             //none
         }
         else if (timer <= alphaMaxTime)
