@@ -11,7 +11,7 @@ public class CameraMove : MonoBehaviour
 
     const float distance = 10;
     Player ownerPlayer;
-    int nowPlayerID = Managers.instance.playerID;
+    int nowPlayerID;
 
     static readonly Vector3 ingameRotation = new Vector3(45, 0, 0);
     float initialTimer;
@@ -24,6 +24,8 @@ public class CameraMove : MonoBehaviour
 
     void Start()
     {
+        nowPlayerID = Managers.instance.playerID;
+
         audioListenerChild = transform.GetChild(0).gameObject;
 
         //初回、キャンバスが生成されていないなら
@@ -46,7 +48,7 @@ public class CameraMove : MonoBehaviour
             FarUpdate();
             Player nowPlayer;
 
-            spectateAnnounceInstance.GetComponent<SpectateCameraAnnounce>().Display(ownerPlayer.GetAlive());
+            spectateAnnounceInstance.GetComponent<SpectateCameraAnnounce>().Display(!ownerPlayer.GetAlive());
             if (ownerPlayer.GetAlive())
             {
                 nowPlayer = ownerPlayer;
