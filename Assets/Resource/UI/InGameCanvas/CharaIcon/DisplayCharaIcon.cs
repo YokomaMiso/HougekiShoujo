@@ -81,17 +81,17 @@ public class DisplayCharaIcon : MonoBehaviour
         {
             float timer = hostIngameData.startTimer;
 
-            if (0.5f <= timer && timer < 0.65f) { FirstBehavior((timer - 0.5f) / 0.15f, 0); }
-            if (0.65f <= timer && timer < 0.8f) { FirstBehavior((timer - 0.65f) / 0.15f, 2); FirstBehavior(1, 0); }
-            if (0.8f <= timer && timer < 0.95f) { FirstBehavior((timer - 0.8f) / 0.15f, 4); FirstBehavior(1, 2); }
+            if (0.5f <= timer && timer < 0.65f) { FirstBehavior(Mathf.Clamp01((timer - 0.5f) / 0.15f), 0); }
+            if (0.65f <= timer && timer < 0.8f) { FirstBehavior(Mathf.Clamp01((timer - 0.65f) / 0.15f), 2); FirstBehavior(1, 0); }
+            if (0.8f <= timer && timer < 0.95f) { FirstBehavior(Mathf.Clamp01((timer - 0.8f) / 0.15f), 4); FirstBehavior(1, 2); }
             if (0.95f <= timer && timer < 1.5f) { FirstBehavior(1, 4); }
 
-            if (1.5f <= timer && timer < 1.65f) { SecondBehavior((timer - 1.5f) / 0.15f, 0); }
-            if (1.65f <= timer && timer < 1.8f) { SecondBehavior((timer - 1.65f) / 0.15f, 2); SecondBehavior(1, 0); }
-            if (1.8f <= timer && timer < 1.95f) { SecondBehavior((timer - 1.8f) / 0.15f, 4); SecondBehavior(1, 2); }
+            if (1.5f <= timer && timer < 1.65f) { SecondBehavior(Mathf.Clamp01((timer - 1.5f) / 0.15f), 0); }
+            if (1.65f <= timer && timer < 1.8f) { SecondBehavior(Mathf.Clamp01((timer - 1.65f) / 0.15f), 2); SecondBehavior(1, 0); }
+            if (1.8f <= timer && timer < 1.95f) { SecondBehavior(Mathf.Clamp01((timer - 1.8f) / 0.15f), 4); SecondBehavior(1, 2); }
             if (1.95f <= timer && timer < 2.5f) { SecondBehavior(1, 4); }
 
-            if (2.5f <= timer) 
+            if (2.5f <= timer)
             {
                 InPlacement();
                 attachedToPlacement = true;
@@ -117,7 +117,7 @@ public class DisplayCharaIcon : MonoBehaviour
                 transform.GetChild(i).GetComponent<Image>().color = iconBGColor[oscRoomData.myTeamNum];
                 if (prevRadioChatID[i] != gameData.playerChatID)
                 {
-                    if(gameData.playerChatID == RADIO_CHAT_ID.NONE)
+                    if (gameData.playerChatID == RADIO_CHAT_ID.NONE)
                     {
 
                     }
@@ -146,8 +146,8 @@ public class DisplayCharaIcon : MonoBehaviour
         for (int i = _num; i < _num + 2; i++)
         {
             if (iconNums[i] == -1) { continue; }
-            Vector2 pos = Vector2.Lerp(iconStartPos[iconNums[i]], iconLineUpPos[iconNums[i]], _rate);
-            transform.GetChild(i).transform.localPosition = pos;
+            Vector2 pos = Vector2.Lerp(iconStartPos[i], iconLineUpPos[i], _rate);
+            transform.GetChild(iconNums[i]).transform.localPosition = pos;
         }
     }
 
@@ -156,8 +156,8 @@ public class DisplayCharaIcon : MonoBehaviour
         for (int i = _num; i < _num + 2; i++)
         {
             if (iconNums[i] == -1) { continue; }
-            Vector2 pos = Vector2.Lerp(iconLineUpPos[iconNums[i]], iconPos[iconNums[i]], _rate);
-            transform.GetChild(i).transform.localPosition = pos;
+            Vector2 pos = Vector2.Lerp(iconLineUpPos[i], iconPos[i], _rate);
+            transform.GetChild(iconNums[i]).transform.localPosition = pos;
         }
     }
 
@@ -166,8 +166,8 @@ public class DisplayCharaIcon : MonoBehaviour
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
             if (iconNums[i] == -1) { continue; }
-            Vector2 pos =  iconPos[iconNums[i]];
-            transform.GetChild(i).transform.localPosition = pos;
+            Vector2 pos = iconPos[i];
+            transform.GetChild(iconNums[i]).transform.localPosition = pos;
         }
     }
 
