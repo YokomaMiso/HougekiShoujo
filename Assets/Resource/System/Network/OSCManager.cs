@@ -81,6 +81,8 @@ public class OSCManager : MonoBehaviour
 
     bool cutSend = false;
 
+    bool isOutServer = false;
+
     //////////////////////
     //////// 関数 ////////
     //////////////////////
@@ -98,6 +100,13 @@ public class OSCManager : MonoBehaviour
     //インゲームデータ処理中に送信されるろまずいのでUpdateは基本不使用
     void Update()
     {
+        if(isOutServer)
+        {
+            Managers.instance.ChangeScene(GAME_STATE.TITLE);
+            Managers.instance.ChangeState(GAME_STATE.TITLE);
+            Managers.instance.roomManager.Init();
+        }
+
         if(Input.GetKey(KeyCode.Space))
         {
             cutSend = true;
@@ -542,10 +551,12 @@ public class OSCManager : MonoBehaviour
             }
             else
             {
-                testS = "クライアントとしてインゲーム受信";
+                //testS = "クライアントとしてインゲーム受信";
 
                 if (_allData.rData.myID == -1 && _allData.pData.PlayerID == 0)
                 {
+                    testS = "サーバが抜けました";
+
                     _allData.rData = initRoomData(_allData.rData);
                     _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
 
@@ -557,8 +568,7 @@ public class OSCManager : MonoBehaviour
 
                     InitNetworkData();
 
-                    Managers.instance.ChangeScene(GAME_STATE.TITLE);
-                    Managers.instance.ChangeState(GAME_STATE.TITLE);
+                    isOutServer = true;
 
                     return;
                 }
