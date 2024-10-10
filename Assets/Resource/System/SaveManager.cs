@@ -115,8 +115,6 @@ public class SaveManager : MonoBehaviour
         //ファイルが存在している
         if (File.Exists(loadPath))
         {
-            OptionData od;
-
             StreamReader reader = new StreamReader(loadPath);
             string datastr = reader.ReadToEnd();
             reader.Close();
@@ -126,7 +124,8 @@ public class SaveManager : MonoBehaviour
         //ファイルが存在しない
         else
         {
-            returnData = defaultOptionData;
+            returnData = new OptionData();
+            returnData.Init(defaultOptionData);
             SaveOptionData(returnData);
         }
 
