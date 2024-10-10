@@ -627,23 +627,7 @@ public class OSCManager : MonoBehaviour
                 //タイムアウト時間に達していれば自身を初期化させてタイトルまで戻す
                 if (connectTimeList[0] > timeoutSec)
                 {
-                    AllGameData.AllData _allData = new AllGameData.AllData();
-
-                    _allData.rData = initRoomData(_allData.rData);
-                    _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
-
-                    playerDataList[0] = _allData;
-
-                    myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
-                    roomData = initRoomData(roomData);
-
-                    sendStartTimer = 0f;
-
-                    isFinishHandshake = false;
-
-                    mainServer.Dispose();
-
-                    
+                    InitClientNetwork();
 
                     Debug.Log("接続がタイムアウトしました");
 
@@ -656,6 +640,27 @@ public class OSCManager : MonoBehaviour
                 }
             }
         }
+
+        return;
+    }
+
+    private void InitClientNetwork()
+    {
+        AllGameData.AllData _allData = new AllGameData.AllData();
+
+        _allData.rData = initRoomData(_allData.rData);
+        _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+        playerDataList[0] = _allData;
+
+        myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+        roomData = initRoomData(roomData);
+
+        sendStartTimer = 0f;
+
+        isFinishHandshake = false;
+
+        mainServer.Dispose();
 
         return;
     }
@@ -709,5 +714,24 @@ public class OSCManager : MonoBehaviour
     public bool GetIsFinishedHandshake()
     {
         return isFinishHandshake;
+    }
+
+    /// <summary>
+    /// ルームから抜けた時
+    /// </summary>
+    public void ExitToRoom()
+    {
+        if(isServer)
+        {
+
+        }
+        else
+        {
+            InitClientNetwork();
+
+            SendValue(playerDataList[0]);
+        }
+
+        return;
     }
 }
