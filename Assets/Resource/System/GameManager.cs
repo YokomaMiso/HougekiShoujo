@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static MachingRoomData;
 
 
 public class GameManager : MonoBehaviour
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
-            Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + oscRoomData.myTeamNum * 3);
+            Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 3);
             //自分の番号なら、自分用のプレハブを生成
             if (i == Managers.instance.playerID)
             {
@@ -156,6 +157,7 @@ public class GameManager : MonoBehaviour
 
     void RoundInit()
     {
+        MachingRoomData.RoomData hostRoomData;
         if (Managers.instance.playerID == 0)
         {
             IngameData.GameData hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
@@ -173,8 +175,11 @@ public class GameManager : MonoBehaviour
             hostIngameData.winner = -1;
 
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
+            hostRoomData = OSCManager.OSCinstance.roomData;
         }
+        else { hostRoomData = OSCManager.OSCinstance.GetRoomData(0); }
 
+        StageData nowStageData = allStageData.GetStageData(hostRoomData.stageNum);
         int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
@@ -182,7 +187,7 @@ public class GameManager : MonoBehaviour
 
             if (GetPlayer(i) != null)
             {
-                Vector3 spawnPos = new Vector3(teamPosX[oscRoomData.myTeamNum], 0, playerPosZ[teamCount[oscRoomData.myTeamNum]]);
+                Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 3);
                 playerInstance[i].GetComponent<Player>().RoundInit();
                 playerInstance[i].transform.position = spawnPos;
 
