@@ -135,6 +135,13 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (isOutServer)
+        {
+            Managers.instance.ChangeScene(GAME_STATE.TITLE);
+            Managers.instance.ChangeState(GAME_STATE.TITLE);
+            Managers.instance.roomManager.Init();
+        }
+
         if (playerDataList.Count == 0)
         {
             Debug.Log("nullです");
