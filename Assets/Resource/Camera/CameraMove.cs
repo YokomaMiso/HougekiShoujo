@@ -11,8 +11,7 @@ public class CameraMove : MonoBehaviour
 
     const float distance = 10;
     Player ownerPlayer;
-    Player[] teamPlayers;
-    int nowPlayer = -1;
+    int nowPlayerID = Managers.instance.playerID;
 
     static readonly Vector3 ingameRotation = new Vector3(45, 0, 0);
     float initialTimer;
@@ -26,7 +25,6 @@ public class CameraMove : MonoBehaviour
     void Start()
     {
         audioListenerChild = transform.GetChild(0).gameObject;
-        TargetSearch();
 
         //初回、キャンバスが生成されていないなら
         if (spectateAnnounceInstance == null)
@@ -46,81 +44,48 @@ public class CameraMove : MonoBehaviour
         {
             CameraShakeUpdate();
             FarUpdate();
-            if (ownerPlayer.GetAlive()) { Move(ownerPlayer.transform.position); }
+            Player nowPlayer;
+
+            spectateAnnounceInstance.GetComponent<SpectateCameraAnnounce>().Display(ownerPlayer.GetAlive());
+            if (ownerPlayer.GetAlive())
+            {
+                nowPlayer = ownerPlayer;
+                nowPlayerID = Managers.instance.playerID;
+            }
             else
             {
                 TargetChange();
-                if (nowPlayer >= 0 && teamPlayers[nowPlayer] && teamPlayers[nowPlayer].GetAlive())
-                {
-                    Move(teamPlayers[nowPlayer].transform.position);
-                }
+                nowPlayer = Managers.instance.gameManager.GetPlayer(nowPlayerID);
             }
-        }
-    }
 
-    void TargetSearch()
-    {
-        MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
-        MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+            if (nowPlayerID >= 0 && nowPlayer.GetAlive())
+            {
+                Move(nowPlayer.transform.position);
+            }
 
-        if (myRoomData.myTeamNum == (int)TEAM_NUM.A) { teamPlayers = new Player[hostRoomData.teamACount - 1]; }
-        else { teamPlayers = new Player[hostRoomData.teamBCount - 1]; }
-
-        int targetIndex = 0;
-        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
-        {
-            //if it is myData, return
-            if (i == Managers.instance.playerID) { continue; }
-
-            //if it is empty, return
-            AllGameData.AllData oscAllData = OSCManager.OSCinstance.GetAllData(i);
-            if (oscAllData.rData.myID == MachingRoomData.bannerEmpty) { continue; }
-
-            //if another team, return
-            if (myRoomData.myTeamNum != oscAllData.rData.myTeamNum) { continue; }
-
-            teamPlayers[targetIndex] = Managers.instance.gameManager.GetPlayer(i);
-            targetIndex++;
         }
     }
 
     void TargetChange()
     {
-        //そもそも１人なら早期リターン
-        if (teamPlayers == null) { return; }
-
-        //カメラ切り替えが出来るかどうか
-        int canChangeCount = 0;
-        for (int i = 0; i < teamPlayers.Length; i++)
-        {
-            //nowPlayerで示しているならカウントは進めない
-            if (i == nowPlayer)
-            {
-                //もし死んでるならnowPlayerを元に戻す
-                if (!teamPlayers[i].GetAlive()) { nowPlayer = -1; }
-                continue;
-            }
-            //生存している味方を検索
-            if (teamPlayers[i].GetAlive()) { canChangeCount++; }
-        }
-
-        //アナウンスUIを表示
-        spectateAnnounceInstance.GetComponent<SpectateCameraAnnounce>().Display(canChangeCount > 0);
-
         //canChangePlayerが１人でも入れば、カメラを切り替えることが出来る
-        if (canChangeCount > 0)
+        //LBが押されたら
+        if (Input.GetButtonDown("LB"))
         {
-            //LBが押されたら
-            if (Input.GetButtonDown("LB"))
+            int maxNum = Managers.instance.gameManager.GetPlayerCount();
+
+            for (int i = 0; i < maxNum; i++)
             {
-                for (int i = 0; i < teamPlayers.Length; i++)
-                {
-                    //nowPlayerで示しているならスルー
-                    if (i == nowPlayer) { continue; }
-                    //nowPlayerに現在の値を入れて抜ける
-                    nowPlayer = i;
-                    break;
-                }
+                int nowID = (i + nowPlayerID) % maxNum;
+
+                //プレイヤーが居ない or 他チームなら早期リターン
+                MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(nowID);
+                MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+                if (roomData.myID == -1 || roomData.myTeamNum != myRoomData.myTeamNum) { continue; }
+                
+                //nowPlayerに現在の値を入れて抜ける
+                nowPlayerID = nowID;
+                break;
             }
         }
     }

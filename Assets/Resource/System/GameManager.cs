@@ -196,6 +196,7 @@ public class GameManager : MonoBehaviour
         }
 
         sdaInstance.Init();
+        Camera.main.GetComponent<CameraMove>().ResetCameraFar();
     }
 
     void EndBehavior()
