@@ -77,7 +77,7 @@ public class KillLogBehavior : MonoBehaviour
         timer += Time.deltaTime;
 
         float posValue = Mathf.Clamp01(timer / posTime);
-        Vector3 addPos = Vector3.up * (logNum * -136);
+        Vector3 addPos = Vector3.up * (logNum * -40);
         transform.localPosition = Vector3.Lerp(startPos + addPos, endPos + addPos, posValue);
 
         float colorValue = Mathf.Clamp01(1.0f - (timer - colorChangeTime));
