@@ -17,10 +17,10 @@ MonoBehaviour:
   stageSize: {x: 72, y: 0, z: 30}
   defaultPosition:
   - {x: -10, y: 0, z: 3}
-  - {x: -10, y: 0, z: 0}
-  - {x: -10, y: 0, z: -3}
   - {x: 10, y: 0, z: 3}
+  - {x: -10, y: 0, z: 0}
   - {x: 10, y: 0, z: 0}
+  - {x: -10, y: 0, z: -3}
   - {x: 10, y: 0, z: -3}
   BGMIntro: {fileID: 8300000, guid: ccf9a8516c8c8bb488a3be21e964bf97, type: 3}
   BGMLoop: {fileID: 8300000, guid: 65bfa73443ecc4e4b906d1dab8e12bd1, type: 3}
