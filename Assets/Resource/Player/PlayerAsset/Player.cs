@@ -114,6 +114,11 @@ public class Player : MonoBehaviour
         }
 
         myCollider.enabled = true;
+
+        MachingRoomData.RoomData roomData;
+        if (IsMine()) { roomData = OSCManager.OSCinstance.roomData; }
+        else { roomData = OSCManager.OSCinstance.GetRoomData(playerID); }
+        if (roomData.myTeamNum == (int)TEAM_NUM.B) { DirectionChange(Vector3.left); }
     }
 
     Material outLine;
@@ -171,6 +176,11 @@ public class Player : MonoBehaviour
         playerImage.SetPlayer(this);
 
         myCollider = GetComponent<Collider>();
+
+        MachingRoomData.RoomData roomData;
+        if (IsMine()) { roomData = OSCManager.OSCinstance.roomData; }
+        else { roomData = OSCManager.OSCinstance.GetRoomData(playerID); }
+        if (roomData.myTeamNum == (int)TEAM_NUM.B) { DirectionChange(Vector3.left); }
     }
 
     void Update()
