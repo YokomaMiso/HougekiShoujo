@@ -29,7 +29,7 @@ public class OSCManager : MonoBehaviour
 
     public const string broadcastAddress = "255.255.255.255";
 
-    public const int startPort = 8000;
+    public const int startPort = 50000;
 
     int tempPort;
 
@@ -399,7 +399,7 @@ public class OSCManager : MonoBehaviour
 
     private int GetRandomTempPort()
     {
-        return UnityEngine.Random.Range(8006, 9000);
+        return UnityEngine.Random.Range(50006, 51000);
     }
 
     ////////////////////////////////////////////////////
