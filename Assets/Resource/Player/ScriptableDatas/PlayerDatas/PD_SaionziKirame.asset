@@ -15,6 +15,7 @@ MonoBehaviour:
   charaName: "\u897F\u5712\u5BFA\u3000\u7DBA\u7F85\u82BD\t\t"
   characterAnimData: {fileID: 11400000, guid: 9abf50c65441dfb4db61cb776c0c1c4a, type: 2}
   moveSpeed: 5
+  difficulity: 3
   shell: {fileID: 11400000, guid: e153c3496aaafbd4c80861b57f56fa94, type: 2}
   subWeapon: {fileID: 11400000, guid: f5a84c731abf50a47b0c9d6f12cb9677, type: 2}
   playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}
