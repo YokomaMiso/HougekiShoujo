@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     Collider myCollider;
 
     [SerializeField] GameObject blindCanvas;
+    [SerializeField] GameObject nameCanvas;
 
     int playerID;
     public void SetPlayerID(int _id) { playerID = _id; }
@@ -181,6 +182,8 @@ public class Player : MonoBehaviour
         if (IsMine()) { roomData = OSCManager.OSCinstance.roomData; }
         else { roomData = OSCManager.OSCinstance.GetRoomData(playerID); }
         if (roomData.myTeamNum == (int)TEAM_NUM.B) { DirectionChange(Vector3.left); }
+
+        nameCanvas.GetComponent<PlayerNameCanvas>().SetName(roomData.playerName,roomData.myTeamNum);
     }
 
     void Update()
