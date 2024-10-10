@@ -76,7 +76,7 @@ public class CameraMove : MonoBehaviour
         {
             int maxNum = Managers.instance.gameManager.GetPlayerCount();
 
-            for (int i = 0; i < maxNum; i++)
+            for (int i = 1; i < maxNum; i++)
             {
                 int nowID = (i + nowPlayerID) % maxNum;
 

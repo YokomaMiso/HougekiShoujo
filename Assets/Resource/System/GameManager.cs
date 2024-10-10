@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //生成処理
-            Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 3);
+            Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 2);
             //自分の番号なら、自分用のプレハブを生成
             if (i == Managers.instance.playerID)
             {
