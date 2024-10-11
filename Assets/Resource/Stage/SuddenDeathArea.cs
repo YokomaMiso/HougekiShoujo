@@ -9,18 +9,18 @@ public class SuddenDeathArea : MonoBehaviour
     float timer = 0;
     const float maxTime = 15;
 
-    const float minRate = 0.15f;
+    const float minRate = 0;
 
     void Start()
     {
         areaMat = GetComponent<MeshRenderer>().material;
-        areaMat.SetFloat("_sizeRate", 1);
+        areaMat.SetFloat("_sizeRate", 1.5f);
     }
 
     public void Init() 
     {
         timer = 0; 
-        areaMat.SetFloat("_sizeRate", 1);
+        areaMat.SetFloat("_sizeRate", 1.5f);
         transform.GetChild(0).localScale = Vector3.one;
     }
 
@@ -34,8 +34,9 @@ public class SuddenDeathArea : MonoBehaviour
         if (timer > maxTime) { return; }
         timer += Managers.instance.timeManager.GetDeltaTime();
 
-        float timeRate = Mathf.Clamp01(timer / maxTime);
-        float nowRate = (1.0f - timeRate) * (1.0f - minRate) + minRate;
+        float timeRate = Mathf.Clamp01(timer / maxTime) * 1.5f;
+        //float nowRate = (1.5f - timeRate) * (1.5f - minRate) + minRate;
+        float nowRate = 1.5f - timeRate;
 
         transform.GetChild(0).localScale = Vector3.one * nowRate;
         areaMat.SetFloat("_sizeRate", nowRate);
