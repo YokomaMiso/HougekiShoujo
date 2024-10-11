@@ -16,6 +16,8 @@ public class ConnectionCanvasBehavior : MonoBehaviour
         stateText = transform.GetChild(2).GetComponent<Text>();
         stateText.text = "部屋を探しています…";
         stateText.color = Color.clear;
+
+     
         
         OSCManager.OSCinstance.CreateTempNet();
     }

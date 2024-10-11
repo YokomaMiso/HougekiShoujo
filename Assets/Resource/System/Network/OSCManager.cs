@@ -1,4 +1,5 @@
 using OscCore;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,9 +47,8 @@ public class OSCManager : MonoBehaviour
     List<OscClientData> clientList = new List<OscClientData>();
     List<float> connectTimeList = new List<float>();
 
-    OscServer tempServer;
-    OscServer mainServer;
-
+    OscServer tempServer { get; set; }
+    OscServer mainServer { get; set; }
 
     //自分がサーバかどうか
     bool isServer = false;
@@ -83,6 +83,8 @@ public class OSCManager : MonoBehaviour
 
     bool isOutServer = false;
 
+    List<OscServer> serverPac = new List<OscServer>();
+
     //////////////////////
     //////// 関数 ////////
     //////////////////////
@@ -96,15 +98,67 @@ public class OSCManager : MonoBehaviour
         //CreateTempNet();
     }
 
+    bool test = false;
+
     // Update is called once per frame
     //インゲームデータ処理中に送信されるろまずいのでUpdateは基本不使用
     void Update()
     {
-        if(isOutServer)
+        if(test)
+        {
+            Debug.Log(mainServer.CountHandlers());
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Managers.instance.CreateOscManager();
+
+            Debug.Log("サーバ作成");
+
+            test = true;
+
+            mainServer = OscServer.GetOrCreate(startPort);
+            //serverPac.Add(tempServer);
+
+            //Debug.Log(mainServer.CountHandlers());
+
+            if(!mainServer.TryAddMethod(address, ReadValue))
+            {
+                Debug.LogError("メソッド追加に失敗しました");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Managers.instance.DeleteOscManager();
+
+            Debug.Log("サーバ削除");
+
+            test = false;
+
+            mainServer.RemoveAddress(address);
+            mainServer.RemoveMethod(address, ReadValue);
+            mainServer.Dispose();
+            //mainServer = null;
+
+            //serverPac[0].Dispose();
+            //serverPac.Clear();
+
+            Debug.Log("ガベージコレクション動作完了");
+        }
+
+        if (Managers.instance.state <= GAME_STATE.CONNECTION)
+        {
+            //return;
+        }
+
+        if (isOutServer)
         {
             Managers.instance.ChangeScene(GAME_STATE.TITLE);
             Managers.instance.ChangeState(GAME_STATE.TITLE);
             Managers.instance.roomManager.Init();
+
+            return;
         }
 
         if(Input.GetKey(KeyCode.Space))
@@ -135,11 +189,18 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Managers.instance.state <= GAME_STATE.CONNECTION)
+        {
+            //return;
+        }
+
         if (isOutServer)
         {
             Managers.instance.ChangeScene(GAME_STATE.TITLE);
             Managers.instance.ChangeState(GAME_STATE.TITLE);
             Managers.instance.roomManager.Init();
+
+            return;
         }
 
         if (playerDataList.Count == 0)
@@ -218,14 +279,20 @@ public class OSCManager : MonoBehaviour
 
     private void DisPacket()
     {
-        if (tempServer != null)
-        {
-            tempServer.Dispose();
-        }
+        //if (tempServer != null)
+        //{
+        //    tempServer.Dispose();
+        //    tempServer = null;
+        //}
 
         if (mainServer != null)
         {
+            //mainServer.RemoveMethod(address, ReadValue);
+            //mainServer.RemoveAddress(address);
+            //OscServer.Remove(mainServer.Port);
             mainServer.Dispose();
+
+            mainServer = null;
         }
 
         if (clientList.Count > 0)
@@ -237,6 +304,10 @@ public class OSCManager : MonoBehaviour
 
             clientList.Clear();
         }
+
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
     }
 
     ////////////////////////////////////////////////////
@@ -288,7 +359,7 @@ public class OSCManager : MonoBehaviour
 
     public void CreateTempNet()
     {
-        DisPacket();
+        //DisPacket();
 
         AllGameData.AllData allData = new AllGameData.AllData();
         myNetIngameData = new IngameData.PlayerNetData();
@@ -340,9 +411,12 @@ public class OSCManager : MonoBehaviour
         //一時ポート番号でサーバからの応答を待機
         tempPort = GetRandomTempPort();
 
-        tempServer = new OscServer(tempPort);
+        tempServer = OscServer.GetOrCreate(tempPort);
 
-        tempServer.TryAddMethod(address, ReadValue);
+        if(!tempServer.TryAddMethod(address, ReadValue))
+        {
+            Debug.LogError("メソッド追加失敗");
+        }
 
         //1秒ごとにハンドシェイクのデータ送信を試みる
         InvokeRepeating("SendFirstHandshake", 0f, 1f);
@@ -397,15 +471,26 @@ public class OSCManager : MonoBehaviour
             clientList[0].Release();
             
             tempServer.Dispose();
+            tempServer = null;
 
+            if(mainServer == null)
+            {
+                
+            }
             mainServer = new OscServer(startPort);
+
+            if (!mainServer.TryAddMethod(address, ReadValue))
+            {
+                Debug.LogError("メソッド追加に失敗しました");
+            }
+            Debug.Log("メインサーバの作成");
 
             isServer = true;
 
             isFinishHandshake = true;
             roomData.playerName=Managers.instance.optionData.playerName;
 
-            mainServer.TryAddMethod(address, ReadValue);
+            
         }
         else
         {
@@ -413,6 +498,7 @@ public class OSCManager : MonoBehaviour
             Debug.Log("サーバが存在しました、クライアント処理へ移行");
 
             tempServer.Dispose();
+            tempServer = null;
 
             mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
 
@@ -649,15 +735,6 @@ public class OSCManager : MonoBehaviour
         return _ingameData;
     }
 
-    /// <summary>
-    /// サーバ側でデータをキャッチすれば呼び出されます
-    /// </summary>
-    /// <remarks>メインスレッド動作のためUnity用のメソッドも動作</remarks>
-    private void MainThreadMethod()
-    {
-
-    }
-
     private void TimeoutChecker()
     {
         if (Managers.instance.state >= GAME_STATE.ROOM && Managers.instance.state <= GAME_STATE.IN_GAME)
@@ -715,29 +792,40 @@ public class OSCManager : MonoBehaviour
     /// </summary>
     private void InitNetworkData()
     {
-
         if(isServer)
         {
-            AllGameData.AllData _allData = new AllGameData.AllData();
+            //AllGameData.AllData _allData = new AllGameData.AllData();
 
-            _allData.rData = initRoomData(_allData.rData);
-            _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+            //_allData.rData = initRoomData(_allData.rData);
+            //_allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
 
-            playerDataList[0] = _allData;
+            //playerDataList[0] = _allData;
 
-            myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
-            roomData = initRoomData(roomData);
+            //myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+            //roomData = initRoomData(roomData);
 
             sendStartTimer = 0f;
 
             isFinishHandshake = false;
 
-            foreach(OscClientData _client in clientList)
-            {
-                _client.Release();
-            }
+            //foreach(OscClientData _client in clientList)
+            //{
+            //    _client.Release();
+            //}
 
-            mainServer.Dispose();
+            //if (mainServer != null)
+            //{
+            //    mainServer.RemoveMethod(address, ReadValue);
+            //    mainServer.RemoveAddress(address);
+
+            //    if (!OscServer.Remove(mainServer.Port))
+            //    {
+            //        Debug.Log("サーバ解放失敗");
+            //        //mainServer.Dispose();
+            //    }
+            //}
+
+            DisPacket();
         }
         else
         {

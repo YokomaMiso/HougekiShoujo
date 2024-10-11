@@ -38,6 +38,7 @@ public class Managers : MonoBehaviour
     public SaveManager saveManager;
     public TimeManager timeManager;
     public RoomManager roomManager;
+    public OSCManager oscManager;
 
     private void Awake()
     {
@@ -102,5 +103,19 @@ public class Managers : MonoBehaviour
     {
         optionData = _receiveData;
         saveManager.SaveOptionData(optionData);
+    }
+
+    public void CreateOscManager()
+    {
+        oscManager = new OSCManager();
+
+        return;
+    }
+
+    public void DeleteOscManager()
+    {
+        Destroy(oscManager);
+
+        return;
     }
 }
