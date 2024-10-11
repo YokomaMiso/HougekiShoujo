@@ -301,6 +301,7 @@ public class OSCManager : MonoBehaviour
         isServer = false;
         isServerResponse = false;
         isFinishHandshake = false;
+        isOutServer = false;
 
         //インゲーム用データの初期化代入
         allData.pData = new IngameData.PlayerNetData();
