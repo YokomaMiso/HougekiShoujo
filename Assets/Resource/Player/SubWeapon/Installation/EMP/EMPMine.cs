@@ -27,7 +27,7 @@ public class EMPMine : InstallationBehavior
         }
     }
 
-    protected override void InstallationAction()
+    public override void InstallationAction()
     {
         Vector3 spawnPos = transform.position;
 
