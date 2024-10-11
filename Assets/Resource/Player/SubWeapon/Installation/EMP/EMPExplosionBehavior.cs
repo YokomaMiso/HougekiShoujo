@@ -20,7 +20,7 @@ public class EMPExplosionBehavior : ExplosionBehavior
         if (hitedPlayer[id]) { return; }
 
         hitedPlayer[id] = true;
-        other.AddComponent<SpeedBuff>().SetRateAndTime(0.0f, 3.0f);
+        other.AddComponent<SpeedBuff>().SetRateAndTime(0.0f, 2.0f);
 
         //トラップ被弾ボイスを鳴らす
         player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);

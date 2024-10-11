@@ -34,6 +34,7 @@ public class BombBehavior : MonoBehaviour
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
+        obj.AddComponent<RoundCheckerSubWeapon>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)

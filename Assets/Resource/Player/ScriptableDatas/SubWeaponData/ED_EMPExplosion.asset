@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionBody: {fileID: 3179393461812120061, guid: 93763fd69982a1343a3fea7b5e753e65,
     type: 3}
-  scale: 2
+  scale: 3
   explosionAnim: {fileID: 9100000, guid: 1debd54c5a654e541bd1dc8a2006c7fb, type: 2}

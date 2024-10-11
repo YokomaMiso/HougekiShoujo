@@ -18,6 +18,8 @@ public class InstallationBehavior : MonoBehaviour
     protected float changeToLoopAnimTime = 1.5f;
     protected RuntimeAnimatorController startAnim;
     protected RuntimeAnimatorController loopAnim;
+
+
     protected virtual void Start()
     {
         lifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime();
@@ -36,7 +38,7 @@ public class InstallationBehavior : MonoBehaviour
         if (timer > lifeTime) { Destroy(gameObject); }
     }
 
-    protected virtual void InstallationAction()
+    public virtual void InstallationAction()
     {
 
     }
