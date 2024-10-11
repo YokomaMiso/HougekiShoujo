@@ -155,6 +155,7 @@ public class RoomManager : MonoBehaviour
 
     public void BackToTitle()
     {
+        OSCManager.OSCinstance.ExitToRoom();
         Managers.instance.ChangeScene(GAME_STATE.TITLE);
         Managers.instance.ChangeState(GAME_STATE.TITLE);
         Init();

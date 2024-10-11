@@ -81,6 +81,8 @@ public class OSCManager : MonoBehaviour
 
     bool cutSend = false;
 
+    bool isOutServer = false;
+
     //////////////////////
     //////// 関数 ////////
     //////////////////////
@@ -98,6 +100,13 @@ public class OSCManager : MonoBehaviour
     //インゲームデータ処理中に送信されるろまずいのでUpdateは基本不使用
     void Update()
     {
+        if(isOutServer)
+        {
+            Managers.instance.ChangeScene(GAME_STATE.TITLE);
+            Managers.instance.ChangeState(GAME_STATE.TITLE);
+            Managers.instance.roomManager.Init();
+        }
+
         if(Input.GetKey(KeyCode.Space))
         {
             cutSend = true;
@@ -113,11 +122,6 @@ public class OSCManager : MonoBehaviour
         Debug.Log("IPAddress is " + GetLocalIPAddress());
         Debug.Log(testS);
 
-        foreach (AllGameData.AllData data in playerDataList)
-        {
-            Debug.Log(data.rData.myID);
-        }
-
         Debug.Log(testNum);
 
         if(isFinishHandshake)
@@ -131,6 +135,13 @@ public class OSCManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (isOutServer)
+        {
+            Managers.instance.ChangeScene(GAME_STATE.TITLE);
+            Managers.instance.ChangeState(GAME_STATE.TITLE);
+            Managers.instance.roomManager.Init();
+        }
+
         if (playerDataList.Count == 0)
         {
             Debug.Log("nullです");
@@ -202,6 +213,11 @@ public class OSCManager : MonoBehaviour
 
     private void OnDisable()
     {
+        DisPacket();
+    }
+
+    private void DisPacket()
+    {
         if (tempServer != null)
         {
             tempServer.Dispose();
@@ -210,6 +226,16 @@ public class OSCManager : MonoBehaviour
         if (mainServer != null)
         {
             mainServer.Dispose();
+        }
+
+        if (clientList.Count > 0)
+        {
+            foreach (OscClientData _client in clientList)
+            {
+                _client.Release();
+            }
+
+            clientList.Clear();
         }
     }
 
@@ -262,6 +288,8 @@ public class OSCManager : MonoBehaviour
 
     public void CreateTempNet()
     {
+        DisPacket();
+
         AllGameData.AllData allData = new AllGameData.AllData();
         myNetIngameData = new IngameData.PlayerNetData();
         roomData = new MachingRoomData.RoomData();
@@ -273,6 +301,7 @@ public class OSCManager : MonoBehaviour
         isServer = false;
         isServerResponse = false;
         isFinishHandshake = false;
+        isOutServer = false;
 
         //インゲーム用データの初期化代入
         allData.pData = new IngameData.PlayerNetData();
@@ -471,11 +500,25 @@ public class OSCManager : MonoBehaviour
             //受信したプレイヤーデータがゲーム内に存在する場合データリストにセットする
             if (!_allData.rData.isHandshaking)
             {
+                if(_allData.rData.myID == -1)
+                {
+                    _allData.rData = initRoomData(_allData.rData);
+                    _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+                    playerDataList[_allData.pData.PlayerID] = _allData;
+
+                    connectTimeList[_allData.pData.PlayerID] = 0.0f;
+
+                    clientList[_allData.pData.PlayerID].Release();
+
+                    return;
+                }
+
                 testS = "サーバとしてインゲーム受信";
                 playerDataList[_allData.pData.PlayerID] = _allData;
 
                 //受信カウントをリセットする
-                connectTimeList[_allData.rData.myID] = 0f;
+                connectTimeList[_allData.pData.PlayerID] = 0f;
             }
             else if (_allData.rData.myID == -1 && _allData.rData.isHandshaking)
             {
@@ -533,7 +576,29 @@ public class OSCManager : MonoBehaviour
             }
             else
             {
-                testS = "クライアントとしてインゲーム受信";
+                //testS = "クライアントとしてインゲーム受信";
+
+                if (_allData.rData.myID == -1 && _allData.pData.PlayerID == 0)
+                {
+                    testS = "サーバが抜けました";
+
+                    _allData.rData = initRoomData(_allData.rData);
+                    _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+                    playerDataList[0] = _allData;
+
+                    connectTimeList[0] = 0.0f;
+
+                    clientList[0].Release();
+
+                    InitNetworkData();
+
+                    DisPacket();
+
+                    isOutServer = true;
+
+                    return;
+                }
 
                 playerDataList[_allData.pData.PlayerID] = _allData;
 
@@ -627,25 +692,11 @@ public class OSCManager : MonoBehaviour
                 //タイムアウト時間に達していれば自身を初期化させてタイトルまで戻す
                 if (connectTimeList[0] > timeoutSec)
                 {
-                    AllGameData.AllData _allData = new AllGameData.AllData();
-
-                    _allData.rData = initRoomData(_allData.rData);
-                    _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
-
-                    playerDataList[0] = _allData;
-
-                    myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
-                    roomData = initRoomData(roomData);
-
-                    sendStartTimer = 0f;
-
-                    isFinishHandshake = false;
-
-                    mainServer.Dispose();
-
-                    
+                    InitNetworkData();
 
                     Debug.Log("接続がタイムアウトしました");
+
+                    DisPacket();
 
                     Managers.instance.ChangeScene(GAME_STATE.TITLE);
                     Managers.instance.ChangeState(GAME_STATE.TITLE);
@@ -655,6 +706,57 @@ public class OSCManager : MonoBehaviour
                     connectTimeList[0] += Time.deltaTime;
                 }
             }
+        }
+
+        return;
+    }
+
+    /// <summary>
+    /// クライアントのネットワーク初期化処理
+    /// </summary>
+    private void InitNetworkData()
+    {
+
+        if(isServer)
+        {
+            AllGameData.AllData _allData = new AllGameData.AllData();
+
+            _allData.rData = initRoomData(_allData.rData);
+            _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+            playerDataList[0] = _allData;
+
+            myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+            roomData = initRoomData(roomData);
+
+            sendStartTimer = 0f;
+
+            isFinishHandshake = false;
+
+            foreach(OscClientData _client in clientList)
+            {
+                _client.Release();
+            }
+
+            mainServer.Dispose();
+        }
+        else
+        {
+            AllGameData.AllData _allData = new AllGameData.AllData();
+
+            _allData.rData = initRoomData(_allData.rData);
+            _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
+
+            playerDataList[0] = _allData;
+
+            myNetIngameData.mainPacketData.inGameData = initIngameData(myNetIngameData.mainPacketData.inGameData);
+            roomData = initRoomData(roomData);
+
+            sendStartTimer = 0f;
+
+            isFinishHandshake = false;
+
+            mainServer.Dispose();
         }
 
         return;
@@ -709,5 +811,46 @@ public class OSCManager : MonoBehaviour
     public bool GetIsFinishedHandshake()
     {
         return isFinishHandshake;
+    }
+
+    /// <summary>
+    /// ルームから抜けた時
+    /// </summary>
+    public void ExitToRoom()
+    {
+        if(isServer)
+        {
+            AllGameData.AllData _data = new AllGameData.AllData();
+            _data.rData = initRoomData(_data.rData);
+            _data = playerDataList[Managers.instance.playerID];
+
+            _data.rData.myID = -1;
+
+            for (int i = 0; i < playerDataList.Count; i++)
+            {
+                if (playerDataList[i].rData.myID != -1)
+                {
+                    SendValue(_data);
+                }
+            }
+
+            InitNetworkData();
+        }
+        else
+        {
+            AllGameData.AllData _data = new AllGameData.AllData();
+            _data.rData = initRoomData(_data.rData);
+            _data = playerDataList[Managers.instance.playerID];
+
+            _data.rData.myID = -1;
+
+            SendValue(_data);
+
+            InitNetworkData();
+        }
+
+        DisPacket();
+
+        return;
     }
 }
