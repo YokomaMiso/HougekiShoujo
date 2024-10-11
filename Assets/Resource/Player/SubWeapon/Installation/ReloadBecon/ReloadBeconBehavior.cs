@@ -46,7 +46,17 @@ public class ReloadBeconBehavior : InstallationBehavior
         if (hitedPlayer[id]) { return; }
 
         hitedPlayer[id] = true;
-
         player.AddComponent<ReloadBuff>().SetRateAndTime(reloadSpeedRate, buffLifeTime);
+
+        //自分自身ならリターン
+        if (id == Managers.instance.playerID) { return; }
+
+        //敵チームならリターン
+        MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(id);
+        if (roomData.myTeamNum != myRoomData.myTeamNum) { return; }
+
+        //感謝ボイスを鳴らす
+        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetThanks(), Camera.main.transform);
     }
 }

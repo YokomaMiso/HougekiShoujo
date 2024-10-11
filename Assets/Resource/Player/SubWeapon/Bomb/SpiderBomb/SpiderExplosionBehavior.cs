@@ -29,9 +29,13 @@ public class SpiderExplosionBehavior : ExplosionBehavior
         Player nowPlayer = other.GetComponent<Player>();
         if (nowPlayer == null) { return; }
 
-        if (hitedPlayer[nowPlayer.GetPlayerID()]) { return; }
+        int id = nowPlayer.GetPlayerID();
+        if (hitedPlayer[id]) { return; }
 
         other.AddComponent<SpeedBuff>().SetRateAndTime(0.7f, 5.0f);
-        hitedPlayer[nowPlayer.GetPlayerID()] = true;
+        hitedPlayer[id] = true;
+
+        //トラップ被弾ボイスを鳴らす
+        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
     }
 }
