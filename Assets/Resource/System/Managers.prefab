@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5065934935842733564}
   - component: {fileID: 8405644380948887651}
   - component: {fileID: 1385870261910460406}
+  - component: {fileID: 7942510688574649445}
   - component: {fileID: 2596348104808432211}
   m_Layer: 0
   m_Name: Managers
@@ -62,7 +63,6 @@ MonoBehaviour:
   saveManager: {fileID: 0}
   timeManager: {fileID: 0}
   roomManager: {fileID: 0}
-  oscManager: {fileID: 0}
 --- !u!114 &2265797116704708556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +135,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797a944ba771fa1448597c0600337743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7942510688574649445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662274610589041154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f9137985e630d449039fc1f3ecedc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sendPerSecond: 60
+  myPort: 8000
 --- !u!114 &2596348104808432211
 MonoBehaviour:
   m_ObjectHideFlags: 0

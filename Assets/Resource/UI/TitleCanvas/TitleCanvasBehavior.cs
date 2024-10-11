@@ -37,9 +37,6 @@ public class TitleCanvasBehavior : MonoBehaviour
         uis[(int)TITLE_STATE.CREDIT].GetComponent<CreditCanvasBehavior>().SetParent(this);
         UIsUpdate();
         SoundManager.PlayBGMIntro(titleBGMIntro, titleBGMLoop);
-
-        Managers.instance.ResetOscManager();
-        Debug.Log("OSCƒŠƒZƒbƒg");
     }
 
     void Update()
