@@ -11,22 +11,27 @@ public class SaveManager : MonoBehaviour
 
     [SerializeField] OptionData defaultOptionData;
 
-    string saveDataFilePath;
     string optionDataFilePath;
     string fileExtension;
     struct SaveData
     {
-        public PlayerData playerData;
+        public string playerName;
+        public float masterVolume;
+        public float bgmVolume;
+        public float sfxVolume;
+        public float voiceVolume;
+        public bool cameraShakeOn;
+        public float mortarSensitive;
     }
     void Awake()
     {
-        saveDataFilePath = Application.persistentDataPath + "/savedata";
         optionDataFilePath = Application.persistentDataPath + "/optiondata";
         fileExtension = ".json";
     }
     void Start()
     {
-
+        //オプションデータのロード
+        Managers.instance.optionData = LoadOptionData();
     }
 
     /*
@@ -111,7 +116,9 @@ public class SaveManager : MonoBehaviour
     {
         OptionData returnData;
 
-        string loadPath = saveDataFilePath + fileExtension;
+        //string loadPath = optionDataFilePath + fileExtension;
+        string loadPath = Application.persistentDataPath + "/optiondata" + ".json";
+
         //ファイルが存在している
         if (File.Exists(loadPath))
         {
@@ -119,16 +126,30 @@ public class SaveManager : MonoBehaviour
             string datastr = reader.ReadToEnd();
             reader.Close();
 
-            returnData = JsonUtility.FromJson<OptionData>(datastr);
+            SaveData sd = JsonUtility.FromJson<SaveData>(datastr);
+            returnData = ConvertSaveData(sd);
         }
         //ファイルが存在しない
         else
         {
             returnData = new OptionData();
             returnData.Init(defaultOptionData);
-            SaveOptionData(returnData);
         }
 
         return returnData;
+    }
+
+    OptionData ConvertSaveData(SaveData _sd)
+    {
+        OptionData returndata=new OptionData();
+        returndata.playerName = _sd.playerName;
+        returndata.masterVolume = _sd.masterVolume;
+        returndata.bgmVolume = _sd.bgmVolume;
+        returndata.sfxVolume = _sd.sfxVolume;
+        returndata.voiceVolume = _sd.voiceVolume;
+        returndata.cameraShakeOn = _sd.cameraShakeOn;
+        returndata.mortarSensitive = _sd.mortarSensitive;
+
+        return returndata;
     }
 }

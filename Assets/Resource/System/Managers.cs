@@ -48,15 +48,12 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             //各マネージャの指定
             ManagerLoad();
-            //オプションデータのロード
-            optionData = saveManager.LoadOptionData();
         }
         else
         {
             Destroy(gameObject);
         }
     }
-
     void Update()
     {
         if (state == nextState) { return; }
