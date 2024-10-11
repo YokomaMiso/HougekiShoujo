@@ -38,13 +38,8 @@ public class TitleCanvasBehavior : MonoBehaviour
         UIsUpdate();
         SoundManager.PlayBGMIntro(titleBGMIntro, titleBGMLoop);
 
-        Managers.instance.DeleteOscManager();
-
-        if (Managers.instance.oscManager == null)
-        {
-            Managers.instance.CreateOscManager();
-            Debug.Log("OSCì¬");
-        }
+        Managers.instance.ResetOscManager();
+        Debug.Log("OSCƒŠƒZƒbƒg");
     }
 
     void Update()

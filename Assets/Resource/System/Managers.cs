@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -105,16 +106,11 @@ public class Managers : MonoBehaviour
         saveManager.SaveOptionData(optionData);
     }
 
-    public void CreateOscManager()
-    {
-        oscManager = new OSCManager();
-
-        return;
-    }
-
-    public void DeleteOscManager()
+    public void ResetOscManager()
     {
         Destroy(oscManager);
+        OSCManager osc = transform.AddComponent<OSCManager>();
+        oscManager = osc;
 
         return;
     }

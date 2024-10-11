@@ -90,7 +90,7 @@ public class OSCManager : MonoBehaviour
     //////////////////////
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //自分のインスタンス
         OSCinstance = this;
@@ -107,44 +107,6 @@ public class OSCManager : MonoBehaviour
         if(test)
         {
             Debug.Log(mainServer.CountHandlers());
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Managers.instance.CreateOscManager();
-
-            Debug.Log("サーバ作成");
-
-            test = true;
-
-            mainServer = OscServer.GetOrCreate(startPort);
-            //serverPac.Add(tempServer);
-
-            //Debug.Log(mainServer.CountHandlers());
-
-            if(!mainServer.TryAddMethod(address, ReadValue))
-            {
-                Debug.LogError("メソッド追加に失敗しました");
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Managers.instance.DeleteOscManager();
-
-            Debug.Log("サーバ削除");
-
-            test = false;
-
-            mainServer.RemoveAddress(address);
-            mainServer.RemoveMethod(address, ReadValue);
-            mainServer.Dispose();
-            //mainServer = null;
-
-            //serverPac[0].Dispose();
-            //serverPac.Clear();
-
-            Debug.Log("ガベージコレクション動作完了");
         }
 
         if (Managers.instance.state <= GAME_STATE.CONNECTION)
@@ -808,22 +770,22 @@ public class OSCManager : MonoBehaviour
 
             isFinishHandshake = false;
 
-            //foreach(OscClientData _client in clientList)
-            //{
-            //    _client.Release();
-            //}
+            foreach(OscClientData _client in clientList)
+            {
+                _client.Release();
+            }
 
-            //if (mainServer != null)
-            //{
-            //    mainServer.RemoveMethod(address, ReadValue);
-            //    mainServer.RemoveAddress(address);
+            if (mainServer != null)
+            {
+                //mainServer.RemoveMethod(address, ReadValue);
+                //mainServer.RemoveAddress(address);
 
-            //    if (!OscServer.Remove(mainServer.Port))
-            //    {
-            //        Debug.Log("サーバ解放失敗");
-            //        //mainServer.Dispose();
-            //    }
-            //}
+                //if (!OscServer.Remove(mainServer.Port))
+                //{
+                    //Debug.Log("サーバ解放失敗");
+                    mainServer.Dispose();
+                //}
+            }
 
             DisPacket();
         }
