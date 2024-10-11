@@ -21,7 +21,7 @@ public class RoomManager : MonoBehaviour
 
     public void Update()
     {
-        if(Managers.instance.state != GAME_STATE.ROOM)
+        if (Managers.instance.state != GAME_STATE.ROOM)
         {
             return;
         }
@@ -117,12 +117,18 @@ public class RoomManager : MonoBehaviour
         }
         else
         {
-            if (!myRoomData.ready) { myRoomData.ready = true; }
+            if (!myRoomData.ready)
+            {
+                RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
+                int[] teamCount = new int[2] { hostRoomData.teamACount, hostRoomData.teamBCount };
 
-            RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
-            int[] teamCount = new int[2] { hostRoomData.teamACount, hostRoomData.teamBCount };
-
-            if (teamCount[myRoomData.myTeamNum] >= 4) { myRoomData.ready = false; }
+                if (teamCount[myRoomData.myTeamNum] < 4)
+                {
+                    myRoomData.ready = true;
+                    PlayerData pd = Managers.instance.gameManager.playerDatas[myRoomData.selectedCharacterID];
+                    SoundManager.PlayVoice(pd.GetPlayerVoiceData().GetReady());
+                }
+            }
         }
 
         OSCManager.OSCinstance.roomData = myRoomData;
