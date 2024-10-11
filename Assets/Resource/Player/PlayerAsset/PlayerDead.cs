@@ -15,16 +15,6 @@ public class PlayerDead : MonoBehaviour
 
     int killPlayerID = -1;
 
-    bool prevEnd;
-
-    void LateUpdate()
-    {
-        IngameData.GameData hostIngameData;
-        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
-        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
-        prevEnd = hostIngameData.end;
-    }
-
     public void SetKillPlayerID(int _num)
     {
         killPlayerID = _num;
@@ -36,8 +26,6 @@ public class PlayerDead : MonoBehaviour
 
     void SetKDFScore(int _num)
     {
-        if (prevEnd) { return; }
-
         int myID = Managers.instance.playerID;
         int deadID = ownerPlayer.GetPlayerID();
         int killerID = _num;
@@ -71,7 +59,6 @@ public class PlayerDead : MonoBehaviour
         deadPos = Vector3.zero;
         killPlayerID = -1;
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.killPlayerID = -1;
-        prevEnd = false;
     }
 
     public void SetDeadPos(Vector3 _pos) { deadPos = _pos; }
