@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
-  m_Name: PD_SaionziKirame
+  m_Name: PD_HanaseriSara
   m_EditorClassIdentifier: 
-  charaName: "\u897F\u5712\u5BFA\u3000\u7DBA\u7F85\u82BD\t\t"
-  characterAnimData: {fileID: 11400000, guid: 9abf50c65441dfb4db61cb776c0c1c4a, type: 2}
+  charaName: "\u82B1\u82B9 \u6C99\u7F85"
+  characterAnimData: {fileID: 11400000, guid: 0b10f1572d2f39c4fa2e3a93f1d0961b, type: 2}
   moveSpeed: 5
   difficulity: 3
-  shell: {fileID: 11400000, guid: e153c3496aaafbd4c80861b57f56fa94, type: 2}
+  shell: {fileID: 11400000, guid: 74998d58e3c668641a22ecfb124d6544, type: 2}
   subWeapon: {fileID: 11400000, guid: f5a84c731abf50a47b0c9d6f12cb9677, type: 2}
-  playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}
+  playerSFXData: {fileID: 11400000, guid: a594c46fc7684f847a520d6e099ab3c9, type: 2}
   playerVoiceData: {fileID: 11400000, guid: 4c52c730e8d06e44baf30f0a19937f15, type: 2}
