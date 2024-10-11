@@ -318,6 +318,9 @@ public class Player : MonoBehaviour
         bool nowFire = myIngameData.fire;
         bool nowSub = myIngameData.useSub;
 
+        playerMove.MoveForOther();
+        playerReload.ReloadBehaviorForOther();
+
         if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive)
         {
             switch (playerState)

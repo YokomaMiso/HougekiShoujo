@@ -78,4 +78,5 @@ public class PlayerReload : MonoBehaviour
         return multiplyAllRate;
     }
 
+    public void ReloadBehaviorForOther() { NowSpeedRate(); } 
 }
