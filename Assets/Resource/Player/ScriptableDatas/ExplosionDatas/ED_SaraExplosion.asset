@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ea82a71e064af341b9c69f4636d1777, type: 3}
-  m_Name: ED_KirameCanonExplosion
+  m_Name: ED_SaraExplosion
   m_EditorClassIdentifier: 
   explosionBody: {fileID: 3179393461812120061, guid: 5fbefd8f387895448bc643a35cd119ea,
     type: 3}
