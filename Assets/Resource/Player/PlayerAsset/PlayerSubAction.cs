@@ -15,6 +15,8 @@ public class PlayerSubAction : MonoBehaviour
     SubWeapon subWeaponData;
     float reloadTimer;
 
+    GameObject installation = null;
+
     public void Init()
     {
         reloadTimer = 0;
@@ -51,8 +53,15 @@ public class PlayerSubAction : MonoBehaviour
                 }
                 break;
             case SUB_TYPE.INSTALLATION:
+                if (installation != null) 
+                {
+                    installation.GetComponent<InstallationBehavior>().InstallationAction();
+                    Destroy(installation); 
+                }
                 obj = Instantiate(subWeaponData.GetInstallation(), transform.position, Quaternion.identity);
                 obj.GetComponent<InstallationBehavior>().SetPlayer(ownerPlayer);
+                obj.AddComponent<RoundCheckerSubWeapon>();
+                installation = obj;
                 break;
             case SUB_TYPE.BLINK:
                 transform.AddComponent<Blink>();

@@ -141,7 +141,7 @@ public class SaveManager : MonoBehaviour
 
     OptionData ConvertSaveData(SaveData _sd)
     {
-        OptionData returndata=new OptionData();
+        OptionData returndata = new OptionData();
         returndata.playerName = _sd.playerName;
         returndata.masterVolume = _sd.masterVolume;
         returndata.bgmVolume = _sd.bgmVolume;
