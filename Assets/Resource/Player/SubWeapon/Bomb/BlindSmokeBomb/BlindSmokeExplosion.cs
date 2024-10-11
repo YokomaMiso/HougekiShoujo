@@ -6,6 +6,8 @@ using UnityEngine;
 public class BlindSmokeExplosion : ExplosionBehavior
 {
     bool hitCheck = false;
+    bool[] hitedPlayer = new bool[6];
+
     [SerializeField] GameObject blindCanvas;
 
     public override void SetData(Explosion _data)
@@ -25,12 +27,19 @@ public class BlindSmokeExplosion : ExplosionBehavior
     }
     protected override void OnTriggerStay(Collider other)
     {
-        if (other.tag != hitTag) { return; }
-
         Player nowPlayer = other.GetComponent<Player>();
         if (nowPlayer == null) { return; }
 
-        if (nowPlayer.GetPlayerID() != Managers.instance.playerID) { return; }
+        int id = nowPlayer.GetPlayerID();
+        if (hitedPlayer[id]) { return; }
+
+        //ヒットしたボイスを鳴らす
+        hitedPlayer[id] = true;
+        //トラップ被弾ボイスを鳴らす
+        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
+
+        //自分じゃないならリターン
+        if (id != Managers.instance.playerID) { return; }
 
         if (hitCheck) { return; }
 
