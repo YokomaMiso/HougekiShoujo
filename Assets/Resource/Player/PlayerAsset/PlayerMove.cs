@@ -20,13 +20,11 @@ public class PlayerMove : MonoBehaviour
         speed = ownerPlayer.GetPlayerData().GetMoveSpeed();
     }
 
+    public void MoveForOther() { NowSpeedRate(); }
+
     public Vector3 Move()
     {
-        if (!ownerPlayer.IsMine()) 
-        {
-            NowSpeedRate();
-            return Vector3.zero; 
-        }
+        if (!ownerPlayer.IsMine()) { return Vector3.zero; }
 
         Vector3 movement = Vector3.zero;
         movement += Vector3.right * Input.GetAxis("Horizontal");
