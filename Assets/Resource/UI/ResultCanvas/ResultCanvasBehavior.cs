@@ -7,12 +7,19 @@ public class ResultCanvasBehavior : MonoBehaviour
     float timer;
     const float canSubmitTimer = 1.5f;
 
+    [SerializeField] GameObject exitButton;
+
+    void Start()
+    {
+        exitButton.SetActive(false);
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
         if (timer < canSubmitTimer) { return; }
 
-        transform.GetChild(1).gameObject.SetActive(true);
+        exitButton.SetActive(true);
 
         if (Input.GetButtonDown("Submit"))
         {
