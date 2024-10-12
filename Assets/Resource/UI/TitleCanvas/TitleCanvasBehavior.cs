@@ -65,8 +65,8 @@ public class TitleCanvasBehavior : MonoBehaviour
                 UIsUpdate();
                 break;
             case TITLE_STATE.CHANGE_TO_CONNECTION:
-                Managers.instance.ChangeState(GAME_STATE.CONNECTION);
-                Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
+                Managers.instance.ChangeState(GAME_STATE.SELECT_ROOM);
+                Managers.instance.ChangeScene(GAME_STATE.SELECT_ROOM);
                 break;
         }
     }
