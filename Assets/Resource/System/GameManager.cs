@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject suddenDeathAreaPrefab;
     SuddenDeathArea sdaInstance;
 
+    [SerializeField] GameObject bgmAnnounceCanvas;
+
     //仮座標
     readonly int[] teamPosX = new int[2] { -10, 10 };
     readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
@@ -54,7 +56,10 @@ public class GameManager : MonoBehaviour
         sdaInstance = sda.GetComponent<SuddenDeathArea>();
 
         //ステージBGMの再生
-        SoundManager.PlayBGMIntro(nowStageData.GetBGMIntro(), nowStageData.GetBGMLoop());
+        SoundManager.PlayBGMIntro(nowStageData.GetBGM().GetBGMIntro(), nowStageData.GetBGM().GetBGMLoop());
+        //BGMラベルの生成
+        GameObject bgmLabel = Instantiate(bgmAnnounceCanvas);
+        bgmLabel.GetComponent<BGMAnnounceCanvasBehavior>().SetBGMText(nowStageData.GetBGM());
 
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed80e11330c5ac41b6577a0937265ea, type: 3}
+  m_Name: BD_Stage1BGMData
+  m_EditorClassIdentifier: 
+  bgmTitle: "\u3042\u3042\u3042"
+  artistName: "\u4E94\u6797 \u6DBC"
+  BGMIntro: {fileID: 8300000, guid: 65bfa73443ecc4e4b906d1dab8e12bd1, type: 3}
+  BGMLoop: {fileID: 8300000, guid: ccf9a8516c8c8bb488a3be21e964bf97, type: 3}
