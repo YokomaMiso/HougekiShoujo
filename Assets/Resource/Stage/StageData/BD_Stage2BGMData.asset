@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmTitle: "\u3044\u3044\u3044"
   artistName: "\u5DDD\u5CF6 \u96C4\u592A"
-  BGMIntro: {fileID: 8300000, guid: d25816b0ef313c041bf689e64afca2cb, type: 3}
-  BGMLoop: {fileID: 8300000, guid: 59686e6723a6bb642b55ce461e36e1c4, type: 3}
+  BGMIntro: {fileID: 8300000, guid: 59686e6723a6bb642b55ce461e36e1c4, type: 3}
+  BGMLoop: {fileID: 8300000, guid: d25816b0ef313c041bf689e64afca2cb, type: 3}
