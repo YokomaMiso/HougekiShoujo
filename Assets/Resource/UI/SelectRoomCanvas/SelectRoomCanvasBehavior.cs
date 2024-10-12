@@ -8,14 +8,14 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 {
     enum SELECT_ROOM_BUTTON_ID { CREATE = 0, JOIN, RANDOM, BACK_TO_TITLE, MAX_NUM };
 
-    Image[] buttons;
+    Image[] buttons = new Image[(int)SELECT_ROOM_BUTTON_ID.MAX_NUM];
     Image createButton;
     Image joinButton;
     Image randomButton;
     Image backTitleButton;
 
     //ボタンのカーソル
-    int selectButonNum = 0;
+    int selectButtonNum = 0;
     //ボタンの最大数
     const int buttonItemNum = 4;
     //カーソル移動可能かどうか
@@ -35,7 +35,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     void Start()
     {
         for (int i = 0; i < (int)SELECT_ROOM_BUTTON_ID.MAX_NUM; i++) { buttons[i] = transform.GetChild(i).GetComponent<Image>(); }
-        buttons[selectButonNum].color = Color.yellow;
+        buttons[selectButtonNum].color = Color.yellow;
 
         roomBanners = transform.GetChild(4).gameObject;
         for (int i = 0; i < roomBannerItemNum; i++)
@@ -67,17 +67,17 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void ChangeButtonSelectNum()
     {
-        float value = Input.GetAxis("Horizontal");
+        float value = Input.GetAxis("Vertical");
 
         //カーソル移動
         if (Mathf.Abs(value) > 0.7f)
         {
             if (isCanSelect)
             {
-                buttons[selectButonNum].color = Color.white;
-                if (value < 0) { selectButonNum = (selectButonNum + buttonItemNum - 1) % buttonItemNum; }
-                else { selectButonNum = (selectButonNum + 1) % buttonItemNum; }
-                buttons[selectButonNum].color = Color.yellow;
+                buttons[selectButtonNum].color = Color.white;
+                if (value < 0) { selectButtonNum = (selectButtonNum + 1) % buttonItemNum; }
+                else { selectButtonNum = (selectButtonNum + buttonItemNum - 1) % buttonItemNum; }
+                buttons[selectButtonNum].color = Color.yellow;
                 isCanSelect = false;
             }
         }
@@ -93,7 +93,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         //決定が押されていないならリターン
         if (!Input.GetButtonDown("Submit")) { return; }
 
-        switch ((SELECT_ROOM_BUTTON_ID)selectButonNum)
+        switch ((SELECT_ROOM_BUTTON_ID)selectButtonNum)
         {
             case SELECT_ROOM_BUTTON_ID.CREATE:
                 //ConnectionSceneに移動し、部屋を作成
@@ -104,6 +104,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
             case SELECT_ROOM_BUTTON_ID.JOIN:
                 selectJoin = true;
                 isCanSelect = true;
+                roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.yellow;
                 break;
 
             case SELECT_ROOM_BUTTON_ID.RANDOM:
@@ -138,7 +139,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
             }
         }
         //カーソル縦移動
-        else if (Mathf.Abs(value.x) > 0.7f)
+        else if (Mathf.Abs(value.y) > 0.7f)
         {
             if (isCanSelect)
             {
