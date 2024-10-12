@@ -17,30 +17,33 @@ public class RoomBanner : MonoBehaviour
         isPlayingText = transform.GetChild(1).GetComponent<Text>();
         memberCountText = transform.GetChild(3).GetComponent<Text>();
         hostIcon = transform.GetChild(4).GetComponent<Image>();
-        for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
-        {
-            memberTexts[i] = transform.GetChild(5 + i).GetComponent<Text>();
-        }
+        for (int i = 0; i < MachingRoomData.playerMaxCount; i++) { memberTexts[i] = transform.GetChild(5 + i).GetComponent<Text>(); }
     }
 
     public void SetData(AllGameData.AllData[] _data, int _num = 0)
     {
+        //子オブジェクトのポインタに実体を指定
+        AssignChild();
+
         //部屋番号
         roomNumText.text = "Room " + (_num + 1).ToString();
 
         //プレイ中なら表示
-        if (_data[0].rData.gameStart) {  }
+        if (_data[0].rData.gameStart) { }
         //プレイしていないなら透明に
         else { isPlayingText.color = Color.clear; }
 
         //メンバー数
         memberCountText.text = _data[0].rData.playerCount.ToString() + "/6";
 
+        //ホストアイコン
+        if (_data[0].rData.playerCount == 0) { hostIcon.color = Color.clear; }
+
         //メンバーの名前
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
             //居なければ透明にする
-            if (_data[i].rData.myID == -1) 
+            if (_data[i].rData.myID == -1)
             {
                 memberTexts[i].color = Color.clear;
                 continue;
