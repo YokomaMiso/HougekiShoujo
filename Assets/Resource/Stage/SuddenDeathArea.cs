@@ -17,11 +17,11 @@ public class SuddenDeathArea : MonoBehaviour
         areaMat.SetFloat("_sizeRate", 1.5f);
     }
 
-    public void Init() 
+    public void Init()
     {
-        timer = 0; 
+        timer = 0;
         areaMat.SetFloat("_sizeRate", 1.5f);
-        transform.GetChild(0).localScale = Vector3.one;
+        transform.GetChild(0).localScale = Vector3.one * 1.5f;
     }
 
     void Update()
