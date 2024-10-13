@@ -18,6 +18,14 @@ public class ResultScoreBoard : MonoBehaviour
 
     int[] scoreNums = new int[6] { -1, -1, -1, -1, -1, -1 };
 
+    bool moveToCenter;
+    public bool arriveToCenter;
+    float moveTimer;
+    const float moveTime = 0.75f;
+    readonly Vector3 startPos = Vector3.right * 1920;
+    readonly Vector3 endPos = Vector3.zero;
+    public void MoveToCenter() { moveToCenter = true; }
+
     void Start()
     {
         BGColor[0] = ColorCordToRGB("#2050E4");
@@ -71,6 +79,23 @@ public class ResultScoreBoard : MonoBehaviour
             GameObject announce = Instantiate(itemAnnouncePrefab, transform);
             announce.transform.localPosition = new Vector3(teamPosX[i], baseHeight + heightSub);
         }
+    }
+
+    void Update()
+    {
+        if (arriveToCenter) { return; }
+        if (moveToCenter) { return; }
+
+        moveTimer += Time.deltaTime;
+
+        if (moveTimer > moveTime)
+        {
+            moveTimer = moveTime;
+            arriveToCenter = true;
+        }
+
+        float nowRate = Mathf.Sqrt(moveTimer / moveTime);
+        transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
     }
 
     Color ColorCordToRGB(string hex)

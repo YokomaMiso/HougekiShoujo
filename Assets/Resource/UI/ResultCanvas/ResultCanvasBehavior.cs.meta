@@ -4,10 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - personalScorePrefab: {fileID: 8955476726707798716, guid: 6dfafc9e4f21cf94a9e0c25c361143b4,
+  - exitButtonPrefab: {fileID: 3050224417162698325, guid: 62fbd9a06fefb0944a1329c1a93f8076,
       type: 3}
-  - itemAnnouncePrefab: {fileID: 6563022727854504477, guid: d8cba977695e2664b960ddcf8768dc57,
-      type: 3}
+  - scoreBoard: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
