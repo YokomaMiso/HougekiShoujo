@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class NameBorder : MonoBehaviour
 {
-    Vector3 startPos = new Vector3(-200, -700);
-    Vector3 endPos = new Vector3(-200, -375);
+    Vector3 startPos = new Vector3(40, -700);
+    Vector3 endPos = new Vector3(40, -450);
 
     float timer;
     const float arriveTime = 0.75f;
@@ -18,7 +18,7 @@ public class NameBorder : MonoBehaviour
     const float killCountSpawnTime = 1.0f;
     bool spawned;
     const float scaleFixTime = 1.5f;
-    const float shakeTime = 2.0f;
+    const float shakeTime = 1.75f;
 
     public void SetData(ResultScoreBoard.KDFData _kdf)
     {
@@ -56,7 +56,7 @@ public class NameBorder : MonoBehaviour
     {
         if (timer < killCountSpawnTime) { return; }
 
-        if (!spawned) 
+        if (!spawned)
         {
             killCountText.color = Color.white;
             for (int i = 0; i < outlines.Length; i++) { outlines[i].enabled = true; }
@@ -73,7 +73,7 @@ public class NameBorder : MonoBehaviour
             float nowRate = 1.0f - ((timer - scaleFixTime) / (shakeTime - scaleFixTime));
 
             killCountText.transform.localScale = Vector3.one;
-            killCountText.transform.localPosition = killcountTextDefaultPos + new Vector3(Random.Range(0, nowRate), Random.Range(0, nowRate), Random.Range(0, nowRate) * 16);
+            killCountText.transform.localPosition = killcountTextDefaultPos + new Vector3(Random.Range(-nowRate, nowRate), Random.Range(-nowRate, nowRate), 0) * 32;
         }
         else
         {
