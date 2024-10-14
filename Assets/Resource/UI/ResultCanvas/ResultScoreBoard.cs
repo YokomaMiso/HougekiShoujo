@@ -93,6 +93,7 @@ public class ResultScoreBoard : MonoBehaviour
             scoreInstance[i].transform.localPosition = new Vector3(teamPosX[oscRoomData.myTeamNum], baseHeight - heightSub * teamCount[oscRoomData.myTeamNum]);
 
             //KDFÉfÅ[É^ÇÃï€ë∂
+            kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].playerName = oscRoomData.playerName;
             kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].playerID = oscRoomData.myID;
             kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].characterID = oscRoomData.selectedCharacterID;
             kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].killCount = gameData.killCount;

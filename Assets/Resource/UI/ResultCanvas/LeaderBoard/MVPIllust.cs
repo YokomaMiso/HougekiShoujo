@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class MVPIllust : MonoBehaviour
     Vector3 startPos = Vector3.left * 1920;
     Vector3 endPos = Vector3.left * 160;
 
-    Vector3 dropShadowPos = new Vector3(1, -1, 0) * 16;
+    Vector3 dropShadowPos = new Vector3(16, -16, 0);
 
     Image[] charaIllusts = new Image[2];
 
@@ -24,8 +25,13 @@ public class MVPIllust : MonoBehaviour
     public void SetTurnBack() { turnBack = true; }
     public bool GetTurnBackComplete() { return turnBackArrive; }
 
-    public void SetData(PlayerData _pd)
+    ResultScoreBoard.KDFData kdf;
+    [SerializeField] GameObject nameBorderPrefab;
+
+    public void SetData(ResultScoreBoard.KDFData _kdf, PlayerData _pd)
     {
+        kdf = _kdf;
+
         //初期座標
         transform.localPosition = startPos;
         //イラストを適用するImageコンポーネントの参照
@@ -56,6 +62,8 @@ public class MVPIllust : MonoBehaviour
             {
                 timer = arriveTime;
                 arrive = true;
+                GameObject obj = Instantiate(nameBorderPrefab, transform);
+                obj.GetComponent<NameBorder>().SetData(kdf);
             }
             float nowRate = Mathf.Sqrt(timer / arriveTime);
             transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate);

@@ -18,6 +18,8 @@ public class DisplayMVP : MonoBehaviour
     const float cautionSpawnTime = 0.5f;
     const float keepoutSpawnTime = 1.0f;
 
+    const float illustSpawnTime = 1.5f;
+
     public void SetMVPKDFData(ResultScoreBoard.KDFData _kdf)
     {
         //MVPデータを適用
@@ -25,35 +27,23 @@ public class DisplayMVP : MonoBehaviour
         //キャラデータの参照
         mvpCharacter = Managers.instance.gameManager.playerDatas[_kdf.characterID];
 
-        //mvpイラストの生成
-        GameObject mvpIllustInstance = Instantiate(mvpIllustPrefab, transform);
-        mvpIllust = mvpIllustInstance.GetComponent<MVPIllust>();
-        mvpIllust.SetData(mvpCharacter);
+        
     }
     void Update()
     {
+        if (timer <= illustSpawnTime) { timer += Time.deltaTime; }
+
         TapeSpawn();
+        IllustSpawn();
         MVPIllustControll();
     }
 
-    void MVPIllustControll()
-    {
-        if (!mvpIllust.GetArrive()) { return; }
-       
-        if (mvpIllust.GetTurnBackComplete()) { Destroy(gameObject); }
-        else if (Input.GetButtonDown("Submit")) 
-        {
-            mvpIllust.SetTurnBack();
-            cautionTapeInstance.GetComponent<CautionTapeBehavior>().SetDestroy();
-            keepoutTapeInstance.GetComponent<CautionTapeBehavior>().SetDestroy();
-        }
-    }
+
     void TapeSpawn()
     {
         //最後のオブジェクト生成が終わったら
         if (keepoutTapeInstance != null) { return; }
 
-        timer += Time.deltaTime;
         if (cautionTapeInstance == null)
         {
             if (timer > cautionSpawnTime) { cautionTapeInstance = Instantiate(cautionTapePrefab, transform); }
@@ -61,6 +51,30 @@ public class DisplayMVP : MonoBehaviour
         if (keepoutTapeInstance == null)
         {
             if (timer > keepoutSpawnTime) { keepoutTapeInstance = Instantiate(keepoutTapePrefab, transform); }
+        }
+    }
+    void IllustSpawn()
+    {
+        if (timer < illustSpawnTime) { return; }
+        if (mvpIllust != null) { return; }
+
+        //mvpイラストの生成
+        GameObject mvpIllustInstance = Instantiate(mvpIllustPrefab, transform);
+        mvpIllust = mvpIllustInstance.GetComponent<MVPIllust>();
+        mvpIllust.SetData(mvpData,mvpCharacter);
+    }
+    void MVPIllustControll()
+    {
+        if (mvpIllust == null) { return; }
+
+        if (!mvpIllust.GetArrive()) { return; }
+
+        if (mvpIllust.GetTurnBackComplete()) { Destroy(gameObject); }
+        else if (Input.GetButtonDown("Submit"))
+        {
+            mvpIllust.SetTurnBack();
+            cautionTapeInstance.GetComponent<CautionTapeBehavior>().SetDestroy();
+            keepoutTapeInstance.GetComponent<CautionTapeBehavior>().SetDestroy();
         }
     }
 }
