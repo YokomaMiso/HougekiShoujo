@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: 74be7e797db44ee4585912337706401c, type: 3}
   idleFirstSprite: {fileID: 1440274642, guid: f9ab6918cd2de974ba5c9040fb7de7cc, type: 3}
+  charaIllust: {fileID: 21300000, guid: 17806bd83a5a9634aa6d1903b7c3b5b1, type: 3}
   idleAnimationData: {fileID: 9100000, guid: ba06dcf618123104b8c92a81bed65804, type: 2}
   runAnimationData:
   - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}

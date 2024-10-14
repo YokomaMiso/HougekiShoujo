@@ -33,7 +33,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 571616290824042403}
-  - {fileID: 731090415721515821}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -118,7 +117,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exitButtonPrefab: {fileID: 3050224417162698325, guid: 62fbd9a06fefb0944a1329c1a93f8076,
     type: 3}
-  scoreBoard: {fileID: 4087030696892953739}
+  scoreBoardPrefab: {fileID: 1164453516660232447, guid: 3c26e6efd350c234bac8fcceca797895,
+    type: 3}
+  displayMVP: {fileID: 1483811730647812895, guid: 5e3ef1a7ba0166441984a6f05c35bcea,
+    type: 3}
 --- !u!1 &8361257233904817651
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,89 +196,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &7331857421535323691
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3352865836953444288}
-    m_Modifications:
-    - target: {fileID: 1164453516660232447, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_Name
-      value: ScoreBoard
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3c26e6efd350c234bac8fcceca797895, type: 3}
---- !u!4 &731090415721515821 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8041924418943495430, guid: 3c26e6efd350c234bac8fcceca797895,
-    type: 3}
-  m_PrefabInstance: {fileID: 7331857421535323691}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4087030696892953739 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6703592348980826784, guid: 3c26e6efd350c234bac8fcceca797895,
-    type: 3}
-  m_PrefabInstance: {fileID: 7331857421535323691}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bca291484e86041a45f2779e3e735f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
