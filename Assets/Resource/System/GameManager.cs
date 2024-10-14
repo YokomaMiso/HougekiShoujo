@@ -153,7 +153,6 @@ public class GameManager : MonoBehaviour
             hostIngameData.alivePlayerCountTeamB = hostRoomData.teamBCount;
             hostIngameData.winCountTeamA = 0;
             hostIngameData.winCountTeamB = 0;
-            hostIngameData.winner = -1;
 
             OSCManager.OSCinstance.roomData = hostRoomData;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
