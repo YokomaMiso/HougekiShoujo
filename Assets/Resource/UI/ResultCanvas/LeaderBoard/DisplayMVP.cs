@@ -46,7 +46,14 @@ public class DisplayMVP : MonoBehaviour
 
         if (cautionTapeInstance == null)
         {
-            if (timer > cautionSpawnTime) { cautionTapeInstance = Instantiate(cautionTapePrefab, transform); }
+            if (timer > cautionSpawnTime) 
+            {
+                cautionTapeInstance = Instantiate(cautionTapePrefab, transform);
+
+                //ƒŠƒUƒ‹ƒg—p‚ÌBGM
+                //GameObject resultBGM = SoundManager.PlayBGM(testResult);
+                //resultBGM.GetComponent<AudioSource>().loop = false;
+            }
         }
         if (keepoutTapeInstance == null)
         {
