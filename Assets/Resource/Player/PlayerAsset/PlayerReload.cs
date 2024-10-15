@@ -47,8 +47,14 @@ public class PlayerReload : MonoBehaviour
     {
         shellNum = _num;
         ownerPlayer.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetReload());
-        GameObject obj = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetReloadSFX(), transform);
-        obj.GetComponent<AudioSource>().pitch = NowSpeedRate() * Random.Range(0.9f, 1.1f);
+        GameObject reloadSFX = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetReloadSFX(), transform);
+        reloadSFX.GetComponent<AudioSource>().pitch = NowSpeedRate() * Random.Range(0.9f, 1.1f);
+
+        if (!ownerPlayer.IsMine())
+        {
+            reloadSFX.GetComponent<AudioSource>().volume *= 0.5f;
+            reloadSFX.AddComponent<AudioLowPassFilter>();
+        }
     }
     public bool Reloading() { return timer != 0; }
     public void ReloadCancel() { timer = 0; }
