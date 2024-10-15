@@ -25,10 +25,12 @@ public class MVPIllust : MonoBehaviour
     public bool GetTurnBackComplete() { return turnBackArrive; }
 
     ResultScoreBoard.KDFData kdf;
+    PlayerData pd;
     [SerializeField] GameObject nameBorderPrefab;
 
     public void SetData(ResultScoreBoard.KDFData _kdf, PlayerData _pd)
     {
+        pd = _pd;
         kdf = _kdf;
 
         //èâä˙ç¿ïW
@@ -62,7 +64,7 @@ public class MVPIllust : MonoBehaviour
                 timer = arriveTime;
                 arrive = true;
                 GameObject obj = Instantiate(nameBorderPrefab, transform);
-                obj.GetComponent<NameBorder>().SetData(kdf);
+                obj.GetComponent<NameBorder>().SetData(kdf, pd);
             }
             float nowRate = Mathf.Sqrt(timer / arriveTime);
             transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
