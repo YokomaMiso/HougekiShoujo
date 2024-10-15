@@ -20,7 +20,9 @@ public class NameBorder : MonoBehaviour
     const float scaleFixTime = 1.5f;
     const float shakeTime = 1.75f;
 
-    public void SetData(ResultScoreBoard.KDFData _kdf)
+    Animator charaIdleAnim;
+
+    public void SetData(ResultScoreBoard.KDFData _kdf,PlayerData _pd)
     {
         //プレイヤー名
         transform.GetChild(0).GetComponent<Text>().text = _kdf.playerName;
@@ -32,6 +34,9 @@ public class NameBorder : MonoBehaviour
         //キルカウントのアウトラインを無効化
         outlines = killCountText.GetComponents<Outline>();
         for (int i = 0; i < outlines.Length; i++) { outlines[i].enabled = false; }
+
+        charaIdleAnim = transform.GetChild(4).GetComponent<Animator>();
+        charaIdleAnim.runtimeAnimatorController = _pd.GetCharacterAnimData().GetIdleAnimForUI();
 
         transform.localPosition = startPos;
     }
