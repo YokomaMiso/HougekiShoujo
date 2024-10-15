@@ -20,7 +20,6 @@ public class BGMAnnounceCanvasBehavior : MonoBehaviour
         label = transform.GetChild(0);
 
         label.GetChild(0).GetComponent<Text>().text = "ÅÙ" + _bgmData.GetBGMTitle();
-        label.GetChild(1).GetComponent<Text>().text = _bgmData.GetBGMArtistName();
 
         label.localPosition = labelStartPos;
     }
