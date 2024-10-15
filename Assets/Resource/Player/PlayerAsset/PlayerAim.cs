@@ -76,8 +76,14 @@ public class PlayerAim : MonoBehaviour
                 break;
         }
 
-        SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetAimSFX(), transform);
+        GameObject aimSFX = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetAimSFX(), transform);
         Camera.main.GetComponent<CameraMove>().SetCameraFar(shellData.GetAimRange() / 2);
+
+        if (!ownerPlayer.IsMine())
+        {
+            aimSFX.GetComponent<AudioSource>().volume *= 0.5f;
+            aimSFX.AddComponent<AudioLowPassFilter>();
+        }
     }
 
     public Vector3 AimMove()
@@ -173,7 +179,7 @@ public class PlayerAim : MonoBehaviour
                 break;
         }
 
-        SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFireSFX(), transform);
+        GameObject fireSFX = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFireSFX(), transform);
         ownerPlayer.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetUseMain());
         obj.GetComponent<ProjectileBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ProjectileBehavior>().SetData(ownerPlayer.GetPlayerData().GetShell());
@@ -183,6 +189,11 @@ public class PlayerAim : MonoBehaviour
             Camera.main.GetComponent<CameraMove>().ResetCameraFar();
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = !OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
+        }
+        else
+        {
+            fireSFX.GetComponent<AudioSource>().volume *= 0.5f;
+            fireSFX.AddComponent<AudioLowPassFilter>();
         }
     }
 
