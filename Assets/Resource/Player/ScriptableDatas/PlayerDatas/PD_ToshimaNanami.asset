@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
   m_Name: PD_ToshimaNanami
   m_EditorClassIdentifier: 
-  charaName: "\u9060\u5CF6\u3000\u4E03\u6D77"
+  charaName: "\u9060\u5CF6 \u4E03\u6D77"
   characterAnimData: {fileID: 11400000, guid: 203b2e40b2be78a43bb9721dc3f741a1, type: 2}
   moveSpeed: 5
   difficulity: 3
