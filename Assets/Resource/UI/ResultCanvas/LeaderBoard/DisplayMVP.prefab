@@ -54,3 +54,5 @@ MonoBehaviour:
     type: 3}
   mvpIllustPrefab: {fileID: 4457818178536688317, guid: d1caa7e99e091964bbaee7911c71740e,
     type: 3}
+  nameHighlightPrefab: {fileID: 4901639529715879116, guid: af284b53f9a0aa7429d614ac84c41481,
+    type: 3}

@@ -13,6 +13,8 @@ public class DisplayMVP : MonoBehaviour
     GameObject keepoutTapeInstance;
     [SerializeField] GameObject mvpIllustPrefab;
     MVPIllust mvpIllust;
+    [SerializeField] GameObject nameHighlightPrefab;
+    CharaNameHighLight nameHighlight;
 
     float timer;
     const float cautionSpawnTime = 0.5f;
@@ -26,8 +28,6 @@ public class DisplayMVP : MonoBehaviour
         mvpData = _kdf;
         //キャラデータの参照
         mvpCharacter = Managers.instance.gameManager.playerDatas[_kdf.characterID];
-
-        
     }
     void Update()
     {
@@ -58,10 +58,15 @@ public class DisplayMVP : MonoBehaviour
         if (timer < illustSpawnTime) { return; }
         if (mvpIllust != null) { return; }
 
+        //名前のハイライト表示
+        GameObject highlightInstance = Instantiate(nameHighlightPrefab, transform);
+        nameHighlight = highlightInstance.GetComponent<CharaNameHighLight>();
+        nameHighlight.SetName(mvpCharacter);
+
         //mvpイラストの生成
         GameObject mvpIllustInstance = Instantiate(mvpIllustPrefab, transform);
         mvpIllust = mvpIllustInstance.GetComponent<MVPIllust>();
-        mvpIllust.SetData(mvpData,mvpCharacter);
+        mvpIllust.SetData(mvpData, mvpCharacter);
     }
     void MVPIllustControll()
     {
@@ -75,6 +80,7 @@ public class DisplayMVP : MonoBehaviour
             mvpIllust.SetTurnBack();
             cautionTapeInstance.GetComponent<CautionTapeBehavior>().SetDestroy();
             keepoutTapeInstance.GetComponent<CautionTapeBehavior>().SetDestroy();
+            nameHighlight.Close();
         }
     }
 }
