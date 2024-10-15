@@ -161,6 +161,7 @@ public class RoomCanvasBehavior : MonoBehaviour
     void CharaDisplayUpdate(PlayerData _playerData)
     {
         charaVisual.sprite = _playerData.GetCharacterAnimData().GetCharaIdle();
+        charaVisual.GetComponent<Animator>().runtimeAnimatorController = _playerData.GetCharacterAnimData().GetIdleAnimForUI();
         nameText.text = _playerData.GetCharaName();
 
         Color[] rollColor = new Color[3] { new Color(0.75f, 0.25f, 0.25f), new Color(0.25f, 0.75f, 0.25f), new Color(0.25f, 0.25f, 0.75f) };
