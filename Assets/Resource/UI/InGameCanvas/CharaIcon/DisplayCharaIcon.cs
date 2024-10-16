@@ -122,7 +122,7 @@ public class DisplayCharaIcon : MonoBehaviour
                     {
 
                     }
-                    else if (gameData.playerChatID <= RADIO_CHAT_ID.SUPPORT)
+                    else if (gameData.playerChatID <= RADIO_CHAT_ID.RETREAT)
                     {
                         GameObject window = Instantiate(serifWindow, transform.GetChild(iconNums[i]).GetChild(0));
                         window.GetComponent<CharaSerifBehavior>().SetSerif(oscRoomData.myTeamNum, (int)gameData.playerChatID);
