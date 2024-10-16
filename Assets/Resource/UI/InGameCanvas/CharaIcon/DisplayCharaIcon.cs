@@ -42,9 +42,6 @@ public class DisplayCharaIcon : MonoBehaviour
 
     readonly Color[] iconBGColor = new Color[2];
 
-    RADIO_CHAT_ID[] prevRadioChatID = new RADIO_CHAT_ID[6] { RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE, RADIO_CHAT_ID.NONE };
-    [SerializeField] GameObject serifWindow;
-
     int[] iconNums = new int[6] { -1, -1, -1, -1, -1, -1 };
 
     bool attachedToPlacement = false;
@@ -116,23 +113,6 @@ public class DisplayCharaIcon : MonoBehaviour
             {
                 transform.GetChild(iconNums[i]).GetChild(0).GetComponent<Image>().color = Color.white;
                 transform.GetChild(iconNums[i]).GetComponent<Image>().color = iconBGColor[oscRoomData.myTeamNum];
-                if (prevRadioChatID[i] != gameData.playerChatID)
-                {
-                    if (gameData.playerChatID == RADIO_CHAT_ID.NONE)
-                    {
-
-                    }
-                    else if (gameData.playerChatID <= RADIO_CHAT_ID.RETREAT)
-                    {
-                        GameObject window = Instantiate(serifWindow, transform.GetChild(iconNums[i]).GetChild(0));
-                        window.GetComponent<CharaSerifBehavior>().SetSerif(oscRoomData.myTeamNum, (int)gameData.playerChatID);
-                    }
-                    else
-                    {
-                        Managers.instance.gameManager.GetPlayer(i).GetComponent<Player>().PlayEmote(gameData.playerChatID);
-                    }
-                    prevRadioChatID[i] = gameData.playerChatID;
-                }
             }
             else
             {

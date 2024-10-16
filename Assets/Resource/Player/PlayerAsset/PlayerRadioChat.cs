@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static IngameData;
 
-public enum RADIO_CHAT_ID { NONE = 0, HELP, BLITZ, SUPPORT, RETREAT, APOLOGIZE, LAUGH, WHAT, PROVOC, MAX_NUM }
+public enum RADIO_CHAT_ID { NONE = 0, BLITZ, SUPPORT, RETREAT, HELP, APOLOGIZE, LAUGH, WHAT, PROVOC, MAX_NUM }
 
 public class PlayerRadioChat : MonoBehaviour
 {
@@ -20,33 +21,30 @@ public class PlayerRadioChat : MonoBehaviour
 
     void Update()
     {
-        if (!ownerPlayer.IsMine()) { return; }
         if (!ownerPlayer.GetAlive()) { return; }
 
-        if (radioChatID == RADIO_CHAT_ID.NONE)
+        if (ownerPlayer.IsMine())
         {
-            ButtonCheck();
-            /*
-            float horizontal = Input.GetAxis("HorizontalArrow");
-            float vertical = Input.GetAxis("VerticalArrow");
-
-            if (horizontal < 0) { radioChatID = RADIO_CHAT_ID.HELP; }
-            else if (horizontal > 0) { radioChatID = RADIO_CHAT_ID.SUPPORT; }
-            else if (vertical > 0) { radioChatID = RADIO_CHAT_ID.BLITZ; }
-            else if (vertical < 0) { radioChatID = RADIO_CHAT_ID.APOLOGIZE; }
-            else { return; }
-            */
+            if (radioChatID == RADIO_CHAT_ID.NONE)
+            {
+                ButtonCheck();
+            }
+            else
+            {
+                timer += Time.deltaTime;
+                if (timer > resetTime)
+                {
+                    timer = 0;
+                    radioChatID = RADIO_CHAT_ID.NONE;
+                }
+            }
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerChatID = radioChatID;
         }
         else
         {
-            timer += Time.deltaTime;
-            if (timer > resetTime)
-            {
-                timer = 0;
-                radioChatID = RADIO_CHAT_ID.NONE;
-            }
+            CheckRadioChat();
         }
-        OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerChatID = radioChatID;
+
     }
 
     public void DisplayEmote(RADIO_CHAT_ID _ID)
@@ -72,8 +70,40 @@ public class PlayerRadioChat : MonoBehaviour
             {
                 int nowRegion = fastChatInstance.GetComponent<FastChat>().GetJoystickRegion();
                 if (nowRegion >= 0) { radioChatID = (RADIO_CHAT_ID)(nowRegion + 1); }
+
+                MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
+                SpawnSerifOrEmote(oscRoomData, radioChatID);
+
                 Destroy(fastChatInstance);
             }
+        }
+    }
+
+    void CheckRadioChat()
+    {
+        IngameData.GameData gameData = OSCManager.OSCinstance.GetIngameData(ownerPlayer.GetPlayerID()).mainPacketData.inGameData;
+        MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(ownerPlayer.GetPlayerID());
+
+        if (radioChatID != gameData.playerChatID)
+        {
+            SpawnSerifOrEmote(oscRoomData, gameData.playerChatID);
+            radioChatID = gameData.playerChatID;
+        }
+    }
+
+    void SpawnSerifOrEmote(MachingRoomData.RoomData _roomData, RADIO_CHAT_ID _chatID)
+    {
+        if (_chatID == RADIO_CHAT_ID.NONE)
+        {
+
+        }
+        else if (_chatID <= RADIO_CHAT_ID.HELP)
+        {
+            Managers.instance.gameManager.ingameCanvas.AddSerif(_roomData, _chatID);
+        }
+        else
+        {
+            ownerPlayer.GetComponent<Player>().PlayEmote(_chatID);
         }
     }
 }
