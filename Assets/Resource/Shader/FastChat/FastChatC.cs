@@ -23,6 +23,9 @@ public class FastChat : MonoBehaviour
 
     private float elapsedTime = 0f;
 
+    int region = -1;
+    public int GetRegion() { return region; }
+
     void Start()
     {
         rawImage = transform.GetChild(0).GetComponent<RawImage>();
@@ -90,7 +93,8 @@ public class FastChat : MonoBehaviour
 
             selecter.SetActive(progress >= 1);
 
-            int region = GetJoystickRegion();
+            region = GetJoystickRegion();
+            GetJoystickButton();
             fastChat.SetFloat("_SelectedRegion", region);
 
         }
@@ -107,24 +111,36 @@ public class FastChat : MonoBehaviour
             fastChat.SetFloat("_Rotation", currentRotation);
 
             elapsedTime = 0f;
+
+            region = -1;
         }
     }
 
-    public int GetJoystickRegion()
+    int GetJoystickRegion()
     {
         Vector3 joyStick = Vector3.zero;
         joyStick.x = Input.GetAxis("RightStickHorizontal");
         joyStick.y = Input.GetAxis("RightStickVertical");
 
-        if (joyStick.magnitude < 0.2f) { return -1; }
+        if (joyStick.magnitude < 0.2f) { return region; }
 
         float angle = Mathf.Atan2(-joyStick.x, -joyStick.y) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
 
-        int region = Mathf.Clamp(Mathf.FloorToInt(angle / 45.0f), 0, 7);
-        Debug.Log("Atan" + region);
+        int nowRegion = Mathf.Clamp(Mathf.FloorToInt(angle / 45.0f), 0, 7);
+        Debug.Log("Atan" + nowRegion);
 
-        return region;
+        return nowRegion;
+    }
+
+    void GetJoystickButton()
+    {
+        //if (Input.GetButtonDown("RightStickButton"))
+        if (Input.GetKeyDown(KeyCode.JoystickButton9))
+        {
+            Debug.Log("‚è‚¹‚Á‚Æ‚¨‚¨‚¨‚¨‚¨");
+            region = -1;
+        }
     }
 
     void SetVisibility(bool isVisible)

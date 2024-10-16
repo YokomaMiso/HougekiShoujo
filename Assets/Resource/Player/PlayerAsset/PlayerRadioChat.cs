@@ -68,7 +68,7 @@ public class PlayerRadioChat : MonoBehaviour
         {
             if (fastChatInstance != null)
             {
-                int nowRegion = fastChatInstance.GetComponent<FastChat>().GetJoystickRegion();
+                int nowRegion = fastChatInstance.GetComponent<FastChat>().GetRegion();
                 if (nowRegion >= 0) { radioChatID = (RADIO_CHAT_ID)(nowRegion + 1); }
 
                 MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
