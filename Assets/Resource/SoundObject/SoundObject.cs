@@ -68,12 +68,16 @@ public class SoundObject : MonoBehaviour
         if (timer >= lifeTime)
         {
             Destroy(gameObject);
-            if (loopBGMInstance) 
-            {
-                AudioSource loopSource = loopBGMInstance.GetComponent<AudioSource>();
-                loopSource.Play();
-                SoundManager.SetNowBGM(loopSource);
-            }
+
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (!loopBGMInstance) { return; }
+
+        AudioSource loopSource = loopBGMInstance.GetComponent<AudioSource>();
+        loopSource.Play();
+        SoundManager.SetNowBGM(loopSource);
     }
 }
