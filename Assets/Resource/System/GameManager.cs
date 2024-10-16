@@ -29,9 +29,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject bgmAnnounceCanvas;
 
-    //âºç¿ïW
-    readonly int[] teamPosX = new int[2] { -10, 10 };
-    readonly int[] playerPosZ = new int[3] { 3, 0, -3 };
+    public IngameCanvasBehavior ingameCanvas;
 
     const float startDelay = 4;
     const float endDelay = 3;
