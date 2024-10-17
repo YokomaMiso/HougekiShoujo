@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public enum RESULT_STATE { DISPLAY_MVP, SHOW_SCORE_BOARD };
 
@@ -16,9 +17,12 @@ public class ResultCanvasBehavior : MonoBehaviour
     ResultScoreBoard scoreBoard;
 
     //MVPとかの表示系を入れる箱
-    GameObject leaderBoards;
+    GameObject leaderBoardInstance;
+    [SerializeField] GameObject displayOtherAward;
     [SerializeField] GameObject displayMVP;
+    GameObject[] leaderBoardPrefabs;
     int index = 0;
+    const int indexLimit = (int)AWARD_ID.MAX_NUM;
 
     void Start()
     {
@@ -26,15 +30,18 @@ public class ResultCanvasBehavior : MonoBehaviour
         scoreBoard = scoreBoardInstance.GetComponent<ResultScoreBoard>();
         scoreBoard.Init();
 
-        leaderBoards = Instantiate(displayMVP, transform);
-        LeaderBoardAction();
-    }
+        leaderBoardPrefabs = new GameObject[indexLimit];
+        leaderBoardPrefabs[0] = displayOtherAward;
+        leaderBoardPrefabs[1] = displayMVP;
 
+        LeaderBoardSpawn();
+    }
 
     void Update()
     {
         //何か表示されているなら早期リターン
-        if (leaderBoards != null) { return; }
+        if (leaderBoardInstance != null) { return; }
+        else if (index < indexLimit) { LeaderBoardSpawn(); return; }
 
         scoreBoard.MoveToCenter();
 
@@ -55,17 +62,21 @@ public class ResultCanvasBehavior : MonoBehaviour
         }
     }
 
-    void LeaderBoardAction()
+    void LeaderBoardSpawn()
     {
+        leaderBoardInstance = Instantiate(leaderBoardPrefabs[index], transform);
         switch (index)
         {
             case 0:
-                leaderBoards.GetComponent<DisplayMVP>().SetMVPKDFData(scoreBoard.GetMVPKDF());
+                leaderBoardInstance.GetComponent<DisplayOtherAward>().SetKDFData(scoreBoard.GetDeadRankerKDF(),AWARD_ID.DEATH);
+                leaderBoardInstance.GetComponent<DisplayOtherAward>().SetKDFData(scoreBoard.GetCriminalKDF(),AWARD_ID.FF);
                 break;
+
             case 1:
-                //leaderBoards.GetComponent<DisplayMVP>().SetMVPKDFData(scoreBoard.GetMVPKDF());
+                leaderBoardInstance.GetComponent<DisplayMVP>().SetMVPKDFData(scoreBoard.GetMVPKDF());
                 break;
         }
+
         index++;
     }
 
