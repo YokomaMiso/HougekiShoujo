@@ -26,6 +26,7 @@ public class MachingRoomData
         //For Network
         public bool isInData;
         public bool isHandshaking;
+        public bool isSearching;
     }
 
 }
