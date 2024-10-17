@@ -14,7 +14,7 @@ public class OscClientData
     /// </summary>
     public OscClientData()
     {
-        this.client = new OscClient(OSCManager.broadcastAddress, OSCManager.startPort);
+        this.client = new OscClient(OSCManager.broadcastAddress, OSCManager.OSCinstance.startPort);
         this.isUsing = false;
 
         return;
@@ -38,7 +38,7 @@ public class OscClientData
     /// </summary>
     public void Release()
     {
-        this.client = new OscClient(OSCManager.broadcastAddress, OSCManager.startPort);
+        this.client = new OscClient(OSCManager.broadcastAddress, OSCManager.OSCinstance.startPort);
         this.isUsing = false;
 
         return;

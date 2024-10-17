@@ -24,12 +24,14 @@ public class OSCManager : MonoBehaviour
     //構造体変換処理があるため生成
     SendDataCreator netInstance = new SendDataCreator();
 
+    public SelectRoomCanvasBehavior pSRCB = null;
+
     //最大プレイヤー人数
     const int maxPlayer = 6;
 
     public const string broadcastAddress = "255.255.255.255";
 
-    public const int startPort = 50000;
+    public int startPort = 50000;
 
     public const int maxRoom = 8;
 
@@ -126,6 +128,7 @@ public class OSCManager : MonoBehaviour
 
         Debug.Log("PlayerID is " + Managers.instance.playerID);
         Debug.Log("IPAddress is " + GetLocalIPAddress());
+        Debug.Log("startPort is " + startPort);
         Debug.Log(testS);
 
         Debug.Log(testNum);
@@ -339,11 +342,14 @@ public class OSCManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
 
-        foreach(bool _b in isUsingRoom)
+        for (int i = 0; i < maxRoom; i++)
         {
-            if(_b == false)
+            if(isUsingRoom[i] == false)
             {
-                
+                AllGameData.AllData _allData = new AllGameData.AllData();
+                _allData.rData = initRoomData(_allData.rData);
+
+                pSRCB.SetRoomBannerData(_allData, i);
             }
         }
     }
@@ -551,8 +557,14 @@ public class OSCManager : MonoBehaviour
         _allData.rData = initRoomData(_allData.rData);
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
+        int roomNum = _allData.pData.mainPacketData.comData.myPort - startPort / 10;
+
+        testNum++;
+
         //受信した部屋のホストポート番号から部屋番号を割り出しその部屋を使用済み扱いにする
-        isUsingRoom[_allData.pData.mainPacketData.comData.myPort - startPort / 10] = true;
+        isUsingRoom[roomNum] = true;
+
+        pSRCB.SetRoomBannerData(_allData, roomNum);
 
         return;
     }
