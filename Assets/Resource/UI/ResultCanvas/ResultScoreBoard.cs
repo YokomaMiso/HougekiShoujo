@@ -158,4 +158,58 @@ public class ResultScoreBoard : MonoBehaviour
         return returnKDFData;
     }
 
+    public KDFData GetDeadRankerKDF()
+    {
+        KDFData returnKDFData = kdfDatas[0][0];
+        for (int i = 0; i < kdfDatas.Length; i++)
+        {
+            for (int j = 0; j < kdfDatas[i].Length; j++)
+            {
+                //デス数が上回っている場合
+                if (returnKDFData.deathCount < kdfDatas[i][j].deathCount) { returnKDFData = kdfDatas[i][j]; continue; }
+                //デス数が同じ場合
+                else if (returnKDFData.deathCount == kdfDatas[i][j].deathCount)
+                {
+                    //キル数が下回っている場合
+                    if (returnKDFData.killCount > kdfDatas[i][j].killCount) { returnKDFData = kdfDatas[i][j]; continue; }
+                    //キル数が同じ場合
+                    else if (returnKDFData.killCount == kdfDatas[i][j].killCount)
+                    {
+                        //FF数が下回っている場合
+                        if (returnKDFData.friendlyFireCount > kdfDatas[i][j].friendlyFireCount) { returnKDFData = kdfDatas[i][j]; continue; };
+                    }
+                }
+            }
+        }
+
+        return returnKDFData;
+    }
+
+    public KDFData GetCriminalKDF()
+    {
+        KDFData returnKDFData = kdfDatas[0][0];
+        for (int i = 0; i < kdfDatas.Length; i++)
+        {
+            for (int j = 0; j < kdfDatas[i].Length; j++)
+            {
+                //FF数が上回っている場合
+                if (returnKDFData.friendlyFireCount < kdfDatas[i][j].friendlyFireCount) { returnKDFData = kdfDatas[i][j]; continue; }
+                //FF数が同じ場合
+                else if (returnKDFData.friendlyFireCount == kdfDatas[i][j].friendlyFireCount)
+                {
+                    //キル数が下回っている場合
+                    if (returnKDFData.deathCount > kdfDatas[i][j].deathCount) { returnKDFData = kdfDatas[i][j]; continue; }
+                    //キル数が同じ場合
+                    else if (returnKDFData.deathCount == kdfDatas[i][j].deathCount)
+                    {
+                        //キル数が下回っている場合
+                        if (returnKDFData.killCount > kdfDatas[i][j].killCount) { returnKDFData = kdfDatas[i][j]; continue; };
+                    }
+                }
+            }
+        }
+
+        return returnKDFData;
+    }
+
 }

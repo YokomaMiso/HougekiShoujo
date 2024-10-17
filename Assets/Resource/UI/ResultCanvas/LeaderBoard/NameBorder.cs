@@ -5,24 +5,31 @@ using UnityEngine.UI;
 
 public class NameBorder : MonoBehaviour
 {
-    Vector3 startPos = new Vector3(40, -700);
-    Vector3 endPos = new Vector3(40, -450);
+    protected Vector3 startPos;
+    protected Vector3 endPos;
 
     float timer;
     const float arriveTime = 0.75f;
     bool arrive;
 
-    Text killCountText;
-    Outline[] outlines;
+    protected Text killCountText;
+    protected Outline[] outlines;
     Vector3 killcountTextDefaultPos = new Vector3(-320, 10);
     const float killCountSpawnTime = 1.0f;
     bool spawned;
     const float scaleFixTime = 1.5f;
     const float shakeTime = 1.75f;
 
-    Animator charaIdleAnim;
+    protected Animator charaIdleAnim;
 
-    public void SetData(ResultScoreBoard.KDFData _kdf,PlayerData _pd)
+    public void SetPos(Vector3 _start,Vector3 _end)
+    {
+        startPos = _start;
+        endPos = _end;
+        transform.localPosition = startPos;
+    }
+
+    public virtual void SetData(ResultScoreBoard.KDFData _kdf,PlayerData _pd)
     {
         //ÉvÉåÉCÉÑÅ[ñº
         transform.GetChild(0).GetComponent<Text>().text = _kdf.playerName;
@@ -35,8 +42,11 @@ public class NameBorder : MonoBehaviour
         outlines = killCountText.GetComponents<Outline>();
         for (int i = 0; i < outlines.Length; i++) { outlines[i].enabled = false; }
 
-        charaIdleAnim = transform.GetChild(4).GetComponent<Animator>();
-        charaIdleAnim.runtimeAnimatorController = _pd.GetCharacterAnimData().GetIdleAnimForUI();
+        if (transform.childCount > 4)
+        {
+            charaIdleAnim = transform.GetChild(4).GetComponent<Animator>();
+            charaIdleAnim.runtimeAnimatorController = _pd.GetCharacterAnimData().GetIdleAnimForUI();
+        }
 
         transform.localPosition = startPos;
     }

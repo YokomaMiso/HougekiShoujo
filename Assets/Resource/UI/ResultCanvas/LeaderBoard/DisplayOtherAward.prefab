@@ -52,3 +52,14 @@ MonoBehaviour:
     type: 3}
   keepoutTapePrefab: {fileID: 5840399599765411744, guid: 741d00b38aa6bc74dbead916ea32cfd3,
     type: 3}
+  charaFramePrefab: {fileID: 183240489683014315, guid: a6f9e429d1e6ced438543bb7608a3555,
+    type: 3}
+  nameBorderPrefab:
+  - {fileID: 4489452218112823795, guid: 6e051b656b4b0564e83e4fa1e9b1e559, type: 3}
+  - {fileID: 4489452218112823795, guid: 62bad7789fd98bb428e66fa999408ce5, type: 3}
+  charaFrameStartPos:
+  - {x: -550, y: -960, z: 0}
+  - {x: 550, y: 960, z: 0}
+  charaFrameEndPos:
+  - {x: -550, y: 0, z: 0}
+  - {x: 550, y: 0, z: 0}

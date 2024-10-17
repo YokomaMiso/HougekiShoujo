@@ -68,6 +68,7 @@ public class MVPIllust : MonoBehaviour
                 arrive = true;
                 GameObject obj = Instantiate(nameBorderPrefab, transform);
                 obj.GetComponent<NameBorder>().SetData(kdf, pd);
+                obj.GetComponent<NameBorder>().SetPos(new Vector3(40, -700), new Vector3(40, -450));
             }
             float nowRate = Mathf.Sqrt(timer / arriveTime);
             transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
