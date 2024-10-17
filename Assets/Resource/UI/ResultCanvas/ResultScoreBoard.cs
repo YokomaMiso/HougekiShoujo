@@ -36,6 +36,16 @@ public class ResultScoreBoard : MonoBehaviour
         public int killCount;
         public int deathCount;
         public int friendlyFireCount;
+
+        public KDFData(int _id)
+        {
+            playerName = "";
+            playerID = _id;
+            characterID = 0;
+            killCount = 0;
+            deathCount = 0;
+            friendlyFireCount = 0;
+        }
     }
 
     KDFData[][] kdfDatas;
