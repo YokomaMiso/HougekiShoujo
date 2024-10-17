@@ -48,5 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61949de0792aa841b147aebae1a9435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cautionTapePrefab: {fileID: 0}
-  keepoutTapePrefab: {fileID: 0}
+  cautionTapePrefab: {fileID: 9131366850080217471, guid: f993081faba38c9459a12767d77c045c,
+    type: 3}
+  keepoutTapePrefab: {fileID: 5840399599765411744, guid: 741d00b38aa6bc74dbead916ea32cfd3,
+    type: 3}

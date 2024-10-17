@@ -18,6 +18,7 @@ public class ResultCanvasBehavior : MonoBehaviour
     //MVP‚Æ‚©‚Ì•\Ž¦Œn‚ð“ü‚ê‚é” 
     GameObject leaderBoards;
     [SerializeField] GameObject displayMVP;
+    int index = 0;
 
     void Start()
     {
@@ -26,8 +27,9 @@ public class ResultCanvasBehavior : MonoBehaviour
         scoreBoard.Init();
 
         leaderBoards = Instantiate(displayMVP, transform);
-        leaderBoards.GetComponent<DisplayMVP>().SetMVPKDFData(scoreBoard.GetMVPKDF());
+        LeaderBoardAction();
     }
+
 
     void Update()
     {
@@ -51,6 +53,20 @@ public class ResultCanvasBehavior : MonoBehaviour
             exitButtonInstance = obj.GetComponent<ResultExitButton>();
             exitButtonInstance.SetOwnerCanvas(this);
         }
+    }
+
+    void LeaderBoardAction()
+    {
+        switch (index)
+        {
+            case 0:
+                leaderBoards.GetComponent<DisplayMVP>().SetMVPKDFData(scoreBoard.GetMVPKDF());
+                break;
+            case 1:
+                //leaderBoards.GetComponent<DisplayMVP>().SetMVPKDFData(scoreBoard.GetMVPKDF());
+                break;
+        }
+        index++;
     }
 
     public void ScoreInit()
