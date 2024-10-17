@@ -47,6 +47,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         {
             RoomBanner _room = roomBanners.transform.GetChild(i).GetComponent<RoomBanner>();
 
+            _room.AssignChild();
+
             //検索した部屋番号を適用
             roomBannerList.Add(_room);
         }
@@ -182,7 +184,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         //決定が押されていないならリターン
         if (!Input.GetButtonDown("Submit")) { return; }
 
-        OSCManager.OSCinstance.startPort = (selectButtonNum * 10) + 50000;
+        OSCManager.OSCinstance.startPort = selectRoomBannerNum * 10 + 50000;
 
         //ConnectionSceneに移動し、選択した部屋に参加
         Managers.instance.ChangeScene(GAME_STATE.CONNECTION);

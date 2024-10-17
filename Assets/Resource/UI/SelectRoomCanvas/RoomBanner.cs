@@ -11,7 +11,7 @@ public class RoomBanner : MonoBehaviour
     Image hostIcon;
     Text memberText;
 
-    void AssignChild()
+    public void AssignChild()
     {
         roomNumText = transform.GetChild(0).GetComponent<Text>();
         isPlayingText = transform.GetChild(1).GetComponent<Text>();
@@ -20,10 +20,15 @@ public class RoomBanner : MonoBehaviour
         memberText = transform.GetChild(5).GetComponent<Text>(); 
     }
 
+    private void Awake()
+    {
+        //AssignChild();
+    }
+
     public void SetData(AllGameData.AllData _data, int _num = 0)
     {
         //子オブジェクトのポインタに実体を指定
-        AssignChild();
+        //AssignChild();
 
         //部屋番号
         roomNumText.text = "Room " + (_num + 1).ToString();

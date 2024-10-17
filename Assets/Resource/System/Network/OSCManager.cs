@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Threading;
 using UnityEngine;
 
 public class OSCManager : MonoBehaviour
@@ -89,6 +90,8 @@ public class OSCManager : MonoBehaviour
 
     bool isOutServer = false;
 
+    SynchronizationContext subContext = null;
+
     //////////////////////
     //////// 関数 ////////
     //////////////////////
@@ -114,6 +117,7 @@ public class OSCManager : MonoBehaviour
 
             isOutServer = false;
         }*/
+        
 
         if(Input.GetKey(KeyCode.Space))
         {
@@ -311,6 +315,8 @@ public class OSCManager : MonoBehaviour
             tempServer = new OscServer(tempPort);
 
             tempServer.TryAddMethod(address, ReadSearchValue);
+
+            subContext = SynchronizationContext.Current;
         }
 
         AllGameData.AllData _allData = new AllGameData.AllData();
@@ -557,14 +563,17 @@ public class OSCManager : MonoBehaviour
         _allData.rData = initRoomData(_allData.rData);
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
-        int roomNum = _allData.pData.mainPacketData.comData.myPort - startPort / 10;
+        int roomNum = (_allData.pData.mainPacketData.comData.myPort - startPort) / 10;
 
-        testNum++;
+        testNum = _allData.pData.mainPacketData.comData.myPort;
 
         //受信した部屋のホストポート番号から部屋番号を割り出しその部屋を使用済み扱いにする
         isUsingRoom[roomNum] = true;
 
-        pSRCB.SetRoomBannerData(_allData, roomNum);
+        subContext.Post(__ =>
+        {
+            pSRCB.SetRoomBannerData(_allData, roomNum);
+        }, null);
 
         return;
     }
@@ -623,6 +632,8 @@ public class OSCManager : MonoBehaviour
                     AllGameData.AllData _serverAllData = new AllGameData.AllData();
                     _serverAllData.rData = roomData;
                     _serverAllData.pData = myNetIngameData;
+
+                    _serverAllData.pData.mainPacketData.comData.myPort = mainServer.Port;
 
                     OscClient _tempClient = new OscClient(_allData.pData.mainPacketData.comData.myIP, _allData.pData.mainPacketData.comData.myPort);
                     SendValueTarget(_serverAllData, _tempClient);
