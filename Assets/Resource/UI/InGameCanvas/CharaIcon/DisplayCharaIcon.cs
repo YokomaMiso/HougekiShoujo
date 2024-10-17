@@ -48,9 +48,6 @@ public class DisplayCharaIcon : MonoBehaviour
 
     void Start()
     {
-        iconBGColor[0] = ColorCordToRGB("#8fdee5");
-        iconBGColor[1] = ColorCordToRGB("#ff1f1f");
-
         int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -65,7 +62,7 @@ public class DisplayCharaIcon : MonoBehaviour
 
             Sprite icon = Managers.instance.gameManager.playerDatas[oscRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
             transform.GetChild(iconNums[i]).GetChild(0).GetComponent<Image>().sprite = icon;
-            transform.GetChild(iconNums[i]).GetComponent<Image>().color = iconBGColor[oscRoomData.myTeamNum];
+            transform.GetChild(iconNums[i]).GetComponent<Image>().color = Managers.instance.ColorCordToRGB(oscRoomData.myTeamNum);
             transform.GetChild(iconNums[i]).transform.localPosition = iconStartPos[iconNums[i]];
 
             teamCount[oscRoomData.myTeamNum]++;
@@ -150,11 +147,5 @@ public class DisplayCharaIcon : MonoBehaviour
             Vector2 pos = iconPos[iconNums[i]];
             transform.GetChild(iconNums[i]).transform.localPosition = pos;
         }
-    }
-
-    Color ColorCordToRGB(string hex)
-    {
-        if (ColorUtility.TryParseHtmlString(hex, out Color color)) return color;
-        else return Color.black;
     }
 }
