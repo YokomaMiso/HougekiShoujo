@@ -8,7 +8,10 @@ public class MVPIllust : MonoBehaviour
     Vector3 startPos = Vector3.left * 1920;
     Vector3 endPos = Vector3.left * 160;
 
-    Vector3 dropShadowPos = new Vector3(16, -16, 0);
+    Vector3 dropShadowPos = new Vector3(32, -16, 0);
+    float dropShadowTimer;
+    const float dropShadowTime = 0.25f;
+    bool drowShadowArrive;
 
     Image[] charaIllusts = new Image[2];
 
@@ -68,7 +71,21 @@ public class MVPIllust : MonoBehaviour
             }
             float nowRate = Mathf.Sqrt(timer / arriveTime);
             transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
-            charaIllusts[0].transform.localPosition = dropShadowPos * nowRate;
+        }
+
+        if (arrive)
+        {
+            if (!drowShadowArrive)
+            {
+                dropShadowTimer += Time.deltaTime;
+                if (dropShadowTimer >= dropShadowTime)
+                {
+                    dropShadowTimer = dropShadowTime;
+                    drowShadowArrive = true;
+                }
+                float nowRate = Mathf.Sqrt(dropShadowTimer / dropShadowTime);
+                charaIllusts[0].transform.localPosition = dropShadowPos * nowRate;
+            }
         }
     }
 }
