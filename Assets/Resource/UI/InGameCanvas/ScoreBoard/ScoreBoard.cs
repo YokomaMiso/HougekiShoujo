@@ -10,8 +10,6 @@ public class ScoreBoard : MonoBehaviour
 
     GameObject[] scoreInstance = new GameObject[6];
 
-    readonly Color[] BGColor = new Color[2];
-
     readonly int baseHeight = 320;
     readonly int heightSub = 140;
 
@@ -19,9 +17,6 @@ public class ScoreBoard : MonoBehaviour
 
     void Start()
     {
-        BGColor[0] = ColorCordToRGB("#2050E4");
-        BGColor[1] = ColorCordToRGB("#ff1f1f");
-
         int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < 6; i++)
         {
@@ -43,7 +38,7 @@ public class ScoreBoard : MonoBehaviour
             teamCount[oscRoomData.myTeamNum]++;
 
             //背景の色変更
-            scoreInstance[i].transform.GetChild(0).GetComponent<Image>().color = BGColor[oscRoomData.myTeamNum];
+            scoreInstance[i].transform.GetChild(0).GetComponent<Image>().color = Managers.instance.ColorCordToRGB(oscRoomData.myTeamNum);
 
             //アイコンの変更
             Sprite icon = Managers.instance.gameManager.playerDatas[oscRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
@@ -67,11 +62,5 @@ public class ScoreBoard : MonoBehaviour
 
         GameObject announce = Instantiate(itemAnnouncePrefab, transform);
         announce.transform.localPosition = Vector3.up * (baseHeight + heightSub);
-    }
-
-    Color ColorCordToRGB(string hex)
-    {
-        if (ColorUtility.TryParseHtmlString(hex, out Color color)) return color;
-        else return Color.black;
     }
 }

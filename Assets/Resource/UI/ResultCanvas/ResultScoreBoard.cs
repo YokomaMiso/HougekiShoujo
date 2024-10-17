@@ -10,8 +10,6 @@ public class ResultScoreBoard : MonoBehaviour
 
     GameObject[] scoreInstance = new GameObject[6];
 
-    readonly Color[] BGColor = new Color[2];
-
     readonly int[] teamPosX = new int[2] { -480, 480 };
     readonly int baseHeight = 140;
     readonly int heightSub = 140;
@@ -57,9 +55,6 @@ public class ResultScoreBoard : MonoBehaviour
         else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
         winner = hostIngameData.winner;
 
-        BGColor[0] = ColorCordToRGB("#2050E4");
-        BGColor[1] = ColorCordToRGB("#ff1f1f");
-
         kdfDatas = new KDFData[2][];
         kdfDatas[(int)TEAM_NUM.A] = new KDFData[3];
         kdfDatas[(int)TEAM_NUM.B] = new KDFData[3];
@@ -81,7 +76,7 @@ public class ResultScoreBoard : MonoBehaviour
             IngameData.GameData gameData = OSCManager.OSCinstance.GetIngameData(i).mainPacketData.inGameData;
 
             //背景の色変更
-            scoreInstance[i].transform.GetChild(0).GetComponent<Image>().color = BGColor[oscRoomData.myTeamNum];
+            scoreInstance[i].transform.GetChild(0).GetComponent<Image>().color = Managers.instance.ColorCordToRGB(oscRoomData.myTeamNum);
 
             //アイコンの変更
             Sprite icon = Managers.instance.gameManager.playerDatas[oscRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
@@ -163,9 +158,4 @@ public class ResultScoreBoard : MonoBehaviour
         return returnKDFData;
     }
 
-    Color ColorCordToRGB(string hex)
-    {
-        if (ColorUtility.TryParseHtmlString(hex, out Color color)) return color;
-        else return Color.black;
-    }
 }

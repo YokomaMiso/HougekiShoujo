@@ -8,7 +8,8 @@ public class CharaSerifBehavior : MonoBehaviour
     Image chatBG;
     Text playerName;
     Image charaIcon;
-    Text chatText;
+
+    [SerializeField] Sprite[] bgSprite;
 
     readonly static Vector3 startPos = Vector3.left * 420;
     readonly static Vector3 endPos = Vector3.zero;
@@ -18,8 +19,6 @@ public class CharaSerifBehavior : MonoBehaviour
 
     const float arriveTime = 0.25f;
     const float lifeTime = 3;
-    string[] serifs = new string[(int)RADIO_CHAT_ID.HELP + 1] { "", "前に出ます！", "援護します！", "後退します！", "ピンチ！助けて！" };
-    readonly Color[] constColor = new Color[2] { new Color(0.1255f, 0.3137f, 0.8941f), new Color(1, 0.125f, 0.125f, 1) };
 
     float timer = 0;
 
@@ -28,14 +27,14 @@ public class CharaSerifBehavior : MonoBehaviour
         chatBG = transform.GetComponent<Image>();
         playerName = transform.GetChild(0).GetComponent<Text>();
         charaIcon = transform.GetChild(1).GetComponent<Image>();
-        chatText = transform.GetChild(2).GetComponent<Text>();
+
+        chatBG.sprite = bgSprite[_roomData.myTeamNum * 4 + (int)_chatID - 1];
 
         playerName.text = _roomData.playerName;
-        playerName.color = constColor[_roomData.myTeamNum];
+        Outline[] outLines = playerName.GetComponents<Outline>();
+        outLines[outLines.Length - 1].effectColor = Managers.instance.ColorCordToRGB(_roomData.myTeamNum);
 
         charaIcon.sprite = Managers.instance.gameManager.playerDatas[_roomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
-
-        chatText.text = serifs[(int)_chatID];
 
         transform.localPosition = startPos;
     }
@@ -46,7 +45,7 @@ public class CharaSerifBehavior : MonoBehaviour
     {
         timer += Time.deltaTime;
         float nowRate = Mathf.Clamp01(timer / arriveTime);
-        transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate) + Vector3.down * posAdd;
+        transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate) + Vector3.down * (chatNum * posAdd);
         if (timer > lifeTime) { Destroy(gameObject); }
     }
 }

@@ -15,6 +15,8 @@ public class Managers : MonoBehaviour
     [SerializeField] GameObject changeSceneCanvasPrefab;
     GameObject changeSceneCanvasInstance = null;
 
+    readonly string[] teamColor = new string[2]{ "#37A0FE", "#F76F6F" };
+
     public bool UsingCanvas()
     {
         bool usingCanvas = false;
@@ -99,5 +101,13 @@ public class Managers : MonoBehaviour
     {
         optionData = _receiveData;
         saveManager.SaveOptionData(optionData);
+    }
+
+    public Color ColorCordToRGB(int _num)
+    {
+        if (_num >= teamColor.Length) { return Color.black; }
+
+        if (ColorUtility.TryParseHtmlString(teamColor[_num], out Color color)) return color;
+        else return Color.black;
     }
 }
