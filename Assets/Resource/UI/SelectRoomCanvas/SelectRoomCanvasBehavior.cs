@@ -37,6 +37,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void Start()
     {
+        OSCManager.OSCinstance.startPort = 50000;
         OSCManager.OSCinstance.pSRCB = this;
 
         for (int i = 0; i < (int)SELECT_ROOM_BUTTON_ID.MAX_NUM; i++) { buttons[i] = transform.GetChild(i).GetComponent<Image>(); }
