@@ -139,6 +139,8 @@ public class ResultScoreBoard : MonoBehaviour
         KDFData returnKDFData = kdfDatas[winner][0];
         for (int i = 1; i < kdfDatas[winner].Length; i++)
         {
+            if (kdfDatas[winner][i].playerID == -1) { continue; }
+
             //キル数が上回っている場合
             if (returnKDFData.killCount < kdfDatas[winner][i].killCount) { returnKDFData = kdfDatas[winner][i]; continue; }
             //キル数が同じ場合
@@ -165,6 +167,8 @@ public class ResultScoreBoard : MonoBehaviour
         {
             for (int j = 0; j < kdfDatas[i].Length; j++)
             {
+                if (kdfDatas[i][j].playerID == -1) { continue; }
+
                 //デス数が上回っている場合
                 if (returnKDFData.deathCount < kdfDatas[i][j].deathCount) { returnKDFData = kdfDatas[i][j]; continue; }
                 //デス数が同じ場合
@@ -192,6 +196,8 @@ public class ResultScoreBoard : MonoBehaviour
         {
             for (int j = 0; j < kdfDatas[i].Length; j++)
             {
+                if (kdfDatas[i][j].playerID == -1) { continue; }
+
                 //FF数が上回っている場合
                 if (returnKDFData.friendlyFireCount < kdfDatas[i][j].friendlyFireCount) { returnKDFData = kdfDatas[i][j]; continue; }
                 //FF数が同じ場合
