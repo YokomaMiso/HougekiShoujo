@@ -28,6 +28,18 @@ public class MortarProjectileBehavior : ProjectileBehavior
         transform.position = currentHorizon + Vector3.up * currentVertical;
     }
 
+    protected override void SpawnExplosion()
+    {
+        Vector3 spawnPos = transform.position;
+        float timeRate = timer / lifeTime;
+        if (timeRate >= 0.95f) { spawnPos.y = 0; }
+
+        GameObject explosionInstance = explosion.GetBody();
+        GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
+        obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
+        obj.GetComponent<ExplosionBehavior>().SetData(explosion);
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
         float timeRate = timer / lifeTime;
