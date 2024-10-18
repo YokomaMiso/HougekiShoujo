@@ -6,7 +6,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class SelectRoomCanvasBehavior : MonoBehaviour
 {
-    enum SELECT_ROOM_BUTTON_ID { CREATE = 0, JOIN, RANDOM, BACK_TO_TITLE, MAX_NUM };
+    enum SELECT_ROOM_BUTTON_ID { UPDATE = 0, JOIN, RANDOM, BACK_TO_TITLE, MAX_NUM };
 
     Image[] buttons = new Image[(int)SELECT_ROOM_BUTTON_ID.MAX_NUM];
     Image createButton;
@@ -35,6 +35,9 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     //ルームバナーリスト
     List<RoomBanner> roomBannerList = new List<RoomBanner>();
 
+    [SerializeField] GameObject connectingWindowPrefab;
+    GameObject connectingWindowInstance;
+
     void Start()
     {
         OSCManager.OSCinstance.startPort = 50000;
@@ -48,12 +51,11 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         {
             RoomBanner _room = roomBanners.transform.GetChild(i).GetComponent<RoomBanner>();
 
-            _room.AssignChild();
-
             //検索した部屋番号を適用
             roomBannerList.Add(_room);
         }
 
+        connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
         OSCManager.OSCinstance.SearchRoom(true);
     }
 
@@ -66,6 +68,9 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     {
         //シーンチェンジのキャンバスが生成されていたら早期リターン
         if (Managers.instance.UsingCanvas()) { return; }
+
+        //通信中ならリタ―ン
+        if(connectingWindowInstance != null) { return; }
 
         //Joinが押されていない
         if (!selectJoin)
@@ -112,9 +117,10 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
         switch ((SELECT_ROOM_BUTTON_ID)selectButtonNum)
         {
-            case SELECT_ROOM_BUTTON_ID.CREATE:
+            case SELECT_ROOM_BUTTON_ID.UPDATE:
                 //ConnectionSceneに移動し、部屋を作成
 
+                connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
                 OSCManager.OSCinstance.SearchRoom(false);
 
                 //Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
@@ -130,7 +136,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
             case SELECT_ROOM_BUTTON_ID.RANDOM:
                 //ConnectionSceneに移動し、部屋に参加or作成
 
-                
+
 
                 //Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
                 //Managers.instance.ChangeState(GAME_STATE.CONNECTION);
