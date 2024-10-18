@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class RoomBanner : MonoBehaviour
     Image hostIcon;
     Text memberText;
 
-    public void AssignChild()
+    void AssignChild()
     {
         roomNumText = transform.GetChild(0).GetComponent<Text>();
         isPlayingText = transform.GetChild(1).GetComponent<Text>();
@@ -20,21 +21,30 @@ public class RoomBanner : MonoBehaviour
         memberText = transform.GetChild(5).GetComponent<Text>(); 
     }
 
-    private void Awake()
+    public void InitBannerText()
     {
-        //AssignChild();
+        //部屋番号
+        roomNumText.text = "Room ";
+        //プレイ中かどうか
+        isPlayingText.color=Color.clear;
+        //メンバー数
+        memberCountText.text = "0/6";
+        //ホストアイコン
+        hostIcon.color = Color.clear;
+        //名前の適用
+        memberText.text = "Empty";
     }
 
     public void SetData(AllGameData.AllData _data, int _num = 0)
     {
         //子オブジェクトのポインタに実体を指定
-        //AssignChild();
+        AssignChild();
 
         //部屋番号
         roomNumText.text = "Room " + (_num + 1).ToString();
 
         //プレイ中なら表示
-        if (_data.rData.gameStart) { }
+        if (_data.rData.gameStart) { isPlayingText.color = Color.red; }
         //プレイしていないなら透明に
         else { isPlayingText.color = Color.clear; }
 
@@ -43,23 +53,11 @@ public class RoomBanner : MonoBehaviour
 
         //ホストアイコン
         if (_data.rData.playerCount == 0) { hostIcon.color = Color.clear; }
+        else { hostIcon.color = Color.white; }
 
         //名前の適用
-        memberText.text = _data.rData.playerName;
-
-        //メンバーの名前
-        //for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
-        //{
-        //    //居なければ透明にする
-        //    if (_data[i].rData.myID == -1)
-        //    {
-        //        memberTexts[i].color = Color.clear;
-        //        continue;
-        //    }
-
-        //    //名前の適用
-        //    memberTexts[i].text = _data[i].rData.playerName;
-        //}
+        if (_data.rData.playerCount == 0) { memberText.text = "Empty"; }
+        else { memberText.text = _data.rData.playerName; }
     }
 
 }
