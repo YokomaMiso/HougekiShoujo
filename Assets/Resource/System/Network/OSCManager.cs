@@ -110,9 +110,9 @@ public class OSCManager : MonoBehaviour
     //インゲームデータ処理中に送信されるろまずいのでUpdateは基本不使用
     void Update()
     {
-        Debug.Log("PlayerID is " + Managers.instance.playerID);
-        Debug.Log("IPAddress is " + GetLocalIPAddress());
-        Debug.Log("startPort is " + startPort);
+        //Debug.Log("PlayerID is " + Managers.instance.playerID);
+        //Debug.Log("IPAddress is " + GetLocalIPAddress());
+        //Debug.Log("startPort is " + startPort);
 
         // タイムアウトチェック
         if(isFinishHandshake)
@@ -183,7 +183,7 @@ public class OSCManager : MonoBehaviour
                         //　相手のIDが割り当て済みならインゲーム用のデータを送信する
                         if (_data.rData.myID != -1)
                         {
-                            Debug.Log("ID " + i + " へデータ送信");
+                            //Debug.Log("ID " + i + " へデータ送信");
                             SendValue(_data);
                         }
                     }
@@ -466,7 +466,7 @@ public class OSCManager : MonoBehaviour
         // 相手（ホスト）からの返答が無ければ一秒ごとにデータ送信をする
         if (roomData.isHandshaking == true)
         {
-            Debug.Log("ハンドシェイクの送信");
+            //Debug.Log("ハンドシェイクの送信");
             SendValue(_data);
         }
 
@@ -565,7 +565,7 @@ public class OSCManager : MonoBehaviour
         {
             if(_clientData.IsUsing())
             {
-                Debug.Log(i + " へデータ送信");
+                //Debug.Log(i + " へデータ送信");
 
                 //データの送信
                 _clientData.client.Send(address, _sendBytes, _sendBytes.Length);
@@ -844,7 +844,7 @@ public class OSCManager : MonoBehaviour
                 {
                     InitNetworkData();
 
-                    Debug.Log("接続がタイムアウトしました");
+                    //Debug.Log("接続がタイムアウトしました");
 
                     DisPacket();
 
