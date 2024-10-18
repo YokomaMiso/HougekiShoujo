@@ -189,31 +189,21 @@ public class PlayerAim : MonoBehaviour
             Camera.main.GetComponent<CameraMove>().ResetCameraFar();
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = !OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
+
+            aimVector = Vector3.zero;
+            attackAreaMat[0].SetFloat("_Direction", 0);
+            attackAreaMat[1].SetFloat("_Direction", 0);
+            aoeArea.transform.localPosition = Vector3.zero;
+
+            attackArea.SetActive(false);
+            aoeArea.SetActive(false);
         }
         else
         {
             fireSFX.GetComponent<AudioSource>().volume *= 0.5f;
             fireSFX.AddComponent<AudioLowPassFilter>();
         }
-    }
 
-    void Update()
-    {
-        if (!ownerPlayer.IsMine()) { return; }
-
-        if (ownerPlayer.playerState != PLAYER_STATE.AIMING)
-        {
-            aimVector = Vector3.zero;
-            if (ownerPlayer.IsMine())
-            {
-                attackAreaMat[0].SetFloat("_Direction", 0);
-                attackAreaMat[1].SetFloat("_Direction", 0);
-                aoeArea.transform.localPosition = Vector3.zero;
-
-                attackArea.SetActive(false);
-                aoeArea.SetActive(false);
-            }
-            return;
-        }
+        ownerPlayer.ChangeShellIconColor(0);
     }
 }

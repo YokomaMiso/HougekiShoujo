@@ -21,10 +21,10 @@ public class PlayerNameCanvas : MonoBehaviour
         bulletIcon.color = Color.clear;
     }
 
-    void Update() 
+    public void ChangeShellIconColor(int _num)
     {
-        int colorValue = ownerPlayer.GetCanonState() + 1;
+        int colorValue = _num;
         Color iconColor = Color.white * colorValue;
-        bulletIcon.color = iconColor; 
+        bulletIcon.color = iconColor;
     }
 }
