@@ -43,20 +43,19 @@ public class Player : MonoBehaviour
     bool alive = true;
     public void SetDead(int _num)
     {
-        IngameData.GameData hostIngameData;
-        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
-        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
-
-        if (hostIngameData.end) { return; }
-
         if (!alive) { return; }
 
-        alive = false;
         if (IsMine())
         {
+            IngameData.GameData hostIngameData;
+            if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+            else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
+            if (hostIngameData.end) { return; }
+
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false;
             Camera.main.GetComponent<CameraMove>().ResetCameraFar();
         }
+        alive = false;
         playerState = PLAYER_STATE.DEAD;
         playerDead.SetDeadPos(transform.position);
         playerDead.SetKillPlayerID(_num);
