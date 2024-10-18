@@ -12,8 +12,8 @@ public class CharaSerifBehavior : MonoBehaviour
 
     [SerializeField] Sprite[] bgSprite;
 
-    readonly static Vector3 startPos = Vector3.left * 420;
-    readonly static Vector3 endPos = Vector3.zero;
+    readonly static Vector3 startPos = new Vector3(-1170, 330);
+    readonly static Vector3 endPos = new Vector3(-750, 330);
 
     int chatNum = 0;
     const int posAdd = 128;

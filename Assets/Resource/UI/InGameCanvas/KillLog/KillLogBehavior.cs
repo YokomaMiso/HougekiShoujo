@@ -9,8 +9,8 @@ public class KillLogBehavior : MonoBehaviour
     Text killText;
     Text deadPlayer;
 
-    Vector3 startPos = Vector3.right * 400;
-    Vector3 endPos = Vector3.zero;
+    readonly static Vector3 startPos = Vector3.right * 1500;
+    readonly static Vector3 endPos = Vector3.right * 750;
 
     int logNum = 0;
 
@@ -53,7 +53,7 @@ public class KillLogBehavior : MonoBehaviour
         //Ž©Œˆ‚È‚ç
         if (killer == deadMan)
         {
-            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage(),Camera.main.transform);
+            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage(), Camera.main.transform);
         }
         //FF‚È‚ç
         else if (killerTeam == deadManTeam)
@@ -91,7 +91,7 @@ public class KillLogBehavior : MonoBehaviour
 
         if (killVoice == null) { return; }
         if (playKillVoice) { return; }
-        if (timer > killVoiceTime) 
+        if (timer > killVoiceTime)
         {
             killerPlayer.PlayVoice(killVoice, Camera.main.transform);
             playKillVoice = true;
