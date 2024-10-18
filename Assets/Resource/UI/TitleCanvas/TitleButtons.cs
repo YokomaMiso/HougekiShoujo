@@ -23,6 +23,7 @@ public class TitleButtons : MonoBehaviour
 
         CursorMove();
         DecideSelect();
+        PressCancel();
     }
 
     void CursorMove()
@@ -53,6 +54,16 @@ public class TitleButtons : MonoBehaviour
         if (Input.GetButtonDown("Submit"))
         {
             parent.ChangeFromButtons(selectNum);
+        }
+    }
+    void PressCancel()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
+            selectNum = selectItemNum - 1;
+            transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
+            isCanSelect = false;
         }
     }
 }
