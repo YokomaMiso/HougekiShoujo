@@ -191,6 +191,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84e55f542a9d654409b9acc73c85bb65, type: 3}
+--- !u!20 &44399437 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1792953345801191558, guid: 84e55f542a9d654409b9acc73c85bb65,
+    type: 3}
+  m_PrefabInstance: {fileID: 44399436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &217902381
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +540,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2774907320524252055, guid: d9fa9ccc66faa99448ebba54949af122,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 44399437}
     - target: {fileID: 3921321195368664648, guid: d9fa9ccc66faa99448ebba54949af122,
         type: 3}
       propertyPath: m_Name
@@ -657,6 +668,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectRoomCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4665943951500490803, guid: f61a18a5f731b36419a0264c672f132a,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 44399437}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

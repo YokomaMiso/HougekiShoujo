@@ -488,6 +488,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 4665943951500490803, guid: 641833ba9df70d54c91168dc4f08ee0e,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1603124038}
     - target: {fileID: 5309321296030655576, guid: 641833ba9df70d54c91168dc4f08ee0e,
         type: 3}
       propertyPath: stateText
@@ -571,6 +576,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84e55f542a9d654409b9acc73c85bb65, type: 3}
+--- !u!20 &1603124038 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1792953345801191558, guid: 84e55f542a9d654409b9acc73c85bb65,
+    type: 3}
+  m_PrefabInstance: {fileID: 1603124037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
