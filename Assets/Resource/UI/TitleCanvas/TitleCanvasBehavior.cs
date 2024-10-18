@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,10 +7,10 @@ public enum TITLE_STATE { STAY = -1, SELECT = 0, INPUT_NAME, CREDIT, CHANGE_TO_C
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
-    [SerializeField, Header("Œˆ’è‰¹")] AudioClip submitSFX;
+    [SerializeField, Header("æ±ºå®šéŸ³")] AudioClip submitSFX;
 
-    [SerializeField, Header("TitleBGM ƒCƒ“ƒgƒ")] AudioClip titleBGMIntro;
-    [SerializeField, Header("TitleBGM ƒ‹[ƒv")] AudioClip titleBGMLoop;
+    [SerializeField, Header("TitleBGM ã‚¤ãƒ³ãƒˆãƒ­")] AudioClip titleBGMIntro;
+    [SerializeField, Header("TitleBGM ãƒ«ãƒ¼ãƒ—")] AudioClip titleBGMLoop;
 
     [SerializeField] GameObject buttons;
     //[SerializeField] GameObject selectNetwork;
@@ -87,6 +87,8 @@ public class TitleCanvasBehavior : MonoBehaviour
                 Managers.instance.CreateOptionCanvas();
                 break;
             case 2:
+                Managers.instance.ChangeState(GAME_STATE.GALLERY);
+                Managers.instance.ChangeScene(GAME_STATE.GALLERY);
                 break;
             case 3:
                 ChangeTitleState(TITLE_STATE.CREDIT);
@@ -100,9 +102,9 @@ public class TitleCanvasBehavior : MonoBehaviour
     public void End()
     {
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;//ƒQ[ƒ€ƒvƒŒƒCI—¹
+        UnityEditor.EditorApplication.isPlaying = false;//ã‚²ãƒ¼ãƒ ãƒ—ãƒ¬ã‚¤çµ‚äº†
 #else
-                    Application.Quit();//ƒQ[ƒ€ƒvƒŒƒCI—¹
+        Application.Quit();//ã‚²ãƒ¼ãƒ ãƒ—ãƒ¬ã‚¤çµ‚äº†
 #endif
     }
 }

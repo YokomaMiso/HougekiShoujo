@@ -1,21 +1,21 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, SELECT_ROOM, CONNECTION, ROOM, IN_GAME, RESULT, MAX_NUM };
+public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, SELECT_ROOM, CONNECTION, ROOM, IN_GAME, RESULT,GALLERY, MAX_NUM };
 
 public class Managers : MonoBehaviour
 {
-    /*ƒVƒ“ƒOƒ‹ƒgƒ“*/
+    /*ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³*/
     public static Managers instance;
 
-    /*ƒZ[ƒuƒf[ƒ^*/
+    /*ã‚»ãƒ¼ãƒ–ãƒ‡ãƒ¼ã‚¿*/
     public OptionData optionData;
     [SerializeField] GameObject optionCanvasPrefab;
     GameObject optionCanvasInstance = null;
     [SerializeField] GameObject changeSceneCanvasPrefab;
     GameObject changeSceneCanvasInstance = null;
 
-    readonly string[] teamColor = new string[2]{ "#37A0FE", "#F76F6F" };
+    readonly string[] teamColor = new string[2] { "#37A0FE", "#F76F6F" };
 
     public bool UsingCanvas()
     {
@@ -26,16 +26,16 @@ public class Managers : MonoBehaviour
         return usingCanvas;
     }
 
-    /*ƒQ[ƒ€‘S‘Ì‚ÌƒXƒe[ƒg*/
+    /*ã‚²ãƒ¼ãƒ å…¨ä½“ã®ã‚¹ãƒ†ãƒ¼ãƒˆ*/
     public GAME_STATE state = GAME_STATE.LOGO_SPLASH;
     public GAME_STATE prevState = GAME_STATE.LOGO_SPLASH;
     public GAME_STATE nextState = GAME_STATE.LOGO_SPLASH;
 
-    /*ƒQ[ƒ€“à‚Åg—p‚·‚éID*/
+    /*ã‚²ãƒ¼ãƒ å†…ã§ä½¿ç”¨ã™ã‚‹ID*/
     public int playerID;
     int characterID = 0;
 
-    /*Šeíƒ}ƒl[ƒWƒƒ*/
+    /*å„ç¨®ãƒãƒãƒ¼ã‚¸ãƒ£*/
     public GameManager gameManager;
     public SaveManager saveManager;
     public TimeManager timeManager;
@@ -45,10 +45,10 @@ public class Managers : MonoBehaviour
     {
         if (instance == null)
         {
-            //ƒVƒ“ƒOƒ‹ƒgƒ“‰»
+            //ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³åŒ–
             instance = this;
             DontDestroyOnLoad(gameObject);
-            //Šeƒ}ƒl[ƒWƒƒ‚Ìw’è
+            //å„ãƒãƒãƒ¼ã‚¸ãƒ£ã®æŒ‡å®š
             ManagerLoad();
         }
         else
