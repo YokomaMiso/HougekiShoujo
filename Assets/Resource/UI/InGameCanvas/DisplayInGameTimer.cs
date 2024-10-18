@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class DisplayInGameTimer : MonoBehaviour
 {
-    Image timeNiddle;
+    Text timerText;
 
     void Start()
     {
-        timeNiddle = transform.GetChild(0).GetComponent<Image>();
+        timerText = transform.GetChild(0).GetComponent<Text>();
     }
 
     void Update()
@@ -20,7 +20,7 @@ public class DisplayInGameTimer : MonoBehaviour
         if (timer > 60) { timer = 60; }
         if (timer <= 0) { timer = 0; }
 
-        float nowAngle = timer - 60.0f;
-        timeNiddle.transform.localRotation = Quaternion.Euler(0, 0, nowAngle * 6);
+        string second = Mathf.FloorToInt(timer % 60).ToString("f0").PadLeft(2, '0');
+        timerText.text = second;
     }
 }
