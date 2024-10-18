@@ -8,8 +8,9 @@ MonoImporter:
       type: 3}
   - otherPlayerPrefab: {fileID: 2522134910337228876, guid: 433860aee1d671f4d87fe700b3b61c74,
       type: 3}
-  - killLogCanvasPrefab: {fileID: 4432466077039030639, guid: 833620ce40e2d5f4583f94e47425889c,
+  - ingameCanvasPrefab: {fileID: 4534531742424575426, guid: b39f5e6e432d30449b63f1be4dadedfd,
       type: 3}
+  - ingameCanvas: {instanceID: 0}
   - scoreBoardCanvasPrefab: {fileID: 4432466077039030639, guid: b44c6c4ed68b7024a8b27b7476c90273,
       type: 3}
   - allStageData: {fileID: 11400000, guid: 15fdd3986d21a1f45a8fe7cc6086cd50, type: 2}

@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     public PlayerData[] playerDatas;
 
     [SerializeField] Material[] outLineMat;
-    [SerializeField] GameObject killLogCanvasPrefab;
-    KillLogCanvas killLogCanvas;
+
+    [SerializeField] GameObject ingameCanvasPrefab;
+    public IngameCanvasBehavior ingameCanvas;
 
     [SerializeField] GameObject scoreBoardCanvasPrefab;
     GameObject scoreBoardCanvas;
@@ -29,7 +30,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject bgmAnnounceCanvas;
 
-    public IngameCanvasBehavior ingameCanvas;
 
     const float startDelay = 4;
     const float endDelay = 3;
@@ -101,17 +101,17 @@ public class GameManager : MonoBehaviour
             teamCount[oscRoomData.myTeamNum]++;
         }
 
-        CreateKillLogCanvas();
+        CreateIngameCanvas();
     }
-    void CreateKillLogCanvas()
+    void CreateIngameCanvas()
     {
-        GameObject killLogCanvasInstance = Instantiate(killLogCanvasPrefab);
-        killLogCanvas = killLogCanvasInstance.GetComponent<KillLogCanvas>();
+        GameObject ingameCanvasInstance = Instantiate(ingameCanvasPrefab);
+        ingameCanvas = ingameCanvasInstance.GetComponent<IngameCanvasBehavior>();
     }
 
     public void AddKillLog(Player _player)
     {
-        killLogCanvas.AddKillLog(_player);
+        ingameCanvas.AddKillLog(_player);
     }
 
     public Player GetPlayer(int _num)
