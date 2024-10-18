@@ -58,6 +58,10 @@ public class ResultScoreBoard : MonoBehaviour
         kdfDatas = new KDFData[2][];
         kdfDatas[(int)TEAM_NUM.A] = new KDFData[3];
         kdfDatas[(int)TEAM_NUM.B] = new KDFData[3];
+        for (int i = 0; i < kdfDatas.Length; i++)
+        {
+            for (int j = 0; j < kdfDatas[i].Length; j++) { kdfDatas[i][j].playerID = -1; }
+        }
 
         int[] teamCount = new int[2] { 0, 0 };
         for (int i = 0; i < 6; i++)
