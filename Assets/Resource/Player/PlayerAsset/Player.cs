@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     PlayerRadioChat playerRadioChat;
     PlayerDead playerDead;
     PlayerImage playerImage;
+    PlayerNameCanvas playerNameCanvas;
 
     Collider myCollider;
 
@@ -137,7 +138,6 @@ public class Player : MonoBehaviour
         voiceSoundObject = SoundManager.PlayVoice(_clip, _transform);
     }
 
-
     void Start()
     {
         this.PlayVoice(playerData.GetPlayerVoiceData().GetGameStart(), Camera.main.transform);
@@ -183,7 +183,9 @@ public class Player : MonoBehaviour
         else { roomData = OSCManager.OSCinstance.GetRoomData(playerID); }
         if (roomData.myTeamNum == (int)TEAM_NUM.B) { DirectionChange(Vector3.left); }
 
-        nameCanvas.GetComponent<PlayerNameCanvas>().SetName(roomData.playerName,roomData.myTeamNum);
+        playerNameCanvas = nameCanvas.GetComponent<PlayerNameCanvas>();
+        playerNameCanvas.SetPlayer(this);
+        playerNameCanvas.SetName(roomData.playerName,roomData.myTeamNum);
     }
 
     void Update()
