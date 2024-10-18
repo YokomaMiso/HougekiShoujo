@@ -193,6 +193,9 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void OpenOption()
     {
+        RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        if (myRoomData.ready) { return; }
+
         if (Input.GetButtonDown("Menu"))
         {
             Managers.instance.CreateOptionCanvas();
@@ -222,10 +225,10 @@ public class RoomCanvasBehavior : MonoBehaviour
         RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
 
         bool start = hostRoomData.gameStart;
-        if (joinedStartedRoom) 
+        if (joinedStartedRoom)
         {
             if (!start) { joinedStartedRoom = false; }
-            return; 
+            return;
         }
 
         if (!start) { return; }
