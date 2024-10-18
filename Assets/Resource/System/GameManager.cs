@@ -374,7 +374,7 @@ public class GameManager : MonoBehaviour
                 GetPlayer(i).PlayVoice(clip, Camera.main.transform);
             }
         }
-        if (aliveCount[(int)TEAM_NUM.B] <= 0)
+        else if (aliveCount[(int)TEAM_NUM.B] <= 0)
         {
             _data.winner = (int)TEAM_NUM.A;
             _data.winCountTeamA++;
