@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class VolumeIndexSetting : MonoBehaviour
 {
+    [SerializeField] float minValue = 0;
     [SerializeField] float maxValue = 1;
     float nowValue;
 
     void Start()
     {
+        transform.GetChild(1).GetComponent<Slider>().minValue = minValue;
         transform.GetChild(1).GetComponent<Slider>().maxValue = maxValue;
     }
 
@@ -27,7 +29,7 @@ public class VolumeIndexSetting : MonoBehaviour
 
     void ValueChange()
     {
-        if (nowValue < 0) { nowValue = 0; }
+        if (nowValue < minValue) { nowValue = minValue; }
         if (nowValue > maxValue) { nowValue = maxValue; }
 
         transform.GetChild(1).GetComponent<Slider>().value = nowValue;
