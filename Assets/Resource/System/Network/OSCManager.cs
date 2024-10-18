@@ -38,10 +38,18 @@ public class OSCManager : MonoBehaviour
 
     int tempPort;
 
+    // 送信タイミング制御用
+    float sendDataTimer;
+    float sendStartTimer;
+
     [SerializeField]
     float sendPerSecond = 60.0f;
 
+    // OSCの独自アドレス
     string address = "/main";
+
+    // サブスレッド保存インスタンス
+    SynchronizationContext subContext = null;
 
     ///////// OSCcore周り ////////
 
@@ -51,6 +59,7 @@ public class OSCManager : MonoBehaviour
     List<OscClientData> clientList = new List<OscClientData>();
     List<float> connectTimeList = new List<float>();
 
+    // 部屋選択画面でどの部屋が使用されているか管理用
     List<bool> isUsingRoom = new List<bool>();
 
     OscServer tempServer;
@@ -63,8 +72,10 @@ public class OSCManager : MonoBehaviour
 
     bool isFinishHandshake = false;
 
-    const float waitHandshakeResponseTime = 2f;
+    // コネクション確認時間
+    const float waitConnectionResponseTime = 2f;
 
+    // タイムアウトまでの時間
     const float timeoutSec = 5f;
 
 
@@ -75,22 +86,12 @@ public class OSCManager : MonoBehaviour
     // とりあえずシングルトンで運用（調停や証明書周りが決まってきたら修正）
     public static OSCManager OSCinstance;
 
-    [SerializeField]
-    int myPort = 8000;
-
-    int testNum = 0;
-
     //ゲーム内で必要な送受信データリスト
     //　要素数＝プレイヤーID
     public List<AllGameData.AllData> playerDataList = new List<AllGameData.AllData>();
 
-    string testS;
-
-    bool cutSend = false;
-
     bool isOutServer = false;
 
-    SynchronizationContext subContext = null;
 
     //////////////////////
     //////// 関数 ////////
@@ -109,45 +110,20 @@ public class OSCManager : MonoBehaviour
     //インゲームデータ処理中に送信されるろまずいのでUpdateは基本不使用
     void Update()
     {
-        /*if(isOutServer)
-        {
-            Managers.instance.ChangeScene(GAME_STATE.TITLE);
-            Managers.instance.ChangeState(GAME_STATE.TITLE);
-            Managers.instance.roomManager.Init();
-
-            isOutServer = false;
-        }*/
-        
-
-        if(Input.GetKey(KeyCode.Space))
-        {
-            cutSend = true;
-            Debug.Log("送信処理カット中");
-        }
-        else
-        {
-            cutSend = false;
-        }
-
-
         Debug.Log("PlayerID is " + Managers.instance.playerID);
         Debug.Log("IPAddress is " + GetLocalIPAddress());
         Debug.Log("startPort is " + startPort);
-        Debug.Log(testS);
 
-        Debug.Log(testNum);
-
+        // タイムアウトチェック
         if(isFinishHandshake)
         {
             TimeoutChecker();
         }
     }
 
-    float sendDataTimer;
-    float sendStartTimer;
-
     private void LateUpdate()
     {
+        // もし自身がクライアントでサーバと接続が切れた場合
         if (isOutServer)
         {
             Managers.instance.ChangeScene(GAME_STATE.TITLE);
@@ -157,33 +133,42 @@ public class OSCManager : MonoBehaviour
             isOutServer = false;
         }
 
+        // プレイヤーデータリストが存在しない場合は処理しない
         if (playerDataList.Count == 0)
         {
-            Debug.Log("nullです");
             return;
         }
 
+        // 自身のデータを送信用にまとめた構造体にコピーする
         allData.rData = roomData;
         allData.pData = myNetIngameData;
         playerDataList[Managers.instance.playerID] = allData;
 
+        // 秒間送信回数
         float fixedDeltaTime = 1.0f / sendPerSecond;
 
         sendDataTimer += Time.deltaTime;
 
+        // コネクションが終わっていなければ以下処理を行わない
         if (!isFinishHandshake) { return; }
 
+        // 送信切り替え用に数秒待機
         if (sendStartTimer <= 2f)
         {
             sendStartTimer += Time.deltaTime;
             return;
         }
 
+        /////////////////////////////////////////////////////////////////////////////
+        //////////////　以下処理はインゲーム用の毎フレーム通信処理です　/////////////
+        /////////////////////////////////////////////////////////////////////////////
+
         if (sendDataTimer >= fixedDeltaTime)
         {
             //ハンドシェイクが完了していれば毎フレームインゲームデータを送信する
             if (isFinishHandshake)
             {
+                // 自身がサーバかどうか
                 if (isServer)
                 {
                     //送信用データリストにある分送信を試みる
@@ -195,6 +180,7 @@ public class OSCManager : MonoBehaviour
 
                         _data = playerDataList[i];
 
+                        //　相手のIDが割り当て済みならインゲーム用のデータを送信する
                         if (_data.rData.myID != -1)
                         {
                             Debug.Log("ID " + i + " へデータ送信");
@@ -202,20 +188,16 @@ public class OSCManager : MonoBehaviour
                         }
                     }
                 }
+                // 以下クライアント側
                 else
                 {
+                    // 送信用のデータを作成
                     AllGameData.AllData _data = new AllGameData.AllData();
                     _data.rData = initRoomData(_data.rData);
                     _data = playerDataList[Managers.instance.playerID];
 
-                    if(cutSend)
-                    {
-                        return;
-                    }
-
                     if (_data.rData.myID != -1)
                     {
-                        Debug.Log("インゲームデータ送信(クライアント)");
                         SendValue(_data);
                     }
                 }
@@ -231,6 +213,9 @@ public class OSCManager : MonoBehaviour
         DisPacket();
     }
 
+    /// <summary>
+    /// パケット破棄処理
+    /// </summary>
     private void DisPacket()
     {
         if (tempServer != null)
@@ -258,6 +243,10 @@ public class OSCManager : MonoBehaviour
     ///////////////　ハンドシェイク用関数　/////////////
     ////////////////////////////////////////////////////
 
+    /// <summary>
+    /// IPアドレス取得処理
+    /// </summary>
+    /// <returns>stringでIPv4のアドレス</returns>
     private string GetLocalIPAddress()
     {
         IPAddress ipv4Address = null;
@@ -280,6 +269,11 @@ public class OSCManager : MonoBehaviour
         return "255.255.255.255";
     }
 
+    /// <summary>
+    /// アドレス取得用
+    /// </summary>
+    /// <param name="type">IPアドレスのタイプ</param>
+    /// <returns>IPv4アドレス</returns>
     private IPAddress GetIPv4AddressByType(NetworkInterfaceType type)
     {
         foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
@@ -300,12 +294,17 @@ public class OSCManager : MonoBehaviour
         }
         return null;
     }
-
+    
+    /// <summary>
+    /// 部屋探索処理
+    /// </summary>
+    /// <param name="_isCreatePacket">パケットを作成するか</param>
     public void SearchRoom(bool _isCreatePacket)
     {
         clientList.Clear();
         isUsingRoom.Clear();
 
+        // パケット作成処理
         if(_isCreatePacket)
         {
             DisPacket();
@@ -316,9 +315,11 @@ public class OSCManager : MonoBehaviour
 
             tempServer.TryAddMethod(address, ReadSearchValue);
 
+            // 上で登録したサブスレッドを保存
             subContext = SynchronizationContext.Current;
         }
 
+        // データの初期化
         AllGameData.AllData _allData = new AllGameData.AllData();
 
         _allData.rData = initRoomData(_allData.rData);
@@ -329,6 +330,7 @@ public class OSCManager : MonoBehaviour
         _allData.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
         _allData.pData.mainPacketData.comData.myPort = tempPort;
 
+        // 最大部屋数分のデータを作成する
         for(int i = 0; i < maxRoom; i++)
         {
             OscClientData _client = new OscClientData();
@@ -339,19 +341,28 @@ public class OSCManager : MonoBehaviour
             isUsingRoom.Add(false);
         }
 
+        // 部屋確認用のデータ送信
         SendValue(_allData);
 
+        
         StartCoroutine(CheckRoomData());
     }
 
+    /// <summary>
+    /// 送信後受信データの確認を行う
+    /// </summary>
+    /// <returns>IEnumerator</returns>
     IEnumerator CheckRoomData()
     {
+        // 部屋確認用データ送信後指定秒数間待機させる
         yield return new WaitForSeconds(3.0f);
 
         for (int i = 0; i < maxRoom; i++)
         {
+            // i番目の部屋がデータ取得していなければ
             if(isUsingRoom[i] == false)
             {
+                // その部屋を空としてデータセットする
                 AllGameData.AllData _allData = new AllGameData.AllData();
                 _allData.rData = initRoomData(_allData.rData);
 
@@ -360,9 +371,15 @@ public class OSCManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 部屋参加時の処理
+    /// </summary>
     public void CreateTempNet()
     {
+        // 一度現在所持しているパケットを全て破棄する
         DisPacket();
+
+        /************** 初期化処理 *************/
 
         AllGameData.AllData allData = new AllGameData.AllData();
         myNetIngameData = new IngameData.PlayerNetData();
@@ -419,6 +436,8 @@ public class OSCManager : MonoBehaviour
 
         tempServer.TryAddMethod(address, ReadMainValue);
 
+        /************** 初期化終了 *************/
+
         //1秒ごとにハンドシェイクのデータ送信を試みる
         InvokeRepeating("SendFirstHandshake", 0f, 1f);
 
@@ -426,21 +445,25 @@ public class OSCManager : MonoBehaviour
         //もし返答がなければこの中でサーバを作成する
         StartCoroutine(CheckForResponse());
 
-        
-
         return;
     }
 
+    /// <summary>
+    /// 部屋参加用のデータ送信処理
+    /// </summary>
     private void SendFirstHandshake()
     {
         AllGameData.AllData _data = new AllGameData.AllData();
         _data.rData = initRoomData(_data.rData);
 
+        // 相手（ホスト）に自身のIPアドレス及びポート番号を伝える
         _data.pData.mainPacketData.comData.myIP = GetLocalIPAddress();
         _data.pData.mainPacketData.comData.myPort = tempPort;
+
+        // 相手（ホスト）に自身がまだ割り当てられていない事を伝える
         _data.rData.myID = -1;
 
-
+        // 相手（ホスト）からの返答が無ければ一秒ごとにデータ送信をする
         if (roomData.isHandshaking == true)
         {
             Debug.Log("ハンドシェイクの送信");
@@ -450,18 +473,24 @@ public class OSCManager : MonoBehaviour
         return;
     }
 
+    /// <summary>
+    /// 部屋参加時のデータ確認
+    /// </summary>
+    /// <returns></returns>
     IEnumerator CheckForResponse()
     {
-        yield return new WaitForSeconds(waitHandshakeResponseTime);
+        yield return new WaitForSeconds(waitConnectionResponseTime);
 
-        Debug.Log("コルーチン作動");
+        // もしホストから返答があればisHandshakingがfalseになる
 
         if (roomData.isHandshaking)
         {
+            //////// true、つまり返事がないためその部屋のホストになる ///////////
+
             //ハンドシェイク確認用パケット破棄前にサーバがなくなるとバグるためここに記述
             CancelInvoke("SendFirstHandshake");
-            Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
 
+            // 自身のデータをホスト用にセットする
             Managers.instance.playerID = 0;
             myNetIngameData.PlayerID = Managers.instance.playerID;
             roomData.myID = Managers.instance.playerID;
@@ -486,11 +515,13 @@ public class OSCManager : MonoBehaviour
         }
         else
         {
+            //////// false、つまり返事があったためクライアントとして参加する ///////////
+
             CancelInvoke("SendFirstHandshake");
-            Debug.Log("サーバが存在しました、クライアント処理へ移行");
 
             tempServer.Dispose();
 
+            //　ホストから指定されたポート番号で受信を始める
             mainServer = new OscServer(myNetIngameData.mainPacketData.comData.myPort);
 
             isServer = false;
@@ -502,6 +533,10 @@ public class OSCManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 一時的に使用するポート番号の取得
+    /// </summary>
+    /// <returns>ポート番号</returns>
     private int GetRandomTempPort()
     {
         return UnityEngine.Random.Range(50100, 51000);
@@ -512,10 +547,10 @@ public class OSCManager : MonoBehaviour
     ////////////////////////////////////////////////////
 
     /// <summary>
-    /// データ送信関数
+    /// データ送信関数、送信先リスト全員に送る
     /// </summary>
-    /// <typeparam name="T">構造体及び値型のデータ</typeparam>
-    /// <param name="_struct">実際に送信したい構造体データ</param>
+    /// <typeparam name="T">送信するデータのテンプレ</typeparam>
+    /// <param name="_struct">送信するデータの実体</param>
     private void SendValue<T>(T _struct) where T : struct
     {
         byte[] _sendBytes = new byte[0];
@@ -539,6 +574,12 @@ public class OSCManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 指定した相手にだけデータ送信する用
+    /// </summary>
+    /// <typeparam name="T">送信するデータのテンプレ</typeparam>
+    /// <param name="_struct">送信するデータの実体</param>
+    /// <param name="_client">送信する相手</param>
     private void SendValueTarget<T>(T _struct, OscClient _client) where T : struct
     {
         byte[] _sendBytes = new byte[0];
@@ -546,11 +587,14 @@ public class OSCManager : MonoBehaviour
         //送信データのバイト配列化
         _sendBytes = netInstance.StructToByte(_struct);
 
-
         //データの送信
         _client.Send(address, _sendBytes, _sendBytes.Length);
     }
 
+    /// <summary>
+    /// 部屋検索時のホストからの応答受け付け用
+    /// </summary>
+    /// <param name="values">受信したデータ</param>
     private void ReadSearchValue(OscMessageValues values)
     {
         byte[] _receiveBytes = new byte[0];
@@ -563,13 +607,14 @@ public class OSCManager : MonoBehaviour
         _allData.rData = initRoomData(_allData.rData);
         _allData = netInstance.ByteToStruct<AllGameData.AllData>(_receiveBytes);
 
+        // 部屋番号を相手のポート番号から割り出す
         int roomNum = (_allData.pData.mainPacketData.comData.myPort - startPort) / 10;
 
-        testNum = _allData.pData.mainPacketData.comData.myPort;
-
-        //受信した部屋のホストポート番号から部屋番号を割り出しその部屋を使用済み扱いにする
+        //受信した部屋を使用済み扱いにする
         isUsingRoom[roomNum] = true;
 
+        // このメソッドはサブスレッド動作のためUnityのメソッドが呼び出せません
+        // そのためメインスレッドへデータセットメソッドの実行を依頼する
         subContext.Post(__ =>
         {
             pSRCB.SetRoomBannerData(_allData, roomNum);
@@ -598,8 +643,6 @@ public class OSCManager : MonoBehaviour
 
         if (isServer)
         {
-            //testS = "サーバ";
-
             //受信したプレイヤーデータがゲーム内に存在する場合データリストにセットする
             if (!_allData.rData.isHandshaking)
             {
@@ -616,8 +659,7 @@ public class OSCManager : MonoBehaviour
 
                     return;
                 }
-
-                testS = "サーバとしてインゲーム受信";
+                
                 playerDataList[_allData.pData.PlayerID] = _allData;
 
                 //受信カウントをリセットする
@@ -641,9 +683,7 @@ public class OSCManager : MonoBehaviour
                     // コネクションする必要がないためreturnする
                     return;
                 }
-
-                testNum++;
-
+                
                 // コネクション受信時
                 for (int i = 1; i < playerDataList.Count; i++)
                 {
@@ -675,7 +715,6 @@ public class OSCManager : MonoBehaviour
         {
             if (!isFinishHandshake)
             {
-                //testS = "クライアントとしてハンドシェイク受信";
                 Managers.instance.playerID = _allData.rData.myID;
                 roomData.myID = _allData.rData.myID;
 
@@ -694,11 +733,8 @@ public class OSCManager : MonoBehaviour
             }
             else
             {
-                //testS = "クライアントとしてインゲーム受信";
-
                 if (_allData.rData.myID == -1 && _allData.pData.PlayerID == 0)
                 {
-                    testS = "サーバが抜けました";
 
                     _allData.rData = initRoomData(_allData.rData);
                     _allData.pData.mainPacketData.inGameData = initIngameData(_allData.pData.mainPacketData.inGameData);
@@ -769,16 +805,11 @@ public class OSCManager : MonoBehaviour
     }
 
     /// <summary>
-    /// サーバ側でデータをキャッチすれば呼び出されます
+    /// タイムアウトチェック処理
     /// </summary>
-    /// <remarks>メインスレッド動作のためUnity用のメソッドも動作</remarks>
-    private void MainThreadMethod()
-    {
-
-    }
-
     private void TimeoutChecker()
     {
+        // 現在のシーンが通信する必要のある時のみチェックさせる
         if (Managers.instance.state >= GAME_STATE.ROOM && Managers.instance.state <= GAME_STATE.IN_GAME)
         {
             if (isServer)
@@ -799,6 +830,7 @@ public class OSCManager : MonoBehaviour
                         
                         clientList[i].Release();
                     }
+                    // そうでない場合は接続時間を足す
                     else if (playerDataList[i].rData.myID != -1)
                     {
                         connectTimeList[i] += Time.deltaTime;
