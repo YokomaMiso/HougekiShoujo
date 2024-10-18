@@ -186,17 +186,10 @@ public class PlayerAim : MonoBehaviour
 
         if (ownerPlayer.IsMine())
         {
-            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = !OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
 
-            aimVector = Vector3.zero;
-            attackAreaMat[0].SetFloat("_Direction", 0);
-            attackAreaMat[1].SetFloat("_Direction", 0);
-            aoeArea.transform.localPosition = Vector3.zero;
-
-            attackArea.SetActive(false);
-            aoeArea.SetActive(false);
+            ResetAim();
         }
         else
         {
@@ -205,5 +198,17 @@ public class PlayerAim : MonoBehaviour
         }
 
         ownerPlayer.ChangeShellIconColor(0);
+    }
+
+    public void ResetAim()
+    {
+        aimVector = Vector3.zero;
+        attackAreaMat[0].SetFloat("_Direction", 0);
+        attackAreaMat[1].SetFloat("_Direction", 0);
+        aoeArea.transform.localPosition = Vector3.zero;
+
+        attackArea.SetActive(false);
+        aoeArea.SetActive(false);
+        Camera.main.GetComponent<CameraMove>().ResetCameraFar();
     }
 }

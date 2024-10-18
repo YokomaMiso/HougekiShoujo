@@ -257,7 +257,7 @@ public class Player : MonoBehaviour
                         else if (inputNum == 1)
                         {
                             playerState = PLAYER_STATE.IDLE;
-                            Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+                            playerAim.ResetAim();
                         }
                         else if (inputNum - 2 == GetCanonState())
                         {

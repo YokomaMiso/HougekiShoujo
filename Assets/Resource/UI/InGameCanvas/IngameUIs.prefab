@@ -245,60 +245,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &1553402241202506340
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8893806763482130056}
-  - component: {fileID: 2730425243279490424}
-  m_Layer: 5
-  m_Name: CharaIcons
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8893806763482130056
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553402241202506340}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3079600542410275195}
-  - {fileID: 7919046441560318929}
-  - {fileID: 2943373221375432801}
-  - {fileID: 16818011392162784}
-  - {fileID: 9039563810216356354}
-  - {fileID: 7879436554483950661}
-  m_Father: {fileID: 7508336116624497330}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2730425243279490424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553402241202506340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253c59f5589763a4f826024744c93186, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1613066702840865061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,12 +1081,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6704216935804895998}
+  - {fileID: 1925366296469137139}
   - {fileID: 7508336116624497330}
   - {fileID: 1004754870733544476}
   - {fileID: 832583510616678388}
   - {fileID: 7924438893201172031}
   - {fileID: 6719447402724261009}
-  - {fileID: 1925366296469137139}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9031331128263316634
@@ -2498,6 +2444,7 @@ GameObject:
   - component: {fileID: 7508336116624497330}
   - component: {fileID: 6375340970516584401}
   - component: {fileID: 5931425599065673434}
+  - component: {fileID: 1520078401568641244}
   m_Layer: 5
   m_Name: CharaIconCanvas
   m_TagString: Untagged
@@ -2517,7 +2464,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8893806763482130056}
+  - {fileID: 3079600542410275195}
+  - {fileID: 7919046441560318929}
+  - {fileID: 2943373221375432801}
+  - {fileID: 16818011392162784}
+  - {fileID: 9039563810216356354}
+  - {fileID: 7879436554483950661}
   m_Father: {fileID: 4644188362424271866}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2546,7 +2498,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5931425599065673434
 MonoBehaviour:
@@ -2571,13 +2523,25 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &1520078401568641244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150582568451160299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253c59f5589763a4f826024744c93186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1220360111290149387
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8893806763482130056}
+    m_TransformParent: {fileID: 7508336116624497330}
     m_Modifications:
     - target: {fileID: 1212639186656088555, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
         type: 3}
@@ -2694,6 +2658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharaIconInGame4
       objectReference: {fileID: 0}
+    - target: {fileID: 8702792976519111754, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2711,7 +2680,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8893806763482130056}
+    m_TransformParent: {fileID: 7508336116624497330}
     m_Modifications:
     - target: {fileID: 1212639186656088555, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
         type: 3}
@@ -2828,6 +2797,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharaIconInGame3
       objectReference: {fileID: 0}
+    - target: {fileID: 8702792976519111754, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2845,7 +2819,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8893806763482130056}
+    m_TransformParent: {fileID: 7508336116624497330}
     m_Modifications:
     - target: {fileID: 1212639186656088555, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
         type: 3}
@@ -2962,6 +2936,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharaIconInGame1
       objectReference: {fileID: 0}
+    - target: {fileID: 8702792976519111754, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2979,7 +2958,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8893806763482130056}
+    m_TransformParent: {fileID: 7508336116624497330}
     m_Modifications:
     - target: {fileID: 1212639186656088555, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
         type: 3}
@@ -3096,6 +3075,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharaIconInGame5
       objectReference: {fileID: 0}
+    - target: {fileID: 8702792976519111754, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3113,7 +3097,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8893806763482130056}
+    m_TransformParent: {fileID: 7508336116624497330}
     m_Modifications:
     - target: {fileID: 1212639186656088555, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
         type: 3}
@@ -3230,6 +3214,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharaIconInGame2
       objectReference: {fileID: 0}
+    - target: {fileID: 8702792976519111754, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3247,7 +3236,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8893806763482130056}
+    m_TransformParent: {fileID: 7508336116624497330}
     m_Modifications:
     - target: {fileID: 1212639186656088555, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
         type: 3}
@@ -3363,6 +3352,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CharaIconInGame6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702792976519111754, guid: a12aa089c9b8fa34a8d99ac57c8a459b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
