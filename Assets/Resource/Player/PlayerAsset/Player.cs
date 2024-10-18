@@ -43,6 +43,12 @@ public class Player : MonoBehaviour
     bool alive = true;
     public void SetDead(int _num)
     {
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
+
+        if (hostIngameData.end) { return; }
+
         if (!alive) { return; }
 
         alive = false;

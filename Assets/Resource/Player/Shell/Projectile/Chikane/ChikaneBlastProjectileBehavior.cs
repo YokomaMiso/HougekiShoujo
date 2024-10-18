@@ -16,7 +16,7 @@ public class ChikaneBlastProjectileBehavior : ProjectileBehavior
     {
         base.Start();
         timeBorder = new float[maxState];
-        const float baseSpawnTime = 0.75f;
+        const float baseSpawnTime = 0.6f;
         const float spawnBetween = 0.1f;
         for (int i = 0; i < maxState; i++)
         {
