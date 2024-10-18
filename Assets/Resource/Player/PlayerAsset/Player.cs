@@ -86,6 +86,8 @@ public class Player : MonoBehaviour
 
     public void PlayEmote(RADIO_CHAT_ID _ID) { playerRadioChat.DisplayEmote(_ID); }
 
+    public void ChangeShellIconColor(int _num) { playerNameCanvas.ChangeShellIconColor(_num); }
+
     //For Other
     bool fire;
     bool useSub;
@@ -104,6 +106,7 @@ public class Player : MonoBehaviour
         playerSubAction.Init();
         playerDead.Init();
         playerImage.Init();
+        ChangeShellIconColor(0);
 
         fire = false;
         useSub = false;
@@ -185,7 +188,7 @@ public class Player : MonoBehaviour
 
         playerNameCanvas = nameCanvas.GetComponent<PlayerNameCanvas>();
         playerNameCanvas.SetPlayer(this);
-        playerNameCanvas.SetName(roomData.playerName,roomData.myTeamNum);
+        playerNameCanvas.SetName(roomData.playerName, roomData.myTeamNum);
     }
 
     void Update()

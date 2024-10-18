@@ -37,6 +37,7 @@ public class PlayerReload : MonoBehaviour
         if (timer > reloadTime)
         {
             timer = 0;
+            ownerPlayer.ChangeShellIconColor(1);
             return shellNum;
         }
 
