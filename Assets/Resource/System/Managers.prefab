@@ -89,8 +89,9 @@ MonoBehaviour:
   outLineMat:
   - {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}
   - {fileID: 2100000, guid: 19fd21ca5640c2242852074a796b5117, type: 2}
-  killLogCanvasPrefab: {fileID: 4432466077039030639, guid: 833620ce40e2d5f4583f94e47425889c,
+  ingameCanvasPrefab: {fileID: 4534531742424575426, guid: b39f5e6e432d30449b63f1be4dadedfd,
     type: 3}
+  ingameCanvas: {fileID: 0}
   scoreBoardCanvasPrefab: {fileID: 4432466077039030639, guid: b44c6c4ed68b7024a8b27b7476c90273,
     type: 3}
   allStageData: {fileID: 11400000, guid: 15fdd3986d21a1f45a8fe7cc6086cd50, type: 2}
@@ -149,8 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f9137985e630d449039fc1f3ecedc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pSRCB: {fileID: 0}
+  startPort: 50000
   sendPerSecond: 60
-  myPort: 8000
 --- !u!114 &2596348104808432211
 MonoBehaviour:
   m_ObjectHideFlags: 0
