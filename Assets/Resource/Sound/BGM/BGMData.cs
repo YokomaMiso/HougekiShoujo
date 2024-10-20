@@ -10,11 +10,9 @@ public class BGMData : ScriptableObject
     [SerializeField, Header("BGM Title")] string bgmTitle;
     [SerializeField, Header("BGM Artist")] string artistName;
 
-    [SerializeField, Header("Stage BGM Intro")] AudioClip BGMIntro;
-    [SerializeField, Header("Stage BGM Loop")] AudioClip BGMLoop;
+    [SerializeField, Header("Stage BGM")] AudioClip BGM;
 
     public string GetBGMTitle() { return bgmTitle; }
     public string GetBGMArtistName() { return artistName; }
-    public AudioClip GetBGMIntro() { return BGMIntro; }
-    public AudioClip GetBGMLoop() { return BGMLoop; }
+    public AudioClip GetBGM() { return BGM; }
 }

@@ -12,8 +12,6 @@ public class SoundObject : MonoBehaviour
     bool isBGM = false;
     float timer;
 
-    GameObject loopBGMInstance;
-
     public void ReceiveSound(AudioClip _clip, SOUND_TYPE _type, bool _loop)
     {
         clip = _clip;
@@ -35,7 +33,7 @@ public class SoundObject : MonoBehaviour
                 break;
 
             case SOUND_TYPE.SFX:
-                pitch *= Random.Range(0.8f, 1.2f);
+                pitch *= Random.Range(0.9f, 1.1f);
                 volume *= SoundManager.sfxVolume;
                 lifeTime = clip.length;
                 break;
@@ -56,28 +54,10 @@ public class SoundObject : MonoBehaviour
 
         source.Play();
     }
-    public void SpawnLoopBGM(AudioClip _clip)
-    {
-        loopBGMInstance = SoundManager.PlayBGM(_clip);
-        loopBGMInstance.GetComponent<AudioSource>().Stop();
-    }
 
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= lifeTime)
-        {
-            Destroy(gameObject);
-
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (!loopBGMInstance) { return; }
-
-        AudioSource loopSource = loopBGMInstance.GetComponent<AudioSource>();
-        loopSource.Play();
-        SoundManager.SetNowBGM(loopSource);
+        if (timer >= lifeTime) { Destroy(gameObject); }
     }
 }

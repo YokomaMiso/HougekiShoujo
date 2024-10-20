@@ -116,8 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submitSFX: {fileID: 0}
-  titleBGMIntro: {fileID: 8300000, guid: 59686e6723a6bb642b55ce461e36e1c4, type: 3}
-  titleBGMLoop: {fileID: 8300000, guid: d25816b0ef313c041bf689e64afca2cb, type: 3}
+  titleBGM: {fileID: 8300000, guid: 260cb025f4ffff343a4ffb306fbe3b26, type: 3}
   buttons: {fileID: 600517467208630858, guid: 545b428b4e374164d91acbe3a33a479f, type: 3}
   inputName: {fileID: 1682089825833050959, guid: ca6073ca1afa62f4fa5cfdb81f5dec08,
     type: 3}

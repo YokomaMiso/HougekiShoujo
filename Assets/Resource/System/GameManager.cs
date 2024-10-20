@@ -54,10 +54,10 @@ public class GameManager : MonoBehaviour
         sdaInstance = sda.GetComponent<SuddenDeathArea>();
 
         //ステージBGMの再生
-        SoundManager.PlayBGMIntro(nowStageData.GetBGM().GetBGMIntro(), nowStageData.GetBGM().GetBGMLoop());
+        SoundManager.PlayBGM(nowStageData.GetBGMData().GetBGM());
         //BGMラベルの生成
         GameObject bgmLabel = Instantiate(bgmAnnounceCanvas);
-        bgmLabel.GetComponent<BGMAnnounceCanvasBehavior>().SetBGMText(nowStageData.GetBGM());
+        bgmLabel.GetComponent<BGMAnnounceCanvasBehavior>().SetBGMText(nowStageData.GetBGMData());
 
         //プレイヤーの生存をtrueにする
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;

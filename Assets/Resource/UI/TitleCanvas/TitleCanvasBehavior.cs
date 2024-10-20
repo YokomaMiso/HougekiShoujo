@@ -9,8 +9,7 @@ public class TitleCanvasBehavior : MonoBehaviour
 {
     [SerializeField, Header("決定音")] AudioClip submitSFX;
 
-    [SerializeField, Header("TitleBGM イントロ")] AudioClip titleBGMIntro;
-    [SerializeField, Header("TitleBGM ループ")] AudioClip titleBGMLoop;
+    [SerializeField, Header("TitleBGM")] AudioClip titleBGM;
 
     [SerializeField] GameObject buttons;
     //[SerializeField] GameObject selectNetwork;
@@ -36,7 +35,7 @@ public class TitleCanvasBehavior : MonoBehaviour
         uis[(int)TITLE_STATE.CREDIT] = Instantiate(creditCanvas, transform);
         uis[(int)TITLE_STATE.CREDIT].GetComponent<CreditCanvasBehavior>().SetParent(this);
         UIsUpdate();
-        SoundManager.PlayBGMIntro(titleBGMIntro, titleBGMLoop);
+        SoundManager.PlayBGM(titleBGM);
     }
 
     void Update()

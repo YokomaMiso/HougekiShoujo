@@ -78,16 +78,4 @@ public class SoundManager : MonoBehaviour
 
         return obj;
     }
-    public static GameObject PlayBGMIntro(AudioClip _startClip, AudioClip _loopClip, Transform _transform = null)
-    {
-        if (_transform == null) { _transform = Camera.main.transform.GetChild(0); }
-
-        GameObject obj = Instantiate(soundObject, _transform);
-        obj.GetComponent<SoundObject>().ReceiveSound(_startClip, SOUND_TYPE.BGM, false);
-        obj.AddComponent<LoopBehavior>().SetLoopClip(_loopClip);
-
-        SetNowBGM(obj.GetComponent<AudioSource>());
-
-        return obj;
-    }
 }
