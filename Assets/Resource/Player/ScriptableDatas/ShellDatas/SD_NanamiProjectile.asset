@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
   m_Name: SD_NanamiProjectile
   m_EditorClassIdentifier: 
-  shellIcon: {fileID: 21300000, guid: a14d0e39f6a427f498c3518f124576f0, type: 3}
+  shellIcon: {fileID: 21300000, guid: 477acf7d108470048a106b9f348a3135, type: 3}
   shellType: 2
   projectile: {fileID: 1008518316061016973, guid: d1e9b76a44427f44d9463411c190d4a8,
     type: 3}
