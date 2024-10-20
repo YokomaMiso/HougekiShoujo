@@ -13,7 +13,7 @@ public abstract class SceneChange : MonoBehaviour
     protected GameObject[] ribbons = new GameObject[2];
 
     protected float timer;
-    protected readonly float lifeTime = 0.5f;
+    protected float lifeTime = 0.5f;
 
     int visibleNum = 0;
     Color[] ribbonColor = new Color[2] { Color.white, Color.clear };
