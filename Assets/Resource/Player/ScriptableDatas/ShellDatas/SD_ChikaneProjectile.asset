@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
   m_Name: SD_ChikaneProjectile
   m_EditorClassIdentifier: 
-  shellIcon: {fileID: 21300000, guid: 1c37a656778a7d7478c8a3d40dfd1021, type: 3}
+  shellIcon: {fileID: 21300000, guid: bef6a078637afdc4fa9539deaaff852c, type: 3}
   shellType: 0
   projectile: {fileID: 1008518316061016973, guid: 13482ded32754ba45ab79811542891d5,
     type: 3}
