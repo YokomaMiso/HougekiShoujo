@@ -18,5 +18,5 @@ public class StageData : ScriptableObject
     public float GetStageRadius() { return Mathf.Sqrt((stageSize.x * stageSize.x) + (stageSize.z * stageSize.z)) * 1.5f; }
     public Vector3 GetDefaultPosition(int _num) { return defaultPosition[_num]; }
 
-    public BGMData GetBGM() { return BGM; }
+    public BGMData GetBGMData() { return BGM; }
 }

@@ -22,4 +22,4 @@ MonoBehaviour:
   - {x: 10, y: 0, z: 0}
   - {x: -10, y: 0, z: -3}
   - {x: 10, y: 0, z: -3}
-  BGM: {fileID: 11400000, guid: 4688876da384ac147b152a1b5e4af1cd, type: 2}
+  BGM: {fileID: 11400000, guid: 32a96666dd0969a4184a6b9781687ff8, type: 2}
