@@ -94,6 +94,8 @@ public class ResultCanvasBehavior : MonoBehaviour
 
     public void ReturnRoom()
     {
+        Managers.instance.roomManager.Init();
+        Managers.instance.gameManager.Init();
         Managers.instance.ChangeScene(GAME_STATE.ROOM);
         Managers.instance.ChangeState(GAME_STATE.ROOM);
     }

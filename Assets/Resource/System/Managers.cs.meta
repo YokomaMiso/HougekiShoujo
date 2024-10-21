@@ -3,7 +3,18 @@ guid: 920a068138514e64bb8a379f64afbcfd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - optionData: {fileID: 11400000, guid: b1541ee7568dc4744a860ae65a90629c, type: 2}
+  - optionCanvasPrefab: {fileID: 4432466077039030639, guid: 9153756e2b41858418c0a0d355e7a280,
+      type: 3}
+  - changeSceneCanvasPrefab: {fileID: 3921321195368664648, guid: 9455ed7b3ac539741ba60531ac760a1b,
+      type: 3}
+  - changeSceneCanvasForResultPrefab: {fileID: 3921321195368664648, guid: 2f9078df922716145a915dae5ef428db,
+      type: 3}
+  - gameManager: {instanceID: 0}
+  - saveManager: {instanceID: 0}
+  - timeManager: {instanceID: 0}
+  - roomManager: {instanceID: 0}
   executionOrder: -50
   icon: {instanceID: 0}
   userData: 

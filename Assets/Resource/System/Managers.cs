@@ -13,6 +13,7 @@ public class Managers : MonoBehaviour
     [SerializeField] GameObject optionCanvasPrefab;
     GameObject optionCanvasInstance = null;
     [SerializeField] GameObject changeSceneCanvasPrefab;
+    [SerializeField] GameObject changeSceneCanvasForResultPrefab;
     GameObject changeSceneCanvasInstance = null;
 
     readonly string[] teamColor = new string[2] { "#37A0FE", "#F76F6F" };
@@ -76,7 +77,14 @@ public class Managers : MonoBehaviour
 
         if (changeSceneCanvasInstance == null)
         {
-            changeSceneCanvasInstance = Instantiate(changeSceneCanvasPrefab);
+            if (_state == GAME_STATE.RESULT)
+            {
+                changeSceneCanvasInstance = Instantiate(changeSceneCanvasForResultPrefab);
+            }
+            else
+            {
+                changeSceneCanvasInstance = Instantiate(changeSceneCanvasPrefab);
+            }
             SceneChange sceneChange = changeSceneCanvasInstance.GetComponent<SceneChange>();
             sceneChange.SetNextScene(_state);
             sceneChange.RibbonsVisible(nextState != GAME_STATE.CONNECTION);
