@@ -13,6 +13,7 @@ public class ResultExitButton : MonoBehaviour
 
     Text text;
 
+    float alphaTimer;
     void Start()
     {
         text = GetComponent<Text>();
@@ -24,7 +25,11 @@ public class ResultExitButton : MonoBehaviour
         if (timer <= canSubmitTime) { timer += Time.deltaTime; }
         else
         {
-            text.color = Color.black * Mathf.Cos(Time.time * 2);
+            alphaTimer += Time.deltaTime;
+            if (alphaTimer > Mathf.PI) { alphaTimer -= Mathf.PI; }
+
+            float nowRate = Mathf.Abs(Mathf.Sin(alphaTimer));
+            text.color = Color.black * nowRate;
 
             if (Managers.instance.UsingCanvas()) { return; }
 
