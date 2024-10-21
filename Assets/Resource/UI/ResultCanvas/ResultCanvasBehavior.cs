@@ -1,82 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-
-public enum RESULT_STATE { DISPLAY_MVP, SHOW_SCORE_BOARD };
+using UnityEngine.UI;
 
 public class ResultCanvasBehavior : MonoBehaviour
 {
     float timer;
-    const float canSubmitTimer = 1.5f;
+    const float displayAwardTime = 8.0f;
+    const float moveToMVPTime = 8.5f;
+    const float displayMVPTime = 16.5f;
+    const float moveToScoreTime = 17.0f;
 
+    [Header("動かすオブジェクト")]
+    [SerializeField] Image newsPaperBG;
+    [SerializeField] GameObject awards;
     [SerializeField] ResultScoreBoard scoreBoard;
 
-    //MVPとかの表示系を入れる箱
-    GameObject leaderBoardInstance;
-    //[SerializeField] GameObject displayOtherAward;
-    //[SerializeField] GameObject displayMVP;
-    GameObject[] leaderBoardPrefabs;
-    int index = 0;
-    const int indexLimit = (int)AWARD_ID.MAX_NUM;
+    [Header("子供のキャンバス")]
+    [SerializeField] AwardCanvas awardCanvas;
+
+    Transform[] moveTransform = new Transform[3];
+    Vector3[] defaultLocalPosition = new Vector3[3];
+    readonly Vector3 displayAwardPos = Vector3.zero;
+    readonly Vector3 displayMVPPos = Vector3.down * 1200;
+    readonly Vector3 displayScorePos = Vector3.up * 650;
 
     void Start()
     {
         scoreBoard.Init();
 
-        //leaderBoardPrefabs = new GameObject[indexLimit];
-        //leaderBoardPrefabs[0] = displayOtherAward;
-        //leaderBoardPrefabs[1] = displayMVP;
+        awardCanvas.SetResultCanvas(this);
 
-        LeaderBoardSpawn();
+        moveTransform[0] = newsPaperBG.transform;
+        defaultLocalPosition[0] = moveTransform[0].localPosition;
+        moveTransform[1] = awards.transform;
+        defaultLocalPosition[1] = moveTransform[1].localPosition;
+        moveTransform[2] = scoreBoard.transform;
+        defaultLocalPosition[2] = moveTransform[2].localPosition;
+
     }
 
     void Update()
     {
-        //何か表示されているなら早期リターン
-        if (leaderBoardInstance != null) { return; }
-        else if (index < indexLimit) { LeaderBoardSpawn(); return; }
-
-        //ボタンが表示されているならリターン
-        //if (exitButtonInstance != null) { return; }
-
         timer += Time.deltaTime;
-        if (timer < canSubmitTimer) { return; }
-
-        //if (exitButtonInstance == null)
-        //{
-        //    GameObject obj = Instantiate(exitButtonPrefab, transform);
-        //    exitButtonInstance = obj.GetComponent<ResultExitButton>();
-        //    exitButtonInstance.SetOwnerCanvas(this);
-        //}
-    }
-
-    void LeaderBoardSpawn()
-    {
-        return;
-
-        leaderBoardInstance = Instantiate(leaderBoardPrefabs[index], transform);
-        switch (index)
+        float nowRate;
+        if (displayAwardTime < timer && timer <= moveToMVPTime)
         {
-            case 0:
-                leaderBoardInstance.GetComponent<DisplayOtherAward>().SetKDFData(scoreBoard.GetDeadRankerKDF(),AWARD_ID.DEATH);
-                leaderBoardInstance.GetComponent<DisplayOtherAward>().SetKDFData(scoreBoard.GetCriminalKDF(),AWARD_ID.FF);
-                break;
-
-            case 1:
-                leaderBoardInstance.GetComponent<DisplayMVP>().SetMVPKDFData(scoreBoard.GetMVPKDF());
-                break;
+            nowRate = Mathf.Sqrt((timer - displayAwardTime) / (moveToMVPTime - displayAwardTime));
+            MoveItems(Vector3.Lerp(displayAwardPos, displayMVPPos, nowRate));
         }
-
-        index++;
+        else if (displayMVPTime < timer && timer <= moveToScoreTime)
+        {
+            nowRate = Mathf.Sqrt((timer - displayMVPTime) / (moveToScoreTime - displayMVPTime));
+            MoveItems(Vector3.Lerp(displayMVPPos, displayScorePos, nowRate));
+        }
     }
 
-    public void ScoreInit()
+    void MoveItems(Vector3 _pos)
+    {
+        for (int i = 0; i < moveTransform.Length; i++) { moveTransform[i].localPosition = defaultLocalPosition[i] + _pos; }
+    }
+
+    void ScoreInit()
     {
         IngameData.GameData myIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
         myIngameData.killCount = 0;
         myIngameData.deathCount = 0;
         myIngameData.friendlyFireCount = 0;
+        myIngameData.fireCount = 0;
 
         myIngameData.winner = -1;
 
@@ -87,7 +78,12 @@ public class ResultCanvasBehavior : MonoBehaviour
     {
         Managers.instance.roomManager.Init();
         Managers.instance.gameManager.Init();
+        ScoreInit();
         Managers.instance.ChangeScene(GAME_STATE.ROOM);
         Managers.instance.ChangeState(GAME_STATE.ROOM);
     }
+
+    public ResultScoreBoard.KDFData GetJunky() { return scoreBoard.GetJunkyKDF(); }
+    public ResultScoreBoard.KDFData GetVictim() { return scoreBoard.GetVictimKDF(); }
+    public ResultScoreBoard.KDFData GetDanger() { return scoreBoard.GetDangerKDF(); }
 }

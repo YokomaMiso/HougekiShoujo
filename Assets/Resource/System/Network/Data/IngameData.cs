@@ -62,6 +62,7 @@ public class IngameData
         public int killCount;
         public int deathCount;
         public int friendlyFireCount;
+        public int fireCount;
 
         //For Server
         public bool play;

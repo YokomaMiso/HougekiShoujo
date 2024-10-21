@@ -187,6 +187,7 @@ public class PlayerAim : MonoBehaviour
         if (ownerPlayer.IsMine())
         {
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = !OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fireCount++;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
 
             ResetAim();

@@ -11,10 +11,6 @@ public class ResultExitButton : MonoBehaviour
     {
         if (Managers.instance.UsingCanvas()) { return; }
 
-        if (Input.GetButtonDown("Submit"))
-        {
-            ownerCanvas.ScoreInit();
-            ownerCanvas.ReturnRoom();
-        }
+        if (Input.GetButtonDown("Submit")) { ownerCanvas.ReturnRoom(); }
     }
 }

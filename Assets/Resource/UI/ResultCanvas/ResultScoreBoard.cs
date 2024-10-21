@@ -27,6 +27,8 @@ public class ResultScoreBoard : MonoBehaviour
         public int killCount;
         public int deathCount;
         public int friendlyFireCount;
+        public int fireCount;
+        public int teamNum;
 
         public KDFData(int _id)
         {
@@ -36,6 +38,8 @@ public class ResultScoreBoard : MonoBehaviour
             killCount = 0;
             deathCount = 0;
             friendlyFireCount = 0;
+            fireCount = 0;
+            teamNum = -1;
         }
     }
 
@@ -74,6 +78,8 @@ public class ResultScoreBoard : MonoBehaviour
             kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].killCount = gameData.killCount;
             kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].deathCount = gameData.deathCount;
             kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].friendlyFireCount = gameData.friendlyFireCount;
+            kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].fireCount = gameData.fireCount;
+            kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].teamNum = oscRoomData.myTeamNum;
 
             //ï\é¶èáÇÃìoò^
             scoreNums[i] = oscRoomData.myTeamNum * 3 + teamCount[oscRoomData.myTeamNum];
@@ -122,8 +128,36 @@ public class ResultScoreBoard : MonoBehaviour
 
         return returnKDFData;
     }
+    public KDFData GetJunkyKDF()
+    {
+        KDFData returnKDFData = kdfDatas[0][0];
+        for (int i = 0; i < kdfDatas.Length; i++)
+        {
+            for (int j = 0; j < kdfDatas[i].Length; j++)
+            {
+                if (kdfDatas[i][j].playerID == -1) { continue; }
 
-    public KDFData GetDeadRankerKDF()
+                //éÀåÇêîÇ™è„âÒÇ¡ÇƒÇ¢ÇÈèÍçá
+                if (returnKDFData.fireCount < kdfDatas[i][j].fireCount) { returnKDFData = kdfDatas[i][j]; continue; }
+                //éÀåÇêîÇ™ìØÇ∂èÍçá
+                else if (returnKDFData.fireCount == kdfDatas[i][j].fireCount)
+                {
+                    //ÉLÉãêîÇ™è„âÒÇ¡ÇƒÇ¢ÇÈèÍçá
+                    if (returnKDFData.killCount < kdfDatas[i][j].killCount) { returnKDFData = kdfDatas[i][j]; continue; }
+                    //ÉLÉãêîÇ™ìØÇ∂èÍçá
+                    else if (returnKDFData.killCount == kdfDatas[i][j].killCount)
+                    {
+                        //FFêîÇ™â∫âÒÇ¡ÇƒÇ¢ÇÈèÍçá
+                        if (returnKDFData.friendlyFireCount > kdfDatas[i][j].friendlyFireCount) { returnKDFData = kdfDatas[i][j]; continue; };
+                    }
+                }
+            }
+        }
+
+        return returnKDFData;
+    }
+
+    public KDFData GetVictimKDF()
     {
         KDFData returnKDFData = kdfDatas[0][0];
         for (int i = 0; i < kdfDatas.Length; i++)
@@ -152,7 +186,7 @@ public class ResultScoreBoard : MonoBehaviour
         return returnKDFData;
     }
 
-    public KDFData GetCriminalKDF()
+    public KDFData GetDangerKDF()
     {
         KDFData returnKDFData = kdfDatas[0][0];
         for (int i = 0; i < kdfDatas.Length; i++)
