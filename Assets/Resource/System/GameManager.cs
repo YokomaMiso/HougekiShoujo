@@ -128,10 +128,10 @@ public class GameManager : MonoBehaviour
         return OSCManager.OSCinstance.GetRoomData(0).playerCount;
     }
 
-    void Init()
+    public void Init()
     {
         nowRound = 1;
-        sdaInstance.Init();
+        if(sdaInstance) sdaInstance.Init();
 
         if (Managers.instance.playerID == 0)
         {
@@ -249,8 +249,8 @@ public class GameManager : MonoBehaviour
             {
                 Managers.instance.ChangeScene(GAME_STATE.RESULT);
                 Managers.instance.ChangeState(GAME_STATE.RESULT);
-                Managers.instance.roomManager.Init();
-                Init();
+                //Managers.instance.roomManager.Init();
+                //Init();
             }
         }
         else
@@ -273,8 +273,6 @@ public class GameManager : MonoBehaviour
             {
                 Managers.instance.ChangeScene(GAME_STATE.RESULT);
                 Managers.instance.ChangeState(GAME_STATE.RESULT);
-                Managers.instance.roomManager.Init();
-                Init();
             }
         }
 

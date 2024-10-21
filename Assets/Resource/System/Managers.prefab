@@ -55,6 +55,8 @@ MonoBehaviour:
     type: 3}
   changeSceneCanvasPrefab: {fileID: 3921321195368664648, guid: 9455ed7b3ac539741ba60531ac760a1b,
     type: 3}
+  changeSceneCanvasForResultPrefab: {fileID: 3921321195368664648, guid: 2f9078df922716145a915dae5ef428db,
+    type: 3}
   state: 0
   prevState: 0
   nextState: 0

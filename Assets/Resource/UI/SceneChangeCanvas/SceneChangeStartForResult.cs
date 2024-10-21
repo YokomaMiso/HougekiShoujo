@@ -4,14 +4,44 @@ using UnityEngine;
 
 public class SceneChangeStartForResult : SceneChange
 {
+    readonly Vector3 newsPaperStartPos = new Vector3(2048, 0);
+    readonly Vector3 newsPaperArrivePos = new Vector3(0, 0);
+    readonly Vector3 newsPaperEndPos = new Vector3(0, 300);
+    readonly Vector3 newsPaperDefaultScale = Vector3.one;
+    readonly Vector3 newsPaperEndScale = Vector3.one * 3;
+
+    Transform newsPaper;
+
+    float newsPaperMoveTime;
+    float newsPaperStopTime;
+    float newsPaperZoomStartTime;
+
     protected override void Start()
     {
-        lifeTime = 2.5f;
+        lifeTime = 4.0f;
+        newsPaperMoveTime = lifeTime - 1.5f;
+        newsPaperStopTime = lifeTime - 1.0f;
+        newsPaperZoomStartTime = lifeTime - 0.5f;
+        newsPaper = transform.GetChild(1);
     }
 
     void Update()
     {
         TimerUpdate();
+        float nowRate;
+
+        if (timer >= newsPaperZoomStartTime)
+        {
+            nowRate = Mathf.Sqrt((timer - newsPaperZoomStartTime) / (lifeTime - newsPaperZoomStartTime));
+            newsPaper.localPosition = Vector3.Lerp(newsPaperArrivePos, newsPaperEndPos, nowRate);
+            newsPaper.localScale = Vector3.Lerp(newsPaperDefaultScale, newsPaperEndScale, nowRate);
+        }
+        else if (newsPaperStopTime >= timer && timer > newsPaperMoveTime)
+        {
+            nowRate = Mathf.Sqrt((timer - newsPaperMoveTime) / (newsPaperStopTime - newsPaperMoveTime));
+            newsPaper.localPosition = Vector3.Lerp(newsPaperStartPos, newsPaperArrivePos, nowRate);
+        }
+
         DestroyCheck(true);
     }
 }
