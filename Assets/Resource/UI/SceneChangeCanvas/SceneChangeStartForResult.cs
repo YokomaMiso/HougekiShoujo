@@ -18,10 +18,10 @@ public class SceneChangeStartForResult : SceneChange
 
     protected override void Start()
     {
-        lifeTime = 4.0f;
+        lifeTime = 3.0f;
         newsPaperMoveTime = lifeTime - 1.5f;
         newsPaperStopTime = lifeTime - 1.0f;
-        newsPaperZoomStartTime = lifeTime - 0.5f;
+        newsPaperZoomStartTime = lifeTime - 0.25f;
         newsPaper = transform.GetChild(1);
     }
 
@@ -32,13 +32,13 @@ public class SceneChangeStartForResult : SceneChange
 
         if (timer >= newsPaperZoomStartTime)
         {
-            nowRate = Mathf.Sqrt((timer - newsPaperZoomStartTime) / (lifeTime - newsPaperZoomStartTime));
+            nowRate = Mathf.Pow((timer - newsPaperZoomStartTime) / (lifeTime - newsPaperZoomStartTime),3);
             newsPaper.localPosition = Vector3.Lerp(newsPaperArrivePos, newsPaperEndPos, nowRate);
             newsPaper.localScale = Vector3.Lerp(newsPaperDefaultScale, newsPaperEndScale, nowRate);
         }
         else if (newsPaperStopTime >= timer && timer > newsPaperMoveTime)
         {
-            nowRate = Mathf.Sqrt((timer - newsPaperMoveTime) / (newsPaperStopTime - newsPaperMoveTime));
+            nowRate = Mathf.Pow((timer - newsPaperMoveTime) / (newsPaperStopTime - newsPaperMoveTime),2);
             newsPaper.localPosition = Vector3.Lerp(newsPaperStartPos, newsPaperArrivePos, nowRate);
         }
 

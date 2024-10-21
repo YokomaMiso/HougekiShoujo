@@ -15,6 +15,7 @@ public class ResultCanvasBehavior : MonoBehaviour
     [SerializeField] Image newsPaperBG;
     [SerializeField] GameObject awards;
     [SerializeField] ResultScoreBoard scoreBoard;
+    [SerializeField] DisplayMVP mvpGroup;
 
     [Header("子供のキャンバス")]
     [SerializeField] AwardCanvas awardCanvas;
@@ -22,8 +23,8 @@ public class ResultCanvasBehavior : MonoBehaviour
     [Header("終了ボタン")]
     [SerializeField] ResultExitButton exitButton;
 
-    Transform[] moveTransform = new Transform[3];
-    Vector3[] defaultLocalPosition = new Vector3[3];
+    Transform[] moveTransform = new Transform[4];
+    Vector3[] defaultLocalPosition = new Vector3[4];
     readonly Vector3 displayAwardPos = Vector3.zero;
     readonly Vector3 displayMVPPos = Vector3.down * 1200;
     readonly Vector3 displayScorePos = Vector3.up * 650;
@@ -33,6 +34,7 @@ public class ResultCanvasBehavior : MonoBehaviour
         scoreBoard.Init();
 
         awardCanvas.SetResultCanvas(this);
+        mvpGroup.SetResultCanvas(this);
         exitButton.SetOwnerCanvas(this);
 
         moveTransform[0] = newsPaperBG.transform;
@@ -41,7 +43,8 @@ public class ResultCanvasBehavior : MonoBehaviour
         defaultLocalPosition[1] = moveTransform[1].localPosition;
         moveTransform[2] = scoreBoard.transform;
         defaultLocalPosition[2] = moveTransform[2].localPosition;
-
+        moveTransform[3] = mvpGroup.transform;
+        defaultLocalPosition[3] = moveTransform[3].localPosition;
     }
 
     void Update()
@@ -90,4 +93,5 @@ public class ResultCanvasBehavior : MonoBehaviour
     public ResultScoreBoard.KDFData GetJunky() { return scoreBoard.GetJunkyKDF(); }
     public ResultScoreBoard.KDFData GetVictim() { return scoreBoard.GetVictimKDF(); }
     public ResultScoreBoard.KDFData GetDanger() { return scoreBoard.GetDangerKDF(); }
+    public ResultScoreBoard.KDFData GetMVP() { return scoreBoard.GetMVPKDF(); }
 }
