@@ -19,6 +19,9 @@ public class ResultCanvasBehavior : MonoBehaviour
     [Header("子供のキャンバス")]
     [SerializeField] AwardCanvas awardCanvas;
 
+    [Header("終了ボタン")]
+    [SerializeField] ResultExitButton exitButton;
+
     Transform[] moveTransform = new Transform[3];
     Vector3[] defaultLocalPosition = new Vector3[3];
     readonly Vector3 displayAwardPos = Vector3.zero;
@@ -30,6 +33,7 @@ public class ResultCanvasBehavior : MonoBehaviour
         scoreBoard.Init();
 
         awardCanvas.SetResultCanvas(this);
+        exitButton.SetOwnerCanvas(this);
 
         moveTransform[0] = newsPaperBG.transform;
         defaultLocalPosition[0] = moveTransform[0].localPosition;

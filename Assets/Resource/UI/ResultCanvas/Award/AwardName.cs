@@ -7,7 +7,7 @@ public class AwardName : MonoBehaviour
 {
     float timer;
     const float shrinkStart = 4.5f;
-    const float childSub = 0.5f;
+    const float childSub = 0.25f;
 
     float limit;
 
@@ -31,8 +31,13 @@ public class AwardName : MonoBehaviour
 
         for (int i = 0; i < (int)AWARD_ID.MAX_NUM; i++)
         {
-            //float scaleValue = Mathf.Clamp01(timer - alphaStart - (childSub * i));
-            //illusts[i].color = Color.white * colorValue;
+            float scaleValue;
+            float subValue = shrinkStart + childSub * (i - 1);
+            if (timer < subValue) { scaleValue = 0; }
+            else { scaleValue = Mathf.Clamp01((timer - subValue) / (shrinkStart + childSub * i - subValue)); }
+
+            names[i].transform.localScale = Vector3.Lerp(startScale, endScale, scaleValue);
+            names[i].color = Color.white * scaleValue;
         }
     }
 }

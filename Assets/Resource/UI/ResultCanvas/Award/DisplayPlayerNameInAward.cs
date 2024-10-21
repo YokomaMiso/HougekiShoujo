@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharaTexts : MonoBehaviour
+public class DisplayPlayerNameInAward : MonoBehaviour
 {
     float timer;
-    const float childSub = 1.0f;
-    const float alphaStart = 1.0f;
+    const float childSub = 0.5f;
+    const float alphaStart = 3.0f;
 
     float limit;
 
@@ -17,12 +17,11 @@ public class CharaTexts : MonoBehaviour
     {
         texts[(int)_id] = transform.GetChild((int)_id).GetComponent<Text>();
 
-        PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
-        texts[(int)_id].text = pd.GetSchoolAndGrade() + "\n" + pd.GetCharaName();
+        texts[(int)_id].text = _kdf.playerName;
     }
     void Start()
     {
-        limit = alphaStart + childSub * ((int)AWARD_ID.MAX_NUM + 1);
+        limit = alphaStart + (childSub * (int)AWARD_ID.MAX_NUM + 1);
     }
     void Update()
     {
