@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PD_HanaseriSara
   m_EditorClassIdentifier: 
   charaName: "\u82B1\u82B9 \u6C99\u7F85"
+  schoolAndGrade: "\u4EC7\u5C04\u9AD8\u6821 \uFF11\u5E74"
   characterAnimData: {fileID: 11400000, guid: 0b10f1572d2f39c4fa2e3a93f1d0961b, type: 2}
   moveSpeed: 5
   difficulity: 3

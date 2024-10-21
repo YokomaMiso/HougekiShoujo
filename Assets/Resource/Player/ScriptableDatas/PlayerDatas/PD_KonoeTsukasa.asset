@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: PD_KonoeTsukasa
   m_EditorClassIdentifier: 
   charaName: "\u8FD1\u885B \u53F8"
+  schoolAndGrade: "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821 \uFF12\u5E74"
   characterAnimData: {fileID: 11400000, guid: bbc7345adcf545f40ad96d4a1db983d1, type: 2}
   moveSpeed: 5
+  difficulity: 1
   shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
   subWeapon: {fileID: 11400000, guid: ed7bb5eba41b87143a4c8c92438afe81, type: 2}
   playerSFXData: {fileID: 11400000, guid: f564a2fe6f4050d4e8539cf01ce3f3e8, type: 2}

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: PD_ZaizenJulia
   m_EditorClassIdentifier: 
   charaName: "\u8CA1\u524D \u6731\u91CC\u4E9C"
+  schoolAndGrade: "\u4EC7\u5C04\u9AD8\u6821 \uFF12\u5E74"
   characterAnimData: {fileID: 11400000, guid: 9abf50c65441dfb4db61cb776c0c1c4a, type: 2}
   moveSpeed: 5
+  difficulity: 1
   shell: {fileID: 11400000, guid: e153c3496aaafbd4c80861b57f56fa94, type: 2}
   subWeapon: {fileID: 11400000, guid: 69a86b1a143f5a34ba637120cd970d00, type: 2}
   playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}

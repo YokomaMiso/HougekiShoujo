@@ -10,29 +10,23 @@ public class ResultCanvasBehavior : MonoBehaviour
     float timer;
     const float canSubmitTimer = 1.5f;
 
-    [SerializeField] GameObject exitButtonPrefab;
-    ResultExitButton exitButtonInstance;
-
-    [SerializeField] GameObject scoreBoardPrefab;
-    ResultScoreBoard scoreBoard;
+    [SerializeField] ResultScoreBoard scoreBoard;
 
     //MVPとかの表示系を入れる箱
     GameObject leaderBoardInstance;
-    [SerializeField] GameObject displayOtherAward;
-    [SerializeField] GameObject displayMVP;
+    //[SerializeField] GameObject displayOtherAward;
+    //[SerializeField] GameObject displayMVP;
     GameObject[] leaderBoardPrefabs;
     int index = 0;
     const int indexLimit = (int)AWARD_ID.MAX_NUM;
 
     void Start()
     {
-        GameObject scoreBoardInstance = Instantiate(scoreBoardPrefab, transform);
-        scoreBoard = scoreBoardInstance.GetComponent<ResultScoreBoard>();
         scoreBoard.Init();
 
-        leaderBoardPrefabs = new GameObject[indexLimit];
-        leaderBoardPrefabs[0] = displayOtherAward;
-        leaderBoardPrefabs[1] = displayMVP;
+        //leaderBoardPrefabs = new GameObject[indexLimit];
+        //leaderBoardPrefabs[0] = displayOtherAward;
+        //leaderBoardPrefabs[1] = displayMVP;
 
         LeaderBoardSpawn();
     }
@@ -43,27 +37,24 @@ public class ResultCanvasBehavior : MonoBehaviour
         if (leaderBoardInstance != null) { return; }
         else if (index < indexLimit) { LeaderBoardSpawn(); return; }
 
-        scoreBoard.MoveToCenter();
-
-        //スコアボードが中央表示されてないならリターン
-        if (!scoreBoard.arriveToCenter) { return; }
-
         //ボタンが表示されているならリターン
-        if (exitButtonInstance != null) { return; }
+        //if (exitButtonInstance != null) { return; }
 
         timer += Time.deltaTime;
         if (timer < canSubmitTimer) { return; }
 
-        if (exitButtonInstance == null)
-        {
-            GameObject obj = Instantiate(exitButtonPrefab, transform);
-            exitButtonInstance = obj.GetComponent<ResultExitButton>();
-            exitButtonInstance.SetOwnerCanvas(this);
-        }
+        //if (exitButtonInstance == null)
+        //{
+        //    GameObject obj = Instantiate(exitButtonPrefab, transform);
+        //    exitButtonInstance = obj.GetComponent<ResultExitButton>();
+        //    exitButtonInstance.SetOwnerCanvas(this);
+        //}
     }
 
     void LeaderBoardSpawn()
     {
+        return;
+
         leaderBoardInstance = Instantiate(leaderBoardPrefabs[index], transform);
         switch (index)
         {

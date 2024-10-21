@@ -6,23 +6,16 @@ using UnityEngine.UI;
 public class ResultScoreBoard : MonoBehaviour
 {
     [SerializeField] GameObject personalScorePrefab;
-    [SerializeField] GameObject itemAnnouncePrefab;
 
     GameObject[] scoreInstance = new GameObject[6];
+    readonly Vector3 scoreBasePos = Vector3.down * 620;
+    readonly Vector3 scorePosSub = Vector3.down * 80;
 
     readonly int[] teamPosX = new int[2] { -480, 480 };
     readonly int baseHeight = 140;
     readonly int heightSub = 140;
 
     int[] scoreNums = new int[6] { -1, -1, -1, -1, -1, -1 };
-
-    bool moveToCenter;
-    public bool arriveToCenter;
-    float moveTimer;
-    const float moveTime = 0.75f;
-    readonly Vector3 startPos = Vector3.right * 1920;
-    readonly Vector3 endPos = Vector3.zero;
-    public void MoveToCenter() { moveToCenter = true; }
 
     int winner;
 
@@ -68,38 +61,11 @@ public class ResultScoreBoard : MonoBehaviour
         {
             //ルームデータの取得
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
-            scoreInstance[i] = Instantiate(personalScorePrefab, transform);
 
-            if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty)
-            {
-                transform.GetChild(i).gameObject.SetActive(false);
-                continue;
-            }
+            if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             //インゲームデータの取得
             IngameData.GameData gameData = OSCManager.OSCinstance.GetIngameData(i).mainPacketData.inGameData;
-
-            //背景の色変更
-            scoreInstance[i].transform.GetChild(0).GetComponent<Image>().color = Managers.instance.ColorCordToRGB(oscRoomData.myTeamNum);
-
-            //アイコンの変更
-            Sprite icon = Managers.instance.gameManager.playerDatas[oscRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
-            scoreInstance[i].transform.GetChild(1).GetComponent<Image>().sprite = icon;
-
-            //名前の変更
-            scoreInstance[i].transform.GetChild(2).GetComponent<Text>().text = oscRoomData.playerName;
-
-            //キル数
-            scoreInstance[i].transform.GetChild(3).GetComponent<Text>().text = gameData.killCount.ToString();
-
-            //デス数
-            scoreInstance[i].transform.GetChild(4).GetComponent<Text>().text = gameData.deathCount.ToString();
-
-            //FF数
-            scoreInstance[i].transform.GetChild(5).GetComponent<Text>().text = gameData.friendlyFireCount.ToString();
-
-            //座標の変更
-            scoreInstance[i].transform.localPosition = new Vector3(teamPosX[oscRoomData.myTeamNum], baseHeight - heightSub * teamCount[oscRoomData.myTeamNum]);
 
             //KDFデータの保存
             kdfDatas[oscRoomData.myTeamNum][teamCount[oscRoomData.myTeamNum]].playerName = oscRoomData.playerName;
@@ -112,30 +78,23 @@ public class ResultScoreBoard : MonoBehaviour
             //表示順の登録
             scoreNums[i] = oscRoomData.myTeamNum * 3 + teamCount[oscRoomData.myTeamNum];
             teamCount[oscRoomData.myTeamNum]++;
+
         }
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 6; i++)
         {
-            GameObject announce = Instantiate(itemAnnouncePrefab, transform);
-            announce.transform.localPosition = new Vector3(teamPosX[i], baseHeight + heightSub);
+            if (scoreNums[i] == -1) { continue; }
+            KDFData nowData = kdfDatas[scoreNums[i] / 3][scoreNums[i] % 3];
+
+            scoreInstance[scoreNums[i]] = Instantiate(personalScorePrefab, transform);
+            scoreInstance[scoreNums[i]].transform.localPosition = scoreBasePos + scorePosSub * scoreNums[i];
+            scoreInstance[scoreNums[i]].GetComponent<PersonalData>().SetData(nowData, scoreNums[i] % 2);
         }
     }
 
     void Update()
     {
-        if (arriveToCenter) { return; }
-        if (!moveToCenter) { return; }
 
-        moveTimer += Time.deltaTime;
-
-        if (moveTimer > moveTime)
-        {
-            moveTimer = moveTime;
-            arriveToCenter = true;
-        }
-
-        float nowRate = Mathf.Sqrt(moveTimer / moveTime);
-        transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
     }
 
     public KDFData GetMVPKDF()
