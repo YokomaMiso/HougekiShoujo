@@ -9,6 +9,7 @@ public class CharacterAnimData : ScriptableObject
     [SerializeField, Header("Character Idle")] protected Sprite idleFirstSprite;
     [SerializeField, Header("Character Illust")] protected Sprite charaIllust;
     [SerializeField, Header("Character Idle For UI")] protected RuntimeAnimatorController idleForUIAnimationData;
+    [SerializeField, Header("Character Run For UI")] protected RuntimeAnimatorController runForUIAnimationData;
 
     [SerializeField, Header("Character Idle")] protected RuntimeAnimatorController idleAnimationData;
     [SerializeField, Header("Character Run")] protected RuntimeAnimatorController[] runAnimationData;
@@ -21,6 +22,7 @@ public class CharacterAnimData : ScriptableObject
     public Sprite GetCharaIdle() { return idleFirstSprite; }
     public Sprite GetCharaIllust() { return charaIllust; }
     public virtual RuntimeAnimatorController GetIdleAnimForUI() { return idleForUIAnimationData; }
+    public virtual RuntimeAnimatorController GetRunAnimForUI() { return runForUIAnimationData; }
     public virtual RuntimeAnimatorController GetIdleAnim(CANON_STATE _state = CANON_STATE.EMPTY) { return idleAnimationData; }
     public RuntimeAnimatorController[] GetRunAnims() { return runAnimationData; }
     public virtual RuntimeAnimatorController GetRunAnim(int _num,CANON_STATE _state = CANON_STATE.EMPTY) { return runAnimationData[_num]; }
