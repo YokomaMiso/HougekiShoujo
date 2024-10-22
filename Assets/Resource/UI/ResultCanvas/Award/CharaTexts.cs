@@ -7,7 +7,7 @@ public class CharaTexts : MonoBehaviour
 {
     float timer;
     const float childSub = 1.0f;
-    const float alphaStart = 1.0f;
+    const float alphaStart = 0.5f;
 
     float limit;
 

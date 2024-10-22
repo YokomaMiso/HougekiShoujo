@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class MVPTextSpawn : MonoBehaviour
 {
     float timer;
-    const float startTime = 14.0f;
-    const float childSub = 0.5f;
+    const float startTime = 11.0f;
+    const float childSub = 0.25f;
 
     const float limit = startTime + childSub * 4;
 

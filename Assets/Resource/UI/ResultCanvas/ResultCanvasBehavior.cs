@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class ResultCanvasBehavior : MonoBehaviour
 {
     float timer;
-    const float displayAwardTime = 8.0f;
-    const float moveToMVPTime = 8.5f;
-    const float displayMVPTime = 16.5f;
-    const float moveToScoreTime = 17.0f;
+    const float displayAwardTime = 7.0f;
+    const float moveToMVPTime = 7.5f;
+    const float displayMVPTime = 14.0f;
+    const float moveToScoreTime = 15.0f;
 
     [Header("動かすオブジェクト")]
     [SerializeField] Image newsPaperBG;

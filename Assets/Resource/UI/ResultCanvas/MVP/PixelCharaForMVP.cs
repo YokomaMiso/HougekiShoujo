@@ -10,8 +10,8 @@ public class PixelCharaForMVP : MonoBehaviour
     readonly Vector3 endPos = new Vector3(-160, 860);
 
     float timer;
-    const float startTime = 9.0f;
-    const float arriveTime = 11.0f;
+    const float startTime = 7.5f;
+    const float arriveTime = 9.0f;
 
     Animator animator;
     RuntimeAnimatorController[] controllers = new RuntimeAnimatorController[(int)ANIM_ID.MAX_NUM];
