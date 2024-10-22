@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class CreditBackGroundBehavior : MonoBehaviour
 {
     float timer;
+    const float blackAlphaStartTime = 1;
     const float blackAlphaMinusTime = 7;
     const float endTime = 139;
-    const float blackAlphaPlusTime = 144;
+    const float blackAlphaPlusTime = 142;
+    const float blackAlphaEndTime = 148;
     const float lifeTime = 150;
 
     readonly Vector3 backStartPos = Vector3.right * 320;
@@ -46,8 +48,8 @@ public class CreditBackGroundBehavior : MonoBehaviour
 
             if (timer <= blackAlphaMinusTime)
             {
-                float nowRate = (1.0f - (timer / blackAlphaMinusTime));
-                black.color = Color.black * Mathf.Pow(nowRate, 2);
+                float nowRate = 1.0f - (timer - blackAlphaStartTime) / (blackAlphaMinusTime - blackAlphaStartTime);
+                black.color = Color.black * nowRate;
             }
         }
         else
@@ -55,7 +57,7 @@ public class CreditBackGroundBehavior : MonoBehaviour
             chara.transform.localPosition = charaMoveValue * (timer - endTime);
             if (timer > blackAlphaPlusTime)
             {
-                float nowRate = (timer - blackAlphaPlusTime) / (lifeTime - blackAlphaPlusTime);
+                float nowRate = (timer - blackAlphaPlusTime) / (blackAlphaEndTime - blackAlphaPlusTime);
                 black.color = Color.black * nowRate;
             }
         }
