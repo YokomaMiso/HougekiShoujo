@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static MachingRoomData;
 
 
 public class GameManager : MonoBehaviour
@@ -131,7 +130,7 @@ public class GameManager : MonoBehaviour
     public void Init()
     {
         nowRound = 1;
-        if(sdaInstance) sdaInstance.Init();
+        if (sdaInstance) sdaInstance.Init();
 
         if (Managers.instance.playerID == 0)
         {
@@ -248,6 +247,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 OSCManager.OSCinstance.roomData.gameStart = false;
+                OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.roundCount = 0;
 
                 Managers.instance.ChangeScene(GAME_STATE.RESULT);
                 Managers.instance.ChangeState(GAME_STATE.RESULT);
@@ -264,8 +264,8 @@ public class GameManager : MonoBehaviour
 
             nowRound = hostIngameData.roundCount;
 
-            if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
-            if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
+            //if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
+            //if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
             if (hostRoomData.gameStart)
             {
@@ -310,7 +310,7 @@ public class GameManager : MonoBehaviour
             if (nowIngameData.alive) { aliveCount[oscRoomData.myTeamNum]++; }
         }
 
-        MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
+        //MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
 
         _data.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
         _data.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
