@@ -247,6 +247,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                OSCManager.OSCinstance.roomData.gameStart = false;
+
                 Managers.instance.ChangeScene(GAME_STATE.RESULT);
                 Managers.instance.ChangeState(GAME_STATE.RESULT);
                 //Managers.instance.roomManager.Init();
