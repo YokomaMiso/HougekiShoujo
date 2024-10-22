@@ -7,7 +7,7 @@ public class RotateText : UIBehaviour, IMeshModifier
 {
     public new void OnValidate()
     {
-        base.OnValidate();
+        //base.OnValidate();
 
         var graphics = base.GetComponent<Graphic>();
         if (graphics != null)
