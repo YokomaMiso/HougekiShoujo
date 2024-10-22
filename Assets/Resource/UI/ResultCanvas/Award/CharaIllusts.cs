@@ -11,7 +11,7 @@ public class CharaIllusts : MonoBehaviour
     const float alphaStart = 1.0f;
 
     float limit;
-    Color teamColor;
+    Color[] teamColors = new Color[(int)AWARD_ID.MAX_NUM];
 
     Image[] masks = new Image[(int)AWARD_ID.MAX_NUM];
     Image[] illusts = new Image[(int)AWARD_ID.MAX_NUM];
@@ -19,7 +19,7 @@ public class CharaIllusts : MonoBehaviour
     public void SetSprite(AWARD_ID _id, ResultScoreBoard.KDFData _kdf)
     {
         masks[(int)_id] = transform.GetChild((int)_id).GetComponent<Image>();
-        teamColor = Managers.instance.ColorCordToRGB(_kdf.teamNum);
+        teamColors[(int)_id] = Managers.instance.ColorCordToRGB(_kdf.teamNum);
 
         PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
         illusts[(int)_id] = transform.GetChild((int)_id).GetChild(0).GetComponent<Image>();
@@ -39,7 +39,7 @@ public class CharaIllusts : MonoBehaviour
         for (int i = 0; i < (int)AWARD_ID.MAX_NUM; i++)
         {
             float colorValue = Mathf.Clamp01(timer - alphaStart - (childSub * i));
-            masks[i].color = teamColor * colorValue;
+            masks[i].color = teamColors[i] * colorValue;
             illusts[i].color = Color.white * colorValue;
         }
     }
