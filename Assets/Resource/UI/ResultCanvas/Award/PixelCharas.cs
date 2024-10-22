@@ -11,7 +11,7 @@ public class PixelCharas : MonoBehaviour
     readonly Vector3 endPos = Vector3.zero;
 
     float timer;
-    const float arriveTime = 3.0f;
+    const float arriveTime = 2.0f;
 
     Animator[] animators = new Animator[(int)AWARD_ID.MAX_NUM];
     RuntimeAnimatorController[][] controllers = new RuntimeAnimatorController[(int)AWARD_ID.MAX_NUM][]

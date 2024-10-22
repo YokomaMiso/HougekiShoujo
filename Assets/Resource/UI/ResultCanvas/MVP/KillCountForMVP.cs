@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class KillCountForMVP : MonoBehaviour
 {
     float timer;
-    const float startTime = 12.5f;
-    const float endTime = 13.5f;
+    const float startTime = 10.0f;
+    const float endTime = 10.5f;
 
     Text[] texts = new Text[2];
 

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class CharaIllustForMVP : MonoBehaviour
 {
     float timer;
-    const float startTime = 11.0f;
-    const float endTime = 12.0f;
+    const float startTime = 9.0f;
+    const float endTime = 10.0f;
 
     Color teamColor;
 

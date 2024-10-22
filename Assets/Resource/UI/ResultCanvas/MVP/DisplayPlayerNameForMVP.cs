@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class DisplayPlayerNameForMVP : MonoBehaviour
 {
     float timer;
-    const float startTime = 12.0f;
-    const float endTime = 12.5f;
+    const float startTime = 9.5f;
+    const float endTime = 10.0f;
 
     Text text;
 

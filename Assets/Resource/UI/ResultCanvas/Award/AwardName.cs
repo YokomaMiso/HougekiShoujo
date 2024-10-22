@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AwardName : MonoBehaviour
 {
     float timer;
-    const float shrinkStart = 4.5f;
+    const float shrinkStart = 3.5f;
     const float childSub = 0.25f;
 
     float limit;

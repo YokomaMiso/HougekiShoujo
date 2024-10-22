@@ -7,7 +7,7 @@ public class DisplayPlayerNameInAward : MonoBehaviour
 {
     float timer;
     const float childSub = 0.5f;
-    const float alphaStart = 3.0f;
+    const float alphaStart = 2.0f;
 
     float limit;
 

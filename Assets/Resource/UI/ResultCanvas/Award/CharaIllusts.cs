@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class CharaIllusts : MonoBehaviour
 {
     float timer;
-    const float childSub = 1.0f;
-    const float alphaStart = 2.0f;
+    const float childSub = 0.5f;
+    const float alphaStart = 1.0f;
 
     float limit;
     Color teamColor;

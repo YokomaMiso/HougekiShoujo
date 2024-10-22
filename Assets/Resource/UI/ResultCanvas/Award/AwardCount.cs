@@ -9,7 +9,7 @@ public class AwardCount : MonoBehaviour
 
     float timer;
     const float childSub = 0.25f;
-    const float alphaStart = 3.5f;
+    const float alphaStart = 2.5f;
 
     float limit;
 

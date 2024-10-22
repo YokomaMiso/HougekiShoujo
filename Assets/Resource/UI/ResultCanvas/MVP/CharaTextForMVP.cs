@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class CharaTextForMVP : MonoBehaviour
 {
     float timer;
-    const float startTime = 9.0f;
-    const float endTime = 10.0f;
+    const float startTime = 7.5f;
+    const float endTime = 8.5f;
 
     Text text;
 

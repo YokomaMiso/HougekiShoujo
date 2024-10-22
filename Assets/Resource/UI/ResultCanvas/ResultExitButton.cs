@@ -9,7 +9,7 @@ public class ResultExitButton : MonoBehaviour
     public void SetOwnerCanvas(ResultCanvasBehavior _owner) { ownerCanvas = _owner; }
 
     float timer;
-    const float canSubmitTime = 19.0f;
+    const float canSubmitTime = 17.0f;
 
     Text text;
 
