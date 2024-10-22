@@ -17,6 +17,8 @@ MonoBehaviour:
   charaIllust: {fileID: 21300000, guid: 3d740d8565bfa1c42b9cc79d16313bf5, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: aac010c8dfb4098459ffd7fc3346b945,
     type: 2}
+  runForUIAnimationData: {fileID: 9100000, guid: a6d4c087fae09e841bf975906276599f,
+    type: 2}
   idleAnimationData: {fileID: 9100000, guid: 78e783a1168478f4780a7a2cac24295c, type: 2}
   runAnimationData:
   - {fileID: 9100000, guid: e5fe418d1fb755645a40964d05ff4240, type: 2}
