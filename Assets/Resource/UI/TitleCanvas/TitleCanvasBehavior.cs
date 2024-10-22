@@ -14,8 +14,7 @@ public class TitleCanvasBehavior : MonoBehaviour
     [SerializeField] GameObject buttons;
     //[SerializeField] GameObject selectNetwork;
     [SerializeField] GameObject inputName;
-    [SerializeField] GameObject creditCanvas;
-    GameObject[] uis = new GameObject[3];
+    GameObject[] uis = new GameObject[2];
 
     TITLE_STATE state = TITLE_STATE.SELECT;
     public TITLE_STATE GetTitleState() { return state; }
@@ -32,8 +31,8 @@ public class TitleCanvasBehavior : MonoBehaviour
         //uis[1].GetComponent<SelectNetwork>().SetParent(this);
         uis[(int)TITLE_STATE.INPUT_NAME] = Instantiate(inputName, transform);
         uis[(int)TITLE_STATE.INPUT_NAME].GetComponent<InputName>().SetParent(this);
-        uis[(int)TITLE_STATE.CREDIT] = Instantiate(creditCanvas, transform);
-        uis[(int)TITLE_STATE.CREDIT].GetComponent<CreditCanvasBehavior>().SetParent(this);
+        //uis[(int)TITLE_STATE.CREDIT] = Instantiate(creditCanvas, transform);
+        //uis[(int)TITLE_STATE.CREDIT].GetComponent<CreditCanvasBehavior>().SetParent(this);
         UIsUpdate();
         SoundManager.PlayBGM(titleBGM);
     }
@@ -90,7 +89,8 @@ public class TitleCanvasBehavior : MonoBehaviour
                 Managers.instance.ChangeScene(GAME_STATE.GALLERY);
                 break;
             case 3:
-                ChangeTitleState(TITLE_STATE.CREDIT);
+                Managers.instance.ChangeState(GAME_STATE.CREDIT);
+                Managers.instance.ChangeScene(GAME_STATE.CREDIT);
                 break;
             case 4:
                 End();
