@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, SELECT_ROOM, CONNECTION, ROOM, IN_GAME, RESULT,GALLERY, MAX_NUM };
+public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, SELECT_ROOM, CONNECTION, ROOM, IN_GAME, RESULT, GALLERY, CREDIT, MAX_NUM };
 
 public class Managers : MonoBehaviour
 {
