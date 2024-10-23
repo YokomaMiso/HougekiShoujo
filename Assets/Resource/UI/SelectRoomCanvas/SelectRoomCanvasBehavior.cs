@@ -89,7 +89,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void ChangeButtonSelectNum()
     {
-        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
 
         //カーソル移動
         if (Mathf.Abs(value.y) > 0.7f)
@@ -151,7 +151,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void ChangeRoomBannerSelectNum()
     {
-        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
 
         //カーソル横移動
         if (Mathf.Abs(value.x) > 0.7f)
