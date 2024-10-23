@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,26 +35,21 @@ public enum BoolActions
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private InputActionMap actionMap;
+    private static InputActionMap actionMap;
 
+    // アクション保存リスト
     private static List<InputAction> boolActions = new List<InputAction>();
     private static List<InputAction> vec2Actions = new List<InputAction>();
-    
-    private static InputAction.CallbackContext inputContext;
 
-    private static List<string> boolKeyStrings = new List<string>();
-    private static List<string> vec2KeyStrings = new List<string>();
+    // delay用の時間計算リスト
+    private static List<float> axisTimeList = new List<float>();
 
     private void Awake()
     {
-        foreach (BoolActions an in BoolActions.GetValues(typeof(BoolActions)))
-        {
-            boolKeyStrings.Add(an.ToString());
-        }
-
+        // vector2のactionある分のタイマーを作る
         foreach (Vec2AxisActions an in BoolActions.GetValues(typeof(Vec2AxisActions)))
         {
-            vec2KeyStrings.Add(an.ToString());
+            axisTimeList.Add(0.0f);
         }
 
         playerInput = GetComponent<PlayerInput>();
@@ -62,19 +58,20 @@ public class InputManager : MonoBehaviour
         
         if(actionMap != null)
         {
+            // アクションタイプに合わせてデータを保存
             foreach(InputAction action in actionMap.actions)
             {
                 if(action.type == InputActionType.Button)
                 {
                     boolActions.Add(action);
 
-                    Debug.Log(action.name + "がButtonにセットされました");
+                    //Debug.Log(action.name + "がButtonにセットされました");
                 }
                 else if(action.type == InputActionType.Value)
                 {
                     vec2Actions.Add(action);
 
-                    Debug.Log(action.name + "がvec2にセットされました");
+                    //Debug.Log(action.name + "がvec2にセットされました");
                 }
             }
         }
@@ -84,35 +81,219 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    /// <summary>
+    /// アナログスティックの現在値取得
+    /// </summary>
+    /// <typeparam name="T">取得したい型、boolまたはvector2</typeparam>
+    /// <param name="an">Actionに登録されているキー</param>
+    /// <returns>スティックが倒されている = true or 現在値: 倒されていない = false or (0, 0)</returns>
+    public static T GetAxis<T>(Vec2AxisActions an) where T : struct
     {
+        object val = new object();
 
+        if (typeof(T) == typeof(bool))
+        {
+            val = true;
+
+            return (T)val;
+        }
+        else if (typeof(T) == typeof(Vector2))
+        {
+            val = vec2Actions[(int)an].ReadValue<Vector2>();
+
+            return (T)val;
+        }
+        else
+        {
+            Debug.LogError("boolもしくはvector2以外が指定されています");
+        }
+
+        return default(T);
     }
 
-    private void OnDisable()
+    /// <summary>
+    /// アナログスティックが押された瞬間の取得
+    /// </summary>
+    /// <typeparam name="T">取得したい型、boolまたはvector2</typeparam>
+    /// <param name="an">Actionに登録されているキー</param>
+    /// <returns>スティックが倒された最初のフレーム = true or 現在値: それ以外 = false or (0, 0)</returns>
+    public static T GetAxisDown<T>(Vec2AxisActions an) where T : struct
     {
+        object val = new object();
 
+        if (vec2Actions[(int)an].WasPressedThisFrame())
+        {
+            if (typeof(T) == typeof(bool))
+            {
+                val = true;
+
+                return (T)val;
+            }
+            else if (typeof(T) == typeof(Vector2))
+            {
+                val = vec2Actions[(int)an].ReadValue<Vector2>().normalized;
+
+                return (T)val;
+            }
+            else
+            {
+                Debug.LogError("boolもしくはvector2以外が指定されています");
+            }
+        }
+
+        return default(T);
     }
 
-    public static Vector2 GetAxis(Vec2AxisActions an)
+    /// <summary>
+    /// アナログスティックが離れた瞬間の取得
+    /// </summary>
+    /// <typeparam name="T">取得したい型、boolまたはvector2</typeparam>
+    /// <param name="an">Actionに登録されているキー</param>
+    /// <returns>スティックが離された最初のフレーム = true or 現在値: それ以外 = false or (0, 0)</returns>
+    public static T GetAxisUp<T>(Vec2AxisActions an)where T : struct
     {
-        return vec2Actions[(int)an].ReadValue<Vector2>();
+        object val = new object();
+
+        if (vec2Actions[(int)an].WasReleasedThisFrame())
+        {
+            if (typeof(T) == typeof(bool))
+            {
+                val = true;
+
+                return (T)val;
+            }
+            else if(typeof(T) == typeof(Vector2))
+            {
+                val = vec2Actions[(int)an].ReadValue<Vector2>().normalized;
+
+                return (T)val;
+            }
+            else
+            {
+                Debug.LogError("boolもしくはvector2以外が指定されています");
+            }
+        }
+
+        return default(T);
     }
 
+    /// <summary>
+    /// アナログスティックの等間隔取得
+    /// </summary>
+    /// <typeparam name="T">取得したい型、boolまたはvector2</typeparam>
+    /// <param name="an">Actionに登録されているキー</param>
+    /// <param name="_time">数値を得る間隔（秒）</param>
+    /// <returns>スティックが倒された最初のフレームとそれ以降指定した時間経過後 = true or 現在値: それ以外 = false or (0, 0)</returns>
+    public static T GetAxisDelay<T>(Vec2AxisActions an, float _time) where T : struct
+    {
+        object val = new object();
+        int actionNum = (int)an;
+
+        if (vec2Actions[actionNum].WasPressedThisFrame())
+        {
+            if (typeof(T) == typeof(bool))
+            {
+                val = true;
+
+                return (T)val;
+            }
+            else if (typeof(T) == typeof(Vector2))
+            {
+                val = vec2Actions[actionNum].ReadValue<Vector2>().normalized;
+
+                return (T)val;
+            }
+            else
+            {
+                Debug.LogError("boolもしくはvector2以外が指定されています");
+            }
+        }
+
+        if (vec2Actions[actionNum].IsPressed())
+        {
+            axisTimeList[actionNum] += Time.deltaTime;
+
+            if (typeof(T) == typeof(bool))
+            {
+                if (axisTimeList[actionNum] > _time)
+                {
+                    val = true;
+
+                    axisTimeList[actionNum] = 0;
+                    return (T)val;
+                }
+            }
+            else if (typeof(T) == typeof(Vector2))
+            {
+                if (axisTimeList[actionNum] > _time)
+                {
+                    val = vec2Actions[actionNum].ReadValue<Vector2>().normalized;
+
+                    axisTimeList[actionNum] = 0;
+                    return (T)val;
+                }
+            }
+            else
+            {
+                Debug.LogError("boolもしくはvector2以外が指定されています");
+            }
+        }
+
+        if(vec2Actions[actionNum].WasReleasedThisFrame())
+        {
+            axisTimeList[actionNum] = 0;
+        }
+
+        return default(T);
+    }
+
+    /// <summary>
+    /// bool型のキー入力取得
+    /// </summary>
+    /// <param name="an">Actionに登録されているキー</param>
+    /// <returns>押されている = true: 押されていない = false</returns>
     public static bool GetKey(BoolActions an)
     {
         return boolActions[(int)an].IsPressed();
     }
 
+    /// <summary>
+    /// bool型のキー入力取得
+    /// </summary>
+    /// <param name="an">Actionに登録されているキー</param>
+    /// <returns>押された最初の１フレーム = true: それ以外 = false</returns>
     public static bool GetKeyDown(BoolActions an)
     {
-        Debug.Log(boolActions[(int)an].name);
-
         return boolActions[(int)an].WasPressedThisFrame();
     }
 
+    /// <summary>
+    /// bool型のキー入力取得
+    /// </summary>
+    /// <param name="an">Actionに登録されているキー</param>
+    /// <returns>離した最初の１フレーム = true: それ以外 = false</returns>
     public static bool GetKeyUp(BoolActions an)
     {
         return boolActions[(int)an].WasReleasedThisFrame();
+    }
+
+    /// <summary>
+    /// InputSystemの有効化
+    /// </summary>
+    public static void EnableInput()
+    {
+        actionMap.Enable();
+
+        return;
+    }
+
+    /// <summary>
+    /// InputSystemの無効化
+    /// </summary>
+    public static void DisableInput()
+    {
+        actionMap.Disable();
+
+        return;
     }
 }

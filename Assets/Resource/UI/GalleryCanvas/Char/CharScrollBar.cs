@@ -98,7 +98,7 @@ public class OffsetChildObjects : MonoBehaviour
 
     void HandleInput()
     {
-        Vector2 Inout = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        Vector2 Inout = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
 
         if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
         {

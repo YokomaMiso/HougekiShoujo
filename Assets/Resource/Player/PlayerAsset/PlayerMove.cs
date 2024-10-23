@@ -27,8 +27,8 @@ public class PlayerMove : MonoBehaviour
         if (!ownerPlayer.IsMine()) { return Vector3.zero; }
 
         Vector3 movement = Vector3.zero;
-        movement += Vector3.right * InputManager.GetAxis(Vec2AxisActions.LStickAxis).x;
-        movement += Vector3.forward * InputManager.GetAxis(Vec2AxisActions.LStickAxis).y;
+        movement += Vector3.right * InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis).x;
+        movement += Vector3.forward * InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis).y;
         movement = movement.normalized;
 
         float currentSpeed = speed * NowSpeedRate() * Managers.instance.timeManager.TimeRate();

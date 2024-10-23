@@ -59,6 +59,8 @@ public class Managers : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 3));
+
         if (state == nextState) { return; }
         if (changeSceneCanvasInstance == null) { SceneManager.LoadScene((int)nextState); }
     }

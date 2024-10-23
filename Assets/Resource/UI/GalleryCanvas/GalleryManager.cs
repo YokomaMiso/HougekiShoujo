@@ -164,7 +164,7 @@ public class GalleryManager : MonoBehaviour
     private void HandleGalleryMainInput()
     {
         if (isFade) { return; }
-        Vector2 axisInput = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        Vector2 axisInput = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
         if (axisInput.y < -0.5f && canChangeIndex)
         {
             inputIndex++;

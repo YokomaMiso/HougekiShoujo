@@ -119,8 +119,8 @@ public class FastChat : MonoBehaviour
     int GetJoystickRegion()
     {
         Vector3 joyStick = Vector3.zero;
-        joyStick.x = InputManager.GetAxis(Vec2AxisActions.RStickAxis).x;
-        joyStick.y = -InputManager.GetAxis(Vec2AxisActions.RStickAxis).y;
+        joyStick.x = InputManager.GetAxis<Vector2>(Vec2AxisActions.RStickAxis).x;
+        joyStick.y = InputManager.GetAxis<Vector2>(Vec2AxisActions.RStickAxis).y;
 
         if (joyStick.magnitude < 0.2f) { return region; }
 
@@ -137,7 +137,7 @@ public class FastChat : MonoBehaviour
     {
         if (InputManager.GetKeyDown(BoolActions.RStickButton))
         {
-            Debug.Log("‚è‚¹‚Á‚Æ‚¨‚¨‚¨‚¨‚¨");
+            Debug.Log("â€šÃ¨â€šÂ¹â€šÃâ€šÃ†â€šÂ¨â€šÂ¨â€šÂ¨â€šÂ¨â€šÂ¨");
             region = -1;
         }
     }

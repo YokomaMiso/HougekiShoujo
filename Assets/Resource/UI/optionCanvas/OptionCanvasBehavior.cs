@@ -44,7 +44,7 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void CursorMove()
     {
-        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
 
         //ƒJ[ƒ\ƒ‹ˆÚ“®
         if (Mathf.Abs(value.y) > 0.8f)
@@ -73,7 +73,7 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void ChangeSelectedValue()
     {
-        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
 
         if (Mathf.Abs(value.x) > 0.8f)
         {

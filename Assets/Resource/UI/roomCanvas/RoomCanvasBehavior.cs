@@ -132,7 +132,7 @@ public class RoomCanvasBehavior : MonoBehaviour
     void CharaSelect()
     {
         int myID = Managers.instance.playerID;
-        float input = InputManager.GetAxis(Vec2AxisActions.LStickAxis).x;
+        float input = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis).x;
 
         if (Mathf.Abs(input) > 0.9f)
         {

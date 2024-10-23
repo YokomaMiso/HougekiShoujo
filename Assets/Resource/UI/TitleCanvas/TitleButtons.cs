@@ -28,7 +28,7 @@ public class TitleButtons : MonoBehaviour
 
     void CursorMove()
     {
-        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        Vector2 value = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 2);
 
         //ƒJ[ƒ\ƒ‹ˆÚ“®
         if (Mathf.Abs(value.x) > 0.7f)
