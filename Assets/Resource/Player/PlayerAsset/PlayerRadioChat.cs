@@ -21,7 +21,11 @@ public class PlayerRadioChat : MonoBehaviour
 
     void Update()
     {
-        if (!ownerPlayer.GetAlive()) { return; }
+        if (!ownerPlayer.GetAlive()) 
+        {
+            if (fastChatInstance != null) { Destroy(fastChatInstance); }
+            return; 
+        }
 
         if (ownerPlayer.IsMine())
         {
