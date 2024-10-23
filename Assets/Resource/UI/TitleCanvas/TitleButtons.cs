@@ -28,22 +28,22 @@ public class TitleButtons : MonoBehaviour
 
     void CursorMove()
     {
-        float value = Input.GetAxis("Horizontal");
+        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
 
         //カーソル移動
-        if (Mathf.Abs(value) > 0.7f)
+        if (Mathf.Abs(value.x) > 0.7f)
         {
             if (isCanSelect)
             {
                 transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
-                if (value < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
+                if (value.x < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
                 else { selectNum = (selectNum + 1) % selectItemNum; }
                 transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
                 isCanSelect = false;
             }
         }
         //前フレームの情報保存
-        else if (Mathf.Abs(value) < 0.2f)
+        else if (Mathf.Abs(value.x) < 0.2f)
         {
             isCanSelect = true;
         }
@@ -51,14 +51,14 @@ public class TitleButtons : MonoBehaviour
 
     void DecideSelect()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
             parent.ChangeFromButtons(selectNum);
         }
     }
     void PressCancel()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
             selectNum = selectItemNum - 1;

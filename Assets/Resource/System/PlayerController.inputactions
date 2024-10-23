@@ -209,7 +209,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Arrow",
+                    "name": "ArrowKey",
                     "id": "ac4092ff-5976-428d-949d-9313332de2db",
                     "path": "2DVector",
                     "interactions": "",
@@ -256,6 +256,61 @@
                     "name": "right",
                     "id": "150e3bea-0fb6-4990-9427-eca5782e90cf",
                     "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LStickAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "ArrowButton",
+                    "id": "65713c13-112e-4b89-a719-9d6d82f1b577",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LStickAxis",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "dff3417a-60ec-498f-97fb-5a64040178ff",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LStickAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "c28d7687-991c-4368-b3ff-d96aa79690f9",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LStickAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "1b403635-4665-445e-b29d-26c2332446e5",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LStickAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "58873ee0-95b3-4d70-85f5-d0d02a53432c",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -89,22 +89,22 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void ChangeButtonSelectNum()
     {
-        float value = Input.GetAxis("Vertical");
+        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
 
         //カーソル移動
-        if (Mathf.Abs(value) > 0.7f)
+        if (Mathf.Abs(value.y) > 0.7f)
         {
             if (isCanSelect)
             {
                 buttons[selectButtonNum].color = Color.white;
-                if (value < 0) { selectButtonNum = (selectButtonNum + 1) % buttonItemNum; }
+                if (value.y < 0) { selectButtonNum = (selectButtonNum + 1) % buttonItemNum; }
                 else { selectButtonNum = (selectButtonNum + buttonItemNum - 1) % buttonItemNum; }
                 buttons[selectButtonNum].color = Color.yellow;
                 isCanSelect = false;
             }
         }
         //前フレームの情報保存
-        else if (Mathf.Abs(value) < 0.2f)
+        else if (Mathf.Abs(value.y) < 0.2f)
         {
             isCanSelect = true;
         }
