@@ -223,7 +223,7 @@ public class GalleryManager : MonoBehaviour
 
     private void GalleryMainUpdate()
     {
-
+        BackToMainTitle();
     }
 
     private void HandleWorldSelectInput()
@@ -264,7 +264,14 @@ public class GalleryManager : MonoBehaviour
         }
     }
 
-
+    private void BackToMainTitle()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Managers.instance.ChangeState(GAME_STATE.TITLE);
+            Managers.instance.ChangeScene(GAME_STATE.TITLE);
+        }
+    }
 
 
 
