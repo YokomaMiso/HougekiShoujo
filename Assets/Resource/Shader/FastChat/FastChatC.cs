@@ -120,7 +120,7 @@ public class FastChat : MonoBehaviour
     {
         Vector3 joyStick = Vector3.zero;
         joyStick.x = InputManager.GetAxis<Vector2>(Vec2AxisActions.RStickAxis).x;
-        joyStick.y = InputManager.GetAxis<Vector2>(Vec2AxisActions.RStickAxis).y;
+        joyStick.y = -InputManager.GetAxis<Vector2>(Vec2AxisActions.RStickAxis).y;
 
         if (joyStick.magnitude < 0.2f) { return region; }
 

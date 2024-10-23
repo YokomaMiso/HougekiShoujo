@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
   m_Name: SW_ReloadBecon
   m_EditorClassIdentifier: 
-  subWeaponIcon: {fileID: 21300000, guid: a45aa24d3ad3e66429ea146820781a5a, type: 3}
+  subWeaponIcon: {fileID: 21300000, guid: f29fb8c1c6942c147bb09775d096c0a6, type: 3}
   subType: 1
   buffType: 0
   installation: {fileID: 1008518316061016973, guid: 0c4fce637059148479ee62bd8f6004a1,
