@@ -22,7 +22,7 @@ public class InputName : MonoBehaviour
     {
         if (parent.GetTitleState() != TITLE_STATE.INPUT_NAME) { return; }
 
-        if (Input.GetButtonDown("Submit"))
+        if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
             string playerName = inputField.text;
             if (playerName == "") { playerName = "Player " + (Managers.instance.playerID + 1).ToString(); }
@@ -31,7 +31,7 @@ public class InputName : MonoBehaviour
             OSCManager.OSCinstance.roomData.playerName = playerName;
             parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
         }
-        else if (Input.GetButtonDown("Cancel"))
+        else if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             parent.ChangeTitleState(TITLE_STATE.SELECT);
         }

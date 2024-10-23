@@ -46,14 +46,14 @@ public class FastChat : MonoBehaviour
 
     void ButtonCheck()
     {
-        if (Input.GetButtonDown("LB"))
+        if (InputManager.GetKeyDown(BoolActions.LeftShoulder))
         {
             isChatActive = true;
             SetVisibility(true);
             elapsedTime = 0f;
         }
 
-        if (Input.GetButtonUp("LB"))
+        if (InputManager.GetKeyUp(BoolActions.LeftShoulder))
         {
             isChatActive = false;
             SetVisibility(false);
@@ -119,8 +119,8 @@ public class FastChat : MonoBehaviour
     int GetJoystickRegion()
     {
         Vector3 joyStick = Vector3.zero;
-        joyStick.x = Input.GetAxis("RightStickHorizontal");
-        joyStick.y = Input.GetAxis("RightStickVertical");
+        joyStick.x = InputManager.GetAxis(Vec2AxisActions.RStickAxis).x;
+        joyStick.y = InputManager.GetAxis(Vec2AxisActions.RStickAxis).y;
 
         if (joyStick.magnitude < 0.2f) { return region; }
 
@@ -135,8 +135,7 @@ public class FastChat : MonoBehaviour
 
     void GetJoystickButton()
     {
-        //if (Input.GetButtonDown("RightStickButton"))
-        if (Input.GetKeyDown(KeyCode.JoystickButton9))
+        if (InputManager.GetKeyDown(BoolActions.RStickButton))
         {
             Debug.Log("‚è‚¹‚Á‚Æ‚¨‚¨‚¨‚¨‚¨");
             region = -1;

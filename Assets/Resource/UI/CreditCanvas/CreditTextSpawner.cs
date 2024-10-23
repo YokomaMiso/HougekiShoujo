@@ -40,7 +40,7 @@ public class CreditTextSpawner : MonoBehaviour
         }
 
         if (Managers.instance.UsingCanvas()) { return; }
-        if (Input.GetButtonDown("Submit"))
+        if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
             Managers.instance.ChangeScene(GAME_STATE.TITLE);
             Managers.instance.ChangeState(GAME_STATE.TITLE);

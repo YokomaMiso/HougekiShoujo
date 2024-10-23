@@ -121,8 +121,8 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         int teamID = -1;
 
-        if (Input.GetButtonDown("LB")) { teamID = (int)TEAM_NUM.A; }
-        else if (Input.GetButtonDown("RB")) { teamID = (int)TEAM_NUM.B; }
+        if (InputManager.GetKeyDown(BoolActions.LeftShoulder)) { teamID = (int)TEAM_NUM.A; }
+        else if (InputManager.GetKeyDown(BoolActions.RightShoulder)) { teamID = (int)TEAM_NUM.B; }
 
         if (teamID < 0) { return; }
 
@@ -132,7 +132,7 @@ public class RoomCanvasBehavior : MonoBehaviour
     void CharaSelect()
     {
         int myID = Managers.instance.playerID;
-        float input = Input.GetAxis("Horizontal");
+        float input = InputManager.GetAxis(Vec2AxisActions.LStickAxis).x;
 
         if (Mathf.Abs(input) > 0.9f)
         {
@@ -196,7 +196,7 @@ public class RoomCanvasBehavior : MonoBehaviour
         RoomData myRoomData = OSCManager.OSCinstance.roomData;
         if (myRoomData.ready) { return; }
 
-        if (Input.GetButtonDown("Menu"))
+        if (InputManager.GetKeyDown(BoolActions.Option))
         {
             Managers.instance.CreateOptionCanvas();
             return;
@@ -205,14 +205,14 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void PressSubmit()
     {
-        if (Input.GetButtonDown("Submit"))
+        if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
             rm.PressSubmit();
         }
     }
     void PressCancel()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             RoomData myRoomData = OSCManager.OSCinstance.roomData;
             if (myRoomData.ready) { rm.PressCancel(); }

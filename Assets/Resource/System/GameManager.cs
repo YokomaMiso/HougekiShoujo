@@ -420,12 +420,12 @@ public class GameManager : MonoBehaviour
         if (scoreBoardCanvas == null)
         {
             //RB押下時にキャンバスを生成
-            if (Input.GetButtonDown("RB")) { scoreBoardCanvas = Instantiate(scoreBoardCanvasPrefab); }
+            if (InputManager.GetKeyDown(BoolActions.RightShoulder)) { scoreBoardCanvas = Instantiate(scoreBoardCanvasPrefab); }
         }
         else
         {
             //RBを離した時にキャンバスを削除
-            if (Input.GetButtonUp("RB")) { Destroy(scoreBoardCanvas); }
+            if (InputManager.GetKeyUp(BoolActions.RightShoulder)) { Destroy(scoreBoardCanvas); }
         }
     }
 

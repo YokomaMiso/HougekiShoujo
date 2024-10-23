@@ -164,27 +164,27 @@ public class GalleryManager : MonoBehaviour
     private void HandleGalleryMainInput()
     {
         if (isFade) { return; }
-        float verticalInput = Input.GetAxis("Vertical");
-        if (verticalInput < -0.5f && canChangeIndex)
+        Vector2 axisInput = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
+        if (axisInput.y < -0.5f && canChangeIndex)
         {
             inputIndex++;
             if (inputIndex > childTransforms.Length) { inputIndex = 0; }
             GalleryMainSelect();
             canChangeIndex = false;
         }
-        else if (verticalInput > 0.5f && canChangeIndex)
+        else if (axisInput.y > 0.5f && canChangeIndex)
         {
             inputIndex--;
             if (inputIndex < 0) { inputIndex = childTransforms.Length; }
             GalleryMainSelect();
             canChangeIndex = false;
         }
-        else if (verticalInput > -0.5f && verticalInput < 0.5f)
+        else if (axisInput.y > -0.5f && axisInput.y < 0.5f)
         {
             canChangeIndex = true;
         }
 
-        if (Input.GetButtonDown("Submit") && inputIndex >= 0)
+        if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0)
         {
             nextState = inputIndex;
             TransFadeOut(inputIndex);
@@ -238,7 +238,7 @@ public class GalleryManager : MonoBehaviour
 
     private void BackToMainGallery()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             charCategory.SetActive(false);
             nextState = -1;
@@ -266,7 +266,7 @@ public class GalleryManager : MonoBehaviour
 
     private void BackToMainTitle()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             Managers.instance.ChangeState(GAME_STATE.TITLE);
             Managers.instance.ChangeScene(GAME_STATE.TITLE);

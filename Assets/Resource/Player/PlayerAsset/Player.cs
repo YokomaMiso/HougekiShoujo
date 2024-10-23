@@ -379,13 +379,13 @@ public class Player : MonoBehaviour
         int reloadValue = -1;
         //if (Input.GetButtonDown("X")) { reloadValue = 0; }
         //if (Input.GetButtonDown("Y")) { reloadValue = 0; }
-        if (Input.GetButtonDown("Submit")) { reloadValue = 0; }
-        if (Input.GetButtonDown("Cancel")) { reloadValue = 1; }
+        if (InputManager.GetKeyDown(BoolActions.SouthButton)) { reloadValue = 0; }
+        if (InputManager.GetKeyDown(BoolActions.EastButton)) { reloadValue = 1; }
 
         //if (Input.GetButtonUp("X")) { reloadValue = 3; }
         //if (Input.GetButtonUp("Y")) { reloadValue = 2; }
-        if (Input.GetButtonUp("Submit")) { reloadValue = 2; }
-        if (Input.GetButtonUp("Cancel")) { reloadValue = 3; }
+        if (InputManager.GetKeyUp(BoolActions.SouthButton)) { reloadValue = 2; }
+        if (InputManager.GetKeyUp(BoolActions.EastButton)) { reloadValue = 3; }
 
         return reloadValue;
     }

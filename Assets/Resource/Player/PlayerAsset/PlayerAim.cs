@@ -91,8 +91,8 @@ public class PlayerAim : MonoBehaviour
         if (ownerPlayer.IsMine())
         {
             Vector3 movement = Vector3.zero;
-            movement += Vector3.right * Input.GetAxis("Horizontal");
-            movement += Vector3.forward * Input.GetAxis("Vertical");
+            movement += Vector3.right * InputManager.GetAxis(Vec2AxisActions.LStickAxis).x;
+            movement += Vector3.forward * InputManager.GetAxis(Vec2AxisActions.LStickAxis).y;
             movement = movement.normalized;
 
             if (movement != Vector3.zero)

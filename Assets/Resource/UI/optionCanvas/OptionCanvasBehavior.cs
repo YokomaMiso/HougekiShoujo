@@ -44,16 +44,16 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void CursorMove()
     {
-        float value = Input.GetAxis("Vertical");
+        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
 
         //カーソル移動
-        if (Mathf.Abs(value) > 0.8f)
+        if (Mathf.Abs(value.y) > 0.8f)
         {
             if (isCanSelect)
             {
                 transform.GetChild(selectNum + 1).GetChild(0).GetComponent<Image>().color = SelectColor(false);
 
-                if (value > 0) { selectNum -= 1; }
+                if (value.y > 0) { selectNum -= 1; }
                 else { selectNum += 1; }
 
                 if (selectNum < 0) { selectNum = 0; }
@@ -65,7 +65,7 @@ public class OptionCanvasBehavior : MonoBehaviour
             }
         }
         //前フレームの情報保存
-        else if (Mathf.Abs(value) < 0.2f)
+        else if (Mathf.Abs(value.y) < 0.2f)
         {
             isCanSelect = true;
         }
@@ -73,9 +73,9 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void ChangeSelectedValue()
     {
-        float value = Input.GetAxis("Horizontal");
+        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
 
-        if (Mathf.Abs(value) > 0.8f)
+        if (Mathf.Abs(value.x) > 0.8f)
         {
             if (timer == 0)
             {
@@ -87,7 +87,7 @@ public class OptionCanvasBehavior : MonoBehaviour
                     case 1:
                     case 2:
                     case 3:
-                        if (value < 0) { applyValue *= -1; }
+                        if (value.x < 0) { applyValue *= -1; }
                         transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
                         SoundManager.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
                         SoundManager.bgmVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
@@ -99,13 +99,13 @@ public class OptionCanvasBehavior : MonoBehaviour
 
                         break;
                     case 4:
-                        transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value < 0);
+                        transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value.y < 0);
                         break;
                     case 6:
                         break;
 
                     default:
-                        if (value < 0) { applyValue *= -1; }
+                        if (value.x < 0) { applyValue *= -1; }
                         transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
                         break;
                 }
@@ -126,7 +126,7 @@ public class OptionCanvasBehavior : MonoBehaviour
         optionData.cameraShakeOn = transform.GetChild(5).GetComponent<RadioBoxIndexSetting>().on;
         optionData.mortarSensitive = transform.GetChild(6).GetComponent<VolumeIndexSetting>().GetValue();
 
-        if (Input.GetButtonDown("Submit"))
+        if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
             if (selectNum == 6)
             {

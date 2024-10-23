@@ -33,7 +33,7 @@ public class ResultExitButton : MonoBehaviour
 
             if (Managers.instance.UsingCanvas()) { return; }
 
-            if (Input.GetButtonDown("Submit")) { ownerCanvas.ReturnRoom(); }
+            if (InputManager.GetKeyDown(BoolActions.SouthButton)) { ownerCanvas.ReturnRoom(); }
         }
     }
 }
