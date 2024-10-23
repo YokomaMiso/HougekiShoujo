@@ -98,11 +98,11 @@ public class OffsetChildObjects : MonoBehaviour
 
     void HandleInput()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        Vector2 Inout = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
 
-        if(GalleryManager.Instance.CurrentState== GalleryState.CharacterSelect)
+        if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
         {
-            if (horizontalInput > 0.5f && canChangeIndex)
+            if (Inout.x > 0.5f && canChangeIndex)
             {
                 if (inputIndex < contentParent.childCount - 1)
                 {
@@ -110,7 +110,7 @@ public class OffsetChildObjects : MonoBehaviour
                 }
                 canChangeIndex = false;
             }
-            else if (horizontalInput < -0.5f && canChangeIndex)
+            else if (Inout.x < -0.5f && canChangeIndex)
             {
                 if (inputIndex > 0)
                 {
@@ -118,41 +118,41 @@ public class OffsetChildObjects : MonoBehaviour
                 }
                 canChangeIndex = false;
             }
-            else if (horizontalInput > -0.5f && horizontalInput < 0.5f)
+            else if (Inout.x > -0.5f && Inout.x < 0.5f)
             {
                 canChangeIndex = true;
             }
         }
 
-        if(GalleryManager.Instance.CurrentState== GalleryState.CharacterGallery)
+        if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
         {
-            if (horizontalInput > 0.5f && canChangeIndex)
+            if (Inout.x > 0.5f && canChangeIndex)
             {
                 CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
 
                 currentAnimatorIndex = (currentAnimatorIndex + 1) % currentCharacter.animatorControllers.Count;
 
-                mainViewPort.UpdateAnimatorController(currentCharacter,currentAnimatorIndex);
+                mainViewPort.UpdateAnimatorController(currentCharacter, currentAnimatorIndex);
 
                 canChangeIndex = false;
             }
-            else if (horizontalInput < -0.5f && canChangeIndex)
+            else if (Inout.x < -0.5f && canChangeIndex)
             {
                 CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
 
                 currentAnimatorIndex = (currentAnimatorIndex - 1 + currentCharacter.animatorControllers.Count)
                                        % currentCharacter.animatorControllers.Count;
 
-                mainViewPort.UpdateAnimatorController(currentCharacter,currentAnimatorIndex);
+                mainViewPort.UpdateAnimatorController(currentCharacter, currentAnimatorIndex);
 
                 canChangeIndex = false;
             }
-            else if (horizontalInput > -0.5f && horizontalInput < 0.5f)
+            else if (Inout.x > -0.5f && Inout.x < 0.5f)
             {
                 canChangeIndex = true;
             }
         }
-        
+
     }
 
     void HighlightCurrentIcon()
@@ -173,7 +173,7 @@ public class OffsetChildObjects : MonoBehaviour
     {
         if(GalleryManager.Instance.CurrentState== GalleryState.CharacterSelect)
         {
-            if (Input.GetButtonDown("Submit") && inputIndex >= 0)
+            if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0)
             {
 
                 CharacterData selectedCharacter = charGalleryManager.characterList[inputIndex];
@@ -189,7 +189,7 @@ public class OffsetChildObjects : MonoBehaviour
 
     void HandleBackKey()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
             {

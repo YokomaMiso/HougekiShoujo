@@ -72,7 +72,7 @@ public class CameraMove : MonoBehaviour
     {
         //canChangePlayerが１人でも入れば、カメラを切り替えることが出来る
         //LBが押されたら
-        if (Input.GetButtonDown("LB"))
+        if (InputManager.GetKeyDown(BoolActions.LeftShoulder))
         {
             int maxNum = Managers.instance.gameManager.GetPlayerCount();
 

@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "RStickButton",
+                    "type": "Button",
+                    "id": "95fd5943-6694-4f44-b721-6643de12c036",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "SouthButton",
                     "type": "Button",
                     "id": "31f2e119-3d23-4518-9a0d-3cdc444e1c46",
@@ -568,6 +577,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "EastButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a67fdcfa-00e2-46f0-8318-986b6b324669",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RStickButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

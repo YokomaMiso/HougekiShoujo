@@ -17,9 +17,9 @@ public class CreditCanvasBehavior : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Submit") || Input.GetButtonDown("Cancel")) { parent.ChangeTitleState(TITLE_STATE.SELECT); }
+        if (InputManager.GetKeyDown(BoolActions.SouthButton) || InputManager.GetKeyDown(BoolActions.EastButton)) { parent.ChangeTitleState(TITLE_STATE.SELECT); }
 
-        float movement = Input.GetAxis("Vertical") * Time.deltaTime * 800;
+        float movement = InputManager.GetAxis(Vec2AxisActions.LStickAxis).y * Time.deltaTime * 800;
         float nowPosY = Mathf.Clamp(creditTexts.localPosition.y - movement, -limit, limit);
 
         creditTexts.localPosition = Vector3.up * nowPosY;

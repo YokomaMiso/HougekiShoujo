@@ -55,7 +55,7 @@ public class PlayerRadioChat : MonoBehaviour
 
     void ButtonCheck()
     {
-        if (Input.GetButtonDown("LB"))
+        if (InputManager.GetKeyDown(BoolActions.LeftShoulder))
         {
             if (fastChatInstance == null)
             {
@@ -64,7 +64,7 @@ public class PlayerRadioChat : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("LB"))
+        if (InputManager.GetKeyUp(BoolActions.LeftShoulder))
         {
             if (fastChatInstance != null)
             {

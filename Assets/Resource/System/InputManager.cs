@@ -14,7 +14,8 @@ public enum Vec2AxisActions
 
 public enum BoolActions
 {
-    SouthButton = 0,
+    RStickButton = 0,
+    SouthButton,
     EastButton,
     RightShoulder,
     LeftShoulder,
@@ -105,6 +106,8 @@ public class InputManager : MonoBehaviour
 
     public static bool GetKeyDown(BoolActions an)
     {
+        Debug.Log(boolActions[(int)an].name);
+
         return boolActions[(int)an].WasPressedThisFrame();
     }
 

@@ -113,7 +113,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     void DecideButtonSelect()
     {
         //決定が押されていないならリターン
-        if (!Input.GetButtonDown("Submit")) { return; }
+        if (!InputManager.GetKeyDown(BoolActions.SouthButton)) { return; }
 
         switch ((SELECT_ROOM_BUTTON_ID)selectButtonNum)
         {
@@ -151,9 +151,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void ChangeRoomBannerSelectNum()
     {
-        Vector3 value = Vector3.zero;
-        value.x = Input.GetAxis("Horizontal");
-        value.y = Input.GetAxis("Vertical");
+        Vector2 value = InputManager.GetAxis(Vec2AxisActions.LStickAxis);
 
         //カーソル横移動
         if (Mathf.Abs(value.x) > 0.7f)
@@ -189,7 +187,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     void DecideRoom()
     {
         //決定が押されていないならリターン
-        if (!Input.GetButtonDown("Submit")) { return; }
+        if (!InputManager.GetKeyDown(BoolActions.SouthButton)) { return; }
 
         OSCManager.OSCinstance.startPort = selectRoomBannerNum * 10 + 50000;
 
@@ -201,9 +199,9 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     void BackButtonSelect()
     {
         //決定が押されてるならリターン
-        if (Input.GetButtonDown("Submit")) { return; }
+        if (InputManager.GetKeyDown(BoolActions.SouthButton)) { return; }
         //キャンセルが押されていないならリターン
-        if (!Input.GetButtonDown("Cancel")) { return; }
+        if (!InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
 
         roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.white;
         selectJoin = false;
