@@ -7,7 +7,6 @@ public class CharaSerifBehavior : MonoBehaviour
 {
     Image chatBG;
     Text playerName;
-    Outline[] textOutLines;
     Image charaIcon;
 
     [SerializeField] Sprite[] bgSprite;
@@ -33,8 +32,6 @@ public class CharaSerifBehavior : MonoBehaviour
         chatBG.sprite = bgSprite[_roomData.myTeamNum * 4 + (int)_chatID - 1];
 
         playerName.text = _roomData.playerName;
-        textOutLines = playerName.GetComponents<Outline>();
-        textOutLines[textOutLines.Length - 1].effectColor = Managers.instance.ColorCordToRGB(_roomData.myTeamNum);
 
         charaIcon.sprite = Managers.instance.gameManager.playerDatas[_roomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
 
@@ -56,7 +53,6 @@ public class CharaSerifBehavior : MonoBehaviour
             chatBG.color = chatBG.color * fadeColor;
             playerName.color = playerName.color * fadeColor;
             charaIcon.color = charaIcon.color * fadeColor;
-            for (int i = 0; i < textOutLines.Length; i++) { textOutLines[i].effectColor = textOutLines[i].effectColor * fadeColor; }
         }
 
         if (timer > lifeTime) { Destroy(gameObject); }

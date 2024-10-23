@@ -137,7 +137,7 @@ public class FastChat : MonoBehaviour
     {
         if (InputManager.GetKeyDown(BoolActions.RStickButton))
         {
-            Debug.Log("‚è‚¹‚Á‚Æ‚¨‚¨‚¨‚¨‚¨");
+            Debug.Log("â€šÃ¨â€šÂ¹â€šÃâ€šÃ†â€šÂ¨â€šÂ¨â€šÂ¨â€šÂ¨â€šÂ¨");
             region = -1;
         }
     }
