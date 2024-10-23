@@ -89,7 +89,7 @@ public class InputName : MonoBehaviour
         if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("j").wasPressedThisFrame) { return; }
 
         string playerName = inputField.text;
-        if (playerName == "") { playerName = "Player " + (Managers.instance.playerID + 1).ToString(); }
+        if (playerName == "") { playerName = "Player"; }
         Managers.instance.optionData.playerName = playerName;
         Managers.instance.SaveOptionData(Managers.instance.optionData);
         OSCManager.OSCinstance.roomData.playerName = playerName;
