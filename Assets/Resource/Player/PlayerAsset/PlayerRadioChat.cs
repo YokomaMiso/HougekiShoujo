@@ -55,6 +55,14 @@ public class PlayerRadioChat : MonoBehaviour
 
     void ButtonCheck()
     {
+        CheckShoulderButton();
+        CheckChatButton();
+    }
+
+    void CheckShoulderButton()
+    {
+        if (radioChatID != RADIO_CHAT_ID.NONE) { return; }
+
         if (InputManager.GetKeyDown(BoolActions.LeftShoulder))
         {
             if (fastChatInstance == null)
@@ -75,6 +83,26 @@ public class PlayerRadioChat : MonoBehaviour
                 SpawnSerifOrEmote(oscRoomData, radioChatID);
 
                 Destroy(fastChatInstance);
+            }
+        }
+    }
+
+    void CheckChatButton()
+    {
+        if (radioChatID != RADIO_CHAT_ID.NONE) { return; }
+
+        int buttonMaxCount = (BoolActions.RadioChat8 + 1) - BoolActions.RadioChat1;
+        for (int i = 0; i < buttonMaxCount; i++)
+        {
+            if (InputManager.GetKeyDown(BoolActions.RadioChat1 + i))
+            {
+                radioChatID = (RADIO_CHAT_ID)(i + 1);
+                MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
+                SpawnSerifOrEmote(oscRoomData, radioChatID);
+
+                if (fastChatInstance != null) { Destroy(fastChatInstance); }
+
+                break;
             }
         }
     }
