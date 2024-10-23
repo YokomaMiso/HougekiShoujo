@@ -45,6 +45,8 @@ public class ResultCanvasBehavior : MonoBehaviour
         defaultLocalPosition[2] = moveTransform[2].localPosition;
         moveTransform[3] = mvpGroup.transform;
         defaultLocalPosition[3] = moveTransform[3].localPosition;
+
+        OSCManager.OSCinstance.roomData.ready = false;
     }
 
     void Update()

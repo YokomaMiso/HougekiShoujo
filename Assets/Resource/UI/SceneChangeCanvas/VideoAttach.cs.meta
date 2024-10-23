@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: fcc209cc537e1df4f94b65585a4380b8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - gb: {fileID: 2800000, guid: 548eff2734696cd42b9456a7a59ee127, type: 3}
+  - videoTexture: {fileID: 8400000, guid: 46ccf3486792d8249b241ebc2ad1512b, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

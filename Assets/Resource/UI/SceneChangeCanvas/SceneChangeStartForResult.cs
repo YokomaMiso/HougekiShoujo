@@ -32,13 +32,13 @@ public class SceneChangeStartForResult : SceneChange
 
         if (timer >= newsPaperZoomStartTime)
         {
-            nowRate = Mathf.Pow((timer - newsPaperZoomStartTime) / (lifeTime - newsPaperZoomStartTime),3);
+            nowRate = Mathf.Pow((timer - newsPaperZoomStartTime) / (lifeTime - newsPaperZoomStartTime), 3);
             newsPaper.localPosition = Vector3.Lerp(newsPaperArrivePos, newsPaperEndPos, nowRate);
             newsPaper.localScale = Vector3.Lerp(newsPaperDefaultScale, newsPaperEndScale, nowRate);
         }
         else if (newsPaperStopTime >= timer && timer > newsPaperMoveTime)
         {
-            nowRate = Mathf.Pow((timer - newsPaperMoveTime) / (newsPaperStopTime - newsPaperMoveTime),2);
+            nowRate = Mathf.Pow((timer - newsPaperMoveTime) / (newsPaperStopTime - newsPaperMoveTime), 2);
             newsPaper.localPosition = Vector3.Lerp(newsPaperStartPos, newsPaperArrivePos, nowRate);
         }
 

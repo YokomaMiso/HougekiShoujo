@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 3222180215648051976}
   - component: {fileID: 4784438791982940785}
   - component: {fileID: 721328423237241893}
+  - component: {fileID: 3119876552211464150}
   m_Layer: 5
   m_Name: Video
   m_TagString: Untagged
@@ -257,7 +258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 46ccf3486792d8249b241ebc2ad1512b, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -281,7 +282,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
   m_RenderMode: 2
-  m_AspectRatio: 2
+  m_AspectRatio: 1
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
@@ -292,11 +293,25 @@ VideoPlayer:
   - 1
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
+  m_SkipOnDrop: 0
   m_Looping: 0
-  m_WaitForFirstFrame: 1
+  m_WaitForFirstFrame: 0
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!114 &3119876552211464150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8804039737677179808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc209cc537e1df4f94b65585a4380b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gb: {fileID: 2800000, guid: 548eff2734696cd42b9456a7a59ee127, type: 3}
+  videoTexture: {fileID: 8400000, guid: 46ccf3486792d8249b241ebc2ad1512b, type: 2}
