@@ -8,7 +8,6 @@ public class TitleButtons : MonoBehaviour
 
     int selectNum = 0;
     const int selectItemNum = 5;
-    bool isCanSelect = true;
 
     public void SetParent(TitleCanvasBehavior _parent) { parent = _parent; }
 
@@ -28,24 +27,16 @@ public class TitleButtons : MonoBehaviour
 
     void CursorMove()
     {
-        Vector2 value = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 2);
+        Vector2 value = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f);
 
         //カーソル移動
         if (Mathf.Abs(value.x) > 0.7f)
         {
-            if (isCanSelect)
-            {
-                transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
-                if (value.x < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
-                else { selectNum = (selectNum + 1) % selectItemNum; }
-                transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
-                isCanSelect = false;
-            }
-        }
-        //前フレームの情報保存
-        else if (Mathf.Abs(value.x) < 0.2f)
-        {
-            isCanSelect = true;
+            transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
+            if (value.x < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
+            else { selectNum = (selectNum + 1) % selectItemNum; }
+            transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
+
         }
     }
 
@@ -63,7 +54,6 @@ public class TitleButtons : MonoBehaviour
             transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
             selectNum = selectItemNum - 1;
             transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
-            isCanSelect = false;
         }
     }
 }

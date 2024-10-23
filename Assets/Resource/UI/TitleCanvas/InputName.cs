@@ -24,15 +24,10 @@ public class InputName : MonoBehaviour
     {
         if (parent.GetTitleState() != TITLE_STATE.INPUT_NAME) { return; }
 
-        inputField.Select();
-
         AddText();
         SubText();
-        if (Keyboard.current[Key.Enter].wasPressedThisFrame) { Submit(); }
-        else if (Keyboard.current[Key.Escape].wasPressedThisFrame) { Cancel(); }
-
-        //if (InputManager.GetKeyDown(BoolActions.SouthButton)) { }
-        //else if (InputManager.GetKeyDown(BoolActions.EastButton)) { }
+        Submit();
+        Cancel();
     }
     void AddText()
     {
@@ -104,7 +99,7 @@ public class InputName : MonoBehaviour
     void Cancel()
     {
         //キャンセルボタンが押されてないなら
-        if (InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
+        if (!InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
 
         if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("k").wasPressedThisFrame) { return; }
         if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("x").wasPressedThisFrame) { return; }

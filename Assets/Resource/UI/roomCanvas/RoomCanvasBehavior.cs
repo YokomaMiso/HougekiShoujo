@@ -32,9 +32,6 @@ public class RoomCanvasBehavior : MonoBehaviour
     Image subWeaponIcon;
     Text subWeaponText;
 
-    float timer = 0;
-    const float charaChangeTimer = 0.5f;
-
     readonly int[] teamPosX = new int[2] { -680, 680 };
     readonly int[] bannerPosY = new int[4] { 240, 80, -80, -240 };
 
@@ -132,22 +129,12 @@ public class RoomCanvasBehavior : MonoBehaviour
     void CharaSelect()
     {
         int myID = Managers.instance.playerID;
-        float input = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis).x;
+        float input = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f).x;
 
         if (Mathf.Abs(input) > 0.9f)
         {
-            if (timer == 0)
-            {
-                if (input > 0) { rm.CharaSelect(1); }
-                else { rm.CharaSelect(-1); }
-            }
-
-            timer += Time.deltaTime;
-            if (timer > charaChangeTimer) { timer = 0; }
-        }
-        else if (Mathf.Abs(input) < 0.2f)
-        {
-            timer = 0;
+            if (input > 0) { rm.CharaSelect(1); }
+            else { rm.CharaSelect(-1); }
         }
 
         int charaID = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).selectedCharacterID;
