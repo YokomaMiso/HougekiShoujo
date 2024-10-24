@@ -99,7 +99,7 @@ public class OptionCanvasBehavior : MonoBehaviour
 
                         break;
                     case 4:
-                        transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value.y < 0);
+                        transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value.x < 0);
                         break;
                     case 6:
                         break;
