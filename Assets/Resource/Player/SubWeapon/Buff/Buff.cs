@@ -27,5 +27,11 @@ public class Buff : MonoBehaviour
         }
     }
 
+    public void ResetBuff()
+    {
+        BuffBehavior();
+        Destroy(this);
+    }
+
     protected virtual void BuffBehavior() { }
 }

@@ -11,7 +11,7 @@ public class SpeedBuff : Buff
         if (GetComponent<PlayerMove>())
         {
             playerMove = GetComponent<PlayerMove>();
-            buffNum = playerMove.AddSpeedRate(speedRate);
+            buffNum = playerMove.AddSpeedRate(this,speedRate);
             //PlayerMoveにバフを送れたらリターン
             if (buffNum >= 0) { return; }
         }
@@ -23,6 +23,5 @@ public class SpeedBuff : Buff
     protected override void BuffBehavior()
     {
         playerMove.ResetSpeedRate(buffNum);
-
     }
 }
