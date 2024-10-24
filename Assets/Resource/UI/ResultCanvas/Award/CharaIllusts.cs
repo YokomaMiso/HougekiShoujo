@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 
 public class CharaIllusts : MonoBehaviour
@@ -12,18 +13,25 @@ public class CharaIllusts : MonoBehaviour
 
     float limit;
     Color[] teamColors = new Color[(int)AWARD_ID.MAX_NUM];
+    readonly string[] teamColorCord = new string[2] { "#34b5bc", "#ff5353" };
 
-    Image[] masks = new Image[(int)AWARD_ID.MAX_NUM];
+    Image[] allMasks = new Image[(int)AWARD_ID.MAX_NUM];
+    Image[] dropShadowMask = new Image[(int)AWARD_ID.MAX_NUM];
+    Image[] dropShadow = new Image[(int)AWARD_ID.MAX_NUM];
     Image[] illusts = new Image[(int)AWARD_ID.MAX_NUM];
 
     public void SetSprite(AWARD_ID _id, ResultScoreBoard.KDFData _kdf)
     {
-        masks[(int)_id] = transform.GetChild((int)_id).GetComponent<Image>();
-        teamColors[(int)_id] = Managers.instance.ColorCordToRGB(_kdf.teamNum);
+        allMasks[(int)_id] = transform.GetChild((int)_id).GetComponent<Image>();
+        teamColors[(int)_id] = ColorCordToRGB(_kdf.teamNum);
+
+        dropShadowMask[(int)_id] = transform.GetChild((int)_id).GetChild(0).GetComponent<Image>();
+        dropShadow[(int)_id] = transform.GetChild((int)_id).GetChild(0).GetChild(0).GetComponent<Image>();
+        illusts[(int)_id] = transform.GetChild((int)_id).GetChild(1).GetComponent<Image>();
 
         PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
-        illusts[(int)_id] = transform.GetChild((int)_id).GetChild(0).GetComponent<Image>();
         illusts[(int)_id].sprite = pd.GetCharacterAnimData().GetCharaIllust();
+        dropShadowMask[(int)_id].sprite = illusts[(int)_id].sprite;
     }
     void Start()
     {
@@ -39,8 +47,17 @@ public class CharaIllusts : MonoBehaviour
         for (int i = 0; i < (int)AWARD_ID.MAX_NUM; i++)
         {
             float colorValue = Mathf.Clamp01(timer - alphaStart - (childSub * i));
-            masks[i].color = teamColors[i] * colorValue;
+            allMasks[i].color = teamColors[i] * colorValue;
+            dropShadow[i].color = Color.black * colorValue;
             illusts[i].color = Color.white * colorValue;
         }
+    }
+
+    Color ColorCordToRGB(int _num)
+    {
+        if (_num >= teamColorCord.Length) { return Color.black; }
+
+        if (ColorUtility.TryParseHtmlString(teamColorCord[_num], out Color color)) return color;
+        else return Color.black;
     }
 }
