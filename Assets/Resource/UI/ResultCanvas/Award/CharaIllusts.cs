@@ -16,22 +16,19 @@ public class CharaIllusts : MonoBehaviour
     readonly string[] teamColorCord = new string[2] { "#34b5bc", "#ff5353" };
 
     Image[] allMasks = new Image[(int)AWARD_ID.MAX_NUM];
-    Image[] dropShadowMask = new Image[(int)AWARD_ID.MAX_NUM];
-    Image[] dropShadow = new Image[(int)AWARD_ID.MAX_NUM];
     Image[] illusts = new Image[(int)AWARD_ID.MAX_NUM];
+
+    [SerializeField] Material outline;
 
     public void SetSprite(AWARD_ID _id, ResultScoreBoard.KDFData _kdf)
     {
         allMasks[(int)_id] = transform.GetChild((int)_id).GetComponent<Image>();
         teamColors[(int)_id] = ColorCordToRGB(_kdf.teamNum);
 
-        dropShadowMask[(int)_id] = transform.GetChild((int)_id).GetChild(0).GetComponent<Image>();
-        dropShadow[(int)_id] = transform.GetChild((int)_id).GetChild(0).GetChild(0).GetComponent<Image>();
-        illusts[(int)_id] = transform.GetChild((int)_id).GetChild(1).GetComponent<Image>();
+        illusts[(int)_id] = transform.GetChild((int)_id).GetChild(0).GetComponent<Image>();
 
         PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
         illusts[(int)_id].sprite = pd.GetCharacterAnimData().GetCharaIllust();
-        dropShadowMask[(int)_id].sprite = illusts[(int)_id].sprite;
     }
     void Start()
     {
@@ -48,7 +45,6 @@ public class CharaIllusts : MonoBehaviour
         {
             float colorValue = Mathf.Clamp01(timer - alphaStart - (childSub * i));
             allMasks[i].color = teamColors[i] * colorValue;
-            dropShadow[i].color = Color.black * colorValue;
             illusts[i].color = Color.white * colorValue;
         }
     }

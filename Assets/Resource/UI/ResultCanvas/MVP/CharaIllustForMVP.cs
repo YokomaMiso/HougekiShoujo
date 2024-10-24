@@ -13,8 +13,6 @@ public class CharaIllustForMVP : MonoBehaviour
     readonly string[] teamColorCord = new string[2] { "#34b5bc", "#ff5353" };
 
     Image allMask;
-    Image dropShadowMask;
-    Image dropShadow;
     Image illust;
 
     public void SetSprite(ResultScoreBoard.KDFData _kdf)
@@ -22,13 +20,10 @@ public class CharaIllustForMVP : MonoBehaviour
         allMask = transform.GetComponent<Image>();
         teamColor = ColorCordToRGB(_kdf.teamNum);
 
-        dropShadowMask = transform.GetChild(0).GetComponent<Image>();
-        dropShadow = transform.GetChild(0).GetChild(0).GetComponent<Image>();
-        illust = transform.GetChild(1).GetComponent<Image>();
+        illust = transform.GetChild(0).GetComponent<Image>();
 
         PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
         illust.sprite = pd.GetCharacterAnimData().GetCharaIllust();
-        dropShadowMask.sprite = illust.sprite;
     }
 
     void Update()
@@ -40,7 +35,6 @@ public class CharaIllustForMVP : MonoBehaviour
 
         float colorValue = Mathf.Clamp01((timer - startTime) / (endTime - startTime));
         allMask.color = teamColor * colorValue;
-        dropShadow.color = Color.black * colorValue; 
         illust.color = Color.white * colorValue;
     }
 
