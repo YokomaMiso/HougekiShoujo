@@ -8,15 +8,15 @@ public class BlindDebuffCanvasBehavior : MonoBehaviour
     const float startTime = 0.5f;
     const float lifeTime = 15;
 
-
     void Update()
     {
+        IngameData.GameData hostIngameData;
+        if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
+        else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
+        if (!hostIngameData.play) { Destroy(gameObject); return; }
+
         IngameData.GameData myIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
-        if (!myIngameData.alive)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (!myIngameData.alive) { Destroy(gameObject); return; }
 
         timer += Managers.instance.timeManager.GetDeltaTime();
 

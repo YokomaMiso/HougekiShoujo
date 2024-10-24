@@ -211,6 +211,7 @@ public class Player : MonoBehaviour
             else
             {
                 playerState = PLAYER_STATE.IDLE;
+                playerMove.Init();
                 if (alive) { playerMove.MoveStop(); }
             }
 
@@ -225,6 +226,7 @@ public class Player : MonoBehaviour
             if (hostIngameData.start && alive && !myIngameData.alive) { SetDead(myIngameData.killPlayerID); }
 
             if (hostIngameData.play) { OtherPlayerBehavior(); }
+            else { playerMove.Init(); }
             if (!alive) { playerDead.DeadBehavior(); }
         }
     }

@@ -12,12 +12,22 @@ public class PlayerMove : MonoBehaviour
     //移動速度
     float speed = 5;
     //バフデバフ用の変数
-    float[] speedRate = new float[8] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+    float[] speedRate = new float[6] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+    SpeedBuff[] buffs = new SpeedBuff[6] { null, null, null, null, null, null };
     const float defaultSpeedRate = 1.0f;
 
     private void Start()
     {
         speed = ownerPlayer.GetPlayerData().GetMoveSpeed();
+    }
+
+    public void Init()
+    {
+        for (int i = 0; i < buffs.Length; i++)
+        {
+            if (buffs[i] != null) { buffs[i].ResetBuff(); }
+        }
+        vfxBehavior.DisplayBuff(1.0f);
     }
 
     public void MoveForOther() { NowSpeedRate(); }
@@ -41,7 +51,7 @@ public class PlayerMove : MonoBehaviour
 
     public void MoveStop() { ownerPlayer.GetComponent<Rigidbody>().velocity = Vector3.zero; }
 
-    public int AddSpeedRate(float _rate)
+    public int AddSpeedRate(SpeedBuff _buff, float _rate)
     {
         int emptyNum = -1;
         for (int i = 0; i < speedRate.Length; i++)
@@ -50,6 +60,7 @@ public class PlayerMove : MonoBehaviour
             {
                 emptyNum = i;
                 speedRate[i] = _rate;
+                buffs[i] = _buff;
                 break;
             }
         }
