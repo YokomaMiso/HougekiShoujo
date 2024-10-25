@@ -11,7 +11,9 @@ public class TitleButtonBehavior : MonoBehaviour
 
     int state = 0;
     float timer;
-    const float maxTime = 0.2f;
+    readonly float[] maxTime = new float[2] { 0.2f, 0.115f };
+
+    float sizeRate;
 
     public void SetState(int _num) { state = _num; }
 
@@ -24,26 +26,32 @@ public class TitleButtonBehavior : MonoBehaviour
         switch (state)
         {
             case 0:
-                if (timer <= 0) { return; }
-                timer = Mathf.Clamp(timer - Time.deltaTime, 0, maxTime);
+                TimerUpdate(-Time.deltaTime);
                 Shrink();
                 break;
+
             case 1:
-                if (timer >= maxTime) { return; }
-                timer = Mathf.Clamp(timer + Time.deltaTime, 0, maxTime);
+                TimerUpdate(Time.deltaTime);
                 Expand();
                 break;
+
         }
 
         image.sprite = sprites[state];
     }
 
+    void TimerUpdate(float _addTime)
+    {
+        timer = Mathf.Clamp(timer + _addTime, 0, maxTime[0]);
+        sizeRate = Mathf.Clamp01(timer / maxTime[state]);
+    }
+
     void Expand()
     {
-        transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, Mathf.Clamp01(timer / maxTime));
+        transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, Mathf.Sqrt(sizeRate));
     }
     void Shrink()
     {
-        transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, Mathf.Clamp01(timer / maxTime));
+        transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, Mathf.Pow(sizeRate, 2));
     }
 }
