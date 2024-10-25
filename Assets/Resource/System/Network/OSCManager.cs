@@ -111,7 +111,7 @@ public class OSCManager : MonoBehaviour
     void Update()
     {
         //Debug.Log("PlayerID is " + Managers.instance.playerID);
-        //Debug.Log("IPAddress is " + GetLocalIPAddress());
+        Debug.Log("IPAddress is " + GetLocalIPAddress());
         //Debug.Log("startPort is " + startPort);
 
         // タイムアウトチェック
@@ -435,6 +435,8 @@ public class OSCManager : MonoBehaviour
         tempServer = new OscServer(tempPort);
 
         tempServer.TryAddMethod(address, ReadMainValue);
+
+        Debug.Log("一時ネットワーク作成完了");
 
         /************** 初期化終了 *************/
 
