@@ -11,6 +11,8 @@ public class SubWeapon : ScriptableObject
     [SerializeField, Header("Sub Type")] SUB_TYPE subType;
     [SerializeField, Header("Buff Type")] BUFF_TYPE buffType;
     [SerializeField, Header("Installation")] GameObject installation;
+
+    [SerializeField, Header("Weapon Name"), TextArea(1, 1)] string subWeaponName;
     [SerializeField, Header("Explain"), TextArea(1, 3)] string subWeaponExplain;
 
     [SerializeField, Header("Installation Start Anim")] RuntimeAnimatorController installationStartAnim;
@@ -24,6 +26,7 @@ public class SubWeapon : ScriptableObject
     public SUB_TYPE GetSubType() { return subType; }
     public BUFF_TYPE GetBuffType() { return buffType; }
     public GameObject GetInstallation() { return installation; }
+    public string GetSubWeaponName() { return subWeaponName; }
     public string GetSubWeaponExplain() { return subWeaponExplain; }
 
     public RuntimeAnimatorController GetInstallationStartAnim() { return installationStartAnim; }

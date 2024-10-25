@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PD_ZaizenJulia
   m_EditorClassIdentifier: 
   charaName: "\u8CA1\u524D \u6731\u91CC\u4E9C"
+  charaNameRubi: "\u3056\u3044\u305C\u3093 \u3058\u3085\u308A\u3042"
   schoolAndGrade: "\u4EC7\u5C04\u9AD8\u6821 \uFF12\u5E74"
   characterAnimData: {fileID: 11400000, guid: 9abf50c65441dfb4db61cb776c0c1c4a, type: 2}
   moveSpeed: 5

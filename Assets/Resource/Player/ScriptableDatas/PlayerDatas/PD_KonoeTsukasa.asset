@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PD_KonoeTsukasa
   m_EditorClassIdentifier: 
   charaName: "\u8FD1\u885B \u53F8"
+  charaNameRubi: "\u3053\u306E\u3048 \u3064\u304B\u3055"
   schoolAndGrade: "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821 \uFF12\u5E74"
   characterAnimData: {fileID: 11400000, guid: bbc7345adcf545f40ad96d4a1db983d1, type: 2}
   moveSpeed: 5

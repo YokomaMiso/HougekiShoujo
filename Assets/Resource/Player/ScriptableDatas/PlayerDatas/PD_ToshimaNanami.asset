@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PD_ToshimaNanami
   m_EditorClassIdentifier: 
   charaName: "\u9060\u5CF6 \u4E03\u6D77"
+  charaNameRubi: "\u3068\u304A\u3057\u307E \u306A\u306A\u307F"
   schoolAndGrade: "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821 \uFF11\u5E74"
   characterAnimData: {fileID: 11400000, guid: 203b2e40b2be78a43bb9721dc3f741a1, type: 2}
   moveSpeed: 5

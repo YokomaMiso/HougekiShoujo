@@ -7,6 +7,7 @@ public class PlayerData : ScriptableObject
 {
     [Header("Character Name")]
     [SerializeField, Header("Character Name")] string charaName;
+    [SerializeField, Header("Character Name Rubi")] string charaNameRubi;
     [SerializeField, Header("School Name")] string schoolAndGrade;
     [Header("Animation")]
     [SerializeField, Header("Anim Data")] CharacterAnimData characterAnimData;
@@ -24,6 +25,7 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Player SFX Data")] PlayerVoiceData playerVoiceData;
 
     public string GetCharaName() { return charaName; }
+    public string GetCharaNameRubi() { return charaNameRubi; }
     public string GetSchoolAndGrade() {  return schoolAndGrade; }
     public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
 
