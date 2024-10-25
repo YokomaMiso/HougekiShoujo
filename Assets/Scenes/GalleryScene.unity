@@ -683,6 +683,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
         type: 3}
+      propertyPath: CharSize.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
       propertyPath: ImageSize.x
       value: 1920
       objectReference: {fileID: 0}

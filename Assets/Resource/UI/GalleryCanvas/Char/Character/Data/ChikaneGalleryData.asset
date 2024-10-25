@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Chikane
   characterIcon: {fileID: 21300000, guid: a517e705b07a5f44e825a6c3189caf3a, type: 3}
-  characterIllustration: {fileID: 21300000, guid: 3b555cd8298d2b643bd5c3ccff5e6346,
+  characterIllustration: {fileID: 21300000, guid: 3d740d8565bfa1c42b9cc79d16313bf5,
     type: 3}
   iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
   animatorControllers:

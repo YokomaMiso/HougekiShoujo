@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Kurumi
   characterIcon: {fileID: 21300000, guid: a40596ef82ebac8468202209f5e1f3d2, type: 3}
-  characterIllustration: {fileID: 21300000, guid: dd7edc5519b15bc45ad248ae252eb74c,
+  characterIllustration: {fileID: 21300000, guid: 9c79cca16b367bc49b44ef04b1cf352d,
     type: 3}
   iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
   animatorControllers:
