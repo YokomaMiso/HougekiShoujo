@@ -681,6 +681,46 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImageSize.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImageSize.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImageScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImageScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImageScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharPosition.x
+      value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharPosition.y
+      value: -100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImagePosition.y
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 6172706548809329155, guid: ec28b28801093f442b9e02d5841a944f,
         type: 3}
       propertyPath: m_AnchorMax.x
