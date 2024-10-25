@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +10,7 @@ public enum Vec2AxisActions
 {
     RStickAxis = 0,
     LStickAxis,
+    TouchAxis
 }
 
 public enum BoolActions
@@ -28,13 +28,15 @@ public enum BoolActions
     RadioChat5,
     RadioChat6,
     RadioChat7,
-    RadioChat8
+    RadioChat8,
+    TouchTap,
+    LeftClick
 }
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    private static PlayerInput playerInput;
     private static InputActionMap actionMap;
 
     // アクション保存リスト
@@ -79,6 +81,8 @@ public class InputManager : MonoBehaviour
         {
             Debug.LogError("actionMapの取得に失敗しました");
         }
+
+        EnableInput();
     }
 
     /// <summary>
@@ -123,6 +127,7 @@ public class InputManager : MonoBehaviour
 
         if (vec2Actions[(int)an].WasPressedThisFrame())
         {
+
             if (typeof(T) == typeof(bool))
             {
                 val = true;
@@ -256,7 +261,7 @@ public class InputManager : MonoBehaviour
     {
         return boolActions[(int)an].IsPressed();
     }
-
+    
     /// <summary>
     /// bool型のキー入力取得
     /// </summary>
@@ -264,6 +269,8 @@ public class InputManager : MonoBehaviour
     /// <returns>押された最初の１フレーム = true: それ以外 = false</returns>
     public static bool GetKeyDown(BoolActions an)
     {
+        Debug.Log(boolActions[(int)an].activeControl);
+
         return boolActions[(int)an].WasPressedThisFrame();
     }
 
@@ -275,6 +282,12 @@ public class InputManager : MonoBehaviour
     public static bool GetKeyUp(BoolActions an)
     {
         return boolActions[(int)an].WasReleasedThisFrame();
+    }
+
+    public static bool CompareActions()
+    {
+
+        return default;
     }
 
     /// <summary>
