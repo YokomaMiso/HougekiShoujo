@@ -17,7 +17,8 @@ MonoBehaviour:
   buffType: 0
   installation: {fileID: 3179393461812120061, guid: 4a5b6581fbb6a5e49b7bb750cd3f7fa3,
     type: 3}
-  subWeaponExplain: "\u30B9\u30D1\u30A4\u30C0\u30FC\u7206\u5F3E\n10\u79D2\u6301\u7D9A\u3059\u308B\u8718\u86DB\u306E\u5DE3\u3092\u6295\u64F2\n\uFF15\u79D2\u9593\u79FB\u52D5\u901F\u5EA6\u304C\u6E1B\u5C11\u3059\u308B"
+  subWeaponName: "\u30B9\u30D1\u30A4\u30C0\u30FC\u7206\u5F3E"
+  subWeaponExplain: "10\u79D2\u6301\u7D9A\u3059\u308B\u8718\u86DB\u306E\u5DE3\u3092\u6295\u64F2\n\uFF15\u79D2\u9593\u79FB\u52D5\u901F\u5EA6\u304C\u6E1B\u5C11\u3059\u308B"
   installationStartAnim: {fileID: 0}
   installationLoopAnim: {fileID: 0}
   reloadTime: 30
