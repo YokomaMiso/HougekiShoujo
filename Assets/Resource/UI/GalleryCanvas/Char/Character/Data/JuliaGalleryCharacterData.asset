@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Julia
   characterIcon: {fileID: 21300000, guid: 215cdf7b91d8d9549bf97a21a24b314c, type: 3}
-  characterIllustration: {fileID: 21300000, guid: d4edf1d6208247b4db5ad476cd0c8ccf,
+  characterIllustration: {fileID: 21300000, guid: 3b65499b49b266b4b9129b2409d0a573,
     type: 3}
   iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
   animatorControllers:
