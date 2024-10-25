@@ -189,7 +189,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 337930475639458087}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8690767713587654626}
+        m_TargetAssemblyTypeName: TitleButtonBehavior, Assembly-CSharp
+        m_MethodName: Pressd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2998587831518256148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +351,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5332507926425203434}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1298295297287073367}
+        m_TargetAssemblyTypeName: TitleButtonBehavior, Assembly-CSharp
+        m_MethodName: Pressd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5107796095016229612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,7 +513,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 528049065314548556}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8072300627149711196}
+        m_TargetAssemblyTypeName: TitleButtonBehavior, Assembly-CSharp
+        m_MethodName: Pressd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1639031712345547170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +675,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9081755367824541382}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7856428534190406173}
+        m_TargetAssemblyTypeName: TitleButtonBehavior, Assembly-CSharp
+        m_MethodName: Pressd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7662570463617532523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,7 +837,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1567285690466090120}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6702567753993355303}
+        m_TargetAssemblyTypeName: TitleButtonBehavior, Assembly-CSharp
+        m_MethodName: Pressd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1400486838540373219
 MonoBehaviour:
   m_ObjectHideFlags: 0

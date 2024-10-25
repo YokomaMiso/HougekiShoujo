@@ -7,7 +7,10 @@ public class TitleButtonBehavior : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
 
+    TitleButtons parent;
     Image image;
+
+    int groupNum;
 
     int state = 0;
     float timer;
@@ -15,6 +18,11 @@ public class TitleButtonBehavior : MonoBehaviour
 
     float sizeRate;
 
+    public void SetGroupParent(TitleButtons _tbs,int _num) 
+    {
+        parent = _tbs; 
+        groupNum = _num;
+    }
     public void SetState(int _num) { state = _num; }
 
     void Start()
@@ -53,5 +61,21 @@ public class TitleButtonBehavior : MonoBehaviour
     void Shrink()
     {
         transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, Mathf.Pow(sizeRate, 2));
+    }
+
+    public void Pressd()
+    {
+        switch (state)
+        {
+            case 0:
+                parent.CursorMoveFromTouch(groupNum);
+                break;
+
+            case 1:
+                parent.DecideSelectFromTouch();
+                break;
+
+        }
+
     }
 }

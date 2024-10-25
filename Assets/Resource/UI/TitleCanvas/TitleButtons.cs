@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class TitleButtons : MonoBehaviour
 {
@@ -9,11 +11,19 @@ public class TitleButtons : MonoBehaviour
     int selectNum = 0;
     const int selectItemNum = 5;
 
+    TitleButtonBehavior[] buttons=new TitleButtonBehavior[selectItemNum];
+
     public void SetParent(TitleCanvasBehavior _parent) { parent = _parent; }
 
     void Start()
     {
-        transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
+        for(int i = 0; i < selectItemNum; i++)
+        {
+            buttons[i] = transform.GetChild(i).GetComponent<TitleButtonBehavior>();
+            buttons[i].SetGroupParent(this,i);
+        }
+
+        buttons[selectNum].SetState(1);
     }
 
     void Update()
@@ -32,11 +42,24 @@ public class TitleButtons : MonoBehaviour
         //ƒJ[ƒ\ƒ‹ˆÚ“®
         if (Mathf.Abs(value.x) > 0.7f)
         {
-            transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
+            buttons[selectNum].SetState(0);
             if (value.x < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
             else { selectNum = (selectNum + 1) % selectItemNum; }
-            transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
+            buttons[selectNum].SetState(1);
 
+        }
+    }
+
+    public void CursorMoveFromTouch(int _num)
+    {
+        buttons[selectNum].SetState(0);
+
+        selectNum = _num;
+        for (int i = 0; i < selectItemNum; i++)
+        {
+            int num = 0;
+            if (_num == i) { num = 1; }
+            buttons[i].SetState(num);
         }
     }
 
@@ -46,6 +69,10 @@ public class TitleButtons : MonoBehaviour
         {
             parent.ChangeFromButtons(selectNum);
         }
+    }
+    public void DecideSelectFromTouch()
+    {
+        parent.ChangeFromButtons(selectNum);
     }
     void PressCancel()
     {
