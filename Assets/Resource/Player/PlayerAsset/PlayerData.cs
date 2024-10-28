@@ -8,7 +8,8 @@ public class PlayerData : ScriptableObject
     [Header("Character Name")]
     [SerializeField, Header("Character Name")] string charaName;
     [SerializeField, Header("Character Name Rubi")] string charaNameRubi;
-    [SerializeField, Header("School Name")] string schoolAndGrade;
+    [SerializeField, Header("School")] SchoolData schoolData;
+    [SerializeField, Header("Grade")] int grade;
     [Header("Animation")]
     [SerializeField, Header("Anim Data")] CharacterAnimData characterAnimData;
     [Header("Status Data")]
@@ -26,15 +27,17 @@ public class PlayerData : ScriptableObject
 
     public string GetCharaName() { return charaName; }
     public string GetCharaNameRubi() { return charaNameRubi; }
-    public string GetSchoolAndGrade() {  return schoolAndGrade; }
-    public CharacterAnimData GetCharacterAnimData() {  return characterAnimData; }
+    public string GetSchoolName() { return schoolData.GetSchoolName(); }
+    public Sprite GetSchoolIcon() { return schoolData.GetSchoolIcon(); }
+    public string GetGrade() { return grade.ToString() + "”N"; }
+    public CharacterAnimData GetCharacterAnimData() { return characterAnimData; }
 
-    public float GetMoveSpeed() {  return moveSpeed; }
-    public int GetDifficulity() {  return difficulity; }
+    public float GetMoveSpeed() { return moveSpeed; }
+    public int GetDifficulity() { return difficulity; }
 
     public Shell GetShell() { return shell; }
     public SubWeapon GetSubWeapon() { return subWeapon; }
 
     public PlayerSFXData GetPlayerSFXData() { return playerSFXData; }
-    public PlayerVoiceData GetPlayerVoiceData() {  return playerVoiceData; }
+    public PlayerVoiceData GetPlayerVoiceData() { return playerVoiceData; }
 }

@@ -18,7 +18,7 @@ public class CharaTexts : MonoBehaviour
         texts[(int)_id] = transform.GetChild((int)_id).GetComponent<Text>();
 
         PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
-        texts[(int)_id].text = pd.GetSchoolAndGrade() + "\n" + pd.GetCharaName();
+        texts[(int)_id].text = pd.GetSchoolName() + " " + pd.GetGrade() + "\n" + pd.GetCharaName();
     }
     void Start()
     {

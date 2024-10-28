@@ -11,12 +11,12 @@ public class CharaTextForMVP : MonoBehaviour
 
     Text text;
 
-    public void SetText( ResultScoreBoard.KDFData _kdf)
+    public void SetText(ResultScoreBoard.KDFData _kdf)
     {
         text = transform.GetComponent<Text>();
 
         PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
-        text.text = pd.GetSchoolAndGrade() + "Å@" + pd.GetCharaName();
+        text.text = pd.GetSchoolName() + " " + pd.GetGrade() + "Å@" + pd.GetCharaName();
     }
 
     void Update()

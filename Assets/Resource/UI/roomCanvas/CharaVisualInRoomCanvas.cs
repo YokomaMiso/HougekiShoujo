@@ -8,6 +8,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
 {
     [SerializeField] Image[] charaIllust;
     [SerializeField] Animator charaAnim;
+    [SerializeField] Image[] schoolIcon;
     [SerializeField] Text charaName;
     [SerializeField] Text charaNameRubi;
     [SerializeField] Image[] difficultGauge;
@@ -28,6 +29,8 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
         charaAnim.runtimeAnimatorController = _pd.GetCharacterAnimData().GetIdleAnimForUI();
         charaName.text = _pd.GetCharaName();
         charaNameRubi.text = _pd.GetCharaNameRubi();
+
+        for (int i = 0; i < schoolIcon.Length; i++) { schoolIcon[i].sprite = _pd.GetSchoolIcon(); }
 
         SetDifficulity(_pd.GetDifficulity());
 
