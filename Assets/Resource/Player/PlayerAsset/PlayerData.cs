@@ -29,7 +29,7 @@ public class PlayerData : ScriptableObject
     public string GetCharaNameRubi() { return charaNameRubi; }
     public string GetSchoolName() { return schoolData.GetSchoolName(); }
     public Sprite GetSchoolIcon() { return schoolData.GetSchoolIcon(); }
-    public string GetGrade() { return grade.ToString() + "”N"; }
+    public string GetGrade() { return grade.ToString() + " ”N"; }
     public CharacterAnimData GetCharacterAnimData() { return characterAnimData; }
 
     public float GetMoveSpeed() { return moveSpeed; }
