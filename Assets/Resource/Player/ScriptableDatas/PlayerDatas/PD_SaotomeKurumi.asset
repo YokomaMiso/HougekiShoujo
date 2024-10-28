@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charaName: "\u65E9\u4E59\u5973 \u304F\u308B\u307F"
   charaNameRubi: "\u3055\u304A\u3068\u3081 \u304F\u308B\u307F"
-  schoolAndGrade: "\u82B1\u97F3\u5973\u5B66\u9662\u9AD8\u7B49\u79D1 \uFF11\u5E74"
+  schoolData: {fileID: 11400000, guid: 23e1893a02047b04e921451f276c2caf, type: 2}
+  grade: 1
   characterAnimData: {fileID: 11400000, guid: 0b10f1572d2f39c4fa2e3a93f1d0961b, type: 2}
   moveSpeed: 5
   difficulity: 3
