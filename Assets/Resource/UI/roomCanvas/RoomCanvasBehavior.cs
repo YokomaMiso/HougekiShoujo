@@ -103,12 +103,12 @@ public class RoomCanvasBehavior : MonoBehaviour
         {
             if (input > 0) { rm.CharaSelect(1); }
             else { rm.CharaSelect(-1); }
+
+            int charaID = OSCManager.OSCinstance.roomData.selectedCharacterID;
+            PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
+
+            charaVisual.SetCharaVisual(nowPlayerData);
         }
-
-        int charaID = OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).selectedCharacterID;
-        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
-
-        charaVisual.SetCharaVisual(nowPlayerData);
     }
 
     void OpenOption()

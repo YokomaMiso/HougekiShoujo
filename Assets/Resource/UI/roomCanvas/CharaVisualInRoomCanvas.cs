@@ -23,6 +23,39 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     readonly Color[] rollBGColor = new Color[3] { Color.red, Color.green, Color.blue };
     readonly string[] rollString = new string[3] { "‹ß", "’†", "‰“" };
 
+    readonly Vector3 illustStartPos = new Vector3(1150, 32);
+    readonly Vector3 illustEndPos = new Vector3(0, 32);
+    readonly Vector3 illustDropShadowPos = new Vector3(-52, 48);
+
+    float timer;
+    const float arriveTime = 0.25f;
+    const float dropShadowArriveTime = 0.15f;
+    const float endTime = arriveTime + dropShadowArriveTime;
+
+    void Update()
+    {
+        if (timer >= endTime) { return; }
+        timer += Time.deltaTime;
+        if (timer >= endTime) { timer = endTime; }
+
+        if (timer <= arriveTime)
+        {
+            for (int i = 0; i < charaIllust.Length; i++)
+            {
+                float nowRate = timer / arriveTime;
+                nowRate = Mathf.Sqrt(nowRate);
+                charaIllust[i].transform.localPosition = Vector3.Lerp(illustStartPos, illustEndPos, nowRate);
+            }
+        }
+        else if (timer <= endTime)
+        {
+            float nowRate = (timer - arriveTime) / (endTime - arriveTime);
+            nowRate = Mathf.Sqrt(nowRate);
+            charaIllust[0].transform.localPosition = Vector3.Lerp(illustEndPos, illustDropShadowPos, nowRate);
+            charaIllust[1].transform.localPosition = illustEndPos;
+        }
+    }
+
     public void SetCharaVisual(PlayerData _pd)
     {
         for (int i = 0; i < charaIllust.Length; i++) { charaIllust[i].sprite = _pd.GetCharacterAnimData().GetCharaIllust(); }
@@ -38,6 +71,9 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
 
         SetSkillIcon(_pd.GetShell());
         SetSkillIcon(_pd.GetSubWeapon());
+
+        timer = 0;
+        for (int i = 0; i < charaIllust.Length; i++) { charaIllust[i].transform.localPosition = illustStartPos; }
     }
 
     void SetDifficulity(int _num)
