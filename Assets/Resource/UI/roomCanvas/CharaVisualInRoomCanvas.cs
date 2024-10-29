@@ -32,6 +32,8 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     const float dropShadowArriveTime = 0.15f;
     const float endTime = arriveTime + dropShadowArriveTime;
 
+    PlayerData nowChara;
+
     void Update()
     {
         if (timer >= endTime) { return; }
@@ -58,6 +60,9 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
 
     public void SetCharaVisual(PlayerData _pd)
     {
+        if (_pd == null || _pd == nowChara) { return; }
+        nowChara = _pd;
+
         for (int i = 0; i < charaIllust.Length; i++) { charaIllust[i].sprite = _pd.GetCharacterAnimData().GetCharaIllust(); }
         charaAnim.runtimeAnimatorController = _pd.GetCharacterAnimData().GetIdleAnimForUI();
         charaName.text = _pd.GetCharaName();
