@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e427b0319bc293945aa847b87756ef53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flagmentData: {fileID: 11400000, guid: 701d646f191e3ee4ca800b7000ba9244, type: 2}
 --- !u!54 &8412983331296808744
 Rigidbody:
   m_ObjectHideFlags: 0
