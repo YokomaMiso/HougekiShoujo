@@ -1,11 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using static MachingRoomData;
 
 public enum TEAM_NUM { A = 0, B = 1 };
@@ -15,8 +10,8 @@ public class RoomCanvasBehavior : MonoBehaviour
     RoomManager rm;
 
     [SerializeField] CharaVisualInRoomCanvas charaVisual;
-
     [SerializeField] GameObject playerBanners;
+    [SerializeField] StageSelectBehavior stageSelect;
 
     readonly Vector3[] teamDefaultPos = new Vector3[2] { new Vector3(532, 400), new Vector3(532, -80) };
     readonly Vector3 teamPosSub = new Vector3(20, -70);
@@ -42,12 +37,16 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (!Managers.instance.UsingCanvas())
         {
-            CharaSelect();
-            TeamSelect();
-            PressSubmit();
-            PressCancel();
-            GameStart();
-            OpenOption();
+            if (!stageSelect.gameObject.activeInHierarchy)
+            {
+                CharaSelect();
+                TeamSelect();
+                PressSubmit();
+                PressCancel();
+                GameStart();
+                OpenOption();
+                CheckStageSelectButton();
+            }
         }
 
         PlayerBannerDisplayUpdate();
@@ -97,7 +96,6 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void CharaSelect()
     {
-
         float input = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f).x;
         if (Mathf.Abs(input) >= 0.9f)
         {
@@ -121,6 +119,17 @@ public class RoomCanvasBehavior : MonoBehaviour
         {
             Managers.instance.CreateOptionCanvas();
             return;
+        }
+    }
+
+    void CheckStageSelectButton()
+    {
+        //‚»‚à‚»‚àƒzƒXƒg‚¶‚á‚È‚¢‚È‚ç
+        if (Managers.instance.playerID != 0) { return; }
+
+        if (InputManager.GetKeyDown(BoolActions.LeftShoulder))
+        {
+            stageSelect.gameObject.SetActive(true);
         }
     }
 
