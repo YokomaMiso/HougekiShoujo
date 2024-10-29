@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
 
-public class NewCharBehaviourScript : ProjectileBehavior
+public class RanProjectileBehaviour : ProjectileBehavior
 {
 
     const int spawnCount = 3;

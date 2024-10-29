@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3061778371443088153}
   - component: {fileID: 847077387191684865}
   m_Layer: 0
-  m_Name: NewChar2BehaviourPrefab
+  m_Name: SaraProjectileBehaviourPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

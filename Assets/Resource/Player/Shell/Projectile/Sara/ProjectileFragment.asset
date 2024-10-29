@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
+  m_Name: ProjectileFragment
+  m_EditorClassIdentifier: 
+  shellIcon: {fileID: 0}
+  shellType: 2
+  projectile: {fileID: 9123592542956839496, guid: 7c78e50fa9f169a47ba64d92c5d2a0bd,
+    type: 3}
+  projectileAnim: {fileID: 9100000, guid: 81c0c6dd80912384abc8b8352d447bb1, type: 2}
+  explosion: {fileID: 11400000, guid: ecf21aae2f93e114eb67393b0de5d006, type: 2}
+  weaponName: 
+  shellExplain: 
+  reloadTime: 0
+  recoilTime: 0
+  projectileSpeed: 0
+  aimRange: 0
+  aimDegree: 0
+  lifeTime: 1

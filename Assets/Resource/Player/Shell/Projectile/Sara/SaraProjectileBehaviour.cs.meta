@@ -3,7 +3,9 @@ guid: 60909eff9593ad446ae5181300386fe3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fragmentPrefab: {fileID: 9123592542956839496, guid: 7c78e50fa9f169a47ba64d92c5d2a0bd,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
