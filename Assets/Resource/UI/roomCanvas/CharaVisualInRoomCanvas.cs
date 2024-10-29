@@ -19,8 +19,8 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     [SerializeField] Text[] weaponName;
     [SerializeField] Text[] weaponExplain;
 
-    readonly Color[] difficulityColor = new Color[3] { Color.green, Color.yellow, Color.red };
-    readonly Color[] rollBGColor = new Color[3] { Color.red, Color.green, Color.blue };
+    readonly string[] difficulityColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
+    readonly string[] rollBGColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
     readonly string[] rollString = new string[3] { "‹ß", "’†", "‰“" };
 
     readonly Vector3 illustStartPos = new Vector3(1150, 32);
@@ -83,7 +83,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
 
     void SetDifficulity(int _num)
     {
-        Color applyColor = difficulityColor[_num - 1];
+        Color applyColor = ColorCordToRGB(difficulityColor[_num - 1]);
         for (int i = 0; i < difficultGauge.Length; i++)
         {
             if (i < _num) { difficultGauge[i].color = applyColor; }
@@ -94,7 +94,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     void SetShellType(int _num)
     {
         rollText.text = rollString[_num];
-        rollBG.color = rollBGColor[_num];
+        rollBG.color = ColorCordToRGB(rollBGColor[_num]);
     }
 
     void SetSkillIcon(Shell _shell)
@@ -108,5 +108,11 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
         skillIcon[1].sprite = _sub.GetIcon();
         weaponName[1].text = _sub.GetSubWeaponName();
         weaponExplain[1].text = _sub.GetSubWeaponExplain();
+    }
+
+    Color ColorCordToRGB(string _cord)
+    {
+        if (ColorUtility.TryParseHtmlString(_cord, out Color color)) return color;
+        else return Color.black;
     }
 }
