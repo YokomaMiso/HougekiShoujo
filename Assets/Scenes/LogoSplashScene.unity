@@ -547,6 +547,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 2265797116704708556, guid: 9131d9bffb3c6af45bd3f5021df3316b,
+        type: 3}
+      propertyPath: playerDatas.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265797116704708556, guid: 9131d9bffb3c6af45bd3f5021df3316b,
+        type: 3}
+      propertyPath: playerDatas.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 835ecc9ccffe4584aa3bdd210e4e6bfe,
+        type: 2}
     - target: {fileID: 5449555358149748899, guid: 9131d9bffb3c6af45bd3f5021df3316b,
         type: 3}
       propertyPath: onDebug
