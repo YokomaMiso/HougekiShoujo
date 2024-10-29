@@ -16,11 +16,10 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     [SerializeField] CharaVisualInRoomCanvas charaVisual;
 
-    [SerializeField] GameObject bannerSelecter;
     [SerializeField] GameObject playerBanners;
 
-    readonly Vector3[] teamDefaultPos = new Vector3[2] { new Vector3(500, 400), new Vector3(500, -80) };
-    readonly Vector3 teamPosSub = new Vector3(40, -80);
+    readonly Vector3[] teamDefaultPos = new Vector3[2] { new Vector3(532, 400), new Vector3(532, -80) };
+    readonly Vector3 teamPosSub = new Vector3(20, -70);
 
     bool joinedStartedRoom;
 
@@ -77,7 +76,6 @@ public class RoomCanvasBehavior : MonoBehaviour
 
             Vector3 applyPos = teamDefaultPos[oscRoomData.myTeamNum] + teamPosSub * teamCount[oscRoomData.myTeamNum];
             playerBanners.transform.GetChild(i).transform.localPosition = applyPos;
-            if (i == Managers.instance.playerID) { bannerSelecter.transform.localPosition = applyPos; }
             teamCount[oscRoomData.myTeamNum]++;
         }
     }
