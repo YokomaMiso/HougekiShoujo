@@ -31,10 +31,12 @@ public class RoomCanvasBehavior : MonoBehaviour
         //©•ª‚ÌŠ‘®ƒ`[ƒ€‚ğU‚è•ª‚¯‚é
         if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).myTeamNum == -1) { rm.PlayerBannerDivider(); }
 
-        if (Managers.instance.playerID != 0)
-        {
-            joinedStartedRoom = OSCManager.OSCinstance.GetRoomData(0).gameStart;
-        }
+        if (Managers.instance.playerID != 0) { joinedStartedRoom = OSCManager.OSCinstance.GetRoomData(0).gameStart; }
+
+        MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        int charaID = myRoomData.selectedCharacterID;
+        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
+        charaVisual.SetCharaVisual(nowPlayerData);
     }
 
     void Update()
@@ -97,14 +99,15 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     void CharaSelect()
     {
-        int myID = Managers.instance.playerID;
+
         float input = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f).x;
         if (Mathf.Abs(input) >= 0.9f)
         {
             if (input > 0) { rm.CharaSelect(1); }
             else { rm.CharaSelect(-1); }
 
-            int charaID = OSCManager.OSCinstance.roomData.selectedCharacterID;
+            MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+            int charaID = myRoomData.selectedCharacterID;
             PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 
             charaVisual.SetCharaVisual(nowPlayerData);
