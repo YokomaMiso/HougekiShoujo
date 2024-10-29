@@ -16,7 +16,7 @@ MonoBehaviour:
   charaNameRubi: "\u306F\u306A\u305B\u308A \u3055\u3089"
   schoolData: {fileID: 11400000, guid: 74745430b8c5aae4d9fd52e77dc1552b, type: 2}
   grade: 1
-  characterAnimData: {fileID: 11400000, guid: 0b10f1572d2f39c4fa2e3a93f1d0961b, type: 2}
+  characterAnimData: {fileID: 11400000, guid: 40b063252180c8741afe9768be173a78, type: 2}
   moveSpeed: 5
   difficulity: 2
   shell: {fileID: 11400000, guid: b1483feaed5a5e443a86f742b928184f, type: 2}
