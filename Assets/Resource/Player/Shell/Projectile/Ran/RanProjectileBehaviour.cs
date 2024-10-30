@@ -7,22 +7,18 @@ public class RanProjectileBehaviour : ProjectileBehavior
 {
 
     const int spawnCount = 3;
-    static int nowCount = 0;
-    const float spawnInterval = 0.5f;
+    int nowCount = 0;
+    const float firstSpawn = 0.5f;
+    const float spawnInterval = 0.25f;
 
 
     Vector3 inputVector;
-    float explosionSpacing = 2.5f;
 
     protected override void Start()
     {
         base.Start();
         inputVector = ownerPlayer.GetInputVector().normalized;
         if (inputVector == Vector3.zero) { inputVector = Vector3.forward; }
-        nowCount = 0;
-        StartCoroutine(ExecuteRepeatedly());
-        
-
     }
 
     public override void SetData(Shell _data)
@@ -36,9 +32,10 @@ public class RanProjectileBehaviour : ProjectileBehavior
     {
         Vector3 forwardVector = inputVector;
         forwardVector.Normalize();
-        Vector3 offset = forwardVector*0.5f;
+        Vector3 offset = forwardVector * 0.5f;
+        Vector3 addPos = offset + forwardVector * explosion.GetScale() * 2 * nowCount;
 
-        Vector3 spawnPos = transform.position+offset + forwardVector * explosionSpacing*nowCount;
+        Vector3 spawnPos = transform.position + addPos;
         GameObject explosionInstance = explosion.GetBody();
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
@@ -46,22 +43,20 @@ public class RanProjectileBehaviour : ProjectileBehavior
         nowCount++;
     }
 
-    IEnumerator ExecuteRepeatedly()
-    {
-        while (nowCount<spawnCount)
-        {
-            SpawnExplosion();
-
-            yield return new WaitForSeconds(spawnInterval);
-        }
-        Destroy(gameObject);
-    }
-
     protected override void Update()
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
         timer += deltaTime;
 
+        if (timer >= firstSpawn + spawnInterval * nowCount)
+        {
+            if (nowCount < spawnCount) { SpawnExplosion(); }
+        }
+
+        if (timer >= lifeTime)
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
