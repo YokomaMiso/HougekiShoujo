@@ -14,4 +14,6 @@ public class AllStageData : ScriptableObject
         if (_num > stageObject.Length) { _num = 0; }
         return stageObject[_num];
     }
+
+    public int GetStageMaxCount() { return stageObject.Length; }
 }
