@@ -90,6 +90,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea5e95e04c0f14c4990e57486f7b9d47, type: 2}
   - {fileID: 11400000, guid: cce039a22e2b0b2469a3ecaced2e1ca1, type: 2}
   - {fileID: 11400000, guid: fecd40e0b1b0fd64db7cfa4f7c93bec9, type: 2}
+  - {fileID: 11400000, guid: 835ecc9ccffe4584aa3bdd210e4e6bfe, type: 2}
+  - {fileID: 11400000, guid: 435ede831e49c35469e51ddf36640d95, type: 2}
   outLineMat:
   - {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}
   - {fileID: 2100000, guid: 19fd21ca5640c2242852074a796b5117, type: 2}

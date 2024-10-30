@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: AD_SaraAnimData
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: a40596ef82ebac8468202209f5e1f3d2, type: 3}
-  idleFirstSprite: {fileID: 695127987, guid: 78ce578ae85a99244b38645af9994b40, type: 3}
+  idleFirstSprite: {fileID: -83681858, guid: 589216a5687118542b451cafc244a71e, type: 3}
   charaIllust: {fileID: 21300000, guid: 3268fea1691a3114c99cd29a86f021f3, type: 3}
-  idleForUIAnimationData: {fileID: 9100000, guid: a4c6122a1e7a21d48ba4d10c816157ab,
+  idleForUIAnimationData: {fileID: 9100000, guid: 1a4229925cd5c4448844f856aa1ad083,
     type: 2}
   runForUIAnimationData: {fileID: 9100000, guid: 4d1e92d269e1091498d91872ad0cd3c1,
     type: 2}
-  idleAnimationData: {fileID: 9100000, guid: bede96a48c0503b49aadcd714280c605, type: 2}
+  idleAnimationData: {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
   runAnimationData:
   - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
   - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
