@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_SakurabiKoto
+  m_EditorClassIdentifier: 
+  charaName: "\u6AFB\u65E5 \u7434"
+  charaNameRubi: "\u3055\u304F\u3089\u3073 \u3053\u3068"
+  schoolData: {fileID: 11400000, guid: d77aa8742f68024408ab889f0fe075ac, type: 2}
+  grade: 2
+  characterAnimData: {fileID: 11400000, guid: 9abf50c65441dfb4db61cb776c0c1c4a, type: 2}
+  moveSpeed: 5
+  difficulity: 2
+  shell: {fileID: 11400000, guid: 85c7c7447fdc6874e8c970153900e2ab, type: 2}
+  subWeapon: {fileID: 11400000, guid: 69a86b1a143f5a34ba637120cd970d00, type: 2}
+  playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: 4c52c730e8d06e44baf30f0a19937f15, type: 2}
