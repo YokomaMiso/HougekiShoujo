@@ -6,6 +6,7 @@ public class FragmentBehavior : ProjectileBehavior
 {
     [SerializeField] Shell flagmentData;
     float addAngle = 0;
+    const float height = 3;
 
     protected override void Start()
     {
@@ -21,12 +22,17 @@ public class FragmentBehavior : ProjectileBehavior
         if (timeRate < 0.5f) { imageAnimator.transform.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * (90 + addAngle); }
         else { imageAnimator.transform.GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * -(90 + addAngle); }
 
-        base.Update();
+        //base.Update();
+        float deltaTime = Managers.instance.timeManager.GetDeltaTime();
+        TimeSetting();
+
+        timer += deltaTime;
 
         Vector3 currentHorizon = Vector3.Lerp(defaultPosition, targetPoint, timeRate);
-        float currentVertical = Mathf.Sin(timeRate * Mathf.PI) * 3;
+        //float currentVertical = Mathf.Sin(timeRate * Mathf.PI) * 3;
+        float currentVertical = -Mathf.Pow(timeRate * 2 - 1.41f, 2) + 2;
 
-        transform.position = currentHorizon + Vector3.up * currentVertical;
+        transform.position = currentHorizon + Vector3.up * currentVertical * height;
     }
 
     protected override void SpawnExplosion()
