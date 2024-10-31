@@ -13,6 +13,7 @@ public class SaraProjectile : ProjectileBehavior
     {
         if (transform.GetChild(0).localScale.x < 0) { addAngle = 180; }
         base.Start();
+        imageAnimator.transform.localScale *= 2;
     }
 
     protected override void Update()
@@ -56,8 +57,8 @@ public class SaraProjectile : ProjectileBehavior
     {
         for (int i = 0; i < spawnCount; i++)
         {
-            Vector3 addPos = (targetPoint-defaultPosition).normalized * 3;
-            addPos = Quaternion.Euler(0, 90 * i, 0) * addPos;
+            Vector3 addPos = (targetPoint - defaultPosition).normalized * 3;
+            addPos = Quaternion.Euler(0, 45 + 90 * i, 0) * addPos;
             Vector3 spawnPos = transform.position;
             GameObject fragment = Instantiate(fragmentPrefab, spawnPos, Quaternion.identity);
             FragmentBehavior fragmentBehavior = fragment.GetComponent<FragmentBehavior>();
