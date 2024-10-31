@@ -16,7 +16,7 @@ MonoBehaviour:
   shellType: 2
   projectile: {fileID: 9123592542956839496, guid: 7c78e50fa9f169a47ba64d92c5d2a0bd,
     type: 3}
-  projectileAnim: {fileID: 9100000, guid: 81c0c6dd80912384abc8b8352d447bb1, type: 2}
+  projectileAnim: {fileID: 9100000, guid: 3adc4b191908bc44094fe51fdb20681b, type: 2}
   explosion: {fileID: 11400000, guid: ecf21aae2f93e114eb67393b0de5d006, type: 2}
   weaponName: 
   shellExplain: 

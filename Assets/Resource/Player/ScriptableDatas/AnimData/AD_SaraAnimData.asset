@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ed411256c0a3545ac11d57b7bb9940, type: 3}
+  m_Script: {fileID: 11500000, guid: 984964a682a8df641abd1ffb44a932d5, type: 3}
   m_Name: AD_SaraAnimData
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: a40596ef82ebac8468202209f5e1f3d2, type: 3}
@@ -26,17 +26,19 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
   - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
   - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
-  reloadAnimationData: {fileID: 9100000, guid: a85ea0bbbe9d3514bbbd1e4dc944817b, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
   aimAnimationData:
-  - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
-  - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
-  - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
-  - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
-  - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
   recoilAnimationData:
-  - {fileID: 9100000, guid: 0b00fc27856927140a9b700318f7bb85, type: 2}
-  - {fileID: 9100000, guid: 0b00fc27856927140a9b700318f7bb85, type: 2}
-  - {fileID: 9100000, guid: 0b00fc27856927140a9b700318f7bb85, type: 2}
-  - {fileID: 9100000, guid: 0b00fc27856927140a9b700318f7bb85, type: 2}
-  - {fileID: 9100000, guid: 0b00fc27856927140a9b700318f7bb85, type: 2}
-  deadAnimationData: {fileID: 9100000, guid: 062ea36387ec8df4ca9d66fc9567a925, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
+  recoilAnimationData2: {fileID: 9100000, guid: 45b2d9b8c62134b40bae9d6b09b28428,
+    type: 2}

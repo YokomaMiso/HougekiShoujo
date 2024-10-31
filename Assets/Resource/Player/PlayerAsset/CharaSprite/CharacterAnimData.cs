@@ -25,11 +25,11 @@ public class CharacterAnimData : ScriptableObject
     public virtual RuntimeAnimatorController GetRunAnimForUI() { return runForUIAnimationData; }
     public virtual RuntimeAnimatorController GetIdleAnim(CANON_STATE _state = CANON_STATE.EMPTY) { return idleAnimationData; }
     public RuntimeAnimatorController[] GetRunAnims() { return runAnimationData; }
-    public virtual RuntimeAnimatorController GetRunAnim(int _num,CANON_STATE _state = CANON_STATE.EMPTY) { return runAnimationData[_num]; }
+    public virtual RuntimeAnimatorController GetRunAnim(int _num, CANON_STATE _state = CANON_STATE.EMPTY) { return runAnimationData[_num]; }
     public RuntimeAnimatorController GetReloadAnim() { return reloadAnimationData; }
     public RuntimeAnimatorController[] GetAimAnims() { return aimAnimationData; }
     public RuntimeAnimatorController GetAimAnim(int _num) { return aimAnimationData[_num]; }
     public RuntimeAnimatorController[] GetRecoilAnims() { return recoilAnimationData; }
-    public RuntimeAnimatorController GetRecoilAnim(int _num) { return recoilAnimationData[_num]; }
+    public virtual RuntimeAnimatorController GetRecoilAnim(int _num, float _direction = 1) { return recoilAnimationData[_num]; }
     public RuntimeAnimatorController GetDeadAnim() { return deadAnimationData; }
 }
