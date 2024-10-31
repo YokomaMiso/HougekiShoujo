@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984964a682a8df641abd1ffb44a932d5, type: 3}
   m_Name: AD_SaraAnimData
   m_EditorClassIdentifier: 
-  characterIcon: {fileID: 21300000, guid: a40596ef82ebac8468202209f5e1f3d2, type: 3}
+  characterIcon: {fileID: 21300000, guid: eabff61d07131814f9456d577d369d86, type: 3}
   idleFirstSprite: {fileID: -83681858, guid: 589216a5687118542b451cafc244a71e, type: 3}
   charaIllust: {fileID: 21300000, guid: 3268fea1691a3114c99cd29a86f021f3, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: 1a4229925cd5c4448844f856aa1ad083,
