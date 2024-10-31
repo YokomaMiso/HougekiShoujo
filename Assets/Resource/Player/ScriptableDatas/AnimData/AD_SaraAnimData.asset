@@ -17,15 +17,15 @@ MonoBehaviour:
   charaIllust: {fileID: 21300000, guid: 3268fea1691a3114c99cd29a86f021f3, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: 1a4229925cd5c4448844f856aa1ad083,
     type: 2}
-  runForUIAnimationData: {fileID: 9100000, guid: 4d1e92d269e1091498d91872ad0cd3c1,
+  runForUIAnimationData: {fileID: 9100000, guid: df7311cac4b529f489dae9c79541c835,
     type: 2}
   idleAnimationData: {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
   runAnimationData:
-  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
-  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
-  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
-  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
-  - {fileID: 9100000, guid: 8771511435075314487f97588c82ea7c, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
   reloadAnimationData: {fileID: 9100000, guid: a85ea0bbbe9d3514bbbd1e4dc944817b, type: 2}
   aimAnimationData:
   - {fileID: 9100000, guid: 523ce29130f7dbc4499b9c4cb8a27745, type: 2}
