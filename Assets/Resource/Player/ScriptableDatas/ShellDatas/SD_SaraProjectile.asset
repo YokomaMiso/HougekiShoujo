@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
   m_Name: SD_SaraProjectile
   m_EditorClassIdentifier: 
-  shellIcon: {fileID: 21300000, guid: 3c377e90ffb17294c8c9af43bd228034, type: 3}
+  shellIcon: {fileID: 21300000, guid: 9af05015a49f5dd4dab6ce9448c49430, type: 3}
   shellType: 2
   projectile: {fileID: 5747862933628916604, guid: 569bdd7a89379424a86c3e0822192905,
     type: 3}
   projectileAnim: {fileID: 9100000, guid: ca5536580f7098c4a8b9090b94ceba67, type: 2}
   explosion: {fileID: 11400000, guid: 74cd99e648e443a4397d71680d503e72, type: 2}
-  weaponName: Borsa Carino
-  shellExplain: "\u3081\u3061\u3083\u304B\u308F\u9784\u306E\u30AF\u30DE\u3068\u5927\u7832\u3092\u4E57\u305B\u8FBC\u3093\u3060\u8FEB\u6483\u7832\r\n\u53EF\u611B\u3044\u304F\u307E\u306F\u7740\u5F3E\u5F8C\u3001\u62E1\u6563\u3059\u308B"
+  weaponName: "\u30DC\u30EB\u30B5\u30FB\u30AB\u30EA\u30FC\u30CE"
+  shellExplain: "\u30AF\u30DE\u7206\u5F3E\u3092\u5C04\u51FA\u3059\u308B\u3081\u3061\u3083\u304B\u308F\u9784\r\n\u7740\u5F3E\u5F8C\u3001\u66F4\u306B\u3082\u3052\u305F\u624B\u8DB3\u3082\u7206\u767A\u3059\u308B"
   reloadTime: 2.5
   recoilTime: 2
   projectileSpeed: 0
