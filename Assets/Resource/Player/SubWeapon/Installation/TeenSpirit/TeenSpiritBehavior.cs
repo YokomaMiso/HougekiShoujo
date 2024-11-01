@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BlueCoralBehavior : InstallationBehavior
+public class TeenSpiritBehavior : InstallationBehavior
 {
     bool[] hitedPlayer = new bool[6];
     float speedRate;
@@ -50,18 +50,13 @@ public class BlueCoralBehavior : InstallationBehavior
         int id = player.GetPlayerID();
         if (hitedPlayer[id]) { return; }
 
-        hitedPlayer[id] = true;
-        player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
-
         //自分自身ならリターン
         if (id == Managers.instance.playerID) { return; }
 
-        //敵チームならリターン
-        MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
-        MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(id);
-        if (roomData.myTeamNum != myRoomData.myTeamNum) { return; }
+        hitedPlayer[id] = true;
+        player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
 
-        //感謝ボイスを鳴らす
-        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetThanks(), Camera.main.transform);
+        //被弾ボイスを鳴らす
+        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
     }
 }
