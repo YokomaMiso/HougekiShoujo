@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
-  m_Name: SW_ReloadBecon
+  m_Name: SW_BlueCoral
   m_EditorClassIdentifier: 
-  subWeaponIcon: {fileID: 21300000, guid: f29fb8c1c6942c147bb09775d096c0a6, type: 3}
+  subWeaponIcon: {fileID: 21300000, guid: 6ded63c0ea8802b4d814db432e1e5eff, type: 3}
   subType: 1
   buffType: 0
   installation: {fileID: 1008518316061016973, guid: 0c4fce637059148479ee62bd8f6004a1,
     type: 3}
-  subWeaponName: "\u30EA\u30ED\u30FC\u30C9\u30D3\u30FC\u30B3\u30F3"
-  subWeaponExplain: "10\u79D2\u6301\u7D9A\u3059\u308B\u30D3\u30FC\u30B3\u30F3\u3092\u8A2D\u7F6E\n\uFF18\u79D2\u9593\u30EA\u30ED\u30FC\u30C9\u304C\u901F\u304F\u306A\u308B"
+  subWeaponName: "\u30D6\u30EB\u30FC\u30B3\u30FC\u30E9\u30EB"
+  subWeaponExplain: "\u6B4C\u306E\u529B\u3067\u5468\u56F2\u306E\u79FB\u52D5\u901F\u5EA6\u3092\uFF18\u79D2\u9593\u4E0A\u6607\u3055\u305B\u308B\n\u79C1\u306E\u604B\u306F\u5357\u306E\u98A8\u306B\u4E57\u3063\u3066\u8D70\u308B\u308F"
   installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
     type: 2}
   installationLoopAnim: {fileID: 9100000, guid: ab12581ac6d1fa04c984951dbe8d22bd,
     type: 2}
   reloadTime: 30
-  speedRate: 1.5
-  lifeTime: 10
+  speedRate: 1.2
+  lifeTime: 1

@@ -3,31 +3,38 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ReloadBeconBehavior : InstallationBehavior
+public class BlueCoralBehavior : InstallationBehavior
 {
     bool[] hitedPlayer = new bool[8];
-    float reloadSpeedRate;
+    float speedRate;
     float buffLifeTime;
 
     protected override void Start()
     {
-        base.Start();
-        reloadSpeedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
-        buffLifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime() - 2.0f;
-        changeToLoopAnimTime = 1.5f;
+        lifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime();
+
+        transform.GetChild(0).gameObject.SetActive(false);
+
+        imageAnimator = transform.GetChild(1).GetComponent<Animator>();
+        imageAnimator.gameObject.SetActive(true);
+
+        speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
+        buffLifeTime = 8.0f;
     }
 
     protected override void Update()
     {
-        base.Update();
+        float deltaTime = Managers.instance.timeManager.GetDeltaTime();
+        TimeSetting();
 
-        if (applyLoop) { return; }
-        if (timer > changeToLoopAnimTime)
-        {
-            imageAnimator.runtimeAnimatorController = loopAnim;
-            transform.GetChild(1).gameObject.SetActive(true);
-            applyLoop = true;
-        }
+        timer += deltaTime;
+        if (timer > lifeTime) { Destroy(gameObject); }
+    }
+
+    protected override void TimeSetting()
+    {
+        if (imageAnimator == null) { return; }
+        imageAnimator.speed = 3 * Managers.instance.timeManager.TimeRate();
     }
 
     protected override void OnTriggerEnter(Collider other)
@@ -37,8 +44,6 @@ public class ReloadBeconBehavior : InstallationBehavior
 
     void OnTriggerStay(Collider other)
     {
-        if (timer < changeToLoopAnimTime) { return; }
-
         Player player = other.GetComponent<Player>();
         if (!player) { return; }
 
@@ -46,7 +51,7 @@ public class ReloadBeconBehavior : InstallationBehavior
         if (hitedPlayer[id]) { return; }
 
         hitedPlayer[id] = true;
-        player.AddComponent<ReloadBuff>().SetRateAndTime(reloadSpeedRate, buffLifeTime);
+        player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
 
         //é©ï™é©êgÇ»ÇÁÉäÉ^Å[Éì
         if (id == Managers.instance.playerID) { return; }
