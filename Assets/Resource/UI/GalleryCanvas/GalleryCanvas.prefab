@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 4665943951500490803}
   - component: {fileID: 7722380963206771496}
   - component: {fileID: 8228573820652825118}
+  - component: {fileID: 1713227457782471674}
   m_Layer: 5
   m_Name: GalleryCanvas
   m_TagString: Untagged
@@ -313,6 +314,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1713227457782471674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4432466077039030639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b643f8dd3d54f194a8ea5f36010fae65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  largeCategory: {fileID: 8430633161719172334}
+  charCategory: {fileID: 5042716174774901387}
+  worldCategory: {fileID: 6046147905694145475}
+  soundCategory: {fileID: 8702844073501512161}
+  fadeDuration: 1
 --- !u!1 &5042716174774901387
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +753,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2655445076686902727}
-  - component: {fileID: 8528254115902520804}
   m_Layer: 5
   m_Name: World category
   m_TagString: Untagged
@@ -762,30 +779,6 @@ RectTransform:
   m_AnchoredPosition: {x: -969, y: 840}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8528254115902520804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6046147905694145475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c2183a0a7665b8489cca3ef03522f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charGalleryManager: {fileID: 11400000, guid: 6fe29c61aba109c429a1a98e636dcea3, type: 2}
-  ImagePosition: {x: 500, y: 80, z: 0}
-  ImageSize: {x: 3508, y: 4961}
-  ImageScale: {x: 0.2, y: 0.2, z: 0.2}
-  CharPosition: {x: 100, y: 200, z: 0}
-  CharSize: {x: 200, y: 200}
-  CharScale: {x: 1, y: 1, z: 1}
-  contentParent: {fileID: 3352865836953444288}
-  characterImagePrefab: {fileID: 4455119145195086568, guid: 5f4d6a8bafa42174eb7fb282d0d077bb,
-    type: 3}
-  characterAnimePrefab: {fileID: 7282625609559941480, guid: 5d281d21d0456934d8be453bcf498219,
-    type: 3}
 --- !u!1 &6417725126161830662
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1143,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7339465596466530960}
-  - component: {fileID: 3110240215131959970}
   m_Layer: 5
   m_Name: Sound category
   m_TagString: Untagged
@@ -1177,30 +1169,6 @@ RectTransform:
   m_AnchoredPosition: {x: -969, y: 840}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3110240215131959970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8702844073501512161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c2183a0a7665b8489cca3ef03522f6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charGalleryManager: {fileID: 11400000, guid: 6fe29c61aba109c429a1a98e636dcea3, type: 2}
-  ImagePosition: {x: 500, y: 80, z: 0}
-  ImageSize: {x: 3508, y: 4961}
-  ImageScale: {x: 0.2, y: 0.2, z: 0.2}
-  CharPosition: {x: 100, y: 200, z: 0}
-  CharSize: {x: 200, y: 200}
-  CharScale: {x: 1, y: 1, z: 1}
-  contentParent: {fileID: 3352865836953444288}
-  characterImagePrefab: {fileID: 4455119145195086568, guid: 5f4d6a8bafa42174eb7fb282d0d077bb,
-    type: 3}
-  characterAnimePrefab: {fileID: 7282625609559941480, guid: 5d281d21d0456934d8be453bcf498219,
-    type: 3}
 --- !u!1 &8937326530204860372
 GameObject:
   m_ObjectHideFlags: 0

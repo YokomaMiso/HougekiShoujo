@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class OffsetChildObjects : MonoBehaviour
 {
-    private bool canChangeIndex = true;
+    private bool LeftStickcanChange = true;
+    private bool RightStickcanChange = true;
 
     public CharGalleryManager charGalleryManager;
     public MainViewPort mainViewPort;
@@ -17,7 +18,11 @@ public class OffsetChildObjects : MonoBehaviour
 
     int inputIndex = -1;
     private int currentAnimatorIndex = 0;
+    private int currentVoiceIndex = 0;
 
+    private AudioSource audioSource;
+
+    private bool EnterDown = false;
     void Start()
     {
         inputIndex = -1;
@@ -26,6 +31,8 @@ public class OffsetChildObjects : MonoBehaviour
         Vector3 newPosition = transform.localPosition;
         newPosition.y = 0;
         transform.localPosition = newPosition;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
 
         GenerateCharacterUI();
 
@@ -94,49 +101,53 @@ public class OffsetChildObjects : MonoBehaviour
         HighlightCurrentIcon();
         HandleEnterKey();
         HandleBackKey();
+
+
     }
 
     void HandleInput()
     {
         Vector2 Inout = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
+        Vector2 RightInout = InputManager.GetAxis<Vector2>(Vec2AxisActions.RStickAxis);
 
         if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
         {
-            if (Inout.x > 0.5f && canChangeIndex)
+            if (Inout.x > 0.5f && LeftStickcanChange)
             {
                 if (inputIndex < contentParent.childCount - 1)
                 {
                     inputIndex++;
                 }
-                canChangeIndex = false;
+                LeftStickcanChange = false;
             }
-            else if (Inout.x < -0.5f && canChangeIndex)
+            else if (Inout.x < -0.5f && LeftStickcanChange)
             {
                 if (inputIndex > 0)
                 {
                     inputIndex--;
                 }
-                canChangeIndex = false;
+                LeftStickcanChange = false;
             }
             else if (Inout.x > -0.5f && Inout.x < 0.5f)
             {
-                canChangeIndex = true;
+                LeftStickcanChange = true;
             }
         }
 
         if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
         {
-            if (Inout.x > 0.5f && canChangeIndex)
+            if (Inout.x > 0.5f && LeftStickcanChange)
             {
                 CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
 
                 currentAnimatorIndex = (currentAnimatorIndex + 1) % currentCharacter.animatorControllers.Count;
 
                 mainViewPort.UpdateAnimatorController(currentCharacter, currentAnimatorIndex);
+                mainViewPort.ModifyGeneratedImages(currentAnimatorIndex);
 
-                canChangeIndex = false;
+                LeftStickcanChange = false;
             }
-            else if (Inout.x < -0.5f && canChangeIndex)
+            else if (Inout.x < -0.5f && LeftStickcanChange)
             {
                 CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
 
@@ -144,12 +155,39 @@ public class OffsetChildObjects : MonoBehaviour
                                        % currentCharacter.animatorControllers.Count;
 
                 mainViewPort.UpdateAnimatorController(currentCharacter, currentAnimatorIndex);
+                mainViewPort.ModifyGeneratedImages(currentAnimatorIndex);
 
-                canChangeIndex = false;
+                LeftStickcanChange = false;
             }
             else if (Inout.x > -0.5f && Inout.x < 0.5f)
             {
-                canChangeIndex = true;
+                LeftStickcanChange = true;
+            }
+
+            if (RightInout.x > 0.5f && RightStickcanChange)
+            {
+                CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
+
+                currentVoiceIndex = (currentVoiceIndex + 1) % currentCharacter.CharVoice.Count;
+
+                mainViewPort.ChangeText(currentCharacter.CharVoice[currentVoiceIndex].voiceText);
+
+                RightStickcanChange = false;
+            }
+            else if (RightInout.x < -0.5f && RightStickcanChange)
+            {
+                CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
+
+                currentVoiceIndex = (currentVoiceIndex - 1 + currentCharacter.CharVoice.Count)
+                                       % currentCharacter.CharVoice.Count;
+
+                mainViewPort.ChangeText(currentCharacter.CharVoice[currentVoiceIndex].voiceText);
+
+                RightStickcanChange = false;
+            }
+            else if (RightInout.x > -0.5f && RightInout.x < 0.5f)
+            {
+                RightStickcanChange = true;
             }
         }
 
@@ -171,20 +209,41 @@ public class OffsetChildObjects : MonoBehaviour
 
     void HandleEnterKey()
     {
-        if(GalleryManager.Instance.CurrentState== GalleryState.CharacterSelect)
+        if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
         {
-            if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0)
+            if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0 && !EnterDown)
             {
-
+                EnterDown = true;
                 CharacterData selectedCharacter = charGalleryManager.characterList[inputIndex];
 
                 GalleryManager.Instance.SetState(GalleryState.CharacterGallery);
 
+                currentAnimatorIndex = 0;
+                currentVoiceIndex = 0;
                 mainViewPort.GenerateCharacterILL(selectedCharacter);
                 mainViewPort.GenerateCharacterAnime(selectedCharacter);
+                mainViewPort.ModifyGeneratedImages(currentAnimatorIndex);
+                mainViewPort.ChangeText(selectedCharacter.CharVoice[currentVoiceIndex].voiceText);
             }
         }
-        
+        if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
+        {
+            if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0 && !EnterDown)
+            {
+                EnterDown = true;
+                CharacterData selectedCharacter = charGalleryManager.characterList[inputIndex];
+                if (selectedCharacter != null)
+                {
+                    audioSource.clip = selectedCharacter.CharVoice[currentVoiceIndex].voiceClip;
+                    audioSource.Play();
+                }
+            }
+        }
+        if (InputManager.GetKeyUp(BoolActions.SouthButton))
+        {
+            EnterDown = false;
+        }
+
     }
 
     void HandleBackKey()
@@ -195,8 +254,13 @@ public class OffsetChildObjects : MonoBehaviour
             {
                 GalleryManager.Instance.SetState(GalleryState.CharacterSelect);
 
+                audioSource.Stop();
 
                 mainViewPort.ClearCharacterILL();
+            }
+            if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
+            {
+                inputIndex = -1;
             }
         }
     }

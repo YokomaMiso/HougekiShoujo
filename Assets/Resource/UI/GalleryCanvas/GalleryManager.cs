@@ -56,7 +56,7 @@ public class GalleryManager : MonoBehaviour
     private static float Duration = 1.0f;
 
     //バター移動用変数
-    private static Vector3 targetPosition = new Vector3(-60,100,0);
+    private static Vector3 targetPosition = new Vector3(-108,70,0);
     private Vector3[] currentPosition = new Vector3[3];
 
 
