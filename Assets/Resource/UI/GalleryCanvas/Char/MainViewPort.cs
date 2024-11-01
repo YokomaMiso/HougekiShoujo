@@ -126,7 +126,7 @@ public class MainViewPort : MonoBehaviour
         textRectTransform.localPosition = Vector3.zero;
         textComponent.alignment = TextAnchor.MiddleCenter;
 
-        textComponent.text = "×Ô¼º½B½é";
+        textComponent.text = "";
         textComponent.font = font;
         textComponent.fontSize = 32;
         textComponent.color = Color.black;

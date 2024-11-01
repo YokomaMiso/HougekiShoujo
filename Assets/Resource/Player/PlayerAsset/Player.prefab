@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd042a6985440754f8030da30f8e59b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfxBehavior: {fileID: 3812636416210247749}
+  buffVfxBehavior: {fileID: 3812636416210247749}
+  debuffVfxBehavior: {fileID: 1850682672918396493}
 --- !u!114 &6069827069582108553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43faf872feaf51e4a9010b64deb9c44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfxBehavior: {fileID: 1850682672918396493}
 --- !u!114 &6022571088057247346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,8 +830,14 @@ PrefabInstance:
     - target: {fileID: 5824900776612835826, guid: e66ed6bd03edab549bc7ab867db53fce,
         type: 3}
       propertyPath: m_Name
-      value: ReloadBuffEffectPrefab
+      value: SlipDeBuffEffectPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8889563418073095079, guid: e66ed6bd03edab549bc7ab867db53fce,
+        type: 3}
+      propertyPath: UVModule.sprites.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b23476758e13154ca381e91061d3b35,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

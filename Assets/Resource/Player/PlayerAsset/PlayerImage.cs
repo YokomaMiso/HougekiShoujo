@@ -44,7 +44,6 @@ public class PlayerImage : MonoBehaviour
                 applyController = animData.GetRunAnim(0, (CANON_STATE)ownerPlayer.GetCanonState());
                 break;
             case PLAYER_STATE.RELOADING:
-                animSpeedRate = ownerPlayer.GetReloadAnimSpeedRate();
                 applyController = animData.GetReloadAnim();
                 break;
             case PLAYER_STATE.AIMING:
