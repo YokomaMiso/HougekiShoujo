@@ -25,4 +25,4 @@ MonoBehaviour:
   projectileSpeed: 12
   aimRange: 0
   aimDegree: 360
-  lifeTime: 0.6
+  lifeTime: 0.75

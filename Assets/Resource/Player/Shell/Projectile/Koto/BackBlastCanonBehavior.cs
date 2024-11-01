@@ -24,7 +24,7 @@ public class BackBlastCanonBehavior : ProjectileBehavior
 
     void SpawnBackBlast()
     {
-        float explosionRadius = backBlastExplosion.GetScale() * 1.5f;
+        float explosionRadius = backBlastExplosion.GetScale() * 3;
         Vector3 spawnPos = ownerPlayer.transform.position - transform.forward * explosionRadius;
 
         GameObject obj = Instantiate(backBlastExplosion.GetBody(), spawnPos, Quaternion.identity);
