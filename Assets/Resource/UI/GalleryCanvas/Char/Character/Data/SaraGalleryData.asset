@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a0b88adf793a5c141b40acebffaf9aa7, type: 3}
-  m_Name: NanamiGalleryData
+  m_Name: SaraGalleryData
   m_EditorClassIdentifier: 
-  characterName: Nanami
-  characterIcon: {fileID: 21300000, guid: 74be7e797db44ee4585912337706401c, type: 3}
-  characterIllustration: {fileID: 21300000, guid: 17806bd83a5a9634aa6d1903b7c3b5b1,
+  characterName: Sara
+  characterIcon: {fileID: 21300000, guid: eabff61d07131814f9456d577d369d86, type: 3}
+  characterIllustration: {fileID: 21300000, guid: 3268fea1691a3114c99cd29a86f021f3,
     type: 3}
   iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
   animatorControllers:
-  - {fileID: 9100000, guid: a88271af4b46aa549bacdaffcd2cfc54, type: 2}
-  - {fileID: 9100000, guid: 651003bc397630c4d9de9a13f3a23cc4, type: 2}
-  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
-  - {fileID: 9100000, guid: 96adf6a26e12e9d4c896b07f3a2400ce, type: 2}
-  - {fileID: 9100000, guid: 5a557b481c1f95f4a85439f67bcf95f6, type: 2}
+  - {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: 9d054954505153645af22917b3e803a9, type: 2}
   CharVoice:
   - voiceClip: {fileID: 8300000, guid: f7468e231dc1aa84086403f4ce9e0cd3, type: 3}
     voiceText: "\u81EA\u5DF1\u7D39\u4ECB"
