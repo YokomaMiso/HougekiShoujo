@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c5fba6b61ea6c0429a90bcb7dfcbd08
+guid: f5975bbbd5cd378418cd96bbabe69a31
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,91 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Koto_Run_Right_0
+      name: Koto_Idle_Right_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffb4954da3f5c4f44a2f386eaf0470f6
+      internalID: -1650434009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Koto_Idle_Right_2_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e315deaed2f7894ead9727445e8fb86
+      internalID: 185107181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Koto_Idle_Right_2_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0d3572d29236be4bbc1cae047cebd7b
+      internalID: 1101995264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Koto_Idle_Right_2_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab48341476997b344a784586968c7bc9
+      internalID: -43007912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Koto_Idle_Right_2_4
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 141976d10eeb3df4a9c408493d8888b6
-      internalID: 943221860
+      spriteID: 3eb2bb353477f4e41a073f6dacadab85
+      internalID: -1847403109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_1
+      name: Koto_Idle_Right_2_5
       rect:
         serializedVersion: 2
         x: 128
@@ -158,14 +242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4853f9cc1e16fc4cb09434a55ca872a
-      internalID: -1582842855
+      spriteID: 3f92e2f71ba411c4980102b91544c9f1
+      internalID: -487631958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_2
+      name: Koto_Idle_Right_2_6
       rect:
         serializedVersion: 2
         x: 256
@@ -179,14 +263,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f95315609a53eb438e022795bb2e21b
-      internalID: -596139302
+      spriteID: a5d5dd3367286c64fa8288ecc30c254f
+      internalID: -757189053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_3
+      name: Koto_Idle_Right_2_7
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6af5d0854cc3baa4a92bc45606af6d3f
+      internalID: 1483888056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Koto_Idle_Right_2_8
       rect:
         serializedVersion: 2
         x: 0
@@ -200,14 +305,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9fc6ff9054ff7644e995e9843dd3f84a
-      internalID: -1664751947
+      spriteID: 0436b581e78c0044cb9aabba3ec63b2c
+      internalID: -1580013263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_4
+      name: Koto_Idle_Right_2_9
       rect:
         serializedVersion: 2
         x: 128
@@ -221,14 +326,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4a6ab338dcf75f49a83d3da2a5a4e49
-      internalID: 126038630
+      spriteID: 7c43034e3d4eef545939f7c80f60f24a
+      internalID: -1297866647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_5
+      name: Koto_Idle_Right_2_10
       rect:
         serializedVersion: 2
         x: 256
@@ -242,14 +347,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed4c2987b7eaf3b4385033302afd7874
-      internalID: -2098970896
+      spriteID: c575e7974e6754d4f93c99e6b628b535
+      internalID: 1269174304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_6
+      name: Koto_Idle_Right_2_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba56b88a62ce03d47b8fcda49e2ffcd6
+      internalID: -1056825421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Koto_Idle_Right_2_12
       rect:
         serializedVersion: 2
         x: 0
@@ -263,14 +389,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63ebebbbfe72db9459fbeb0c37547859
-      internalID: 803740955
+      spriteID: 049bc89c1855f2849a6c4963f1053821
+      internalID: 206474123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_7
+      name: Koto_Idle_Right_2_13
       rect:
         serializedVersion: 2
         x: 128
@@ -284,8 +410,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 509843944d13b634f8ed3b5402e6283f
-      internalID: -599623770
+      spriteID: 7a8007f076577014696034db14da6791
+      internalID: -501908877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Koto_Idle_Right_2_14
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6daa3723642df444a5b117032332a85
+      internalID: -608761358
       vertices: []
       indices: 
       edges: []
@@ -293,7 +440,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 004d43da46368ea47901bec20c3e0d74
+    spriteID: be074f90691481d49aa62ae3099f557c
     internalID: 0
     vertices: []
     indices: 
@@ -301,14 +448,21 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Koto_Run_Right_0: 943221860
-      Koto_Run_Right_1: -1582842855
-      Koto_Run_Right_2: -596139302
-      Koto_Run_Right_3: -1664751947
-      Koto_Run_Right_4: 126038630
-      Koto_Run_Right_5: -2098970896
-      Koto_Run_Right_6: 803740955
-      Koto_Run_Right_7: -599623770
+      Koto_Idle_Right_2_0: -1650434009
+      Koto_Idle_Right_2_1: 185107181
+      Koto_Idle_Right_2_10: 1269174304
+      Koto_Idle_Right_2_11: -1056825421
+      Koto_Idle_Right_2_12: 206474123
+      Koto_Idle_Right_2_13: -501908877
+      Koto_Idle_Right_2_14: -608761358
+      Koto_Idle_Right_2_2: 1101995264
+      Koto_Idle_Right_2_3: -43007912
+      Koto_Idle_Right_2_4: -1847403109
+      Koto_Idle_Right_2_5: -487631958
+      Koto_Idle_Right_2_6: -757189053
+      Koto_Idle_Right_2_7: 1483888056
+      Koto_Idle_Right_2_8: -1580013263
+      Koto_Idle_Right_2_9: -1297866647
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
