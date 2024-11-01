@@ -8,7 +8,7 @@ public class RanProjectileBehaviour : ProjectileBehavior
 
     int state = 0;
     const float firstSpawn = 0.6f;
-    const float spawnInterval = 0.25f;
+    const float spawnInterval = 0.35f;
 
     Vector3 inputVector;
 
@@ -27,7 +27,7 @@ public class RanProjectileBehaviour : ProjectileBehavior
 
     protected override void SpawnExplosion()
     {
-        Vector3 forwardVector = inputVector.normalized * explosion.GetScale() * 1.5f;
+        Vector3 forwardVector = inputVector.normalized * explosion.GetScale() * 0.25f;
 
         Vector3 spawnPos = transform.position + forwardVector;
         GameObject explosionInstance = explosion.GetBody();
@@ -66,10 +66,10 @@ public class RanProjectileBehaviour : ProjectileBehavior
         switch (state)
         {
             case 0:
-                if (timer >= firstSpawn) { SpawnExplosion(); }
+                if (timer >= firstSpawn) { SpawnSecondExplosion(); }
                 break;
             case 1:
-                if (timer >= firstSpawn + spawnInterval) { SpawnSecondExplosion(); }
+                if (timer >= firstSpawn + spawnInterval) { SpawnExplosion(); }
                 break;
         }
 
