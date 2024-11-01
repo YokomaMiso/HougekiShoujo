@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3886333372576915333}
   - component: {fileID: 6790464838379298388}
   m_Layer: 0
-  m_Name: BeconPrefab
+  m_Name: BlueCoralPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2790069042509766578
 Transform:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6376999803088194243
 Transform:
   m_ObjectHideFlags: 0
