@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6638852785523414993}
-  - component: {fileID: 3886333372576915333}
+  - component: {fileID: 6604336213066806570}
   - component: {fileID: 6790464838379298388}
   m_Layer: 0
   m_Name: TeenSpiritPrefab
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 6376999803088194243}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3886333372576915333
+--- !u!114 &6604336213066806570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1008518316061016973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b828785d16edc0f4db033d2062fda1ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a1cb74b760f0c047a8e7ab4e1cd6beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &6790464838379298388

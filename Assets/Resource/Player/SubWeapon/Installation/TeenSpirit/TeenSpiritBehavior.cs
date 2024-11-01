@@ -20,6 +20,8 @@ public class TeenSpiritBehavior : InstallationBehavior
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
         buffLifeTime = 8.0f;
+
+        hitedPlayer[Managers.instance.playerID] = true;
     }
 
     protected override void Update()
@@ -49,9 +51,6 @@ public class TeenSpiritBehavior : InstallationBehavior
 
         int id = player.GetPlayerID();
         if (hitedPlayer[id]) { return; }
-
-        //©•ª©g‚È‚çƒŠƒ^[ƒ“
-        if (id == Managers.instance.playerID) { return; }
 
         hitedPlayer[id] = true;
         player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
