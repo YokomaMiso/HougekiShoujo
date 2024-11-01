@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BackBlastCanonBehavior : ProjectileBehavior
 {
+    [SerializeField] Explosion backBlastExplosion;
     const float backBlastTime = 0.25f;
     bool spawnedBackBlast;
 
@@ -23,12 +24,12 @@ public class BackBlastCanonBehavior : ProjectileBehavior
 
     void SpawnBackBlast()
     {
-        float explosionRadius = explosion.GetScale() * 1.5f;
+        float explosionRadius = backBlastExplosion.GetScale() * 1.5f;
         Vector3 spawnPos = ownerPlayer.transform.position - transform.forward * explosionRadius;
 
-        GameObject obj = Instantiate(explosion.GetBody(), spawnPos, Quaternion.identity);
+        GameObject obj = Instantiate(backBlastExplosion.GetBody(), spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
-        obj.GetComponent<ExplosionBehavior>().SetData(explosion);
+        obj.GetComponent<ExplosionBehavior>().SetData(backBlastExplosion);
         spawnedBackBlast = true;
     }
 }
