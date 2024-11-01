@@ -22,7 +22,7 @@ MonoBehaviour:
   shellExplain: "\u30EA\u30B3\u30A4\u30EB\u304C\u6291\u3048\u3089\u308C\u305F\u7121\u53CD\u52D5\u7832\n\u5F8C\u65B9\u306B\u7206\u98A8\u304C\u51FA\u308B\u305F\u3081\u3001\u6271\u3044\u306B\u6CE8\u610F"
   reloadTime: 3
   recoilTime: 1
-  projectileSpeed: 9
+  projectileSpeed: 12
   aimRange: 0
   aimDegree: 360
-  lifeTime: 1
+  lifeTime: 0.6
