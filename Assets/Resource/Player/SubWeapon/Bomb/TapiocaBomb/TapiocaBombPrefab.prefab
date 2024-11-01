@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1166596283970069200}
   - component: {fileID: 4280665764232894923}
   m_Layer: 0
-  m_Name: FlashBombPrefab
+  m_Name: TapiocaBombPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

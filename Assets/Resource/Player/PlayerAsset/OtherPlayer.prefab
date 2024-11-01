@@ -118,7 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd042a6985440754f8030da30f8e59b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfxBehavior: {fileID: 3812636416210247749}
+  buffVfxBehavior: {fileID: 3812636416210247749}
+  debuffVfxBehavior: {fileID: 3413631301288636381}
 --- !u!114 &6069827069582108553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43faf872feaf51e4a9010b64deb9c44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfxBehavior: {fileID: 3413631301288636381}
 --- !u!114 &6022571088057247346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +200,6 @@ MonoBehaviour:
   emotePrefab: {fileID: 2522134910337228876, guid: e2635b3d3c59752458cbe02e36d149dc,
     type: 3}
   fastChatCanvasPrefab: {fileID: 4432466077039030639, guid: 3cf0983ca891a8d44a4060748899ad96,
-    type: 3}
-  serifWindow: {fileID: 2264529309454844271, guid: e1cda63bc62952a4f8cc6d9d28455d8c,
     type: 3}
 --- !u!135 &1582690489312574683
 SphereCollider:

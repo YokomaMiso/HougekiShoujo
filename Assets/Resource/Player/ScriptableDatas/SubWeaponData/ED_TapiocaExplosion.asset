@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ea82a71e064af341b9c69f4636d1777, type: 3}
-  m_Name: ED_FlashExplosion
+  m_Name: ED_TapiocaExplosion
   m_EditorClassIdentifier: 
   explosionBody: {fileID: 3179393461812120061, guid: 6961ffbbbcd5fb246b7ee776e24c8cba,
     type: 3}

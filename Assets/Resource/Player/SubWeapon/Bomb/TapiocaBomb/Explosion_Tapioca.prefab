@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2569756816433642799}
   - component: {fileID: 1166596283970069200}
-  - component: {fileID: 8250524881378481758}
+  - component: {fileID: -6460173986763299217}
   m_Layer: 0
-  m_Name: Explosion_Flash
+  m_Name: Explosion_Tapioca
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8250524881378481758
+--- !u!114 &-6460173986763299217
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

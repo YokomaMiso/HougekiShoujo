@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FlashExplosionBehavior : ExplosionBehavior
+public class TapiocaExplosionBehavior : ExplosionBehavior
 {
     bool hitCheck = false;
     bool[] hitedPlayer = new bool[6];
@@ -36,6 +36,6 @@ public class FlashExplosionBehavior : ExplosionBehavior
         //トラップ被弾ボイスを鳴らす
         nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
 
-        nowPlayer.AddComponent<SpeedBuff>().SetRateAndTime(-1, 8);
+        nowPlayer.GetComponent<PlayerMove>().ReceiveSlip(12.0f);
     }
 }
