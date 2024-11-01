@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0c5fba6b61ea6c0429a90bcb7dfcbd08
+guid: d730f881b0cea744c9f3cde407a0258e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,133 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Koto_Run_Right_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 141976d10eeb3df4a9c408493d8888b6
-      internalID: 943221860
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Koto_Run_Right_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4853f9cc1e16fc4cb09434a55ca872a
-      internalID: -1582842855
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Koto_Run_Right_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f95315609a53eb438e022795bb2e21b
-      internalID: -596139302
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Koto_Run_Right_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9fc6ff9054ff7644e995e9843dd3f84a
-      internalID: -1664751947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Koto_Run_Right_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4a6ab338dcf75f49a83d3da2a5a4e49
-      internalID: 126038630
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Koto_Run_Right_5
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ed4c2987b7eaf3b4385033302afd7874
-      internalID: -2098970896
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Koto_Run_Right_6
+      name: Koto_Aim_Down_0
       rect:
         serializedVersion: 2
         x: 0
@@ -263,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63ebebbbfe72db9459fbeb0c37547859
-      internalID: 803740955
+      spriteID: bab77080b6386f4469c911447230347a
+      internalID: 1013264733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Koto_Run_Right_7
+      name: Koto_Aim_Down_1
       rect:
         serializedVersion: 2
         x: 128
@@ -284,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 509843944d13b634f8ed3b5402e6283f
-      internalID: -599623770
+      spriteID: 91fb6bbafa1794a409492a7a27855211
+      internalID: -262531272
       vertices: []
       indices: 
       edges: []
@@ -293,7 +167,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 004d43da46368ea47901bec20c3e0d74
+    spriteID: f86d27d573176ea46abd45a4749e8d77
     internalID: 0
     vertices: []
     indices: 
@@ -301,14 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Koto_Run_Right_0: 943221860
-      Koto_Run_Right_1: -1582842855
-      Koto_Run_Right_2: -596139302
-      Koto_Run_Right_3: -1664751947
-      Koto_Run_Right_4: 126038630
-      Koto_Run_Right_5: -2098970896
-      Koto_Run_Right_6: 803740955
-      Koto_Run_Right_7: -599623770
+      Koto_Aim_Down_0: 1013264733
+      Koto_Aim_Down_1: -262531272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

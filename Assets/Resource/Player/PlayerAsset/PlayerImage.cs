@@ -38,17 +38,17 @@ public class PlayerImage : MonoBehaviour
         switch (ownerPlayer.playerState)
         {
             default://case PLAYER_STATE.IDLE:
-                applyController = animData.GetIdleAnim((CANON_STATE)ownerPlayer.GetCanonState());
+                applyController = animData.GetIdleAnim((CANON_STATE)ownerPlayer.GetCanonState(), ownerPlayer.NowDirection());
                 break;
             case PLAYER_STATE.RUN:
-                applyController = animData.GetRunAnim(0, (CANON_STATE)ownerPlayer.GetCanonState());
+                applyController = animData.GetRunAnim(0, (CANON_STATE)ownerPlayer.GetCanonState(), ownerPlayer.NowDirection());
                 break;
             case PLAYER_STATE.RELOADING:
-                applyController = animData.GetReloadAnim();
+                applyController = animData.GetReloadAnim(ownerPlayer.NowDirection());
                 break;
             case PLAYER_STATE.AIMING:
                 float time = charaSprite.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime;
-                applyController = animData.GetAimAnim(ownerPlayer.AnimNumFromVector());
+                applyController = animData.GetAimAnim(ownerPlayer.AnimNumFromVector(), ownerPlayer.NowDirection());
                 charaSprite.GetComponent<Animator>().ForceStateNormalizedTime(time + Managers.instance.timeManager.GetDeltaTime());
                 //charaSprite.GetComponent<Animator>().Play(0, -1, time);
                 break;
