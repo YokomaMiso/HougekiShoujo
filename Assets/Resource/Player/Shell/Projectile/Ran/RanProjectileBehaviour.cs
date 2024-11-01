@@ -6,11 +6,9 @@ using UnityEngine;
 public class RanProjectileBehaviour : ProjectileBehavior
 {
 
-    const int spawnCount = 3;
-    int nowCount = 0;
-    const float firstSpawn = 0.4f;
-    const float spawnInterval = 0.15f;
-
+    int state = 0;
+    const float firstSpawn = 0.6f;
+    const float spawnInterval = 0.25f;
 
     Vector3 inputVector;
 
@@ -27,20 +25,37 @@ public class RanProjectileBehaviour : ProjectileBehavior
         explosion = _data.GetExplosion();
     }
 
-
     protected override void SpawnExplosion()
     {
-        Vector3 forwardVector = inputVector;
-        forwardVector.Normalize();
-        Vector3 offset = forwardVector * 0.5f;
-        Vector3 addPos = offset + forwardVector * explosion.GetScale() * 2 * nowCount;
+        Vector3 forwardVector = inputVector.normalized * explosion.GetScale() * 1.5f;
 
-        Vector3 spawnPos = transform.position + addPos;
+        Vector3 spawnPos = transform.position + forwardVector;
         GameObject explosionInstance = explosion.GetBody();
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
-        nowCount++;
+
+        state++;
+    }
+
+    protected void SpawnSecondExplosion()
+    {
+        Vector3[] offsetSide = new Vector3[2] { -transform.right, transform.right };
+
+        for (int i = 0; i < 2; i++)
+        {
+            Vector3 forwardVector = inputVector.normalized * explosion.GetScale() * 1.5f;
+            float explosionScale = explosion.GetScale() * 2;
+            Vector3 offset = offsetSide[i] * explosionScale;
+            Vector3 addPos = offset + forwardVector;
+
+            Vector3 spawnPos = transform.position + addPos;
+            GameObject explosionInstance = explosion.GetBody();
+            GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
+            obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
+            obj.GetComponent<ExplosionBehavior>().SetData(explosion);
+        }
+        state++;
     }
 
     protected override void Update()
@@ -48,9 +63,14 @@ public class RanProjectileBehaviour : ProjectileBehavior
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
         timer += deltaTime;
 
-        if (timer >= firstSpawn + spawnInterval * nowCount)
+        switch (state)
         {
-            if (nowCount < spawnCount) { SpawnExplosion(); }
+            case 0:
+                if (timer >= firstSpawn) { SpawnExplosion(); }
+                break;
+            case 1:
+                if (timer >= firstSpawn + spawnInterval) { SpawnSecondExplosion(); }
+                break;
         }
 
         if (timer >= lifeTime)

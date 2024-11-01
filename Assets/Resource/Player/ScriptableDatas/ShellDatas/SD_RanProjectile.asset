@@ -17,7 +17,7 @@ MonoBehaviour:
   projectile: {fileID: 5179943196335613339, guid: 024b3f64d90d9cf4d868b370b4b720ce,
     type: 3}
   projectileAnim: {fileID: 0}
-  explosion: {fileID: 11400000, guid: 4b8b2b4cf67e7c647b6b78c0ac1e5a50, type: 2}
+  explosion: {fileID: 11400000, guid: a0edeb93c7d7b714da6c4edb5887ec86, type: 2}
   weaponName: "\u4EEE\u540D"
   shellExplain: "\u524D\u65B9\u306B\uFF13\u767A\u306E\u5F3E\u3092\u767A\u5C04\u3059\u308B\n\u5C04\u7A0B\u306F\u9577\u3044\u304C\u3001\u786C\u76F4\u3082\u9577\u3044"
   reloadTime: 2
