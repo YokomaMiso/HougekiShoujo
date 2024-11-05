@@ -19,6 +19,8 @@ public class StageSelectBehavior : MonoBehaviour
         start = true;
         end = false;
         transform.GetChild(0).localPosition = startPos;
+
+        DisplayStageUpdate(OSCManager.OSCinstance.roomData.stageNum);
     }
 
     void Update()
