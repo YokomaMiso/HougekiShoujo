@@ -57,7 +57,7 @@ public class StageSelectBehavior : MonoBehaviour
     void StageNumChange()
     {
         float input = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f).x;
-        if (Mathf.Abs(input) >= 0.9f)
+        if (Mathf.Abs(input) >= 0.1f)
         {
             MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
             int stageNum = myRoomData.stageNum;
@@ -75,7 +75,7 @@ public class StageSelectBehavior : MonoBehaviour
 
     void DisplayStageUpdate(int _num)
     {
-        StageData sd= Managers.instance.gameManager.allStageData.GetStageData(_num);
+        StageData sd = Managers.instance.gameManager.allStageData.GetStageData(_num);
         transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite = sd.GetScreenShot();
         transform.GetChild(0).GetChild(3).GetComponent<Image>().sprite = sd.GetMinimap();
     }
