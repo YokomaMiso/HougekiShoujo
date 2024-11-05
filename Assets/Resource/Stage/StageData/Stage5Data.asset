@@ -17,10 +17,10 @@ MonoBehaviour:
   stageSize: {x: 48, y: 0, z: 28}
   defaultPosition:
   - {x: -20, y: 0, z: 12}
-  - {x: -22, y: 0, z: 8}
-  - {x: -18, y: 0, z: 8}
   - {x: 20, y: 0, z: 12}
+  - {x: -22, y: 0, z: 8}
   - {x: 22, y: 0, z: 8}
+  - {x: -18, y: 0, z: 8}
   - {x: 18, y: 0, z: 8}
   BGM: {fileID: 11400000, guid: 4688876da384ac147b152a1b5e4af1cd, type: 2}
   screenShot: {fileID: 21300000, guid: cb1a853b9f9f3a141a992eb4085b88a5, type: 3}
