@@ -20,7 +20,7 @@ public class VideoAttach : MonoBehaviour
     void FixedUpdate()
     {
         count++;
-        if (count > 1)
+        if (count > 2)
         {
             ri.SetTexture("_mainTex", videoTexture);
             Destroy(this);
