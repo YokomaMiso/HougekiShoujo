@@ -53,7 +53,7 @@ public class PlayerImage : MonoBehaviour
                 //charaSprite.GetComponent<Animator>().Play(0, -1, time);
                 break;
             case PLAYER_STATE.ATTACKING:
-                applyController = animData.GetRecoilAnim(0, ownerPlayer.NowDirection());
+                applyController = animData.GetRecoilAnim(ownerPlayer.AnimNumFromVector(), ownerPlayer.NowDirection());
                 break;
             case PLAYER_STATE.DEAD:
                 applyController = animData.GetDeadAnim();
