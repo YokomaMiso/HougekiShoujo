@@ -113,13 +113,19 @@ public class RoomManager : MonoBehaviour
             {
 #if UNITY_EDITOR
                 myRoomData.gameStart = true;
-                myRoomData.stageNum = Random.Range(0, Managers.instance.gameManager.allStageData.GetStageLength());
+                if (myRoomData.stageNum == 0)
+                {
+                    myRoomData.stageNum = Random.Range(1, Managers.instance.gameManager.allStageData.GetStageLength());
+                }
 #else
                 //メンバー数が偶数ならゲームスタート
                 if(myRoomData.teamACount == myRoomData.teamBCount)
                 {
                     myRoomData.gameStart = true;
-                    myRoomData.stageNum = Random.Range(0, Managers.instance.gameManager.allStageData.GetStageLength());
+                    if (myRoomData.stageNum == 0)
+                    {
+                        myRoomData.stageNum = Random.Range(1, Managers.instance.gameManager.allStageData.GetStageLength());
+                    }
                 }
 #endif
 
