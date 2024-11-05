@@ -34,11 +34,11 @@ MonoBehaviour:
   - {fileID: 9100000, guid: b5763a722e186dc429cd94963fb09498, type: 2}
   - {fileID: 9100000, guid: b793bd5498c5de644b1049209f9f271d, type: 2}
   recoilAnimationData:
+  - {fileID: 9100000, guid: 069a193266cc12a4e970f56c5abac976, type: 2}
+  - {fileID: 9100000, guid: d70861c56e79894468e58979e35dfcf8, type: 2}
   - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
+  - {fileID: 9100000, guid: d3b9a4291c569a84e95a02e16acd21b8, type: 2}
+  - {fileID: 9100000, guid: 2f8b3479c2d2cf94abea93d25be0c4ca, type: 2}
   deadAnimationData: {fileID: 9100000, guid: e88ce4b70ad9b964289d5aa6c38a323a, type: 2}
   idleAnimationData2: {fileID: 9100000, guid: d697e55d605fe5342be6a290ab0312f6, type: 2}
   runAnimationData2:
@@ -56,8 +56,8 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 2256924e64f3f2d4cb40491ff29fcb7d, type: 2}
   - {fileID: 9100000, guid: 434cbb802ab7e1646ae246ba23dbb73d, type: 2}
   recoilAnimationData2:
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
-  - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
+  - {fileID: 9100000, guid: 069a193266cc12a4e970f56c5abac976, type: 2}
+  - {fileID: 9100000, guid: d70861c56e79894468e58979e35dfcf8, type: 2}
+  - {fileID: 9100000, guid: a8c499e06d82c3e4680cf46c55bda5e3, type: 2}
+  - {fileID: 9100000, guid: 66c665ad0a448954098d6636784c1f17, type: 2}
+  - {fileID: 9100000, guid: 266cb3ac841bf114b80eaac692e75700, type: 2}
