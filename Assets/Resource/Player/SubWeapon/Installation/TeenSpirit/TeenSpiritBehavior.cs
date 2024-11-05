@@ -30,6 +30,7 @@ public class TeenSpiritBehavior : InstallationBehavior
         TimeSetting();
 
         timer += deltaTime;
+        transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 2;
         if (timer > lifeTime) { Destroy(gameObject); }
     }
 
