@@ -35,7 +35,7 @@ public class KotoAnimData : CharacterAnimData
     public override RuntimeAnimatorController GetRecoilAnim(int _num, float _direction = 1)
     {
         if (_direction > 0) { return recoilAnimationData[_num]; }
-        else { return runAnimationData2[_num]; }
+        else { return recoilAnimationData2[_num]; }
 
     }
 }
