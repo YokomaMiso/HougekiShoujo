@@ -20,6 +20,8 @@ public class BlueCoralBehavior : InstallationBehavior
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
         buffLifeTime = 8.0f;
+
+        transform.localScale = Vector3.zero;
     }
 
     protected override void Update()
@@ -28,6 +30,8 @@ public class BlueCoralBehavior : InstallationBehavior
         TimeSetting();
 
         timer += deltaTime;
+        transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 2;
+
         if (timer > lifeTime) { Destroy(gameObject); }
     }
 

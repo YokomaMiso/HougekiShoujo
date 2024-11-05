@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fe36e284a795e4b8782e48a8c673d6, type: 3}
   m_Name: AD_KotoAnimData
   m_EditorClassIdentifier: 
-  characterIcon: {fileID: 21300000, guid: 215cdf7b91d8d9549bf97a21a24b314c, type: 3}
+  characterIcon: {fileID: 21300000, guid: 50be89eaf26b95244922bd659ef4f9bc, type: 3}
   idleFirstSprite: {fileID: 1183249752, guid: 10d17d366be8c594096214988b7cbad1, type: 3}
   charaIllust: {fileID: 21300000, guid: 191ee4b53c3dca24fba2782000c5426d, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: 62016db4c0bebc242b78d85fa5297219,
