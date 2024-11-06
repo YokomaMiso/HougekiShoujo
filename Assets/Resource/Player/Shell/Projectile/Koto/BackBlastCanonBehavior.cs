@@ -22,13 +22,14 @@ public class BackBlastCanonBehavior : ProjectileBehavior
             if (startTimer >= backBlastTime)
             {
                 startTimer = backBlastTime;
-                imageAnimator.gameObject.SetActive(true);
                 SpawnBackBlast();
             }
         }
-        else
+
+        if (startTimer > backBlastTime / 2)
         {
             base.Update();
+            imageAnimator.gameObject.SetActive(true);
             transform.position += transform.forward * speed * Managers.instance.timeManager.GetDeltaTime();
         }
     }
@@ -47,7 +48,7 @@ public class BackBlastCanonBehavior : ProjectileBehavior
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (startTimer < backBlastTime) { return; }
+        if (startTimer < backBlastTime / 2) { return; }
 
         if (other.tag == playerTag)
         {
