@@ -30,6 +30,8 @@ public class MainViewPort : MonoBehaviour
     private Text currentText;
     public Font font;
 
+    private AudioSource CurrentAudioSource;
+
     public void GenerateCharacterILL(CharacterData character)
     {
         GameObject newImage = Instantiate(characterImagePrefab, contentParent);
@@ -131,6 +133,25 @@ public class MainViewPort : MonoBehaviour
         textComponent.fontSize = 32;
         textComponent.color = Color.black;
 
+    }
+
+    public void GenerateCharacterVoice()
+    {
+        GameObject VoiceObject = new GameObject("VoicePlayer");
+        VoiceObject.transform.SetParent(contentParent, false);
+        VoiceObject.tag = "GalleryObject";
+
+        AudioSource audioSource = VoiceObject.AddComponent<AudioSource>();
+        CurrentAudioSource = audioSource;
+    }
+
+    public void PlayerCharacterVoice(CharacterData character,int currentVoiceIndex)
+    {
+        if (CurrentAudioSource != null)
+        {
+            CurrentAudioSource.clip= character.CharVoice[currentVoiceIndex].voiceClip;
+            CurrentAudioSource.Play();
+        }
     }
 
     public void UpdateAnimatorController(CharacterData character,int currentAnimatorIndex)

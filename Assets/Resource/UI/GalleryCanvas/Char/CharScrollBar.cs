@@ -41,6 +41,7 @@ public class OffsetChildObjects : MonoBehaviour
         HandleBackKey();
     }
 
+
     void ArrangeIcons()
     {
         if (contentParent.childCount == 0) return;
@@ -101,7 +102,6 @@ public class OffsetChildObjects : MonoBehaviour
         HighlightCurrentIcon();
         HandleEnterKey();
         HandleBackKey();
-
 
     }
 
@@ -209,6 +209,11 @@ public class OffsetChildObjects : MonoBehaviour
 
     void HandleEnterKey()
     {
+        if (InputManager.GetKeyUp(BoolActions.SouthButton))
+        {
+            EnterDown = false;
+        }
+
         if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
         {
             if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0 && !EnterDown)
@@ -224,8 +229,10 @@ public class OffsetChildObjects : MonoBehaviour
                 mainViewPort.GenerateCharacterAnime(selectedCharacter);
                 mainViewPort.ModifyGeneratedImages(currentAnimatorIndex);
                 mainViewPort.ChangeText(selectedCharacter.CharVoice[currentVoiceIndex].voiceText);
+                mainViewPort.GenerateCharacterVoice();
             }
         }
+
         if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
         {
             if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0 && !EnterDown)
@@ -234,16 +241,10 @@ public class OffsetChildObjects : MonoBehaviour
                 CharacterData selectedCharacter = charGalleryManager.characterList[inputIndex];
                 if (selectedCharacter != null)
                 {
-                    audioSource.clip = selectedCharacter.CharVoice[currentVoiceIndex].voiceClip;
-                    audioSource.Play();
+                    mainViewPort.PlayerCharacterVoice(selectedCharacter, currentVoiceIndex);
                 }
             }
         }
-        if (InputManager.GetKeyUp(BoolActions.SouthButton))
-        {
-            EnterDown = false;
-        }
-
     }
 
     void HandleBackKey()
@@ -257,10 +258,6 @@ public class OffsetChildObjects : MonoBehaviour
                 audioSource.Stop();
 
                 mainViewPort.ClearCharacterILL();
-            }
-            if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
-            {
-                inputIndex = -1;
             }
         }
     }

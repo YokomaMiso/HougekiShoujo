@@ -266,7 +266,7 @@ public class GalleryManager : MonoBehaviour
 
     private void BackToMainTitle()
     {
-        if (InputManager.GetKeyDown(BoolActions.EastButton))
+        if (InputManager.GetKeyDown(BoolActions.EastButton)&&!isFade)
         {
             Managers.instance.ChangeState(GAME_STATE.TITLE);
             Managers.instance.ChangeScene(GAME_STATE.TITLE);
@@ -388,5 +388,9 @@ public class GalleryManager : MonoBehaviour
             }
             ButtonFadeOut(childTransforms[i]);
         }
+    }
+    public bool GetFadeState()
+    {
+        return isFade;
     }
 }
