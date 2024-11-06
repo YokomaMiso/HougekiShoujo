@@ -9,12 +9,14 @@ public class RoomManager : MonoBehaviour
 {
     /*ì‡ïîìIÇ»èàóù*/
     public readonly int empty = -1;
+    int prevStageNum;
 
     public void Init()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.roomData;
         oscRoomData.gameStart = false;
         oscRoomData.ready = false;
+        oscRoomData.stageNum = prevStageNum;
 
         OSCManager.OSCinstance.roomData = oscRoomData;
     }
@@ -113,6 +115,7 @@ public class RoomManager : MonoBehaviour
             {
 #if UNITY_EDITOR
                 myRoomData.gameStart = true;
+                prevStageNum = myRoomData.stageNum;
                 if (myRoomData.stageNum == 0)
                 {
                     myRoomData.stageNum = Random.Range(1, Managers.instance.gameManager.allStageData.GetStageLength());
@@ -122,6 +125,7 @@ public class RoomManager : MonoBehaviour
                 if(myRoomData.teamACount == myRoomData.teamBCount)
                 {
                     myRoomData.gameStart = true;
+                    prevStageNum = myRoomData.stageNum;
                     if (myRoomData.stageNum == 0)
                     {
                         myRoomData.stageNum = Random.Range(1, Managers.instance.gameManager.allStageData.GetStageLength());

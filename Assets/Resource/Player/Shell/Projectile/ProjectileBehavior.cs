@@ -80,7 +80,7 @@ public abstract class ProjectileBehavior : MonoBehaviour
         imageAnimator.speed = 1 * Managers.instance.timeManager.TimeRate();
     }
 
-    public void SetAngle(float _angle)
+    public virtual void SetAngle(float _angle)
     {
         angle = _angle;
     }
