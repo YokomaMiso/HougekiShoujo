@@ -550,7 +550,7 @@ PrefabInstance:
     - target: {fileID: 2265797116704708556, guid: 9131d9bffb3c6af45bd3f5021df3316b,
         type: 3}
       propertyPath: playerDatas.Array.size
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2265797116704708556, guid: 9131d9bffb3c6af45bd3f5021df3316b,
         type: 3}

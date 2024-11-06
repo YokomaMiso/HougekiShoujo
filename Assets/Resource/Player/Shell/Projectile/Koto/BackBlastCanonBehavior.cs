@@ -5,22 +5,32 @@ using UnityEngine;
 public class BackBlastCanonBehavior : ProjectileBehavior
 {
     [SerializeField] Explosion backBlastExplosion;
-    //const float backBlastTime = 0.25f;
-    bool spawnedBackBlast;
+    const float backBlastTime = 0.4f;
+    float startTimer;
 
     protected override void Start()
     {
         base.Start();
-        SpawnBackBlast();
+        imageAnimator.gameObject.SetActive(false);
     }
 
     protected override void Update()
     {
-        base.Update();
-        transform.position += transform.forward * speed * Managers.instance.timeManager.GetDeltaTime();
-
-        if (spawnedBackBlast) { return; }
-        //if (timer > backBlastTime) { SpawnBackBlast(); }
+        if (startTimer < backBlastTime)
+        {
+            startTimer += Managers.instance.timeManager.GetDeltaTime();
+            if (startTimer >= backBlastTime)
+            {
+                startTimer = backBlastTime;
+                imageAnimator.gameObject.SetActive(true);
+                SpawnBackBlast();
+            }
+        }
+        else
+        {
+            base.Update();
+            transform.position += transform.forward * speed * Managers.instance.timeManager.GetDeltaTime();
+        }
     }
 
     void SpawnBackBlast()
@@ -33,6 +43,24 @@ public class BackBlastCanonBehavior : ProjectileBehavior
         obj.GetComponent<ExplosionBehavior>().SetData(backBlastExplosion);
         float angle = Mathf.Atan2(transform.forward.z, transform.forward.x) * Mathf.Rad2Deg;
         obj.transform.GetChild(0).GetComponent<ObjectBillboard>().FixedAngles = Vector3.forward * angle;
-        spawnedBackBlast = true;
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (startTimer < backBlastTime) { return; }
+
+        if (other.tag == playerTag)
+        {
+            if (other.GetComponent<Player>() != ownerPlayer)
+            {
+                SpawnExplosion();
+                Destroy(gameObject);
+            }
+        }
+        else if (other.tag == groundTag)
+        {
+            SpawnExplosion();
+            Destroy(gameObject);
+        }
     }
 }
