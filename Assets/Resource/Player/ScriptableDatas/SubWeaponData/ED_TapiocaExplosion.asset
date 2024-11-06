@@ -15,4 +15,4 @@ MonoBehaviour:
   explosionBody: {fileID: 3179393461812120061, guid: 6961ffbbbcd5fb246b7ee776e24c8cba,
     type: 3}
   scale: 3
-  explosionAnim: {fileID: 9100000, guid: cff04ddf749a8b04a9b219d1aee32a72, type: 2}
+  explosionAnim: {fileID: 9100000, guid: e8341c07037506646bc1e01591164302, type: 2}

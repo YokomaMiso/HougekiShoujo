@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackBlastCanonBehavior : ProjectileBehavior
 {
     [SerializeField] Explosion backBlastExplosion;
-    const float backBlastTime = 0.4f;
+    const float backBlastTime = 0.3f;
     float startTimer;
 
     protected override void Start()
