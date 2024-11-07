@@ -30,6 +30,7 @@ public class SoundObject : MonoBehaviour
                 if (_loop) { lifeTime = Mathf.Infinity; }
                 else { lifeTime = clip.length; }
                 isBGM = true;
+                source.spatialBlend = 0;
                 break;
 
             case SOUND_TYPE.SFX:
@@ -41,6 +42,7 @@ public class SoundObject : MonoBehaviour
             case SOUND_TYPE.SFX_FOR_UI:
                 volume *= SoundManager.sfxVolume;
                 lifeTime = clip.length;
+                source.spatialBlend = 0;
                 break;
 
             case SOUND_TYPE.VOICE:
