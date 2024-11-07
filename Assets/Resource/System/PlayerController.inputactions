@@ -545,17 +545,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d2331673-35df-4c95-a2d8-841be23d3234",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "RStickAxis",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b40a98d8-bd53-4a23-be17-58eff3fa3cea",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -639,6 +628,17 @@
                     "processors": "",
                     "groups": "Key&Mouse",
                     "action": "LeftClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2331673-35df-4c95-a2d8-841be23d3234",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "RStickAxis",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

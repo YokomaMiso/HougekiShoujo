@@ -10,7 +10,6 @@ public enum Vec2AxisActions
 {
     RStickAxis = 0,
     LStickAxis,
-    TouchAxis
 }
 
 public enum BoolActions
@@ -85,6 +84,11 @@ public class InputManager : MonoBehaviour
         EnableInput();
     }
 
+    private void Update()
+    {
+        //InputSystem.Update();
+    }
+
     /// <summary>
     /// アナログスティックの現在値取得
     /// </summary>
@@ -103,7 +107,14 @@ public class InputManager : MonoBehaviour
         }
         else if (typeof(T) == typeof(Vector2))
         {
+            if(Pointer.current.press.isPressed)
+            {
+                //InputSystem.Update();
+            }
+
             val = vec2Actions[(int)an].ReadValue<Vector2>();
+
+            Debug.Log(val);
 
             return (T)val;
         }
@@ -269,8 +280,6 @@ public class InputManager : MonoBehaviour
     /// <returns>押された最初の１フレーム = true: それ以外 = false</returns>
     public static bool GetKeyDown(BoolActions an)
     {
-        Debug.Log(boolActions[(int)an].activeControl);
-
         return boolActions[(int)an].WasPressedThisFrame();
     }
 
