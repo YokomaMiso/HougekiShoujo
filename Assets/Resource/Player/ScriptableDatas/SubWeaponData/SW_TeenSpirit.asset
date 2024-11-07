@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
   m_Name: SW_TeenSpirit
   m_EditorClassIdentifier: 
-  subWeaponIcon: {fileID: 21300000, guid: b347624ca608da247a5141aa49d2e801, type: 3}
+  subWeaponIcon: {fileID: 21300000, guid: aac976f88e2157a409fc1f894ecd3662, type: 3}
   subType: 1
   buffType: 0
   installation: {fileID: 1008518316061016973, guid: 0081d9098c47f6440a3c50534a511907,
