@@ -113,6 +113,14 @@ public class RoomManager : MonoBehaviour
             //自分以外の全プレイヤーがREADY中なら
             if (readyCount >= myRoomData.playerCount - 1)
             {
+                /*
+                myRoomData.gameStart = true;
+                prevStageNum = myRoomData.stageNum;
+                if (myRoomData.stageNum == 0)
+                {
+                    myRoomData.stageNum = Random.Range(1, Managers.instance.gameManager.allStageData.GetStageLength());
+                }
+                */
 #if UNITY_EDITOR
                 myRoomData.gameStart = true;
                 prevStageNum = myRoomData.stageNum;
@@ -132,7 +140,6 @@ public class RoomManager : MonoBehaviour
                     }
                 }
 #endif
-
             }
         }
         else
