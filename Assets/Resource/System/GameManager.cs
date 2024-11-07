@@ -204,10 +204,15 @@ public class GameManager : MonoBehaviour
     {
         /*
         //YÉ{É^ÉìÇ≈ÉQÅ[ÉÄÇî≤ÇØÇÈ
-        if (Input.GetButtonDown("Y"))
+        if (InputManager.GetKeyDown(BoolActions.RightShoulder))
         {
-            Managers.instance.ChangeScene(GAME_STATE.RESULT);
-            Managers.instance.ChangeState(GAME_STATE.RESULT);
+            OSCManager.OSCinstance.roomData.gameStart = false;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.roundCount = 0;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.winner = 0;
+
+            Managers.instance.ChangeScene(GAME_STATE.ROOM);
+            Managers.instance.ChangeState(GAME_STATE.ROOM);
+            RoundInit();
             Managers.instance.roomManager.Init();
             Init();
         }
