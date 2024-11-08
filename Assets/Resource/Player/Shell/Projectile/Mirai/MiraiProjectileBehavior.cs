@@ -4,18 +4,8 @@ using UnityEngine;
 
 public class MiraiProjectileBehavior : ProjectileBehavior
 {
-    public override void SetData(Shell _data)
-    {
-        imageAnimator = transform.GetChild(0).GetComponent<Animator>();
-        imageAnimator.runtimeAnimatorController = _data.GetAnim();
-        lifeTime = _data.GetLifeTime();
-        explosion = _data.GetExplosion();
-        speed = _data.GetSpeed();
+    const float enableTime = 0.25f;
 
-        if (_data.GetShellType() != SHELL_TYPE.BLAST) { SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetFlySFX(), transform); }
-        transform.position += Quaternion.Euler(0, angle, 0) * transform.forward;
-
-    }
     protected override void Start()
     {
     }
@@ -23,5 +13,10 @@ public class MiraiProjectileBehavior : ProjectileBehavior
     {
         base.Update();
         transform.position += transform.forward * speed * Managers.instance.timeManager.GetDeltaTime();
+    }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (timer < enableTime) { return; }
+        base.OnTriggerEnter(other);
     }
 }
