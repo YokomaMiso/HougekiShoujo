@@ -8,6 +8,7 @@ Shader "CustomShader/FastChatS"
 		_Rotation("Rotation",Float) = 0.0
 		_SelectedRegion("SelectedRegion", Float) = -1.0
 		_RegionSize("RegionSize",Float)=9.0
+		_AngleOffset("AngleOffset",Float)=6.0
 	}
 		SubShader
 		{
@@ -48,6 +49,7 @@ Shader "CustomShader/FastChatS"
 				float _Rotation;
 				float _SelectedRegion;
 				float _RegionSize;
+				float _AngleOffset;
 
 				v2f vert(appdata v)
 				{
@@ -74,7 +76,7 @@ Shader "CustomShader/FastChatS"
 
 					//angle = -angle;
 
-					angle -= (45 + 45.0 / 2);
+					angle -= (45+_AngleOffset);
 
 					if (angle < 0)angle += 360;
 
