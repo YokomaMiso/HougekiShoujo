@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -59,6 +60,14 @@ public class InputManager : MonoBehaviour
 
     public static ControllerType currentController { get; private set; } = ControllerType.None;
 
+    public static bool isChangedController { get; private set; } = false;
+
+    // 各デバイスのすべてのキーを１つにバインドしたInputAction（キー種別検知用）
+    private InputAction xInputAnyKey              = new InputAction(type: InputActionType.PassThrough, binding: "<XInputController>/*", interactions: "Press");
+    private InputAction dualShock4AnyKey          = new InputAction(type: InputActionType.PassThrough, binding: "<DualShockGamepad>/*", interactions: "Press");
+    private InputAction detectDualSenseAnyKey     = new InputAction(type: InputActionType.PassThrough, binding: "<DualSenseGamepadHID>/*", interactions: "Press");
+    private InputAction switchProControllerAnyKey = new InputAction(type: InputActionType.PassThrough, binding: "<SwitchProControllerHID>/*", interactions: "Press");
+
     private void Awake()
     {
         // vector2のactionある分のタイマーを作る
@@ -96,13 +105,22 @@ public class InputManager : MonoBehaviour
         }
 
         EnableInput();
+
+        // キー検知用アクションの有効化
+        xInputAnyKey.Enable();
+        dualShock4AnyKey.Enable();
+        detectDualSenseAnyKey.Enable();
+        switchProControllerAnyKey.Enable();
     }
 
     private void Update()
     {
+        isChangedController = false;
+
         UpdateCurrentController();
 
         Debug.Log(currentController);
+        Debug.Log(isChangedController);
     }
 
     /// <summary>
@@ -304,25 +322,28 @@ public class InputManager : MonoBehaviour
 
     private void UpdateCurrentController()
     {
-        switch(playerInput.currentControlScheme)
+        var beforeDeviceType = currentController;
+        
+        switch (playerInput.currentControlScheme)
         {
             case "Gamepad":
-
-                var currentGamepad = Gamepad.current;
-
-                string deviceName = currentGamepad.name.ToLower();
-
-                if (deviceName.Contains("wireless") || deviceName.Contains("dualsense") || deviceName.Contains("dual sense"))
+                
+                if (xInputAnyKey.triggered)
+                {
+                    currentController = ControllerType.XInput;
+                }
+                else if (dualShock4AnyKey.triggered || detectDualSenseAnyKey.triggered)
                 {
                     currentController = ControllerType.DirectInput;
                 }
-                else if (deviceName.Contains("switch"))
+                else if (switchProControllerAnyKey.triggered)
                 {
                     currentController = ControllerType.SwitchInput;
                 }
-                else
+
+                if (beforeDeviceType != currentController)
                 {
-                    currentController = ControllerType.XInput;
+                    isChangedController = true;
                 }
 
                 return;
@@ -330,20 +351,40 @@ public class InputManager : MonoBehaviour
 
                 currentController = ControllerType.Keyboard;
 
+                if (beforeDeviceType != currentController)
+                {
+                    isChangedController = true;
+                }
+
                 return;
             case "Touchscreen":
 
                 currentController = ControllerType.TouchScreen;
+
+                if (beforeDeviceType != currentController)
+                {
+                    isChangedController = true;
+                }
 
                 return;
             case "OtherControll":
 
                 currentController = ControllerType.Other;
 
+                if (beforeDeviceType != currentController)
+                {
+                    isChangedController = true;
+                }
+
                 return;
         }
 
         currentController = ControllerType.None;
+
+        if (beforeDeviceType != currentController)
+        {
+            isChangedController = true;
+        }
     }
 
     /// <summary>
