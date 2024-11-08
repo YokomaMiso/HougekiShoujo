@@ -51,6 +51,10 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             //各マネージャの指定
             ManagerLoad();
+
+            //フレームレートの固定
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 120;
         }
         else
         {
