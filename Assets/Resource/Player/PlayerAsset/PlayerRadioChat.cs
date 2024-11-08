@@ -4,6 +4,7 @@ using UnityEngine;
 using static IngameData;
 
 public enum RADIO_CHAT_ID { NONE = 0, BLITZ, SUPPORT, RETREAT, HELP, APOLOGIZE, LAUGH, WHAT, PROVOC, MAX_NUM }
+public enum RADIO_TYPE { NONE = 0, EMOTE=9,TEXT=4 }
 
 public class PlayerRadioChat : MonoBehaviour
 {
@@ -72,11 +73,36 @@ public class PlayerRadioChat : MonoBehaviour
             if (fastChatInstance == null)
             {
                 fastChatInstance = Instantiate(fastChatCanvasPrefab);
+                fastChatInstance.GetComponent<FastChat>().SetChatType((int)RADIO_TYPE.EMOTE);
                 fastChatInstance.GetComponent<FastChat>().ReceiverFromRadioChat(true);
             }
         }
 
         if (InputManager.GetKeyUp(BoolActions.LeftShoulder))
+        {
+            if (fastChatInstance != null)
+            {
+                int nowRegion = fastChatInstance.GetComponent<FastChat>().GetRegion();
+                if (nowRegion >= 0) { radioChatID = (RADIO_CHAT_ID)(nowRegion + 1); }
+
+                MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
+                SpawnSerifOrEmote(oscRoomData, radioChatID);
+
+                Destroy(fastChatInstance);
+            }
+        }
+
+        if (InputManager.GetKeyDown(BoolActions.LeftTrigger))
+        {
+            if (fastChatInstance == null)
+            {
+                fastChatInstance = Instantiate(fastChatCanvasPrefab);
+                fastChatInstance.GetComponent<FastChat>().SetChatType((int)RADIO_TYPE.TEXT);
+                fastChatInstance.GetComponent<FastChat>().ReceiverFromRadioChat(true);
+            }
+        }
+
+        if (InputManager.GetKeyUp(BoolActions.LeftTrigger))
         {
             if (fastChatInstance != null)
             {
