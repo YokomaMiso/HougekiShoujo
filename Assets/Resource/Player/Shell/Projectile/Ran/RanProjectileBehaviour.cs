@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RanProjectileBehaviour : ProjectileBehavior
 {
-    int state = 0;
+    bool spawned;
     const float firstSpawn = 0.6f;
     //const float spawnInterval = 0.15f;
 
@@ -41,7 +41,7 @@ public class RanProjectileBehaviour : ProjectileBehavior
             obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
             obj.GetComponent<ExplosionBehavior>().SetData(explosion);
         }
-        state++;
+        spawned = true;
     }
 
     protected override void Update()
@@ -49,12 +49,11 @@ public class RanProjectileBehaviour : ProjectileBehavior
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
         timer += deltaTime;
 
-        if (timer >= firstSpawn) { SpawnExplosion(); }
+        if (timer >= lifeTime) { Destroy(gameObject); }
 
-        if (timer >= lifeTime)
-        {
-            Destroy(gameObject);
-        }
+        if (spawned) { return; }
+
+        if (timer >= firstSpawn) { SpawnExplosion(); }
     }
 }
 
