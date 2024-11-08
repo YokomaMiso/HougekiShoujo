@@ -19,6 +19,7 @@ public enum BoolActions
     EastButton,
     RightShoulder,
     LeftShoulder,
+    LeftTrigger,
     Option,
     RadioChat1,
     RadioChat2,
@@ -30,6 +31,17 @@ public enum BoolActions
     RadioChat8,
     TouchTap,
     LeftClick
+}
+
+public enum ControllerType
+{
+    XInput = 0,
+    DirectInput,
+    SwitchInput,
+    Keyboard,
+    TouchScreen,
+    Other,
+    None
 }
 
 [RequireComponent(typeof(PlayerInput))]
@@ -44,6 +56,8 @@ public class InputManager : MonoBehaviour
 
     // delay用の時間計算リスト
     private static List<float> axisTimeList = new List<float>();
+
+    public static ControllerType currentController { get; private set; } = ControllerType.None;
 
     private void Awake()
     {
@@ -86,7 +100,9 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        //InputSystem.Update();
+        UpdateCurrentController();
+
+        Debug.Log(currentController);
     }
 
     /// <summary>
@@ -107,14 +123,7 @@ public class InputManager : MonoBehaviour
         }
         else if (typeof(T) == typeof(Vector2))
         {
-            if(Pointer.current.press.isPressed)
-            {
-                //InputSystem.Update();
-            }
-
             val = vec2Actions[(int)an].ReadValue<Vector2>();
-
-            Debug.Log(val);
 
             return (T)val;
         }
@@ -293,10 +302,48 @@ public class InputManager : MonoBehaviour
         return boolActions[(int)an].WasReleasedThisFrame();
     }
 
-    public static bool CompareActions()
+    private void UpdateCurrentController()
     {
+        switch(playerInput.currentControlScheme)
+        {
+            case "Gamepad":
 
-        return default;
+                var currentGamepad = Gamepad.current;
+
+                string deviceName = currentGamepad.name.ToLower();
+
+                if (deviceName.Contains("wireless") || deviceName.Contains("dualsense") || deviceName.Contains("dual sense"))
+                {
+                    currentController = ControllerType.DirectInput;
+                }
+                else if (deviceName.Contains("switch"))
+                {
+                    currentController = ControllerType.SwitchInput;
+                }
+                else
+                {
+                    currentController = ControllerType.XInput;
+                }
+
+                return;
+            case "Key&Mouse":
+
+                currentController = ControllerType.Keyboard;
+
+                return;
+            case "Touchscreen":
+
+                currentController = ControllerType.TouchScreen;
+
+                return;
+            case "OtherControll":
+
+                currentController = ControllerType.Other;
+
+                return;
+        }
+
+        currentController = ControllerType.None;
     }
 
     /// <summary>

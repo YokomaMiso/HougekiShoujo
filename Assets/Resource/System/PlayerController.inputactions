@@ -69,6 +69,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LeftTrigger",
+                    "type": "Button",
+                    "id": "3ee90f7f-ba35-4d45-83a5-1a6fcb62bba2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Option",
                     "type": "Button",
                     "id": "51522bca-d65e-41e7-a90f-c0a0a0841776",
@@ -639,6 +648,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "RStickAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0935b615-8c8e-49d9-82b7-9ea9af404262",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LeftTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9da5154d-db7f-48e4-aac9-2bfc8687ca1a",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Key&Mouse",
+                    "action": "LeftTrigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

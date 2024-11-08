@@ -111,7 +111,7 @@ public class OSCManager : MonoBehaviour
     void Update()
     {
         //Debug.Log("PlayerID is " + Managers.instance.playerID);
-        Debug.Log("IPAddress is " + GetLocalIPAddress());
+        //Debug.Log("IPAddress is " + GetLocalIPAddress());
         //Debug.Log("startPort is " + startPort);
 
         // タイムアウトチェック
