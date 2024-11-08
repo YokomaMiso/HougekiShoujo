@@ -69,7 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d2799aad5306d498eb34ff3458e70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backBlastExplosion: {fileID: 11400000, guid: 7ee9dcac500346d4db8c4f141ba66fdd, type: 2}
+  backBlast: {fileID: 7140182065255718198, guid: 17ffedda21065ea458ac9df0c7dd7407,
+    type: 3}
 --- !u!1 &2008790680177907739
 GameObject:
   m_ObjectHideFlags: 0
