@@ -25,9 +25,9 @@ public class MainViewPortWorld : MonoBehaviour
     {
         foreach(WorldGalleryData worldData in allWorldGalleryData.worldGalleryDatas)
         {
-            if (worldData != null && worldData.sprites != null)
+            if (worldData != null && worldData.bulidTextPair!= null)
             {
-                MaxBuliding += worldData.sprites.Count;
+                MaxBuliding += worldData.bulidTextPair.Count;
             }
         }
     }
@@ -108,11 +108,11 @@ public class MainViewPortWorld : MonoBehaviour
         int currentIndex = 0;
         foreach(WorldGalleryData worldData in allWorldGalleryData.worldGalleryDatas)
         {
-            if (index < currentIndex + worldData.sprites.Count)
+            if (index < currentIndex + worldData.bulidTextPair.Count)
             {
-                return worldData.sprites[index - currentIndex];
+                return worldData.bulidTextPair[index - currentIndex].sprite;
             }
-            currentIndex += worldData.sprites.Count;
+            currentIndex += worldData.bulidTextPair.Count;
         }
         return null;
     }

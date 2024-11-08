@@ -9,6 +9,12 @@ public class SpriteImporter : MonoBehaviour
     {
         Texture2D selectedTexture = Selection.activeObject as Texture2D;
 
+        if (selectedTexture == null)
+        {
+            Debug.LogError("Please select a valid texture.");
+            return;
+        }
+
         string texturePath = AssetDatabase.GetAssetPath(selectedTexture);
         Object[] allSprites = AssetDatabase.LoadAllAssetsAtPath(texturePath);
 
@@ -22,13 +28,24 @@ public class SpriteImporter : MonoBehaviour
             }
         }
 
-
         WorldGalleryData spriteCollection = ScriptableObject.CreateInstance<WorldGalleryData>();
-        spriteCollection.sprites = spriteList;
+        spriteCollection.bulidTextPair = new List<BulidingTextPair>();
 
-        string assetPathAndName = "Assets/Resource/UI/GalleryCanvas/World/Data" + selectedTexture.name + ".asset";
+        foreach (Sprite sprite in spriteList)
+        {
+            BulidingTextPair newPair = new BulidingTextPair
+            {
+                sprite = sprite,
+                bulidingText = "Default Text",
+                hasText = true 
+            };
+            spriteCollection.bulidTextPair.Add(newPair);
+        }
+
+        string assetPathAndName = "Assets/Resource/UI/GalleryCanvas/World/Data/" + selectedTexture.name + ".asset";
         AssetDatabase.CreateAsset(spriteCollection, assetPathAndName);
         AssetDatabase.SaveAssets();
 
+        Debug.Log("Sprite collection created successfully at " + assetPathAndName);
     }
 }
