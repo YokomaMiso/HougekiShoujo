@@ -13,8 +13,8 @@ public class RoomCanvasBehavior : MonoBehaviour
     [SerializeField] GameObject playerBanners;
     [SerializeField] StageSelectBehavior stageSelect;
 
-    readonly Vector3[] teamDefaultPos = new Vector3[2] { new Vector3(532, 400), new Vector3(532, -80) };
-    readonly Vector3 teamPosSub = new Vector3(20, -70);
+    readonly Vector3[] teamDefaultPos = new Vector3[2] { new Vector3(450, 352), new Vector3(440, -128) };
+    readonly Vector3 teamPosSub = new Vector3(30, -80);
 
     bool joinedStartedRoom;
 

@@ -13,7 +13,8 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     [SerializeField] Text charaNameRubi;
     [SerializeField] Image[] difficultGauge;
     [SerializeField] Text rollText;
-    [SerializeField] Image rollBG;
+    [SerializeField] Image rollTape;
+    [SerializeField] Sprite[] rollTapeSprites;
 
     [SerializeField] Image[] skillIcon;
     [SerializeField] Text[] weaponName;
@@ -21,7 +22,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
 
     readonly string[] difficulityColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
     readonly string[] rollBGColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
-    readonly string[] rollString = new string[3] { "‹ß", "’†", "‰“" };
+    readonly string[] rollString = new string[3] { "‹ß‹——£", "’†‹——£", "‰“‹——£" };
 
     readonly Vector3 illustStartPos = new Vector3(1150, 32);
     readonly Vector3 illustEndPos = new Vector3(0, 32);
@@ -94,7 +95,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     void SetShellType(int _num)
     {
         rollText.text = rollString[_num];
-        rollBG.color = ColorCordToRGB(rollBGColor[_num]);
+        rollTape.sprite = rollTapeSprites[_num];
     }
 
     void SetSkillIcon(Shell _shell)
