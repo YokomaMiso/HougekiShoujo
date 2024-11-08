@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 3907882099985128062}
   - component: {fileID: 1045235643845625823}
   - component: {fileID: 6025620477733062273}
-  - component: {fileID: 4287416131275198158}
+  - component: {fileID: 720440449914938628}
   m_Layer: 0
   m_Name: MiniMap
   m_TagString: Untagged
@@ -184,8 +184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -720, y: -320}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -750, y: -310}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1045235643845625823
 CanvasRenderer:
@@ -222,7 +222,7 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &4287416131275198158
+--- !u!114 &720440449914938628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,6 +235,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miniMap: {fileID: 2100000, guid: 38808b3945d7eb0468962effda25a7d2, type: 2}
+  allStageData: {fileID: 11400000, guid: 15fdd3986d21a1f45a8fe7cc6086cd50, type: 2}
+  minX: -18
+  minZ: -20
+  maxX: 18
+  maxZ: 20
 --- !u!1 &645469639659229483
 GameObject:
   m_ObjectHideFlags: 0

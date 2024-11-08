@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: PD_HanaseriSara
   m_EditorClassIdentifier: 
   charaName: "\u82B1\u82B9 \u6C99\u7F85"
-  schoolAndGrade: "\u4EC7\u5C04\u9AD8\u6821 \uFF11\u5E74"
-  characterAnimData: {fileID: 11400000, guid: 0b10f1572d2f39c4fa2e3a93f1d0961b, type: 2}
+  charaNameRubi: "\u306F\u306A\u305B\u308A \u3055\u3089"
+  schoolData: {fileID: 11400000, guid: 74745430b8c5aae4d9fd52e77dc1552b, type: 2}
+  grade: 1
+  characterAnimData: {fileID: 11400000, guid: 40b063252180c8741afe9768be173a78, type: 2}
   moveSpeed: 5
-  difficulity: 3
-  shell: {fileID: 11400000, guid: 74998d58e3c668641a22ecfb124d6544, type: 2}
-  subWeapon: {fileID: 11400000, guid: f5a84c731abf50a47b0c9d6f12cb9677, type: 2}
+  difficulity: 1
+  shell: {fileID: 11400000, guid: b1483feaed5a5e443a86f742b928184f, type: 2}
+  subWeapon: {fileID: 11400000, guid: 2e7d495e072aa044f9d52df27c059a4e, type: 2}
   playerSFXData: {fileID: 11400000, guid: a594c46fc7684f847a520d6e099ab3c9, type: 2}
   playerVoiceData: {fileID: 11400000, guid: 4c52c730e8d06e44baf30f0a19937f15, type: 2}

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: PD_MidukiChikane
   m_EditorClassIdentifier: 
   charaName: "\u89B3\u6708 \u5343\u9244"
-  schoolAndGrade: "\u4EC7\u5C04\u9AD8\u6821 \uFF12\u5E74"
+  charaNameRubi: "\u307F\u3065\u304D \u3061\u304B\u306D"
+  schoolData: {fileID: 11400000, guid: 74745430b8c5aae4d9fd52e77dc1552b, type: 2}
+  grade: 2
   characterAnimData: {fileID: 11400000, guid: 2e6790484df528446bd847d126044e89, type: 2}
   moveSpeed: 5
   difficulity: 2

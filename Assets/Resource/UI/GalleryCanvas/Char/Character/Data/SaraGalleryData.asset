@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b88adf793a5c141b40acebffaf9aa7, type: 3}
+  m_Name: SaraGalleryData
+  m_EditorClassIdentifier: 
+  characterName: Sara
+  characterIcon: {fileID: 21300000, guid: eabff61d07131814f9456d577d369d86, type: 3}
+  characterIllustration: {fileID: 21300000, guid: 3268fea1691a3114c99cd29a86f021f3,
+    type: 3}
+  iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
+  animatorControllers:
+  - {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: 9d054954505153645af22917b3e803a9, type: 2}
+  CharVoice:
+  - voiceClip: {fileID: 8300000, guid: f7468e231dc1aa84086403f4ce9e0cd3, type: 3}
+    voiceText: "\u81EA\u5DF1\u7D39\u4ECB"
+  - voiceClip: {fileID: 8300000, guid: b8617cb77e14c6b41a171e762e240e01, type: 3}
+    voiceText: Ready
+  - voiceClip: {fileID: 8300000, guid: 9b5e7ea227b4b054a97249676717c1a9, type: 3}
+    voiceText: "\u30EA\u30ED\u30FC\u30C9"
+  - voiceClip: {fileID: 8300000, guid: 249eb820e63a04b43b634565261fd002, type: 3}
+    voiceText: "\u30E1\u30A4\u30F3\u4F7F\u7528"
+  - voiceClip: {fileID: 8300000, guid: 7f35d058e8d31ea4a957ae3b45b212b5, type: 3}
+    voiceText: "\u30B5\u30D6\u4F7F\u7528"
+  - voiceClip: {fileID: 8300000, guid: b7a74dc7dbf98874fb5114db27d6ab15, type: 3}
+    voiceText: "\u5473\u65B9\u3078\u306E\u611F\u8B1D"
+  - voiceClip: {fileID: 8300000, guid: 4cb2bf4e4e386344ba4664d467975ae1, type: 3}
+    voiceText: "\u7F60\u306B\u304B\u304B\u3063\u305F"
+  - voiceClip: {fileID: 8300000, guid: 286db7dc5fcec6046a5b2343fd95619f, type: 3}
+    voiceText: "\u6575\u6483"
+  - voiceClip: {fileID: 8300000, guid: 409b0d1b3def1754dbe25f0896105c15, type: 3}
+    voiceText: "\u6483\u7834\u3055\u308C\u305F"
+  - voiceClip: {fileID: 8300000, guid: 8a69c851d87de1e46877b3d06678e80b, type: 3}
+    voiceText: "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
+  - voiceClip: {fileID: 8300000, guid: 09b3f93d79bea8a449d1cfe5e4e449e8, type: 3}
+    voiceText: "\u8A66\u5408\u52DD\u5229"
+  - voiceClip: {fileID: 8300000, guid: 3477e87659fb365419d63afe8f854bbd, type: 3}
+    voiceText: "\u964D\u53C2"
+  - voiceClip: {fileID: 8300000, guid: 0e86c8ed087a18e4f85902230f065116, type: 3}
+    voiceText: "\u76F8\u624B\u304C\u964D\u53C2"
+  - voiceClip: {fileID: 8300000, guid: da564c2e560e8ab4ebfec10714d38579, type: 3}
+    voiceText: "\u30D5\u30A1\u30A4\u30C8"
+  - voiceClip: {fileID: 8300000, guid: becbc1413ddcda440961dbf4ebeddd11, type: 3}
+    voiceText: "\u30BF\u30A4\u30C8\u30EB"

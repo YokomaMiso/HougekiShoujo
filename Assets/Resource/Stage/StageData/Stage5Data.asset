@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a08d4c96db6ce74f986a905ad61582d, type: 3}
   m_Name: Stage5Data
   m_EditorClassIdentifier: 
-  stagePrefab: {fileID: 5198325544041908592, guid: 2e077cf4c398354488272765218ec3a3,
+  stagePrefab: {fileID: 5198325544041908592, guid: e6a3bdebb071b3a4d8b4fa8536477417,
     type: 3}
   stageSize: {x: 48, y: 0, z: 28}
   defaultPosition:
   - {x: -20, y: 0, z: 12}
-  - {x: -22, y: 0, z: 8}
-  - {x: -18, y: 0, z: 8}
   - {x: 20, y: 0, z: 12}
+  - {x: -22, y: 0, z: 8}
   - {x: 22, y: 0, z: 8}
+  - {x: -18, y: 0, z: 8}
   - {x: 18, y: 0, z: 8}
   BGM: {fileID: 11400000, guid: 4688876da384ac147b152a1b5e4af1cd, type: 2}
+  screenShot: {fileID: 21300000, guid: cb1a853b9f9f3a141a992eb4085b88a5, type: 3}
+  minimap: {fileID: 21300000, guid: a0c5d7898570256459073a59723a13ed, type: 3}
+  minX: 0
+  maxX: 0
+  minZ: 0
+  maxZ: 0

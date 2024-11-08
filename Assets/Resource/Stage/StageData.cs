@@ -12,6 +12,15 @@ public class StageData : ScriptableObject
     [SerializeField, Header("Stage Position")] Vector3[] defaultPosition;
 
     [SerializeField, Header("Stage BGM Data")] BGMData BGM;
+    
+    [SerializeField, Header("Stage Screen Shot")] Sprite screenShot;
+    [SerializeField, Header("Stage MiniMap")] Sprite minimap;
+
+    [SerializeField, Header("MiniMap MinX")] float minX;
+    [SerializeField, Header("MiniMap MaxX")] float maxX;
+    [SerializeField, Header("MiniMap MinZ")] float minZ;
+    [SerializeField, Header("MiniMap MaxZ")] float maxZ;
+
 
     public GameObject GetStagePrefab() { return stagePrefab; }
     public Vector3 GetStageSize() { return stageSize; }
@@ -19,4 +28,13 @@ public class StageData : ScriptableObject
     public Vector3 GetDefaultPosition(int _num) { return defaultPosition[_num]; }
 
     public BGMData GetBGMData() { return BGM; }
+
+    public Sprite GetScreenShot() {  return screenShot; }
+    public Sprite GetMinimap() { return minimap; }
+
+    public float GetMinX() { return minX; }
+    public float GetMinZ() { return minZ; }
+    public float GetMaxX() { return maxX; }
+    public float GetMaxZ() { return maxZ; }
+
 }

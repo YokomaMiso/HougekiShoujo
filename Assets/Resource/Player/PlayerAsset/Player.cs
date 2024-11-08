@@ -87,7 +87,6 @@ public class Player : MonoBehaviour
         return 4;
     }
 
-    public float GetReloadAnimSpeedRate() { return playerReload.NowSpeedRate(); }
 
     public void PlayEmote(RADIO_CHAT_ID _ID) { playerRadioChat.DisplayEmote(_ID); }
 
@@ -331,7 +330,6 @@ public class Player : MonoBehaviour
         bool nowSub = myIngameData.useSub;
 
         playerMove.MoveForOther();
-        playerReload.ReloadBehaviorForOther();
 
         if (OSCManager.OSCinstance.GetIngameData(GetPlayerID()).mainPacketData.inGameData.alive)
         {

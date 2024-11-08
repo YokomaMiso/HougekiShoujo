@@ -22,6 +22,7 @@ public class FastChat : MonoBehaviour
     private float scaleEndValue = 1.0f;
 
     private float elapsedTime = 0f;
+    private float RegionSize = 4;
 
     int region = -1;
     public int GetRegion() { return region; }
@@ -31,12 +32,10 @@ public class FastChat : MonoBehaviour
         rawImage = transform.GetChild(0).GetComponent<RawImage>();
         selecter = transform.GetChild(1).gameObject;
         selecter.SetActive(false);
-        //SetVisibility(false);
     }
 
     void Update()
     {
-        //ButtonCheck();
 
         if (isChatActive)
         {
@@ -92,9 +91,9 @@ public class FastChat : MonoBehaviour
             fastChat.SetFloat("_Rotation", currentRotation);
 
             selecter.SetActive(progress >= 1);
-
             region = GetJoystickRegion();
             GetJoystickButton();
+            fastChat.SetFloat("_RegionSize", RegionSize);
             fastChat.SetFloat("_SelectedRegion", region);
 
         }
@@ -127,7 +126,10 @@ public class FastChat : MonoBehaviour
         float angle = Mathf.Atan2(-joyStick.x, -joyStick.y) * Mathf.Rad2Deg;
         if (angle < 0) angle += 360;
 
-        int nowRegion = Mathf.Clamp(Mathf.FloorToInt(angle / 45.0f), 0, 7);
+        float regionType = 360 / RegionSize;
+        int regionSection = (int)RegionSize - 1;
+
+        int nowRegion = Mathf.Clamp(Mathf.FloorToInt(angle / regionType), 0, regionSection);
         Debug.Log("Atan" + nowRegion);
 
         return nowRegion;
@@ -150,4 +152,9 @@ public class FastChat : MonoBehaviour
         }
     }
 
+
+    public void SetChatType(int _regionSize)
+    {
+        RegionSize = _regionSize;
+    }
 }

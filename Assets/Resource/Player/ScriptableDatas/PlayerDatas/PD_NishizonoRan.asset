@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_NishizonoRan
+  m_EditorClassIdentifier: 
+  charaName: "\u897F\u5712 \u862D"
+  charaNameRubi: "\u306B\u3057\u305E\u306E \u3089\u3093"
+  schoolData: {fileID: 11400000, guid: 23e1893a02047b04e921451f276c2caf, type: 2}
+  grade: 1
+  characterAnimData: {fileID: 11400000, guid: bbc7345adcf545f40ad96d4a1db983d1, type: 2}
+  moveSpeed: 5
+  difficulity: 1
+  shell: {fileID: 11400000, guid: 4c452906fa1e24649b00ee9aa48c16b5, type: 2}
+  subWeapon: {fileID: 11400000, guid: 6762c20a2c205bd4f8617d665d0e3113, type: 2}
+  playerSFXData: {fileID: 11400000, guid: f564a2fe6f4050d4e8539cf01ce3f3e8, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: 4c52c730e8d06e44baf30f0a19937f15, type: 2}

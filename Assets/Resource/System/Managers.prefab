@@ -85,10 +85,14 @@ MonoBehaviour:
     type: 3}
   allPlayerCount: 2
   playerDatas:
-  - {fileID: 11400000, guid: 4263fdabccc477f44a3fe0d41781cf02, type: 2}
   - {fileID: 11400000, guid: c856c19e79586664899c176953f21bd5, type: 2}
-  - {fileID: 11400000, guid: ea5e95e04c0f14c4990e57486f7b9d47, type: 2}
+  - {fileID: 11400000, guid: 435ede831e49c35469e51ddf36640d95, type: 2}
+  - {fileID: 11400000, guid: ce57f0f5d5ea687459d06d9cf22deb60, type: 2}
+  - {fileID: 11400000, guid: d336194746221c947be271f48c1c7a18, type: 2}
   - {fileID: 11400000, guid: cce039a22e2b0b2469a3ecaced2e1ca1, type: 2}
+  - {fileID: 11400000, guid: 4263fdabccc477f44a3fe0d41781cf02, type: 2}
+  - {fileID: 11400000, guid: 835ecc9ccffe4584aa3bdd210e4e6bfe, type: 2}
+  - {fileID: 11400000, guid: ea5e95e04c0f14c4990e57486f7b9d47, type: 2}
   - {fileID: 11400000, guid: fecd40e0b1b0fd64db7cfa4f7c93bec9, type: 2}
   outLineMat:
   - {fileID: 2100000, guid: bc02bc3d5ef3b664c9e1d46fae3370d3, type: 2}

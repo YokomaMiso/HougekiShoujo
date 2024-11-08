@@ -11,7 +11,7 @@ public class ReloadBuff : Buff
         if (GetComponent<PlayerReload>())
         {
             playerReload = GetComponent<PlayerReload>();
-            buffNum = playerReload.AddSpeedRate(speedRate);
+            //buffNum = playerReload.AddSpeedRate(speedRate);
             //PlayerReloadにバフを送れたらリターン
             if (buffNum >= 0) { return; }
         }
@@ -22,6 +22,6 @@ public class ReloadBuff : Buff
 
     protected override void BuffBehavior()
     {
-        playerReload.ResetSpeedRate(buffNum);
+       // playerReload.ResetSpeedRate(buffNum);
     }
 }

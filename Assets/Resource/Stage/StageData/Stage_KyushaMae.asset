@@ -23,3 +23,9 @@ MonoBehaviour:
   - {x: -10, y: 0, z: -3}
   - {x: 10, y: 0, z: -3}
   BGM: {fileID: 11400000, guid: 4688876da384ac147b152a1b5e4af1cd, type: 2}
+  screenShot: {fileID: 21300000, guid: 3a3bbbc3214565a42aa12cd6d542d09d, type: 3}
+  minimap: {fileID: 21300000, guid: 1bf7ec4f2091f384daa437fc69e9d0fa, type: 3}
+  minX: -18
+  maxX: 18.8
+  minZ: -20
+  maxZ: 22.15

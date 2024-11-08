@@ -7,6 +7,7 @@ Shader "CustomShader/FastChatS"
 		_Scale("Scale",Float) = 10.0
 		_Rotation("Rotation",Float) = 0.0
 		_SelectedRegion("SelectedRegion", Float) = -1.0
+		_RegionSize("RegionSize",Float)=9.0
 	}
 		SubShader
 		{
@@ -46,6 +47,7 @@ Shader "CustomShader/FastChatS"
 				float _Scale;
 				float _Rotation;
 				float _SelectedRegion;
+				float _RegionSize;
 
 				v2f vert(appdata v)
 				{
@@ -76,7 +78,9 @@ Shader "CustomShader/FastChatS"
 
 					if (angle < 0)angle += 360;
 
-					int region = int(round(angle) / 45.0);
+					float regionButton=360/_RegionSize;
+
+					int region = int(round(angle) / regionButton);
 
 					half4 col = tex2D(_MainTex, uv);
 					half4 colorOverlay = tex2D(_ColorTex,i.uv);

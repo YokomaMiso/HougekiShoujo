@@ -29,9 +29,8 @@ public class BombBehavior : MonoBehaviour
     protected virtual void SpawnExplosion()
     {
         Vector3 spawnPos = transform.position;
-        GameObject explosionInstance = explosion.GetBody();
         spawnPos.y = 0;
-        GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
+        GameObject obj = Instantiate(explosion.GetBody(), spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
         obj.AddComponent<RoundCheckerSubWeapon>();

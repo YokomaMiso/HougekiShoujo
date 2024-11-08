@@ -7,8 +7,8 @@ public class MortarProjectileBehavior : ProjectileBehavior
     float addAngle = 0;
     protected override void Start()
     {
-        base.Start();
         if (transform.GetChild(0).localScale.x < 0) { addAngle = 180; }
+        base.Start();
     }
 
     protected override void Update()
@@ -20,8 +20,6 @@ public class MortarProjectileBehavior : ProjectileBehavior
 
         base.Update();
 
-        float horizonTimeRate = timeRate * 2;
-        if (horizonTimeRate > 1) { horizonTimeRate = 1; }
         Vector3 currentHorizon = Vector3.Lerp(defaultPosition, targetPoint, timeRate);
         float currentVertical = Mathf.Sin(timeRate * Mathf.PI) * 15;
 

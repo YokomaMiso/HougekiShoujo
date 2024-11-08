@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CreditBackGroundBehavior : MonoBehaviour
 {
+    [SerializeField] AudioClip creditBGM;
+
     float timer;
     const float endTime = 139;
     const float lifeTime = 150;
@@ -20,6 +22,9 @@ public class CreditBackGroundBehavior : MonoBehaviour
 
     void Start()
     {
+        AudioSource bgmSource = SoundManager.PlayBGM(creditBGM).GetComponent<AudioSource>();
+        bgmSource.loop = false;
+
         back = transform.GetChild(0).GetComponent<RawImage>();
         front = transform.GetChild(1).GetComponent<RawImage>();
         chara = transform.GetChild(2).GetComponent<Animator>();

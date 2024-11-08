@@ -23,13 +23,13 @@ public class CharacterAnimData : ScriptableObject
     public Sprite GetCharaIllust() { return charaIllust; }
     public virtual RuntimeAnimatorController GetIdleAnimForUI() { return idleForUIAnimationData; }
     public virtual RuntimeAnimatorController GetRunAnimForUI() { return runForUIAnimationData; }
-    public virtual RuntimeAnimatorController GetIdleAnim(CANON_STATE _state = CANON_STATE.EMPTY) { return idleAnimationData; }
+    public virtual RuntimeAnimatorController GetIdleAnim(CANON_STATE _state = CANON_STATE.EMPTY, float _direction = 1) { return idleAnimationData; }
     public RuntimeAnimatorController[] GetRunAnims() { return runAnimationData; }
-    public virtual RuntimeAnimatorController GetRunAnim(int _num,CANON_STATE _state = CANON_STATE.EMPTY) { return runAnimationData[_num]; }
-    public RuntimeAnimatorController GetReloadAnim() { return reloadAnimationData; }
-    public RuntimeAnimatorController[] GetAimAnims() { return aimAnimationData; }
-    public RuntimeAnimatorController GetAimAnim(int _num) { return aimAnimationData[_num]; }
-    public RuntimeAnimatorController[] GetRecoilAnims() { return recoilAnimationData; }
-    public RuntimeAnimatorController GetRecoilAnim(int _num) { return recoilAnimationData[_num]; }
+    public virtual RuntimeAnimatorController GetRunAnim(int _num, CANON_STATE _state = CANON_STATE.EMPTY, float _direction = 1) { return runAnimationData[_num]; }
+    public virtual RuntimeAnimatorController GetReloadAnim(float _direction = 1) { return reloadAnimationData; }
+    public  RuntimeAnimatorController[] GetAimAnims() { return aimAnimationData; }
+    public virtual RuntimeAnimatorController GetAimAnim(int _num, float _direction = 1) { return aimAnimationData[_num]; }
+    public  RuntimeAnimatorController[] GetRecoilAnims() { return recoilAnimationData; }
+    public virtual RuntimeAnimatorController GetRecoilAnim(int _num, float _direction = 1) { return recoilAnimationData[_num]; }
     public RuntimeAnimatorController GetDeadAnim() { return deadAnimationData; }
 }

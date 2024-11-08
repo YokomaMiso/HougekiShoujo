@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
+  m_Name: SW_TapiocaBomb
+  m_EditorClassIdentifier: 
+  subWeaponIcon: {fileID: 21300000, guid: ed3ee42d21c2be4438b73db6e7375bfe, type: 3}
+  subType: 3
+  buffType: 0
+  installation: {fileID: 3179393461812120061, guid: cf6d56e57f4cc8144a0fdcbe2574de49,
+    type: 3}
+  subWeaponName: "\u30BF\u30D4\u30AA\u30AB\u7206\u5F3E\n\u30BF\u30D4\u30AA\u30AB\u7206\u5F3E"
+  subWeaponExplain: "10\u79D2\u6301\u7D9A\u3059\u308B\u30BF\u30D4\u30AA\u30AB\u3092\u6295\u64F2\n\uFF18\u79D2\u9593\u8DB3\u304C\u6ED1\u308B\u3088\u3046\u306B\u306A\u308B"
+  installationStartAnim: {fileID: 0}
+  installationLoopAnim: {fileID: 0}
+  reloadTime: 30
+  speedRate: 0.5
+  lifeTime: 10
