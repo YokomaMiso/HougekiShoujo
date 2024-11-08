@@ -108,9 +108,9 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RegionSize: 9
-    - _Rotation: 6.2831855
-    - _Scale: 1
-    - _SelectedRegion: 4
+    - _Rotation: 6.0490866
+    - _Scale: 1.0372579
+    - _SelectedRegion: -1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
