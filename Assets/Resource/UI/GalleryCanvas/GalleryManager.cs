@@ -9,7 +9,8 @@ public enum GalleryState
     CharacterSelect,
     CharacterGallery,
     WorldSelect,
-    WorldGallery,
+    WorldIllGallery,
+    WorldTextGallery,
     SoundSelect,
     SoundGallery,
 }
@@ -45,7 +46,7 @@ public class GalleryManager : MonoBehaviour
     //入力処理用(GalleryMain)
     private bool canChangeIndex = true;
     private int inputIndex = -1;
-    private Transform[] childTransforms;
+    private List<Transform> childTransforms = new List<Transform>();
     private Vector3 selecterSize = new Vector3(1.1f, 1.1f, 1.1f);
     private Vector3 defaultSize = new Vector3(1f, 1f, 1f);
 
@@ -56,19 +57,33 @@ public class GalleryManager : MonoBehaviour
     private static float Duration = 1.0f;
 
     //バター移動用変数
-    private static Vector3 targetPosition = new Vector3(-108,70,0);
-    private Vector3[] currentPosition = new Vector3[3];
+    private static Vector3 targetPositionCount = new Vector3(-108,70,0);
+    private List<Vector3> currentPosition = new List<Vector3>();
+    private Vector3[] worldCurrentPosition=new Vector3[2];
+    private Vector3[] targetWorldPosition=new Vector3[2];
+    private Vector3 currentPositionCount;
 
 
     private void Start()
     {
+        childTransforms.Clear();
+        currentPosition.Clear();
         if (largeCategory != null)
         {
-            childTransforms = new Transform[largeCategory.transform.childCount];
-            for (int i = 0; i < childTransforms.Length; i++)
+            for (int i = 0; i < largeCategory.transform.childCount; i++)
             {
-                childTransforms[i] = largeCategory.transform.GetChild(i);
-                currentPosition[i] = childTransforms[i].localPosition;
+                Transform child = largeCategory.transform.GetChild(i);
+                childTransforms.Add(child);
+                currentPosition.Add(child.localPosition);
+            }
+        }
+
+        if (worldCategory != null)
+        {
+            for(int i = 0; i < worldCategory.transform.childCount; i++)
+            {
+                worldCurrentPosition[i] = worldCategory.transform.GetChild(i).localPosition;
+                targetWorldPosition[i] = new Vector3(221, worldCurrentPosition[i].y, worldCurrentPosition[i].z);
             }
         }
         SetState(GalleryState.GalleryMain);
@@ -97,20 +112,20 @@ public class GalleryManager : MonoBehaviour
             case GalleryState.CharacterGallery:
                 break;
             case GalleryState.WorldSelect:
-                break;
-            case GalleryState.WorldGallery:
-                largeCategory.SetActive(false);
                 charCategory.SetActive(false);
                 worldCategory.SetActive(true);
                 soundCategory.SetActive(false);
                 break;
-            case GalleryState.SoundSelect:
+            case GalleryState.WorldIllGallery:
                 break;
-            case GalleryState.SoundGallery:
-                largeCategory.SetActive(false);
+            case GalleryState.WorldTextGallery:
+                break;
+            case GalleryState.SoundSelect:
                 charCategory.SetActive(false);
                 worldCategory.SetActive(false);
                 soundCategory.SetActive(true);
+                break;
+            case GalleryState.SoundGallery:
                 break;
             default:
                 break;
@@ -122,19 +137,22 @@ public class GalleryManager : MonoBehaviour
         switch (CurrentState)
         {
             case GalleryState.GalleryMain:
-                HandleGalleryMainInput();
                 GalleryMainUpdate();
+                HandleGalleryMainInput();
                 break;
             case GalleryState.CharacterSelect:
+                HandleGalleryMainInput();
                 HandleCharSelectInput();
                 break;
             case GalleryState.CharacterGallery:
                 HandleCharGalleryInput();
                 break;
             case GalleryState.WorldSelect:
+                HandleGalleryMainInput();
                 HandleWorldSelectInput();
                 break;
             case GalleryState.SoundSelect:
+                HandleGalleryMainInput();
                 HandleSoundSelectInput();
                 break;
             default:
@@ -168,14 +186,14 @@ public class GalleryManager : MonoBehaviour
         if (axisInput.y < -0.5f && canChangeIndex)
         {
             inputIndex++;
-            if (inputIndex > childTransforms.Length) { inputIndex = 0; }
+            if (inputIndex >= childTransforms.Count) { inputIndex = 0; }
             GalleryMainSelect();
             canChangeIndex = false;
         }
         else if (axisInput.y > 0.5f && canChangeIndex)
         {
             inputIndex--;
-            if (inputIndex < 0) { inputIndex = childTransforms.Length; }
+            if (inputIndex < 0) { inputIndex = childTransforms.Count-1; }
             GalleryMainSelect();
             canChangeIndex = false;
         }
@@ -186,22 +204,59 @@ public class GalleryManager : MonoBehaviour
 
         if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0)
         {
-            nextState = inputIndex;
-            TransFadeOut(inputIndex);
+            if(CurrentState == GalleryState.GalleryMain)
+            {
+                nextState = inputIndex;
+                TransFadeOut(inputIndex);
+            }
         }
 
-        if (!isFade && nextState >= 0) 
+        if (InputManager.GetKeyDown(BoolActions.EastButton))
+        {
+            charCategory.SetActive(false);
+            nextState = -1;
+            switch (CurrentState)
+            {
+                case GalleryState.CharacterSelect:
+                    inputIndex = 0;
+                    break;
+                case GalleryState.WorldSelect:
+                    inputIndex = 1;
+                    break;
+                case GalleryState.SoundSelect:
+                    inputIndex = 2;
+                    break;
+                default:
+                    break;
+            }
+            if (CurrentState == GalleryState.WorldSelect)
+            {
+                WorldFadeOut(0.5f);
+            }
+            SetCategoryChild(largeCategory);
+            TransFadeIn(inputIndex);
+        }
+
+        if (!isFade) 
         {
             switch (nextState)
             {
+                case -1:
+                    SetState(GalleryState.GalleryMain);
+                    break;
                 case 0:
                     SetState(GalleryState.CharacterSelect);
+                    childTransforms.Clear();
+                    currentPosition.Clear();
                     break;
                 case 1:
+                    SetCategoryChild(worldCategory);
+                    WorldFadeIn(0.5f);
                     SetState(GalleryState.WorldSelect);
                     break;
                 case 2:
                     SetState(GalleryState.SoundSelect);
+                    SetCategoryChild(soundCategory);
                     break;
                 default:
                     break;
@@ -212,7 +267,6 @@ public class GalleryManager : MonoBehaviour
 
     private void HandleCharSelectInput()
     {
-        BackToMainGallery();
     }
 
     private void HandleCharGalleryInput()
@@ -228,37 +282,21 @@ public class GalleryManager : MonoBehaviour
 
     private void HandleWorldSelectInput()
     {
-        BackToMainGallery();
     }
 
     private void HandleSoundSelectInput()
     {
-        BackToMainGallery();
-    }
-
-    private void BackToMainGallery()
-    {
-        if (InputManager.GetKeyDown(BoolActions.EastButton))
-        {
-            charCategory.SetActive(false);
-            nextState = -1;
-            TransFadeIn(inputIndex);
-        }
-        if (!isFade && nextState == -1)
-        {
-            SetState(GalleryState.GalleryMain);
-        }
     }
 
     private void GalleryMainSelect()
     {
 
-        for (int i = 0; i < childTransforms.Length; i++)
+        for (int i = 0; i < childTransforms.Count; i++)
         {
             childTransforms[i].localScale = defaultSize;
         }
 
-        if (inputIndex >= 0 && inputIndex < childTransforms.Length)
+        if (inputIndex >= 0 && inputIndex < childTransforms.Count)
         {
             childTransforms[inputIndex].localScale = selecterSize;
         }
@@ -270,6 +308,7 @@ public class GalleryManager : MonoBehaviour
         {
             Managers.instance.ChangeState(GAME_STATE.TITLE);
             Managers.instance.ChangeScene(GAME_STATE.TITLE);
+            isFade = true;
         }
     }
 
@@ -306,9 +345,9 @@ public class GalleryManager : MonoBehaviour
         }
     }
 
-    private void ButtonMove(Transform targetobject,Vector3 targetposition)
+    private void ButtonMove(Transform targetobject,Vector3 targetposition,float _duration)
     {
-        StartCoroutine(MoveObject(targetobject, targetposition, Duration));
+        StartCoroutine(MoveObject(targetobject, targetposition, _duration));
     }
 
     private IEnumerator FadeIn(Image image, float duration)
@@ -366,31 +405,89 @@ public class GalleryManager : MonoBehaviour
 
     private void TransFadeIn(int index) 
     {
-        for (int i = 0; i < childTransforms.Length; i++)
-        {
-            if (i == index)
-            {
-                ButtonMove(childTransforms[i], currentPosition[i]);
-                continue;
-            }
-            ButtonFadeIn(childTransforms[i]);
-        }
+
+         for (int i = 0; i < childTransforms.Count; i++)
+         {
+             if (i == index)
+             {
+                 currentPosition[i] = currentPositionCount;
+                 ButtonMove(childTransforms[i], currentPosition[i],Duration);
+                 continue;
+             }
+             ButtonFadeIn(childTransforms[i]);
+         }
+        
     }
 
     private void TransFadeOut(int index)
     {
-        for (int i = 0; i < childTransforms.Length; i++)
+        for (int i = 0; i < childTransforms.Count; i++)
         {
             if (i == index)
             {
-                ButtonMove(childTransforms[i], targetPosition);
+                currentPositionCount = childTransforms[i].localPosition;
+                ButtonMove(childTransforms[i], targetPositionCount,Duration);
                 continue;
             }
             ButtonFadeOut(childTransforms[i]);
         }
     }
+
+    private void WorldFadeIn(float _duration)
+    {
+        if (CurrentState == GalleryState.GalleryMain)
+        {
+            for (int i = 0; i < childTransforms.Count; i++)
+            {
+                currentPosition[i] = currentPositionCount;
+                ButtonMove(childTransforms[i], targetWorldPosition[i], Duration);
+                ButtonFadeIn(childTransforms[i]);
+            }
+        }
+    }
+
+    private void WorldFadeOut( float _duration)
+    {
+        if (CurrentState == GalleryState.WorldSelect)
+        {
+            for (int i = 0; i < childTransforms.Count; i++)
+            {
+                ButtonMove(childTransforms[i], worldCurrentPosition[i], Duration);
+                ButtonFadeOut(childTransforms[i]);
+            }
+        }
+    }
+
     public bool GetFadeState()
     {
         return isFade;
+    }
+
+    private void SetCategoryChild(GameObject _CategoryObject)
+    {
+        childTransforms.Clear();
+        currentPosition.Clear();
+        if (_CategoryObject != null)
+        {
+            for (int i = 0; i < _CategoryObject.transform.childCount; i++)
+            {
+                Transform child = _CategoryObject.transform.GetChild(i);
+                childTransforms.Add(child);
+                currentPosition.Add(child.localPosition);
+            }
+        }
+    }
+
+
+    /*--------------------------------------------------------------------------------------------------------------
+    * -------------------------------------------------------------------------------------------------------------
+    * -------------------------------------------変数取得関連関数----------------------------------------------
+    * -------------------------------------------------------------------------------------------------------------
+    * -------------------------------------------------------------------------------------------------------------
+    * -------------------------------------------------------------------------------------------------------------*/
+
+    public int GetInputIndex()
+    {
+        return inputIndex;
     }
 }
