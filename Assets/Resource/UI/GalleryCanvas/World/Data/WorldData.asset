@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WorldData
   m_EditorClassIdentifier: 
   worldGalleryDatas:
-  - {fileID: 11400000, guid: d54b38f9c38cb3e488cfeacabe1e89af, type: 2}
-  - {fileID: 11400000, guid: fe32336e773ecbe45ad12cffb0f93152, type: 2}
+  - {fileID: 11400000, guid: 1c4a177e25fb8454e9c01da18bbe2e64, type: 2}
+  - {fileID: 11400000, guid: 0e46fbf6552ad6545a632bcf5eb3099f, type: 2}
