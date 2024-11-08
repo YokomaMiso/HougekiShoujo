@@ -118,9 +118,6 @@ public class InputManager : MonoBehaviour
         isChangedController = false;
 
         UpdateCurrentController();
-
-        Debug.Log(currentController);
-        Debug.Log(isChangedController);
     }
 
     /// <summary>
