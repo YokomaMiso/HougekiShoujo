@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MiraiProjectileBehavior : ProjectileBehavior
 {
-    const float enableTime = 0.25f;
-
     protected override void Start()
     {
     }
@@ -13,10 +11,5 @@ public class MiraiProjectileBehavior : ProjectileBehavior
     {
         base.Update();
         transform.position += transform.forward * speed * Managers.instance.timeManager.GetDeltaTime();
-    }
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (timer < enableTime) { return; }
-        base.OnTriggerEnter(other);
     }
 }
