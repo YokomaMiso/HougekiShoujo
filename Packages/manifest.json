@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.annulusgames.enhanced-on-screen-stick": "https://github.com/AnnulusGames/EnhancedOnScreenStick.git?path=Assets/EnhancedOnScreenStick",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.4.4",
     "com.unity.ide.rider": "3.0.27",
@@ -8,7 +9,6 @@
     "com.unity.inputsystem": "1.7.0",
     "com.unity.render-pipelines.universal": "14.0.9",
     "com.unity.test-framework": "1.1.33",
-    "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.7.6",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.9.1",

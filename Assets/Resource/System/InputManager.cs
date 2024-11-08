@@ -1,10 +1,10 @@
-ï»¿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 //-------------------------------------------------------------------------------------------------------------//
-//--æ–°ã—ãç™»éŒ²ã™ã‚‹éš›ã¯ Assets/Resource/System ã«ã‚ã‚‹PlayerControllerã®Actionsã®åå‰ã¨ä¸¦ã³ã‚’çµ±ä¸€ã•ã›ã¦ãã ã•ã„--//
+//--V‚µ‚­“o˜^‚·‚éÛ‚Í Assets/Resource/System ‚É‚ ‚éPlayerController‚ÌActions‚Ì–¼‘O‚Æ•À‚Ñ‚ğ“ˆê‚³‚¹‚Ä‚­‚¾‚³‚¢--//
 //-------------------------------------------------------------------------------------------------------------//
 
 public enum Vec2AxisActions
@@ -29,25 +29,48 @@ public enum BoolActions
     RadioChat5,
     RadioChat6,
     RadioChat7,
-    RadioChat8
+    RadioChat8,
+    TouchTap,
+    LeftClick
+}
+
+public enum ControllerType
+{
+    XInput = 0,
+    DirectInput,
+    SwitchInput,
+    Keyboard,
+    TouchScreen,
+    Other,
+    None
 }
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput;
+    private static PlayerInput playerInput;
     private static InputActionMap actionMap;
 
-    // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ä¿å­˜ãƒªã‚¹ãƒˆ
+    // ƒAƒNƒVƒ‡ƒ“•Û‘¶ƒŠƒXƒg
     private static List<InputAction> boolActions = new List<InputAction>();
     private static List<InputAction> vec2Actions = new List<InputAction>();
 
-    // delayç”¨ã®æ™‚é–“è¨ˆç®—ãƒªã‚¹ãƒˆ
+    // delay—p‚ÌŠÔŒvZƒŠƒXƒg
     private static List<float> axisTimeList = new List<float>();
+
+    public static ControllerType currentController { get; private set; } = ControllerType.None;
+
+    public static bool isChangedController { get; private set; } = false;
+
+    // ŠeƒfƒoƒCƒX‚Ì‚·‚×‚Ä‚ÌƒL[‚ğ‚P‚Â‚ÉƒoƒCƒ“ƒh‚µ‚½InputActioniƒL[í•ÊŒŸ’m—pj
+    private InputAction xInputAnyKey              = new InputAction(type: InputActionType.PassThrough, binding: "<XInputController>/*", interactions: "Press");
+    private InputAction dualShock4AnyKey          = new InputAction(type: InputActionType.PassThrough, binding: "<DualShockGamepad>/*", interactions: "Press");
+    private InputAction detectDualSenseAnyKey     = new InputAction(type: InputActionType.PassThrough, binding: "<DualSenseGamepadHID>/*", interactions: "Press");
+    private InputAction switchProControllerAnyKey = new InputAction(type: InputActionType.PassThrough, binding: "<SwitchProControllerHID>/*", interactions: "Press");
 
     private void Awake()
     {
-        // vector2ã®actionã‚ã‚‹åˆ†ã®ã‚¿ã‚¤ãƒãƒ¼ã‚’ä½œã‚‹
+        // vector2‚Ìaction‚ ‚é•ª‚Ìƒ^ƒCƒ}[‚ğì‚é
         foreach (Vec2AxisActions an in BoolActions.GetValues(typeof(Vec2AxisActions)))
         {
             axisTimeList.Add(0.0f);
@@ -56,38 +79,56 @@ public class InputManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         actionMap = playerInput.currentActionMap;
-
-        if (actionMap != null)
+        
+        if(actionMap != null)
         {
-            // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã‚¿ã‚¤ãƒ—ã«åˆã‚ã›ã¦ãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜
-            foreach (InputAction action in actionMap.actions)
+            // ƒAƒNƒVƒ‡ƒ“ƒ^ƒCƒv‚É‡‚í‚¹‚Äƒf[ƒ^‚ğ•Û‘¶
+            foreach(InputAction action in actionMap.actions)
             {
-                if (action.type == InputActionType.Button)
+                if(action.type == InputActionType.Button)
                 {
                     boolActions.Add(action);
 
-                    //Debug.Log(action.name + "ãŒButtonã«ã‚»ãƒƒãƒˆã•ã‚Œã¾ã—ãŸ");
+                    //Debug.Log(action.name + "‚ªButton‚ÉƒZƒbƒg‚³‚ê‚Ü‚µ‚½");
                 }
-                else if (action.type == InputActionType.Value)
+                else if(action.type == InputActionType.Value)
                 {
                     vec2Actions.Add(action);
 
-                    //Debug.Log(action.name + "ãŒvec2ã«ã‚»ãƒƒãƒˆã•ã‚Œã¾ã—ãŸ");
+                    //Debug.Log(action.name + "‚ªvec2‚ÉƒZƒbƒg‚³‚ê‚Ü‚µ‚½");
                 }
             }
         }
         else
         {
-            Debug.LogError("actionMapã®å–å¾—ã«å¤±æ•—ã—ã¾ã—ãŸ");
+            Debug.LogError("actionMap‚Ìæ“¾‚É¸”s‚µ‚Ü‚µ‚½");
         }
+
+        EnableInput();
+
+        // ƒL[ŒŸ’m—pƒAƒNƒVƒ‡ƒ“‚Ì—LŒø‰»
+        xInputAnyKey.Enable();
+        dualShock4AnyKey.Enable();
+        detectDualSenseAnyKey.Enable();
+        switchProControllerAnyKey.Enable();
+    }
+
+    private void Update()
+    {
+        isChangedController = false;
+
+        UpdateCurrentController();
+
+        Debug.Log(currentController);
+        Debug.Log(isChangedController);
     }
 
     /// <summary>
-    /// ã‚¢ãƒŠãƒ­ã‚°ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ç¾åœ¨å€¤å–å¾—
+    /// ƒAƒiƒƒOƒXƒeƒBƒbƒN‚ÌŒ»İ’læ“¾
     /// </summary>
-    /// <typeparam name="T">å–å¾—ã—ãŸã„å‹ã€boolã¾ãŸã¯vector2</typeparam>
-    /// <param name="an">Actionã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼</param>
-    /// <returns>ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒå€’ã•ã‚Œã¦ã„ã‚‹ = true or ç¾åœ¨å€¤: å€’ã•ã‚Œã¦ã„ãªã„ = false or (0, 0)</returns>
+    /// <typeparam name="T">æ“¾‚µ‚½‚¢Œ^Abool‚Ü‚½‚Ívector2</typeparam>
+    /// <param name="an">Action‚É“o˜^‚³‚ê‚Ä‚¢‚éƒL[</param>
+    /// <returns>ƒXƒeƒBƒbƒN‚ª“|‚³‚ê‚Ä‚¢‚é = true or Œ»İ’l: “|‚³‚ê‚Ä‚¢‚È‚¢ = false or (0, 0)</returns>
     public static T GetAxis<T>(Vec2AxisActions an) where T : struct
     {
         object val = new object();
@@ -106,24 +147,25 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("boolã‚‚ã—ãã¯vector2ä»¥å¤–ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã™");
+            Debug.LogError("bool‚à‚µ‚­‚Ívector2ˆÈŠO‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚·");
         }
 
         return default(T);
     }
 
     /// <summary>
-    /// ã‚¢ãƒŠãƒ­ã‚°ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒæŠ¼ã•ã‚ŒãŸç¬é–“ã®å–å¾—
+    /// ƒAƒiƒƒOƒXƒeƒBƒbƒN‚ª‰Ÿ‚³‚ê‚½uŠÔ‚Ìæ“¾
     /// </summary>
-    /// <typeparam name="T">å–å¾—ã—ãŸã„å‹ã€boolã¾ãŸã¯vector2</typeparam>
-    /// <param name="an">Actionã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼</param>
-    /// <returns>ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒå€’ã•ã‚ŒãŸæœ€åˆã®ãƒ•ãƒ¬ãƒ¼ãƒ  = true or ç¾åœ¨å€¤: ãã‚Œä»¥å¤– = false or (0, 0)</returns>
+    /// <typeparam name="T">æ“¾‚µ‚½‚¢Œ^Abool‚Ü‚½‚Ívector2</typeparam>
+    /// <param name="an">Action‚É“o˜^‚³‚ê‚Ä‚¢‚éƒL[</param>
+    /// <returns>ƒXƒeƒBƒbƒN‚ª“|‚³‚ê‚½Å‰‚ÌƒtƒŒ[ƒ€ = true or Œ»İ’l: ‚»‚êˆÈŠO = false or (0, 0)</returns>
     public static T GetAxisDown<T>(Vec2AxisActions an) where T : struct
     {
         object val = new object();
 
         if (vec2Actions[(int)an].WasPressedThisFrame())
         {
+
             if (typeof(T) == typeof(bool))
             {
                 val = true;
@@ -138,7 +180,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("boolã‚‚ã—ãã¯vector2ä»¥å¤–ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã™");
+                Debug.LogError("bool‚à‚µ‚­‚Ívector2ˆÈŠO‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚·");
             }
         }
 
@@ -146,12 +188,12 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ã‚¢ãƒŠãƒ­ã‚°ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒé›¢ã‚ŒãŸç¬é–“ã®å–å¾—
+    /// ƒAƒiƒƒOƒXƒeƒBƒbƒN‚ª—£‚ê‚½uŠÔ‚Ìæ“¾
     /// </summary>
-    /// <typeparam name="T">å–å¾—ã—ãŸã„å‹ã€boolã¾ãŸã¯vector2</typeparam>
-    /// <param name="an">Actionã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼</param>
-    /// <returns>ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒé›¢ã•ã‚ŒãŸæœ€åˆã®ãƒ•ãƒ¬ãƒ¼ãƒ  = true or ç¾åœ¨å€¤: ãã‚Œä»¥å¤– = false or (0, 0)</returns>
-    public static T GetAxisUp<T>(Vec2AxisActions an) where T : struct
+    /// <typeparam name="T">æ“¾‚µ‚½‚¢Œ^Abool‚Ü‚½‚Ívector2</typeparam>
+    /// <param name="an">Action‚É“o˜^‚³‚ê‚Ä‚¢‚éƒL[</param>
+    /// <returns>ƒXƒeƒBƒbƒN‚ª—£‚³‚ê‚½Å‰‚ÌƒtƒŒ[ƒ€ = true or Œ»İ’l: ‚»‚êˆÈŠO = false or (0, 0)</returns>
+    public static T GetAxisUp<T>(Vec2AxisActions an)where T : struct
     {
         object val = new object();
 
@@ -163,7 +205,7 @@ public class InputManager : MonoBehaviour
 
                 return (T)val;
             }
-            else if (typeof(T) == typeof(Vector2))
+            else if(typeof(T) == typeof(Vector2))
             {
                 val = vec2Actions[(int)an].ReadValue<Vector2>().normalized;
 
@@ -171,7 +213,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("boolã‚‚ã—ãã¯vector2ä»¥å¤–ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã™");
+                Debug.LogError("bool‚à‚µ‚­‚Ívector2ˆÈŠO‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚·");
             }
         }
 
@@ -179,12 +221,12 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ã‚¢ãƒŠãƒ­ã‚°ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ç­‰é–“éš”å–å¾—
+    /// ƒAƒiƒƒOƒXƒeƒBƒbƒN‚Ì“™ŠÔŠuæ“¾
     /// </summary>
-    /// <typeparam name="T">å–å¾—ã—ãŸã„å‹ã€boolã¾ãŸã¯vector2</typeparam>
-    /// <param name="an">Actionã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼</param>
-    /// <param name="_time">æ•°å€¤ã‚’å¾—ã‚‹é–“éš”ï¼ˆç§’ï¼‰</param>
-    /// <returns>ã‚¹ãƒ†ã‚£ãƒƒã‚¯ãŒå€’ã•ã‚ŒãŸæœ€åˆã®ãƒ•ãƒ¬ãƒ¼ãƒ ã¨ãã‚Œä»¥é™æŒ‡å®šã—ãŸæ™‚é–“çµŒéå¾Œ = true or ç¾åœ¨å€¤: ãã‚Œä»¥å¤– = false or (0, 0)</returns>
+    /// <typeparam name="T">æ“¾‚µ‚½‚¢Œ^Abool‚Ü‚½‚Ívector2</typeparam>
+    /// <param name="an">Action‚É“o˜^‚³‚ê‚Ä‚¢‚éƒL[</param>
+    /// <param name="_time">”’l‚ğ“¾‚éŠÔŠui•bj</param>
+    /// <returns>ƒXƒeƒBƒbƒN‚ª“|‚³‚ê‚½Å‰‚ÌƒtƒŒ[ƒ€‚Æ‚»‚êˆÈ~w’è‚µ‚½ŠÔŒo‰ßŒã = true or Œ»İ’l: ‚»‚êˆÈŠO = false or (0, 0)</returns>
     public static T GetAxisDelay<T>(Vec2AxisActions an, float _time) where T : struct
     {
         object val = new object();
@@ -206,7 +248,7 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("boolã‚‚ã—ãã¯vector2ä»¥å¤–ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã™");
+                Debug.LogError("bool‚à‚µ‚­‚Ívector2ˆÈŠO‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚·");
             }
         }
 
@@ -236,11 +278,11 @@ public class InputManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("boolã‚‚ã—ãã¯vector2ä»¥å¤–ãŒæŒ‡å®šã•ã‚Œã¦ã„ã¾ã™");
+                Debug.LogError("bool‚à‚µ‚­‚Ívector2ˆÈŠO‚ªw’è‚³‚ê‚Ä‚¢‚Ü‚·");
             }
         }
 
-        if (vec2Actions[actionNum].WasReleasedThisFrame())
+        if(vec2Actions[actionNum].WasReleasedThisFrame())
         {
             axisTimeList[actionNum] = 0;
         }
@@ -249,37 +291,104 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// boolå‹ã®ã‚­ãƒ¼å…¥åŠ›å–å¾—
+    /// boolŒ^‚ÌƒL[“ü—Íæ“¾
     /// </summary>
-    /// <param name="an">Actionã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼</param>
-    /// <returns>æŠ¼ã•ã‚Œã¦ã„ã‚‹ = true: æŠ¼ã•ã‚Œã¦ã„ãªã„ = false</returns>
+    /// <param name="an">Action‚É“o˜^‚³‚ê‚Ä‚¢‚éƒL[</param>
+    /// <returns>‰Ÿ‚³‚ê‚Ä‚¢‚é = true: ‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢ = false</returns>
     public static bool GetKey(BoolActions an)
     {
         return boolActions[(int)an].IsPressed();
     }
-
+    
     /// <summary>
-    /// boolå‹ã®ã‚­ãƒ¼å…¥åŠ›å–å¾—
+    /// boolŒ^‚ÌƒL[“ü—Íæ“¾
     /// </summary>
-    /// <param name="an">Actionã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼</param>
-    /// <returns>æŠ¼ã•ã‚ŒãŸæœ€åˆã®ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ  = true: ãã‚Œä»¥å¤– = false</returns>
+    /// <param name="an">Action‚É“o˜^‚³‚ê‚Ä‚¢‚éƒL[</param>
+    /// <returns>‰Ÿ‚³‚ê‚½Å‰‚Ì‚PƒtƒŒ[ƒ€ = true: ‚»‚êˆÈŠO = false</returns>
     public static bool GetKeyDown(BoolActions an)
     {
         return boolActions[(int)an].WasPressedThisFrame();
     }
 
     /// <summary>
-    /// boolå‹ã®ã‚­ãƒ¼å…¥åŠ›å–å¾—
+    /// boolŒ^‚ÌƒL[“ü—Íæ“¾
     /// </summary>
-    /// <param name="an">Actionã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¼</param>
-    /// <returns>é›¢ã—ãŸæœ€åˆã®ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ  = true: ãã‚Œä»¥å¤– = false</returns>
+    /// <param name="an">Action‚É“o˜^‚³‚ê‚Ä‚¢‚éƒL[</param>
+    /// <returns>—£‚µ‚½Å‰‚Ì‚PƒtƒŒ[ƒ€ = true: ‚»‚êˆÈŠO = false</returns>
     public static bool GetKeyUp(BoolActions an)
     {
         return boolActions[(int)an].WasReleasedThisFrame();
     }
 
+    private void UpdateCurrentController()
+    {
+        var beforeDeviceType = currentController;
+        
+        switch (playerInput.currentControlScheme)
+        {
+            case "Gamepad":
+                
+                if (xInputAnyKey.triggered)
+                {
+                    currentController = ControllerType.XInput;
+                }
+                else if (dualShock4AnyKey.triggered || detectDualSenseAnyKey.triggered)
+                {
+                    currentController = ControllerType.DirectInput;
+                }
+                else if (switchProControllerAnyKey.triggered)
+                {
+                    currentController = ControllerType.SwitchInput;
+                }
+
+                if (beforeDeviceType != currentController)
+                {
+                    isChangedController = true;
+                }
+
+                return;
+            case "Key&Mouse":
+
+                currentController = ControllerType.Keyboard;
+
+                if (beforeDeviceType != currentController)
+                {
+                    isChangedController = true;
+                }
+
+                return;
+            case "Touchscreen":
+
+                currentController = ControllerType.TouchScreen;
+
+                if (beforeDeviceType != currentController)
+                {
+                    isChangedController = true;
+                }
+
+                return;
+            case "OtherControll":
+
+                currentController = ControllerType.Other;
+
+                if (beforeDeviceType != currentController)
+                {
+                    isChangedController = true;
+                }
+
+                return;
+        }
+
+        currentController = ControllerType.None;
+
+        if (beforeDeviceType != currentController)
+        {
+            isChangedController = true;
+        }
+    }
+
     /// <summary>
-    /// InputSystemã®æœ‰åŠ¹åŒ–
+    /// InputSystem‚Ì—LŒø‰»
     /// </summary>
     public static void EnableInput()
     {
@@ -289,7 +398,7 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// InputSystemã®ç„¡åŠ¹åŒ–
+    /// InputSystem‚Ì–³Œø‰»
     /// </summary>
     public static void DisableInput()
     {
