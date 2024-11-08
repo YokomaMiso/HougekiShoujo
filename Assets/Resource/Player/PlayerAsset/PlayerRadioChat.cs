@@ -21,6 +21,7 @@ public class PlayerRadioChat : MonoBehaviour
     GameObject fastChatInstance = null;
 
     RADIO_CHAT_ID radioChatID;
+    RADIO_TYPE radioType= RADIO_TYPE.NONE;
 
     const float resetTime = 5.0f;
     float timer;
@@ -77,6 +78,7 @@ public class PlayerRadioChat : MonoBehaviour
         {
             if (fastChatInstance == null)
             {
+                radioType = RADIO_TYPE.EMOTE;
                 fastChatInstance = Instantiate(EmoteChatCanvasPrefab);
                 fastChatInstance.GetComponent<FastChat>().SetChatType((int)RADIO_TYPE.EMOTE);
                 if (chatMainTex[0] != null && chatColorTex[0]!=null)
@@ -111,6 +113,7 @@ public class PlayerRadioChat : MonoBehaviour
         {
             if (fastChatInstance == null)
             {
+                radioType = RADIO_TYPE.TEXT;
                 fastChatInstance = Instantiate(TeamChatCanvasPrefab);
                 if (chatMainTex[1] != null && chatColorTex[1] != null)
                 {
@@ -146,7 +149,7 @@ public class PlayerRadioChat : MonoBehaviour
         {
             if (InputManager.GetKeyDown(BoolActions.RadioChat1 + i))
             {
-                radioChatID = (RADIO_CHAT_ID)(i + 1);
+                radioChatID = (radioType == RADIO_TYPE.TEXT) ? (RADIO_CHAT_ID)(i + 1) : (RADIO_CHAT_ID)(i + 5);
                 MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
                 SpawnSerifOrEmote(oscRoomData, radioChatID);
 
