@@ -79,7 +79,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -119,8 +119,6 @@ MonoBehaviour:
   titleBGM: {fileID: 8300000, guid: 260cb025f4ffff343a4ffb306fbe3b26, type: 3}
   buttons: {fileID: 600517467208630858, guid: 545b428b4e374164d91acbe3a33a479f, type: 3}
   inputName: {fileID: 1682089825833050959, guid: ca6073ca1afa62f4fa5cfdb81f5dec08,
-    type: 3}
-  creditCanvas: {fileID: 4918601816050111206, guid: bd5edb4fd9658b542b58e338bca06e2f,
     type: 3}
 --- !u!1 &5151819074982472560
 GameObject:

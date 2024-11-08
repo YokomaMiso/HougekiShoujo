@@ -236,6 +236,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 167927169}
+    - target: {fileID: 3077192066428088476, guid: 60bb45d9a0a105e489a3818b934c4da9,
+        type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077192066428088476, guid: 60bb45d9a0a105e489a3818b934c4da9,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3921321195368664648, guid: 60bb45d9a0a105e489a3818b934c4da9,
         type: 3}
       propertyPath: m_Name
