@@ -3,7 +3,12 @@ guid: bd7f4d28fcaf9144681febe219079ff1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: schoolWalls
+    second: {fileID: 2100000, guid: aa80c8e33d3c6824fa27cc56ca1934a5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
