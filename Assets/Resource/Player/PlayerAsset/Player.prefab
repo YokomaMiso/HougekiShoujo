@@ -202,8 +202,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotePrefab: {fileID: 2522134910337228876, guid: e2635b3d3c59752458cbe02e36d149dc,
     type: 3}
-  fastChatCanvasPrefab: {fileID: 4432466077039030639, guid: 3cf0983ca891a8d44a4060748899ad96,
+  TeamChatCanvasPrefab: {fileID: 4432466077039030639, guid: 495c75c0d28ac9243ace25f5bcd0acda,
     type: 3}
+  EmoteChatCanvasPrefab: {fileID: 4432466077039030639, guid: 3cf0983ca891a8d44a4060748899ad96,
+    type: 3}
+  chatMainTex:
+  - {fileID: 2800000, guid: fa3389997e2c31d42b98f6259b11f8bf, type: 3}
+  - {fileID: 2800000, guid: a3dd77076f6ac4644baeed9cd951fff9, type: 3}
+  chatColorTex:
+  - {fileID: 2800000, guid: 92e28d222fe914844ba935614e48c38b, type: 3}
+  - {fileID: 2800000, guid: 4c4e06f4e7dff1b4fa82ad2d08765049, type: 3}
 --- !u!135 &1582690489312574683
 SphereCollider:
   m_ObjectHideFlags: 0

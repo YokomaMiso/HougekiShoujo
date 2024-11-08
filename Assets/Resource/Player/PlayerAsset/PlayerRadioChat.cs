@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static IngameData;
 
-public enum RADIO_CHAT_ID { NONE = 0, BLITZ, SUPPORT, RETREAT, HELP, APOLOGIZE, LAUGH, WHAT, PROVOC, MAX_NUM }
+public enum RADIO_CHAT_ID { NONE = 0, BLITZ, SUPPORT, RETREAT, HELP, APOLOGIZE, LAUGH, WHAT, PROVOC, POP_CORN, GOOD_GRIEF, ANGRY, TEE_HEE, GOOD_JOB, MAX_NUM }
 public enum RADIO_TYPE { NONE = 0, EMOTE=9,TEXT=4 }
 
 public class PlayerRadioChat : MonoBehaviour
@@ -12,7 +12,12 @@ public class PlayerRadioChat : MonoBehaviour
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
 
     [SerializeField] GameObject emotePrefab;
-    [SerializeField] GameObject fastChatCanvasPrefab;
+    [SerializeField] GameObject TeamChatCanvasPrefab;
+    [SerializeField] GameObject EmoteChatCanvasPrefab;
+
+    [SerializeField] Texture[] chatMainTex;
+    [SerializeField] Texture[] chatColorTex;
+
     GameObject fastChatInstance = null;
 
     RADIO_CHAT_ID radioChatID;
@@ -72,8 +77,13 @@ public class PlayerRadioChat : MonoBehaviour
         {
             if (fastChatInstance == null)
             {
-                fastChatInstance = Instantiate(fastChatCanvasPrefab);
+                fastChatInstance = Instantiate(EmoteChatCanvasPrefab);
                 fastChatInstance.GetComponent<FastChat>().SetChatType((int)RADIO_TYPE.EMOTE);
+                if (chatMainTex[0] != null && chatColorTex[0]!=null)
+                {
+                    fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_MainTex", chatMainTex[0]);
+                    fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_ColorTex", chatColorTex[0]);
+                }
                 fastChatInstance.GetComponent<FastChat>().ReceiverFromRadioChat(true);
             }
         }
@@ -83,7 +93,12 @@ public class PlayerRadioChat : MonoBehaviour
             if (fastChatInstance != null)
             {
                 int nowRegion = fastChatInstance.GetComponent<FastChat>().GetRegion();
-                if (nowRegion >= 0) { radioChatID = (RADIO_CHAT_ID)(nowRegion + 1); }
+                
+                if (nowRegion >= 0)
+                {
+                    nowRegion += 4;
+                    radioChatID = (RADIO_CHAT_ID)(nowRegion + 1);
+                }
 
                 MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
                 SpawnSerifOrEmote(oscRoomData, radioChatID);
@@ -96,7 +111,12 @@ public class PlayerRadioChat : MonoBehaviour
         {
             if (fastChatInstance == null)
             {
-                fastChatInstance = Instantiate(fastChatCanvasPrefab);
+                fastChatInstance = Instantiate(TeamChatCanvasPrefab);
+                if (chatMainTex[1] != null && chatColorTex[1] != null)
+                {
+                    fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_MainTex", chatMainTex[1]);
+                    fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_ColorTex", chatColorTex[1]);
+                }
                 fastChatInstance.GetComponent<FastChat>().SetChatType((int)RADIO_TYPE.TEXT);
                 fastChatInstance.GetComponent<FastChat>().ReceiverFromRadioChat(true);
             }
