@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class RanProjectileBehaviour : ProjectileBehavior
 {
-    [SerializeField] Explosion secondBlast;
     int state = 0;
     const float firstSpawn = 0.6f;
-    const float spawnInterval = 0.35f;
+    //const float spawnInterval = 0.15f;
 
     Vector3 inputVector;
 
@@ -45,34 +44,12 @@ public class RanProjectileBehaviour : ProjectileBehavior
         state++;
     }
 
-
-    protected void SpawnSecondExplosion()
-    {
-        Vector3 forwardVector = inputVector.normalized * explosion.GetScale() * 0.25f;
-
-        Vector3 spawnPos = transform.position + forwardVector;
-        GameObject explosionInstance = secondBlast.GetBody();
-        GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
-        obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
-        obj.GetComponent<ExplosionBehavior>().SetData(secondBlast);
-
-        state++;
-    }
-
     protected override void Update()
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
         timer += deltaTime;
 
-        switch (state)
-        {
-            case 0:
-                if (timer >= firstSpawn) { SpawnExplosion();  }
-                break;
-            case 1:
-                if (timer >= firstSpawn + spawnInterval) { SpawnSecondExplosion(); }
-                break;
-        }
+        if (timer >= firstSpawn) { SpawnExplosion(); }
 
         if (timer >= lifeTime)
         {
