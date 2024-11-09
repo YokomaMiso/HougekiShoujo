@@ -85,7 +85,7 @@ public class PlayerRadioChat : MonoBehaviour
                 {
                     fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_MainTex", chatMainTex[0]);
                     fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_ColorTex", chatColorTex[0]);
-                    fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetFloat("_AngleOffset", 6.0f);
+                    fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetFloat("_AngleOffset", 5.0f);
                 }
                 fastChatInstance.GetComponent<FastChat>().ReceiverFromRadioChat(true);
             }
@@ -107,6 +107,7 @@ public class PlayerRadioChat : MonoBehaviour
                 SpawnSerifOrEmote(oscRoomData, radioChatID);
 
                 Destroy(fastChatInstance);
+                fastChatInstance.GetComponent<FastChat>().ResetShaderValues();
             }
         }
 
@@ -138,6 +139,7 @@ public class PlayerRadioChat : MonoBehaviour
                 SpawnSerifOrEmote(oscRoomData, radioChatID);
 
                 Destroy(fastChatInstance);
+                fastChatInstance.GetComponent<FastChat>().ResetShaderValues();
             }
         }
     }
