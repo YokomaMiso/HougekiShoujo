@@ -130,6 +130,8 @@ public class FastChat : MonoBehaviour
         int regionSection = (int)RegionSize - 1;
 
         int nowRegion = Mathf.Clamp(Mathf.FloorToInt(angle / regionType), 0, regionSection);
+        nowRegion = regionSection - nowRegion;
+
         Debug.Log("Atan" + nowRegion);
 
         return nowRegion;

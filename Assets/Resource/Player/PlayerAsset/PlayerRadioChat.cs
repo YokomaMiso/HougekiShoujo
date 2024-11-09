@@ -99,7 +99,7 @@ public class PlayerRadioChat : MonoBehaviour
                 
                 if (nowRegion >= 0)
                 {
-                    nowRegion += 4;
+                    nowRegion += 5;
                     radioChatID = (RADIO_CHAT_ID)(nowRegion + 1);
                 }
 
