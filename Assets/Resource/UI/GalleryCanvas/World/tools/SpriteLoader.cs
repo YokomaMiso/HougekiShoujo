@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class SpriteImporter : MonoBehaviour
 {
-    /*
-        [MenuItem("Tools/Create Sprite Collection from Texture")]
+    [MenuItem("Tools/Create Sprite Collection from Texture")]
     public static void CreateSpriteCollectionFromTexture()
     {
         Texture2D selectedTexture = Selection.activeObject as Texture2D;
@@ -38,7 +37,7 @@ public class SpriteImporter : MonoBehaviour
             {
                 sprite = sprite,
                 bulidingText = "Default Text",
-                hasText = true 
+                hasText = true
             };
             spriteCollection.bulidTextPair.Add(newPair);
         }
@@ -49,5 +48,4 @@ public class SpriteImporter : MonoBehaviour
 
         Debug.Log("Sprite collection created successfully at " + assetPathAndName);
     }
-    */
 }
