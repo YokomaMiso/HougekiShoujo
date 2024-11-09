@@ -47,11 +47,13 @@ public class KeyAnnounceInRoom : MonoBehaviour
             keys[3].transform.GetChild(1).GetComponent<Text>().text = "ëﬁèo";
             keys[4].SetActive(false);
         }
+
+        ChangeDisplayButtons();
     }
 
     void Update()
     {
-        ChangeDisplayButtons();
+        if (InputManager.isChangedController) { ChangeDisplayButtons(); }
 
         MachingRoomData.RoomData roomData = OSCManager.OSCinstance.roomData;
 
@@ -101,23 +103,17 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
     void ChangeDisplayButtons()
     {
-        /*
-        if (InputManager.GetKeyDown(BoolActions.RightShoulder))
-        {
-            spriteNum = (spriteNum + 1) % 2;
-        }
-        */
-
-        if (spriteNum == prevSpriteNum) { return; }
-
         Sprite[] applySprites;
-        switch (spriteNum)
+        switch (InputManager.currentController)
         {
-            default:
+            case ControllerType.XInput:
                 applySprites = gamePadButtons;
                 break;
-            case 1:
+            case ControllerType.DirectInput:
                 applySprites = dualSenseButtons;
+                break;
+            default:
+                applySprites = gamePadButtons;
                 break;
         }
 
