@@ -1890,6 +1890,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 71b4ec746260b9046b45ce099b3e19e4, type: 3}
   - {fileID: 21300000, guid: a45f6089a937b2c468905832e1b57ab3, type: 3}
   - {fileID: 21300000, guid: 8cc6ddc90143faf4299fb3e3cdf7bcc2, type: 3}
+  keyButtons:
+  - {fileID: 21300000, guid: 8f3cb3ca32146334aae6abfd3ba9eabd, type: 3}
+  - {fileID: 21300000, guid: f4e6beaba6faea04fa8c4ac2bcd88b26, type: 3}
+  - {fileID: 21300000, guid: dc7f508c76eaebf4c8deed6ebec9669d, type: 3}
+  - {fileID: 21300000, guid: 16b968f01025b954dacb64e74bd09de9, type: 3}
+  - {fileID: 21300000, guid: e768fb975716da34ea91a9b4c8400bfc, type: 3}
 --- !u!1 &4432466077039030639
 GameObject:
   m_ObjectHideFlags: 0
