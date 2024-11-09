@@ -43,22 +43,6 @@ public class FastChat : MonoBehaviour
         }
     }
 
-    void ButtonCheck()
-    {
-        if (InputManager.GetKeyDown(BoolActions.LeftShoulder))
-        {
-            isChatActive = true;
-            SetVisibility(true);
-            elapsedTime = 0f;
-        }
-
-        if (InputManager.GetKeyUp(BoolActions.LeftShoulder))
-        {
-            isChatActive = false;
-            SetVisibility(false);
-            ResetShaderValues();
-        }
-    }
 
     public void ReceiverFromRadioChat(bool _start)
     {
@@ -69,10 +53,9 @@ public class FastChat : MonoBehaviour
             elapsedTime = 0f;
         }
         else
-        {
+        {      
             isChatActive = false;
             SetVisibility(false);
-            ResetShaderValues();
         }
     }
 
@@ -99,7 +82,7 @@ public class FastChat : MonoBehaviour
         }
     }
 
-    void ResetShaderValues()
+    public void ResetShaderValues()
     {
         if (fastChat != null)
         {
