@@ -18,8 +18,7 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
     [SerializeField] Sprite[] gamePadButtons;
     [SerializeField] Sprite[] dualSenseButtons;
-    int spriteNum;
-    int prevSpriteNum;
+    [SerializeField] Sprite[] keyButtons;
 
     void Start()
     {
@@ -113,7 +112,7 @@ public class KeyAnnounceInRoom : MonoBehaviour
                 applySprites = dualSenseButtons;
                 break;
             default:
-                applySprites = gamePadButtons;
+                applySprites = keyButtons;
                 break;
         }
 
@@ -121,8 +120,6 @@ public class KeyAnnounceInRoom : MonoBehaviour
         {
             keys[i].transform.GetChild(0).GetComponent<Image>().sprite = applySprites[i];
         }
-
-        prevSpriteNum = spriteNum;
     }
 
     bool ReadyChecker(MachingRoomData.RoomData _myData)
