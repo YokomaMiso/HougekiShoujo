@@ -1890,6 +1890,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 71b4ec746260b9046b45ce099b3e19e4, type: 3}
   - {fileID: 21300000, guid: a45f6089a937b2c468905832e1b57ab3, type: 3}
   - {fileID: 21300000, guid: 8cc6ddc90143faf4299fb3e3cdf7bcc2, type: 3}
+  proConButtons:
+  - {fileID: 21300000, guid: 690d71ca2e6104a46984b324f548d3ea, type: 3}
+  - {fileID: 21300000, guid: fc80876ae03b0e14782061b9e78a19ca, type: 3}
+  - {fileID: 21300000, guid: 1c48dd92673e6c441b69f1648a8fcaae, type: 3}
+  - {fileID: 21300000, guid: fedccdcb98762044fb20c620623ab08b, type: 3}
+  - {fileID: 21300000, guid: 8a0d98c23cbd0e845af6b993d9c17d98, type: 3}
   keyButtons:
   - {fileID: 21300000, guid: 8f3cb3ca32146334aae6abfd3ba9eabd, type: 3}
   - {fileID: 21300000, guid: f4e6beaba6faea04fa8c4ac2bcd88b26, type: 3}

@@ -18,6 +18,7 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
     [SerializeField] Sprite[] gamePadButtons;
     [SerializeField] Sprite[] dualSenseButtons;
+    [SerializeField] Sprite[] proConButtons;
     [SerializeField] Sprite[] keyButtons;
 
     void Start()
@@ -110,6 +111,9 @@ public class KeyAnnounceInRoom : MonoBehaviour
                 break;
             case ControllerType.DirectInput:
                 applySprites = dualSenseButtons;
+                break;
+            case ControllerType.SwitchInput:
+                applySprites = proConButtons;
                 break;
             default:
                 applySprites = keyButtons;
