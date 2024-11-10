@@ -218,3 +218,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc2f838587ab324c98e4dcfd8e8e93c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allButtonSpriteDataPrefab: {fileID: 11400000, guid: 1feb5fd6c7f42de4faee9e9d5147125f,
+    type: 2}

@@ -16,11 +16,6 @@ public class KeyAnnounceInRoom : MonoBehaviour
     GameObject[] keys;
     const int maxKeyCount = 5;
 
-    [SerializeField] Sprite[] gamePadButtons;
-    [SerializeField] Sprite[] dualSenseButtons;
-    [SerializeField] Sprite[] proConButtons;
-    [SerializeField] Sprite[] keyButtons;
-
     void Start()
     {
         keys = new GameObject[maxKeyCount];
@@ -103,27 +98,8 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
     void ChangeDisplayButtons()
     {
-        Sprite[] applySprites;
-        switch (InputManager.currentController)
-        {
-            case ControllerType.XInput:
-                applySprites = gamePadButtons;
-                break;
-            case ControllerType.DirectInput:
-                applySprites = dualSenseButtons;
-                break;
-            case ControllerType.SwitchInput:
-                applySprites = proConButtons;
-                break;
-            default:
-                applySprites = keyButtons;
-                break;
-        }
-
-        for (int i = 0; i < maxKeyCount; i++)
-        {
-            keys[i].transform.GetChild(0).GetComponent<Image>().sprite = applySprites[i];
-        }
+        Sprite[] applySprites = InputManager.nowButtonSpriteData.GetAllSprites();
+        for (int i = 0; i < maxKeyCount; i++) { keys[i].transform.GetChild(0).GetComponent<Image>().sprite = applySprites[i]; }
     }
 
     bool ReadyChecker(MachingRoomData.RoomData _myData)

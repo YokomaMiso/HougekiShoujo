@@ -63,10 +63,14 @@ public class InputManager : MonoBehaviour
     public static bool isChangedController { get; private set; } = false;
 
     // 各デバイスのすべてのキーを１つにバインドしたInputAction（キー種別検知用）
-    private InputAction xInputAnyKey              = new InputAction(type: InputActionType.PassThrough, binding: "<XInputController>/*", interactions: "Press");
-    private InputAction dualShock4AnyKey          = new InputAction(type: InputActionType.PassThrough, binding: "<DualShockGamepad>/*", interactions: "Press");
-    private InputAction detectDualSenseAnyKey     = new InputAction(type: InputActionType.PassThrough, binding: "<DualSenseGamepadHID>/*", interactions: "Press");
+    private InputAction xInputAnyKey = new InputAction(type: InputActionType.PassThrough, binding: "<XInputController>/*", interactions: "Press");
+    private InputAction dualShock4AnyKey = new InputAction(type: InputActionType.PassThrough, binding: "<DualShockGamepad>/*", interactions: "Press");
+    private InputAction detectDualSenseAnyKey = new InputAction(type: InputActionType.PassThrough, binding: "<DualSenseGamepadHID>/*", interactions: "Press");
     private InputAction switchProControllerAnyKey = new InputAction(type: InputActionType.PassThrough, binding: "<SwitchProControllerHID>/*", interactions: "Press");
+
+    [SerializeField] AllButtonSpriteData allButtonSpriteDataPrefab;
+    public static AllButtonSpriteData allButtonSpriteData;
+    public static ButtonSpriteData nowButtonSpriteData;
 
     private void Awake()
     {
@@ -79,19 +83,19 @@ public class InputManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         actionMap = playerInput.currentActionMap;
-        
-        if(actionMap != null)
+
+        if (actionMap != null)
         {
             // アクションタイプに合わせてデータを保存
-            foreach(InputAction action in actionMap.actions)
+            foreach (InputAction action in actionMap.actions)
             {
-                if(action.type == InputActionType.Button)
+                if (action.type == InputActionType.Button)
                 {
                     boolActions.Add(action);
 
                     //Debug.Log(action.name + "がButtonにセットされました");
                 }
-                else if(action.type == InputActionType.Value)
+                else if (action.type == InputActionType.Value)
                 {
                     vec2Actions.Add(action);
 
@@ -111,6 +115,9 @@ public class InputManager : MonoBehaviour
         dualShock4AnyKey.Enable();
         detectDualSenseAnyKey.Enable();
         switchProControllerAnyKey.Enable();
+
+        allButtonSpriteData = allButtonSpriteDataPrefab;
+        nowButtonSpriteData = allButtonSpriteData.GetButtonSprite((int)ControllerType.Keyboard);
     }
 
     private void Update()
@@ -118,6 +125,7 @@ public class InputManager : MonoBehaviour
         isChangedController = false;
 
         UpdateCurrentController();
+        if (isChangedController) { nowButtonSpriteData = allButtonSpriteData.GetButtonSprite((int)currentController); }
 
         Debug.Log(currentController);
         Debug.Log(isChangedController);
@@ -193,7 +201,7 @@ public class InputManager : MonoBehaviour
     /// <typeparam name="T">取得したい型、boolまたはvector2</typeparam>
     /// <param name="an">Actionに登録されているキー</param>
     /// <returns>スティックが離された最初のフレーム = true or 現在値: それ以外 = false or (0, 0)</returns>
-    public static T GetAxisUp<T>(Vec2AxisActions an)where T : struct
+    public static T GetAxisUp<T>(Vec2AxisActions an) where T : struct
     {
         object val = new object();
 
@@ -205,7 +213,7 @@ public class InputManager : MonoBehaviour
 
                 return (T)val;
             }
-            else if(typeof(T) == typeof(Vector2))
+            else if (typeof(T) == typeof(Vector2))
             {
                 val = vec2Actions[(int)an].ReadValue<Vector2>().normalized;
 
@@ -282,7 +290,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if(vec2Actions[actionNum].WasReleasedThisFrame())
+        if (vec2Actions[actionNum].WasReleasedThisFrame())
         {
             axisTimeList[actionNum] = 0;
         }
@@ -299,7 +307,7 @@ public class InputManager : MonoBehaviour
     {
         return boolActions[(int)an].IsPressed();
     }
-    
+
     /// <summary>
     /// bool型のキー入力取得
     /// </summary>
@@ -323,11 +331,11 @@ public class InputManager : MonoBehaviour
     private void UpdateCurrentController()
     {
         var beforeDeviceType = currentController;
-        
+
         switch (playerInput.currentControlScheme)
         {
             case "Gamepad":
-                
+
                 if (xInputAnyKey.triggered)
                 {
                     currentController = ControllerType.XInput;
