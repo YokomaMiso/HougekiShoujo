@@ -6,11 +6,21 @@ using UnityEngine.UI;
 
 public class RoomBanner : MonoBehaviour
 {
+    public int roomNum;
+
     Text roomNumText;
     Text isPlayingText;
     Text memberCountText;
     Image hostIcon;
     Text memberText;
+
+    SelectRoomCanvasBehavior parent;
+    public void SetParent(SelectRoomCanvasBehavior _parent) { parent = _parent; }
+
+    public void PressThisBanner()
+    {
+        parent.DecideRoomFromTouch(roomNum);
+    }
 
     void AssignChild()
     {
@@ -41,6 +51,7 @@ public class RoomBanner : MonoBehaviour
         AssignChild();
 
         //•”‰®”Ô†
+        roomNum = _num;
         roomNumText.text = "Room " + (_num + 1).ToString();
 
         //ƒvƒŒƒC’†‚È‚ç•\¦
