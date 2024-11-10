@@ -13,6 +13,9 @@ public class DisplayShellIcon : MonoBehaviour
     Text subText;
     Image cancelIcon;
 
+    Image shellButton;
+    Image subButton;
+
     Sprite shellIconSprite;
     Sprite subIconSprite;
 
@@ -27,18 +30,31 @@ public class DisplayShellIcon : MonoBehaviour
         cancelIcon.gameObject.SetActive(false);
         iconFrame = transform.GetChild(2).GetComponent<Image>();
 
+        shellButton = shellIcon.transform.GetChild(0).GetComponent<Image>();
+        subButton = subIcon.transform.GetChild(2).GetComponent<Image>();
+
         shellIconSprite = ownerPlayer.GetPlayerData().GetShell().GetShellIcon();
         shellIcon.sprite = shellIconSprite;
         subIconSprite = ownerPlayer.GetPlayerData().GetSubWeapon().GetIcon();
         subIcon.sprite = subIconSprite;
 
         iconFrame.color = Color.clear;
+
+        ChangeDisplayButtons();
     }
 
     void Update()
     {
         CheckPlayerShell();
         CheckPlayerSubWeapon();
+
+        if (InputManager.isChangedController) { ChangeDisplayButtons(); }
+    }
+
+    void ChangeDisplayButtons()
+    {
+        shellButton.sprite = InputManager.nowButtonSpriteData.GetSubmit();
+        subButton.sprite = InputManager.nowButtonSpriteData.GetCancel();
     }
 
     void CheckPlayerShell()

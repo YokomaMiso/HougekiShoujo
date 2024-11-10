@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a678d712ad9c1a4ba72c5a95ccfa214, type: 3}
+  m_Name: BSD_KeyBoard
+  m_EditorClassIdentifier: 
+  horizontal: {fileID: 21300000, guid: 8f3cb3ca32146334aae6abfd3ba9eabd, type: 3}
+  vertical: {fileID: 21300000, guid: f4e6beaba6faea04fa8c4ac2bcd88b26, type: 3}
+  submit: {fileID: 21300000, guid: dc7f508c76eaebf4c8deed6ebec9669d, type: 3}
+  cancel: {fileID: 21300000, guid: 16b968f01025b954dacb64e74bd09de9, type: 3}
+  stageSelect: {fileID: 21300000, guid: e768fb975716da34ea91a9b4c8400bfc, type: 3}
