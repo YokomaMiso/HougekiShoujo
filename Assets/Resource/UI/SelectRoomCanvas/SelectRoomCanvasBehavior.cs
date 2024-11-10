@@ -28,7 +28,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     GameObject roomBanners;
 
     //ルームバナーのカーソル
-    int selectRoomBannerNum = 0;
+    public int selectRoomBannerNum = 0;
     //ボタンの最大数
     const int roomBannerItemNum = 8;
 
@@ -50,6 +50,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         for (int i = 0; i < roomBannerItemNum; i++)
         {
             RoomBanner _room = roomBanners.transform.GetChild(i).GetComponent<RoomBanner>();
+            _room.SetParent(this);
 
             //検索した部屋番号を適用
             roomBannerList.Add(_room);
@@ -70,7 +71,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         if (Managers.instance.UsingCanvas()) { return; }
 
         //通信中ならリタ―ン
-        if(connectingWindowInstance != null) { return; }
+        if (connectingWindowInstance != null) { return; }
 
         //Joinが押されていない
         if (!selectJoin)
@@ -110,11 +111,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         }
     }
 
-    void DecideButtonSelect()
+    void DecideBehavior()
     {
-        //決定が押されていないならリターン
-        if (!InputManager.GetKeyDown(BoolActions.SouthButton)) { return; }
-
         switch ((SELECT_ROOM_BUTTON_ID)selectButtonNum)
         {
             case SELECT_ROOM_BUTTON_ID.UPDATE:
@@ -135,9 +133,6 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
             case SELECT_ROOM_BUTTON_ID.RANDOM:
                 //ConnectionSceneに移動し、部屋に参加or作成
-
-
-
                 //Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
                 //Managers.instance.ChangeState(GAME_STATE.CONNECTION);
                 break;
@@ -146,6 +141,32 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
                 Managers.instance.ChangeScene(GAME_STATE.TITLE);
                 Managers.instance.ChangeState(GAME_STATE.TITLE);
                 break;
+        }
+    }
+
+    void DecideButtonSelect()
+    {
+        //決定が押されていないならリターン
+        if (!InputManager.GetKeyDown(BoolActions.SouthButton)) { return; }
+
+        DecideBehavior();
+    }
+    public void DecideButtonSelectFromUI(int _selectButtonNum)
+    {
+        //シーンチェンジのキャンバスが生成されていたら早期リターン
+        if (Managers.instance.UsingCanvas()) { return; }
+
+        //通信中ならリタ―ン
+        if (connectingWindowInstance != null) { return; }
+
+        if (selectJoin) { return; }
+
+        if (selectButtonNum == _selectButtonNum) { DecideBehavior(); }
+        else 
+        {
+            buttons[selectButtonNum].color = Color.white;
+            selectButtonNum = _selectButtonNum;
+            buttons[selectButtonNum].color = Color.yellow;
         }
     }
 
@@ -194,6 +215,26 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         //ConnectionSceneに移動し、選択した部屋に参加
         Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
         Managers.instance.ChangeState(GAME_STATE.CONNECTION);
+    }
+
+    public void DecideRoomFromTouch(int _num)
+    {
+        if (!selectJoin) { return; }
+
+        if (_num == selectRoomBannerNum)
+        {
+            OSCManager.OSCinstance.startPort = selectRoomBannerNum * 10 + 50000;
+
+            //ConnectionSceneに移動し、選択した部屋に参加
+            Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
+            Managers.instance.ChangeState(GAME_STATE.CONNECTION);
+        }
+        else
+        {
+            roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.white;
+            selectRoomBannerNum = _num;
+            roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.yellow;
+        }
     }
 
     void BackButtonSelect()

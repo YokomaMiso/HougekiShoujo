@@ -17,9 +17,8 @@ public class InputName : MonoBehaviour
     {
         inputField = transform.GetChild(1).GetComponent<InputField>();
         inputField.text = Managers.instance.optionData.playerName;
-        inputField.Select();
+        //inputField.Select();
     }
-
     void Update()
     {
         if (parent.GetTitleState() != TITLE_STATE.INPUT_NAME) { return; }
@@ -88,6 +87,11 @@ public class InputName : MonoBehaviour
         if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("z").wasPressedThisFrame) { return; }
         if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("j").wasPressedThisFrame) { return; }
 
+        GoToNextScene();
+    }
+
+    void GoToNextScene()
+    {
         string playerName = inputField.text;
         if (playerName == "") { playerName = "Player"; }
         Managers.instance.optionData.playerName = playerName;
@@ -107,5 +111,10 @@ public class InputName : MonoBehaviour
         if (Keyboard.current[Key.RightShift].wasPressedThisFrame) { return; }
 
         parent.ChangeTitleState(TITLE_STATE.SELECT);
+    }
+
+    public void SubmitFromUIButton()
+    {
+        GoToNextScene();
     }
 }
