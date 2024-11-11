@@ -83,13 +83,20 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).ready) { return; }
 
-
         float inputValue = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis).y;
         if (Mathf.Abs(inputValue) < 0.9f) { return; }
 
         int teamID;
         if (inputValue > 0) { teamID = (int)TEAM_NUM.A; }
         else { teamID = (int)TEAM_NUM.B; }
+
+        rm.PlayerBannerChanger(teamID);
+    }
+
+    public void TeamSelectFromUI(int _num)
+    {
+        if (OSCManager.OSCinstance.GetRoomData(Managers.instance.playerID).ready) { return; }
+        int teamID = _num;
 
         rm.PlayerBannerChanger(teamID);
     }
@@ -108,6 +115,17 @@ public class RoomCanvasBehavior : MonoBehaviour
 
             charaVisual.SetCharaVisual(nowPlayerData);
         }
+    }
+
+    public void CharaSelectFromUI(int _num)
+    {
+        rm.CharaSelect(_num);
+
+        MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        int charaID = myRoomData.selectedCharacterID;
+        PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
+
+        charaVisual.SetCharaVisual(nowPlayerData);
     }
 
     void OpenOption()
@@ -133,12 +151,24 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
     }
 
+    public void CheckStageSelectButtonFromUI()
+    {
+        //‚»‚à‚»‚àƒzƒXƒg‚¶‚á‚È‚¢‚È‚ç
+        if (Managers.instance.playerID != 0) { return; }
+
+        stageSelect.gameObject.SetActive(true);
+    }
+
     void PressSubmit()
     {
         if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
             rm.PressSubmit();
         }
+    }
+    public void PressSubmitFromUI()
+    {
+        rm.PressSubmit();
     }
     void PressCancel()
     {

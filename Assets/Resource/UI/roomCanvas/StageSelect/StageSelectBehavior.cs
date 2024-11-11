@@ -11,14 +11,16 @@ public class StageSelectBehavior : MonoBehaviour
     bool end;
     const float moveTime = 0.5f;
 
-    readonly Vector3 startPos = new Vector3(-416, -1180);
+    readonly Vector3 startPos = new Vector3(-416, -944);
     readonly Vector3 endPos = new Vector3(-416, -80);
+
+    [SerializeField] Transform binder;
 
     void OnEnable()
     {
         start = true;
         end = false;
-        transform.GetChild(0).localPosition = startPos;
+        binder.localPosition = startPos;
 
         DisplayStageUpdate(OSCManager.OSCinstance.roomData.stageNum);
     }
@@ -35,7 +37,7 @@ public class StageSelectBehavior : MonoBehaviour
             }
 
             float nowRate = Mathf.Sqrt(timer / moveTime);
-            transform.GetChild(0).localPosition = Vector3.Lerp(startPos, endPos, nowRate);
+            binder.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
         }
         else if (!end)
         {
@@ -52,7 +54,7 @@ public class StageSelectBehavior : MonoBehaviour
             }
 
             float nowRate = Mathf.Sqrt(timer / moveTime);
-            transform.GetChild(0).localPosition = Vector3.Lerp(startPos, endPos, nowRate);
+            binder.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
         }
     }
 
@@ -75,11 +77,26 @@ public class StageSelectBehavior : MonoBehaviour
         }
     }
 
+    public void StageNumChangeFromUI(int _num)
+    {
+        MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        int stageNum = myRoomData.stageNum;
+
+        int stageMaxCount = Managers.instance.gameManager.allStageData.GetStageMaxCount();
+
+        if (_num > 0) { stageNum = (stageNum + 1) % stageMaxCount; }
+        else { stageNum = (stageNum + (stageMaxCount - 1)) % stageMaxCount; }
+
+        OSCManager.OSCinstance.roomData.stageNum = stageNum;
+
+        DisplayStageUpdate(stageNum);
+    }
+
     void DisplayStageUpdate(int _num)
     {
         StageData sd = Managers.instance.gameManager.allStageData.GetStageData(_num);
-        transform.GetChild(0).GetChild(2).GetComponent<Image>().sprite = sd.GetScreenShot();
-        transform.GetChild(0).GetChild(3).GetComponent<Image>().sprite = sd.GetMinimap();
+        binder.GetChild(2).GetComponent<Image>().sprite = sd.GetScreenShot();
+        binder.GetChild(3).GetComponent<Image>().sprite = sd.GetMinimap();
     }
 
     void PressSubmit()
@@ -88,5 +105,9 @@ public class StageSelectBehavior : MonoBehaviour
         {
             end = true;
         }
+    }
+    public void PressSubmitFromUI()
+    {
+        end = true;
     }
 }
