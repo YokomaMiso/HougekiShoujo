@@ -88,6 +88,19 @@ public class MiniMapC : MonoBehaviour
             playerPositions[arrayIndex] = new Vector4(normalizedX, 0, normalizedZ, 1);
 
             arrayIndex++;
+
+            Debug.Log("MaxPlayer"+playerCount);
+            for(int i = 0; i < playerCount; i++)
+            {
+                if (i >= playerTeams.Length)
+                {
+                    Debug.LogError("Error: Index " + i + " は存在しない " + playerTeams.Length);
+                    continue;
+                }
+                Debug.Log("PlayerTeams" + playerTeams[i]);
+                Debug.Log("PlayerPosition" + playerPos[i]);
+            }
+
         }
 
         if (miniMap != null)
