@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 1606402673141982862}
   - component: {fileID: 8346831449524114117}
   - component: {fileID: 1351538614971898933}
+  - component: {fileID: 7833140107185978623}
   m_Layer: 5
   m_Name: ScoreBoardCanvas
   m_TagString: Untagged
@@ -802,6 +803,23 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &7833140107185978623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709048735998296356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1763642140981105113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,9 +1683,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7588871684028052967}
-        m_TargetAssemblyTypeName: ResultCanvasBehavior, Assembly-CSharp
-        m_MethodName: ReturnRoom
+      - m_Target: {fileID: 2475075734694297818}
+        m_TargetAssemblyTypeName: ResultExitButton, Assembly-CSharp
+        m_MethodName: Press
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

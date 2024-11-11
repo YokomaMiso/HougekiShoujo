@@ -49,4 +49,9 @@ public class ResultExitButton : MonoBehaviour
             if (InputManager.GetKeyDown(BoolActions.SouthButton)) { ownerCanvas.ReturnRoom(); }
         }
     }
+
+    public void Press()
+    {
+        ownerCanvas.ReturnRoom();
+    }
 }
