@@ -374,9 +374,20 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    int prevInputFromUI = -1;
+    public void SetInputFromUI(int _num) { prevInputFromUI = _num; }
+
     int InputCheck()
     {
         int reloadValue = -1;
+
+        if (prevInputFromUI != -1)
+        {
+            reloadValue = prevInputFromUI;
+            prevInputFromUI = -1;
+            return reloadValue;
+        }
+
         //if (Input.GetButtonDown("X")) { reloadValue = 0; }
         //if (Input.GetButtonDown("Y")) { reloadValue = 0; }
         if (InputManager.GetKeyDown(BoolActions.SouthButton)) { reloadValue = 0; }
