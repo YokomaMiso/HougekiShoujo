@@ -12,16 +12,28 @@ public class ResultExitButton : MonoBehaviour
     const float canSubmitTime = 17.0f;
 
     Text text;
+    Image button;
 
     float alphaTimer;
     void Start()
     {
         text = GetComponent<Text>();
         text.color = Color.clear;
+        button = transform.GetChild(0).GetComponent<Image>();
+        button.color = Color.clear;
+
+        button.sprite = InputManager.nowButtonSpriteData.GetSubmit();
     }
 
     void Update()
     {
+        if (InputManager.isChangedController)
+        {
+            button.sprite = InputManager.nowButtonSpriteData.GetSubmit();
+            if (InputManager.currentController == ControllerType.TouchScreen) { text.text = "Press Here"; }
+            else { text.text = "Press"; }
+        }
+
         if (timer <= canSubmitTime) { timer += Time.deltaTime; }
         else
         {
@@ -30,6 +42,7 @@ public class ResultExitButton : MonoBehaviour
 
             float nowRate = Mathf.Abs(Mathf.Sin(alphaTimer));
             text.color = Color.black * nowRate;
+            button.color = new Color(1, 1, 1, nowRate);
 
             if (Managers.instance.UsingCanvas()) { return; }
 
