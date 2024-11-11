@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class SpriteImporter : MonoBehaviour
 {
+    /*
     [MenuItem("Tools/Create Sprite Collection from Texture")]
     public static void CreateSpriteCollectionFromTexture()
     {
@@ -48,4 +49,5 @@ public class SpriteImporter : MonoBehaviour
 
         Debug.Log("Sprite collection created successfully at " + assetPathAndName);
     }
+    */
 }
