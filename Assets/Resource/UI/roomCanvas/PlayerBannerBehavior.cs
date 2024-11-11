@@ -15,13 +15,12 @@ public class PlayerBannerBehavior : MonoBehaviour
         {
             transform.GetChild(0).GetComponent<Image>().color = Color.white;
             transform.GetChild(3).GetComponent<Text>().color = Color.black;
+            transform.GetChild(5).gameObject.SetActive(true);
         }
-
     }
     public void BannerIconUpdate(RoomData _roomData)
     {
         if (_roomData.myID == MachingRoomData.bannerEmpty) { return; }
-
 
         int charaID = _roomData.selectedCharacterID;
         Sprite icon = Managers.instance.gameManager.playerDatas[charaID].GetCharacterAnimData().GetCharaIcon();
@@ -29,5 +28,7 @@ public class PlayerBannerBehavior : MonoBehaviour
 
         transform.GetChild(3).GetComponent<Text>().text = _roomData.playerName;
         transform.GetChild(4).gameObject.SetActive(_roomData.ready);
+
+        if (num == Managers.instance.playerID) { transform.GetChild(5).gameObject.SetActive(!_roomData.ready); }
     }
 }
