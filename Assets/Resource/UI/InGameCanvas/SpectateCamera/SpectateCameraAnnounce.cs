@@ -5,8 +5,12 @@ using UnityEngine.UI;
 
 public class SpectateCameraAnnounce : MonoBehaviour
 {
-    public void Display(bool _canChange) 
+    [SerializeField] Image button;
+
+    public void Display(bool _canChange)
     {
-        transform.gameObject.SetActive(_canChange); 
+        transform.gameObject.SetActive(_canChange);
+
+        button.sprite = InputManager.nowButtonSpriteData.GetShoulder();
     }
 }

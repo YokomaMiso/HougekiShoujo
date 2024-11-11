@@ -23,5 +23,6 @@ public class ButtonSpriteData : ScriptableObject
     }
     public Sprite GetSubmit() { return submit; }
     public Sprite GetCancel() { return cancel; }
+    public Sprite GetShoulder() { return stageSelect; }
 
 }
