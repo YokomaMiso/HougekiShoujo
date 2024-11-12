@@ -20,6 +20,6 @@ MonoBehaviour:
   subWeaponExplain: "\uFF15\u79D2\u9593\u3001\u81EA\u8EAB\u306E\u79FB\u52D5\u901F\u5EA6\u304C\u4E0A\u6607\u3059\u308B\n\u4F7F\u7528\u5F8C\u300115\u79D2\u306E\u5F85\u6A5F\u6642\u9593\u304C\u5FC5\u8981"
   installationStartAnim: {fileID: 0}
   installationLoopAnim: {fileID: 0}
-  reloadTime: 25
+  reloadTime: 15
   speedRate: 1.5
   lifeTime: 5
