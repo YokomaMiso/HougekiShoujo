@@ -16,6 +16,7 @@ MonoBehaviour:
   charaNameRubi: "\u307F\u3065\u304D \u3061\u304B\u306D"
   schoolData: {fileID: 11400000, guid: 74745430b8c5aae4d9fd52e77dc1552b, type: 2}
   grade: 2
+  mvpExplain: "\u4ECA\u5E74\u306EMVP\u306F\u4EC7\u5C04\u9AD8\u68212\u5E74\u306E\u89B3\u6708\u5343\u9244\u304C\u53D7\u8CDE\u3002\u5F7C\u5973\u306F\u6301\u3061\u524D\u306E\u811A\u529B\u3092\u6D3B\u304B\u3057\u3001\u9053\u3092\u5207\u308A\u958B\u304D\u52DD\u5229\u3078\u5C0E\u304D\u307E\u3057\u305F\u3002"
   characterAnimData: {fileID: 11400000, guid: 2e6790484df528446bd847d126044e89, type: 2}
   moveSpeed: 5
   difficulity: 2
