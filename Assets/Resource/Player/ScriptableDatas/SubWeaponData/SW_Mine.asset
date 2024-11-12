@@ -23,6 +23,6 @@ MonoBehaviour:
     type: 2}
   installationLoopAnim: {fileID: 9100000, guid: f6859c366d2eafe449618c4ead980fb1,
     type: 2}
-  reloadTime: 25
+  reloadTime: 20
   speedRate: 0
   lifeTime: Infinity

@@ -30,7 +30,7 @@ public class BlueCoralBehavior : InstallationBehavior
         TimeSetting();
 
         timer += deltaTime;
-        transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 2;
+        transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 3;
 
         if (timer > lifeTime) { Destroy(gameObject); }
     }

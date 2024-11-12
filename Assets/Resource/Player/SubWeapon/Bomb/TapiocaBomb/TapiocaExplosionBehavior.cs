@@ -36,6 +36,6 @@ public class TapiocaExplosionBehavior : ExplosionBehavior
         //トラップ被弾ボイスを鳴らす
         nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
 
-        nowPlayer.GetComponent<PlayerMove>().ReceiveSlip(12.0f);
+        nowPlayer.GetComponent<PlayerMove>().ReceiveSlip(6.0f);
     }
 }
