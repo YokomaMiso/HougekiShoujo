@@ -159,6 +159,51 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RadioChat9",
+                    "type": "Button",
+                    "id": "607c65ef-2bef-4496-9056-c8842d437af1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RadioChat10",
+                    "type": "Button",
+                    "id": "7afe2ee8-e040-45fc-9e09-e885318cbe11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RadioChat11",
+                    "type": "Button",
+                    "id": "b9694051-4689-4d9c-8ddc-cbc9b9016142",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RadioChat12",
+                    "type": "Button",
+                    "id": "02dee616-97a3-402e-8e6e-aa0546ef1ab5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RadioChat13",
+                    "type": "Button",
+                    "id": "a720016d-c9d6-4c04-ab60-59d358f34d9e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "TapTouch",
                     "type": "Button",
                     "id": "fcf8222d-8e41-4ac1-a887-d6ab51aa0b4c",
@@ -670,6 +715,61 @@
                     "processors": "",
                     "groups": "Key&Mouse",
                     "action": "LeftTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "922df032-385c-426b-ba63-dbf5e162d04d",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Key&Mouse",
+                    "action": "RadioChat10",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d9de918-1c6e-4423-8695-8d3f6d03e10b",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Key&Mouse",
+                    "action": "RadioChat11",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "27a9804c-d887-46c8-84db-ff3bcdf6dcef",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Key&Mouse",
+                    "action": "RadioChat12",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "250835f9-051c-4a18-b3ac-5ca5b332fb2a",
+                    "path": "<Keyboard>/f4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Key&Mouse",
+                    "action": "RadioChat13",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f5bb50c-c98a-4438-8904-6c3e75bc53bf",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RadioChat9",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

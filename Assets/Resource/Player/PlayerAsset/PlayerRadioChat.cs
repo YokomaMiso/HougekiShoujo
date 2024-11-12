@@ -148,12 +148,12 @@ public class PlayerRadioChat : MonoBehaviour
     {
         if (radioChatID != RADIO_CHAT_ID.NONE) { return; }
 
-        int buttonMaxCount = (BoolActions.RadioChat8 + 1) - BoolActions.RadioChat1;
+        int buttonMaxCount = (BoolActions.RadioChat13+1) - BoolActions.RadioChat1;
         for (int i = 0; i < buttonMaxCount; i++)
         {
-            if (InputManager.GetKeyDown(BoolActions.RadioChat1 + i))
+            if (InputManager.GetKeyDown(BoolActions.RadioChat1 + (i)))
             {
-                radioChatID = (radioType == RADIO_TYPE.TEXT) ? (RADIO_CHAT_ID)(i + 1) : (RADIO_CHAT_ID)(i + 5);
+                radioChatID = (RADIO_CHAT_ID)((i >= 0 && i < 9) ? (i + 5) : (i >=9 && i <13) ? (i - 8) : i);
                 MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
                 SpawnSerifOrEmote(oscRoomData, radioChatID);
 
