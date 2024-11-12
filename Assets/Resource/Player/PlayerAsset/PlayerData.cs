@@ -10,6 +10,7 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Character Name Rubi")] string charaNameRubi;
     [SerializeField, Header("School")] SchoolData schoolData;
     [SerializeField, Header("Grade")] int grade;
+    [SerializeField, Header("MVP Explain"), TextArea(1, 5)] string mvpExplain;
     [Header("Animation")]
     [SerializeField, Header("Anim Data")] CharacterAnimData characterAnimData;
     [Header("Status Data")]
