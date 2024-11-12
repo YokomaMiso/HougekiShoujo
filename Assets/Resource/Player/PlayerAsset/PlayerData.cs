@@ -32,6 +32,7 @@ public class PlayerData : ScriptableObject
     public Sprite GetSchoolIcon() { return schoolData.GetSchoolIcon(); }
     public string GetGrade() { return grade.ToString() + " ”N"; }
     public CharacterAnimData GetCharacterAnimData() { return characterAnimData; }
+    public string GetMVPExplain() { return mvpExplain; }
 
     public float GetMoveSpeed() { return moveSpeed; }
     public int GetDifficulity() { return difficulity; }
