@@ -19,7 +19,7 @@ MonoBehaviour:
   projectileAnim: {fileID: 0}
   explosion: {fileID: 11400000, guid: a0edeb93c7d7b714da6c4edb5887ec86, type: 2}
   weaponName: YELLOW-1892
-  shellExplain: "\u524D\u65B9\u306B\uFF12\u767A\u306E\u5F3E\u3092\u767A\u5C04\u3059\u308B\n\u524D\u65B9\u5411\u306E\u5E83\u3044\u7BC4\u56F2\u3092\u7832\u6483\u3059\u308B"
+  shellExplain: "\u524D\u65B9\u5E83\u7BC4\u56F2\u306B\uFF12\u767A\u306E\u5F3E\u3092\u767A\u5C04\u3059\u308B\n\u305D\u306E\u4EE3\u308F\u308A\u306B\u767A\u751F\u304C\u9045\u304F\u3001\u786C\u76F4\u304C\u9577\u3044"
   reloadTime: 2
   recoilTime: 2
   projectileSpeed: 0
