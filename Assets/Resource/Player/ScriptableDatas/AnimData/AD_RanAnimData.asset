@@ -22,7 +22,7 @@ MonoBehaviour:
   idleAnimationData: {fileID: 9100000, guid: 15cadc8b8308bea41b977f2cad7d2347, type: 2}
   runAnimationData:
   - {fileID: 9100000, guid: 4d76b364b488fd24a82d7904823669ff, type: 2}
-  reloadAnimationData: {fileID: 9100000, guid: c58685a493257c84299407801febcebf, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: dfce84d20c2b83b42b87b6618d6e16cc, type: 2}
   aimAnimationData:
   - {fileID: 9100000, guid: 2a35fdbfbe7d92149b894e0917a8b5c2, type: 2}
   - {fileID: 9100000, guid: 059a037f4993f6b4fac74c51a1512fc1, type: 2}
