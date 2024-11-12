@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class RanProjectileBehaviour : ProjectileBehavior
 {
-    bool spawned;
+    int state = 0;
+    const int maxSpawnCount = 2;
     const float firstSpawn = 0.6f;
-    //const float spawnInterval = 0.15f;
+    const float spawnInterval = 0.3f;
 
     Vector3 inputVector;
+
+    readonly float[] forwardValue = new float[maxSpawnCount] { 2.25f, 0.25f };
 
     protected override void Start()
     {
@@ -26,22 +29,15 @@ public class RanProjectileBehaviour : ProjectileBehavior
 
     protected override void SpawnExplosion()
     {
-        Vector3[] offsetSide = new Vector3[2] { -transform.right, transform.right };
+        Vector3 forwardVector = inputVector.normalized * forwardValue[state];
 
-        for (int i = 0; i < 2; i++)
-        {
-            Vector3 forwardVector = inputVector.normalized * explosion.GetScale() * 1.5f;
-            float explosionScale = explosion.GetScale();
-            Vector3 offset = offsetSide[i] * explosionScale;
-            Vector3 addPos = offset + forwardVector;
+        Vector3 spawnPos = transform.position + forwardVector;
+        GameObject explosionInstance = explosion.GetBody();
+        GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
+        obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
+        obj.GetComponent<ExplosionBehavior>().SetData(explosion);
 
-            Vector3 spawnPos = transform.position + addPos;
-            GameObject explosionInstance = explosion.GetBody();
-            GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
-            obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
-            obj.GetComponent<ExplosionBehavior>().SetData(explosion);
-        }
-        spawned = true;
+        state++;
     }
 
     protected override void Update()
@@ -51,9 +47,9 @@ public class RanProjectileBehaviour : ProjectileBehavior
 
         if (timer >= lifeTime) { Destroy(gameObject); }
 
-        if (spawned) { return; }
+        if (state >= maxSpawnCount) { return; }
 
-        if (timer >= firstSpawn) { SpawnExplosion(); }
+        if (timer >= firstSpawn + spawnInterval * state) { SpawnExplosion(); }
     }
 }
 
