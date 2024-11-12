@@ -105,4 +105,9 @@ public class DisplayShellIcon : MonoBehaviour
                 break;
         }
     }
+
+    public void SendButtonToPlayer(int _num)
+    {
+        ownerPlayer.SetInputFromUI(_num);
+    }
 }
