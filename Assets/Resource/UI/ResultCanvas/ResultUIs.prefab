@@ -2596,6 +2596,7 @@ MonoBehaviour:
   killCountText: {fileID: 4479435842869484799}
   pixelChara: {fileID: 3334396067844794916}
   mvpText: {fileID: 3600515361549468176}
+  mvpExplain: {fileID: 7627645037959948123}
 --- !u!1 &4597889234890108766
 GameObject:
   m_ObjectHideFlags: 0
