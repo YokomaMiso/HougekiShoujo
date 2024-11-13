@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class InGameStartText : MonoBehaviour
 {
-    Vector2 pos = new Vector3(0, 0, 0);
-
     RectTransform rectTransform;
+    Image image;
+    [SerializeField]Image vfx;
+
+    [SerializeField] Sprite fightSprite;
+    [SerializeField] Sprite[] roundSprites;
 
     void Start()
     {
@@ -17,7 +20,11 @@ public class InGameStartText : MonoBehaviour
     public void Init()
     {
         rectTransform = GetComponent<RectTransform>();
-        rectTransform.localPosition = pos;
+        rectTransform.localPosition = Vector3.zero;
+        image = GetComponent<Image>();
+        image.color = Color.clear;
+
+        vfx.color = Color.clear;
     }
 
     void Update()
@@ -26,7 +33,9 @@ public class InGameStartText : MonoBehaviour
 
         if (hostIngameData.play)
         {
-            GetComponent<Text>().color = Color.clear;
+            image.color = Color.clear;
+            vfx.color = Color.clear;
+
             return;
         }
 
@@ -39,17 +48,21 @@ public class InGameStartText : MonoBehaviour
             float[] randoms = new float[2] { Random.Range(-seed, seed), Random.Range(-seed, seed) };
 
             rectTransform.localPosition = new Vector2(randoms[0] * randoms[0], randoms[1] * randoms[1]);
-            GetComponent<Text>().text = "Fight!";
-            GetComponent<Text>().color = Color.white;
+            image.sprite = fightSprite;
+            image.color = Color.white;
+            vfx.color = Color.white;
+
         }
         else if (3.5f > timer && timer > 2.5f)
         {
-            GetComponent<Text>().text = "Round " + hostIngameData.roundCount.ToString();
-            GetComponent<Text>().color = Color.white;
+            image.sprite = roundSprites[hostIngameData.roundCount - 1];
+            image.color = Color.white;
+            vfx.color = Color.clear;
         }
         else
         {
-            GetComponent<Text>().color = Color.clear;
+            image.color = Color.clear;
+            vfx.color = Color.clear;
         }
     }
 }
