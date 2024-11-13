@@ -8,29 +8,23 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 {
     enum SELECT_ROOM_BUTTON_ID { UPDATE = 0, JOIN, RANDOM, BACK_TO_TITLE, MAX_NUM };
 
-    Image[] buttons = new Image[(int)SELECT_ROOM_BUTTON_ID.MAX_NUM];
-    Image createButton;
-    Image joinButton;
-    Image randomButton;
-    Image backTitleButton;
+    [SerializeField] SelectRoomCursorBehavior cursor;
 
-    //ボタンのカーソル
-    int selectButtonNum = 0;
-    //ボタンの最大数
-    const int buttonItemNum = 4;
-    //カーソル移動可能かどうか
-    bool isCanSelect = true;
+    [SerializeField] RectTransform refreshButton;
+    [SerializeField] RectTransform randomButton;
+    [SerializeField] RectTransform backTitleButton;
 
-    //joinButtonを押したかどうか
-    bool selectJoin;
+    //カーソル
+    int selectRoomNum = 0;
+    //ルームの最大数
+    const int maxRoomNum = 8;
+    //上方向のボタンの数
+    const int headerButonNum = 2;
+    //下方向のボタンの数
+    const int footerButonNum = 1;
 
     //ルームbannerの親
-    GameObject roomBanners;
-
-    //ルームバナーのカーソル
-    public int selectRoomBannerNum = 0;
-    //ボタンの最大数
-    const int roomBannerItemNum = 8;
+    [SerializeField] GameObject roomBanners;
 
     //ルームバナーリスト
     List<RoomBanner> roomBannerList = new List<RoomBanner>();
@@ -43,11 +37,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         OSCManager.OSCinstance.startPort = 50000;
         OSCManager.OSCinstance.pSRCB = this;
 
-        for (int i = 0; i < (int)SELECT_ROOM_BUTTON_ID.MAX_NUM; i++) { buttons[i] = transform.GetChild(i).GetComponent<Image>(); }
-        buttons[selectButtonNum].color = Color.yellow;
-
-        roomBanners = transform.GetChild(4).gameObject;
-        for (int i = 0; i < roomBannerItemNum; i++)
+        for (int i = 0; i < maxRoomNum; i++)
         {
             RoomBanner _room = roomBanners.transform.GetChild(i).GetComponent<RoomBanner>();
             _room.SetParent(this);
@@ -73,75 +63,106 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         //通信中ならリタ―ン
         if (connectingWindowInstance != null) { return; }
 
-        //Joinが押されていない
-        if (!selectJoin)
+        ChangeButtonSelectNum();
+        DecideButtonSelect();
+        BackButtonSelect();
+    }
+
+    void CursorUpdate()
+    {
+        //カーソル座標の変更
+        //カーソルがルーム内に居る時の挙動
+        if (selectRoomNum < maxRoomNum)
         {
-            ChangeButtonSelectNum();
-            DecideButtonSelect();
+            cursor.SetPosition(roomBannerList[selectRoomNum].GetComponent<RectTransform>());
         }
-        //Joinが押された
+        //カーソルが上方向のボタンに居る時
+        else if (selectRoomNum < maxRoomNum + headerButonNum)
+        {
+            if (selectRoomNum == maxRoomNum) { cursor.SetPosition(backTitleButton); }
+            else { cursor.SetPosition(refreshButton); }
+        }
+        //カーソルが下方向のボタンに居る時
         else
         {
-            ChangeRoomBannerSelectNum();
-            DecideRoom();
-            BackButtonSelect();
+            cursor.SetPosition(randomButton);
         }
     }
 
     void ChangeButtonSelectNum()
     {
-        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
+        const float border = 0.9f;
 
-        //カーソル移動
-        if (Mathf.Abs(value.y) > 0.7f)
+        Vector2 value = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.3f);
+        if (value.magnitude < border) { return; }
+
+        //カーソルがルーム上段に居る時の挙動
+        if (selectRoomNum < maxRoomNum / 2)
         {
-            if (isCanSelect)
+            int maxNum = (maxRoomNum / 2);
+
+            if (Mathf.Abs(value.x) > border)
             {
-                buttons[selectButtonNum].color = Color.white;
-                if (value.y < 0) { selectButtonNum = (selectButtonNum + 1) % buttonItemNum; }
-                else { selectButtonNum = (selectButtonNum + buttonItemNum - 1) % buttonItemNum; }
-                buttons[selectButtonNum].color = Color.yellow;
-                isCanSelect = false;
+                if (value.x > 0) { selectRoomNum = (selectRoomNum + 1) % maxNum; }
+                else { selectRoomNum = (selectRoomNum + maxNum - 1) % maxNum; }
+            }
+
+            if (Mathf.Abs(value.y) > border)
+            {
+                //上方向のボタンに移動
+                if (value.y > 0) { selectRoomNum = maxRoomNum + selectRoomNum / 2; }
+                //ルームの下段に移動
+                else { selectRoomNum += maxNum; }
             }
         }
-        //前フレームの情報保存
-        else if (Mathf.Abs(value.y) < 0.2f)
+        //カーソルがルーム下段に居る時の挙動
+        else if (selectRoomNum < maxRoomNum)
         {
-            isCanSelect = true;
-        }
-    }
+            int maxNum = (maxRoomNum / 2);
 
-    void DecideBehavior()
-    {
-        switch ((SELECT_ROOM_BUTTON_ID)selectButtonNum)
+            if (Mathf.Abs(value.x) > border)
+            {
+                if (value.x > 0) { selectRoomNum = (selectRoomNum + 1) % maxNum + 4; }
+                else { selectRoomNum = (selectRoomNum + maxNum - 1) % maxNum + 4; }
+            }
+
+            if (Mathf.Abs(value.y) > border)
+            {
+                //ルームの上段に移動
+                if (value.y > 0) { selectRoomNum -= maxNum; }
+                //下方向のボタンに移動
+                else { selectRoomNum = maxRoomNum + headerButonNum; }
+            }
+        }
+        //カーソルが上方向のボタンに居る時
+        else if (selectRoomNum < maxRoomNum + headerButonNum)
         {
-            case SELECT_ROOM_BUTTON_ID.UPDATE:
-                //ConnectionSceneに移動し、部屋を作成
+            if (Mathf.Abs(value.x) > border)
+            {
+                if (value.x > 0) { selectRoomNum = maxRoomNum + 1; }
+                else { selectRoomNum = maxRoomNum; }
+            }
 
-                connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
-                OSCManager.OSCinstance.SearchRoom(false);
-
-                //Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
-                //Managers.instance.ChangeState(GAME_STATE.CONNECTION);
-                break;
-
-            case SELECT_ROOM_BUTTON_ID.JOIN:
-                selectJoin = true;
-                isCanSelect = true;
-                roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.yellow;
-                break;
-
-            case SELECT_ROOM_BUTTON_ID.RANDOM:
-                //ConnectionSceneに移動し、部屋に参加or作成
-                //Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
-                //Managers.instance.ChangeState(GAME_STATE.CONNECTION);
-                break;
-
-            case SELECT_ROOM_BUTTON_ID.BACK_TO_TITLE:
-                Managers.instance.ChangeScene(GAME_STATE.TITLE);
-                Managers.instance.ChangeState(GAME_STATE.TITLE);
-                break;
+            if (Mathf.Abs(value.y) > border)
+            {
+                //上を押されても何もしない
+                if (value.y > 0) { }
+                //ルームの上段に移動
+                else { selectRoomNum = (selectRoomNum % 2) * (maxRoomNum / 2 - 1); }
+            }
         }
+        //カーソルが下方向のボタンに居る時
+        else
+        {
+            if (Mathf.Abs(value.y) > border)
+            {
+                //ルームの下段に移動
+                if (value.y > 0) { selectRoomNum = maxRoomNum - 1; }
+            }
+        }
+
+
+        CursorUpdate();
     }
 
     void DecideButtonSelect()
@@ -151,7 +172,39 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
         DecideBehavior();
     }
-    public void DecideButtonSelectFromUI(int _selectButtonNum)
+
+    void DecideBehavior()
+    {
+        //カーソルがルーム内に居る時の挙動
+        if (selectRoomNum < maxRoomNum)
+        {
+            DecideRoom();
+        }
+        //カーソルが上方向のボタンに居る時
+        else if (selectRoomNum < maxRoomNum + headerButonNum)
+        {
+            //タイトルに戻る
+            if (selectRoomNum == maxRoomNum)
+            {
+                Managers.instance.ChangeScene(GAME_STATE.TITLE);
+                Managers.instance.ChangeState(GAME_STATE.TITLE);
+            }
+            //ルーム情報の更新
+            else
+            {
+                connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
+                OSCManager.OSCinstance.SearchRoom(false);
+            }
+        }
+        //カーソルが下方向のボタンに居る時
+        else
+        {
+            selectRoomNum = Random.Range(0, maxRoomNum);
+            DecideRoom();
+        }
+    }
+
+    public void DecideButtonSelectFromUI(int _selectRoomNum)
     {
         //シーンチェンジのキャンバスが生成されていたら早期リターン
         if (Managers.instance.UsingCanvas()) { return; }
@@ -159,82 +212,22 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         //通信中ならリタ―ン
         if (connectingWindowInstance != null) { return; }
 
-        if (selectJoin) { return; }
 
-        if (selectButtonNum == _selectButtonNum) { DecideBehavior(); }
+        if (selectRoomNum == _selectRoomNum) { DecideBehavior(); }
         else 
         {
-            buttons[selectButtonNum].color = Color.white;
-            selectButtonNum = _selectButtonNum;
-            buttons[selectButtonNum].color = Color.yellow;
-        }
-    }
-
-    void ChangeRoomBannerSelectNum()
-    {
-        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
-
-        //カーソル横移動
-        if (Mathf.Abs(value.x) > 0.7f)
-        {
-            if (isCanSelect)
-            {
-                roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.white;
-                if (value.x < 0) { selectRoomBannerNum = (selectRoomBannerNum + roomBannerItemNum - 1) % roomBannerItemNum; }
-                else { selectRoomBannerNum = (selectRoomBannerNum + 1) % roomBannerItemNum; }
-                roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.yellow;
-                isCanSelect = false;
-            }
-        }
-        //カーソル縦移動
-        else if (Mathf.Abs(value.y) > 0.7f)
-        {
-            if (isCanSelect)
-            {
-                roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.white;
-                if (value.y < 0) { selectRoomBannerNum = (selectRoomBannerNum + 2) % roomBannerItemNum; }
-                else { selectRoomBannerNum = (selectRoomBannerNum + roomBannerItemNum - 2) % roomBannerItemNum; }
-                roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.yellow;
-                isCanSelect = false;
-            }
-        }
-        //前フレームの情報保存
-        else if (value.magnitude < 0.2f)
-        {
-            isCanSelect = true;
+            selectRoomNum = _selectRoomNum;
+            CursorUpdate();
         }
     }
 
     void DecideRoom()
     {
-        //決定が押されていないならリターン
-        if (!InputManager.GetKeyDown(BoolActions.SouthButton)) { return; }
-
-        OSCManager.OSCinstance.startPort = selectRoomBannerNum * 10 + 50000;
+        OSCManager.OSCinstance.startPort = selectRoomNum * 10 + 50000;
 
         //ConnectionSceneに移動し、選択した部屋に参加
         Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
         Managers.instance.ChangeState(GAME_STATE.CONNECTION);
-    }
-
-    public void DecideRoomFromTouch(int _num)
-    {
-        if (!selectJoin) { return; }
-
-        if (_num == selectRoomBannerNum)
-        {
-            OSCManager.OSCinstance.startPort = selectRoomBannerNum * 10 + 50000;
-
-            //ConnectionSceneに移動し、選択した部屋に参加
-            Managers.instance.ChangeScene(GAME_STATE.CONNECTION);
-            Managers.instance.ChangeState(GAME_STATE.CONNECTION);
-        }
-        else
-        {
-            roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.white;
-            selectRoomBannerNum = _num;
-            roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.yellow;
-        }
     }
 
     void BackButtonSelect()
@@ -244,8 +237,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         //キャンセルが押されていないならリターン
         if (!InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
 
-        roomBanners.transform.GetChild(selectRoomBannerNum).GetComponent<Image>().color = Color.white;
-        selectJoin = false;
+        Managers.instance.ChangeScene(GAME_STATE.TITLE);
+        Managers.instance.ChangeState(GAME_STATE.TITLE);
     }
 
     public void SetRoomBannerData(AllGameData.AllData _allData, int i)

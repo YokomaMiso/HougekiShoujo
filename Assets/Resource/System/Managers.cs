@@ -122,4 +122,10 @@ public class Managers : MonoBehaviour
         if (ColorUtility.TryParseHtmlString(teamColor[_num], out Color color)) return color;
         else return Color.black;
     }
+
+    public Color ColorCordToRGB(string _cord)
+    {
+        if (ColorUtility.TryParseHtmlString(_cord, out Color color)) return color;
+        else return Color.black;
+    }
 }
