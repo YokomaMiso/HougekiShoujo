@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -55,7 +55,7 @@ public class OffsetChildObjects : MonoBehaviour
         {
             RectTransform currentChild = contentParent.GetChild(i).GetComponent<RectTransform>();
             float newY = basePosition.y - i * (baseHeight / 2);
-            float newX = (i % 2 == 0) ? basePosition.x : basePosition.x - baseWidth;
+            float newX = (i % 2 == 0) ? basePosition.x : basePosition.x + baseWidth;
             currentChild.localPosition = new Vector3(newX, newY, basePosition.z);
         }
     }

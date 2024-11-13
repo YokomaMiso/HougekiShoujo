@@ -570,10 +570,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3760621826857976283, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: iconSize.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760621826857976283, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: iconSize.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760621826857976283, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: firstIconPosition.x
+      value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760621826857976283, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: firstIconPosition.y
+      value: -35
+      objectReference: {fileID: 0}
     - target: {fileID: 4432466077039030639, guid: ec28b28801093f442b9e02d5841a944f,
         type: 3}
       propertyPath: m_Name
       value: GalleryCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharPosition.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: CharPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImagePosition.x
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: ImagePosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014416135218552892, guid: ec28b28801093f442b9e02d5841a944f,
+        type: 3}
+      propertyPath: AnimeSelecterOffset.y
+      value: -250
       objectReference: {fileID: 0}
     - target: {fileID: 6172706548809329155, guid: ec28b28801093f442b9e02d5841a944f,
         type: 3}
