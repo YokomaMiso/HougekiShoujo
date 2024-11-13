@@ -7,8 +7,8 @@ public class RanProjectileBehaviour : ProjectileBehavior
 {
     int state = 0;
     const int maxSpawnCount = 2;
-    const float firstSpawn = 0.6f;
-    const float spawnInterval = 0.3f;
+    const float firstSpawn = 0.4f;
+    const float spawnInterval = 0.4f;
 
     Vector3 inputVector;
 
