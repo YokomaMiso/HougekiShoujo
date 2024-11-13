@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AD_RanAnimData
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: 0e6bef598d6891248b15b1e3f7c56757, type: 3}
-  idleFirstSprite: {fileID: -961174824, guid: e1da27869baa27b46b1b16de8d415b58, type: 3}
+  idleFirstSprite: {fileID: 134370666, guid: 912c6923ae2973946b3fe5236cc178e9, type: 3}
   charaIllust: {fileID: 21300000, guid: 490096b6ce6c3fe40be447576eb057dc, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: a4cc8c78615cb5d4da9626b46cfa4c02,
     type: 2}
@@ -24,15 +24,15 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 4d76b364b488fd24a82d7904823669ff, type: 2}
   reloadAnimationData: {fileID: 9100000, guid: dfce84d20c2b83b42b87b6618d6e16cc, type: 2}
   aimAnimationData:
-  - {fileID: 9100000, guid: 2a35fdbfbe7d92149b894e0917a8b5c2, type: 2}
-  - {fileID: 9100000, guid: 059a037f4993f6b4fac74c51a1512fc1, type: 2}
-  - {fileID: 9100000, guid: a2560cbd49d4a154ca6be1e6823ed240, type: 2}
-  - {fileID: 9100000, guid: 83d7e237575514e408c014480e7bbf26, type: 2}
-  - {fileID: 9100000, guid: ded9fb6e10f219f4899f34f1a34f5eb6, type: 2}
+  - {fileID: 9100000, guid: 05f504de1b963c146a32ccd78f71aaaa, type: 2}
+  - {fileID: 9100000, guid: 05f504de1b963c146a32ccd78f71aaaa, type: 2}
+  - {fileID: 9100000, guid: d0352eae1b1203d4aa3915bb806ea969, type: 2}
+  - {fileID: 9100000, guid: d0352eae1b1203d4aa3915bb806ea969, type: 2}
+  - {fileID: 9100000, guid: fa3302bb0d7326249baa2bb649e503ad, type: 2}
   recoilAnimationData:
+  - {fileID: 9100000, guid: ce7251be7bb06c74b9e41dc80fcb62f3, type: 2}
   - {fileID: 9100000, guid: 6a06b71bb2818b84aa8a615dd8bf3a52, type: 2}
   - {fileID: 9100000, guid: 6a06b71bb2818b84aa8a615dd8bf3a52, type: 2}
   - {fileID: 9100000, guid: 6a06b71bb2818b84aa8a615dd8bf3a52, type: 2}
-  - {fileID: 9100000, guid: 6a06b71bb2818b84aa8a615dd8bf3a52, type: 2}
-  - {fileID: 9100000, guid: 6a06b71bb2818b84aa8a615dd8bf3a52, type: 2}
+  - {fileID: 9100000, guid: c8c1bf0e948655540bfd9783d5cd1649, type: 2}
   deadAnimationData: {fileID: 9100000, guid: 53604a5c401fc7d408d1ad154d688256, type: 2}
