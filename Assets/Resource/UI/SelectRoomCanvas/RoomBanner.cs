@@ -6,13 +6,15 @@ using UnityEngine.UI;
 
 public class RoomBanner : MonoBehaviour
 {
+    [SerializeField] Sprite[] bannerSprites;
+
     public int roomNum;
 
     Text roomNumText;
-    Text isPlayingText;
+    Image isPlaying;
     Text memberCountText;
-    Image hostIcon;
-    Text memberText;
+    Text hostText;
+    Text hostName;
 
     SelectRoomCanvasBehavior parent;
     public void SetParent(SelectRoomCanvasBehavior _parent) { parent = _parent; }
@@ -25,10 +27,10 @@ public class RoomBanner : MonoBehaviour
     void AssignChild()
     {
         roomNumText = transform.GetChild(0).GetComponent<Text>();
-        isPlayingText = transform.GetChild(1).GetComponent<Text>();
-        memberCountText = transform.GetChild(3).GetComponent<Text>();
-        hostIcon = transform.GetChild(4).GetComponent<Image>();
-        memberText = transform.GetChild(5).GetComponent<Text>(); 
+        isPlaying = transform.GetChild(1).GetComponent<Image>();
+        memberCountText = transform.GetChild(2).GetComponent<Text>();
+        hostText = transform.GetChild(3).GetComponent<Text>();
+        hostName = transform.GetChild(4).GetComponent<Text>();
     }
 
     public void InitBannerText()
@@ -36,13 +38,15 @@ public class RoomBanner : MonoBehaviour
         //部屋番号
         roomNumText.text = "Room ";
         //プレイ中かどうか
-        isPlayingText.color=Color.clear;
+        isPlaying.color = Color.clear;
         //メンバー数
         memberCountText.text = "0/6";
         //ホストアイコン
-        hostIcon.color = Color.clear;
+        hostText.color = Color.clear;
         //名前の適用
-        memberText.text = "Empty";
+        hostName.text = "Empty";
+
+        GetComponent<Image>().sprite = bannerSprites[UnityEngine.Random.Range(0, bannerSprites.Length)];
     }
 
     public void SetData(AllGameData.AllData _data, int _num = 0)
@@ -55,20 +59,20 @@ public class RoomBanner : MonoBehaviour
         roomNumText.text = "Room " + (_num + 1).ToString();
 
         //プレイ中なら表示
-        if (_data.rData.gameStart) { isPlayingText.color = Color.red; }
+        if (_data.rData.gameStart) { isPlaying.color = Color.white; }
         //プレイしていないなら透明に
-        else { isPlayingText.color = Color.clear; }
+        else { isPlaying.color = Color.clear; }
 
         //メンバー数
         memberCountText.text = _data.rData.playerCount.ToString() + "/6";
 
         //ホストアイコン
-        if (_data.rData.playerCount == 0) { hostIcon.color = Color.clear; }
-        else { hostIcon.color = Color.white; }
+        if (_data.rData.playerCount == 0) { hostText.text = ""; }
+        else { hostText.text = "Host"; }
 
         //名前の適用
-        if (_data.rData.playerCount == 0) { memberText.text = "Empty"; }
-        else { memberText.text = _data.rData.playerName; }
+        if (_data.rData.playerCount == 0) { hostName.text = "Empty"; }
+        else { hostName.text = _data.rData.playerName; }
     }
 
 }
