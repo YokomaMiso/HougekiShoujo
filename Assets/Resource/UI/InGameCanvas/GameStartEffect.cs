@@ -8,54 +8,35 @@ public class GameStartEffect : MonoBehaviour
 {
 
     Image baseLine;
-    Text[] vsText = new Text[2];
 
-    readonly Vector2 baseLineStartScale = new Vector3(0, 100);
-    readonly Vector2 baseLineFirstTargetScale = new Vector3(1920, 100);
+    readonly Vector2 baseLineStartScale = new Vector3(1920, 688);
     readonly Vector2 baseLineEndTargetScale = new Vector3(1920, 0);
 
-    readonly float vsTextHeight = 640;
-    readonly float[] vsTextMultiple = new float[2] { 1, -1 };
+    readonly Vector2 startPos = new Vector2(0, -32);
+    readonly Vector2 endPos = new Vector2(-1920*2, -32);
 
-    void Start()
-    {
-        baseLine = transform.GetChild(0).GetComponent<Image>();
-        vsText[0] = transform.GetChild(1).GetComponent<Text>();
-        vsText[1] = transform.GetChild(2).GetComponent<Text>();
-    }
+    void Start() { baseLine = transform.GetChild(0).GetComponent<Image>(); }
 
     void Update()
     {
         IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
         float timer = hostIngameData.startTimer;
 
-        if (timer < 0.5f) { FirstBehavior(timer / 0.5f); }
-        else if (1.0f > timer && timer > 0.5f) { FirstBehavior(1); }
-        else if (1.5f <= timer && timer < 2.5f) { SecondBehavior(timer - 1.5f); }
+        if (1.5f <= timer && timer < 3.0f)
+        {
+            float timeRate = Mathf.Pow(Mathf.Clamp01(timer - 1.5f),3);
+            LineBehavior(timeRate);
+        }
 
-        if (timer > 3.0f) { Destroy(gameObject); }
+        if (timer >= 3.0f) { Destroy(gameObject); }
     }
 
-    void FirstBehavior(float _rate)
+    void LineBehavior(float _rate)
     {
-        Vector2 size = Vector2.Lerp(baseLineStartScale, baseLineFirstTargetScale, _rate);
-        baseLine.GetComponent<RectTransform>().sizeDelta = size;
+        //Vector2 size = Vector2.Lerp(baseLineStartScale, baseLineEndTargetScale, _rate);
+        //baseLine.GetComponent<RectTransform>().sizeDelta = size;
 
-        for (int i = 0; i < vsText.Length; i++)
-        {
-            float nowHeight = Mathf.Lerp(vsTextHeight * vsTextMultiple[i], 0, _rate);
-            vsText[i].transform.localPosition = new Vector2(0, nowHeight);
-        }
-    }
-
-    void SecondBehavior(float _rate)
-    {
-        Vector2 size = Vector2.Lerp(baseLineFirstTargetScale, baseLineEndTargetScale, _rate);
-        baseLine.GetComponent<RectTransform>().sizeDelta = size;
-
-        for (int i = 0; i < vsText.Length; i++)
-        {
-            vsText[i].color = new Color(1, 1, 1, 1.0f - _rate);
-        }
+        Vector2 pos = Vector2.Lerp(startPos, endPos, _rate);
+        baseLine.transform.localPosition = pos;
     }
 }

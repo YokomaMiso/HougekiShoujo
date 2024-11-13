@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class InGameEndText : MonoBehaviour
 {
-    Vector2 pos = new Vector3(0, 0, 0);
-
     RectTransform rectTransform;
+    Image image;
+    [SerializeField] Image vfx;
+
+    [SerializeField] Sprite[] sprites;
 
     void Start()
     {
@@ -17,37 +19,48 @@ public class InGameEndText : MonoBehaviour
     public void Init()
     {
         rectTransform = GetComponent<RectTransform>();
-        rectTransform.localPosition = pos;
+        rectTransform.localPosition = Vector3.zero;
+        image = GetComponent<Image>();
+        image.color = Color.clear;
+
+        vfx.color = Color.clear;
     }
 
     void Update()
     {
         IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
 
-        if (!hostIngameData.end) { GetComponent<Text>().color = Color.clear; return; }
+        if (!hostIngameData.end)
+        {
+            image.color = Color.clear;
+            vfx.color = Color.clear;
 
-        GetComponent<Text>().color = Color.white;
+            return;
+        }
 
         float timer = hostIngameData.endTimer;
 
-        string[] displayTeam = new string[2] { "Team A ", "Team B " };
-        string[] displayResult = new string[2] { "Get Round", "Win" };
+        int displayTeam = 0;
 
         GameManager gm = Managers.instance.gameManager;
 
         bool gameEnd = false;
         if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
-        if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
+        else if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
         int teamIndex = hostIngameData.winner;
 
         int resultIndex = 0;
-        if (gameEnd) { resultIndex = 1; }
+        if (gameEnd) 
+        {
+            resultIndex++; 
+            vfx.color = Color.white;
+        }
 
         if (teamIndex != -1)
         {
-            GetComponent<Text>().text = displayTeam[teamIndex] + displayResult[resultIndex];
-            GetComponent<Text>().color = Color.white;
+            image.sprite = sprites[displayTeam + resultIndex * 2];
+            image.color = Color.white;
         }
     }
 }
