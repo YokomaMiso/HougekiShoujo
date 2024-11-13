@@ -21,7 +21,7 @@ public class RoomBanner : MonoBehaviour
 
     public void PressThisBanner()
     {
-        parent.DecideRoomFromTouch(roomNum);
+        parent.DecideButtonSelectFromUI(roomNum);
     }
 
     void AssignChild()
@@ -56,7 +56,7 @@ public class RoomBanner : MonoBehaviour
 
         //•”‰®”Ô†
         roomNum = _num;
-        roomNumText.text = "Room " + (_num + 1).ToString();
+        roomNumText.text = (_num + 1).ToString();
 
         //ƒvƒŒƒC’†‚È‚ç•\¦
         if (_data.rData.gameStart) { isPlaying.color = Color.white; }
