@@ -12,18 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e2ee1207b008e4881a23804526a4a6, type: 3}
   m_Name: PVD_Blank
   m_EditorClassIdentifier: 
-  titleCall: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  selfPR: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  ready: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  gameStart: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  reload: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  useMain: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  useSub: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  kill: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  friendlyFire: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  damage: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  damageFF: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  damageTrap: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  thanks: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  roundWin: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  gameWin: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  titleCall:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  selfPR:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  ready:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  gameStart:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  reload:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  useMain:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  useSub:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  kill:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  friendlyFire:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  damage:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  damageFF:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  damageTrap:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  thanks:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  roundWin:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  gameWin:
+  - {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}

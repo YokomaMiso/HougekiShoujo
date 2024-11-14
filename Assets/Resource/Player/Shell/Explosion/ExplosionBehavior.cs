@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ExplosionBehavior : MonoBehaviour
 {
-    Player ownerPlayer;
+    protected Player ownerPlayer;
     public void SetPlayer(Player _player) { ownerPlayer = _player; }
     public Player GetPlayer() { return ownerPlayer; }
 
     protected Animator imageAnimator;
     protected string hitTag = "Player";
-    [SerializeField, Range(0.0f, 1.0f)] float cameraShakeRate = 1.0f;
+    [SerializeField, Range(0.0f, 1.0f)] protected float cameraShakeRate = 1.0f;
 
     protected float lifeTime;
     protected float timer;
