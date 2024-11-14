@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class SelectRoomCanvasBehavior : MonoBehaviour
 {
@@ -15,11 +14,11 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     [SerializeField] RectTransform backTitleButton;
 
     //カーソル
-    int selectRoomNum = 0;
+    public int selectRoomNum = 0;
     //ルームの最大数
-    const int maxRoomNum = 8;
+    public readonly int maxRoomNum = 8;
     //上方向のボタンの数
-    const int headerButonNum = 2;
+    public readonly int headerButonNum = 2;
     //下方向のボタンの数
     const int footerButonNum = 1;
 
@@ -27,7 +26,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     [SerializeField] GameObject roomBanners;
 
     //ルームバナーリスト
-    List<RoomBanner> roomBannerList = new List<RoomBanner>();
+    public List<RoomBanner> roomBannerList = new List<RoomBanner>();
 
     [SerializeField] GameObject connectingWindowPrefab;
     GameObject connectingWindowInstance;
@@ -66,6 +65,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         ChangeButtonSelectNum();
         DecideButtonSelect();
         BackButtonSelect();
+        PressLeftShoulder();
     }
 
     void CursorUpdate()
@@ -239,6 +239,14 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
         Managers.instance.ChangeScene(GAME_STATE.TITLE);
         Managers.instance.ChangeState(GAME_STATE.TITLE);
+    }
+    void PressLeftShoulder()
+    {
+        //LBが押されてないならリターン
+        if (!InputManager.GetKeyDown(BoolActions.LeftShoulder)) { return; }
+
+        connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
+        OSCManager.OSCinstance.SearchRoom(false);
     }
 
     public void SetRoomBannerData(AllGameData.AllData _allData, int i)

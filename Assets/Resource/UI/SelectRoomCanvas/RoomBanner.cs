@@ -9,6 +9,7 @@ public class RoomBanner : MonoBehaviour
     [SerializeField] Sprite[] bannerSprites;
 
     public int roomNum;
+    public int memberCount;
 
     Text roomNumText;
     Image isPlaying;
@@ -64,7 +65,8 @@ public class RoomBanner : MonoBehaviour
         else { isPlaying.color = Color.clear; }
 
         //メンバー数
-        memberCountText.text = _data.rData.playerCount.ToString() + "/6";
+        memberCount = _data.rData.playerCount;
+        memberCountText.text = memberCount.ToString() + "/6";
 
         //ホストアイコン
         if (_data.rData.playerCount == 0) { hostText.text = ""; }

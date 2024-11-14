@@ -26,7 +26,7 @@ public class SoundObject : MonoBehaviour
         switch (_type)
         {
             case SOUND_TYPE.BGM:
-                volume *= SoundManager.bgmVolume;
+                volume *= SoundManager.bgmVolume/2;
                 if (_loop) { lifeTime = Mathf.Infinity; }
                 else { lifeTime = clip.length; }
                 isBGM = true;
