@@ -9,14 +9,27 @@ public class VolumeIndexSetting : MonoBehaviour
     [SerializeField] float maxValue = 1;
     float nowValue;
 
-    void Start()
+    Slider slider;
+
+    void Init()
     {
-        transform.GetChild(1).GetComponent<Slider>().minValue = minValue;
-        transform.GetChild(1).GetComponent<Slider>().maxValue = maxValue;
+        slider = transform.GetChild(1).GetComponent<Slider>();
+        slider.minValue = minValue;
+        slider.maxValue = maxValue;
+    }
+
+    void Update()
+    {
+        if (slider.value != nowValue)
+        {
+            nowValue = slider.value;
+            ValueChange();
+        }
     }
 
     public void SetValue(float _value)
     {
+        Init();
         nowValue = _value;
         ValueChange();
     }
@@ -32,7 +45,7 @@ public class VolumeIndexSetting : MonoBehaviour
         if (nowValue < minValue) { nowValue = minValue; }
         if (nowValue > maxValue) { nowValue = maxValue; }
 
-        transform.GetChild(1).GetComponent<Slider>().value = nowValue;
+        slider.value = nowValue;
         transform.GetChild(2).GetChild(0).GetComponent<Text>().text = nowValue.ToString("f1");
     }
 }
