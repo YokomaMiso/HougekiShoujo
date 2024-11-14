@@ -98,15 +98,17 @@ public class OptionCanvasBehavior : MonoBehaviour
                         SoundManager.BGMVolumeChange(nowVolume);
 
                         break;
+                 
                     case 4:
                         transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value.x < 0);
                         break;
-                    case 6:
-                        break;
-
-                    default:
+                    
+                    case 5:
                         if (value.x < 0) { applyValue *= -1; }
                         transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
+                        break;
+                    
+                    case 6:
                         break;
                 }
             }
@@ -130,9 +132,14 @@ public class OptionCanvasBehavior : MonoBehaviour
         {
             if (selectNum == 6)
             {
-                Managers.instance.SaveOptionData(optionData);
-                Destroy(gameObject);
+                Submit();
             }
         }
+    }
+
+    public void Submit()
+    {
+        Managers.instance.SaveOptionData(optionData);
+        Destroy(gameObject);
     }
 }
