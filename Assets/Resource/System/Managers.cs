@@ -55,6 +55,13 @@ public class Managers : MonoBehaviour
             //フレームレートの固定
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 120;
+
+            // 画面の向きを縦のみに設定
+            Screen.orientation = ScreenOrientation.LandscapeLeft;
+            // 左向きを有効にする
+            Screen.autorotateToLandscapeLeft = true;
+            // 右向きを有効にする
+            Screen.autorotateToLandscapeRight = true;
         }
         else
         {
