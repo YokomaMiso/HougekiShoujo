@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea82a71e064af341b9c69f4636d1777, type: 3}
   m_Name: ED_Fragment
   m_EditorClassIdentifier: 
-  explosionBody: {fileID: 3179393461812120061, guid: 5fbefd8f387895448bc643a35cd119ea,
+  explosionBody: {fileID: 3179393461812120061, guid: 5f929a57090fa214fa5e1a367ba70102,
     type: 3}
   scale: 1.5
   explosionAnim: {fileID: 9100000, guid: f476137a5f01e7243b5f2cea2279fd83, type: 2}
