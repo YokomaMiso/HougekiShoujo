@@ -179,6 +179,11 @@ public class RoomCanvasBehavior : MonoBehaviour
             else { rm.BackToTitle(); }
         }
     }
+    public void PressBackTitle()
+    {
+        rm.BackToTitle();
+    }
+
     void GameStart()
     {
         RoomData hostRoomData = OSCManager.OSCinstance.GetRoomData(0);
