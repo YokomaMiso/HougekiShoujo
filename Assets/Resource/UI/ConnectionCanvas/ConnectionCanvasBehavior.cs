@@ -11,17 +11,22 @@ public class ConnectionCanvasBehavior : MonoBehaviour
     float alphaValue = 0;
     int alphaPlus = 2;
 
+    float timeOutTimer;
+    float timeOutTime = 4.0f;
+
     private void Start()
     {
         stateText = transform.GetChild(2).GetComponent<Text>();
         stateText.text = "部屋を探しています…";
         stateText.color = Color.clear;
-        
+
         OSCManager.OSCinstance.CreateTempNet();
     }
 
     void Update()
     {
+        timeOutTimer += Time.deltaTime;
+
         //ハンドシェイクが終了していればルームシーンへ移行する
         if (OSCManager.OSCinstance.GetIsFinishedHandshake())
         {
@@ -31,6 +36,11 @@ public class ConnectionCanvasBehavior : MonoBehaviour
                 else { stateText.text = "新しい部屋を作成します"; }
                 Invoke("MoveToRoomScene", 2.0f);
             }
+        }
+        else if (timeOutTimer > timeOutTime)
+        {
+            stateText.text = "タイムアウトしました。\nタイトルへ戻ります。";
+            Invoke("MoveToTitleScene", 2.0f);
         }
 
         TextAlphaUpdate();
@@ -50,6 +60,18 @@ public class ConnectionCanvasBehavior : MonoBehaviour
 
         Managers.instance.ChangeScene(GAME_STATE.ROOM);
         Managers.instance.ChangeState(GAME_STATE.ROOM);
+
+        return;
+    }
+
+    private void MoveToTitleScene()
+    {
+        //stateText.text = "";
+        changed = true;
+        alphaPlus = -2;
+
+        Managers.instance.ChangeScene(GAME_STATE.TITLE);
+        Managers.instance.ChangeState(GAME_STATE.TITLE);
 
         return;
     }
