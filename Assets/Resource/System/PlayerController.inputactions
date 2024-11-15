@@ -665,17 +665,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c5bd3e25-6363-425d-b5a2-dd5962145cc1",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Touchscreen",
-                    "action": "TapTouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "0b88c878-9d4a-4085-9cca-e3ec4610eed1",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -778,17 +767,6 @@
     ],
     "controlSchemes": [
         {
-            "name": "Touchscreen",
-            "bindingGroup": "Touchscreen",
-            "devices": [
-                {
-                    "devicePath": "<Touchscreen>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
             "name": "Key&Mouse",
             "bindingGroup": "Key&Mouse",
             "devices": [
@@ -810,7 +788,12 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": false,
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": true,
                     "isOR": false
                 }
             ]
