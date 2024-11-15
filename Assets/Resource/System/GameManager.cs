@@ -38,55 +38,55 @@ public class GameManager : MonoBehaviour
 
     public void CreatePlayer()
     {
-        //ƒzƒXƒg‚Ìƒ‹[ƒ€ƒf[ƒ^‚ğ“Ç‚İæ‚é
+        //ãƒ›ã‚¹ãƒˆã®ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿å–ã‚‹
         MachingRoomData.RoomData roomData;
         if (Managers.instance.playerID == 0) { roomData = OSCManager.OSCinstance.roomData; }
         else { roomData = OSCManager.OSCinstance.GetRoomData(0); }
 
-        //ƒXƒe[ƒW¶¬ˆ—
+        //ã‚¹ãƒ†ãƒ¼ã‚¸ç”Ÿæˆå‡¦ç†
         StageData nowStageData = allStageData.GetStageData(roomData.stageNum);
         GameObject stage = Instantiate(nowStageData.GetStagePrefab());
 
-        //ƒTƒhƒ“ƒfƒXƒGƒŠƒA‚Ì¶¬
+        //ã‚µãƒ‰ãƒ³ãƒ‡ã‚¹ã‚¨ãƒªã‚¢ã®ç”Ÿæˆ
         GameObject sda = Instantiate(suddenDeathAreaPrefab, stage.transform);
         sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();
         sdaInstance = sda.GetComponent<SuddenDeathArea>();
 
-        //ƒXƒe[ƒWBGM‚ÌÄ¶
+        //ã‚¹ãƒ†ãƒ¼ã‚¸BGMã®å†ç”Ÿ
         SoundManager.PlayBGM(nowStageData.GetBGMData().GetBGM());
-        //BGMƒ‰ƒxƒ‹‚Ì¶¬
+        //BGMãƒ©ãƒ™ãƒ«ã®ç”Ÿæˆ
         GameObject bgmLabel = Instantiate(bgmAnnounceCanvas);
         bgmLabel.GetComponent<BGMAnnounceCanvasBehavior>().SetBGMText(nowStageData.GetBGMData());
 
-        //ƒvƒŒƒCƒ„[‚Ì¶‘¶‚ğtrue‚É‚·‚é
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç”Ÿå­˜ã‚’trueã«ã™ã‚‹
         OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
 
-        //ƒvƒŒƒCƒ„[‚Ì”‚ğ“Ç‚İæ‚é
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ•°ã‚’èª­ã¿å–ã‚‹
         int playerCount = OSCManager.OSCinstance.GetRoomData(0).playerCount;
         RoomManager rm = Managers.instance.roomManager;
 
-        //¶¬‚·‚é”‚ÍƒvƒŒƒCƒ„[‚Ì”
+        //ç”Ÿæˆã™ã‚‹æ•°ã¯ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ•°
         playerInstance = new GameObject[playerMaxNum];
 
         int[] teamCount = new int[2] { 0, 0 };
 
-        //‰¼‚ÌƒvƒŒƒCƒ„[¶¬ˆ—
+        //ä»®ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”Ÿæˆå‡¦ç†
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
-            //ƒ‹[ƒ€ƒf[ƒ^‚ğ“Ç‚İæ‚é
+            //ãƒ«ãƒ¼ãƒ ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿å–ã‚‹
             MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.GetRoomData(i);
 
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
-            //¶¬ˆ—
+            //ç”Ÿæˆå‡¦ç†
             Vector3 spawnPos = nowStageData.GetDefaultPosition(oscRoomData.myTeamNum + teamCount[oscRoomData.myTeamNum] * 2);
-            //©•ª‚Ì”Ô†‚È‚çA©•ª—p‚ÌƒvƒŒƒnƒu‚ğ¶¬
+            //è‡ªåˆ†ã®ç•ªå·ãªã‚‰ã€è‡ªåˆ†ç”¨ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆ
             if (i == Managers.instance.playerID)
             {
                 playerInstance[i] = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
                 Camera.main.GetComponent<CameraMove>().SetPlayer(playerInstance[i].GetComponent<Player>());
             }
-            //©•ª‚¶‚á‚È‚¢‚È‚çA‘¼ƒvƒŒƒCƒ„[—p‚ÌƒvƒŒƒnƒu‚ğ¶¬
+            //è‡ªåˆ†ã˜ã‚ƒãªã„ãªã‚‰ã€ä»–ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”¨ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆ
             else
             {
                 playerInstance[i] = Instantiate(otherPlayerPrefab, spawnPos, Quaternion.identity);
@@ -203,7 +203,7 @@ public class GameManager : MonoBehaviour
     void EndBehavior()
     {
         /*
-        //Yƒ{ƒ^ƒ“‚ÅƒQ[ƒ€‚ğ”²‚¯‚é
+        //Yãƒœã‚¿ãƒ³ã§ã‚²ãƒ¼ãƒ ã‚’æŠœã‘ã‚‹
         if (InputManager.GetKeyDown(BoolActions.RightShoulder))
         {
             OSCManager.OSCinstance.roomData.gameStart = false;
@@ -218,30 +218,30 @@ public class GameManager : MonoBehaviour
         }
         */
 
-        //ƒzƒXƒg‚Ìƒf[ƒ^
+        //ãƒ›ã‚¹ãƒˆã®ãƒ‡ãƒ¼ã‚¿
         IngameData.GameData hostIngameData;
         bool gameEnd = false;
 
-        //©•ª‚ªƒzƒXƒg‚È‚ç
+        //è‡ªåˆ†ãŒãƒ›ã‚¹ãƒˆãªã‚‰
         if (Managers.instance.playerID == 0)
         {
-            //©•ª‚Ìƒf[ƒ^‚ğƒzƒXƒg‚Æ‚µ‚ÄŠi”[
+            //è‡ªåˆ†ã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ›ã‚¹ãƒˆã¨ã—ã¦æ ¼ç´
             hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
 
-            //end‚È‚ç‘ŠúƒŠƒ^[ƒ“
+            //endãªã‚‰æ—©æœŸãƒªã‚¿ãƒ¼ãƒ³
             if (!hostIngameData.end) { return; }
 
-            //endTimer‚ğ‘«‚µZ
+            //endTimerã‚’è¶³ã—ç®—
             hostIngameData.endTimer += Managers.instance.timeManager.GetDeltaTime();
 
-            //endDelayˆÈ‰º‚È‚ç‘ŠúƒŠƒ^[ƒ“
+            //endDelayä»¥ä¸‹ãªã‚‰æ—©æœŸãƒªã‚¿ãƒ¼ãƒ³
             if (hostIngameData.endTimer < endDelay)
             {
                 OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData = hostIngameData;
                 return;
             }
 
-            //‚Ç‚¿‚ç‚©‚Ìƒ`[ƒ€‚ÌwinCount‚ªˆê’è”‚ğ’´‚¦‚Ä‚¢‚é‚È‚ç
+            //ã©ã¡ã‚‰ã‹ã®ãƒãƒ¼ãƒ ã®winCountãŒä¸€å®šæ•°ã‚’è¶…ãˆã¦ã„ã‚‹ãªã‚‰
             if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
             if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
 
@@ -287,12 +287,12 @@ public class GameManager : MonoBehaviour
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
-        return _data;
+        // return _data;
 
         if (!_data.play) { return _data; }
         if (_data.winner != -1) { return _data; }
 
-        //ƒ`[ƒ€‚²‚Æ‚Ì¶‚«c‚è”
+        //ãƒãƒ¼ãƒ ã”ã¨ã®ç”Ÿãæ®‹ã‚Šæ•°
         int[] aliveCount = new int[2] { 0, 0 };
 
         for (int i = 0; i < playerInstance.Length; i++)
@@ -323,7 +323,7 @@ public class GameManager : MonoBehaviour
         /*
         if (_data.roundTimer <= 0)
         {
-            Debug.Log("ŠÔØ‚ê‚¾‚æ");
+            Debug.Log("æ™‚é–“åˆ‡ã‚Œã ã‚ˆ");
 
             //if(hostRoomData.teamACount== hostRoomData.teamBCount) { }
             if (_data.alivePlayerCountTeamA > _data.alivePlayerCountTeamB)
@@ -343,15 +343,15 @@ public class GameManager : MonoBehaviour
                 {
                     _data.winner = (int)TEAM_NUM.B;
                     _data.winCountTeamB++;
-                    Debug.Log("Aƒ`[ƒ€‚Ì€–S”‚Åƒ`ƒFƒbƒN’Ê‚Á‚½‚æ");
-                    Debug.Log("Bƒ`[ƒ€‚ÌŸ—˜” " + _data.winCountTeamB);
+                    Debug.Log("Aãƒãƒ¼ãƒ ã®æ­»äº¡æ•°ã§ãƒã‚§ãƒƒã‚¯é€šã£ãŸã‚ˆ");
+                    Debug.Log("Bãƒãƒ¼ãƒ ã®å‹åˆ©æ•° " + _data.winCountTeamB);
                 }
                 if (aliveCount[(int)TEAM_NUM.B] <= 0)
                 {
                     _data.winner = (int)TEAM_NUM.A;
                     _data.winCountTeamA++;
-                    Debug.Log("Bƒ`[ƒ€‚Ì€–S”‚Åƒ`ƒFƒbƒN’Ê‚Á‚½‚æ");
-                    Debug.Log("Aƒ`[ƒ€‚ÌŸ—˜” " + _data.winCountTeamA);
+                    Debug.Log("Bãƒãƒ¼ãƒ ã®æ­»äº¡æ•°ã§ãƒã‚§ãƒƒã‚¯é€šã£ãŸã‚ˆ");
+                    Debug.Log("Aãƒãƒ¼ãƒ ã®å‹åˆ©æ•° " + _data.winCountTeamA);
                 }
         }
         */
@@ -360,8 +360,8 @@ public class GameManager : MonoBehaviour
         {
             _data.winner = (int)TEAM_NUM.B;
             _data.winCountTeamB++;
-            Debug.Log("Aƒ`[ƒ€‚Ì€–S”‚Åƒ`ƒFƒbƒN’Ê‚Á‚½‚æ");
-            Debug.Log("Bƒ`[ƒ€‚ÌŸ—˜” " + _data.winCountTeamB);
+            Debug.Log("Aãƒãƒ¼ãƒ ã®æ­»äº¡æ•°ã§ãƒã‚§ãƒƒã‚¯é€šã£ãŸã‚ˆ");
+            Debug.Log("Bãƒãƒ¼ãƒ ã®å‹åˆ©æ•° " + _data.winCountTeamB);
 
             for (int i = 0; i < playerInstance.Length; i++)
             {
@@ -383,8 +383,8 @@ public class GameManager : MonoBehaviour
         {
             _data.winner = (int)TEAM_NUM.A;
             _data.winCountTeamA++;
-            Debug.Log("Bƒ`[ƒ€‚Ì€–S”‚Åƒ`ƒFƒbƒN’Ê‚Á‚½‚æ");
-            Debug.Log("Aƒ`[ƒ€‚ÌŸ—˜” " + _data.winCountTeamA);
+            Debug.Log("Bãƒãƒ¼ãƒ ã®æ­»äº¡æ•°ã§ãƒã‚§ãƒƒã‚¯é€šã£ãŸã‚ˆ");
+            Debug.Log("Aãƒãƒ¼ãƒ ã®å‹åˆ©æ•° " + _data.winCountTeamA);
 
             for (int i = 0; i < playerInstance.Length; i++)
             {
@@ -412,24 +412,24 @@ public class GameManager : MonoBehaviour
         if (Managers.instance.playerID == 0) { hostIngameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData; }
         else { hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData; }
 
-        //ƒQ[ƒ€‚ªI—¹‚µ‚Ä‚é‚È‚ç
+        //ã‚²ãƒ¼ãƒ ãŒçµ‚äº†ã—ã¦ã‚‹ãªã‚‰
         if (hostIngameData.end)
         {
-            //ƒLƒƒƒ“ƒoƒX‚ÌÀ‘Ì‚ª‚ ‚é‚È‚çíœ‚·‚é
+            //ã‚­ãƒ£ãƒ³ãƒã‚¹ã®å®Ÿä½“ãŒã‚ã‚‹ãªã‚‰å‰Šé™¤ã™ã‚‹
             if (scoreBoardCanvas != null) { Destroy(scoreBoardCanvas); }
-            //‘ŠúƒŠƒ^[ƒ“
+            //æ—©æœŸãƒªã‚¿ãƒ¼ãƒ³
             return;
         }
 
-        //ƒLƒƒƒ“ƒoƒX‚ÌÀ‘Ì‚ª‚È‚¢‚È‚ç
+        //ã‚­ãƒ£ãƒ³ãƒã‚¹ã®å®Ÿä½“ãŒãªã„ãªã‚‰
         if (scoreBoardCanvas == null)
         {
-            //RB‰Ÿ‰º‚ÉƒLƒƒƒ“ƒoƒX‚ğ¶¬
+            //RBæŠ¼ä¸‹æ™‚ã«ã‚­ãƒ£ãƒ³ãƒã‚¹ã‚’ç”Ÿæˆ
             if (InputManager.GetKeyDown(BoolActions.RightShoulder)) { scoreBoardCanvas = Instantiate(scoreBoardCanvasPrefab); }
         }
         else
         {
-            //RB‚ğ—£‚µ‚½‚ÉƒLƒƒƒ“ƒoƒX‚ğíœ
+            //RBã‚’é›¢ã—ãŸæ™‚ã«ã‚­ãƒ£ãƒ³ãƒã‚¹ã‚’å‰Šé™¤
             if (InputManager.GetKeyUp(BoolActions.RightShoulder)) { Destroy(scoreBoardCanvas); }
         }
     }
