@@ -7,8 +7,17 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
     public RectTransform handle;
     private Vector2 inputVector;
 
+    private void Start()
+    {
+        background.gameObject.SetActive(false);
+        handle.gameObject.SetActive(false);
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
+        background.gameObject.SetActive(true);
+        handle.gameObject.SetActive(true);
+
         OnDrag(eventData);
     }
 
@@ -29,6 +38,9 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        background.gameObject.SetActive(false);
+        handle.gameObject.SetActive(false);
+
         handle.anchoredPosition = Vector2.zero;
     }
 }
