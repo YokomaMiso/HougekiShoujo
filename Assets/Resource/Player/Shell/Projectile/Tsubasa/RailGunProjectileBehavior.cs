@@ -7,6 +7,9 @@ public class RailGunProjectileBehavior : ProjectileBehavior
     [SerializeField] Transform damageArea;
     [SerializeField] RailGunBulletBehavior trailObject;
 
+    bool start;
+    const float attackStartTime = 0.5f;
+
     public override void SetData(Shell _data)
     {
         lifeTime = _data.GetLifeTime();
@@ -17,12 +20,14 @@ public class RailGunProjectileBehavior : ProjectileBehavior
         damageArea.GetComponent<RailGunDamageArea>().SetPlayer(ownerPlayer);
     }
 
-    protected override void Start() { }
+    protected override void Start()
+    {
+    }
 
     public override void SetAngle(float _angle)
     {
         angle = _angle;
-        damageArea.rotation = Quaternion.Euler(0, -angle+90, 0);
+        damageArea.rotation = Quaternion.Euler(0, -angle + 90, 0);
 
         //’·‚³
         float length = 100;
@@ -54,6 +59,8 @@ public class RailGunProjectileBehavior : ProjectileBehavior
         float distance = (endPos - playerPos).magnitude;
         damageArea.localScale = new Vector3(scale.x, scale.y, scale.z * distance);
 
+        damageArea.gameObject.SetActive(false);
+
         trailObject.transform.position = playerPos;
         trailObject.SetForward(damageArea.forward, 400);
     }
@@ -62,7 +69,19 @@ public class RailGunProjectileBehavior : ProjectileBehavior
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
         timer += deltaTime;
-        if (timer > lifeTime) { Destroy(gameObject); }
+
+        if (timer > lifeTime)
+        {
+            Destroy(gameObject);
+        }
+
+        if (start) { return; }
+        if (timer > attackStartTime)
+        {
+            trailObject.AttackStart();
+            damageArea.gameObject.SetActive(true);
+            start = true;
+        }
     }
 
     protected override void SpawnExplosion() { }

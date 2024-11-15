@@ -7,6 +7,9 @@ public class RailGunBulletBehavior : MonoBehaviour
     Vector3 forward;
     float speed;
 
+    bool start;
+    public void AttackStart() { start = true; }
+
     public void SetForward(Vector3 _forward, float _speed)
     {
         forward = _forward;
@@ -14,6 +17,7 @@ public class RailGunBulletBehavior : MonoBehaviour
     }
     void Update()
     {
+        if (!start) { return; }
         transform.position += forward * speed * Managers.instance.timeManager.GetDeltaTime();
     }
 
