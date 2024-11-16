@@ -223,6 +223,9 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void DecideRoom()
     {
+        if (roomBannerList[selectRoomNum].memberCount >= 6) { return; }
+        if (roomBannerList[selectRoomNum].isPlaying) { return; }
+
         OSCManager.OSCinstance.startPort = selectRoomNum * 10 + 50000;
 
         //ConnectionScene‚ÉˆÚ“®‚µA‘I‘ğ‚µ‚½•”‰®‚ÉQ‰Á
