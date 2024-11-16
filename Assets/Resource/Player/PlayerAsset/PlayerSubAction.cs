@@ -29,6 +29,8 @@ public class PlayerSubAction : MonoBehaviour
         reloadTimer -= Managers.instance.timeManager.GetDeltaTime();
     }
 
+    public void CutOffReloadTime(float _value) { reloadTimer -= _value; }
+
     bool CanUse() { return reloadTimer <= 0; }
     public float ReloadTime() { return reloadTimer; }
     public void UseSubWeapon()
@@ -53,10 +55,10 @@ public class PlayerSubAction : MonoBehaviour
                 }
                 break;
             case SUB_TYPE.INSTALLATION:
-                if (installation != null) 
+                if (installation != null)
                 {
                     installation.GetComponent<InstallationBehavior>().InstallationAction();
-                    Destroy(installation); 
+                    Destroy(installation);
                 }
                 obj = Instantiate(subWeaponData.GetInstallation(), transform.position, Quaternion.identity);
                 obj.GetComponent<InstallationBehavior>().SetPlayer(ownerPlayer);

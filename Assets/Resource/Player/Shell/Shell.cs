@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SHELL_TYPE { BLAST = 0, CANON, MORTAR };
+public enum SHELL_TYPE { BLAST = 0, CANON, MORTAR, SPECIAL };
 
 [CreateAssetMenu(fileName = "ShellData", menuName = "Create/PlayerData/ShellData", order = 1)]
 public class Shell : ScriptableObject
