@@ -30,7 +30,11 @@ public class PlayerData : ScriptableObject
     public string GetCharaNameRubi() { return charaNameRubi; }
     public string GetSchoolName() { return schoolData.GetSchoolName(); }
     public Sprite GetSchoolIcon() { return schoolData.GetSchoolIcon(); }
-    public string GetGrade() { return grade.ToString() + " ”N"; }
+    public string GetGrade() 
+    {
+        if (grade == 0) { return " ‹³ˆõ"; }
+        return grade.ToString() + " ”N"; 
+    }
     public CharacterAnimData GetCharacterAnimData() { return characterAnimData; }
     public string GetMVPExplain() { return mvpExplain; }
 
