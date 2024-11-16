@@ -7,8 +7,6 @@ public enum TITLE_STATE { STAY = -1, SELECT = 0, INPUT_NAME, CREDIT, CHANGE_TO_C
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
-    [SerializeField, Header("決定音")] AudioClip submitSFX;
-
     [SerializeField, Header("TitleBGM")] AudioClip titleBGM;
 
     [SerializeField] GameObject buttons;
@@ -22,6 +20,22 @@ public class TitleCanvasBehavior : MonoBehaviour
     float titleCallTimer;
     const float titleCallTime = 0.5f;
     bool titleCalled;
+
+    [SerializeField] AudioClip submitSFX;
+    [SerializeField] AudioClip cancelSFX;
+    [SerializeField] AudioClip cursorSFX;
+
+    public void PlaySFXInTitle(int _num)
+    {
+        AudioClip ac;
+        switch (_num)
+        {
+            default: ac = submitSFX; break;
+            case 1: ac = cancelSFX; break;
+            case 2: ac = cursorSFX; break;
+        }
+        SoundManager.PlaySFXForUI(ac);
+    }
 
     void Start()
     {

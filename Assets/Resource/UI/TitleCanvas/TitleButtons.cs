@@ -46,7 +46,7 @@ public class TitleButtons : MonoBehaviour
             if (value.x < 0) { selectNum = (selectNum + selectItemNum - 1) % selectItemNum; }
             else { selectNum = (selectNum + 1) % selectItemNum; }
             buttons[selectNum].SetState(1);
-
+            parent.PlaySFXInTitle(2);
         }
     }
 
@@ -60,6 +60,7 @@ public class TitleButtons : MonoBehaviour
             int num = 0;
             if (_num == i) { num = 1; }
             buttons[i].SetState(num);
+            parent.PlaySFXInTitle(2);
         }
     }
 
@@ -67,11 +68,13 @@ public class TitleButtons : MonoBehaviour
     {
         if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
+            parent.PlaySFXInTitle(0);
             parent.ChangeFromButtons(selectNum);
         }
     }
     public void DecideSelectFromTouch()
     {
+        parent.PlaySFXInTitle(0);
         parent.ChangeFromButtons(selectNum);
     }
     void PressCancel()
@@ -81,6 +84,7 @@ public class TitleButtons : MonoBehaviour
             transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(0);
             selectNum = selectItemNum - 1;
             transform.GetChild(selectNum).GetComponent<TitleButtonBehavior>().SetState(1);
+            parent.PlaySFXInTitle(2);
         }
     }
 }

@@ -29,7 +29,7 @@ public class RoomBanner : MonoBehaviour
     void AssignChild()
     {
         roomNumText = transform.GetChild(0).GetComponent<Text>();
-        isPlaying = transform.GetChild(1).GetComponent<Image>();
+        isPlayingIcon = transform.GetChild(1).GetComponent<Image>();
         memberCountText = transform.GetChild(2).GetComponent<Text>();
         hostText = transform.GetChild(3).GetComponent<Text>();
         hostName = transform.GetChild(4).GetComponent<Text>();

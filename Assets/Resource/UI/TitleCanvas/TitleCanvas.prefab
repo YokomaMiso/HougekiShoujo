@@ -116,11 +116,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e7a39a405a7bc4bbc5d9c22aca5cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  submitSFX: {fileID: 0}
   titleBGM: {fileID: 8300000, guid: 260cb025f4ffff343a4ffb306fbe3b26, type: 3}
   buttons: {fileID: 600517467208630858, guid: 545b428b4e374164d91acbe3a33a479f, type: 3}
   inputName: {fileID: 1682089825833050959, guid: ca6073ca1afa62f4fa5cfdb81f5dec08,
     type: 3}
+  submitSFX: {fileID: 8300000, guid: 30696a7cf03517b41842776ace7ab440, type: 3}
+  cancelSFX: {fileID: 8300000, guid: c65ae382bdd476d499e66d03215bb856, type: 3}
+  cursorSFX: {fileID: 8300000, guid: 0f69e7d6eb8f2154486ac58c69359770, type: 3}
 --- !u!1 &5151819074982472560
 GameObject:
   m_ObjectHideFlags: 0

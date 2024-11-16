@@ -267,6 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e6e81e50af7f247abf1855a9cd078f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSFX: {fileID: 8300000, guid: f211830602f7df041ba9f64daca67890, type: 3}
 --- !u!1001 &1437441490186460816
 PrefabInstance:
   m_ObjectHideFlags: 0

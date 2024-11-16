@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class SceneChangeEnd : SceneChange
 {
+    [SerializeField] AudioClip endSFX;
+
+    protected override void Start()
+    {
+        sfx = endSFX;
+        base.Start();
+    }
+
     protected override void SetPosition()
     {
         for (int i = 0; i < 2; i++)
