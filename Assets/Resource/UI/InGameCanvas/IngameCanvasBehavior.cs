@@ -7,7 +7,22 @@ public class IngameCanvasBehavior : MonoBehaviour
     [SerializeField] KillLogCanvas killLogList;
     [SerializeField] SerifListBehavior serifList;
 
-    void Awake() { Managers.instance.gameManager.ingameCanvas = this; }
+    void Awake() 
+    {
+        Managers.instance.gameManager.ingameCanvas = this;
+
+        if (Managers.instance.unlockFlag[(int)UNLOCK_ITEM.UI_DELETE])
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                DisplayShellIcon shellIcon= transform.GetChild(i).GetComponent<DisplayShellIcon>();
+                if (shellIcon == null)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+        }
+    }
 
     void OnDestroy() { Managers.instance.gameManager.ingameCanvas = null; }
 

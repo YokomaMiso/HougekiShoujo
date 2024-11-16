@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 
 public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, SELECT_ROOM, CONNECTION, ROOM, IN_GAME, RESULT, GALLERY, CREDIT, MAX_NUM };
+public enum UNLOCK_ITEM { UI_DELETE, TSUBASA, STAGE, MAX_NUM };
 
 public class Managers : MonoBehaviour
 {
@@ -41,6 +42,8 @@ public class Managers : MonoBehaviour
     public SaveManager saveManager;
     public TimeManager timeManager;
     public RoomManager roomManager;
+
+    public bool[] unlockFlag = new bool[(int)UNLOCK_ITEM.MAX_NUM];
 
     private void Awake()
     {

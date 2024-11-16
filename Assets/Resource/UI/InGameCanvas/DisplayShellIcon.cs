@@ -45,9 +45,11 @@ public class DisplayShellIcon : MonoBehaviour
 
     void Update()
     {
-        CheckPlayerShell();
-        CheckPlayerSubWeapon();
-
+        if (!Managers.instance.unlockFlag[(int)UNLOCK_ITEM.UI_DELETE])
+        {
+            CheckPlayerShell();
+            CheckPlayerSubWeapon();
+        }
         if (InputManager.isChangedController) { ChangeDisplayButtons(); }
     }
 

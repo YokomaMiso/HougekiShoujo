@@ -16,6 +16,16 @@ public class InputName : MonoBehaviour
     string prevText;
     [SerializeField] AudioClip inputTextSFX;
 
+    [SerializeField] GameObject unlockWindowPrefab;
+    GameObject unlockWindowInstance;
+
+    readonly string[] unlockText = new string[(int)UNLOCK_ITEM.MAX_NUM]
+    {
+        "13",
+        "DELETE",
+        "wing"
+    };
+
     void Start()
     {
         inputField = transform.GetChild(1).GetComponent<InputField>();
@@ -27,8 +37,9 @@ public class InputName : MonoBehaviour
     void Update()
     {
         if (parent.GetTitleState() != TITLE_STATE.INPUT_NAME) { return; }
+        if (unlockWindowInstance) { return; }
 
-        if (prevText != inputField.text) 
+        if (prevText != inputField.text)
         {
             SoundManager.PlaySFXForUI(inputTextSFX);
             prevText = inputField.text;
@@ -39,6 +50,75 @@ public class InputName : MonoBehaviour
         Submit();
         Cancel();
     }
+
+    void Submit()
+    {
+        //決定ボタンが押されてないなら
+        if (!InputManager.GetKeyDown(BoolActions.SouthButton))
+        {
+            //エンターキーが押されてないならリターン
+            if (!Keyboard.current[Key.Enter].wasPressedThisFrame) { return; }
+        }
+
+        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("z").wasPressedThisFrame) { return; }
+        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("j").wasPressedThisFrame) { return; }
+
+        GoToNextScene();
+    }
+
+    bool SeachUnlockKeyWord()
+    {
+        string text = inputField.text;
+        for (int i = 0; i < (int)UNLOCK_ITEM.MAX_NUM; i++)
+        {
+            if (text == unlockText[i])
+            {
+                if (!Managers.instance.unlockFlag[i])
+                {
+                    Managers.instance.unlockFlag[i] = true;
+                    unlockWindowInstance = Instantiate(unlockWindowPrefab, parent.transform);
+                    unlockWindowInstance.GetComponent<UnlockWindow>().SetTextNum(i);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    void GoToNextScene()
+    {
+        if (SeachUnlockKeyWord()) { return; }
+
+        string playerName = inputField.text;
+        if (playerName == "") { playerName = "Player"; }
+        Managers.instance.optionData.playerName = playerName;
+        Managers.instance.SaveOptionData(Managers.instance.optionData);
+        OSCManager.OSCinstance.roomData.playerName = playerName;
+
+        parent.PlaySFXInTitle(0);
+        parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
+    }
+
+    void Cancel()
+    {
+        //キャンセルボタンが押されてないなら
+        if (!InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
+
+        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("k").wasPressedThisFrame) { return; }
+        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("x").wasPressedThisFrame) { return; }
+        if (Keyboard.current[Key.LeftShift].wasPressedThisFrame) { return; }
+        if (Keyboard.current[Key.RightShift].wasPressedThisFrame) { return; }
+
+        parent.PlaySFXInTitle(1);
+        parent.ChangeTitleState(TITLE_STATE.SELECT);
+    }
+
+    public void SubmitFromUIButton()
+    {
+        GoToNextScene();
+    }
+
     void AddText()
     {
         int charNum;
@@ -84,51 +164,5 @@ public class InputName : MonoBehaviour
             string t = inputField.text.Remove(inputField.text.Length - 1);
             inputField.text = t;
         }
-    }
-
-    void Submit()
-    {
-        //決定ボタンが押されてないなら
-        if (!InputManager.GetKeyDown(BoolActions.SouthButton))
-        {
-            //エンターキーが押されてないならリターン
-            if (!Keyboard.current[Key.Enter].wasPressedThisFrame) { return; }
-        }
-
-        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("z").wasPressedThisFrame) { return; }
-        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("j").wasPressedThisFrame) { return; }
-
-        GoToNextScene();
-    }
-
-    void GoToNextScene()
-    {
-        string playerName = inputField.text;
-        if (playerName == "") { playerName = "Player"; }
-        Managers.instance.optionData.playerName = playerName;
-        Managers.instance.SaveOptionData(Managers.instance.optionData);
-        OSCManager.OSCinstance.roomData.playerName = playerName;
-
-        parent.PlaySFXInTitle(0);
-        parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
-    }
-
-    void Cancel()
-    {
-        //キャンセルボタンが押されてないなら
-        if (!InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
-
-        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("k").wasPressedThisFrame) { return; }
-        if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("x").wasPressedThisFrame) { return; }
-        if (Keyboard.current[Key.LeftShift].wasPressedThisFrame) { return; }
-        if (Keyboard.current[Key.RightShift].wasPressedThisFrame) { return; }
-
-        parent.PlaySFXInTitle(1);
-        parent.ChangeTitleState(TITLE_STATE.SELECT);
-    }
-
-    public void SubmitFromUIButton()
-    {
-        GoToNextScene();
     }
 }
