@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TeenSpiritBehavior : InstallationBehavior
+public class PileBunkerBehavior : InstallationBehavior
 {
     bool[] hitedPlayer = new bool[6];
     float speedRate;
@@ -30,7 +30,7 @@ public class TeenSpiritBehavior : InstallationBehavior
         TimeSetting();
 
         timer += deltaTime;
-        transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 3;
+        //transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 3;
         if (timer > lifeTime) { Destroy(gameObject); }
     }
 
@@ -54,9 +54,7 @@ public class TeenSpiritBehavior : InstallationBehavior
         if (hitedPlayer[id]) { return; }
 
         hitedPlayer[id] = true;
-        //player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
-        Vector3 direction = (player.transform.position - ownerPlayer.transform.position).normalized;
-        player.GetComponent<PlayerMove>().ReceiveSlip(0.5f, direction * 10);
+        player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
 
         //”í’eƒ{ƒCƒX‚ð–Â‚ç‚·
         player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
