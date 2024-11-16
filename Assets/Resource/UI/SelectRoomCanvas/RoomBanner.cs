@@ -10,9 +10,10 @@ public class RoomBanner : MonoBehaviour
 
     public int roomNum;
     public int memberCount;
+    public bool isPlaying;
 
     Text roomNumText;
-    Image isPlaying;
+    Image isPlayingIcon;
     Text memberCountText;
     Text hostText;
     Text hostName;
@@ -39,7 +40,7 @@ public class RoomBanner : MonoBehaviour
         //部屋番号
         roomNumText.text = "Room ";
         //プレイ中かどうか
-        isPlaying.color = Color.clear;
+        isPlayingIcon.color = Color.clear;
         //メンバー数
         memberCountText.text = "0/6";
         //ホストアイコン
@@ -60,9 +61,10 @@ public class RoomBanner : MonoBehaviour
         roomNumText.text = (_num + 1).ToString();
 
         //プレイ中なら表示
-        if (_data.rData.gameStart) { isPlaying.color = Color.white; }
+        isPlaying = _data.rData.gameStart;
+        if (_data.rData.gameStart) { isPlayingIcon.color = Color.white; }
         //プレイしていないなら透明に
-        else { isPlaying.color = Color.clear; }
+        else { isPlayingIcon.color = Color.clear; }
 
         //メンバー数
         memberCount = _data.rData.playerCount;

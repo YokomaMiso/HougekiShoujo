@@ -40,8 +40,16 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
         //カーソルがルーム内に居る時の挙動
         if (srcb.selectRoomNum < srcb.maxRoomNum)
         {
+            if (srcb.roomBannerList[srcb.selectRoomNum].memberCount >= 6) 
+            {
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = "";
+            }
+            else if (srcb.roomBannerList[srcb.selectRoomNum].isPlaying) 
+            {
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = "";
+            }
             //0人なら
-            if (srcb.roomBannerList[srcb.selectRoomNum].memberCount == 0)
+            else if (srcb.roomBannerList[srcb.selectRoomNum].memberCount == 0)
             {
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = "部屋を作成";
             }
@@ -69,8 +77,6 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
         {
             keys[2].transform.GetChild(1).GetComponent<Text>().text = "ランダムマッチ";
         }
-
-        MachingRoomData.RoomData roomData = OSCManager.OSCinstance.roomData;
     }
 
     void ChangeDisplayButtons()
