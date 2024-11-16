@@ -21,8 +21,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     [SerializeField] Text[] weaponExplain;
 
     readonly string[] difficulityColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
-    readonly string[] rollBGColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
-    readonly string[] rollString = new string[3] { "‹ß‹——£", "’†‹——£", "‰“‹——£" };
+    readonly string[] rollString = new string[4] { "‹ß‹——£", "’†‹——£", "‰“‹——£", "–³”F‰Â" };
 
     readonly Vector3 illustStartPos = new Vector3(1150, 32);
     readonly Vector3 illustEndPos = new Vector3(0, 32);

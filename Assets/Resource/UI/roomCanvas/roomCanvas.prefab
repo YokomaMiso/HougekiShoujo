@@ -1840,6 +1840,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5713c7e0a5a5c284eb7caa686e72b89d, type: 3}
   - {fileID: 21300000, guid: 81078208c14e40d47ab5471c66ffad68, type: 3}
   - {fileID: 21300000, guid: d6e9657eba6d1234f8f3e72cd5825dd3, type: 3}
+  - {fileID: 21300000, guid: c162792bab39cea4593d1b17f43f6a90, type: 3}
   skillIcon:
   - {fileID: 5460239990163048764}
   - {fileID: 8890918603663465821}

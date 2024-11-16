@@ -247,7 +247,8 @@ public class Player : MonoBehaviour
                         if (reloadNum == -1) { playerState = PLAYER_STATE.RELOADING; }
                         else
                         {
-                            canonState = (CANON_STATE)reloadNum;
+                            if (playerData.GetShell().GetShellType() != SHELL_TYPE.SPECIAL) { canonState = (CANON_STATE)reloadNum; }
+                            else { playerSubAction.CutOffReloadTime(5.0f); }
                             playerState = PLAYER_STATE.IDLE;
                         }
                         break;
