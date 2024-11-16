@@ -17,14 +17,14 @@ public class InputName : MonoBehaviour
     {
         inputField = transform.GetChild(1).GetComponent<InputField>();
         inputField.text = Managers.instance.optionData.playerName;
-        //inputField.Select();
+        inputField.Select();
     }
     void Update()
     {
         if (parent.GetTitleState() != TITLE_STATE.INPUT_NAME) { return; }
 
-        AddText();
-        SubText();
+        //AddText();
+        //SubText();
         Submit();
         Cancel();
     }
