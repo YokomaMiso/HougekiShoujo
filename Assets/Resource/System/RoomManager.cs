@@ -83,7 +83,9 @@ public class RoomManager : MonoBehaviour
 
         int calc = myRoomData.selectedCharacterID;
 
-        int maxCharaCount = Managers.instance.gameManager.playerDatas.Length;
+        int maxCharaCount;
+        if (Managers.instance.unlockFlag[(int)UNLOCK_ITEM.TSUBASA]) { maxCharaCount = Managers.instance.gameManager.playerDatas.Length; }
+        else { maxCharaCount = Managers.instance.gameManager.playerDatas.Length - 1; }
 
         if (value > 0) { calc = (calc + 1) % maxCharaCount; }
         else { calc = (calc + (maxCharaCount - 1)) % maxCharaCount; }

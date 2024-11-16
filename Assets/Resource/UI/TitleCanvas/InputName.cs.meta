@@ -5,7 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - inputTextSFX: {fileID: 8300000, guid: b0f73d4eaa436694bb22300b028d608c, type: 3}
-  - submit: {fileID: 8300000, guid: 30696a7cf03517b41842776ace7ab440, type: 3}
+  - unlockWindowPrefab: {fileID: 6057738084878234807, guid: 456496b3fe56d1d4e8b21d0ff6dc25b1,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
