@@ -111,9 +111,12 @@ public class PlayerMove : MonoBehaviour
         return slipVector;
     }
 
-    public void ReceiveSlip(float _timer)
+    public void ReceiveSlip(float _timer, Vector3 _vector = default(Vector3))
     {
         slipTimer = _timer;
-        slipVector = ownerPlayer.GetComponent<Rigidbody>().velocity;
+        Vector3 addVector;
+        if (_vector == Vector3.zero) { addVector = ownerPlayer.GetComponent<Rigidbody>().velocity; }
+        else { addVector = _vector; }
+        slipVector = addVector;
     }
 }

@@ -54,7 +54,9 @@ public class TeenSpiritBehavior : InstallationBehavior
         if (hitedPlayer[id]) { return; }
 
         hitedPlayer[id] = true;
-        player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
+        //player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
+        Vector3 direction = (player.transform.position - ownerPlayer.transform.position).normalized;
+        player.GetComponent<PlayerMove>().ReceiveSlip(0.5f, direction * 10);
 
         //”í’eƒ{ƒCƒX‚ð–Â‚ç‚·
         player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
