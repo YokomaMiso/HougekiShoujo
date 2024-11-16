@@ -3,7 +3,9 @@ guid: 8fce7279d840d614bb2c1c23c37e9a0b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - inputTextSFX: {fileID: 8300000, guid: b0f73d4eaa436694bb22300b028d608c, type: 3}
+  - submit: {fileID: 8300000, guid: 30696a7cf03517b41842776ace7ab440, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

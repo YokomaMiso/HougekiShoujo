@@ -13,15 +13,26 @@ public class InputName : MonoBehaviour
 
     public void SetParent(TitleCanvasBehavior _parent) { parent = _parent; }
 
+    string prevText;
+    [SerializeField] AudioClip inputTextSFX;
+
     void Start()
     {
         inputField = transform.GetChild(1).GetComponent<InputField>();
         inputField.text = Managers.instance.optionData.playerName;
         inputField.Select();
+
+        prevText = inputField.text;
     }
     void Update()
     {
         if (parent.GetTitleState() != TITLE_STATE.INPUT_NAME) { return; }
+
+        if (prevText != inputField.text) 
+        {
+            SoundManager.PlaySFXForUI(inputTextSFX);
+            prevText = inputField.text;
+        }
 
         //AddText();
         //SubText();
@@ -97,6 +108,8 @@ public class InputName : MonoBehaviour
         Managers.instance.optionData.playerName = playerName;
         Managers.instance.SaveOptionData(Managers.instance.optionData);
         OSCManager.OSCinstance.roomData.playerName = playerName;
+
+        parent.PlaySFXInTitle(0);
         parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
     }
 
@@ -110,6 +123,7 @@ public class InputName : MonoBehaviour
         if (Keyboard.current[Key.LeftShift].wasPressedThisFrame) { return; }
         if (Keyboard.current[Key.RightShift].wasPressedThisFrame) { return; }
 
+        parent.PlaySFXInTitle(1);
         parent.ChangeTitleState(TITLE_STATE.SELECT);
     }
 

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public abstract class SceneChange : MonoBehaviour
 {
+    protected AudioClip sfx;
+
     protected Vector3[] basePos = new Vector3[2] { new Vector3(-230, 420), new Vector3(230, -420) };
     protected Vector3[] startPos = new Vector3[2] { new Vector3(1880, 1590), new Vector3(-1880, -1590) };
     protected Vector3[] endPos = new Vector3[2] { new Vector3(-2485, -830), new Vector3(2485, 830) };
@@ -23,6 +25,8 @@ public abstract class SceneChange : MonoBehaviour
 
     protected virtual void Start()
     {
+        if (sfx) { SoundManager.PlaySFXForUI(sfx); }
+
         SetChild();
         SetPosition();
     }
