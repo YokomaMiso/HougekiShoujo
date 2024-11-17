@@ -113,7 +113,7 @@ public class PlayerMove : MonoBehaviour
 
     public void ReceiveSlip(float _timer, Vector3 _vector = default(Vector3))
     {
-        slipTimer = _timer;
+        if (slipTimer < _timer) { slipTimer = _timer; }
         Vector3 addVector;
         if (_vector == Vector3.zero) { addVector = ownerPlayer.GetComponent<Rigidbody>().velocity; }
         else { addVector = _vector; }
