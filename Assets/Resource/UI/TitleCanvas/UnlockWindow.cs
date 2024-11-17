@@ -9,11 +9,11 @@ public class UnlockWindow : MonoBehaviour
     const float lifeTime = 3.0f;
 
     Text unlockText;
-    readonly string[] textString = new string[3]
+    readonly string[] textString = new string[(int)UNLOCK_ITEM.MAX_NUM]
     {
         "「ハードコアモード」を起動",
         "「近衛翼」を解放しました",
-        "「ぺっぺろ丸」を解放しました",
+        //"「ぺっぺろ丸」を解放しました",
     };
 
     int textNum;

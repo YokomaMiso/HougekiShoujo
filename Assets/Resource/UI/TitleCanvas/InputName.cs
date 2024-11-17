@@ -21,9 +21,9 @@ public class InputName : MonoBehaviour
 
     readonly string[] unlockText = new string[(int)UNLOCK_ITEM.MAX_NUM]
     {
-        "13",
         "DELETE",
-        "wing"
+        "wing",
+        //"13",
     };
 
     void Start()
