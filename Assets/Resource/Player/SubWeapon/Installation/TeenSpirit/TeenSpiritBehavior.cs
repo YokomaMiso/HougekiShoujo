@@ -30,14 +30,9 @@ public class TeenSpiritBehavior : InstallationBehavior
         TimeSetting();
 
         timer += deltaTime;
-        transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 3;
+        float nowRate = Mathf.Sqrt(Mathf.Clamp01(timer / lifeTime)) * 3;
+        transform.localScale = Vector3.one * nowRate;
         if (timer > lifeTime) { Destroy(gameObject); }
-    }
-
-    protected override void TimeSetting()
-    {
-        if (imageAnimator == null) { return; }
-        imageAnimator.speed = 3 * Managers.instance.timeManager.TimeRate();
     }
 
     protected override void OnTriggerEnter(Collider other)
