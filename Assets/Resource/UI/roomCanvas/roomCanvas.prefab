@@ -6099,7 +6099,7 @@ PrefabInstance:
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressSubmitFromUI
+      value: PressFromUI
       objectReference: {fileID: 0}
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
@@ -6243,7 +6243,7 @@ PrefabInstance:
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressSubmitFromUI
+      value: PressFromUI
       objectReference: {fileID: 0}
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
@@ -6387,7 +6387,7 @@ PrefabInstance:
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressSubmitFromUI
+      value: PressFromUI
       objectReference: {fileID: 0}
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
@@ -6531,7 +6531,7 @@ PrefabInstance:
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressSubmitFromUI
+      value: PressFromUI
       objectReference: {fileID: 0}
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
@@ -6679,7 +6679,7 @@ PrefabInstance:
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressSubmitFromUI
+      value: PressFromUI
       objectReference: {fileID: 0}
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
@@ -6947,7 +6947,7 @@ PrefabInstance:
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressSubmitFromUI
+      value: PressFromUI
       objectReference: {fileID: 0}
     - target: {fileID: 5834363606532347790, guid: 8181d36392a98404b86510454daebd31,
         type: 3}

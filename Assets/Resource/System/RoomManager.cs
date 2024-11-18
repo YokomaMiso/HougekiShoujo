@@ -11,6 +11,9 @@ public class RoomManager : MonoBehaviour
     public readonly int empty = -1;
     int prevStageNum;
 
+    public int readyCount = 0;
+
+
     public void Init()
     {
         RoomData oscRoomData = OSCManager.OSCinstance.roomData;
@@ -23,10 +26,7 @@ public class RoomManager : MonoBehaviour
 
     public void Update()
     {
-        if (Managers.instance.state != GAME_STATE.ROOM)
-        {
-            return;
-        }
+        if (Managers.instance.state != GAME_STATE.ROOM) { return; }
 
         if (OSCManager.OSCinstance.roomData.myID != 0) { return; }
 
@@ -105,7 +105,7 @@ public class RoomManager : MonoBehaviour
             if (myRoomData.teamACount >= 4) { return; }
             if (myRoomData.teamBCount >= 4) { return; }
 
-            int readyCount = 0;
+            readyCount = 0;
             for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
             {
                 RoomData otherData = OSCManager.OSCinstance.GetRoomData(i);

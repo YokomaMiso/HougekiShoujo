@@ -166,9 +166,17 @@ public class RoomCanvasBehavior : MonoBehaviour
             rm.PressSubmit();
         }
     }
-    public void PressSubmitFromUI()
+    public void PressFromUI()
     {
-        rm.PressSubmit();
+        if (Managers.instance.playerID == 0)
+        {
+            rm.PressSubmit();
+        }
+        else
+        {
+            if (OSCManager.OSCinstance.roomData.ready) { rm.PressCancel(); }
+            else { rm.PressSubmit(); }
+        }
     }
     void PressCancel()
     {
