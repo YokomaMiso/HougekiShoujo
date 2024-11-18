@@ -51,7 +51,7 @@ public class PlayerBannerBehavior : MonoBehaviour
 
         if (num == 0)
         {
-            if (Managers.instance.roomManager.readyCount >= _roomData.playerCount)
+            if (Managers.instance.roomManager.readyCount >= _roomData.playerCount - 1)
             {
                 buttonImage.color = Color.white;
             }
@@ -64,11 +64,11 @@ public class PlayerBannerBehavior : MonoBehaviour
         {
             if (_roomData.ready)
             {
-                buttonImage.sprite = buttonSpriteReady;
+                buttonImage.sprite = buttonSpriteCancel;
             }
             else
             {
-                buttonImage.sprite = buttonSpriteCancel;
+                buttonImage.sprite = buttonSpriteReady;
             }
 
         }
