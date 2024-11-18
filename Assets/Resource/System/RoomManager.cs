@@ -33,6 +33,7 @@ public class RoomManager : MonoBehaviour
         int cnt = 0;
         int[] teamCount = new int[2];
 
+        readyCount = 1;
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
             RoomData roomData = OSCManager.OSCinstance.GetRoomData(i);
@@ -40,6 +41,7 @@ public class RoomManager : MonoBehaviour
             {
                 cnt++;
                 if (roomData.myTeamNum >= 0) { teamCount[roomData.myTeamNum]++; }
+                if (roomData.ready) { readyCount++; }
             }
         }
         OSCManager.OSCinstance.roomData.teamACount = teamCount[0];
@@ -104,13 +106,6 @@ public class RoomManager : MonoBehaviour
         {
             if (myRoomData.teamACount >= 4) { return; }
             if (myRoomData.teamBCount >= 4) { return; }
-
-            readyCount = 0;
-            for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
-            {
-                RoomData otherData = OSCManager.OSCinstance.GetRoomData(i);
-                if (otherData.ready) { readyCount++; }
-            }
 
             //自分以外の全プレイヤーがREADY中なら
             if (readyCount >= myRoomData.playerCount - 1)
