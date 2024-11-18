@@ -1300,6 +1300,7 @@ MonoBehaviour:
   roomBannerList: []
   connectingWindowPrefab: {fileID: 6057738084878234807, guid: bb0a1870865a61348b41a41fe22e9d67,
     type: 3}
+  refreshSFX: {fileID: 8300000, guid: b0f73d4eaa436694bb22300b028d608c, type: 3}
 --- !u!1 &4612213229641900953
 GameObject:
   m_ObjectHideFlags: 0

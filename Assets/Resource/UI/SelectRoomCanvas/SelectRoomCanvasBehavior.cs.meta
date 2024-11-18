@@ -4,8 +4,14 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - cursor: {instanceID: 0}
+  - refreshButton: {instanceID: 0}
+  - randomButton: {instanceID: 0}
+  - backTitleButton: {instanceID: 0}
+  - roomBanners: {instanceID: 0}
   - connectingWindowPrefab: {fileID: 6057738084878234807, guid: bb0a1870865a61348b41a41fe22e9d67,
       type: 3}
+  - refreshSFX: {fileID: 8300000, guid: b0f73d4eaa436694bb22300b028d608c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

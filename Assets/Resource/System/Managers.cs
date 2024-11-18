@@ -45,6 +45,21 @@ public class Managers : MonoBehaviour
 
     public bool[] unlockFlag = new bool[(int)UNLOCK_ITEM.MAX_NUM];
 
+    [SerializeField] AudioClip submitSFX;
+    [SerializeField] AudioClip cancelSFX;
+    [SerializeField] AudioClip cursorSFX;
+    public void PlaySFXForUI(int _num)
+    {
+        AudioClip ac;
+        switch (_num)
+        {
+            default: ac = submitSFX; break;
+            case 1: ac = cancelSFX; break;
+            case 2: ac = cursorSFX; break;
+        }
+        SoundManager.PlaySFXForUI(ac);
+    }
+
     private void Awake()
     {
         if (instance == null)

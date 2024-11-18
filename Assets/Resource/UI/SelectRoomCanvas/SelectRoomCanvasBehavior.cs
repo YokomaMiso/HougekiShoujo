@@ -15,6 +15,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     //カーソル
     public int selectRoomNum = 0;
+    int prevSelectRoomNum = 0;
     //ルームの最大数
     public readonly int maxRoomNum = 8;
     //上方向のボタンの数
@@ -30,6 +31,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     [SerializeField] GameObject connectingWindowPrefab;
     GameObject connectingWindowInstance;
+
+    [SerializeField] AudioClip refreshSFX;
 
     void Start()
     {
@@ -70,6 +73,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
     void CursorUpdate()
     {
+        if (prevSelectRoomNum == selectRoomNum) { return; }
+
         //カーソル座標の変更
         //カーソルがルーム内に居る時の挙動
         if (selectRoomNum < maxRoomNum)
@@ -87,6 +92,9 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         {
             cursor.SetPosition(randomButton);
         }
+
+        Managers.instance.PlaySFXForUI(2);
+        prevSelectRoomNum = selectRoomNum;
     }
 
     void ChangeButtonSelectNum()
@@ -161,7 +169,6 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
             }
         }
 
-
         CursorUpdate();
     }
 
@@ -186,12 +193,16 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
             //タイトルに戻る
             if (selectRoomNum == maxRoomNum)
             {
+                Managers.instance.PlaySFXForUI(1);
+
                 Managers.instance.ChangeScene(GAME_STATE.TITLE);
                 Managers.instance.ChangeState(GAME_STATE.TITLE);
             }
             //ルーム情報の更新
             else
             {
+                SoundManager.PlaySFXForUI(refreshSFX);
+
                 connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
                 OSCManager.OSCinstance.SearchRoom(false);
             }
@@ -214,7 +225,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
 
         if (selectRoomNum == _selectRoomNum) { DecideBehavior(); }
-        else 
+        else
         {
             selectRoomNum = _selectRoomNum;
             CursorUpdate();
@@ -225,6 +236,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     {
         if (roomBannerList[selectRoomNum].memberCount >= 6) { return; }
         if (roomBannerList[selectRoomNum].isPlaying) { return; }
+
+        Managers.instance.PlaySFXForUI(0);
 
         OSCManager.OSCinstance.startPort = selectRoomNum * 10 + 50000;
 
@@ -240,6 +253,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         //キャンセルが押されていないならリターン
         if (!InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
 
+        Managers.instance.PlaySFXForUI(1);
+
         Managers.instance.ChangeScene(GAME_STATE.TITLE);
         Managers.instance.ChangeState(GAME_STATE.TITLE);
     }
@@ -247,6 +262,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     {
         //LBが押されてないならリターン
         if (!InputManager.GetKeyDown(BoolActions.LeftShoulder)) { return; }
+
+        SoundManager.PlaySFXForUI(refreshSFX);
 
         connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
         OSCManager.OSCinstance.SearchRoom(false);
