@@ -21,22 +21,6 @@ public class TitleCanvasBehavior : MonoBehaviour
     const float titleCallTime = 0.5f;
     bool titleCalled;
 
-    [SerializeField] AudioClip submitSFX;
-    [SerializeField] AudioClip cancelSFX;
-    [SerializeField] AudioClip cursorSFX;
-
-    public void PlaySFXInTitle(int _num)
-    {
-        AudioClip ac;
-        switch (_num)
-        {
-            default: ac = submitSFX; break;
-            case 1: ac = cancelSFX; break;
-            case 2: ac = cursorSFX; break;
-        }
-        SoundManager.PlaySFXForUI(ac);
-    }
-
     void Start()
     {
         uis[(int)TITLE_STATE.SELECT] = Instantiate(buttons, transform);

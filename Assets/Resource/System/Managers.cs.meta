@@ -15,6 +15,9 @@ MonoImporter:
   - saveManager: {instanceID: 0}
   - timeManager: {instanceID: 0}
   - roomManager: {instanceID: 0}
+  - submitSFX: {fileID: 8300000, guid: 30696a7cf03517b41842776ace7ab440, type: 3}
+  - cancelSFX: {fileID: 8300000, guid: c65ae382bdd476d499e66d03215bb856, type: 3}
+  - cursorSFX: {fileID: 8300000, guid: 0f69e7d6eb8f2154486ac58c69359770, type: 3}
   executionOrder: -50
   icon: {instanceID: 0}
   userData: 

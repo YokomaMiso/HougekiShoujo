@@ -96,7 +96,7 @@ public class InputName : MonoBehaviour
         Managers.instance.SaveOptionData(Managers.instance.optionData);
         OSCManager.OSCinstance.roomData.playerName = playerName;
 
-        parent.PlaySFXInTitle(0);
+        Managers.instance.PlaySFXForUI(0);
         parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
     }
 
@@ -110,7 +110,7 @@ public class InputName : MonoBehaviour
         if (Keyboard.current[Key.LeftShift].wasPressedThisFrame) { return; }
         if (Keyboard.current[Key.RightShift].wasPressedThisFrame) { return; }
 
-        parent.PlaySFXInTitle(1);
+        Managers.instance.PlaySFXForUI(1);
         parent.ChangeTitleState(TITLE_STATE.SELECT);
     }
 
