@@ -19,7 +19,7 @@ public class BlueCoralBehavior : InstallationBehavior
         imageAnimator.gameObject.SetActive(true);
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
-        buffLifeTime = 8.0f;
+        buffLifeTime = 5.0f;
 
         transform.localScale = Vector3.zero;
     }

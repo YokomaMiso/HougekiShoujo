@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpiderExplosionBehavior : ExplosionBehavior
 {
     bool[] hitedPlayer = new bool[6];
+    const float buffLifeTime = 8.0f;
 
     public override void SetData(Explosion _data)
     {
@@ -32,7 +33,7 @@ public class SpiderExplosionBehavior : ExplosionBehavior
         int id = nowPlayer.GetPlayerID();
         if (hitedPlayer[id]) { return; }
 
-        other.AddComponent<SpeedBuff>().SetRateAndTime(0.7f, 5.0f);
+        other.AddComponent<SpeedBuff>().SetRateAndTime(ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate(), buffLifeTime);
         hitedPlayer[id] = true;
 
         //トラップ被弾ボイスを鳴らす

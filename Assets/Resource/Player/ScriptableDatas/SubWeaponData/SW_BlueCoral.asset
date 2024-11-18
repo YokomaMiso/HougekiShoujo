@@ -18,7 +18,7 @@ MonoBehaviour:
   installation: {fileID: 1008518316061016973, guid: 0c4fce637059148479ee62bd8f6004a1,
     type: 3}
   subWeaponName: "\u30D6\u30EB\u30FC\u30B3\u30FC\u30E9\u30EB"
-  subWeaponExplain: "\u6B4C\u306E\u529B\u3067\u5468\u56F2\u306E\u79FB\u52D5\u901F\u5EA6\u3092\uFF18\u79D2\u9593\u4E0A\u6607\u3055\u305B\u308B\n\u79C1\u306E\u604B\u306F\u5357\u306E\u98A8\u306B\u4E57\u3063\u3066\u8D70\u308B\u308F"
+  subWeaponExplain: "\u6B4C\u306E\u529B\u3067\u5468\u56F2\u306E\u79FB\u52D5\u901F\u5EA6\u3092\uFF15\u79D2\u9593\u4E0A\u6607\u3055\u305B\u308B\n\u79C1\u306E\u604B\u306F\u5357\u306E\u98A8\u306B\u4E57\u3063\u3066\u8D70\u308B\u308F"
   installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
     type: 2}
   installationLoopAnim: {fileID: 9100000, guid: ab12581ac6d1fa04c984951dbe8d22bd,

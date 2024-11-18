@@ -19,7 +19,7 @@ public class PileBunkerBehavior : InstallationBehavior
         imageAnimator.gameObject.SetActive(true);
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
-        buffLifeTime = 8.0f;
+        buffLifeTime = 1.0f;
 
         hitedPlayer[ownerPlayer.GetPlayerID()] = true;
     }

@@ -18,11 +18,11 @@ MonoBehaviour:
   installation: {fileID: 1008518316061016973, guid: f68961ad875f76c40950a502a2e256f4,
     type: 3}
   subWeaponName: "\u5730\u5747\u3057"
-  subWeaponExplain: "\u8DB3\u306B\u4ED5\u8FBC\u3093\u3060\u30D1\u30A4\u30EB\u30D0\u30F3\u30AB\u30FC\u3092\u5730\u9762\u306B\u6253\u3061\u8FBC\u3080\n\u7BC4\u56F2\u5185\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u79FB\u52D5\u901F\u5EA6\u3092\uFF18\u79D2\u9593\u6E1B\u5C11\u3055\u305B\u308B"
+  subWeaponExplain: "\u8DB3\u306B\u4ED5\u8FBC\u3093\u3060\u30D1\u30A4\u30EB\u30D0\u30F3\u30AB\u30FC\u3092\u5730\u9762\u306B\u6253\u3061\u8FBC\u3080\n\u7BC4\u56F2\u5185\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u3092\uFF11\u79D2\u9593\u79FB\u52D5\u4E0D\u53EF\u306B\u3059\u308B"
   installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
     type: 2}
   installationLoopAnim: {fileID: 9100000, guid: ab12581ac6d1fa04c984951dbe8d22bd,
     type: 2}
   reloadTime: 15
-  speedRate: 0.65
+  speedRate: 0
   lifeTime: 1
