@@ -22,5 +22,5 @@ MonoBehaviour:
   installationStartAnim: {fileID: 0}
   installationLoopAnim: {fileID: 0}
   reloadTime: 20
-  speedRate: 0.5
+  speedRate: 0
   lifeTime: 10
