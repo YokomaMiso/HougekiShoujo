@@ -8,6 +8,7 @@ public class PileBunkerBehavior : InstallationBehavior
     bool[] hitedPlayer = new bool[6];
     float speedRate;
     float buffLifeTime;
+    SpriteRenderer vfxSpriteRenderer;
 
     protected override void Start()
     {
@@ -17,11 +18,19 @@ public class PileBunkerBehavior : InstallationBehavior
 
         imageAnimator = transform.GetChild(1).GetComponent<Animator>();
         imageAnimator.gameObject.SetActive(true);
+        vfxSpriteRenderer = imageAnimator.GetComponent<SpriteRenderer>();
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
         buffLifeTime = 1.0f;
 
         hitedPlayer[ownerPlayer.GetPlayerID()] = true;
+
+        Vector3 distance = transform.position - Camera.main.transform.position;
+        float weight = distance.magnitude / 5;
+        if (weight < 1) { weight = 1; }
+
+        float shakeValue = 1.0f / weight * 0.75f;
+        Camera.main.GetComponent<CameraMove>().SetCameraShake(shakeValue);
     }
 
     protected override void Update()
@@ -30,7 +39,10 @@ public class PileBunkerBehavior : InstallationBehavior
         TimeSetting();
 
         timer += deltaTime;
-        //transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 3;
+
+        float nowRate = Mathf.Pow(Mathf.Clamp01((timer + 0.2f) / lifeTime), 4);
+        vfxSpriteRenderer.color = new Color(1, 1, 1, 1.0f - nowRate);
+
         if (timer > lifeTime) { Destroy(gameObject); }
     }
 
