@@ -8,6 +8,7 @@ public class TeenSpiritBehavior : InstallationBehavior
     bool[] hitedPlayer = new bool[6];
     float speedRate;
     float buffLifeTime;
+    SpriteRenderer vfxSpriteRenderer;
 
     protected override void Start()
     {
@@ -17,6 +18,7 @@ public class TeenSpiritBehavior : InstallationBehavior
 
         imageAnimator = transform.GetChild(1).GetComponent<Animator>();
         imageAnimator.gameObject.SetActive(true);
+        vfxSpriteRenderer = imageAnimator.GetComponent<SpriteRenderer>();
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
         buffLifeTime = 8.0f;
@@ -30,8 +32,11 @@ public class TeenSpiritBehavior : InstallationBehavior
         TimeSetting();
 
         timer += deltaTime;
-        float nowRate = Mathf.Sqrt(Mathf.Clamp01(timer / lifeTime)) * 3;
-        transform.localScale = Vector3.one * nowRate;
+        float nowRate = Mathf.Sqrt(Mathf.Clamp01(timer / lifeTime));
+        transform.localScale = Vector3.one * nowRate * 3;
+
+        nowRate = Mathf.Pow(Mathf.Clamp01(timer / lifeTime), 3);
+        vfxSpriteRenderer.color = new Color(1, 1, 1, 1.0f - nowRate);
         if (timer > lifeTime) { Destroy(gameObject); }
     }
 
