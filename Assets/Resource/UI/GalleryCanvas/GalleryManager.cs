@@ -42,6 +42,8 @@ public class GalleryManager : MonoBehaviour
     public GameObject worldCategory;
     public GameObject soundCategory;
 
+    public SoundGalleryManeger soundsManeger;
+
 
     //入力処理用(GalleryMain)
     private bool canChangeIndex = true;
@@ -54,7 +56,7 @@ public class GalleryManager : MonoBehaviour
     public float fadeDuration = 1f;
     private bool isFade=false;
     private int nextState = -1;
-    private static float Duration = 1.0f;
+    private static float Duration = 0.2f;
 
     //バター移動用変数
     private static Vector3 targetPositionCount = new Vector3(-108,70,0);
@@ -207,12 +209,20 @@ public class GalleryManager : MonoBehaviour
             if(CurrentState == GalleryState.GalleryMain)
             {
                 nextState = inputIndex;
+                if (nextState == 2)
+                {
+                    if (soundsManeger != null)
+                    {
+                        soundsManeger.GenerateVoiceButton();
+                    }
+                }
                 TransFadeOut(inputIndex);
             }
         }
 
         if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
+            if (soundsManeger.audioSource.isPlaying) { return; }
             charCategory.SetActive(false);
             nextState = -1;
             switch (CurrentState)
@@ -225,6 +235,10 @@ public class GalleryManager : MonoBehaviour
                     break;
                 case GalleryState.SoundSelect:
                     inputIndex = 2;
+                    if (soundsManeger != null)
+                    {
+                        soundsManeger.DeleteSoundsImage();
+                    }
                     break;
                 default:
                     break;

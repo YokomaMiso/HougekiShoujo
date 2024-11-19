@@ -12,15 +12,13 @@ public class OffsetChildObjects : MonoBehaviour
     public MainViewPort mainViewPort;
     public Transform contentParent;
     public GameObject characterButtonPrefab;
+    public CharGalleryController charGalleryController;
+
     public Vector3 firstIconPosition = new Vector3(-25, 130, 0);
     public Vector3 iconScale = new Vector3(0.2f, 0.2f, 0.2f);
     public Vector2 iconSize = new Vector2(200, 200);
 
     int inputIndex = -1;
-    private int currentAnimatorIndex = 0;
-    private int currentVoiceIndex = 0;
-
-    private AudioSource audioSource;
 
     private bool EnterDown = false;
     void Start()
@@ -32,13 +30,9 @@ public class OffsetChildObjects : MonoBehaviour
         newPosition.y = 0;
         transform.localPosition = newPosition;
 
-        audioSource = gameObject.AddComponent<AudioSource>();
-
         GenerateCharacterUI();
 
         ArrangeIcons();
-
-        HandleBackKey();
     }
 
 
@@ -77,7 +71,7 @@ public class OffsetChildObjects : MonoBehaviour
             Image buttonImage = newButton.GetComponentInChildren<Image>();
             if (buttonImage != null)
             {
-                buttonImage.sprite = character.characterIcon;
+                buttonImage.sprite = character.charData.characterIcon;
                 if (character.iconMaterial != null)
                 {
                     buttonImage.material = new Material(character.iconMaterial);
@@ -88,7 +82,7 @@ public class OffsetChildObjects : MonoBehaviour
             Text buttonText = newButton.GetComponentInChildren<Text>();
             if (buttonText != null)
             {
-                buttonText.text = character.characterName;
+                buttonText.text = character.charData.characterName;
             }
 
             Button button = newButton.GetComponent<Button>();
@@ -101,7 +95,6 @@ public class OffsetChildObjects : MonoBehaviour
         HandleInput();
         HighlightCurrentIcon();
         HandleEnterKey();
-        HandleBackKey();
 
     }
 
@@ -134,63 +127,6 @@ public class OffsetChildObjects : MonoBehaviour
             }
         }
 
-        if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
-        {
-            if (Inout.x > 0.5f && LeftStickcanChange)
-            {
-                CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
-
-                currentAnimatorIndex = (currentAnimatorIndex + 1) % currentCharacter.animatorControllers.Count;
-
-                mainViewPort.UpdateAnimatorController(currentCharacter, currentAnimatorIndex);
-                mainViewPort.ModifyGeneratedImages(currentAnimatorIndex);
-
-                LeftStickcanChange = false;
-            }
-            else if (Inout.x < -0.5f && LeftStickcanChange)
-            {
-                CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
-
-                currentAnimatorIndex = (currentAnimatorIndex - 1 + currentCharacter.animatorControllers.Count)
-                                       % currentCharacter.animatorControllers.Count;
-
-                mainViewPort.UpdateAnimatorController(currentCharacter, currentAnimatorIndex);
-                mainViewPort.ModifyGeneratedImages(currentAnimatorIndex);
-
-                LeftStickcanChange = false;
-            }
-            else if (Inout.x > -0.5f && Inout.x < 0.5f)
-            {
-                LeftStickcanChange = true;
-            }
-
-            if (RightInout.x > 0.5f && RightStickcanChange)
-            {
-                CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
-
-                currentVoiceIndex = (currentVoiceIndex + 1) % currentCharacter.CharVoice.Count;
-
-                mainViewPort.ChangeText(currentCharacter.CharVoice[currentVoiceIndex].voiceText);
-
-                RightStickcanChange = false;
-            }
-            else if (RightInout.x < -0.5f && RightStickcanChange)
-            {
-                CharacterData currentCharacter = charGalleryManager.characterList[inputIndex];
-
-                currentVoiceIndex = (currentVoiceIndex - 1 + currentCharacter.CharVoice.Count)
-                                       % currentCharacter.CharVoice.Count;
-
-                mainViewPort.ChangeText(currentCharacter.CharVoice[currentVoiceIndex].voiceText);
-
-                RightStickcanChange = false;
-            }
-            else if (RightInout.x > -0.5f && RightInout.x < 0.5f)
-            {
-                RightStickcanChange = true;
-            }
-        }
-
     }
 
     void HighlightCurrentIcon()
@@ -219,45 +155,10 @@ public class OffsetChildObjects : MonoBehaviour
             if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0 && !EnterDown)
             {
                 EnterDown = true;
-                CharacterData selectedCharacter = charGalleryManager.characterList[inputIndex];
-
+                mainViewPort.EnterCharacterGallery(charGalleryManager.characterList[inputIndex]);
+                charGalleryController.SetCharData(charGalleryManager.characterList[inputIndex]);
+                mainViewPort.GenerateIll(charGalleryManager.characterList[inputIndex]);
                 GalleryManager.Instance.SetState(GalleryState.CharacterGallery);
-
-                currentAnimatorIndex = 0;
-                currentVoiceIndex = 0;
-                mainViewPort.GenerateCharacterILL(selectedCharacter);
-                mainViewPort.GenerateCharacterAnime(selectedCharacter);
-                mainViewPort.ModifyGeneratedImages(currentAnimatorIndex);
-                mainViewPort.ChangeText(selectedCharacter.CharVoice[currentVoiceIndex].voiceText);
-                mainViewPort.GenerateCharacterVoice();
-            }
-        }
-
-        if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
-        {
-            if (InputManager.GetKeyDown(BoolActions.SouthButton) && inputIndex >= 0 && !EnterDown)
-            {
-                EnterDown = true;
-                CharacterData selectedCharacter = charGalleryManager.characterList[inputIndex];
-                if (selectedCharacter != null)
-                {
-                    mainViewPort.PlayerCharacterVoice(selectedCharacter, currentVoiceIndex);
-                }
-            }
-        }
-    }
-
-    void HandleBackKey()
-    {
-        if (InputManager.GetKeyDown(BoolActions.EastButton))
-        {
-            if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
-            {
-                GalleryManager.Instance.SetState(GalleryState.CharacterSelect);
-
-                audioSource.Stop();
-
-                mainViewPort.ClearCharacterILL();
             }
         }
     }
