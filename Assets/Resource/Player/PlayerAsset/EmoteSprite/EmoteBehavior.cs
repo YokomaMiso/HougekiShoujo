@@ -5,6 +5,7 @@ using UnityEngine;
 public class EmoteBehavior : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
+    [SerializeField] AudioClip[] clips;
     int spriteNum = 0;
 
     SpriteRenderer image;
@@ -17,13 +18,14 @@ public class EmoteBehavior : MonoBehaviour
 
     public void SetSpriteNum(RADIO_CHAT_ID _ID)
     {
-        spriteNum = _ID - RADIO_CHAT_ID.APOLOGIZE;
+        spriteNum = (_ID - RADIO_CHAT_ID.APOLOGIZE) % (int)RADIO_TYPE.EMOTE;
     }
 
     void Start()
     {
         image = transform.GetChild(0).GetComponent<SpriteRenderer>();
         image.sprite = sprites[spriteNum];
+        SoundManager.PlaySFXForUI(clips[spriteNum],this.transform);
     }
 
     void Update()

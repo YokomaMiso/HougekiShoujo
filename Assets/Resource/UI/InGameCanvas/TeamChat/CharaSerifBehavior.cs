@@ -10,6 +10,7 @@ public class CharaSerifBehavior : MonoBehaviour
     Image charaIcon;
 
     [SerializeField] Sprite[] bgSprite;
+    [SerializeField] AudioClip[] clips;
 
     readonly static Vector3 startPos = new Vector3(-1170, 330);
     readonly static Vector3 endPos = new Vector3(-750, 330);
@@ -36,6 +37,8 @@ public class CharaSerifBehavior : MonoBehaviour
         charaIcon.sprite = Managers.instance.gameManager.playerDatas[_roomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
 
         transform.localPosition = startPos;
+
+        SoundManager.PlaySFXForUI(clips[(int)_chatID - 1]);
     }
 
     public void ChatNumAdd() { chatNum++; }
