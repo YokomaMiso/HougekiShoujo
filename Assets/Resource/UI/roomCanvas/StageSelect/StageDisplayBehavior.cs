@@ -13,6 +13,6 @@ public class StageDisplayBehavior : MonoBehaviour
 
         StageData sd = Managers.instance.gameManager.allStageData.GetStageData(stageNum);
         transform.GetChild(0).GetComponent<Image>().sprite = sd.GetScreenShot();
-        transform.GetChild(1).GetComponent<Text>().text = sd.GetStageName();
+        transform.GetChild(1).GetComponent<Text>().text = "ステージ\n" + sd.GetStageName();
     }
 }

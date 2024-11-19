@@ -97,6 +97,7 @@ public class StageSelectBehavior : MonoBehaviour
         StageData sd = Managers.instance.gameManager.allStageData.GetStageData(_num);
         binder.GetChild(2).GetComponent<Image>().sprite = sd.GetScreenShot();
         binder.GetChild(3).GetComponent<Image>().sprite = sd.GetMinimap();
+        binder.GetChild(7).GetComponent<Text>().text = sd.GetStageName();
     }
 
     void PressSubmit()
