@@ -14,6 +14,6 @@ public class WorldGalleryData : ScriptableObject
 public class BulidingTextPair
 {
     public Sprite sprite;
-    public string bulidingText;
+    [TextArea] public string bulidingText;
     public bool hasText;
 }

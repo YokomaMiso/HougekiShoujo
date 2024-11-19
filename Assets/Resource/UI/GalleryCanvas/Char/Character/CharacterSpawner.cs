@@ -16,7 +16,7 @@ public class CharacterSpawner : MonoBehaviour
                 return;
             }
 
-            GameObject newCharacter = new GameObject(data.characterName);
+            GameObject newCharacter = new GameObject(data.charData.characterName);
             Animator animator = newCharacter.AddComponent<Animator>();
             animator.runtimeAnimatorController = data.animatorControllers[animatorIndex];
             newCharacter.transform.position = position;

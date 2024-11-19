@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b88adf793a5c141b40acebffaf9aa7, type: 3}
+  m_Name: RanGalleryData
+  m_EditorClassIdentifier: 
+  charData:
+    characterName: "\u897F\u5712 \u862D"
+    schoolText: "\u5B66\u6821\u3000\u82B1\u97F3\u5973\u5B66\u9662\u9AD8\u7B49\u79D1"
+    schoolYear: "\u5B66\u5E74\u3000\u4E00\u5E74"
+    charDesign: "\u30D1\u30F3\u30AF\u3067\u30ED\u30C3\u30AF\u306A\u5973\u306E\u5B50\r\u66F2\u304C\u3063\n\u305F\u3053\u3068\u304C\u5ACC\u3044\u306A\u9811\u56FA\u8005\u3002\r\u5927\u7832\u306E\n\u8F5F\u97F3\u306B\u60F9\u304B\u308C\u5927\u7832\u9053\u3092\u59CB\u3081\u308B"
+    characterIcon: {fileID: 21300000, guid: e6002f534aa280b4f8475f2b91c3f4e4, type: 3}
+    characterIllustration: {fileID: 21300000, guid: b59b0fa758567a3458bf4147885a6d41,
+      type: 3}
+    schoolIcon: {fileID: 21300000, guid: c51b3654a0c96ba48a2352ecceb9a4ca, type: 3}
+    emoteIllustration: {fileID: 21300000, guid: ef997e550ed24ba4f87f220c8458c329,
+      type: 3}
+  weapon:
+  - weaponIcon: {fileID: 21300000, guid: 148e11e4596762e4980cdbf65a6c4193, type: 3}
+    weaponName: YELLOW-1892
+    weaponText: "\u524D\u65B9\u5E83\u7BC4\u56F2\u306B\uFF12\u767A\u306E\u5F3E\u3092\u767A\u5C04\u3059\u308B\n\u305D\u306E\u4EE3\u308F\u308A\u306B\u767A\u751F\u304C\u9045\u304F\u3001\u786C\u76F4\u304C\n\u9577\u3044"
+  - weaponIcon: {fileID: 21300000, guid: aac976f88e2157a409fc1f894ecd3662, type: 3}
+    weaponName: "\u30C6\u30A3\u30FC\u30F3\u30B9\u30D4\u30EA\u30C3\u30C8"
+    weaponText: "\u30AE\u30BF\u30FC\u306E\u529B\u3067\u5468\u56F2\u306E\u79FB\u52D5\u901F\u5EA6\u3092\uFF18\n\u79D2\u9593\u6E1B\u5C11\u3055\u305B\u308B\nHello,
+      hello, hello, how low?"
+  sketh: {fileID: 21300000, guid: e562042c49160194d8a6d092563ca157, type: 3}
+  iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
+  animatorControllers:
+  - {fileID: 9100000, guid: 15cadc8b8308bea41b977f2cad7d2347, type: 2}
+  - {fileID: 9100000, guid: 4d76b364b488fd24a82d7904823669ff, type: 2}
+  - {fileID: 9100000, guid: 9c8badb5741610d44b447a5649230c1a, type: 2}
+  - {fileID: 9100000, guid: aaf5a25c87e3f6f4ab72847a6f28c3db, type: 2}
+  - {fileID: 9100000, guid: c10a4341154763f4195a54e631e40cce, type: 2}
+  CharVoice:
+  - voiceClip: {fileID: 8300000, guid: 7e17bbb3ae5280148a7b93619065322d, type: 3}
+    voiceText: "\u30BF\u30A4\u30C8\u30EB\u30B3\u30FC\u30EB"
+  - voiceClip: {fileID: 8300000, guid: ed8a098d967e08e428e10053556e8756, type: 3}
+    voiceText: "\u81EA\u5DF1\u7D39\u4ECB"
+  - voiceClip: {fileID: 8300000, guid: ff3466e034e43a943b82e03800fbd815, type: 3}
+    voiceText: Ready
+  - voiceClip: {fileID: 8300000, guid: de682df77febd39458e4647d51650b0b, type: 3}
+    voiceText: "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
+  - voiceClip: {fileID: 8300000, guid: effa6d15d1a31bd498db8c76a9735ae9, type: 3}
+    voiceText: "\u8A66\u5408\u52DD\u5229"
+  - voiceClip: {fileID: 8300000, guid: 619c2319175df034da9d2391ed7c2136, type: 3}
+    voiceText: "\u30D5\u30A1\u30A4\u30C8"
+  - voiceClip: {fileID: 8300000, guid: 2ad91c422405a514baa75b1fd98fc3a9, type: 3}
+    voiceText: "\u30EA\u30ED\u30FC\u30C91"
+  - voiceClip: {fileID: 8300000, guid: 85a1ddd4e527b9541a079e5d4899c2da, type: 3}
+    voiceText: "\u30EA\u30ED\u30FC\u30C92"
+  - voiceClip: {fileID: 8300000, guid: 6eff6b3b7d163034ca9d95958528df55, type: 3}
+    voiceText: "\u30EA\u30ED\u30FC\u30C93"
+  - voiceClip: {fileID: 8300000, guid: 86670268b11953543bb6ac1000ccfbda, type: 3}
+    voiceText: "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
+  - voiceClip: {fileID: 8300000, guid: d73b1aa0544bb2f44b3161ff2e2f87d4, type: 3}
+    voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
+  - voiceClip: {fileID: 8300000, guid: 2c0a5644859812a4bbf83c3fa917aca9, type: 3}
+    voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
+  - voiceClip: {fileID: 8300000, guid: ec2ff5336a0d1a942bc89e42ed24f9c8, type: 3}
+    voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
+  - voiceClip: {fileID: 8300000, guid: 798c39e4ec42f2042a021a3c9e34fcf4, type: 3}
+    voiceText: "\u6483\u7834\u3055\u308C\u305F"
+  - voiceClip: {fileID: 8300000, guid: ba35a51f286798e46afad2ab55e22287, type: 3}
+    voiceText: "\u6575\u64831"
+  - voiceClip: {fileID: 8300000, guid: 0a203133945965943acf3d9a4c657d5b, type: 3}
+    voiceText: "\u6575\u64832"
+  - voiceClip: {fileID: 8300000, guid: fa5769c320e72dc44be1708f5c0741e8, type: 3}
+    voiceText: "\u6575\u64833"
+  - voiceClip: {fileID: 8300000, guid: 034fe1a955321a64d8372e4e22ed5648, type: 3}
+    voiceText: "\u30B5\u30DD\u30FC\u30C8\u30D5\u30A1\u30A4\u30A2\u30FC1"
+  - voiceClip: {fileID: 8300000, guid: c1d6c3ce07a865940b75933b466d2311, type: 3}
+    voiceText: "\u30B5\u30DD\u30FC\u30C8\u30D5\u30A1\u30A4\u30A2\u30FC2"
+  - voiceClip: {fileID: 8300000, guid: 3345a178054fe1449a705a2f8d345309, type: 3}
+    voiceText: "\u7F601"
+  - voiceClip: {fileID: 8300000, guid: 029b16604cc9c284e9d93c85cbd60265, type: 3}
+    voiceText: "\u7F602"
+  - voiceClip: {fileID: 8300000, guid: a5e275a311b885145ad12c94cdbf79f6, type: 3}
+    voiceText: "\u7F603"
+  - voiceClip: {fileID: 8300000, guid: 1ab602dbf82938542847022394de261e, type: 3}
+    voiceText: "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
+  - voiceClip: {fileID: 8300000, guid: d013e2e18c839ab4a8310a2e25f73ae3, type: 3}
+    voiceText: "\u5473\u65B9\u3078\u611F\u8B1D"

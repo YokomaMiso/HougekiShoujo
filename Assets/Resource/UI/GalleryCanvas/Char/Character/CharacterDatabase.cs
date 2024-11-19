@@ -8,6 +8,6 @@ public class CharacterDatabase : MonoBehaviour
 
     public CharacterData GetCharacterData(string name)
     {
-        return characterList.Find(character => character.characterName == name);
+        return characterList.Find(character => character.charData.characterName == name);
     }
 }

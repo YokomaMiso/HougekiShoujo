@@ -7,198 +7,336 @@ public class MainViewPort : MonoBehaviour
 {
     public CharGalleryManager charGalleryManager;
 
-    public Vector3 ImagePosition = new Vector3(-25, 130, 0);
-    public Vector2 ImageSize = new Vector2(3508, 4961);
-    public Vector3 ImageScale = new Vector3(0.2f, 0.2f, 0.2f);
-
-    public Vector3 CharPosition = new Vector3(-150, 100, 0);
-    public Vector2 CharSize = new Vector2(200, 200);
-    public Vector3 CharScale = new Vector3(0.2f, 0.2f, 0.2f);
-
-    public Vector2 AnimeSelecterSize = new Vector2(15, 15);
-    public Vector2 AnimeSelecterOffset = new Vector2(15, 15);
-    public Vector2 VoiceSelecterSize = new Vector2(15, 15);
-    public Vector2 VoiceSelecterOffset = new Vector2(15, 15);
-
     public Transform contentParent;
-    public GameObject characterImagePrefab;
-    public GameObject characterAnimePrefab;
+    public GameObject[] layoutPrefabs;
+    public GameObject currentPage;
 
-    private GameObject CurrentCharacter;
-    private List<Image> generatedImages = new List<Image>();
+    private int charIntroCount=1;
+    private int skethImageCount = 1;
 
-    private Text currentText;
-    public Font font;
+    private int maxPage;
 
-    private AudioSource CurrentAudioSource;
-
-    public void GenerateCharacterILL(CharacterData character)
+    void Update()
     {
-        GameObject newImage = Instantiate(characterImagePrefab, contentParent);
-        newImage.tag = "GalleryObject";
-
-        RectTransform imageRectTransform = newImage.GetComponent<RectTransform>();
-        if (imageRectTransform != null)
+        if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
-            imageRectTransform.localPosition = ImagePosition;
-            imageRectTransform.sizeDelta = ImageSize;
-            imageRectTransform.localScale = ImageScale;
-        }
-
-        Image buttonImage = newImage.GetComponentInChildren<Image>();
-        if (buttonImage != null)
-        {
-            buttonImage.sprite = character.characterIllustration;
-        }
-    }
-
-    public void GenerateCharacterAnime(CharacterData character)
-    {
-        generatedImages.Clear();
-
-        GameObject newAnime = Instantiate(characterAnimePrefab, contentParent);
-        newAnime.tag = "GalleryObject";
-
-        Transform charSpriteTransform = newAnime.transform.Find("CharSprite");
-
-        RectTransform imageRectTransform = newAnime.GetComponent<RectTransform>();
-        if (imageRectTransform != null)
-        {
-            imageRectTransform.localPosition = CharPosition;
-            imageRectTransform.sizeDelta = CharSize;
-            imageRectTransform.localScale = CharScale;
-        }
-
-        Animator animator = charSpriteTransform.GetComponent<Animator>();
-        if (animator != null && character.animatorControllers.Count > 0)
-        {
-            animator.runtimeAnimatorController = character.animatorControllers[0];
-        }
-        CurrentCharacter = newAnime;
-
-        Vector3 currentPosition = new Vector3(newAnime.transform.localPosition.x + AnimeSelecterOffset.x,
-                                              newAnime.transform.localPosition.y+AnimeSelecterOffset.y,
-                                              newAnime.transform.localPosition.z);
-
-
-        for(int i = 0; i < character.animatorControllers.Count; i++)
-        {
-            GameObject imageObject = new GameObject("AnimatorImage_" + i);
-            imageObject.transform.SetParent(contentParent, false);
-            imageObject.tag = "GalleryObject";
-
-            RectTransform rectTransform = imageObject.AddComponent<RectTransform>();
-            Image image = imageObject.AddComponent<Image>();
-
-            rectTransform.sizeDelta = AnimeSelecterSize;
-            rectTransform.localPosition = new Vector3(currentPosition.x + i * 50, currentPosition.y, currentPosition.z);
-            rectTransform.localScale = Vector3.one;
-
-            image.color = Color.white;
-
-            generatedImages.Add(image);
-        }
-
-        GameObject VoiceObject = new GameObject("VoiceButton");
-        VoiceObject.transform.SetParent(contentParent, false);
-        VoiceObject.tag = "GalleryObject";
-
-        RectTransform rectVoiceTransform = VoiceObject.AddComponent<RectTransform>();
-        Image voiceImage = VoiceObject.AddComponent<Image>();
-
-        rectVoiceTransform.sizeDelta = VoiceSelecterSize;
-        rectVoiceTransform.localPosition = new Vector3(currentPosition.x+VoiceSelecterOffset.x,
-                                                       currentPosition.y + VoiceSelecterOffset.y,
-                                                       currentPosition.z);
-        rectVoiceTransform.localScale = Vector3.one;
-        voiceImage.color = Color.white;
-        Color colorA = voiceImage.color;
-        colorA.a = 0.2f;
-        voiceImage.color = colorA;
-
-        GameObject textObject = new GameObject("VoiceButtonText");
-        textObject.transform.SetParent(VoiceObject.transform, false);
-
-        RectTransform textRectTransform = textObject.AddComponent<RectTransform>();
-        Text textComponent = textObject.AddComponent<Text>();
-
-        currentText = textComponent;
-
-        textRectTransform.sizeDelta = rectVoiceTransform.sizeDelta;
-        textRectTransform.localPosition = Vector3.zero;
-        textComponent.alignment = TextAnchor.MiddleCenter;
-
-        textComponent.text = "";
-        textComponent.font = font;
-        textComponent.fontSize = 32;
-        textComponent.color = Color.black;
-
-    }
-
-    public void GenerateCharacterVoice()
-    {
-        GameObject VoiceObject = new GameObject("VoicePlayer");
-        VoiceObject.transform.SetParent(contentParent, false);
-        VoiceObject.tag = "GalleryObject";
-
-        AudioSource audioSource = VoiceObject.AddComponent<AudioSource>();
-        CurrentAudioSource = audioSource;
-    }
-
-    public void PlayerCharacterVoice(CharacterData character,int currentVoiceIndex)
-    {
-        if (CurrentAudioSource != null)
-        {
-            CurrentAudioSource.clip= character.CharVoice[currentVoiceIndex].voiceClip;
-            CurrentAudioSource.Play();
-        }
-    }
-
-    public void UpdateAnimatorController(CharacterData character,int currentAnimatorIndex)
-    {
-        Transform charSpriteTransform = CurrentCharacter.transform.Find("CharSprite");
-
-        Animator animator = charSpriteTransform.GetComponent<Animator>();
-
-        if (animator != null)
-        {
-            animator.runtimeAnimatorController = character.animatorControllers[currentAnimatorIndex];
-            animator.Play(0);
-        }
-    }
-
-    public void ClearCharacterILL()
-    {
-        foreach (Transform child in contentParent)
-        {
-            if (child.CompareTag("GalleryObject"))
+            if (!IsFourthPage(currentPage))
             {
-                Destroy(child.gameObject);
+                return;
+            }
+            PlayVoice(currentPage);
+        }
+    }
+
+    public void SwitchPage(int page, CharacterData characterData)
+    {
+        if (currentPage != null)
+        {
+            Destroy(currentPage);
+        }
+
+        int currentPageStart = 1;
+        int currentPageEnd;
+        int pageTypeCount = -1;
+
+        if (page == 1)
+        {
+            currentPage = GetPageFromPool(layoutPrefabs[0]);
+            pageTypeCount = 0;
+            UpdatePageContent(currentPage, characterData, 0, pageTypeCount);
+            return;
+        }
+
+        currentPageStart++;
+        currentPageEnd = currentPageStart + (characterData.weapon?.Count ?? 0) - 1;
+        if (page >= currentPageStart && page <= currentPageEnd)
+        {
+            currentPage = GetPageFromPool(layoutPrefabs[1]);
+            pageTypeCount = 1;
+            UpdatePageContent(currentPage, characterData, page, pageTypeCount);
+            return;
+        }
+
+        currentPageStart = currentPageEnd + 1;
+        currentPageEnd = currentPageStart + (characterData.animatorControllers?.Count ?? 0) - 1;
+        if (page >= currentPageStart && page <= currentPageEnd)
+        {
+            currentPage = GetPageFromPool(layoutPrefabs[2]);
+            pageTypeCount = 2;
+            int animetionCount = page - currentPageStart;
+            UpdatePageContent(currentPage, characterData, animetionCount, pageTypeCount);
+            return;
+        }
+
+        currentPageStart = currentPageEnd + 1;
+        currentPageEnd = currentPageStart;
+        if (page == currentPageStart)
+        {
+            currentPage = GetPageFromPool(layoutPrefabs[3]);
+            pageTypeCount = 3;
+            return;
+        }
+
+        currentPageStart = currentPageEnd + 1;
+        currentPageEnd = currentPageStart + (characterData.CharVoice?.Count ?? 0) - 1;
+        if (page >= currentPageStart && page <= currentPageEnd)
+        {
+            currentPage = GetPageFromPool(layoutPrefabs[4]);
+            pageTypeCount = 4;
+            int voiceCount = page - currentPageStart;
+            UpdatePageContent(currentPage, characterData, voiceCount, pageTypeCount);
+            return;
+        }
+
+        Debug.LogError($"ÈëÁ¦¤µ¤ì¤¿¥Ú©`¥¸ {page} Ÿo„¿!");
+    }
+
+
+    private GameObject GetPageFromPool(GameObject layoutPrefab)
+    {
+        GameObject page = Instantiate(layoutPrefab, contentParent);
+        Vector3 localPos = new Vector3(199,123,0);
+        page.transform.localPosition = localPos;
+        page.transform.localRotation = Quaternion.identity;
+        page.transform.localScale = Vector3.one;
+        return page;
+    }
+
+
+    public void EnterCharacterGallery(CharacterData characterData)
+    {
+        int animatorCount = characterData.animatorControllers != null ? characterData.animatorControllers.Count : 0;
+        int charVoiceCount = characterData.CharVoice != null ? characterData.CharVoice.Count : 0;
+        int weaponPageCount = characterData.weapon != null ? characterData.weapon.Count : 0;
+
+        maxPage = charIntroCount + skethImageCount + animatorCount + charVoiceCount + weaponPageCount;
+
+        SwitchPage(1, characterData);
+    }
+
+    public int GetMaxPage()
+    {
+        return maxPage;
+    }
+
+    public void SetActive(bool state)
+    {
+        if (currentPage != null)
+        {
+            currentPage.SetActive(state);
+        }
+    }
+
+    private void UpdatePageContent(GameObject page, CharacterData characterData, int pageIndex,int pageType)
+    {
+        int weaponCount = pageIndex - 2;
+        switch (pageType)
+        {
+            case 0:
+                UpdateCharIntro(page, characterData);
+                break;
+            case 1:
+                UpdateWeaponIntro(page, characterData, weaponCount);
+                break;
+            case 2:
+                UpdateCharAnime(page, characterData, pageIndex);
+                break;
+            case 3:
+                break;
+            case 4:
+                UpdateVoicePrefab(page, characterData, pageIndex);
+                break;
+            default:
+                break;
+        }
+    }
+    private void UpdateCharIntro(GameObject page,CharacterData characterData)
+    {
+        //Text
+        Transform nameTransform = page.transform.Find("Name");
+        if (nameTransform != null)
+        {
+            Text nameText = nameTransform.GetComponent<Text>();
+            if (nameText != null)
+            {
+                nameText.text = characterData.charData.characterName;
+            }
+        }
+
+        Transform schoolNameTransform = page.transform.Find("School");
+        if (schoolNameTransform != null)
+        {
+            Text schoolNameText = schoolNameTransform.GetComponent<Text>();
+            if (schoolNameText != null)
+            {
+                schoolNameText.text = characterData.charData.schoolText;
+            }
+        }
+
+        Transform schoolYear = page.transform.Find("SchoolYear");
+        if (schoolYear != null)
+        {
+            Text schoolYearText = schoolYear.GetComponent<Text>();
+            if (schoolYearText != null)
+            {
+                schoolYearText.text = characterData.charData.schoolYear;
+            }
+        }
+
+        Transform charIntro = page.transform.Find("Design");
+        if (charIntro != null)
+        {
+            Text charIntroText = charIntro.GetComponent<Text>();
+            if (charIntroText != null)
+            {
+                charIntroText.text = characterData.charData.charDesign;
+            }
+        }
+
+        //Image
+        Transform schoolIcon = page.transform.Find("SchoolIcon");
+        if (schoolIcon != null)
+        {
+            Image schoolIconImage = schoolIcon.GetComponent<Image>();
+            if (schoolIconImage != null)
+            {
+                schoolIconImage.sprite = characterData.charData.schoolIcon;
+            }
+        }
+
+        Transform emote = page.transform.Find("emote");
+        if (emote != null)
+        {
+            Image emoteImage = emote.GetComponent<Image>();
+            if (emoteImage != null)
+            {
+                emoteImage.sprite = characterData.charData.emoteIllustration;
             }
         }
     }
 
-    public void ModifyGeneratedImages(int index)
+    private void UpdateWeaponIntro(GameObject page, CharacterData characterData,int WeaponType)
     {
-        for (int i = 0; i < generatedImages.Count; i++)
+        //Text
+        Transform weaponNameTransform = page.transform.Find("WeaponName");
+        if (weaponNameTransform != null)
         {
-            RectTransform rectTransform = generatedImages[i].GetComponent<RectTransform>();
-            if (rectTransform != null)
+            Text weaponNameText = weaponNameTransform.GetComponent<Text>();
+            if (weaponNameText != null)
             {
-                rectTransform.sizeDelta = AnimeSelecterSize;
-                if (i == index)
-                {
-                    rectTransform.sizeDelta *= 1.5f;
-                }
+                weaponNameText.text = characterData.weapon[WeaponType].weaponName;
+            }
+        }
+
+        Transform weaponIntroTransform = page.transform.Find("WeaponIntro");
+        if (weaponIntroTransform != null)
+        {
+            Text weaponIntroText = weaponIntroTransform.GetComponent<Text>();
+            if (weaponIntroText != null)
+            {
+                weaponIntroText.text = characterData.weapon[WeaponType].weaponText;
+            }
+        }
+
+        //image
+        Transform weaponIconTransform = page.transform.Find("WeaponIcon");
+        if (weaponIconTransform != null)
+        {
+            Image weaponIconImage = weaponIconTransform.GetComponent<Image>();
+            if (weaponIconImage != null)
+            {
+                weaponIconImage.sprite = characterData.weapon[WeaponType].weaponIcon;
             }
         }
     }
 
-    public void ChangeText(string newText)
+    private void UpdateCharAnime(GameObject page, CharacterData characterData, int animeCount)
     {
-        if (currentText != null)
+        Transform CharSprite = page.transform.Find("CharSprite");
+        if (CharSprite != null)
         {
-            currentText.text = newText;
+            Animator charAnime = CharSprite.GetComponent<Animator>();
+            if (charAnime != null)
+            {
+                charAnime.runtimeAnimatorController = characterData.animatorControllers[animeCount];
+            }
+        }
+    }
+
+    private void UpdateVoicePrefab(GameObject page, CharacterData characterData, int VoiceCount)
+    {
+        Transform VoiceName = page.transform.Find("VoiceName");
+        if (VoiceName != null)
+        {
+            Text voiceNameText = VoiceName.GetComponent<Text>();
+            if (voiceNameText != null)
+            {
+                voiceNameText.text = characterData.CharVoice[VoiceCount].voiceText;
+            }
+        }
+
+        Transform voiceObject = page.transform.Find("VoiceObject");
+        if (voiceObject != null)
+        {
+            AudioSource voiceClip = voiceObject.GetComponent<AudioSource>();
+            if (voiceClip != null)
+            {
+                voiceClip.clip = characterData.CharVoice[VoiceCount].voiceClip;
+            }
+        }
+
+        //Transform VoiceText = page.transform.Find("VoiceText");
+        //if (VoiceText != null)
+        //{
+        //    Text voice = VoiceText.GetComponent<Text>();
+        //    if (voice != null)
+        //    {
+        //        voice.text = characterData.CharVoice[VoiceCount];
+        //    }
+        //}
+    }
+
+    private void PlayVoice(GameObject voiceObject)
+    {
+
+        Transform voiceObj = voiceObject.transform.Find("VoiceObject");
+        AudioSource voicePlayer = voiceObj.GetComponent<AudioSource>();
+        if (voicePlayer != null&& voicePlayer.clip!=null)
+        {
+            voicePlayer.Play();
+        }
+    }
+
+    bool IsFourthPage(GameObject page)
+    {
+        if (layoutPrefabs != null && layoutPrefabs.Length > 4)
+        {
+            return page != null && page.name.StartsWith(layoutPrefabs[4].name);
+        }
+        return false; 
+    }
+
+    public void GenerateIll(CharacterData characterData)
+    {
+        GameObject newObject = new GameObject("CharacterImage");
+        newObject.tag = "GalleryObject";
+        newObject.transform.SetParent(contentParent);
+        RectTransform rectTransform = newObject.AddComponent<RectTransform>();
+        Image image = newObject.AddComponent<Image>();
+        image.sprite = characterData.charData.characterIllustration;
+        rectTransform.sizeDelta = new Vector2(1920, 1080);
+        rectTransform.anchoredPosition = new Vector2(0, 0);
+        rectTransform.localPosition = new Vector3(-200, 0, 0);
+        rectTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        rectTransform.SetAsFirstSibling();
+    }
+
+    public void DeletCharIll()
+    {
+        GameObject[] galleryObjects = GameObject.FindGameObjectsWithTag("GalleryObject");
+        foreach (GameObject obj in galleryObjects)
+        {
+            Destroy(obj);
         }
     }
 }
