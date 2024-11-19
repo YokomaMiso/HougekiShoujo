@@ -9,14 +9,19 @@ public class BlueCoralBehavior : InstallationBehavior
     float speedRate;
     float buffLifeTime;
 
+    Transform vfx;
+    MeshRenderer vfxRenderer;
+    Vector3 vfxScale;
+    float vfxDefaultScaleY;
+
     protected override void Start()
     {
         lifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime();
 
-        transform.GetChild(0).gameObject.SetActive(false);
-
-        imageAnimator = transform.GetChild(1).GetComponent<Animator>();
-        imageAnimator.gameObject.SetActive(true);
+        vfx = transform.GetChild(0);
+        vfxRenderer = vfx.GetComponent<MeshRenderer>();
+        vfxScale = vfx.localScale;
+        vfxDefaultScaleY = vfxScale.y;
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
         buffLifeTime = 5.0f;
@@ -27,10 +32,16 @@ public class BlueCoralBehavior : InstallationBehavior
     protected override void Update()
     {
         float deltaTime = Managers.instance.timeManager.GetDeltaTime();
-        TimeSetting();
 
         timer += deltaTime;
         transform.localScale = Vector3.one * Mathf.Clamp01(timer / lifeTime) * 3;
+
+        vfx.localRotation = Quaternion.Euler(0, 360 * timer, 0);
+        vfxScale.y = Mathf.Lerp(vfxDefaultScaleY, vfxDefaultScaleY / 3, Mathf.Clamp01(timer / lifeTime));
+        vfx.localScale = vfxScale;
+
+        float nowRate = Mathf.Pow(Mathf.Clamp01(timer / lifeTime), 3);
+        vfxRenderer.material.color = new Color(1, 1, 1, 1.0f - nowRate);
 
         if (timer > lifeTime) { Destroy(gameObject); }
     }
