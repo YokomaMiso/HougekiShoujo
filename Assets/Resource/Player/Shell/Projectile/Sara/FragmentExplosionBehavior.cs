@@ -8,7 +8,7 @@ public class FragmentExplosionBehavior : ExplosionBehavior
 
     protected override void Start()
     {
-        lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
+        lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.35f;
 
         GameObject obj = SoundManager.PlaySFX(fragExp);
         obj.transform.position = this.transform.position;
