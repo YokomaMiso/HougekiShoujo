@@ -136,19 +136,24 @@ public class Player : MonoBehaviour
 
 
     GameObject voiceSoundObject;
-    public void PlayVoice(AudioClip _clip, Transform _transform = null)
+    int voiceSoundID = 0;
+    public void PlayVoice(AudioClip _clip, Transform _transform = null, int _num = 0)
     {
-        if (voiceSoundObject != null) { Destroy(voiceSoundObject); }
+        if (_num >= voiceSoundID)
+        {
+            if (voiceSoundObject != null) { Destroy(voiceSoundObject); }
+            voiceSoundID = _num;
+        }
 
         if (_transform == null) { _transform = transform; }
 
         voiceSoundObject = SoundManager.PlayVoice(_clip, _transform);
+        voiceSoundObject.AddComponent<PlayerVoiceReset>().SetOwnerPlayer(this);
     }
+    public void ResetVoiceSoundID() { voiceSoundID = 0; }
 
     void Start()
     {
-        this.PlayVoice(playerData.GetPlayerVoiceData().GetGameStart(), Camera.main.transform);
-
         playerMove = gameObject.GetComponent<PlayerMove>();
         playerMove.SetPlayer(this);
 
@@ -157,6 +162,7 @@ public class Player : MonoBehaviour
         if (IsMine())
         {
             playerAim.SetPlayer(this, transform.GetChild(2).gameObject, transform.GetChild(1).gameObject);
+            this.PlayVoice(playerData.GetPlayerVoiceData().GetGameStart(), Camera.main.transform);
         }
         else
         {
