@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a08d4c96db6ce74f986a905ad61582d, type: 3}
   m_Name: Stage_KyushaMae
   m_EditorClassIdentifier: 
+  stageName: "\u4EC7\u5C04\u9AD8\u6821\u6B63\u9580\u524D"
   stagePrefab: {fileID: 5198325544041908592, guid: 739fc8a94ca56004d980df378464ab84,
     type: 3}
   stageSize: {x: 36, y: 0, z: 15}

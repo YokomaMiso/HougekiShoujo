@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class StageData : ScriptableObject
 {
-    [SerializeField, Header("StagePrefab")] GameObject stagePrefab;
+    [SerializeField, Header("Stage Name")] string stageName;
+    [SerializeField, Header("Stage Prefab")] GameObject stagePrefab;
     [SerializeField, Header("Stage Size")] Vector3 stageSize;
     [SerializeField, Header("Stage Position")] Vector3[] defaultPosition;
 
@@ -21,7 +22,7 @@ public class StageData : ScriptableObject
     [SerializeField, Header("MiniMap MinZ")] float minZ;
     [SerializeField, Header("MiniMap MaxZ")] float maxZ;
 
-
+    public string GetStageName() { return  stageName; }
     public GameObject GetStagePrefab() { return stagePrefab; }
     public Vector3 GetStageSize() { return stageSize; }
     public float GetStageRadius() { return Mathf.Sqrt((stageSize.x * stageSize.x) + (stageSize.z * stageSize.z)) * 1.5f; }
