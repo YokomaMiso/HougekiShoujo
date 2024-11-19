@@ -13,6 +13,9 @@ public class RoomCanvasBehavior : MonoBehaviour
     [SerializeField] GameObject playerBanners;
     [SerializeField] StageSelectBehavior stageSelect;
 
+    [SerializeField] GameObject stageBinder;
+    [SerializeField] GameObject stageDisplay;
+
     readonly Vector3[] teamDefaultPos = new Vector3[2] { new Vector3(450, 352), new Vector3(440, -128) };
     readonly Vector3 teamPosSub = new Vector3(30, -80);
 
@@ -31,6 +34,16 @@ public class RoomCanvasBehavior : MonoBehaviour
         int charaID = myRoomData.selectedCharacterID;
         PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
         charaVisual.SetCharaVisual(nowPlayerData);
+
+        if (Managers.instance.playerID != 0) 
+        {
+            stageBinder.SetActive(false);
+        }
+        else
+        {
+            stageDisplay.SetActive(false);
+        }
+
     }
 
     void Update()

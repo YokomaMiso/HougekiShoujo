@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a08d4c96db6ce74f986a905ad61582d, type: 3}
   m_Name: RandomStageData
   m_EditorClassIdentifier: 
+  stageName: "\u30E9\u30F3\u30C0\u30E0"
   stagePrefab: {fileID: 5198325544041908592, guid: 2e077cf4c398354488272765218ec3a3,
     type: 3}
   stageSize: {x: 0, y: 0, z: 0}
