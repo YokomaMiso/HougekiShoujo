@@ -7,12 +7,12 @@ public class EMPMine : InstallationBehavior
 {
     [SerializeField] Explosion empExplosion;
 
-
     protected override void Start()
     {
         explosion = empExplosion;
-        base.Start();
-        changeToLoopAnimTime = 1.5f;
+        //base.Start();
+        lifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime();
+        changeToLoopAnimTime = 0.5f;
     }
 
     protected override void Update()
@@ -22,7 +22,7 @@ public class EMPMine : InstallationBehavior
         if (applyLoop) { return; }
         if (timer > changeToLoopAnimTime)
         {
-            imageAnimator.runtimeAnimatorController = loopAnim;
+            //imageAnimator.runtimeAnimatorController = loopAnim;
             applyLoop = true;
         }
     }
