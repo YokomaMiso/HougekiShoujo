@@ -28,7 +28,7 @@ public class ExplosionBehavior : MonoBehaviour
 
     protected virtual void Start()
     {
-        lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length - 0.75f;
+        lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length * 0.5f;
 
         GameObject obj = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetExplosionSFX());
         obj.transform.position = this.transform.position;
