@@ -13,15 +13,8 @@ public class TextChangerAtLanguage : MonoBehaviour
     [SerializeField] string simpleChinese;
     [SerializeField] string traditionalChinese;
 
-    void Start()
+    void ChangeText()
     {
-        text = GetComponent<Text>();
-    }
-
-    void Update()
-    {
-        if (!change) { return; }
-    
         string applyText;
         switch (Managers.instance.nowLanguage)
         {
@@ -32,6 +25,18 @@ public class TextChangerAtLanguage : MonoBehaviour
         }
 
         text.text = applyText;
+    }
+
+    void Start()
+    {
+        text = GetComponent<Text>();
+        ChangeText();
+    }
+
+    void Update()
+    {
+        if (!change) { return; }
+        ChangeText();
     }
 
     void LateUpdate()

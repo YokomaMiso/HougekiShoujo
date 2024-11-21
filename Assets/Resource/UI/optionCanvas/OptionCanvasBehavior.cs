@@ -17,8 +17,6 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void Start()
     {
-        TextChangerAtLanguage.change = true;
-
         optionData = Managers.instance.GetOptionData();
         transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
         transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);

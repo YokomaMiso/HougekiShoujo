@@ -21,7 +21,13 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     [SerializeField] Text[] weaponExplain;
 
     readonly string[] difficulityColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
-    readonly string[] rollString = new string[4] { "近距離", "中距離", "遠距離", "無認可" };
+    readonly string[][] rollString = new string[4][] 
+    {
+       new string[4]{ "近距離", "中距離", "遠距離", "無認可" },
+       new string[4]{ "Melee", "Middle", "Range", "Secret" },
+       new string[4]{ "近距離", "中距離", "遠距離", "無認可" },
+       new string[4]{ "近距離", "中距離", "遠距離", "無認可" },
+    };
 
     readonly Vector3 illustStartPos = new Vector3(1150, 32);
     readonly Vector3 illustEndPos = new Vector3(0, 32);
@@ -93,7 +99,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
 
     void SetShellType(int _num)
     {
-        rollText.text = rollString[_num];
+        rollText.text = rollString[(int)Managers.instance.nowLanguage][_num];
         rollTape.sprite = rollTapeSprites[_num];
     }
 
