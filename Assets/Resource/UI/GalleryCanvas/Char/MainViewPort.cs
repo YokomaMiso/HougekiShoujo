@@ -15,6 +15,14 @@ public class MainViewPort : MonoBehaviour
     private int skethImageCount = 1;
 
     private int maxPage;
+    private bool isPlaying=false;
+
+    private int voicePage;
+    private CharacterData currentCharData;
+
+    public float typingSpeed = 0.05f;
+
+    private AudioSource currentVoiceObject;
 
     void Update()
     {
@@ -24,7 +32,10 @@ public class MainViewPort : MonoBehaviour
             {
                 return;
             }
-            PlayVoice(currentPage);
+            if (!isPlaying)
+            {
+                StartCoroutine(PlayVoiceAndText(currentPage,voicePage, currentCharData));
+            }
         }
     }
 
@@ -84,6 +95,8 @@ public class MainViewPort : MonoBehaviour
             currentPage = GetPageFromPool(layoutPrefabs[4]);
             pageTypeCount = 4;
             int voiceCount = page - currentPageStart;
+            voicePage = voiceCount;
+            currentCharData = characterData;
             UpdatePageContent(currentPage, characterData, voiceCount, pageTypeCount);
             return;
         }
@@ -274,38 +287,10 @@ public class MainViewPort : MonoBehaviour
                 voiceNameText.text = characterData.CharVoice[VoiceCount].voiceText;
             }
         }
-
-        Transform voiceObject = page.transform.Find("VoiceObject");
-        if (voiceObject != null)
-        {
-            AudioSource voiceClip = voiceObject.GetComponent<AudioSource>();
-            if (voiceClip != null)
-            {
-                voiceClip.clip = characterData.CharVoice[VoiceCount].voiceClip;
-            }
-        }
-
-        //Transform VoiceText = page.transform.Find("VoiceText");
-        //if (VoiceText != null)
-        //{
-        //    Text voice = VoiceText.GetComponent<Text>();
-        //    if (voice != null)
-        //    {
-        //        voice.text = characterData.CharVoice[VoiceCount];
-        //    }
-        //}
+        
     }
 
-    private void PlayVoice(GameObject voiceObject)
-    {
 
-        Transform voiceObj = voiceObject.transform.Find("VoiceObject");
-        AudioSource voicePlayer = voiceObj.GetComponent<AudioSource>();
-        if (voicePlayer != null&& voicePlayer.clip!=null)
-        {
-            voicePlayer.Play();
-        }
-    }
 
     bool IsFourthPage(GameObject page)
     {
@@ -329,6 +314,65 @@ public class MainViewPort : MonoBehaviour
         rectTransform.localPosition = new Vector3(-200, 0, 0);
         rectTransform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
         rectTransform.SetAsFirstSibling();
+    }
+
+    private IEnumerator PlayVoiceAndText(GameObject gameObject, int VoiceCount, CharacterData characterData)
+    {
+        isPlaying = true;
+
+        string fullText = characterData.CharVoice[VoiceCount].voiceFullText;
+        Transform VoiceText = gameObject.transform.Find("VoiceText");
+        Transform voiceObject = gameObject.transform.Find("VoiceObject");
+        Text voice = VoiceText?.GetComponent<Text>();
+        AudioSource voiceClip = voiceObject?.GetComponent<AudioSource>();
+
+        if (voiceClip != null)
+        {
+            currentVoiceObject = voiceClip;
+            currentVoiceObject.clip = characterData.CharVoice[VoiceCount].voiceClip;
+            currentVoiceObject.Play();
+
+            float totalDuration = currentVoiceObject.clip.length;
+            float timePerCharacter = totalDuration / fullText.Length;
+
+            string currentText = "";
+
+            foreach (char c in fullText)
+            {
+                if (voice == null || currentVoiceObject == null)
+                {
+                    isPlaying = false;
+                    yield break;
+                }
+
+                currentText += c;
+                voice.text = currentText;
+                yield return new WaitForSeconds(Mathf.Min(typingSpeed, timePerCharacter));
+            }
+
+            if (currentVoiceObject != null)
+            {
+                while (currentVoiceObject != null && currentVoiceObject.isPlaying)
+                {
+                    yield return null; 
+                }
+            }
+
+
+            isPlaying = false;
+        }
+        else
+        {
+            Debug.LogError("Voice object or AudioSource is missing!");
+            isPlaying = false;
+        }
+    }
+
+
+    void OnDestroy()
+    {
+        currentVoiceObject.Stop();
+        StopAllCoroutines();
     }
 
     public void DeletCharIll()
