@@ -20,6 +20,7 @@ public class VoiceTextPair
 {
     public AudioClip voiceClip;
     public string voiceText;
+    [TextArea] public string voiceFullText;
 }
 
 [System.Serializable]
