@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public enum GAME_STATE { LOGO_SPLASH = 0, TITLE, SELECT_ROOM, CONNECTION, ROOM, IN_GAME, RESULT, GALLERY, CREDIT, MAX_NUM };
 public enum UNLOCK_ITEM { UI_DELETE, TSUBASA, /*STAGE,*/ MAX_NUM };
 
+public enum LANGUAGE_NUM { JAPANESE,ENGLISH,SIMPLE_CHINESE,TRADITIONAL_CHINESE,MAX_NUM };
+
 public class Managers : MonoBehaviour
 {
     /*シングルトン*/
@@ -43,7 +45,11 @@ public class Managers : MonoBehaviour
     public TimeManager timeManager;
     public RoomManager roomManager;
 
+    /*解放要素*/
     public bool[] unlockFlag = new bool[(int)UNLOCK_ITEM.MAX_NUM];
+
+    /*言語設定*/
+    public LANGUAGE_NUM nowLanguage;
 
     [SerializeField] AudioClip submitSFX;
     [SerializeField] AudioClip cancelSFX;

@@ -32,6 +32,7 @@ public class SaveManager : MonoBehaviour
     {
         //オプションデータのロード
         Managers.instance.optionData = LoadOptionData();
+        Managers.instance.nowLanguage = (LANGUAGE_NUM)Managers.instance.optionData.languageNum;
     }
 
     /*
