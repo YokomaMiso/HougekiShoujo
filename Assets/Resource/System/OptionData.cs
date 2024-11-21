@@ -14,6 +14,7 @@ public class OptionData : ScriptableObject
     public float voiceVolume = 0.8f;
     public bool cameraShakeOn = true;
     public float mortarSensitive = 20.0f;
+    public int languageNum = 0;
 
     public void Init(OptionData _od)
     {
@@ -24,5 +25,6 @@ public class OptionData : ScriptableObject
         voiceVolume = _od.voiceVolume;
         cameraShakeOn = _od.cameraShakeOn;
         mortarSensitive = _od.mortarSensitive;
+        languageNum = _od.languageNum;
     }
 }

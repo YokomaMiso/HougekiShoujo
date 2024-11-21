@@ -17,6 +17,8 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void Start()
     {
+        TextChangerAtLanguage.change = true;
+
         optionData = Managers.instance.GetOptionData();
         transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
         transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
@@ -24,6 +26,7 @@ public class OptionCanvasBehavior : MonoBehaviour
         transform.GetChild(4).GetComponent<VolumeIndexSetting>().SetValue(optionData.voiceVolume);
         transform.GetChild(5).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
         transform.GetChild(6).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
+        transform.GetChild(7).GetComponent<LanguageRadioBoxSetting>().SetValue(optionData.languageNum);
 
         transform.GetChild(1).GetChild(0).GetComponent<Image>().color = SelectColor(true);
     }
@@ -57,7 +60,7 @@ public class OptionCanvasBehavior : MonoBehaviour
                 else { selectNum += 1; }
 
                 if (selectNum < 0) { selectNum = 0; }
-                if (selectNum > 6) { selectNum = 6; }
+                if (selectNum > 7) { selectNum = 7; }
 
                 isCanSelect = false;
 
@@ -98,17 +101,21 @@ public class OptionCanvasBehavior : MonoBehaviour
                         SoundManager.BGMVolumeChange(nowVolume);
 
                         break;
-                 
+
                     case 4:
                         transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value.x < 0);
                         break;
-                    
+
                     case 5:
                         if (value.x < 0) { applyValue *= -1; }
                         transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
                         break;
-                    
+
                     case 6:
+                        int valueToInt;
+                        if (value.x > 0) { valueToInt = 1; }
+                        else { valueToInt = -1; }
+                        int returnValue= transform.GetChild(selectNum + 1).GetComponent<LanguageRadioBoxSetting>().AddValue(valueToInt);
                         break;
                 }
             }
@@ -127,10 +134,11 @@ public class OptionCanvasBehavior : MonoBehaviour
         optionData.voiceVolume = transform.GetChild(4).GetComponent<VolumeIndexSetting>().GetValue();
         optionData.cameraShakeOn = transform.GetChild(5).GetComponent<RadioBoxIndexSetting>().on;
         optionData.mortarSensitive = transform.GetChild(6).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.languageNum = transform.GetChild(7).GetComponent<LanguageRadioBoxSetting>().num;
 
         if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
-            if (selectNum == 6)
+            if (selectNum == 7)
             {
                 Submit();
             }

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +19,15 @@ public class InputName : MonoBehaviour
     [SerializeField] GameObject unlockWindowPrefab;
     GameObject unlockWindowInstance;
 
+    [SerializeField] Text announce;
+    readonly string[] announceText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "åå‰å…¥åŠ›\nè‹±æ•°å­—ï¼˜ä»¥å†…",
+        "Input Name\nWithin 8",
+        "åç§°è¾“å…¥\nè‹±æ•°å­—ï¼˜ä»¥å†…",
+        "å§“åè¼¸å…¥\nè‹±æ•°å­—ï¼˜ä»¥å†…",
+    };
+
     readonly string[] unlockText = new string[(int)UNLOCK_ITEM.MAX_NUM]
     {
         "DELETE",
@@ -33,6 +42,8 @@ public class InputName : MonoBehaviour
         inputField.Select();
 
         prevText = inputField.text;
+
+        announce.text = announceText[(int)Managers.instance.nowLanguage];
     }
     void Update()
     {
@@ -53,10 +64,10 @@ public class InputName : MonoBehaviour
 
     void Submit()
     {
-        //Œˆ’èƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚È‚¢‚È‚ç
+        //æ±ºå®šãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ãªã„ãªã‚‰
         if (!InputManager.GetKeyDown(BoolActions.SouthButton))
         {
-            //ƒGƒ“ƒ^[ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚È‚¢‚È‚çƒŠƒ^[ƒ“
+            //ã‚¨ãƒ³ã‚¿ãƒ¼ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ãªã„ãªã‚‰ãƒªã‚¿ãƒ¼ãƒ³
             if (!Keyboard.current[Key.Enter].wasPressedThisFrame) { return; }
         }
 
@@ -102,7 +113,7 @@ public class InputName : MonoBehaviour
 
     void Cancel()
     {
-        //ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚È‚¢‚È‚ç
+        //ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ãªã„ãªã‚‰
         if (!InputManager.GetKeyDown(BoolActions.EastButton)) { return; }
 
         if (Keyboard.current.FindKeyOnCurrentKeyboardLayout("k").wasPressedThisFrame) { return; }
