@@ -8,25 +8,25 @@ public class DisplayCharaIcon : MonoBehaviour
 {
     readonly Vector2[] iconStartPos = new Vector2[6]
     {
-        new Vector2(-1000,0),
-        new Vector2(1000,0),
+        new Vector2(-1100,0),
+        new Vector2(1100,0),
 
-        new Vector2(-1150,0),
-        new Vector2(1150,0),
+        new Vector2(-1228,0),
+        new Vector2(1228,0),
 
-        new Vector2(-1300,0),
-        new Vector2(1300,0),
+        new Vector2(-1356,0),
+        new Vector2(1356,0),
     };
     readonly Vector2[] iconLineUpPos = new Vector2[6]
     {
-        new Vector2(-250,0),
-        new Vector2(250,0),
+        new Vector2(-100,0),
+        new Vector2(100,0),
 
-        new Vector2(-400,0),
-        new Vector2(400,0),
+        new Vector2(-228,0),
+        new Vector2(228,0),
 
-        new Vector2(-550,0),
-        new Vector2(550,0),
+        new Vector2(-356,0),
+        new Vector2(356,0),
     };
     readonly Vector2[] iconPos = new Vector2[6]
     {

@@ -16,6 +16,64 @@ public class KeyAnnounceInRoom : MonoBehaviour
     GameObject[] keys;
     const int maxKeyCount = 5;
 
+    readonly string[] characterChangeText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "キャラクター変更",
+        "Change Character",
+        "",
+        "",
+    };
+    readonly string[] teamChangeText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "チーム変更",
+        "Change Team",
+        "",
+        "",
+    };
+    readonly string[] startText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "スタート",
+        "START",
+        "",
+        "",
+    };
+    readonly string[] dissolutionText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "解散",
+        "Dissolution",
+        "",
+        "",
+    };
+    readonly string[] stageChangeText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "ステージ変更",
+        "Change Stage",
+        "",
+        "",
+    };
+    readonly string[] stageDecideText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+{
+        "ステージ決定",
+        "Decide Stage",
+        "",
+        "",
+};
+    readonly string readyText ="READY";
+    readonly string[] exitText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "退出",
+        "Exit",
+        "",
+        "",
+    };
+    readonly string[] cancelText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "READY解除",
+        "Cancel",
+        "",
+        "",
+    };
+
     void Start()
     {
         keys = new GameObject[maxKeyCount];
@@ -27,19 +85,19 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
         if (Managers.instance.playerID == 0)
         {
-            keys[0].transform.GetChild(1).GetComponent<Text>().text = "キャラクター変更";
-            keys[1].transform.GetChild(1).GetComponent<Text>().text = "チーム変更";
-            keys[2].transform.GetChild(1).GetComponent<Text>().text = "START";
+            keys[0].transform.GetChild(1).GetComponent<Text>().text = characterChangeText[(int)Managers.instance.nowLanguage];
+            keys[1].transform.GetChild(1).GetComponent<Text>().text=teamChangeText[(int)Managers.instance.nowLanguage];
+            keys[2].transform.GetChild(1).GetComponent<Text>().text = startText[(int)Managers.instance.nowLanguage];
             keys[2].SetActive(false);
-            keys[3].transform.GetChild(1).GetComponent<Text>().text = "解散";
-            keys[4].transform.GetChild(1).GetComponent<Text>().text = "マップ変更";
+            keys[3].transform.GetChild(1).GetComponent<Text>().text = dissolutionText[(int)Managers.instance.nowLanguage];
+            keys[4].transform.GetChild(1).GetComponent<Text>().text = startText[(int)Managers.instance.nowLanguage];
         }
         else
         {
-            keys[0].transform.GetChild(1).GetComponent<Text>().text = "キャラクター変更";
-            keys[1].transform.GetChild(1).GetComponent<Text>().text = "チーム変更";
-            keys[2].transform.GetChild(1).GetComponent<Text>().text = "READY";
-            keys[3].transform.GetChild(1).GetComponent<Text>().text = "退出";
+            keys[0].transform.GetChild(1).GetComponent<Text>().text = characterChangeText[(int)Managers.instance.nowLanguage];
+            keys[1].transform.GetChild(1).GetComponent<Text>().text = teamChangeText[(int)Managers.instance.nowLanguage];
+            keys[2].transform.GetChild(1).GetComponent<Text>().text = readyText;
+            keys[3].transform.GetChild(1).GetComponent<Text>().text = exitText[(int)Managers.instance.nowLanguage];
             keys[4].SetActive(false);
         }
 
@@ -57,23 +115,23 @@ public class KeyAnnounceInRoom : MonoBehaviour
         {
             if (stageSelectCanvas.activeInHierarchy)
             {
-                keys[0].transform.GetChild(1).GetComponent<Text>().text = "ステージ変更";
+                keys[0].transform.GetChild(1).GetComponent<Text>().text = stageChangeText[(int)Managers.instance.nowLanguage];
                 keys[1].SetActive(false);
-                keys[2].transform.GetChild(1).GetComponent<Text>().text = "ステージ決定";
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = stageDecideText[(int)Managers.instance.nowLanguage];
                 keys[2].SetActive(true);
                 keys[3].SetActive(false);
                 keys[4].SetActive(false);
             }
             else
             {
-                keys[0].transform.GetChild(1).GetComponent<Text>().text = "キャラクター変更";
-                keys[1].transform.GetChild(1).GetComponent<Text>().text = "チーム変更";
+                keys[0].transform.GetChild(1).GetComponent<Text>().text = characterChangeText[(int)Managers.instance.nowLanguage];
+                keys[1].transform.GetChild(1).GetComponent<Text>().text = teamChangeText[(int)Managers.instance.nowLanguage];
                 keys[1].SetActive(true);
-                keys[2].transform.GetChild(1).GetComponent<Text>().text = "START";
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = startText[(int)Managers.instance.nowLanguage];
                 keys[2].SetActive(ReadyChecker(roomData));
-                keys[3].transform.GetChild(1).GetComponent<Text>().text = "解散";
+                keys[3].transform.GetChild(1).GetComponent<Text>().text = dissolutionText[(int)Managers.instance.nowLanguage];
                 keys[3].SetActive(true);
-                keys[4].transform.GetChild(1).GetComponent<Text>().text = "マップ変更";
+                keys[4].transform.GetChild(1).GetComponent<Text>().text = stageChangeText[(int)Managers.instance.nowLanguage];
                 keys[4].SetActive(true);
             }
         }
@@ -84,14 +142,14 @@ public class KeyAnnounceInRoom : MonoBehaviour
                 keys[0].SetActive(false);
                 keys[1].SetActive(false);
                 keys[2].SetActive(false);
-                keys[3].transform.GetChild(1).GetComponent<Text>().text = "READY解除";
+                keys[3].transform.GetChild(1).GetComponent<Text>().text = cancelText[(int)Managers.instance.nowLanguage];
             }
             else
             {
                 keys[0].SetActive(true);
                 keys[1].SetActive(true);
                 keys[2].SetActive(true);
-                keys[3].transform.GetChild(1).GetComponent<Text>().text = "退出";
+                keys[3].transform.GetChild(1).GetComponent<Text>().text = exitText[(int)Managers.instance.nowLanguage];
             }
         }
     }

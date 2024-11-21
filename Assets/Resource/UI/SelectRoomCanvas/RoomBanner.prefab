@@ -255,6 +255,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cd9b4828104911a4cbc76ea836dfdf89, type: 3}
   roomNum: 0
   memberCount: 0
+  isPlaying: 0
 --- !u!114 &7989401597945809129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}

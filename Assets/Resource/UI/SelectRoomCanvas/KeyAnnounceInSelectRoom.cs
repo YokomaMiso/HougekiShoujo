@@ -16,6 +16,49 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
     GameObject[] keys;
     const int maxKeyCount = 5;
 
+    readonly string[] cursorMoveText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "カーソル移動",
+        "Cursor Move",
+        "",
+        "",
+    };
+    readonly string[] createRoomText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "部屋を作成",
+        "Create Room",
+        "",
+        "",
+    };
+    readonly string[] backToTitleText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "タイトルに戻る",
+        "Back to Title",
+        "",
+        "",
+    };
+    readonly string[] refreshText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "部屋の更新",
+        "Refresh Room",
+        "",
+        "",
+    };
+    readonly string[] joinToRoomText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "部屋に参加",
+        "Join to Room",
+        "",
+        "",
+    };
+    readonly string[] randomMatchText = new string[(int)LANGUAGE_NUM.MAX_NUM]
+    {
+        "ランダムマッチ",
+        "Random Match",
+        "",
+        "",
+    };
+
     void Start()
     {
         keys = new GameObject[maxKeyCount];
@@ -25,10 +68,10 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
         keys[3] = cancel;
         keys[4] = leftShoulder;
 
-        keys[1].transform.GetChild(1).GetComponent<Text>().text = "カーソル移動";
-        keys[2].transform.GetChild(1).GetComponent<Text>().text = "部屋を作成";
-        keys[3].transform.GetChild(1).GetComponent<Text>().text = "タイトルに戻る";
-        keys[4].transform.GetChild(1).GetComponent<Text>().text = "部屋の更新";
+        keys[1].transform.GetChild(1).GetComponent<Text>().text = cursorMoveText[(int)Managers.instance.nowLanguage];
+        keys[2].transform.GetChild(1).GetComponent<Text>().text = createRoomText[(int)Managers.instance.nowLanguage];
+        keys[3].transform.GetChild(1).GetComponent<Text>().text = backToTitleText[(int)Managers.instance.nowLanguage];
+        keys[4].transform.GetChild(1).GetComponent<Text>().text = refreshText[(int)Managers.instance.nowLanguage];
 
         ChangeDisplayButtons();
     }
@@ -40,22 +83,22 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
         //カーソルがルーム内に居る時の挙動
         if (srcb.selectRoomNum < srcb.maxRoomNum)
         {
-            if (srcb.roomBannerList[srcb.selectRoomNum].memberCount >= 6) 
+            if (srcb.roomBannerList[srcb.selectRoomNum].memberCount >= 6)
             {
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = "";
             }
-            else if (srcb.roomBannerList[srcb.selectRoomNum].isPlaying) 
+            else if (srcb.roomBannerList[srcb.selectRoomNum].isPlaying)
             {
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = "";
             }
             //0人なら
             else if (srcb.roomBannerList[srcb.selectRoomNum].memberCount == 0)
             {
-                keys[2].transform.GetChild(1).GetComponent<Text>().text = "部屋を作成";
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = createRoomText[(int)Managers.instance.nowLanguage];
             }
             else
             {
-                keys[2].transform.GetChild(1).GetComponent<Text>().text = "部屋に参加";
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = joinToRoomText[(int)Managers.instance.nowLanguage]; ;
             }
         }
         //カーソルが上方向のボタンに居る時
@@ -64,18 +107,18 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
             //タイトルに戻る
             if (srcb.selectRoomNum == srcb.maxRoomNum)
             {
-                keys[2].transform.GetChild(1).GetComponent<Text>().text = "タイトルに戻る";
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = backToTitleText[(int)Managers.instance.nowLanguage]; ;
             }
             //ルーム情報の更新
             else
             {
-                keys[2].transform.GetChild(1).GetComponent<Text>().text = "部屋の更新";
+                keys[2].transform.GetChild(1).GetComponent<Text>().text = refreshText[(int)Managers.instance.nowLanguage]; ;
             }
         }
         //カーソルが下方向のボタンに居る時
         else
         {
-            keys[2].transform.GetChild(1).GetComponent<Text>().text = "ランダムマッチ";
+            keys[2].transform.GetChild(1).GetComponent<Text>().text = randomMatchText[(int)Managers.instance.nowLanguage]; ;
         }
     }
 
