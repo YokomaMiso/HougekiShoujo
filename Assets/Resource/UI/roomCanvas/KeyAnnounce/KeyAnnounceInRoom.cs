@@ -40,7 +40,7 @@ public class KeyAnnounceInRoom : MonoBehaviour
     readonly string[] dissolutionText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
         "‰ðŽU",
-        "Dissolution",
+        "Disband",
         "",
         "",
     };

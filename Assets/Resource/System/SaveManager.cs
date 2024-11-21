@@ -22,6 +22,7 @@ public class SaveManager : MonoBehaviour
         public float voiceVolume;
         public bool cameraShakeOn;
         public float mortarSensitive;
+        public int languageNum;
     }
     void Awake()
     {
@@ -150,6 +151,7 @@ public class SaveManager : MonoBehaviour
         returndata.voiceVolume = _sd.voiceVolume;
         returndata.cameraShakeOn = _sd.cameraShakeOn;
         returndata.mortarSensitive = _sd.mortarSensitive;
+        returndata.languageNum = _sd.languageNum;
 
         return returndata;
     }
