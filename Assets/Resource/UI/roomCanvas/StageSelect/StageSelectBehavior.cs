@@ -52,7 +52,7 @@ public class StageSelectBehavior : MonoBehaviour
         {
             StageNumChange();
             PressSubmit();
-            float colorAlpha = 0.66f + (Mathf.Sin(Time.time * 3) / 3);
+            float colorAlpha = 0.5f + (Mathf.Sin(Time.time * 6) / 3);
             stump.color = new Color(1, 1, 1, colorAlpha);
         }
         else
