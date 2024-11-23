@@ -34,7 +34,7 @@ public class SoundObject : MonoBehaviour
                 break;
 
             case SOUND_TYPE.SFX:
-                pitch *= Random.Range(0.9f, 1.1f);
+                pitch *= Random.Range(0.95f, 1.05f);
                 volume *= SoundManager.sfxVolume;
                 lifeTime = clip.length;
                 break;

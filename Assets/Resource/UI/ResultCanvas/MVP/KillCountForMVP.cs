@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +13,14 @@ public class KillCountForMVP : MonoBehaviour
 
     readonly Color[] textColor = new Color[2] { Color.red, Color.white };
 
+    readonly string[] units = new string[(int)LANGUAGE_NUM.MAX_NUM] { "人", "x", "次", "次" };
+    readonly string[] actionText = new string[(int)LANGUAGE_NUM.MAX_NUM] { "倒した", "killed", "击倒", "撃倒" };
+
     public void SetText(ResultScoreBoard.KDFData _kdf)
     {
         for (int i = 0; i < 2; i++) { texts[i] = transform.GetChild(i).GetComponent<Text>(); }
-        texts[0].text = _kdf.killCount.ToString() + "��";
+        texts[0].text = _kdf.killCount.ToString() + units[(int)Managers.instance.nowLanguage];
+        texts[1].text = actionText[(int)Managers.instance.nowLanguage];
     }
 
     void Update()
