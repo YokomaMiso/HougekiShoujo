@@ -24,7 +24,9 @@ public class PlayerData : ScriptableObject
     [Header("SFX")]
     [SerializeField, Header("Player SFX Data")] PlayerSFXData playerSFXData;
     [Header("Voice")]
-    [SerializeField, Header("Player SFX Data")] PlayerVoiceData playerVoiceData;
+    [SerializeField, Header("Player Voice Data")] PlayerVoiceData playerVoiceData;
+    [Header("Result Jingle")]
+    [SerializeField, Header("Player Jingle")] AudioClip resultJingle;
 
     public string GetCharaName() { return charaName; }
     public string GetCharaNameRubi() { return charaNameRubi; }
@@ -46,4 +48,5 @@ public class PlayerData : ScriptableObject
 
     public PlayerSFXData GetPlayerSFXData() { return playerSFXData; }
     public PlayerVoiceData GetPlayerVoiceData() { return playerVoiceData; }
+    public AudioClip GetResultJingle() { return resultJingle; }
 }

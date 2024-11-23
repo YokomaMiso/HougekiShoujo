@@ -2386,6 +2386,7 @@ MonoBehaviour:
   stageSelect: {fileID: 8589024957306964187}
   stageBinder: {fileID: 6147753632539301608}
   stageDisplay: {fileID: 7257981158185615266}
+  roomBGM: {fileID: 8300000, guid: b8e0192871f2e7f4da7a0a53a396b625, type: 3}
 --- !u!1 &4478471455035712463
 GameObject:
   m_ObjectHideFlags: 0

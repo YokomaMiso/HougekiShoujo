@@ -4,14 +4,13 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - exitButtonPrefab: {fileID: 3050224417162698325, guid: 62fbd9a06fefb0944a1329c1a93f8076,
-      type: 3}
-  - scoreBoardPrefab: {fileID: 1164453516660232447, guid: 3c26e6efd350c234bac8fcceca797895,
-      type: 3}
-  - displayOtherAward: {fileID: 1483811730647812895, guid: 451d960fbf27d134586203a1a9ab0201,
-      type: 3}
-  - displayMVP: {fileID: 1483811730647812895, guid: 5e3ef1a7ba0166441984a6f05c35bcea,
-      type: 3}
+  - newsPaperBG: {instanceID: 0}
+  - awards: {instanceID: 0}
+  - scoreBoard: {instanceID: 0}
+  - mvpGroup: {instanceID: 0}
+  - awardCanvas: {instanceID: 0}
+  - exitButton: {instanceID: 0}
+  - startJingle: {fileID: 8300000, guid: b423fba74c9380343a7c5bd057198403, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

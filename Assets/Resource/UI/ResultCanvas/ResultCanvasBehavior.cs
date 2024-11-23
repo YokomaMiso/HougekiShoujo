@@ -29,6 +29,9 @@ public class ResultCanvasBehavior : MonoBehaviour
     readonly Vector3 displayMVPPos = Vector3.down * 1200;
     readonly Vector3 displayScorePos = Vector3.up * 650;
 
+    [Header("ƒWƒ“ƒOƒ‹")]
+    [SerializeField] AudioClip startJingle;
+
     void Start()
     {
         scoreBoard.Init();
@@ -47,6 +50,8 @@ public class ResultCanvasBehavior : MonoBehaviour
         defaultLocalPosition[3] = moveTransform[3].localPosition;
 
         OSCManager.OSCinstance.roomData.ready = false;
+
+        SoundManager.PlayJingleForResult(startJingle);
     }
 
     void Update()
