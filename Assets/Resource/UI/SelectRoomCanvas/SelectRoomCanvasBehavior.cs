@@ -33,6 +33,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
     GameObject connectingWindowInstance;
 
     [SerializeField] AudioClip refreshSFX;
+    [SerializeField] AudioClip selectRoomBGM;
 
     void Start()
     {
@@ -50,6 +51,8 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
 
         connectingWindowInstance = Instantiate(connectingWindowPrefab, transform);
         OSCManager.OSCinstance.SearchRoom(true);
+
+        SoundManager.PlayBGM(selectRoomBGM);
     }
 
     private void OnDestroy()

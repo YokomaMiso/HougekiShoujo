@@ -3,7 +3,13 @@ guid: c1e0405fb1535c143861149f2e9cea18
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - charaVisual: {instanceID: 0}
+  - playerBanners: {instanceID: 0}
+  - stageSelect: {instanceID: 0}
+  - stageBinder: {instanceID: 0}
+  - stageDisplay: {instanceID: 0}
+  - roomBGM: {fileID: 8300000, guid: b8e0192871f2e7f4da7a0a53a396b625, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -21,6 +21,8 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     bool joinedStartedRoom;
 
+    [SerializeField] AudioClip roomBGM;
+
     void Start()
     {
         rm = Managers.instance.roomManager;
@@ -35,15 +37,10 @@ public class RoomCanvasBehavior : MonoBehaviour
         PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
         charaVisual.SetCharaVisual(nowPlayerData);
 
-        if (Managers.instance.playerID != 0) 
-        {
-            stageBinder.SetActive(false);
-        }
-        else
-        {
-            stageDisplay.SetActive(false);
-        }
+        if (Managers.instance.playerID != 0) { stageBinder.SetActive(false); }
+        else { stageDisplay.SetActive(false); }
 
+        SoundManager.PlayBGM(roomBGM);
     }
 
     void Update()

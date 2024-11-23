@@ -78,4 +78,15 @@ public class SoundManager : MonoBehaviour
 
         return obj;
     }
+    public static GameObject PlayJingleForResult(AudioClip _clip, Transform _transform = null)
+    {
+        if (_transform == null) { _transform = Camera.main.transform.GetChild(0); }
+
+        GameObject obj = Instantiate(soundObject, _transform);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip, SOUND_TYPE.BGM, false);
+
+        SetNowBGM(obj.GetComponent<AudioSource>());
+
+        return obj;
+    }
 }

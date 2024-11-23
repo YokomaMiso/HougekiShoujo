@@ -24,3 +24,4 @@ MonoBehaviour:
   subWeapon: {fileID: 11400000, guid: ed7bb5eba41b87143a4c8c92438afe81, type: 2}
   playerSFXData: {fileID: 11400000, guid: f564a2fe6f4050d4e8539cf01ce3f3e8, type: 2}
   playerVoiceData: {fileID: 11400000, guid: 4b7d9cb65fdd29844aa24dc2bc037c94, type: 2}
+  resultJingle: {fileID: 8300000, guid: b444f2b03827101489d8e4fc7c2535b1, type: 3}

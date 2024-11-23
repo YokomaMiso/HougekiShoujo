@@ -6,16 +6,22 @@ using UnityEngine.UI;
 public class DisplayPlayerNameForMVP : MonoBehaviour
 {
     float timer;
-    const float startTime = 9.5f;
-    const float endTime = 10.0f;
+    const float startTime = 9.3f;
+    const float endTime = 9.8f;
 
     Text text;
+
+    bool jinglePlayed;
+    AudioClip mvpJingle;
 
     public void SetText(ResultScoreBoard.KDFData _kdf)
     {
         text = transform.GetComponent<Text>();
 
         text.text = _kdf.playerName;
+        PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
+        mvpJingle = pd.GetResultJingle();
+
     }
 
     void Update()
@@ -27,5 +33,12 @@ public class DisplayPlayerNameForMVP : MonoBehaviour
 
         float colorValue = Mathf.Clamp01((timer - startTime) / (endTime - startTime));
         text.color = Color.black * colorValue;
+
+        if (jinglePlayed) { return; }
+        if (timer >= startTime)
+        {
+            SoundManager.PlayJingleForResult(mvpJingle);
+            jinglePlayed = true;
+        }
     }
 }

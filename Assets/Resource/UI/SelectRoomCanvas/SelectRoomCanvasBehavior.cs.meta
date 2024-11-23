@@ -12,6 +12,7 @@ MonoImporter:
   - connectingWindowPrefab: {fileID: 6057738084878234807, guid: bb0a1870865a61348b41a41fe22e9d67,
       type: 3}
   - refreshSFX: {fileID: 8300000, guid: b0f73d4eaa436694bb22300b028d608c, type: 3}
+  - selectRoomBGM: {fileID: 8300000, guid: b8e0192871f2e7f4da7a0a53a396b625, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

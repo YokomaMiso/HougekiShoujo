@@ -3067,6 +3067,7 @@ MonoBehaviour:
   mvpGroup: {fileID: 9081604445780259188}
   awardCanvas: {fileID: 1259577327565910999}
   exitButton: {fileID: 2475075734694297818}
+  startJingle: {fileID: 8300000, guid: b423fba74c9380343a7c5bd057198403, type: 3}
 --- !u!1 &5325189518673690223
 GameObject:
   m_ObjectHideFlags: 0
