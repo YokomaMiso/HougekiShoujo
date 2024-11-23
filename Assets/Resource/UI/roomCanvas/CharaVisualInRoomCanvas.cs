@@ -24,7 +24,7 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     readonly string[][] rollString = new string[4][] 
     {
        new string[4]{ "‹ß‹——£", "’†‹——£", "‰“‹——£", "–³”F‰Â" },
-       new string[4]{ "Melee", "Middle", "Range", "Secret" },
+       new string[4]{ "Short", "Middle", "Long", "Secret" },
        new string[4]{ "‹ß‹——£", "’†‹——£", "‰“‹——£", "–³”F‰Â" },
        new string[4]{ "‹ß‹——£", "’†‹——£", "‰“‹——£", "–³”F‰Â" },
     };
