@@ -4361,7 +4361,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cursor Sensitive
+  m_Text: Cursor Sensitivity
 --- !u!114 &5028248323068769000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4375,7 +4375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   japanese: "\u30AB\u30FC\u30BD\u30EB\u611F\u5EA6"
-  english: Cursor Sensitive
+  english: Cursor Sensitivity
   simpleChinese: "\u9F20\u6807\u79FB\u52A8\u901F\u5EA6"
   traditionalChinese: "\u9F20\u6A19\u79FB\u52D5\u901F\u5EA6"
 --- !u!1 &7281941995051416993

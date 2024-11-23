@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,60 +18,60 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
     readonly string[] characterChangeText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "ƒLƒƒƒ‰ƒNƒ^[•ÏX",
+        "ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼å¤‰æ›´",
         "Change Character",
-        "",
-        "",
+        "äººç‰©é€‰æ‹©",
+        "äººç‰©é¸æ“‡",
     };
     readonly string[] teamChangeText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "ƒ`[ƒ€•ÏX",
+        "ãƒãƒ¼ãƒ å¤‰æ›´",
         "Change Team",
-        "",
-        "",
+        "æ¢é˜Ÿ",
+        "æ›éšŠ",
     };
     readonly string[] startText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "ƒXƒ^[ƒg",
+        "ã‚¹ã‚¿ãƒ¼ãƒˆ",
         "START",
-        "",
-        "",
+        "å¼€å§‹",
+        "é–‹å§‹",
     };
     readonly string[] dissolutionText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "‰ðŽU",
+        "è§£æ•£",
         "Disband",
-        "",
-        "",
+        "è§£æ•£",
+        "è§£æ•£",
     };
     readonly string[] stageChangeText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "ƒXƒe[ƒW•ÏX",
+        "ã‚¹ãƒ†ãƒ¼ã‚¸å¤‰æ›´",
         "Change Stage",
-        "",
-        "",
+        "åœ°å›¾é€‰æ‹©",
+        "åœ°åœ–é¸æ“‡",
     };
     readonly string[] stageDecideText = new string[(int)LANGUAGE_NUM.MAX_NUM]
 {
-        "ƒXƒe[ƒWŒˆ’è",
+        "ã‚¹ãƒ†ãƒ¼ã‚¸æ±ºå®š",
         "Decide Stage",
-        "",
-        "",
+        "ç¡®å®šåœ°å›¾",
+        "ç¢ºå®šåœ°åœ–",
 };
     readonly string readyText ="READY";
     readonly string[] exitText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "‘Þo",
+        "é€€å‡º",
         "Exit",
-        "",
-        "",
+        "é€€å‡º",
+        "é€€å‡º",
     };
     readonly string[] cancelText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "READY‰ðœ",
+        "READYè§£é™¤",
         "Cancel",
-        "",
-        "",
+        "è§£é™¤READY",
+        "è§£é™¤READY",
     };
 
     void Start()
@@ -110,7 +110,7 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
         MachingRoomData.RoomData roomData = OSCManager.OSCinstance.roomData;
 
-        //ƒzƒXƒg‚È‚ç
+        //ãƒ›ã‚¹ãƒˆãªã‚‰
         if (Managers.instance.playerID == 0)
         {
             if (stageSelectCanvas.activeInHierarchy)
@@ -169,7 +169,7 @@ public class KeyAnnounceInRoom : MonoBehaviour
             if (otherData.ready) { readyCount++; }
         }
 
-        //Ž©•ªˆÈŠO‚Ì‘SƒvƒŒƒCƒ„[‚ªREADY’†‚È‚ç
+        //è‡ªåˆ†ä»¥å¤–ã®å…¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒREADYä¸­ãªã‚‰
         if (readyCount >= _myData.playerCount - 1)
         {
 #if UNITY_EDITOR

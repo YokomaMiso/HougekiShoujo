@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,45 +18,45 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
 
     readonly string[] cursorMoveText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "ƒJ[ƒ\ƒ‹ˆÚ“®",
+        "ã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•",
         "Cursor Move",
-        "",
-        "",
+        "é¼ æ ‡ç§»åŠ¨",
+        "é¼ æ¨™ç§»å‹•",
     };
     readonly string[] createRoomText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "•”‰®‚ğì¬",
+        "éƒ¨å±‹ã‚’ä½œæˆ",
         "Create Room",
-        "",
-        "",
+        "åˆ›å»ºæˆ¿é—´",
+        "å‰µå»ºæˆ¿é–“",
     };
     readonly string[] backToTitleText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "ƒ^ƒCƒgƒ‹‚É–ß‚é",
+        "ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹",
         "Back to Title",
-        "",
-        "",
+        "è¿”å›ä¸»é¡µé¢",
+        "è¿”å›ä¸»é é¢",
     };
     readonly string[] refreshText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "•”‰®‚ÌXV",
+        "éƒ¨å±‹ã®æ›´æ–°",
         "Refresh Room",
-        "",
-        "",
+        "åˆ·æ–°æˆ¿é—´",
+        "åˆ·æ–°æˆ¿é–“",
     };
     readonly string[] joinToRoomText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "•”‰®‚ÉQ‰Á",
+        "éƒ¨å±‹ã«å‚åŠ ",
         "Join to Room",
-        "",
-        "",
+        "åŠ å…¥æˆ¿é—´",
+        "åŠ å…¥æˆ¿é–“",
     };
     readonly string[] randomMatchText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
-        "ƒ‰ƒ“ƒ_ƒ€ƒ}ƒbƒ`",
+        "ãƒ©ãƒ³ãƒ€ãƒ ãƒãƒƒãƒ",
         "Random Match",
-        "",
-        "",
+        "éšæœºå‚åŠ ",
+        "éš¨æ©ŸåƒåŠ ",
     };
 
     void Start()
@@ -80,7 +80,7 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
     {
         if (InputManager.isChangedController) { ChangeDisplayButtons(); }
 
-        //ƒJ[ƒ\ƒ‹‚ªƒ‹[ƒ€“à‚É‹‚é‚Ì‹““®
+        //ã‚«ãƒ¼ã‚½ãƒ«ãŒãƒ«ãƒ¼ãƒ å†…ã«å±…ã‚‹æ™‚ã®æŒ™å‹•
         if (srcb.selectRoomNum < srcb.maxRoomNum)
         {
             if (srcb.roomBannerList[srcb.selectRoomNum].memberCount >= 6)
@@ -91,7 +91,7 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
             {
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = "";
             }
-            //0l‚È‚ç
+            //0äººãªã‚‰
             else if (srcb.roomBannerList[srcb.selectRoomNum].memberCount == 0)
             {
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = createRoomText[(int)Managers.instance.nowLanguage];
@@ -101,21 +101,21 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = joinToRoomText[(int)Managers.instance.nowLanguage]; ;
             }
         }
-        //ƒJ[ƒ\ƒ‹‚ªã•ûŒü‚Ìƒ{ƒ^ƒ“‚É‹‚é
+        //ã‚«ãƒ¼ã‚½ãƒ«ãŒä¸Šæ–¹å‘ã®ãƒœã‚¿ãƒ³ã«å±…ã‚‹æ™‚
         else if (srcb.selectRoomNum < srcb.maxRoomNum + srcb.headerButonNum)
         {
-            //ƒ^ƒCƒgƒ‹‚É–ß‚é
+            //ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹
             if (srcb.selectRoomNum == srcb.maxRoomNum)
             {
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = backToTitleText[(int)Managers.instance.nowLanguage]; ;
             }
-            //ƒ‹[ƒ€î•ñ‚ÌXV
+            //ãƒ«ãƒ¼ãƒ æƒ…å ±ã®æ›´æ–°
             else
             {
                 keys[2].transform.GetChild(1).GetComponent<Text>().text = refreshText[(int)Managers.instance.nowLanguage]; ;
             }
         }
-        //ƒJ[ƒ\ƒ‹‚ª‰º•ûŒü‚Ìƒ{ƒ^ƒ“‚É‹‚é
+        //ã‚«ãƒ¼ã‚½ãƒ«ãŒä¸‹æ–¹å‘ã®ãƒœã‚¿ãƒ³ã«å±…ã‚‹æ™‚
         else
         {
             keys[2].transform.GetChild(1).GetComponent<Text>().text = randomMatchText[(int)Managers.instance.nowLanguage]; ;
@@ -137,7 +137,7 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
             if (otherData.ready) { readyCount++; }
         }
 
-        //©•ªˆÈŠO‚Ì‘SƒvƒŒƒCƒ„[‚ªREADY’†‚È‚ç
+        //è‡ªåˆ†ä»¥å¤–ã®å…¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒREADYä¸­ãªã‚‰
         if (readyCount >= _myData.playerCount - 1)
         {
 #if UNITY_EDITOR
