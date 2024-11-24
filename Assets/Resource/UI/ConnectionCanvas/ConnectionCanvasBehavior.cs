@@ -17,7 +17,7 @@ public class ConnectionCanvasBehavior : MonoBehaviour
     readonly string[] seachText = new string[4] 
     {
         "部屋を探しています…",
-        "Searching for the Room...",
+        "Searching for Room...",
         "寻找该房间...",
         "尋找該房間...",
     };

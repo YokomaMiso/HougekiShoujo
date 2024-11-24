@@ -10,12 +10,16 @@ public class CreditTextSpawner : MonoBehaviour
 
     float timer;
     const float spawnStartTime = 5;
-    const float lifeTime = spawnStartTime + 5.75f * 24;
+    float lifeTime;
 
     float spawnSpan;
     const float creditLifeTimeSub = 1.0f;
 
-    void Start() { spawnSpan = (lifeTime - spawnStartTime) / credits.Length; }
+    void Start() 
+    {
+        lifeTime = spawnStartTime + 6.7f * credits.Length;
+        spawnSpan = (lifeTime - spawnStartTime) / credits.Length; 
+    }
 
     void Update()
     {
