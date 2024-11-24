@@ -211,7 +211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u266A\u25CB\u25CB\u25CB\u25CB / \u5DDD\u5CF6 \u96C4\u592A"
+  m_Text: "\u266APixel Surprise! / \u5DDD\u5CF6 \u96C4\u592A"
 --- !u!114 &7014826944976739285
 MonoBehaviour:
   m_ObjectHideFlags: 0
