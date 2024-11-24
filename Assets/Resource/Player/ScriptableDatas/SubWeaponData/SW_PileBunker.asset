@@ -13,12 +13,25 @@ MonoBehaviour:
   m_Name: SW_PileBunker
   m_EditorClassIdentifier: 
   subWeaponIcon: {fileID: 21300000, guid: aac976f88e2157a409fc1f894ecd3662, type: 3}
-  subType: 1
+  subType: 0
   buffType: 0
   installation: {fileID: 1008518316061016973, guid: f68961ad875f76c40950a502a2e256f4,
     type: 3}
-  subWeaponName: "\u5730\u5747\u3057"
-  subWeaponExplain: "\u8DB3\u306B\u4ED5\u8FBC\u3093\u3060\u30D1\u30A4\u30EB\u30D0\u30F3\u30AB\u30FC\u3092\u5730\u9762\u306B\u6253\u3061\u8FBC\u3080\n\u7BC4\u56F2\u5185\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u3092\uFF11\u79D2\u9593\u79FB\u52D5\u4E0D\u53EF\u306B\u3059\u308B"
+  subWeaponName:
+  - "\u5730\u5747\u3057"
+  - Earthquake
+  - "\u5730\u9707"
+  - "\u5730\u9707"
+  subWeaponExplain:
+  - "\u8DB3\u306B\u4ED5\u8FBC\u3093\u3060\u30D1\u30A4\u30EB\u30D0\u30F3\u30AB\u30FC\u3092\u5730\u9762\u306B\u6253\u3061\u8FBC\u3080\r\n\u7BC4\u56F2\u5185\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u3092\uFF11\u79D2\u9593\u79FB\u52D5\u4E0D\u53EF\u306B\u3059\u308B"
+  - 'Pile bunker in the feet drive into the ground.
+
+    Players within range are
+    stun for 1 sec.'
+  - "\u5C06\u57CB\u5728\u811A\u4E0B\u7684\u6C99\u5751\u6253\u5165\u5730\u4E0B\u3002\n\u8303\u56F4\u5185\u7684\u73A9\u5BB6\u4F1A\u88AB\u7729\u6655
+    1 \u79D2\u3002"
+  - "\u7D2E\u5728\u8173\u5E95\u7684\u6A01\u67F1\u6C99\u5751\u6703\u88AB\u6253\u5165\u5730\u4E0B\u3002\n\u7BC4\u570D\u5167\u7684\u73A9\u5BB6\u6703\u88AB\u7729\u6688
+    1 \u79D2\u3002"
   installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
     type: 2}
   installationLoopAnim: {fileID: 9100000, guid: ab12581ac6d1fa04c984951dbe8d22bd,

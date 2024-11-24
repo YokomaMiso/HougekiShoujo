@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charaName: "\u9060\u5CF6 \u4E03\u6D77"
   charaNameRubi: "\u3068\u304A\u3057\u307E \u306A\u306A\u307F"
+  charaNameRubiEnglish: Nanami Toshima
   schoolData: {fileID: 11400000, guid: d77aa8742f68024408ab889f0fe075ac, type: 2}
   grade: 1
   mvpExplain: "\u6211\u304C\u6821\u306E1\u5E74\u751F\u3001\u9060\u5CF6\u4E03\u6D77\u304C\u4ECA\u5E74\u306EMVP\u3092\u53D7\u8CDE\uFF01\uFF01\u5F7C\u5973\u306F\u5F13\u9053\u90E8\u3067\u3082\u5B9F\u7E3E\u3092\u6B8B\u3057\u3066\u304A\u308A\u3001\u307E\u3055\u306B\u84CB\u4E16\u4E4B\u624D\u3068\u8A00\u3048\u308B\u3067\u3057\u3087\u3046\u3002"

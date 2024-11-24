@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charaName: "\u8FD1\u885B \u53F8"
   charaNameRubi: "\u3053\u306E\u3048 \u3064\u304B\u3055"
+  charaNameRubiEnglish: Tsukasa Konoe
   schoolData: {fileID: 11400000, guid: d77aa8742f68024408ab889f0fe075ac, type: 2}
   grade: 2
   mvpExplain: "\u6211\u304C\u6821\u306E\u98A8\u7D00\u59D4\u54E1\u9577\u3092\u52D9\u3081\u308B2\u5E74\u3001\u8FD1\u885B\u53F8\u304C\u4ECA\u5927\u4F1A\u306EMVP\u3092\u53D7\u8CDE\uFF01\uFF01\u6211\u304C\u6821\u3067\u306F\uFF13\u4EBA\u76EE\u306EMVP\u53D7\u8CDE\u8005\u304C\u751F\u307E\u308C\u307E\u3057\u305F\u3002"

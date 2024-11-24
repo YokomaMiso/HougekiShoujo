@@ -8,6 +8,7 @@ public class PlayerData : ScriptableObject
     [Header("Character Name")]
     [SerializeField, Header("Character Name")] string charaName;
     [SerializeField, Header("Character Name Rubi")] string charaNameRubi;
+    [SerializeField, Header("Character Name Rubi ENG")] string charaNameRubiEnglish;
     [SerializeField, Header("School")] SchoolData schoolData;
     [SerializeField, Header("Grade")] int grade;
     [SerializeField, Header("MVP Explain"), TextArea(1, 5)] string mvpExplain;
@@ -29,7 +30,11 @@ public class PlayerData : ScriptableObject
     [SerializeField, Header("Player Jingle")] AudioClip resultJingle;
 
     public string GetCharaName() { return charaName; }
-    public string GetCharaNameRubi() { return charaNameRubi; }
+    public string GetCharaNameRubi() 
+    {
+        if (Managers.instance.nowLanguage == LANGUAGE_NUM.JAPANESE) { return charaNameRubi; }
+        else { return charaNameRubiEnglish; }
+    }
     public string GetSchoolName() { return schoolData.GetSchoolName(); }
     public Sprite GetSchoolIcon() { return schoolData.GetSchoolIcon(); }
     public string GetGrade() 
