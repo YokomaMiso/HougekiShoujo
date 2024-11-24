@@ -13,12 +13,23 @@ MonoBehaviour:
   m_Name: SW_TapiocaBomb
   m_EditorClassIdentifier: 
   subWeaponIcon: {fileID: 21300000, guid: ed3ee42d21c2be4438b73db6e7375bfe, type: 3}
-  subType: 3
+  subType: 0
   buffType: 0
   installation: {fileID: 3179393461812120061, guid: cf6d56e57f4cc8144a0fdcbe2574de49,
     type: 3}
-  subWeaponName: "\u30BF\u30D4\u30AA\u30AB\u7206\u5F3E\n\u30BF\u30D4\u30AA\u30AB\u7206\u5F3E"
-  subWeaponExplain: "10\u79D2\u6301\u7D9A\u3059\u308B\u30BF\u30D4\u30AA\u30AB\u3092\u6295\u64F2\n\uFF16\u79D2\u9593\u8DB3\u304C\u6ED1\u308B\u3088\u3046\u306B\u306A\u308B"
+  subWeaponName:
+  - "\u30BF\u30D4\u30AA\u30AB\u7206\u5F3E"
+  - Tapioca Bomb
+  - "\u6728\u85AF\u70B8\u5F39"
+  - "\u6728\u85AF\u70B8\u5F48"
+  subWeaponExplain:
+  - "10\u79D2\u6301\u7D9A\u3059\u308B\u30BF\u30D4\u30AA\u30AB\u3092\u6295\u64F2\r\n\uFF16\u79D2\u9593\u8DB3\u304C\u6ED1\u308B\u3088\u3046\u306B\u306A\u308B"
+  - 'Throwing tapioca that lasts for 10 sec.
+
+    Becomes slippery for 6 sec.'
+  - "\u6295\u63B7\u6728\u85AF\uFF0C\u6301\u7EED 10 \u79D2\u3002\n\u5728 6 \u79D2\u5185\u53D8\u5F97\u6E7F\u6ED1\u3002"
+  - "\u62CB\u51FA\u6301\u7E8C 10 \u79D2\u7684\u6728\u85AF\u7C89\u3002\n\u8B8A\u5F97\u6FD5\u6ED1\uFF0C\u6301\u7E8C
+    6 \u79D2\u3002"
   installationStartAnim: {fileID: 0}
   installationLoopAnim: {fileID: 0}
   reloadTime: 20

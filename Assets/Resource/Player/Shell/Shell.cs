@@ -12,8 +12,8 @@ public class Shell : ScriptableObject
     [SerializeField, Header("Projectile")] GameObject projectile;
     [SerializeField, Header("Projectile Anim")] RuntimeAnimatorController projectileAnim;
     [SerializeField, Header("Explosion")] Explosion explosion;
-    [SerializeField, Header("Weapon Name"), TextArea(1, 1)] string weaponName;
-    [SerializeField, Header("Explain"), TextArea(1, 2)] string shellExplain;
+    [SerializeField, Header("Weapon Name"), TextArea(1, 1)] string[] weaponName;
+    [SerializeField, Header("Explain"), TextArea(1, 2)] string[] shellExplain;
 
     [SerializeField, Header("Reload Time")] float reloadTime;
     [SerializeField, Header("Recoil Time")] float recoilTime;
@@ -28,8 +28,8 @@ public class Shell : ScriptableObject
     public RuntimeAnimatorController GetAnim() { return projectileAnim; }
 
     public Explosion GetExplosion() { return explosion; }
-    public string GetShellName() { return weaponName; }
-    public string GetShellExplain() { return shellExplain; }
+    public string GetShellName() { return weaponName[(int)Managers.instance.nowLanguage]; }
+    public string GetShellExplain() { return shellExplain[(int)Managers.instance.nowLanguage]; }
 
     public float GetReloadTime() { return reloadTime; }
     public float GetRecoilTime() { return recoilTime; }
