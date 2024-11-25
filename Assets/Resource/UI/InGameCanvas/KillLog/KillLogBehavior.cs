@@ -5,34 +5,35 @@ using UnityEngine.UI;
 
 public class KillLogBehavior : MonoBehaviour
 {
-    Text killPlayer;
-    Text killText;
-    Text deadPlayer;
+    Image killPlayer;
+    Image deadPlayer;
 
-    readonly static Vector3 startPos = Vector3.right * 1500;
-    readonly static Vector3 endPos = Vector3.right * 750;
+    readonly static Vector3 startPos = Vector3.right * 1400;
+    readonly static Vector3 endPos = Vector3.right * 700;
 
     int logNum = 0;
 
     float timer;
     const float posTime = 0.25f;
-    const float colorChangeTime = 5;
-    const float lifeTime = 6;
+    const float backTime = 5.25f;
+    const float lifeTime = 5.5f;
 
-    readonly Color[] constColor = new Color[2] { new Color(0.1255f, 0.3137f, 0.8941f), new Color(1, 0.125f, 0.125f, 1) };
-    Color killColor;
-    Color deadColor;
+    //readonly Color[] constColor = new Color[2] { new Color(0.1255f, 0.3137f, 0.8941f), new Color(1, 0.125f, 0.125f, 1) };
+    //Color killColor;
+    //Color deadColor;
 
     const float killVoiceTime = 0.5f;
     bool playKillVoice;
     AudioClip killVoice;
     Player killerPlayer;
 
+    [SerializeField] Sprite[] killerSpriteBG;
+    [SerializeField] Sprite[] deadManSpriteBG;
+
     public void SetText(Player _player)
     {
-        killPlayer = transform.GetChild(0).GetComponent<Text>();
-        killText = transform.GetChild(1).GetComponent<Text>();
-        deadPlayer = transform.GetChild(2).GetComponent<Text>();
+        killPlayer = transform.GetChild(0).GetComponent<Image>();
+        deadPlayer = transform.GetChild(2).GetComponent<Image>();
 
         int killer = _player.GetKiller();
         int deadMan = _player.GetPlayerID();
@@ -40,15 +41,21 @@ public class KillLogBehavior : MonoBehaviour
         MachingRoomData.RoomData killerRoomData = OSCManager.OSCinstance.GetRoomData(killer);
         MachingRoomData.RoomData deadManRoomData = OSCManager.OSCinstance.GetRoomData(deadMan);
 
-        killPlayer.text = killerRoomData.playerName;
-        deadPlayer.text = deadManRoomData.playerName;
+        killPlayer.sprite = killerSpriteBG[killerRoomData.myTeamNum];
+        deadPlayer.sprite = deadManSpriteBG[deadManRoomData.myTeamNum];
+
+        killPlayer.transform.GetChild(0).GetComponent<Text>().text = killerRoomData.playerName;
+        deadPlayer.transform.GetChild(0).GetComponent<Text>().text = deadManRoomData.playerName;
+
+        killPlayer.transform.GetChild(1).GetComponent<Image>().sprite = Managers.instance.gameManager.playerDatas[killerRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
+        deadPlayer.transform.GetChild(1).GetComponent<Image>().sprite = Managers.instance.gameManager.playerDatas[deadManRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();
 
         int killerTeam = killerRoomData.myTeamNum;
         int deadManTeam = deadManRoomData.myTeamNum;
-        killColor = constColor[killerTeam];
-        deadColor = constColor[deadManTeam];
-        killPlayer.color = killColor;
-        deadPlayer.color = deadColor;
+        //killColor = constColor[killerTeam];
+        //deadColor = constColor[deadManTeam];
+        //killPlayer.color = killColor;
+        //deadPlayer.color = deadColor;
 
         //Ž©Œˆ‚È‚ç
         if (killer == deadMan)
@@ -76,15 +83,22 @@ public class KillLogBehavior : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        float posValue = Mathf.Clamp01(timer / posTime);
-        Vector3 addPos = Vector3.up * (logNum * -40);
-        transform.localPosition = Vector3.Lerp(startPos + addPos, endPos + addPos, posValue);
-
-        float colorValue = Mathf.Clamp01(1.0f - (timer - colorChangeTime));
-        Color multiplyRate = new Color(1, 1, 1, colorValue);
-        killPlayer.color = killColor * multiplyRate;
-        killText.color = Color.white * multiplyRate;
-        deadPlayer.color = deadColor * multiplyRate;
+        if (timer < backTime)
+        {
+            float posValue = Mathf.Clamp01(timer / posTime);
+            Vector3 addPos = Vector3.up * (logNum * -40);
+            transform.localPosition = Vector3.Lerp(startPos + addPos, endPos + addPos, posValue);
+        }
+        else
+        {
+            float posValue = Mathf.Clamp01(timer - backTime / lifeTime - backTime);
+            Vector3 addPos = Vector3.up * (logNum * -40);
+            transform.localPosition = Vector3.Lerp(endPos + addPos, startPos + addPos, posValue);
+        }
+        //float colorValue = Mathf.Clamp01(1.0f - (timer - colorChangeTime));
+        //Color multiplyRate = new Color(1, 1, 1, colorValue);
+        //killPlayer.color = multiplyRate;
+        //deadPlayer.color = multiplyRate;
 
         if (timer > lifeTime) { Destroy(gameObject); }
 
