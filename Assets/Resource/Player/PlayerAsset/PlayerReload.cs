@@ -32,8 +32,11 @@ public class PlayerReload : MonoBehaviour
         {
             timer = 0;
             reloadFlagForOther = false;
-            ownerPlayer.ChangeShellIconColor(1);
-            ownerPlayer.canonState = CANON_STATE.RELOADED;
+            if (ownerPlayer.GetPlayerData().GetShell().GetShellType() != SHELL_TYPE.SPECIAL)
+            {
+                ownerPlayer.ChangeShellIconColor(1);
+                ownerPlayer.canonState = CANON_STATE.RELOADED;
+            }
         }
     }
 
@@ -43,7 +46,10 @@ public class PlayerReload : MonoBehaviour
         if (timer > reloadTime)
         {
             timer = 0;
-            ownerPlayer.ChangeShellIconColor(1);
+            if (ownerPlayer.GetPlayerData().GetShell().GetShellType() != SHELL_TYPE.SPECIAL) 
+            {
+                ownerPlayer.ChangeShellIconColor(1);
+            }
             return shellNum;
         }
 

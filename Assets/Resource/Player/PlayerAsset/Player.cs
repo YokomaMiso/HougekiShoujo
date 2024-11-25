@@ -360,10 +360,8 @@ public class Player : MonoBehaviour
                     DirectionChange(stickValue);
                     break;
                 case PLAYER_STATE.RELOADING:
-                    if (canonState == CANON_STATE.EMPTY)
-                    {
-                        if (!playerReload.reloadFlagForOther) { playerReload.Reload(0); }
-                    }
+                    if (canonState != CANON_STATE.EMPTY) { break; }
+                    if (!playerReload.reloadFlagForOther) { playerReload.Reload(0); }
                     break;
             }
         }
