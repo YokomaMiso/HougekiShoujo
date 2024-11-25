@@ -16,7 +16,7 @@ public class BombBehavior : MonoBehaviour
     public virtual void LaunchBomb(Vector3 _vector)
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        Vector3 addVector = _vector + Vector3.up;
+        Vector3 addVector = _vector + Vector3.up * 0.5f;
         rb.AddForce(addVector, ForceMode.Impulse);
     }
     protected virtual void Update()

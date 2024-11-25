@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpiderExplosionBehavior : ExplosionBehavior
 {
     bool[] hitedPlayer = new bool[6];
-    const float buffLifeTime = 8.0f;
+    const float buffLifeTime = 5.0f;
 
     public override void SetData(Explosion _data)
     {
