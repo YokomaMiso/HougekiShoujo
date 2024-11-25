@@ -90,11 +90,16 @@ public class Player : MonoBehaviour
 
     public void PlayEmote(RADIO_CHAT_ID _ID) { playerRadioChat.DisplayEmote(_ID); }
 
-    public void ChangeShellIconColor(int _num) { playerNameCanvas.ChangeShellIconColor(_num); }
+    public void ChangeShellIconColor(int _num)
+    {
+        if (playerNameCanvas == null) { return; }
+        playerNameCanvas.ChangeShellIconColor(_num);
+    }
 
     //For Other
     bool fire;
     bool useSub;
+    PLAYER_STATE prevPlayerState;
 
     public void RoundInit()
     {
@@ -196,9 +201,16 @@ public class Player : MonoBehaviour
         else { roomData = OSCManager.OSCinstance.GetRoomData(playerID); }
         if (roomData.myTeamNum == (int)TEAM_NUM.B) { DirectionChange(Vector3.left); }
 
-        playerNameCanvas = nameCanvas.GetComponent<PlayerNameCanvas>();
-        playerNameCanvas.SetPlayer(this);
-        playerNameCanvas.SetName(roomData.playerName, roomData.myTeamNum);
+        if (Managers.instance.unlockFlag[(int)UNLOCK_ITEM.UI_DELETE])
+        {
+            Destroy(nameCanvas);
+        }
+        else
+        {
+            playerNameCanvas = nameCanvas.GetComponent<PlayerNameCanvas>();
+            playerNameCanvas.SetPlayer(this);
+            playerNameCanvas.SetName(roomData.playerName, roomData.myTeamNum);
+        }
     }
 
     void Update()
@@ -346,6 +358,9 @@ public class Player : MonoBehaviour
                 case PLAYER_STATE.AIMING:
                     //移動に応じてキャラグラフィックの向き変更
                     DirectionChange(stickValue);
+                    break;
+                case PLAYER_STATE.RELOADING:
+                    if (!playerReload.reloadFlagForOther) { playerReload.Reload(0); }
                     break;
             }
         }
