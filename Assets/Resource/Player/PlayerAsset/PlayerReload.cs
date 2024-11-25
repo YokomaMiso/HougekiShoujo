@@ -33,6 +33,7 @@ public class PlayerReload : MonoBehaviour
             timer = 0;
             reloadFlagForOther = false;
             ownerPlayer.ChangeShellIconColor(1);
+            ownerPlayer.canonState = CANON_STATE.RELOADED;
         }
     }
 
