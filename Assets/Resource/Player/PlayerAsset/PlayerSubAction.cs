@@ -35,7 +35,10 @@ public class PlayerSubAction : MonoBehaviour
     public float ReloadTime() { return reloadTimer; }
     public void UseSubWeapon()
     {
-        if (!CanUse()) { return; }
+        if (ownerPlayer.IsMine())
+        {
+            if (!CanUse()) { return; }
+        }
 
         GameObject obj;
 
