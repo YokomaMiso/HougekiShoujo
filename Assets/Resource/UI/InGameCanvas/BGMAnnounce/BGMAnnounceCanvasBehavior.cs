@@ -6,14 +6,16 @@ using UnityEngine.UI;
 public class BGMAnnounceCanvasBehavior : MonoBehaviour
 {
     Transform label;
-    readonly Vector3 labelStartPos = new Vector3(-1360, -500);
-    readonly Vector3 labelEndPos = new Vector3(-560, -500);
+    readonly Vector3 labelStartPos = new Vector3(-1360, -420);
+    readonly Vector3 labelEndPos = new Vector3(-520, -420);
 
     float timer;
     const float waitTime = 0.5f;
     const float arriveTime = 1.0f;
     const float startBackTime = 3.5f;
     const float lifeTime = 4.0f;
+
+    [SerializeField] Image record;
 
     public void SetBGMText(BGMData _bgmData)
     {
@@ -25,6 +27,8 @@ public class BGMAnnounceCanvasBehavior : MonoBehaviour
     }
     void Update()
     {
+        record.transform.localRotation = Quaternion.Euler(0f, 0f, Time.time * -360);
+
         timer += Time.deltaTime;
         if (timer < waitTime) { return; }
 
