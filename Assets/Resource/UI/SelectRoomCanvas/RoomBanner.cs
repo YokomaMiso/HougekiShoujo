@@ -48,7 +48,7 @@ public class RoomBanner : MonoBehaviour
         //名前の適用
         hostName.text = "Empty";
 
-        GetComponent<Image>().sprite = bannerSprites[UnityEngine.Random.Range(0, bannerSprites.Length)];
+        GetComponent<Image>().sprite = bannerSprites[0];
     }
 
     public void SetData(AllGameData.AllData _data, int _num = 0)
@@ -77,6 +77,14 @@ public class RoomBanner : MonoBehaviour
         //名前の適用
         if (_data.rData.playerCount == 0) { hostName.text = "Empty"; }
         else { hostName.text = _data.rData.playerName; }
+
+        int spriteNum;
+        if (isPlaying) { spriteNum = 2; }
+        else if (memberCount >= 6) { spriteNum = 2; }
+        else if (memberCount == 0) { spriteNum = 0; }
+        else { spriteNum = 1; }
+
+        GetComponent<Image>().sprite = bannerSprites[spriteNum];
     }
 
 }
