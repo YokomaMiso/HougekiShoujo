@@ -11,6 +11,8 @@ public class PlayerReload : MonoBehaviour
     float timer;
     int shellNum = -1;
 
+    public bool reloadFlagForOther;
+
     public void Init()
     {
         timer = 0;
@@ -19,6 +21,19 @@ public class PlayerReload : MonoBehaviour
     void Start()
     {
         reloadTime = ownerPlayer.GetPlayerData().GetShell().GetReloadTime();
+    }
+
+    void Update()
+    {
+        if (!reloadFlagForOther) { return; }
+
+        timer += Managers.instance.timeManager.GetDeltaTime();
+        if (timer > reloadTime)
+        {
+            timer = 0;
+            reloadFlagForOther = false;
+            ownerPlayer.ChangeShellIconColor(1);
+        }
     }
 
     public int ReloadBehavior()
@@ -45,6 +60,7 @@ public class PlayerReload : MonoBehaviour
         {
             reloadSFX.GetComponent<AudioSource>().volume *= 0.5f;
             reloadSFX.AddComponent<AudioLowPassFilter>();
+            reloadFlagForOther = true;
         }
     }
     public bool Reloading() { return timer != 0; }
