@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SW_BlueCoral
   m_EditorClassIdentifier: 
   subWeaponIcon: {fileID: 21300000, guid: f2bafae297512e648afc720d00b2cbee, type: 3}
-  subType: 0
+  subType: 1
   buffType: 0
   installation: {fileID: 1008518316061016973, guid: 0c4fce637059148479ee62bd8f6004a1,
     type: 3}

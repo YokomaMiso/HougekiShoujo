@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SW_Mine
   m_EditorClassIdentifier: 
   subWeaponIcon: {fileID: 21300000, guid: 5644694ee586fcd44bcdab93522366aa, type: 3}
-  subType: 0
+  subType: 1
   buffType: 0
   installation: {fileID: 1008518316061016973, guid: 75b7a856eb1b7ae469338e795f26ea02,
     type: 3}

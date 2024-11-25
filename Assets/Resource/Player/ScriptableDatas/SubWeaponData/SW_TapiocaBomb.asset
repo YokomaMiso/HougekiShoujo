@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SW_TapiocaBomb
   m_EditorClassIdentifier: 
   subWeaponIcon: {fileID: 21300000, guid: ed3ee42d21c2be4438b73db6e7375bfe, type: 3}
-  subType: 0
+  subType: 3
   buffType: 0
   installation: {fileID: 3179393461812120061, guid: cf6d56e57f4cc8144a0fdcbe2574de49,
     type: 3}
