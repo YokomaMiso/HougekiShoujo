@@ -68,7 +68,13 @@ public class PlayerDead : MonoBehaviour
         if (deadTimer > deadBehaviorTime) { return; }
 
         deadTimer += Managers.instance.timeManager.GetDeltaTime();
-        transform.position = Vector3.Lerp(deadPos, deadPos + deadTargetPos, deadTimer / deadBehaviorTime);
-
+        if (deadTimer > deadBehaviorTime)
+        {
+            transform.position = new Vector3(2000, 2000);
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(deadPos, deadPos + deadTargetPos, deadTimer / deadBehaviorTime);
+        }
     }
 }

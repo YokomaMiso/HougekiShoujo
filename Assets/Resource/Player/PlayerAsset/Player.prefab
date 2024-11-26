@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43faf872feaf51e4a9010b64deb9c44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reloadFlagForOther: 0
 --- !u!114 &6022571088057247346
 MonoBehaviour:
   m_ObjectHideFlags: 0
