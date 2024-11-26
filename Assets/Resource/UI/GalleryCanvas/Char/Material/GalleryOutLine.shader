@@ -12,7 +12,7 @@ Shader "CustomShader/GallerySpriteOutlineWithShadow"
 
     SubShader
     {
-        Tags { "Queue" = "Transparent" "RenderType" = "Transparent""RenderPipeline" = "Transparent" }
+        Tags { "Queue" = "AlphaTest" "RenderType" = "TransparentCutout" }
         LOD 200
         // Pass for outline
         Pass
