@@ -7,10 +7,19 @@ public class SpectateCameraAnnounce : MonoBehaviour
 {
     [SerializeField] Image button;
 
+    void Start()
+    {
+        if (Managers.instance.GetSmartPhoneFlag()) { button.color = Color.clear; }
+    }
+
     public void Display(bool _canChange)
     {
         transform.gameObject.SetActive(_canChange);
+        button.sprite = InputManager.nowButtonSpriteData.GetSubmit();
+    }
 
-        button.sprite = InputManager.nowButtonSpriteData.GetShoulder();
+    public void PressThis()
+    {
+        Camera.main.GetComponent<CameraMove>().TargetChange();
     }
 }

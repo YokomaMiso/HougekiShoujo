@@ -28,11 +28,13 @@ public class PlayerRadioChat : MonoBehaviour
 
     void Update()
     {
+        /*
         if (!ownerPlayer.GetAlive()) 
         {
             if (fastChatInstance != null) { Destroy(fastChatInstance); }
             return; 
         }
+        */
 
         if (ownerPlayer.IsMine())
         {
@@ -188,6 +190,7 @@ public class PlayerRadioChat : MonoBehaviour
         }
         else
         {
+            Managers.instance.gameManager.ingameCanvas.AddSerif(_roomData, _chatID);
             ownerPlayer.GetComponent<Player>().PlayEmote(_chatID);
         }
     }

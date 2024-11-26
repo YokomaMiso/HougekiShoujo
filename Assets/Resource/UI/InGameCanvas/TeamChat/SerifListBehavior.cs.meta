@@ -6,6 +6,8 @@ MonoImporter:
   defaultReferences:
   - serifWindow: {fileID: 2264529309454844271, guid: e1cda63bc62952a4f8cc6d9d28455d8c,
       type: 3}
+  - emoteWindow: {fileID: 2264529309454844271, guid: 303bfdb79afb1304abbfb20ea2577d42,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

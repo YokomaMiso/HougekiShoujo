@@ -5,26 +5,26 @@ using UnityEngine.UI;
 
 public class CharaSerifBehavior : MonoBehaviour
 {
-    Image chatBG;
-    Text playerName;
-    Image charaIcon;
+    protected Image chatBG;
+    protected Text playerName;
+    protected Image charaIcon;
 
-    [SerializeField] Sprite[] bgSprite;
+    [SerializeField] protected Sprite[] bgSprite;
     [SerializeField] AudioClip[] clips;
 
-    readonly static Vector3 startPos = new Vector3(-1170, 330);
-    readonly static Vector3 endPos = new Vector3(-750, 330);
+    public readonly static Vector3 startPos = new Vector3(-1170, 330);
+    public readonly static Vector3 endPos = new Vector3(-750, 330);
 
-    int chatNum = 0;
-    const int posAdd = 128;
+    protected int chatNum = 0;
+    public readonly int posAdd = 128;
 
-    const float arriveTime = 0.25f;
-    const float lifeTime = 5;
-    const float fadeStart = 4.5f;
+    public readonly float arriveTime = 0.25f;
+    public readonly float lifeTime = 5;
+    public readonly float fadeStart = 4.5f;
 
-    float timer = 0;
+    protected float timer = 0;
 
-    public void SetSerif(MachingRoomData.RoomData _roomData, RADIO_CHAT_ID _chatID)
+    public virtual void SetSerif(MachingRoomData.RoomData _roomData, RADIO_CHAT_ID _chatID)
     {
         chatBG = transform.GetComponent<Image>();
         playerName = transform.GetChild(0).GetComponent<Text>();
@@ -43,7 +43,7 @@ public class CharaSerifBehavior : MonoBehaviour
 
     public void ChatNumAdd() { chatNum++; }
 
-    void Update()
+    protected virtual void Update()
     {
         timer += Time.deltaTime;
         float nowRate = Mathf.Clamp01(timer / arriveTime);

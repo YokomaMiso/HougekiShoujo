@@ -56,7 +56,8 @@ public class CameraMove : MonoBehaviour
             }
             else
             {
-                TargetChange();
+                //Aが押されたら
+                if (InputManager.GetKeyDown(BoolActions.SouthButton)) { TargetChange(); }
                 nowPlayer = Managers.instance.gameManager.GetPlayer(nowPlayerID);
             }
 
@@ -68,27 +69,23 @@ public class CameraMove : MonoBehaviour
         }
     }
 
-    void TargetChange()
+    public void TargetChange()
     {
         //canChangePlayerが１人でも入れば、カメラを切り替えることが出来る
-        //LBが押されたら
-        if (InputManager.GetKeyDown(BoolActions.LeftShoulder))
+
+        int maxNum = Managers.instance.gameManager.GetPlayerCount();
+        for (int i = 1; i < maxNum; i++)
         {
-            int maxNum = Managers.instance.gameManager.GetPlayerCount();
+            int nowID = (i + nowPlayerID) % maxNum;
 
-            for (int i = 1; i < maxNum; i++)
-            {
-                int nowID = (i + nowPlayerID) % maxNum;
+            //プレイヤーが居ない or 他チームなら早期リターン
+            MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(nowID);
+            MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+            if (roomData.myID == -1 || roomData.myTeamNum != myRoomData.myTeamNum) { continue; }
 
-                //プレイヤーが居ない or 他チームなら早期リターン
-                MachingRoomData.RoomData roomData = OSCManager.OSCinstance.GetRoomData(nowID);
-                MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
-                if (roomData.myID == -1 || roomData.myTeamNum != myRoomData.myTeamNum) { continue; }
-                
-                //nowPlayerに現在の値を入れて抜ける
-                nowPlayerID = nowID;
-                break;
-            }
+            //nowPlayerに現在の値を入れて抜ける
+            nowPlayerID = nowID;
+            break;
         }
     }
     void InitialAngle()
