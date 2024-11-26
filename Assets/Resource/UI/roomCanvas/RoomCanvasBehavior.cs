@@ -23,6 +23,8 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     [SerializeField] AudioClip roomBGM;
 
+    [SerializeField] SelecterArrow[] charaArrows;
+
     void Start()
     {
         rm = Managers.instance.roomManager;
@@ -116,8 +118,16 @@ public class RoomCanvasBehavior : MonoBehaviour
         float input = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f).x;
         if (Mathf.Abs(input) >= 0.9f)
         {
-            if (input > 0) { rm.CharaSelect(1); }
-            else { rm.CharaSelect(-1); }
+            if (input > 0) 
+            {
+                rm.CharaSelect(1);
+                charaArrows[1].SetAdd();
+            }
+            else 
+            {
+                rm.CharaSelect(-1); 
+                charaArrows[0].SetAdd();
+            }
 
             MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
             int charaID = myRoomData.selectedCharacterID;
@@ -130,8 +140,10 @@ public class RoomCanvasBehavior : MonoBehaviour
     public void CharaSelectFromUI(int _num)
     {
         rm.CharaSelect(_num);
+        charaArrows[Mathf.RoundToInt(Mathf.Clamp01(_num))].SetAdd();
 
         MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        myRoomData = OSCManager.OSCinstance.roomData;
         int charaID = myRoomData.selectedCharacterID;
         PlayerData nowPlayerData = Managers.instance.gameManager.playerDatas[charaID];
 

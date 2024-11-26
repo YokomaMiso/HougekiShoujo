@@ -22,6 +22,8 @@ public class StageSelectBehavior : MonoBehaviour
     [SerializeField] Transform binder;
     Image stump;
 
+    [SerializeField] SelecterArrow[] selectArrows;
+
     void OnEnable()
     {
         start = true;
@@ -94,8 +96,16 @@ public class StageSelectBehavior : MonoBehaviour
 
             int stageMaxCount = Managers.instance.gameManager.allStageData.GetStageMaxCount();
 
-            if (input > 0) { stageNum = (stageNum + 1) % stageMaxCount; }
-            else { stageNum = (stageNum + (stageMaxCount - 1)) % stageMaxCount; }
+            if (input > 0)
+            {
+                stageNum = (stageNum + 1) % stageMaxCount;
+                selectArrows[1].SetAdd();
+            }
+            else
+            {
+                stageNum = (stageNum + (stageMaxCount - 1)) % stageMaxCount;
+                selectArrows[0].SetAdd();
+            }
 
             OSCManager.OSCinstance.roomData.stageNum = stageNum;
 
@@ -110,8 +120,16 @@ public class StageSelectBehavior : MonoBehaviour
 
         int stageMaxCount = Managers.instance.gameManager.allStageData.GetStageMaxCount();
 
-        if (_num > 0) { stageNum = (stageNum + 1) % stageMaxCount; }
-        else { stageNum = (stageNum + (stageMaxCount - 1)) % stageMaxCount; }
+        if (_num > 0)
+        {
+            stageNum = (stageNum + 1) % stageMaxCount;
+            selectArrows[1].SetAdd();
+        }
+        else
+        {
+            stageNum = (stageNum + (stageMaxCount - 1)) % stageMaxCount;
+            selectArrows[0].SetAdd();
+        }
 
         OSCManager.OSCinstance.roomData.stageNum = stageNum;
 
