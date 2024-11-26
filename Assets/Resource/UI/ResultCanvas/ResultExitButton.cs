@@ -15,23 +15,32 @@ public class ResultExitButton : MonoBehaviour
     Image button;
 
     float alphaTimer;
+
+    readonly string[] pressText = new string[2]
+    {
+        "Press",
+        "Press Here",
+    };
+
     void Start()
     {
         text = GetComponent<Text>();
         text.color = Color.clear;
+
         button = transform.GetChild(0).GetComponent<Image>();
         button.color = Color.clear;
 
         button.sprite = InputManager.nowButtonSpriteData.GetSubmit();
+
+        if (Managers.instance.GetSmartPhoneFlag()) { text.text = pressText[1]; }
+        else { text.text = pressText[0]; }
     }
 
     void Update()
     {
         if (InputManager.isChangedController)
         {
-            button.sprite = InputManager.nowButtonSpriteData.GetSubmit();
-            if (InputManager.currentController == ControllerType.TouchScreen) { text.text = "Press Here"; }
-            else { text.text = "Press"; }
+            if (Managers.instance.GetSmartPhoneFlag()) { button.sprite = InputManager.nowButtonSpriteData.GetSubmit(); }
         }
 
         if (timer <= canSubmitTime) { timer += Time.deltaTime; }
@@ -42,16 +51,12 @@ public class ResultExitButton : MonoBehaviour
 
             float nowRate = Mathf.Abs(Mathf.Sin(alphaTimer));
             text.color = Color.black * nowRate;
-            button.color = new Color(1, 1, 1, nowRate);
+            if (Managers.instance.GetSmartPhoneFlag()) { button.color = Color.clear; }
+            else { button.color = new Color(1, 1, 1, nowRate); }
 
             if (Managers.instance.UsingCanvas()) { return; }
 
             if (InputManager.GetKeyDown(BoolActions.SouthButton)) { ownerCanvas.ReturnRoom(); }
         }
-    }
-
-    public void Press()
-    {
-        ownerCanvas.ReturnRoom();
     }
 }

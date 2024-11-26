@@ -66,6 +66,10 @@ public class Managers : MonoBehaviour
         SoundManager.PlaySFXForUI(ac);
     }
 
+    //スマートフォンフラグ
+    bool smartPhone;
+    public bool GetSmartPhoneFlag() { return smartPhone; }
+
     private void Awake()
     {
         if (instance == null)
@@ -86,6 +90,10 @@ public class Managers : MonoBehaviour
             Screen.autorotateToLandscapeLeft = true;
             // 右向きを有効にする
             Screen.autorotateToLandscapeRight = true;
+
+#if UNITY_ANDROID
+            smartPhone = true;
+#endif
         }
         else
         {
