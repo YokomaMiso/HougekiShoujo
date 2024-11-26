@@ -19,14 +19,14 @@ public class DisplayCharaIcon : MonoBehaviour
     };
     readonly Vector2[] iconLineUpPos = new Vector2[6]
     {
-        new Vector2(-100,0),
-        new Vector2(100,0),
+        new Vector2(-160,0),
+        new Vector2(160,0),
 
-        new Vector2(-228,0),
-        new Vector2(228,0),
+        new Vector2(-288,0),
+        new Vector2(288,0),
 
-        new Vector2(-356,0),
-        new Vector2(356,0),
+        new Vector2(-416,0),
+        new Vector2(416,0),
     };
     readonly Vector2[] iconPos = new Vector2[6]
     {
