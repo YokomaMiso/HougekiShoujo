@@ -369,11 +369,11 @@ public class MainViewPort : MonoBehaviour
     }
 
 
-    void OnDestroy()
-    {
-        currentVoiceObject.Stop();
-        StopAllCoroutines();
-    }
+    //void OnDestroy()
+    //{
+    //    currentVoiceObject.Stop();
+    //    StopAllCoroutines();
+    //}
 
     public void DeletCharIll()
     {
