@@ -8,9 +8,11 @@ public class ScoreBoard : MonoBehaviour
     [SerializeField] GameObject personalScorePrefab;
     [SerializeField] GameObject itemAnnouncePrefab;
 
+    [SerializeField] Sprite[] scoreBG;
+
     GameObject[] scoreInstance = new GameObject[6];
 
-    readonly int baseHeight = 320;
+    readonly int baseHeight = 240;
     readonly int heightSub = 140;
 
     int[] scoreNums = new int[6] { -1, -1, -1, -1, -1, -1 };
@@ -38,7 +40,7 @@ public class ScoreBoard : MonoBehaviour
             teamCount[oscRoomData.myTeamNum]++;
 
             //背景の色変更
-            scoreInstance[i].transform.GetChild(0).GetComponent<Image>().color = Managers.instance.ColorCordToRGB(oscRoomData.myTeamNum);
+            scoreInstance[i].transform.GetChild(0).GetComponent<Image>().sprite = scoreBG[oscRoomData.myTeamNum];
 
             //アイコンの変更
             Sprite icon = Managers.instance.gameManager.playerDatas[oscRoomData.selectedCharacterID].GetCharacterAnimData().GetCharaIcon();

@@ -16,7 +16,7 @@ public class KillLogBehavior : MonoBehaviour
     float timer;
     const float posTime = 0.25f;
     const float backTime = 5.25f;
-    const float lifeTime = 5.5f;
+    const float lifeTime = 5.75f;
 
     //readonly Color[] constColor = new Color[2] { new Color(0.1255f, 0.3137f, 0.8941f), new Color(1, 0.125f, 0.125f, 1) };
     //Color killColor;

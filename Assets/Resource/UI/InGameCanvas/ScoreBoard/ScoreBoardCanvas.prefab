@@ -48,6 +48,9 @@ MonoBehaviour:
     type: 3}
   itemAnnouncePrefab: {fileID: 6563022727854504477, guid: d8cba977695e2664b960ddcf8768dc57,
     type: 3}
+  scoreBG:
+  - {fileID: 21300000, guid: 3e9d7466666b9d3478c177005961743d, type: 3}
+  - {fileID: 21300000, guid: 9ea10fe2a185b3648b67673dd60f91ab, type: 3}
 --- !u!1 &4432466077039030639
 GameObject:
   m_ObjectHideFlags: 0
