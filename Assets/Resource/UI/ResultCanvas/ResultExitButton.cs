@@ -18,8 +18,8 @@ public class ResultExitButton : MonoBehaviour
 
     readonly string[] pressText = new string[2]
     {
-        "Press",
-        "Press Here",
+        " Press\n",
+        " Press Here\n",
     };
 
     void Start()

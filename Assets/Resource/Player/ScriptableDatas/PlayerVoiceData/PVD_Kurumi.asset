@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e2ee1207b008e4881a23804526a4a6, type: 3}
+  m_Name: PVD_Kurumi
+  m_EditorClassIdentifier: 
+  titleCall:
+  - {fileID: 8300000, guid: 9687555d6f212754f8996f029d354957, type: 3}
+  selfPR:
+  - {fileID: 8300000, guid: 10f61800cf5b1724db572065ef12a783, type: 3}
+  ready:
+  - {fileID: 8300000, guid: 1d08e59d4e1213a408cae3ae270f5151, type: 3}
+  gameStart:
+  - {fileID: 8300000, guid: 8339819def0da3043a547319ee7625e0, type: 3}
+  reload:
+  - {fileID: 8300000, guid: 0409f66496c7e9146b1a9804a4dcab5c, type: 3}
+  - {fileID: 8300000, guid: fd614ffcdd787de49afd14f98b01f865, type: 3}
+  useMain:
+  - {fileID: 8300000, guid: e5985bdb02fc4f945adfb6c295a8bd8e, type: 3}
+  - {fileID: 8300000, guid: d7d1942271f2c194b86c5c7b81702f52, type: 3}
+  - {fileID: 8300000, guid: 9805dd2272a9fa34ba4587dcf5b407dc, type: 3}
+  useSub:
+  - {fileID: 8300000, guid: 7c25a18fb59b28149932c352ae9ef88e, type: 3}
+  kill:
+  - {fileID: 8300000, guid: 972a7885a129c6b488013d0657675c66, type: 3}
+  - {fileID: 8300000, guid: 8bc99310992f7c342bbe93a60b7c311d, type: 3}
+  - {fileID: 8300000, guid: 457b7c51e6e6c2a4aa9f6b7b8e4f6f05, type: 3}
+  friendlyFire:
+  - {fileID: 8300000, guid: 0080b78f74d71ab4aac5d8a10fb7bca3, type: 3}
+  damage:
+  - {fileID: 8300000, guid: 5978c0efc5fe4944a987db064fb44692, type: 3}
+  damageFF:
+  - {fileID: 8300000, guid: b4eac0e6820dd5246971ebc71804c6a9, type: 3}
+  damageTrap:
+  - {fileID: 8300000, guid: bcb80e747f0892647a8346121e9d9ef0, type: 3}
+  - {fileID: 8300000, guid: e8633ad78ff164d4cbff4e9dee3999fe, type: 3}
+  - {fileID: 8300000, guid: cfc6f3087806d9741b1cbdcd420b1e02, type: 3}
+  thanks:
+  - {fileID: 8300000, guid: c07031a5476c22348a76e4f803bca9e6, type: 3}
+  roundWin:
+  - {fileID: 8300000, guid: 4354b80d7029fc64fbc64285b5865173, type: 3}
+  gameWin:
+  - {fileID: 8300000, guid: a92f1d4b6cccd8d4fbdaea0b909027a0, type: 3}

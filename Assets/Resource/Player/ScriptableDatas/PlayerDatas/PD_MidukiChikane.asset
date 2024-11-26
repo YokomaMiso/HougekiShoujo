@@ -24,5 +24,5 @@ MonoBehaviour:
   shell: {fileID: 11400000, guid: bb631e357c6d78348adf725933bdd39a, type: 2}
   subWeapon: {fileID: 11400000, guid: 498a63f1d0d0dd54883438851b0aaef1, type: 2}
   playerSFXData: {fileID: 11400000, guid: df044055227ad2b4fbde61784f337fab, type: 2}
-  playerVoiceData: {fileID: 11400000, guid: 4c52c730e8d06e44baf30f0a19937f15, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: fb2143eb82f7d424e8f2b5b6cca0b471, type: 2}
   resultJingle: {fileID: 8300000, guid: fc884f5592daab44480ff478b44cdd9a, type: 3}
