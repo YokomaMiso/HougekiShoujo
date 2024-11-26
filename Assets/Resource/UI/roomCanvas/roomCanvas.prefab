@@ -1313,6 +1313,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   binder: {fileID: 2178477041114623667}
+  selectArrows:
+  - {fileID: 8933073467203853271}
+  - {fileID: 9188444697818549024}
 --- !u!1 &3648120999037756819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,6 +2403,9 @@ MonoBehaviour:
   stageBinder: {fileID: 6147753632539301608}
   stageDisplay: {fileID: 7257981158185615266}
   roomBGM: {fileID: 8300000, guid: b8e0192871f2e7f4da7a0a53a396b625, type: 3}
+  charaArrows:
+  - {fileID: 5522949247184413981}
+  - {fileID: 5305381604992588193}
 --- !u!1 &4478471455035712463
 GameObject:
   m_ObjectHideFlags: 0
@@ -3306,6 +3312,7 @@ GameObject:
   - component: {fileID: 8407868699088150791}
   - component: {fileID: 6775765506060696763}
   - component: {fileID: 6358919366456320172}
+  - component: {fileID: 8933073467203853271}
   m_Layer: 5
   m_Name: SelecterLeft
   m_TagString: Untagged
@@ -3439,6 +3446,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Pointer>/press
+--- !u!114 &8933073467203853271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078976051009106118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936dea414c2b3c94daeff7415568b440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addPos: {x: -16, y: 0}
 --- !u!1 &5146712160012071109
 GameObject:
   m_ObjectHideFlags: 0
@@ -3740,6 +3760,7 @@ GameObject:
   - component: {fileID: 1688652762502926683}
   - component: {fileID: 7560558802021380251}
   - component: {fileID: 1131502552849454323}
+  - component: {fileID: 5522949247184413981}
   m_Layer: 5
   m_Name: SelecterLeft
   m_TagString: Untagged
@@ -3763,7 +3784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -382, y: -88}
+  m_AnchoredPosition: {x: -408, y: -88}
   m_SizeDelta: {x: 196, y: 196}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1753206693365331393
@@ -3873,6 +3894,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Pointer>/press
+--- !u!114 &5522949247184413981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6121359956047016200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936dea414c2b3c94daeff7415568b440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addPos: {x: -32, y: 0}
 --- !u!1 &6147753632539301608
 GameObject:
   m_ObjectHideFlags: 0
@@ -5159,6 +5193,7 @@ GameObject:
   - component: {fileID: 4472941255784963346}
   - component: {fileID: 8591086636985339296}
   - component: {fileID: 142535675168271031}
+  - component: {fileID: 5305381604992588193}
   m_Layer: 5
   m_Name: SelecterRight
   m_TagString: Untagged
@@ -5182,7 +5217,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 432, y: -88}
+  m_AnchoredPosition: {x: 440, y: -88}
   m_SizeDelta: {x: 196, y: 196}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &943609834645548888
@@ -5292,6 +5327,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Pointer>/press
+--- !u!114 &5305381604992588193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850498796594046961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936dea414c2b3c94daeff7415568b440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addPos: {x: 32, y: 0}
 --- !u!1 &7946357837289763947
 GameObject:
   m_ObjectHideFlags: 0
@@ -5534,6 +5582,7 @@ GameObject:
   - component: {fileID: 2198510202099349905}
   - component: {fileID: 498350155155365918}
   - component: {fileID: 4405391491485904984}
+  - component: {fileID: 9188444697818549024}
   m_Layer: 5
   m_Name: SelecterRight
   m_TagString: Untagged
@@ -5667,6 +5716,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ControlPath: <Pointer>/press
+--- !u!114 &9188444697818549024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076922663984937852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936dea414c2b3c94daeff7415568b440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addPos: {x: 16, y: 0}
 --- !u!1 &8514349148890560162
 GameObject:
   m_ObjectHideFlags: 0
