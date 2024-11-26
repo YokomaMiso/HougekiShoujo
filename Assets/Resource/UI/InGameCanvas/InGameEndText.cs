@@ -40,8 +40,6 @@ public class InGameEndText : MonoBehaviour
 
         float timer = hostIngameData.endTimer;
 
-        int displayTeam = 0;
-
         GameManager gm = Managers.instance.gameManager;
 
         bool gameEnd = false;
@@ -59,7 +57,7 @@ public class InGameEndText : MonoBehaviour
 
         if (teamIndex != -1)
         {
-            image.sprite = sprites[displayTeam + resultIndex * 2];
+            image.sprite = sprites[teamIndex + resultIndex * 2];
             image.color = Color.white;
         }
     }
