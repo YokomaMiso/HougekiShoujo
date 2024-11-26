@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e2ee1207b008e4881a23804526a4a6, type: 3}
+  m_Name: PVD_Nanami
+  m_EditorClassIdentifier: 
+  titleCall:
+  - {fileID: 8300000, guid: 86c5b5070a4bf6d419176097e47e2ada, type: 3}
+  selfPR:
+  - {fileID: 8300000, guid: 6e3608da9c4d6d543858b693036834d1, type: 3}
+  ready:
+  - {fileID: 8300000, guid: 679f62c7b2622a84e90bb1724e592896, type: 3}
+  gameStart:
+  - {fileID: 8300000, guid: e9682d6c093bf4f4dbae34ab4911be70, type: 3}
+  reload:
+  - {fileID: 8300000, guid: a2bf24b206d22254baaf0327383fcf63, type: 3}
+  - {fileID: 8300000, guid: a125ed1eb18f4764ebe95e53d5903ade, type: 3}
+  useMain:
+  - {fileID: 8300000, guid: 009524efdf1019948a18d5f2aede4606, type: 3}
+  - {fileID: 8300000, guid: c945868079488634387a7b5c93d112fe, type: 3}
+  useSub:
+  - {fileID: 8300000, guid: a7b5548cc0ac6dd4fa59fe45593d3b60, type: 3}
+  kill:
+  - {fileID: 8300000, guid: 61246eb39d0fa5341a2d7776748ed180, type: 3}
+  - {fileID: 8300000, guid: ab92cc8c8dab41d41b8a2186100bade6, type: 3}
+  friendlyFire:
+  - {fileID: 8300000, guid: 725ac6293fc0f5248948a4a3af767402, type: 3}
+  damage:
+  - {fileID: 8300000, guid: 9d575d4bd2fedcc4eb6064b055282281, type: 3}
+  damageFF:
+  - {fileID: 8300000, guid: deb76cf7787d97641bf6d6be93eb6e01, type: 3}
+  damageTrap:
+  - {fileID: 8300000, guid: 3fa9708aab932794893eb734fb99c052, type: 3}
+  - {fileID: 8300000, guid: f3eab1aa65b7ba645a1c0b742d739ff4, type: 3}
+  thanks:
+  - {fileID: 8300000, guid: 9dc2da0b56671a94585e694414bc2857, type: 3}
+  roundWin:
+  - {fileID: 8300000, guid: 6f03a09ce417107489956c698ef244fb, type: 3}
+  gameWin:
+  - {fileID: 8300000, guid: 9ea2ee42f3676ce4aa70f88e959822fa, type: 3}

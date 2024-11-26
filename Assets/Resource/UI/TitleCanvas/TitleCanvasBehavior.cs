@@ -41,8 +41,7 @@ public class TitleCanvasBehavior : MonoBehaviour
         titleCallTimer += Time.deltaTime;
         if (titleCallTimer > titleCallTime)
         {
-            //int characterID = Random.Range(0,Managers.instance.gameManager.playerDatas.Length);
-            int characterID = 3;
+            int characterID = Random.Range(0, Managers.instance.gameManager.playerDatas.Length - 1);
             SoundManager.PlayVoice(Managers.instance.gameManager.playerDatas[characterID].GetPlayerVoiceData().GetTitleCall());
             titleCalled = true;
         }
