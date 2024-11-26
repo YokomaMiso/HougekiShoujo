@@ -38,10 +38,6 @@ public class InGameEndText : MonoBehaviour
             return;
         }
 
-        float timer = hostIngameData.endTimer;
-
-        GameManager gm = Managers.instance.gameManager;
-
         bool gameEnd = false;
         if (hostIngameData.winCountTeamA >= 3) { gameEnd = true; }
         else if (hostIngameData.winCountTeamB >= 3) { gameEnd = true; }
