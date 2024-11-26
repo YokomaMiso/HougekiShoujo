@@ -126,6 +126,8 @@ public class ResultScoreBoard : MonoBehaviour
             }
         }
 
+        scoreInstance[scoreNums[returnKDFData.playerID]].GetComponent<PersonalData>().YouAreMVP();
+
         return returnKDFData;
     }
     public KDFData GetJunkyKDF()
