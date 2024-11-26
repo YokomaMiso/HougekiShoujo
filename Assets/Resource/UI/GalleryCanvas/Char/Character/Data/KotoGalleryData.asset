@@ -21,7 +21,7 @@ MonoBehaviour:
     characterIllustration: {fileID: 21300000, guid: 191ee4b53c3dca24fba2782000c5426d,
       type: 3}
     schoolIcon: {fileID: 21300000, guid: 5cbe234c9cfa45648b6c1d489cd5e3f4, type: 3}
-    emoteIllustration: {fileID: 21300000, guid: ef997e550ed24ba4f87f220c8458c329,
+    emoteIllustration: {fileID: 21300000, guid: 4dc97a3ee1b591944be00333c3a5eacc,
       type: 3}
   weapon:
   - weaponIcon: {fileID: 21300000, guid: 7578c0a2a3708b844aa3e0deaba8a456, type: 3}
@@ -39,75 +39,69 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 934707e0ab1029f48905aa6210f58159, type: 2}
   - {fileID: 9100000, guid: 1e636dfc249e7be4b836db392ca642de, type: 2}
   CharVoice:
-  - voiceClip: {fileID: 8300000, guid: 7e17bbb3ae5280148a7b93619065322d, type: 3}
+  - voiceClip: {fileID: 8300000, guid: 34d92d986021bd34aabeb4380b0f07d2, type: 3}
     voiceText: "\u30BF\u30A4\u30C8\u30EB\u30B3\u30FC\u30EB"
     voiceFullText: "\u7832\u6483\u5C11\u5973"
-  - voiceClip: {fileID: 8300000, guid: ed8a098d967e08e428e10053556e8756, type: 3}
+  - voiceClip: {fileID: 8300000, guid: a0e5897135785a440ad05b809130963b, type: 3}
     voiceText: "\u81EA\u5DF1\u7D39\u4ECB"
-    voiceFullText: "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u68212\u5E74\u3002\u8FD1\u885B\u53F8\u3060\u3002\u5927\u7832\u90E8\u3068\u98A8\u7D00\u59D4\u54E1\u306B\u6240\u5C5E\u3057\u3066\u3044\u308B\u3002\u2026\u3053\u3093\u306A\u3082\u306E\u3067\u3044\u3044\u304B\uFF1F"
-  - voiceClip: {fileID: 8300000, guid: ff3466e034e43a943b82e03800fbd815, type: 3}
+    voiceFullText: "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u6821\uFF12\u5E74\u306E\u6AFB\u65E5\u7434\u3067\u3059\u3002\u50D5\u306F\u5927\u7832\u5F97\u610F\u306A\u3093\u3060\u3088\u306D\uFF5E\u304A\u3063\u304D\u304F\u3066\u3064\u3088\u3044\u3057\u3002\u3042\u3001\u50D5\u306B\u60DA\u308C\u3061\u3083\u3060\u3081\u3060\u3088\uFF1F"
+  - voiceClip: {fileID: 8300000, guid: eb6fe3a49e4b92f45ae0d996400c12f9, type: 3}
     voiceText: Ready
-    voiceFullText: "\u79C1\u306B\u4EFB\u305B\u308D\u3002"
-  - voiceClip: {fileID: 8300000, guid: de682df77febd39458e4647d51650b0b, type: 3}
-    voiceText: "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
-    voiceFullText: "\u898B\u77E5\u3063\u305F\u5974\u3089\u3070\u304B\u308A\u3060\u306A"
-  - voiceClip: {fileID: 8300000, guid: effa6d15d1a31bd498db8c76a9735ae9, type: 3}
+    voiceFullText: "\u6E96\u5099\u3067\u304D\u305F\u3088\u2661"
+  - voiceClip: {fileID: 8300000, guid: 75821782de128e34890516006ade6577, type: 3}
     voiceText: "\u8A66\u5408\u52DD\u5229"
-    voiceFullText: "\u6211\u3005\u306E\u52DD\u5229\u3060\u306A"
-  - voiceClip: {fileID: 8300000, guid: 619c2319175df034da9d2391ed7c2136, type: 3}
+    voiceFullText: "\u3084\u3063\u305F\uFF5E\uFF5E\u52DD\u3063\u305F\uFF5E\uFF5E\uFF5E\uFF5E\u2661"
+  - voiceClip: {fileID: 8300000, guid: dbb29c8299320964a91cd4151cd6eeab, type: 3}
     voiceText: "\u30D5\u30A1\u30A4\u30C8"
-    voiceFullText: "\u7740\u3044\u3066\u6765\u3044"
-  - voiceClip: {fileID: 8300000, guid: 2ad91c422405a514baa75b1fd98fc3a9, type: 3}
+    voiceFullText: "\u4E00\u7DD2\u306B\u304C\u3093\u3070\u308D\uFF1F"
+  - voiceClip: {fileID: 8300000, guid: 30b1fa59e9972c54696491ec22914307, type: 3}
     voiceText: "\u30EA\u30ED\u30FC\u30C91"
-    voiceFullText: "\u30EA\u30ED\u30FC\u30C9\u3059\u308B"
-  - voiceClip: {fileID: 8300000, guid: 85a1ddd4e527b9541a079e5d4899c2da, type: 3}
+    voiceFullText: "\u3088\u3044\u3057\u3087\u3063\u3068"
+  - voiceClip: {fileID: 8300000, guid: 8bde34a21bc5e234fb91e6396ab9ad23, type: 3}
     voiceText: "\u30EA\u30ED\u30FC\u30C92"
-    voiceFullText: "\u30EA\u30ED\u30FC\u30C9"
-  - voiceClip: {fileID: 8300000, guid: 6eff6b3b7d163034ca9d95958528df55, type: 3}
+    voiceFullText: "\u6B21\u3044\u304F\u3088\uFF5E"
+  - voiceClip: {fileID: 8300000, guid: c18d8fe87126ade44a23314aff6e9de3, type: 3}
     voiceText: "\u30EA\u30ED\u30FC\u30C93"
-    voiceFullText: "\u30EA\u30ED\u30FC\u30C9\u3060"
-  - voiceClip: {fileID: 8300000, guid: 86670268b11953543bb6ac1000ccfbda, type: 3}
+    voiceFullText: "\u3069\u3093\u3069\u3093\u266A"
+  - voiceClip: {fileID: 8300000, guid: 3b865bec70570a6469b74ab42faadc4b, type: 3}
     voiceText: "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
-    voiceFullText: "\u3075\u3063\uFF01"
-  - voiceClip: {fileID: 8300000, guid: d73b1aa0544bb2f44b3161ff2e2f87d4, type: 3}
+    voiceFullText: "\u76DB\u308A\u4E0A\u304C\u3063\u3066\u3053\uFF5E"
+  - voiceClip: {fileID: 8300000, guid: 47ed9da926be79c45a9f7dc81a0df314, type: 3}
     voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
-    voiceFullText: "\u3053\u3053\u304B\u306A"
-  - voiceClip: {fileID: 8300000, guid: 2c0a5644859812a4bbf83c3fa917aca9, type: 3}
+    voiceFullText: "\u304A\u308A\u3083\u3063"
+  - voiceClip: {fileID: 8300000, guid: 4f288085b50ca404db92bcf2ab29ca48, type: 3}
     voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
-    voiceFullText: "\u3053\u3053"
-  - voiceClip: {fileID: 8300000, guid: ec2ff5336a0d1a942bc89e42ed24f9c8, type: 3}
+    voiceFullText: "\u3069\u30FC\u3093\u2661"
+  - voiceClip: {fileID: 8300000, guid: 644c43c4541ffc444892b705a7c1d208, type: 3}
     voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
-    voiceFullText: "\u305D\u3053\u3060"
-  - voiceClip: {fileID: 8300000, guid: 798c39e4ec42f2042a021a3c9e34fcf4, type: 3}
+    voiceFullText: "\u3075\u3093\u3063"
+  - voiceClip: {fileID: 8300000, guid: 7b1cd7ab83b441040847f89b43457e1b, type: 3}
     voiceText: "\u6483\u7834\u3055\u308C\u305F"
-    voiceFullText: "\u304F\u305D\u3063"
-  - voiceClip: {fileID: 8300000, guid: ba35a51f286798e46afad2ab55e22287, type: 3}
+    voiceFullText: "\u3082\uFF5E\uFF5E\uFF5E\uFF5E\uFF5E\uFF5E\u2661"
+  - voiceClip: {fileID: 8300000, guid: 41a8dee0514f3bb41a522c2fb15960ea, type: 3}
     voiceText: "\u6575\u64831"
-    voiceFullText: "\u826F\u3057"
-  - voiceClip: {fileID: 8300000, guid: 0a203133945965943acf3d9a4c657d5b, type: 3}
+    voiceFullText: "\u3084\u3063\u305F\u2661"
+  - voiceClip: {fileID: 8300000, guid: 2822113676eb46d4b84f92ebcf8dcfa7, type: 3}
     voiceText: "\u6575\u64832"
-    voiceFullText: "\u30AF\u30EA\u30A2"
-  - voiceClip: {fileID: 8300000, guid: fa5769c320e72dc44be1708f5c0741e8, type: 3}
+    voiceFullText: "\u3058\u3083\u3042\u306D\uFF5E"
+  - voiceClip: {fileID: 8300000, guid: 21db93dab7554fe4894450845e095b29, type: 3}
     voiceText: "\u6575\u64833"
-    voiceFullText: "\u6575\u3092\u7121\u529B\u5316"
-  - voiceClip: {fileID: 8300000, guid: 034fe1a955321a64d8372e4e22ed5648, type: 3}
+    voiceFullText: "\u304A\u75B2\u308C\uFF5E"
+  - voiceClip: {fileID: 8300000, guid: a6d030741f654904eb6f5b76727917b5, type: 3}
     voiceText: "FF\uFF08\u3055\u308C\u305F\u6642\uFF09"
-    voiceFullText: "\u4F55\u3092\u3057\u3066\u3044\u308B"
-  - voiceClip: {fileID: 8300000, guid: c1d6c3ce07a865940b75933b466d2311, type: 3}
+    voiceFullText: "\u3046\u308F\uFF5E\uFF5E\uFF5E\u3093\u6CE3"
+  - voiceClip: {fileID: 8300000, guid: ba81aacb2fc038d478e393f34565d0a7, type: 3}
     voiceText: "FF\uFF08\u3057\u305F\u6642\uFF09"
-    voiceFullText: "\u524D\u306B\u7ACB\u3064\u306A\uFF01"
-  - voiceClip: {fileID: 8300000, guid: 3345a178054fe1449a705a2f8d345309, type: 3}
+    voiceFullText: "\u3054\u3081\uFF5E\u3093\u2661"
+  - voiceClip: {fileID: 8300000, guid: 8bd179d35aee19f498e241ff1b59b89f, type: 3}
     voiceText: "\u7F60\u304B\u304B\u3063\u305F1"
-    voiceFullText: "\u307E\u305A\u3044\u306A"
-  - voiceClip: {fileID: 8300000, guid: 029b16604cc9c284e9d93c85cbd60265, type: 3}
+    voiceFullText: "\u52A9\u3051\u3066~?"
+  - voiceClip: {fileID: 8300000, guid: 5cadbd74d08ee8d4fb0d4ec449321d82, type: 3}
     voiceText: "\u7F60\u304B\u304B\u3063\u305F2"
-    voiceFullText: "\u304F\u3045"
-  - voiceClip: {fileID: 8300000, guid: a5e275a311b885145ad12c94cdbf79f6, type: 3}
-    voiceText: "\u7F60\u304B\u304B\u3063\u305F3"
-    voiceFullText: "\u3057\u307E\u3063\u305F"
-  - voiceClip: {fileID: 8300000, guid: 1ab602dbf82938542847022394de261e, type: 3}
+    voiceFullText: "\u3084\u3070\uFF5E\u3044"
+  - voiceClip: {fileID: 8300000, guid: 904a55c93e861c94e8d655c2f92616f4, type: 3}
     voiceText: "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
-    voiceFullText: "\u3088\u304F\u3084\u3063\u305F"
-  - voiceClip: {fileID: 8300000, guid: d013e2e18c839ab4a8310a2e25f73ae3, type: 3}
+    voiceFullText: "\u50D5\u306E\u52DD\u3061\uFF5E\uFF5E\uFF5E\u2661"
+  - voiceClip: {fileID: 8300000, guid: 3758371be082f9940ab144304c87c09f, type: 3}
     voiceText: "\u5473\u65B9\u3078\u611F\u8B1D"
-    voiceFullText: "\u3042\u308A\u304C\u3068\u306A"
+    voiceFullText: "\u983C\u308A\u306B\u306A\u308B\u306D\u2661"
