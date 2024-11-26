@@ -97,6 +97,12 @@ public class ResultCanvasBehavior : MonoBehaviour
         Managers.instance.ChangeState(GAME_STATE.ROOM);
     }
 
+    public void PressBG()
+    {
+        if (timer < moveToScoreTime) { return; }
+        ReturnRoom();
+    }
+
     public ResultScoreBoard.KDFData GetJunky() { return scoreBoard.GetJunkyKDF(); }
     public ResultScoreBoard.KDFData GetVictim() { return scoreBoard.GetVictimKDF(); }
     public ResultScoreBoard.KDFData GetDanger() { return scoreBoard.GetDangerKDF(); }
