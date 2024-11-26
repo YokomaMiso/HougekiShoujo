@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
         Vector3 normalizedVector = Vector3.Normalize(inputVector);
         if (normalizedVector.x < 0) { normalizedVector.x *= -1; }
         float angle = Mathf.Atan2(normalizedVector.x, normalizedVector.z) * Mathf.Rad2Deg;
+        Debug.Log(angle);
 
         const float borderAngle = 45f;  //45度ずつで返却する番号を変える
         const float defaultAngle = borderAngle / 2; //22.5度からスタート
@@ -439,8 +440,6 @@ public class Player : MonoBehaviour
 
     void DirectionChange(Vector3 _movement)
     {
-        if (_movement.x == 0) { return; }
-
         inputVector = _movement;
 
         Vector3 imageScale = Vector3.one;
