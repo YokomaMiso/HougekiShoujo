@@ -7,7 +7,7 @@ public enum TEAM_NUM { A = 0, B = 1 };
 
 public class RoomCanvasBehavior : MonoBehaviour
 {
-    RoomManager rm;
+    public RoomManager rm;
 
     [SerializeField] CharaVisualInRoomCanvas charaVisual;
     [SerializeField] GameObject playerBanners;
@@ -24,6 +24,8 @@ public class RoomCanvasBehavior : MonoBehaviour
     [SerializeField] AudioClip roomBGM;
 
     [SerializeField] SelecterArrow[] charaArrows;
+
+    [SerializeField] ExitCheck exitCheck;
 
     void Start()
     {
@@ -43,13 +45,16 @@ public class RoomCanvasBehavior : MonoBehaviour
         else { stageDisplay.SetActive(false); }
 
         SoundManager.PlayBGM(roomBGM);
+
+        exitCheck.SetOwner(this);
+        exitCheck.gameObject.SetActive(false);
     }
 
     void Update()
     {
         if (!Managers.instance.UsingCanvas())
         {
-            if (!stageSelect.gameObject.activeInHierarchy)
+            if (!UsingCanvasInRoom())
             {
                 CharaSelect();
                 TeamSelect();
@@ -62,6 +67,14 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
 
         PlayerBannerDisplayUpdate();
+    }
+
+    bool UsingCanvasInRoom()
+    {
+        if (stageSelect.gameObject.activeInHierarchy) { return true; }
+        if (exitCheck.gameObject.activeInHierarchy) { return true; }
+
+        return false;
     }
 
     void PlayerBannerDisplayUpdate()
@@ -118,14 +131,14 @@ public class RoomCanvasBehavior : MonoBehaviour
         float input = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f).x;
         if (Mathf.Abs(input) >= 0.9f)
         {
-            if (input > 0) 
+            if (input > 0)
             {
                 rm.CharaSelect(1);
                 charaArrows[1].SetAdd();
             }
-            else 
+            else
             {
-                rm.CharaSelect(-1); 
+                rm.CharaSelect(-1);
                 charaArrows[0].SetAdd();
             }
 
@@ -206,12 +219,14 @@ public class RoomCanvasBehavior : MonoBehaviour
         {
             RoomData myRoomData = OSCManager.OSCinstance.roomData;
             if (myRoomData.ready) { rm.PressCancel(); }
-            else { rm.BackToTitle(); }
+            //else { rm.BackToTitle(); }
+            else { exitCheck.gameObject.SetActive(true); }
         }
     }
     public void PressBackTitle()
     {
-        rm.BackToTitle();
+        exitCheck.gameObject.SetActive(true);
+        //rm.BackToTitle();
     }
 
     void GameStart()
