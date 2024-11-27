@@ -36,7 +36,6 @@ public class FastChat : MonoBehaviour
 
     void Update()
     {
-
         if (isChatActive)
         {
             UpdateShader();
@@ -115,8 +114,6 @@ public class FastChat : MonoBehaviour
         int nowRegion = Mathf.Clamp(Mathf.FloorToInt(angle / regionType), 0, regionSection);
         nowRegion = regionSection - nowRegion;
 
-        Debug.Log("Atan" + nowRegion);
-
         return nowRegion;
     }
 
@@ -124,7 +121,6 @@ public class FastChat : MonoBehaviour
     {
         if (InputManager.GetKeyDown(BoolActions.RStickButton))
         {
-            Debug.Log("‚è‚¹‚Á‚Æ‚¨‚¨‚¨‚¨‚¨");
             region = -1;
         }
     }
