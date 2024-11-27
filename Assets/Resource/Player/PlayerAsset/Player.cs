@@ -441,6 +441,7 @@ public class Player : MonoBehaviour
     {
         inputVector = _movement;
 
+        if (_movement.x == 0) { return; }
         Vector3 imageScale = Vector3.one;
         if (_movement.x < 0) { imageScale.x *= -1; }
         playerImage.transform.localScale = imageScale;
