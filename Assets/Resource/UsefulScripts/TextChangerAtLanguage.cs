@@ -13,7 +13,7 @@ public class TextChangerAtLanguage : MonoBehaviour
     [SerializeField] string simpleChinese;
     [SerializeField] string traditionalChinese;
 
-    void ChangeText()
+    public void ChangeText()
     {
         string applyText;
         switch (Managers.instance.nowLanguage)
