@@ -33,7 +33,7 @@ public class RoomManager : MonoBehaviour
         int cnt = 0;
         int[] teamCount = new int[2];
 
-        readyCount = 1;
+        readyCount = 0;
         for (int i = 0; i < MachingRoomData.playerMaxCount; i++)
         {
             RoomData roomData = OSCManager.OSCinstance.GetRoomData(i);

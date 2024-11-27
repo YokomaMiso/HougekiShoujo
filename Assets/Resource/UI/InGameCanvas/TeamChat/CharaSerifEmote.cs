@@ -9,6 +9,8 @@ public class CharaSerifEmote : CharaSerifBehavior
 
     public override void SetSerif(MachingRoomData.RoomData _roomData, RADIO_CHAT_ID _chatID)
     {
+        if (_chatID >= RADIO_CHAT_ID.MAX_NUM || _chatID <= RADIO_CHAT_ID.APOLOGIZE) { _chatID = RADIO_CHAT_ID.APOLOGIZE; }
+
         chatBG = transform.GetComponent<Image>();
         playerName = transform.GetChild(0).GetComponent<Text>();
         charaIcon = transform.GetChild(1).GetComponent<Image>();
