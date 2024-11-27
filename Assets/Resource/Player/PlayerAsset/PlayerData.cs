@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,8 +39,8 @@ public class PlayerData : ScriptableObject
     public Sprite GetSchoolIcon() { return schoolData.GetSchoolIcon(); }
     public string GetGrade() 
     {
-        if (grade == 0) { return " ‹³ˆõ"; }
-        return grade.ToString() + " ”N"; 
+        if (grade == 0) { return " æ•™å“¡"; }
+        return grade.ToString() + " å¹´"; 
     }
     public CharacterAnimData GetCharacterAnimData() { return characterAnimData; }
     public string GetMVPExplain() { return mvpExplain; }

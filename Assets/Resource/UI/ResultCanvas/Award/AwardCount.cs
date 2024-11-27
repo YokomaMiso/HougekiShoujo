@@ -23,9 +23,9 @@ public class AwardCount : MonoBehaviour
     readonly string[] units = new string[(int)LANGUAGE_NUM.MAX_NUM] { "回", "x", "次", "次" };
     readonly string[][] actionText = new string[(int)AWARD_ID.MAX_NUM][]
     {
-        new string[(int)LANGUAGE_NUM.MAX_NUM]{"撃った","Fired", "击出", "撃出" },
-        new string[(int)LANGUAGE_NUM.MAX_NUM]{"倒された", "KO-ed", "被击倒", "被撃倒" },
-        new string[(int)LANGUAGE_NUM.MAX_NUM]{"誤射した","Misfired", "误射", "誤射" }
+        new string[(int)LANGUAGE_NUM.MAX_NUM]{"撃った","Fired", "射击", "射擊" },
+        new string[(int)LANGUAGE_NUM.MAX_NUM]{"倒された", "KO-ed", "被击倒", "被擊倒" },
+        new string[(int)LANGUAGE_NUM.MAX_NUM]{"誤射した","Misfired", "误伤", "誤傷" }
     };
     readonly Color[] textColor = new Color[2] { Color.red, Color.white };
 

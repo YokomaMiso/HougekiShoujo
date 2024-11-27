@@ -1369,8 +1369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   japanese: "BGM\u30DC\u30EA\u30E5\u30FC\u30E0"
   english: BGM Volume
-  simpleChinese: "\u97F3\u4E50"
-  traditionalChinese: "\u97F3\u6A02"
+  simpleChinese: "\u80CC\u666F\u97F3"
+  traditionalChinese: "\u80CC\u666F\u97F3"
 --- !u!1 &2203273163311223191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3233,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E2D\u6587(\u7E41)"
+  m_Text: "\u7E41\u9AD4\u4E2D\u6587"
 --- !u!1 &5564833513203923399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3848,7 +3848,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E2D\u6587(\u7B80)"
+  m_Text: "\u7B80\u4F53\u4E2D\u6587"
 --- !u!1 &6680977386673905387
 GameObject:
   m_ObjectHideFlags: 0
@@ -4376,8 +4376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   japanese: "\u30AB\u30FC\u30BD\u30EB\u611F\u5EA6"
   english: Cursor Sensitivity
-  simpleChinese: "\u9F20\u6807\u79FB\u52A8\u901F\u5EA6"
-  traditionalChinese: "\u9F20\u6A19\u79FB\u52D5\u901F\u5EA6"
+  simpleChinese: "\u9F20\u6807\u7075\u654F\u5EA6"
+  traditionalChinese: "\u9F20\u6A19\u9748\u654F\u5EA6"
 --- !u!1 &7281941995051416993
 GameObject:
   m_ObjectHideFlags: 0
@@ -5632,8 +5632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   japanese: "\u753B\u9762\u63FA\u308C"
   english: Camera Shake
-  simpleChinese: "\u76F8\u673A\u9707\u52A8"
-  traditionalChinese: "\u76F8\u6A5F\u9707\u52D5"
+  simpleChinese: "\u5C4F\u5E55\u6296\u52A8"
+  traditionalChinese: "\u5C4F\u5E55\u6296\u52D5"
 --- !u!1 &8824650610815542131
 GameObject:
   m_ObjectHideFlags: 0
