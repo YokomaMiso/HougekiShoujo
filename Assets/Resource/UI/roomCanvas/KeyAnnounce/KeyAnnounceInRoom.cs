@@ -76,6 +76,12 @@ public class KeyAnnounceInRoom : MonoBehaviour
 
     void Start()
     {
+        if (Managers.instance.GetSmartPhoneFlag()) 
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         keys = new GameObject[maxKeyCount];
         keys[0] = horizon;
         keys[1] = vertical;
