@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ed411256c0a3545ac11d57b7bb9940, type: 3}
   m_Name: AD_MiraiAnimData
   m_EditorClassIdentifier: 
-  characterIcon: {fileID: 21300000, guid: 215cdf7b91d8d9549bf97a21a24b314c, type: 3}
+  characterIcon: {fileID: 21300000, guid: 5f3c6fc566588854c8f54fe9e8087f0a, type: 3}
   idleFirstSprite: {fileID: -906591038, guid: 0629128b0c01eb44fa40514b66e903ec, type: 3}
   charaIllust: {fileID: 21300000, guid: 33b8353c9b201a84689267cf7eaec556, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: 59af7393c68163846bd55713d48dbc0c,
