@@ -18,22 +18,22 @@ public class ConnectionCanvasBehavior : MonoBehaviour
     {
         "部屋を探しています…",
         "Searching for Room...",
-        "寻找该房间...",
-        "尋找該房間...",
+        "正在搜索房间...",
+        "正在搜索房間...",
     };
     readonly string[] foundText = new string[4]
     {
         "部屋を発見しました\n参加します",
         "Room has been found.\nProceeding to join.",
-        "找到该房间\n即将加入",
-        "找到該房間\n即將加入",
+        "已找到房间\n即将加入",
+        "已找到房間\n即將加入",
     };
     readonly string[] createText = new string[4]
     {
         "新しい部屋を作成します",
         "Creating a Room.",
-        "创建新房间",
-        "創建新房間",
+        "已创建新的房间",
+        "已創建新的房間",
     };
     readonly string[] timeOutText = new string[4]
     {

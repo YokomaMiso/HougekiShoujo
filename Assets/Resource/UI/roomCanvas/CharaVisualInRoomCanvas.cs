@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,12 +21,12 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     [SerializeField] Text[] weaponExplain;
 
     readonly string[] difficulityColor = new string[3] { "#5dff61", "#ffef5d", "#ff5353" };
-    readonly string[][] rollString = new string[4][] 
+    readonly string[][] rollString = new string[4][]
     {
-       new string[4]{ "‹ß‹——£", "’†‹——£", "‰“‹——£", "–³”F‰Â" },
+       new string[4]{ "è¿‘è·é›¢", "ä¸­è·é›¢", "é è·é›¢", "ç„¡èªå¯" },
        new string[4]{ "Short", "Middle", "Long", "Secret" },
-       new string[4]{ "‹ß‹——£", "’†‹——£", "‰“‹——£", "–³”F‰Â" },
-       new string[4]{ "‹ß‹——£", "’†‹——£", "‰“‹——£", "–³”F‰Â" },
+       new string[4]{ "è¿‘è·é›¢", "ä¸­è·é›¢", "è¿œè·é›¢", "æ— è®¤å¯" },
+       new string[4]{ "è¿‘è·é›¢", "ä¸­è·é›¢", "é è·é›¢", "ç„¡èªå¯" },
     };
 
     readonly Vector3 illustStartPos = new Vector3(1150, 32);

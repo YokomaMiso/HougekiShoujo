@@ -20,8 +20,8 @@ MonoBehaviour:
   subWeaponName:
   - "\u30C6\u30A3\u30FC\u30F3\u30B9\u30D4\u30EA\u30C3\u30C8"
   - Teen Spirit
-  - Teen Spirit
-  - Teen Spirit
+  - "\u9752\u6625\u6C14\u606F"
+  - "\u9752\u6625\u6C23\u606F"
   subWeaponExplain:
   - "\u30AE\u30BF\u30FC\u306E\u529B\u3067\u5468\u56F2\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u3092\u5439\u304D\u98DB\u3070\u3059\r\nHello,
     hello, hello, how low?"
@@ -29,9 +29,9 @@ MonoBehaviour:
 
     Hello, hello, hello,
     how low?'
-  - "\u5409\u4ED6\u7684\u5A01\u529B\u8BA9\u5468\u56F4\u7684\u6F14\u594F\u8005\u671B\u5C18\u83AB\u53CA\u3002\r\nHello,
+  - "\u7528\u5409\u4ED6\u7684\u529B\u91CF\u51FB\u98DE\u5468\u56F4\u7684\u73A9\u5BB6\r\nHello,
     hello, hello, how low?"
-  - "\u5409\u4ED6\u7684\u5A01\u529B\u5439\u8D70\u5468\u570D\u7684\u6F14\u594F\u8005\u3002\r\nHello,
+  - "\u7528\u5409\u4ED6\u7684\u529B\u91CF\u64CA\u98DB\u5468\u570D\u7684\u73A9\u5BB6\r\nHello,
     hello, hello, how low?"
   installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
     type: 2}

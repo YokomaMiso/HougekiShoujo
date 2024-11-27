@@ -20,15 +20,15 @@ public class KeyAnnounceInRoom : MonoBehaviour
     {
         "キャラクター変更",
         "Change Character",
-        "人物选择",
-        "人物選擇",
+        "更换角色",
+        "更換角色",
     };
     readonly string[] teamChangeText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
         "チーム変更",
         "Change Team",
-        "换队",
-        "換隊",
+        "更换队伍",
+        "更換隊伍",
     };
     readonly string[] startText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
@@ -48,8 +48,8 @@ public class KeyAnnounceInRoom : MonoBehaviour
     {
         "ステージ変更",
         "Change Stage",
-        "地图选择",
-        "地圖選擇",
+        "更换地图",
+        "更換地圖",
     };
     readonly string[] stageDecideText = new string[(int)LANGUAGE_NUM.MAX_NUM]
 {
@@ -70,8 +70,8 @@ public class KeyAnnounceInRoom : MonoBehaviour
     {
         "READY解除",
         "Cancel",
-        "解除READY",
-        "解除READY",
+        "取消准备",
+        "取消準備",
     };
 
     void Start()

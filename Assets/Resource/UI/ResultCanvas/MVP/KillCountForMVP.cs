@@ -13,8 +13,8 @@ public class KillCountForMVP : MonoBehaviour
 
     readonly Color[] textColor = new Color[2] { Color.red, Color.white };
 
-    readonly string[] units = new string[(int)LANGUAGE_NUM.MAX_NUM] { "人", "x", "次", "次" };
-    readonly string[] actionText = new string[(int)LANGUAGE_NUM.MAX_NUM] { "倒した", "killed", "击倒", "撃倒" };
+    readonly string[] units = new string[(int)LANGUAGE_NUM.MAX_NUM] { "人", "x", "人", "人" };
+    readonly string[] actionText = new string[(int)LANGUAGE_NUM.MAX_NUM] { "倒した", "killed", "击败", "擊敗" };
 
     public void SetText(ResultScoreBoard.KDFData _kdf)
     {

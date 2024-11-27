@@ -20,8 +20,8 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
     {
         "カーソル移動",
         "Cursor Move",
-        "鼠标移动",
-        "鼠標移動",
+        "移动鼠标",
+        "移動鼠標",
     };
     readonly string[] createRoomText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
@@ -34,15 +34,15 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
     {
         "タイトルに戻る",
         "Back to Title",
-        "返回主页面",
-        "返回主頁面",
+        "返回主菜单",
+        "返回主菜單",
     };
     readonly string[] refreshText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
         "部屋の更新",
         "Refresh Room",
-        "刷新房间",
-        "刷新房間",
+        "刷新房间列表",
+        "刷新房間列表",
     };
     readonly string[] joinToRoomText = new string[(int)LANGUAGE_NUM.MAX_NUM]
     {
@@ -55,8 +55,8 @@ public class KeyAnnounceInSelectRoom : MonoBehaviour
     {
         "ランダムマッチ",
         "Random Match",
-        "随机参加",
-        "隨機參加",
+        "随机匹配",
+        "隨機匹配",
     };
 
     void Start()
