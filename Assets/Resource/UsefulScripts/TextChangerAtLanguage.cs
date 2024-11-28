@@ -15,6 +15,11 @@ public class TextChangerAtLanguage : MonoBehaviour
 
     public void ChangeText()
     {
+        if (text == null) 
+        {
+            text = GetComponent<Text>();
+        }
+
         string applyText;
         switch (Managers.instance.nowLanguage)
         {
@@ -26,10 +31,13 @@ public class TextChangerAtLanguage : MonoBehaviour
 
         text.text = applyText;
     }
+    void OnEnable()
+    {
+        ChangeText();
+    }
 
     void Start()
     {
-        text = GetComponent<Text>();
         ChangeText();
     }
 
