@@ -11,6 +11,10 @@ public class InGameEndText : MonoBehaviour
 
     [SerializeField] Sprite[] sprites;
 
+    bool soundPlayed;
+    [SerializeField] AudioClip[] roundSetVoice;
+    [SerializeField] AudioClip[] winVoice;
+
     void Start()
     {
         Init();
@@ -24,6 +28,8 @@ public class InGameEndText : MonoBehaviour
         image.color = Color.clear;
 
         vfx.color = Color.clear;
+
+        //soundPlayed = false;
     }
 
     void Update()
@@ -34,6 +40,7 @@ public class InGameEndText : MonoBehaviour
         {
             image.color = Color.clear;
             vfx.color = Color.clear;
+            //soundPlayed = false;
 
             return;
         }
@@ -45,9 +52,9 @@ public class InGameEndText : MonoBehaviour
         int teamIndex = hostIngameData.winner;
 
         int resultIndex = 0;
-        if (gameEnd) 
+        if (gameEnd)
         {
-            resultIndex++; 
+            resultIndex++;
             vfx.color = Color.white;
         }
 
@@ -55,6 +62,16 @@ public class InGameEndText : MonoBehaviour
         {
             image.sprite = sprites[teamIndex + resultIndex * 2];
             image.color = Color.white;
+
+            /*
+            if (!soundPlayed)
+            {
+                if (gameEnd) { SoundManager.PlaySFXForUI(winVoice[teamIndex]); }
+                else { SoundManager.PlaySFXForUI(roundSetVoice[teamIndex]); }
+                soundPlayed = true;
+
+            }
+            */
         }
     }
 }
