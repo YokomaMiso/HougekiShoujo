@@ -8,6 +8,8 @@ public class LanguageRadioBoxSetting : MonoBehaviour
     public int num;
     const int maxNum = 4;
 
+    public static Sprite[] levelFourWindow = new Sprite[2];
+
     public void SetValue(int _num)
     {
         num = _num;
@@ -32,13 +34,17 @@ public class LanguageRadioBoxSetting : MonoBehaviour
 
     void ColorUpdate()
     {
-        Color[] colors = new Color[2] { Color.yellow, Color.white };
-
         for (int i = 0; i < maxNum; i++)
         {
-            Color color = colors[1];
-            if (num == i) { color = colors[0]; }
-            transform.GetChild(i + 1).GetComponent<Image>().color = color;
+            Sprite sprite = levelFourWindow[0];
+            Color color = Color.white;
+            if (num == i)
+            {
+                sprite = levelFourWindow[1];
+                color = Color.black;
+            }
+            transform.GetChild(i + 1).GetComponent<Image>().sprite = sprite;
+            transform.GetChild(i + 1).GetChild(0).GetComponent<Text>().color = color;
         }
     }
 }
