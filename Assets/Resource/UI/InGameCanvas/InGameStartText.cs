@@ -7,10 +7,14 @@ public class InGameStartText : MonoBehaviour
 {
     RectTransform rectTransform;
     Image image;
-    [SerializeField]Image vfx;
+    [SerializeField] Image vfx;
 
     [SerializeField] Sprite fightSprite;
     [SerializeField] Sprite[] roundSprites;
+
+    bool[] soundPlayed = new bool[2];
+    [SerializeField] AudioClip[] roundVoice;
+    [SerializeField] AudioClip fightVoice;
 
     void Start()
     {
@@ -25,6 +29,8 @@ public class InGameStartText : MonoBehaviour
         image.color = Color.clear;
 
         vfx.color = Color.clear;
+
+        //for (int i = 0; i < soundPlayed.Length; i++) { soundPlayed[i] = false; }
     }
 
     void Update()
@@ -35,6 +41,7 @@ public class InGameStartText : MonoBehaviour
         {
             image.color = Color.clear;
             vfx.color = Color.clear;
+            //for (int i = 0; i < soundPlayed.Length; i++) { soundPlayed[i] = false; }
 
             return;
         }
@@ -43,6 +50,14 @@ public class InGameStartText : MonoBehaviour
 
         if (4.0f > timer && timer > 3.5f)
         {
+            /*
+            if (!soundPlayed[1]) 
+            {
+                SoundManager.PlaySFXForUI(fightVoice);
+                soundPlayed[1] = true;
+            }
+            */
+
             const float maxTime = 4.0f;
             float seed = (maxTime - timer) * 20;
             float[] randoms = new float[2] { Random.Range(-seed, seed), Random.Range(-seed, seed) };
@@ -55,7 +70,16 @@ public class InGameStartText : MonoBehaviour
         }
         else if (3.5f > timer && timer > 2.5f)
         {
-            image.sprite = roundSprites[hostIngameData.roundCount - 1];
+            int roundCount = hostIngameData.roundCount - 1;
+            /*
+            if (!soundPlayed[0]) 
+            {
+                SoundManager.PlaySFXForUI(roundVoice[roundCount]);
+                soundPlayed[0] = true;
+            }
+            */
+
+            image.sprite = roundSprites[roundCount];
             image.color = Color.white;
             vfx.color = Color.clear;
         }

@@ -772,6 +772,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5fc9af9f4ef115240a3ef631aa212013, type: 3}
   - {fileID: 21300000, guid: c936e650b2cf8564ca7a7ce23f358dd0, type: 3}
   - {fileID: 21300000, guid: 5e10fb2c8105c334da29108edecf2395, type: 3}
+  roundVoice:
+  - {fileID: 8300000, guid: 8b1e5142e48f9f24a9c3e1799cc6d46c, type: 3}
+  - {fileID: 8300000, guid: 762c02ad02a712b4d9852f66cec559e5, type: 3}
+  - {fileID: 8300000, guid: 7b7506d2158852842be3bc170491352b, type: 3}
+  - {fileID: 8300000, guid: b51f8563bf6425242b38e1101b6fc98b, type: 3}
+  - {fileID: 8300000, guid: 39bb838f8f028664bae0185c4dffbea3, type: 3}
+  fightVoice: {fileID: 8300000, guid: f303a11bc534aa749a8a902be8e47fe6, type: 3}
 --- !u!1 &3569549600905928874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,6 +1443,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3670fc2751332b34b842849cdc709d83, type: 3}
   - {fileID: 21300000, guid: fa01b0e1bc64fd641bef61af4d11b2c9, type: 3}
   - {fileID: 21300000, guid: ffd8fc3dc4cebca4792aa10033fcb724, type: 3}
+  roundSetVoice:
+  - {fileID: 8300000, guid: 5059024bab9e96b49879753ceed1092c, type: 3}
+  - {fileID: 8300000, guid: aef3a176d86785647b288b298143db28, type: 3}
+  winVoice:
+  - {fileID: 8300000, guid: cc266314d5ad28d4eb348f4f26192224, type: 3}
+  - {fileID: 8300000, guid: fd945fa0aca2d16439be4b958356c721, type: 3}
 --- !u!114 &7114193224090447309
 MonoBehaviour:
   m_ObjectHideFlags: 0
