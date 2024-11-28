@@ -10,120 +10,172 @@ public class OptionCanvasBehavior : MonoBehaviour
     public void SetGameManager(GameManager _gameManager) { gameManager = _gameManager; }
 
     OptionData optionData;
-    int selectNum = 0;
-    bool isCanSelect = true;
-    float timer = 0;
+    int selectCategory = 0;
+    const int categoryMaxNum = 4;
     const float cursorTimer = 0.15f;
+
+    int settingNum = 0;
+    readonly int[] settingMaxNum = new int[categoryMaxNum] { 4, 2, 1, 0 };
+
+    bool inCategory;
+
+    [SerializeField] public Sprite[] levelOneWindow;
+    [SerializeField] public Sprite[] levelTwoWindow;
+    [SerializeField] public Sprite[] levelThreePen;
+    [SerializeField] public Sprite[] levelFourWindow;
+
+    [SerializeField] Image soundCategory;
+    [SerializeField] Image gamePlayCategory;
+    [SerializeField] Image languageCategory;
+    [SerializeField] Image submit;
+    Image[] categorys;
+
+    [SerializeField] GameObject soundSetting;
+    [SerializeField] GameObject gamePlaySetting;
+    [SerializeField] GameObject languageSetting;
+    [SerializeField] GameObject emptySetting;
+    GameObject[] settings;
 
     void Start()
     {
         optionData = Managers.instance.GetOptionData();
-        transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
-        transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
-        transform.GetChild(3).GetComponent<VolumeIndexSetting>().SetValue(optionData.sfxVolume);
-        transform.GetChild(4).GetComponent<VolumeIndexSetting>().SetValue(optionData.voiceVolume);
-        transform.GetChild(5).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
-        transform.GetChild(6).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
-        transform.GetChild(7).GetComponent<LanguageRadioBoxSetting>().SetValue(optionData.languageNum);
 
-        transform.GetChild(1).GetChild(0).GetComponent<Image>().color = SelectColor(true);
+        categorys = new Image[categoryMaxNum];
+        categorys[0] = soundCategory;
+        categorys[1] = gamePlayCategory;
+        categorys[2] = languageCategory;
+        categorys[3] = submit;
+
+        settings = new GameObject[categoryMaxNum];
+        settings[0] = soundSetting;
+        settings[1] = gamePlaySetting;
+        settings[2] = languageSetting;
+        settings[3] = emptySetting;
+
+        soundSetting.transform.GetChild(0).GetComponent<VolumeIndexSetting>().SetValue(optionData.masterVolume);
+        soundSetting.transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.bgmVolume);
+        soundSetting.transform.GetChild(2).GetComponent<VolumeIndexSetting>().SetValue(optionData.sfxVolume);
+        soundSetting.transform.GetChild(3).GetComponent<VolumeIndexSetting>().SetValue(optionData.voiceVolume);
+        gamePlaySetting.transform.GetChild(0).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
+        gamePlaySetting.transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
+        languageSetting.transform.GetChild(0).GetComponent<LanguageRadioBoxSetting>().SetValue(optionData.languageNum);
+
+        for (int i = 0; i < categoryMaxNum; i++)
+        {
+            if (i == selectCategory)
+            {
+                categorys[i].sprite = levelOneWindow[1];
+                settings[i].SetActive(true);
+            }
+            else
+            {
+                categorys[i].sprite = levelOneWindow[0];
+                settings[i].SetActive(false);
+            }
+        }
     }
-    Color SelectColor(bool _select)
-    {
-        Color color = Color.white;
-        if (_select) { color = Color.yellow; }
-
-        return color;
-    }
-
     void Update()
     {
-        CursorMove();
-        ChangeSelectedValue();
-    }
+        Vector2 value = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, cursorTimer);
 
-
-    void CursorMove()
-    {
-        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
-
-        //カーソル移動
-        if (Mathf.Abs(value.y) > 0.8f)
+        if (inCategory)
         {
-            if (isCanSelect)
-            {
-                transform.GetChild(selectNum + 1).GetChild(0).GetComponent<Image>().color = SelectColor(false);
-
-                if (value.y > 0) { selectNum -= 1; }
-                else { selectNum += 1; }
-
-                if (selectNum < 0) { selectNum = 0; }
-                if (selectNum > 7) { selectNum = 7; }
-
-                isCanSelect = false;
-
-                transform.GetChild(selectNum + 1).GetChild(0).GetComponent<Image>().color = SelectColor(true);
-            }
-        }
-        //前フレームの情報保存
-        else if (Mathf.Abs(value.y) < 0.2f)
-        {
-            isCanSelect = true;
-        }
-    }
-
-    void ChangeSelectedValue()
-    {
-        Vector2 value = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
-
-        if (Mathf.Abs(value.x) > 0.8f)
-        {
-            if (timer == 0)
-            {
-                float applyValue = 1;
-
-                switch (selectNum)
-                {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                        if (value.x < 0) { applyValue *= -1; }
-                        transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
-                        SoundManager.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
-                        SoundManager.bgmVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
-                        SoundManager.sfxVolume = transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
-                        SoundManager.voiceVolume = transform.GetChild(4).GetComponent<VolumeIndexSetting>().GetValue();
-
-                        float nowVolume = SoundManager.masterVolume * SoundManager.bgmVolume;
-                        SoundManager.BGMVolumeChange(nowVolume);
-
-                        break;
-
-                    case 4:
-                        transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value.x < 0);
-                        break;
-
-                    case 5:
-                        if (value.x < 0) { applyValue *= -1; }
-                        transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
-                        break;
-
-                    case 6:
-                        int valueToInt;
-                        if (value.x > 0) { valueToInt = 1; }
-                        else { valueToInt = -1; }
-                        int returnValue= transform.GetChild(selectNum + 1).GetComponent<LanguageRadioBoxSetting>().AddValue(valueToInt);
-                        break;
-                }
-            }
-
-            timer += Time.deltaTime;
-            if (timer > cursorTimer) { timer = 0; }
+            //ChangeSelectedValue();
         }
         else
         {
-            timer = 0;
+            CategoryMove(value.y);
+            if (InputManager.GetKeyDown(BoolActions.SouthButton)) { SubmitInCategory(); }
+        }
+    }
+
+
+    void CategoryMove(float _y)
+    {
+
+        //カーソル移動
+        if (Mathf.Abs(_y) > 0.8f)
+        {
+            categorys[selectCategory].sprite = levelOneWindow[0];
+            settings[selectCategory].SetActive(false);
+
+            if (_y > 0) { selectCategory = (selectCategory + categoryMaxNum - 1) % categoryMaxNum; }
+            else { selectCategory = (selectCategory + 1) % categoryMaxNum; }
+
+            categorys[selectCategory].sprite = levelOneWindow[1];
+            settings[selectCategory].SetActive(true);
+        }
+    }
+    void SubmitInCategory()
+    {
+        switch (selectCategory)
+        {
+            default:
+                inCategory = true;
+                settingNum = 0;
+                break;
+            case 3:
+                Submit();
+                break;
+        }
+    }
+
+    void ChangeSelectedValue(Vector2 _value)
+    {
+        switch (selectCategory)
+        {
+            //sound
+            case 0:
+                break;
+            //gameplay
+            case 1:
+                break;
+            //language
+            case 2:
+                break;
+            //submit
+            case 3:
+                break;
+        }
+        /*
+        if (Mathf.Abs(value.x) > 0.8f)
+        {
+            float applyValue = 1;
+
+            switch (selectNum)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    if (value.x < 0) { applyValue *= -1; }
+                    transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
+                    SoundManager.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
+                    SoundManager.bgmVolume = transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
+                    SoundManager.sfxVolume = transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
+                    SoundManager.voiceVolume = transform.GetChild(4).GetComponent<VolumeIndexSetting>().GetValue();
+
+                    float nowVolume = SoundManager.masterVolume * SoundManager.bgmVolume;
+                    SoundManager.BGMVolumeChange(nowVolume);
+
+                    break;
+
+                case 4:
+                    transform.GetChild(selectNum + 1).GetComponent<RadioBoxIndexSetting>().SetValue(value.x < 0);
+                    break;
+
+                case 5:
+                    if (value.x < 0) { applyValue *= -1; }
+                    transform.GetChild(selectNum + 1).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
+                    break;
+
+                case 6:
+                    int valueToInt;
+                    if (value.x > 0) { valueToInt = 1; }
+                    else { valueToInt = -1; }
+                    int returnValue = transform.GetChild(selectNum + 1).GetComponent<LanguageRadioBoxSetting>().AddValue(valueToInt);
+                    break;
+            }
         }
 
         optionData.masterVolume = transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
@@ -138,9 +190,9 @@ public class OptionCanvasBehavior : MonoBehaviour
         {
             if (selectNum == 7)
             {
-                Submit();
             }
         }
+        */
     }
 
     public void Submit()
