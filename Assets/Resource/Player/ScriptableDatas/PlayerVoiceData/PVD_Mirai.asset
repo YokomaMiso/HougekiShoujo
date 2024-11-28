@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e2ee1207b008e4881a23804526a4a6, type: 3}
+  m_Name: PVD_Mirai
+  m_EditorClassIdentifier: 
+  titleCall:
+  - {fileID: 8300000, guid: 36a71b63a8112de4087426de57cec452, type: 3}
+  selfPR:
+  - {fileID: 8300000, guid: 803a375cf4a189d4a88620e4518b9273, type: 3}
+  ready:
+  - {fileID: 8300000, guid: cd64d0c5c2d26f247a3547be46bbe865, type: 3}
+  gameStart:
+  - {fileID: 8300000, guid: 16dd743b764cf0c46b151ccde26764ec, type: 3}
+  reload:
+  - {fileID: 8300000, guid: ba1a37a98ff16e6458ad1ef00a45d1f0, type: 3}
+  - {fileID: 8300000, guid: 11f9bd5053d6517448b4b5fa0b25fe5f, type: 3}
+  - {fileID: 8300000, guid: 5eeb13d69c562154ea52aadce5ebae71, type: 3}
+  useMain:
+  - {fileID: 8300000, guid: bdedcb670177b8646a445c8be422e791, type: 3}
+  - {fileID: 8300000, guid: 25fcfe64fceb45d4280473f15ca2c62d, type: 3}
+  - {fileID: 8300000, guid: 07ed95800617e18478ad28981ad2465d, type: 3}
+  useSub:
+  - {fileID: 8300000, guid: 56dc3048a099b8a48a26e53523022cd7, type: 3}
+  kill:
+  - {fileID: 8300000, guid: 6fe85bb5e525c9345aad244f35d8248f, type: 3}
+  - {fileID: 8300000, guid: ce1b77732360b664dadb040d4c9c3c3b, type: 3}
+  - {fileID: 8300000, guid: 4427ac729d8d695459e6dd42ac022347, type: 3}
+  friendlyFire:
+  - {fileID: 8300000, guid: a3cb20993c8dfd24d884674a7442697c, type: 3}
+  damage:
+  - {fileID: 8300000, guid: d14d0a6e6ec7d89469686467f04cf8c8, type: 3}
+  - {fileID: 8300000, guid: f178b78e651c84e4581178bce2c02fb2, type: 3}
+  damageFF:
+  - {fileID: 8300000, guid: efda23f1eb9ea384fb71fa1a73d8bf44, type: 3}
+  damageTrap:
+  - {fileID: 8300000, guid: f7f36c44167751648966e557fbb384b7, type: 3}
+  - {fileID: 8300000, guid: 853ea63ccbe23c54486fc9ab0bd5542b, type: 3}
+  - {fileID: 8300000, guid: b7cc95593998ffd47a9e5454ba350033, type: 3}
+  thanks:
+  - {fileID: 8300000, guid: 1153be3122d92b34eb7898ab076cd00e, type: 3}
+  roundWin:
+  - {fileID: 8300000, guid: 37b6c6c99b2ac4e4889a031410ee5ea9, type: 3}
+  gameWin:
+  - {fileID: 8300000, guid: 941b4f7ac5d128849950558f679dc961, type: 3}
