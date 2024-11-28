@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: AD_MiraiAnimData
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: 5f3c6fc566588854c8f54fe9e8087f0a, type: 3}
-  idleFirstSprite: {fileID: -906591038, guid: 0629128b0c01eb44fa40514b66e903ec, type: 3}
+  idleFirstSprite: {fileID: -1694669801, guid: 60e6c5376f9495d4d8d9a5730dac2a19, type: 3}
   charaIllust: {fileID: 21300000, guid: 33b8353c9b201a84689267cf7eaec556, type: 3}
-  idleForUIAnimationData: {fileID: 9100000, guid: 59af7393c68163846bd55713d48dbc0c,
+  idleForUIAnimationData: {fileID: 9100000, guid: c338016fbf4e3a244b790ae2737c50e3,
     type: 2}
   runForUIAnimationData: {fileID: 9100000, guid: 5a59126cdc5958a438569df4acd443ec,
     type: 2}
-  idleAnimationData: {fileID: 9100000, guid: 74fa1f6a0cfb4a1429ac939d205b8f0b, type: 2}
+  idleAnimationData: {fileID: 9100000, guid: 156742e20ca313448830c36e1b6a91f0, type: 2}
   runAnimationData:
   - {fileID: 9100000, guid: 86e89820564e2c04f8dd413c8e6147f8, type: 2}
   reloadAnimationData: {fileID: 9100000, guid: f2624718e7213f743961c2ca38b779bf, type: 2}
