@@ -15,7 +15,7 @@ public class OptionCanvasBehavior : MonoBehaviour
     const float cursorTimer = 0.15f;
 
     int settingNum = 0;
-    readonly int[] settingMaxNum = new int[categoryMaxNum] { 4, 2, 1, 0 };
+    readonly int[] settingMaxNum = new int[categoryMaxNum] { 5, 3, 2, 0 };
 
     bool inCategory;
 
@@ -80,7 +80,8 @@ public class OptionCanvasBehavior : MonoBehaviour
 
         if (inCategory)
         {
-            //ChangeSelectedValue();
+            ChangeSelectedValue(value.x);
+            ChangeSettingNum(value.y);
         }
         else
         {
@@ -92,7 +93,6 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     void CategoryMove(float _y)
     {
-
         //ƒJ[ƒ\ƒ‹ˆÚ“®
         if (Mathf.Abs(_y) > 0.8f)
         {
@@ -120,12 +120,36 @@ public class OptionCanvasBehavior : MonoBehaviour
         }
     }
 
-    void ChangeSelectedValue(Vector2 _value)
+    void ChangeSettingNum(float _y)
     {
+        if (Mathf.Abs(_y) < 0.8f) { return; }
+
+        if (_y < 0) { settingNum = (settingNum + 1) % settingMaxNum[selectCategory]; }
+        else { settingNum = (settingNum + settingMaxNum[selectCategory] - 1) % settingMaxNum[selectCategory]; }
+    }
+
+    void ChangeSelectedValue(float _x)
+    {
+        if (Mathf.Abs(_x) < 0.8f) { return; }
+
+        float applyValue = 1;
+
         switch (selectCategory)
         {
             //sound
             case 0:
+                if (settingNum < settingMaxNum[selectCategory] - 1)
+                {
+                    if (_x < 0) { applyValue *= -1; }
+                    soundSetting.transform.GetChild(settingNum).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
+                    SoundManager.masterVolume = soundSetting.transform.GetChild(0).GetComponent<VolumeIndexSetting>().GetValue();
+                    SoundManager.bgmVolume = soundSetting.transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
+                    SoundManager.sfxVolume = soundSetting.transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
+                    SoundManager.voiceVolume = soundSetting.transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
+
+                    float nowVolume = SoundManager.masterVolume * SoundManager.bgmVolume;
+                    SoundManager.BGMVolumeChange(nowVolume);
+                }
                 break;
             //gameplay
             case 1:
