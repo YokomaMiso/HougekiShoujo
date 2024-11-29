@@ -52,8 +52,8 @@ public class PlayerSubAction : MonoBehaviour
                     case BUFF_TYPE.SPEED:
                         transform.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, lifeTime);
                         break;
-                    case BUFF_TYPE.RELOAD:
-                        transform.AddComponent<ReloadBuff>().SetRateAndTime(speedRate, lifeTime);
+                    case BUFF_TYPE.DASH:
+                        ownerPlayer.GetComponent<PlayerMove>().ReceiveSlip(lifeTime, ownerPlayer.GetInputVector() * speedRate);
                         break;
                 }
                 break;

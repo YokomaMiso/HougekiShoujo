@@ -13,9 +13,11 @@ public class BombBehavior : MonoBehaviour
     protected string playerTag = "Player";
     protected string groundTag = "Ground";
 
+    protected Rigidbody rb;
+
     public virtual void LaunchBomb(Vector3 _vector)
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         Vector3 addVector = _vector + Vector3.up * 0.5f;
         rb.AddForce(addVector, ForceMode.Impulse);
     }
