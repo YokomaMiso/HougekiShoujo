@@ -31,6 +31,6 @@ MonoBehaviour:
   - "\u5927\u5E45\u63D0\u5347\u79FB\u52D5\u901F\u5EA6\uFF0C\u6301\u7E8C 3 \u79D2\u3002\n\u51B7\u537B\u6642\u959315\u79D2"
   installationStartAnim: {fileID: 0}
   installationLoopAnim: {fileID: 0}
-  reloadTime: 15
-  speedRate: 1.5
+  reloadTime: 10
+  speedRate: 1.75
   lifeTime: 3
