@@ -16,8 +16,8 @@ public class StageSelectBehavior : MonoBehaviour
     float stumpTimer;
     const float stumpMoveTime = 0.5f;
 
-    readonly Vector3 startPos = new Vector3(-416, -944);
-    readonly Vector3 endPos = new Vector3(-416, -80);
+    readonly Vector3 startPos = new Vector3(-416, -880);
+    readonly Vector3 endPos = new Vector3(-416, 36);
 
     [SerializeField] Transform binder;
     Image stump;
@@ -142,6 +142,7 @@ public class StageSelectBehavior : MonoBehaviour
         binder.GetChild(2).GetComponent<Image>().sprite = sd.GetScreenShot();
         binder.GetChild(3).GetComponent<Image>().sprite = sd.GetMinimap();
         binder.GetChild(7).GetComponent<Text>().text = sd.GetStageName();
+        binder.GetChild(8).GetComponent<Text>().text = _num.ToString("00");
     }
 
     void PressSubmit()
