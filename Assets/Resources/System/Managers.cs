@@ -35,6 +35,9 @@ public class Managers : MonoBehaviour
     public GAME_STATE prevState = GAME_STATE.LOGO_SPLASH;
     public GAME_STATE nextState = GAME_STATE.LOGO_SPLASH;
 
+    [SerializeField]
+    public bool isLocalPlay = false;
+
     /*ゲーム内で使用するID*/
     public int playerID;
     int characterID = 0;
