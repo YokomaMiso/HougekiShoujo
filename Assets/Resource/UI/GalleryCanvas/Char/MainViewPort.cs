@@ -202,7 +202,7 @@ public class MainViewPort : MonoBehaviour
             Text charIntroText = charIntro.GetComponent<Text>();
             if (charIntroText != null)
             {
-                charIntroText.text = characterData.charData.charDesign;
+                charIntroText.text = characterData.charData.GetCharDesign();
             }
         }
 
@@ -237,7 +237,7 @@ public class MainViewPort : MonoBehaviour
             Text weaponNameText = weaponNameTransform.GetComponent<Text>();
             if (weaponNameText != null)
             {
-                weaponNameText.text = characterData.weapon[WeaponType].weaponName;
+                weaponNameText.text = characterData.weapon[WeaponType].GetWeaponName();
             }
         }
 
@@ -247,7 +247,7 @@ public class MainViewPort : MonoBehaviour
             Text weaponIntroText = weaponIntroTransform.GetComponent<Text>();
             if (weaponIntroText != null)
             {
-                weaponIntroText.text = characterData.weapon[WeaponType].weaponText;
+                weaponIntroText.text = characterData.weapon[WeaponType].GetWeaponText();
             }
         }
 
@@ -284,7 +284,7 @@ public class MainViewPort : MonoBehaviour
             Text voiceNameText = VoiceName.GetComponent<Text>();
             if (voiceNameText != null)
             {
-                voiceNameText.text = characterData.CharVoice[VoiceCount].voiceText;
+                voiceNameText.text = characterData.CharVoice[VoiceCount].GetVoiceText();
             }
         }
         
@@ -320,7 +320,7 @@ public class MainViewPort : MonoBehaviour
     {
         isPlaying = true;
 
-        string fullText = characterData.CharVoice[VoiceCount].voiceFullText;
+        string fullText = characterData.CharVoice[VoiceCount].GetVoiceFullText();
         Transform VoiceText = gameObject.transform.Find("VoiceText");
         Transform voiceObject = gameObject.transform.Find("VoiceObject");
         Text voice = VoiceText?.GetComponent<Text>();
