@@ -1,0 +1,320 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0b88adf793a5c141b40acebffaf9aa7, type: 3}
+  m_Name: MiraiGalleryCharacterData
+  m_EditorClassIdentifier: 
+  charData:
+    characterName: "\u85E4\u5802 \u307F\u3089\u3044"
+    schoolText: "\u5B66\u6821\u3000\u82B1\u97F3\u5973\u5B66\u9662\u9AD8\u7B49\u79D1"
+    schoolYear: "\u5B66\u5E74\u3000\u4E09\u5E74"
+    charDesign:
+    - "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821\u306B\u901A\u3046\u5973\u306E\u5B50\u3002\r\n\u53F8\u306E\u30B9\u30C8\u30FC\u30AB\u30FC\u3067\u5927\u7832\u90E8\u306B\u3044\u308B\n\u306E\u3082\u305D\u306E\u305F\u3081\u3002\r\u53F8\u306E\u3053\u3068\u306F\u672C\u6C17\n\u3067\u5F7C\u5973\u306B\u3057\u305F\u3044\u3068\u8003\u3048\u3066\u3044\u308B\u3002"
+    - "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821\u306B\u901A\u3046\u5973\u306E\u5B50\u3002\r\n\u53F8\u306E\u30B9\u30C8\u30FC\u30AB\u30FC\u3067\u5927\u7832\u90E8\u306B\u3044\u308B\n\u306E\u3082\u305D\u306E\u305F\u3081\u3002\r\u53F8\u306E\u3053\u3068\u306F\u672C\u6C17\n\u3067\u5F7C\u5973\u306B\u3057\u305F\u3044\u3068\u8003\u3048\u3066\u3044\u308B\u3002"
+    - "\u5728\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821\u4E0A\u5B66\u7684\u5973\u5B69\u5B50\u3002\r\n\u7531\u4E8E\u662F\u53F8\u7684\u8DDF\u8E2A\u72C2\uFF0C\u8FFD\u7740\u53F8\u52A0\u5165\u4E86\u5927\u70AE\u90E8\u3002\r\n\u53D1\u81EA\u5185\u5FC3\u7684\u60F3\u548C\u53F8\u8C08\u604B\u7231\u3002"
+    - "\u5728\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B78\u6821\u4E0A\u5B78\u7684\u5973\u5B69\u5B50\u3002\r\n\u7531\u65BC\u662F\u53F8\u7684\u8DDF\u8E64\u72C2\uFF0C\u8FFD\u8457\u53F8\u52A0\u5165\u4E86\u5927\u70AE\u90E8\u3002\r\n\u767C\u81EA\u5167\u5FC3\u7684\u60F3\u548C\u53F8\u8AC7\u6200\u611B\u3002\r\n"
+    characterIcon: {fileID: 21300000, guid: 5f3c6fc566588854c8f54fe9e8087f0a, type: 3}
+    characterIllustration: {fileID: 21300000, guid: 33b8353c9b201a84689267cf7eaec556,
+      type: 3}
+    schoolIcon: {fileID: 21300000, guid: 3b5866fb95c665841927102d41fccf41, type: 3}
+    emoteIllustration: {fileID: 21300000, guid: ef997e550ed24ba4f87f220c8458c329,
+      type: 3}
+  weapon:
+  - weaponIcon: {fileID: 21300000, guid: 3c377e90ffb17294c8c9af43bd228034, type: 3}
+    weaponName:
+    - "\u56DB\u65A4\u706B\u7832 \u62FF\u7834\u5D18"
+    - 4kgCannon Napoleon
+    - "\u56DB\u65A4\u706B\u7832 \u62FF\u7834\u4ED1"
+    - "\u56DB\u65A4\u706B\u7832 \u62FF\u7834\u5D18"
+    weaponText:
+    - "\u5F3E\u901F\u306E\u9045\u3044\u3001\u5DE8\u5927\u306A\u7832\u5F3E\u3092\u653E\u3064\r\n\u300C\u6700\u3082\u5927\u304D\u306A\u5371\u967A\u306F\u52DD\u5229\u306E\t\u306E\u3058\u3083\u300D"
+    - 'Slow, huge shells with low velocity.
+
+      "The most dangerous moment comes
+      with victory..."'
+    - "\u88C5\u586B\u901F\u5EA6\u6162\u4F46\u662F\u4F1A\u53D1\u5C04\u5DE8\u5927\u7684\u70AE\u5F39\n\u300C\u8D8A\u63A5\u8FD1\u80DC\u5229\u8D8A\u5BB9\u6613\u6389\u4EE5\u8F7B\u5FC3\u5462\u300D"
+    - "\u901F\u5EA6\u6162\u3001\u901F\u5EA6\u4F4E\u7684\u5DE8\u5927\u7832\u5F48\u3002\r\n\u300C\u8D8A\u63A5\u8FD1\u52DD\u5229\u8D8A\u5BB9\u6613\u6389\u4EE5\u8F15\u5FC3\u5462\u300D"
+  - weaponIcon: {fileID: 21300000, guid: 5644694ee586fcd44bcdab93522366aa, type: 3}
+    weaponName:
+    - "\u7AF6\u6280\u6539\u826F\u578B \u85E4\u5802\u731F\u5E2B\u4F1A\u5236\u5F0F\u767A\u6761\u631F"
+    - Todo's bear trap
+    - "\u7ADE\u6280\u6539\u826F\u578B \u85E4\u5802\u730E\u72EE\u4F1A\u5236\u5F0F\u6355\u517D\u5939"
+    - "\u7AF6\u6280\u6539\u826F\u578B \u85E4\u5802\u7375\u7345\u6703\u88FD\u5F0F\u6355\u7378\u593E"
+    weaponText:
+    - "\uFF12\u79D2\u52D5\u3051\u306A\u304F\u306A\u308B\u30C8\u30E9\u30D0\u30B5\u30DF\u3092\u8A2D\u7F6E\u3059\u308B\r\n\uFF12\u3064\u76EE\u3092\u8A2D\u7F6E\u6642\u306B\uFF11\u3064\u76EE\u304C\u8D77\u52D5\u3059\u308B"
+    - 'Install a bear trap that will be stun for 2 sec.
+
+      The 1st is activated
+      when the 2nd is installed.'
+    - "\u5B89\u88C5\u4E00\u4E2A\u4F1A\u7729\u6655 2 \u79D2\u7684\u6355\u517D\u5939\u3002\n\u5B89\u88C5\u7B2C\u4E8C\u4E2A\u65F6\uFF0C\u7B2C\u4E00\u4E2A\u6355\u517D\u5939\u4F1A\u88AB\u6FC0\u6D3B\u3002"
+    - "\u5B89\u88DD\u6703\u7729\u6688 2 \u79D2\u7684\u6355\u7378\u593E\u3002\n\u7576\u5B89\u88DD\u7B2C\u4E8C\u500B\u6642\uFF0C\u7B2C\u4E00\u500B\u6355\u7378\u593E\u5C31\u6703\u555F\u52D5\u3002"
+  sketh: {fileID: 21300000, guid: e562042c49160194d8a6d092563ca157, type: 3}
+  iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
+  animatorControllers:
+  - {fileID: 9100000, guid: 156742e20ca313448830c36e1b6a91f0, type: 2}
+  - {fileID: 9100000, guid: f2174e31faaee6449a69cd1f20d7416f, type: 2}
+  - {fileID: 9100000, guid: 27042407a32d6ac4488c4744b0b49894, type: 2}
+  - {fileID: 9100000, guid: 2bcd1d128b4820742b628d11cc000ac8, type: 2}
+  - {fileID: 9100000, guid: 6aa571bb2df1ebb45a98ce1b0e682fc4, type: 2}
+  CharVoice:
+  - voiceClip: {fileID: 8300000, guid: 9687555d6f212754f8996f029d354957, type: 3}
+    voiceText:
+    - "\u30BF\u30A4\u30C8\u30EB\u30B3\u30FC\u30EB"
+    - "\u30BF\u30A4\u30C8\u30EB\u30B3\u30FC\u30EB"
+    - "\u5FF5\u6807\u9898"
+    - "\u5FF5\u6A19\u984C"
+    voiceFullText:
+    - "\u7832\u6483\u5C11\u5973"
+    - "\u7832\u6483\u5C11\u5973"
+    - "\u70AE\u51FB\u5C11\u5973"
+    - "\u70AE\u64CA\u5C11\u5973"
+  - voiceClip: {fileID: 8300000, guid: 10f61800cf5b1724db572065ef12a783, type: 3}
+    voiceText:
+    - "\u81EA\u5DF1\u7D39\u4ECB"
+    - "\u81EA\u5DF1\u7D39\u4ECB"
+    - "\u81EA\u6211\u4ECB\u7ECD"
+    - "\u81EA\u6211\u4ECB\u7D39"
+    voiceFullText:
+    - "\u82B1\u97F3\u5973\u5B66\u9662\u3002\u65E9\u4E59\u5973\u304F\u308B\u307F\u3067\u3059\u30021\u5E74\u751F\u3067\u3059\u3002\u5B50\u4F9B\u3058\u3083\u306A\u3044\u3067\u3059\uFF08\u6012\uFF09\uFF01\u5927\u7832\u9053\u3092\u59CB\u3081\u3066\u3061\u3087\u3063\u3068\u5F37\u304F\u306A\u3063\u305F\u3093\u3067\u3059\u3088\uFF1F"
+    - "\u82B1\u97F3\u5973\u5B66\u9662\u3002\u65E9\u4E59\u5973\u304F\u308B\u307F\u3067\u3059\u30021\u5E74\u751F\u3067\u3059\u3002\u5B50\u4F9B\u3058\u3083\u306A\u3044\u3067\u3059\uFF08\u6012\uFF09\uFF01\u5927\u7832\u9053\u3092\u59CB\u3081\u3066\u3061\u3087\u3063\u3068\u5F37\u304F\u306A\u3063\u305F\u3093\u3067\u3059\u3088\uFF1F"
+    - "\u4EBA\u5BB6\u662F\u82B1\u97F3\u5973\u5B66\u9662\u7684\u4E00\u5E74\u7EA7\u751F\uFF0C\u65E9\u4E59\u5973\u304F\u308B\u307F\uFF01\u4EBA\u5BB6\u624D\u4E0D\u662F\u5C0F\u5B69\u5B50\uFF01\uFF08\u751F\u6C14\uFF09\n\u81EA\u4ECE\u5F00\u59CB\u7EC3\u5927\u70AE\u9053\u540E\uFF0C\u4EBA\u5BB6\u53EF\u662F\u53D8\u5F97\u66F4\u5F3A\u4E86\u54E6\uFF01"
+    - "\u4EBA\u5BB6\u662F\u82B1\u97F3\u5973\u5B66\u9662\u7684\u4E00\u5E74\u7EA7\u751F\uFF0C\u65E9\u4E59\u5973\u304F\u308B\u307F\uFF01\u4EBA\u5BB6\u624D\u4E0D\u662F\u5C0F\u5B69\u5B50\uFF01\uFF08\u751F\u6C14\uFF09\r\n\u81EA\u5F9E\u958B\u59CB\u7DF4\u5927\u70AE\u9053\u5F8C\uFF0C\u4EBA\u5BB6\u53EF\u662F\u8B8A\u5F97\u66F4\u5F37\u4E86\u54E6\uFF01\r\n"
+  - voiceClip: {fileID: 8300000, guid: 1d08e59d4e1213a408cae3ae270f5151, type: 3}
+    voiceText:
+    - Ready
+    - Ready
+    - "\u51C6\u5907"
+    - "\u6E96\u5099"
+    voiceFullText:
+    - "\u7528\u610F\u3067\u304D\u307E\u3057\u305F\uFF01"
+    - "\u7528\u610F\u3067\u304D\u307E\u3057\u305F\uFF01"
+    - "\u51C6\u5907\u597D\u5566\uFF01"
+    - "\u6E96\u5099\u597D\u5566\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 167899530bc57a642b1890b22dc9097f, type: 3}
+    voiceText:
+    - "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
+    - "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
+    - "\u6807\u9898\u754C\u9762"
+    - "\u6A19\u984C\u754C\u9762"
+    voiceFullText:
+    - "\u3075\u3048\u3047\u2026\u77E5\u3089\u306A\u3044\u4EBA\u304C\u305F\u304F\u3055\u3093\u2026"
+    - "\u3075\u3048\u3047\u2026\u77E5\u3089\u306A\u3044\u4EBA\u304C\u305F\u304F\u3055\u3093\u2026"
+    - "\u545C\u6B38...\u597D\u591A\u4E0D\u8BA4\u8BC6\u7684\u4EBA..."
+    - "\u55DA\u6B38...\u597D\u591A\u4E0D\u8A8D\u8B58\u7684\u4EBA"
+  - voiceClip: {fileID: 8300000, guid: a92f1d4b6cccd8d4fbdaea0b909027a0, type: 3}
+    voiceText:
+    - "\u8A66\u5408\u52DD\u5229"
+    - "\u8A66\u5408\u52DD\u5229"
+    - "\u6BD4\u8D5B\u80DC\u5229"
+    - "\u6BD4\u8CFD\u52DD\u5229"
+    voiceFullText:
+    - "\u304B\u3001\u52DD\u3061\u307E\u3057\u305F\uFF01\uFF01"
+    - "\u304B\u3001\u52DD\u3061\u307E\u3057\u305F\uFF01\uFF01"
+    - "\u8D62\u3001\u8D62\u5566\uFF01\uFF01"
+    - "\u8D62\u3001\u8D62\u5566\uFF01\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 8339819def0da3043a547319ee7625e0, type: 3}
+    voiceText:
+    - "\u30D5\u30A1\u30A4\u30C8"
+    - "\u30D5\u30A1\u30A4\u30C8"
+    - "\u5F00\u6218"
+    - "\u958B\u6230"
+    voiceFullText:
+    - "\u9811\u5F35\u308A\u307E\u3057\u3087\u3046\uFF08\u5FDC\u63F4\uFF09"
+    - "\u9811\u5F35\u308A\u307E\u3057\u3087\u3046\uFF08\u5FDC\u63F4\uFF09"
+    - "\u52A0\u6CB9\u5440\uFF01"
+    - "\u52A0\u6CB9\u5440\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 0409f66496c7e9146b1a9804a4dcab5c, type: 3}
+    voiceText:
+    - "\u30EA\u30ED\u30FC\u30C91"
+    - "\u30EA\u30ED\u30FC\u30C91"
+    - "\u88C5\u586B1"
+    - "\u88DD\u586B1"
+    voiceFullText:
+    - "\uFF96\uFF72\uFF7C\uFF6E\u3001\uFF96\uFF72\uFF7C\uFF6E"
+    - "\uFF96\uFF72\uFF7C\uFF6E\u3001\uFF96\uFF72\uFF7C\uFF6E"
+    - "\u563F\u54BB\uFF0C\u563F\u54BB"
+    - "\u563F\u54BB\uFF0C\u563F\u54BB"
+  - voiceClip: {fileID: 8300000, guid: fd614ffcdd787de49afd14f98b01f865, type: 3}
+    voiceText:
+    - "\u30EA\u30ED\u30FC\u30C92"
+    - "\u30EA\u30ED\u30FC\u30C92"
+    - "\u88C5\u586B2"
+    - "\u88DD\u586B2"
+    voiceFullText:
+    - "\u30EA\u30ED\u30FC\u30C9\u3001\u3057\u307E\u3059\uFF01\uFF08\u5FC5\u6B7B\uFF09"
+    - "\u30EA\u30ED\u30FC\u30C9\u3001\u3057\u307E\u3059\uFF01\uFF08\u5FC5\u6B7B\uFF09"
+    - "\u88C5\uFF0C\u88C5\u5F39\uFF01\uFF01"
+    - "\u88DD\uFF0C\u88DD\u5F48\uFF01\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 7c25a18fb59b28149932c352ae9ef88e, type: 3}
+    voiceText:
+    - "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
+    - "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
+    - "\u4F7F\u7528\u526F\u6B66\u5668"
+    - "\u4F7F\u7528\u526F\u6B66\u5668"
+    voiceFullText:
+    - "\u3069\u3046\u3067\u3059\u304B\uFF01"
+    - "\u3069\u3046\u3067\u3059\u304B\uFF01"
+    - "\u611F\u89C9\u600E\u4E48\u6837\uFF01"
+    - "\u611F\u89BA\u600E\u9EBD\u6A23\uFF01"
+  - voiceClip: {fileID: 8300000, guid: e5985bdb02fc4f945adfb6c295a8bd8e, type: 3}
+    voiceText:
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56681"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56681"
+    voiceFullText:
+    - "\u30C9\u30FC\u30FC\u30F3"
+    - "\u30C9\u30FC\u30FC\u30F3"
+    - "\u549A\uFF01\uFF01\uFF01\uFF01"
+    - "\u549A\uFF01\uFF01\uFF01\uFF01"
+  - voiceClip: {fileID: 8300000, guid: d7d1942271f2c194b86c5c7b81702f52, type: 3}
+    voiceText:
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56682"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56682"
+    voiceFullText:
+    - "\u3069\u3046\u3060\uFF01"
+    - "\u3069\u3046\u3060\uFF01"
+    - "\u600E\u4E48\u6837\uFF01"
+    - "\u600E\u9EBD\u6A23\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 9805dd2272a9fa34ba4587dcf5b407dc, type: 3}
+    voiceText:
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56683"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56683"
+    voiceFullText:
+    - "\u3053\u3053\u3067\u3059\uFF01"
+    - "\u3053\u3053\u3067\u3059\uFF01"
+    - "\u5728\u8FD9\uFF01\uFF01"
+    - "\u5728\u9019\uFF01\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 5978c0efc5fe4944a987db064fb44692, type: 3}
+    voiceText:
+    - "\u6483\u7834\u3055\u308C\u305F"
+    - "\u6483\u7834\u3055\u308C\u305F"
+    - "\u88AB\u51FB\u8D25"
+    - "\u88AB\u64CA\u6557"
+    voiceFullText:
+    - "\u3048\uFF5E\uFF5E\uFF5E\uFF5E\uFF5E\uFF5E\u3093(\xB4;\u03C9;\uFF40)"
+    - "\u3048\uFF5E\uFF5E\uFF5E\uFF5E\uFF5E\uFF5E\u3093(\xB4;\u03C9;\uFF40)"
+    - "\u8BF6~~~~~~~~~(\xB4;\u03C9;\uFF40)"
+    - "\u8A92~~~~~~~~~(\xB4;\u03C9;\uFF40)"
+  - voiceClip: {fileID: 8300000, guid: 972a7885a129c6b488013d0657675c66, type: 3}
+    voiceText:
+    - "\u6575\u64831"
+    - "\u6575\u64831"
+    - "\u653B\u51FB\u654C\u65B91"
+    - "\u653B\u64CA\u6575\u65B91"
+    voiceFullText:
+    - "\u3084\u3063\u305F\u3041\uFF01"
+    - "\u3084\u3063\u305F\u3041\uFF01"
+    - "\u592A\u597D\u5566\uFF01"
+    - "\u592A\u597D\u5566\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 8bc99310992f7c342bbe93a60b7c311d, type: 3}
+    voiceText:
+    - "\u6575\u64832"
+    - "\u6575\u64832"
+    - "\u653B\u51FB\u654C\u4EBA2"
+    - "\u653B\u64CA\u6575\u4EBA2"
+    voiceFullText:
+    - "\u3084\u308A\u307E\u3057\u305F\uFF01"
+    - "\u3084\u308A\u307E\u3057\u305F\uFF01"
+    - "\u6253\u4E2D\u5566\uFF01"
+    - "\u6253\u4E2D\u5566\uFF01"
+  - voiceClip: {fileID: 8300000, guid: 457b7c51e6e6c2a4aa9f6b7b8e4f6f05, type: 3}
+    voiceText:
+    - "\u6575\u64833"
+    - "\u6575\u64833"
+    - "\u653B\u51FB\u654C\u4EBA3"
+    - "\u653B\u64CA\u6575\u4EBA3"
+    voiceFullText:
+    - "\u5012\u3057\u307E\u3057\u305F\uFF01"
+    - "\u5012\u3057\u307E\u3057\u305F\uFF01"
+    - "\u6253\u5230\u5979\u5566\uFF01"
+    - "\u6253\u5230\u5979\u5566\uFF01"
+  - voiceClip: {fileID: 8300000, guid: b4eac0e6820dd5246971ebc71804c6a9, type: 3}
+    voiceText:
+    - "FF\uFF08\u3055\u308C\u305F\u6642\uFF09"
+    - "FF\uFF08\u3055\u308C\u305F\u6642\uFF09"
+    - "\u88AB\u51FB\u8D25"
+    - "\u88AB\u64CA\u6557"
+    voiceFullText:
+    - "\u3084\u3063\u3066\u3057\u307E\u3044\u307E\u3057\u305F\u2026"
+    - "\u3084\u3063\u3066\u3057\u307E\u3044\u307E\u3057\u305F\u2026"
+    - "\u88AB\u6253\u5230\u4E86..."
+    - "\u88AB\u6253\u5230\u4E86..."
+  - voiceClip: {fileID: 8300000, guid: 0080b78f74d71ab4aac5d8a10fb7bca3, type: 3}
+    voiceText:
+    - "FF\uFF08\u3057\u305F\u6642\uFF09"
+    - "FF\uFF08\u3057\u305F\u6642\uFF09"
+    - "\u547D\u4E2D\u53CB\u65B9"
+    - "\u547D\u4E2D\u53CB\u65B9"
+    voiceFullText:
+    - "\u3054\u3081\u3093\u306A\u3061\u3083\uFF5E\u3044\uFF08\u6D99\u76EE\uFF09"
+    - "\u3054\u3081\u3093\u306A\u3061\u3083\uFF5E\u3044\uFF08\u6D99\u76EE\uFF09"
+    - "\u5BF9\u4E0D\u8D77\u4E86\u5566\uFF5E\uFF08\u6CEA\u773C\u6C6A\u6C6A\uFF09\uFF01"
+    - "\u3054\u3081\u3093\u306A\u3061\u3083\uFF5E\u3044\uFF08\u6D99\u76EE\uFF09"
+  - voiceClip: {fileID: 8300000, guid: bcb80e747f0892647a8346121e9d9ef0, type: 3}
+    voiceText:
+    - "\u7F60\u304B\u304B\u3063\u305F1"
+    - "\u7F60\u304B\u304B\u3063\u305F1"
+    - "\u4E2D\u9677\u9631"
+    - "\u4E2D\u9677\u9631"
+    voiceFullText:
+    - "\uFF80\uFF64\uFF80\uFF7D\uFF79\uFF83"
+    - "\uFF80\uFF64\uFF80\uFF7D\uFF79\uFF83"
+    - "\u6551\uFF0C\u6551\u6551\u6211\uFF01"
+    - "\u6551\uFF0C\u6551\u6551\u6211\uFF01"
+  - voiceClip: {fileID: 8300000, guid: e8633ad78ff164d4cbff4e9dee3999fe, type: 3}
+    voiceText:
+    - "\u7F60\u304B\u304B\u3063\u305F2"
+    - "\u7F60\u304B\u304B\u3063\u305F2"
+    - "\u4E2D\u9677\u96312"
+    - "\u4E2D\u9677\u96312"
+    voiceFullText:
+    - "\u52A9\u3051\u3066\u304F\u3060\u3055\u3044\u6CE3"
+    - "\u52A9\u3051\u3066\u304F\u3060\u3055\u3044\u6CE3"
+    - "\u8BF7\u5E2E\u5E2E\u6211\uFF08\u54ED\uFF09"
+    - "\u8ACB\u5E6B\u5E6B\u6211\uFF08\u54ED\uFF09"
+  - voiceClip: {fileID: 8300000, guid: cfc6f3087806d9741b1cbdcd420b1e02, type: 3}
+    voiceText:
+    - "\u7F60\u304B\u304B\u3063\u305F3"
+    - "\u7F60\u304B\u304B\u3063\u305F3"
+    - "\u4E2D\u9677\u96313"
+    - "\u4E2D\u9677\u96313"
+    voiceFullText:
+    - "\u3046\u308F\u308F\u308F"
+    - "\u3046\u308F\u308F\u308F"
+    - "\u545C\u54C7\u54C7\u54C7"
+    - "\u55DA\u54C7\u54C7\u54C7"
+  - voiceClip: {fileID: 8300000, guid: 4354b80d7029fc64fbc64285b5865173, type: 3}
+    voiceText:
+    - "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
+    - "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
+    - "\u56DE\u5408\u80DC\u5229"
+    - "\u56DE\u5408\u52DD\u5229"
+    voiceFullText:
+    - "\u3064\u304E\u3082\u304C\u3093\u3070\u308A\u307E\u3059\u3063"
+    - "\u3064\u304E\u3082\u304C\u3093\u3070\u308A\u307E\u3059\u3063"
+    - "\u4E0B\u56DE\u5408\u4E5F\u8981\u52A0\u6CB9\uFF01"
+    - "\u4E0B\u56DE\u5408\u4E5F\u8981\u52A0\u6CB9\uFF01"
+  - voiceClip: {fileID: 8300000, guid: c07031a5476c22348a76e4f803bca9e6, type: 3}
+    voiceText:
+    - "\u5473\u65B9\u3078\u611F\u8B1D"
+    - "\u5473\u65B9\u3078\u611F\u8B1D"
+    - "\u611F\u8C22\u53CB\u65B9"
+    - "\u611F\u8B1D\u53CB\u65B9"
+    voiceFullText:
+    - "\u3042\u308A\u304C\u3068\u3046\u3054\u3056\u3044\u307E\u3059\uFF08\u6C57\uFF09"
+    - "\u3042\u308A\u304C\u3068\u3046\u3054\u3056\u3044\u307E\u3059\uFF08\u6C57\uFF09"
+    - "\u611F\uFF0C\u611F\u8C22\u5566\uFF08\u6C57\uFF09"
+    - "\u611F\uFF0C\u611F\u8B1D\u5566\uFF08\u6C57\uFF09"

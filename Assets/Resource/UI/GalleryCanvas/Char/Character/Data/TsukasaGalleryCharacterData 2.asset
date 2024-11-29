@@ -16,7 +16,15 @@ MonoBehaviour:
     characterName: "\u8FD1\u885B \u53F8"
     schoolText: "\u5B66\u6821\u3000\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821"
     schoolYear: "\u5B66\u5E74\u3000\u4E8C\u5E74"
-    charDesign: "\u8A2D\u5B9A\u3000\u98A8\u7D00\u59D4\u54E1\u3092\u62C5\u3046\u30AF\u30FC\u30EB\u30D3\n\u30E5\u30FC\u30C6\u30A3\u30FC\u3002\r\u7537\u5144\u5F1F\u304C\u591A\u304F\u3001\u6027\n\u683C\u3082\u7537\u52DD\u308A\u3002\r\u904B\u52D5\u306F\u3068\u3066\u3064\u3082\u306A\n\u304F\u5F97\u610F\u3060\u304C\u3001\u5B9F\u306F\u72AC\u304C\u82E6\u624B\u3002"
+    charDesign:
+    - "\u98A8\u7D00\u59D4\u54E1\u3092\u62C5\u3046\u30AF\u30FC\u30EB\u30D3\n\u30E5\u30FC\u30C6\u30A3\u30FC\u3002\r\u7537\u5144\u5F1F\u304C\u591A\u304F\u3001\u6027\n\u683C\u3082\u7537\u52DD\u308A\u3002\r\u904B\u52D5\u306F\u3068\u3066\u3064\u3082\u306A\n\u304F\u5F97\u610F\u3060\u304C\u3001\u5B9F\u306F\u72AC\u304C\u82E6\u624B\u3002"
+    - "\u98A8\u7D00\u59D4\u54E1\u3092\u62C5\u3046\u30AF\u30FC\u30EB\u30D3\n\u30E5\u30FC\u30C6\u30A3\u30FC\u3002\r\u7537\u5144\u5F1F\u304C\u591A\u304F\u3001\u6027\n\u683C\u3082\u7537\u52DD\u308A\u3002\r\u904B\u52D5\u306F\u3068\u3066\u3064\u3082\u306A\n\u304F\u5F97\u610F\u3060\u304C\u3001\u5B9F\u306F\u72AC\u304C\u82E6\u624B\u3002"
+    - "\u62C5\u4EFB\u98CE\u7EAA\u59D4\u5458\u7684\u9AD8\u5CAD\u4E4B\u82B1\u3002 
+      \r\n\u5BB6\u4E2D\u6709\u8BB8\u591A\u5144\u5F1F\uFF0C\u6027\u683C\u4E5F\u5F88\u8C6A\u723D\u3002 
+      \r\n\u8FD0\u52A8\u80FD\u529B\u975E\u5E38\u51FA\u8272\uFF0C\u4F46\u5B9E\u9645\u4E0A\u5374\u5BB3\u6015\u72D7\u3002"
+    - "\u64D4\u4EFB\u98A8\u7D00\u59D4\u54E1\u7684\u9AD8\u5DBA\u4E4B\u82B1\u3002 
+      \r\n\u5BB6\u4E2D\u6709\u8A31\u591A\u5144\u5F1F\uFF0C\u6027\u683C\u4E5F\u5F88\u8C6A\u723D\u3002 
+      \r\n\u904B\u52D5\u80FD\u529B\u975E\u5E38\u51FA\u8272\uFF0C\u4F46\u5BE6\u969B\u4E0A\u537B\u5BB3\u6015\u72D7\u3002\r\n"
     characterIcon: {fileID: 21300000, guid: 0e6bef598d6891248b15b1e3f7c56757, type: 3}
     characterIllustration: {fileID: 21300000, guid: 490096b6ce6c3fe40be447576eb057dc,
       type: 3}
@@ -25,11 +33,33 @@ MonoBehaviour:
       type: 3}
   weapon:
   - weaponIcon: {fileID: 21300000, guid: 3169640b0f262164ea8522873714fcd7, type: 3}
-    weaponName: "\u30AC\u30B9\u5F0F\u7206\u71B1\u7832 \u8086\u865F"
-    weaponText: "\u5C04\u7A0B\u304C\u77ED\u304F\u3001\u767A\u5C04\u5F8C\u3059\u3050\u306B\u7206\u767A\u3059\u308B\n\u30EA\u30ED\u30FC\u30C9\u6642\u9593\u304C\u77ED\u304F\u3001\u63A5\u8FD1\u6226\u306B\u5F37\u3044"
+    weaponName:
+    - "\u30AC\u30B9\u5F0F\u7206\u71B1\u7832 \u8086\u865F"
+    - Gas-Powered Cannon No. 4
+    - "\u56DB\u53F7\u71C3\u6C14\u7206\u70B8\u70AE"
+    - "\u8086\u865F\u74E6\u65AF\u7206\u70B8\u7832"
+    weaponText:
+    - "\u5C04\u7A0B\u304C\u77ED\u304F\u3001\u767A\u5C04\u5F8C\u3059\u3050\u306B\u7206\u767A\u3059\u308B\r\n\u30EA\u30ED\u30FC\u30C9\u6642\u9593\u304C\u77ED\u304F\u3001\u63A5\u8FD1\u6226\u306B\u5F37\u3044"
+    - 'Short range, explodes soon after firing.
+
+      Short reload time, strong
+      in close combat.'
+    - "\u5C04\u7A0B\u5F88\u77ED\u4F46\u662F\u53D1\u5C04\u540E\u4F1A\u5728\u524D\u65B9\u77AC\u95F4\u7206\u70B8\n\u88C5\u586B\u65F6\u95F4\u4E5F\u5F88\u77ED\u6240\u4EE5\u8FD1\u8DDD\u79BB\u6218\u5F88\u5F3A"
+    - "\u5C04\u7A0B\u5F88\u77ED\u4F46\u662F\u767C\u5C04\u540E\u6703\u5728\u524D\u65B9\u77AC\u9593\u7206\u70B8\n\u88DD\u586B\u6642\u9593\u4E5F\u5F88\u77ED\u6240\u4EE5\u8FD1\u8DDD\u96E2\u6230\u5F88\u5F3A"
   - weaponIcon: {fileID: 21300000, guid: 6ded63c0ea8802b4d814db432e1e5eff, type: 3}
-    weaponName: "\u77ED\u8DDD\u96E2\u8EE2\u9001\u88C5\u7F6E"
-    weaponText: "\u81EA\u8EAB\u3092\u77AC\u9593\u79FB\u52D5\u3055\u305B\u308B\u88C5\u7F6E\n\u4F7F\u7528\u5F8C\u300115\u79D2\u306E\u5F85\u6A5F\u6642\u9593\u304C\u5FC5\u8981"
+    weaponName:
+    - "\u77ED\u8DDD\u96E2\u8EE2\u9001\u88C5\u7F6E"
+    - Short Warp Device
+    - "\u8FD1\u8DDD\u79BB\u4F20\u9001\u88C5\u7F6E"
+    - "\u8FD1\u8DDD\u96E2\u50B3\u9001\u88DD\u7F6E"
+    weaponText:
+    - "\u81EA\u8EAB\u3092\u77AC\u9593\u79FB\u52D5\u3055\u305B\u308B\u88C5\u7F6E\r\n\u4F7F\u7528\u5F8C\u300115\u79D2\u306E\u5F85\u6A5F\u6642\u9593\u304C\u5FC5\u8981"
+    - 'Device to move itself instantaneously.
+
+      Requires 15 sec waiting period
+      after use.'
+    - "\u5411\u524D\u65B9\u77AC\u79FB\u4E00\u5C0F\u6BB5\u8DDD\u79BB\u7684\u88C5\u7F6E\n\u51B7\u5374\u65F6\u95F415\u79D2"
+    - "\u5411\u524D\u65B9\u77AC\u79FB\u4E00\u5C0F\u6BB5\u8DDD\u96E2\u7684\u88DD\u7F6E\n\u51B7\u537B\u6642\u959315\u79D2"
   sketh: {fileID: 21300000, guid: e562042c49160194d8a6d092563ca157, type: 3}
   iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
   animatorControllers:
@@ -40,74 +70,266 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 1cdaf127179484640a723a1769897e94, type: 2}
   CharVoice:
   - voiceClip: {fileID: 8300000, guid: 7e17bbb3ae5280148a7b93619065322d, type: 3}
-    voiceText: "\u30BF\u30A4\u30C8\u30EB\u30B3\u30FC\u30EB"
-    voiceFullText: "\u7832\u6483\u5C11\u5973"
+    voiceText:
+    - "\u30BF\u30A4\u30C8\u30EB\u30B3\u30FC\u30EB"
+    - "\u30BF\u30A4\u30C8\u30EB\u30B3\u30FC\u30EB"
+    - "\u5FF5\u6807\u9898"
+    - "\u5FF5\u6A19\u984C"
+    voiceFullText:
+    - "\u7832\u6483\u5C11\u5973"
+    - "\u7832\u6483\u5C11\u5973"
+    - "\u70AE\u51FB\u5C11\u5973"
+    - "\u70AE\u64CA\u5C11\u5973"
   - voiceClip: {fileID: 8300000, guid: ed8a098d967e08e428e10053556e8756, type: 3}
-    voiceText: "\u81EA\u5DF1\u7D39\u4ECB"
-    voiceFullText: "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u68212\u5E74\u3002\u8FD1\u885B\u53F8\u3060\u3002\u5927\u7832\u90E8\u3068\u98A8\u7D00\u59D4\u54E1\u306B\u6240\u5C5E\u3057\u3066\u3044\u308B\u3002\u2026\u3053\u3093\u306A\u3082\u306E\u3067\u3044\u3044\u304B\uFF1F"
+    voiceText:
+    - "\u81EA\u5DF1\u7D39\u4ECB"
+    - "\u81EA\u5DF1\u7D39\u4ECB"
+    - "\u81EA\u6211\u4ECB\u7ECD"
+    - "\u81EA\u6211\u4ECB\u7D39"
+    voiceFullText:
+    - "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u68212\u5E74\u3002\u8FD1\u885B\u53F8\u3060\u3002\u5927\u7832\u90E8\u3068\u98A8\u7D00\u59D4\u54E1\u306B\u6240\u5C5E\u3057\u3066\u3044\u308B\u3002\u2026\u3053\u3093\u306A\u3082\u306E\u3067\u3044\u3044\u304B\uFF1F"
+    - "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u68212\u5E74\u3002\u8FD1\u885B\u53F8\u3060\u3002\u5927\u7832\u90E8\u3068\u98A8\u7D00\u59D4\u54E1\u306B\u6240\u5C5E\u3057\u3066\u3044\u308B\u3002\u2026\u3053\u3093\u306A\u3082\u306E\u3067\u3044\u3044\u304B\uFF1F"
+    - "\u6211\u662F\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u6821\u4E8C\u5E74\u7EA7\u7684\u8FD1\u885B\u53F8\u3002\u96B6\u5C5E\u4E8E\u5927\u70AE\u90E8\u548C\u98CE\u7EAA\u59D4\u5458\u4F1A\u3002\n\u2026\u2026\u8FD9\u6837\u53EF\u4EE5\u4E86\u5417\uFF1F"
+    - "\u6211\u662F\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u6821\u4E8C\u5E74\u7D1A\u7684\u8FD1\u885B\u53F8\u3002\u96B8\u5C6C\u4E8E\u5927\u70AE\u90E8\u548C\u98A8\u7D00\u59D4\u54E1\u6703\u3002\r\n\u2026\u2026\u9019\u6A23\u53EF\u4EE5\u4E86\u55CE\uFF1F\r\n"
   - voiceClip: {fileID: 8300000, guid: ff3466e034e43a943b82e03800fbd815, type: 3}
-    voiceText: Ready
-    voiceFullText: "\u79C1\u306B\u4EFB\u305B\u308D\u3002"
+    voiceText:
+    - Ready
+    - Ready
+    - "\u51C6\u5907"
+    - "\u6E96\u5099"
+    voiceFullText:
+    - "\u79C1\u306B\u4EFB\u305B\u308D\u3002"
+    - "\u79C1\u306B\u4EFB\u305B\u308D\u3002"
+    - "\u8FD9\u91CC\u5C31\u4EA4\u7ED9\u6211"
+    - "\u9019\u88CF\u5C31\u4EA4\u7ED9\u6211"
   - voiceClip: {fileID: 8300000, guid: de682df77febd39458e4647d51650b0b, type: 3}
-    voiceText: "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
-    voiceFullText: "\u898B\u77E5\u3063\u305F\u5974\u3089\u3070\u304B\u308A\u3060\u306A"
+    voiceText:
+    - "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
+    - "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
+    - "\u6807\u9898\u754C\u9762"
+    - "\u6A19\u984C\u754C\u9762"
+    voiceFullText:
+    - "\u898B\u77E5\u3063\u305F\u5974\u3089\u3070\u304B\u308A\u3060\u306A"
+    - "\u898B\u77E5\u3063\u305F\u5974\u3089\u3070\u304B\u308A\u3060\u306A"
+    - "\u5168\u662F\u4E9B\u719F\u9762\u5B54\u554A\u3002"
+    - "\u5168\u662F\u4E9B\u719F\u9762\u5B54\u554A\u3002"
   - voiceClip: {fileID: 8300000, guid: effa6d15d1a31bd498db8c76a9735ae9, type: 3}
-    voiceText: "\u8A66\u5408\u52DD\u5229"
-    voiceFullText: "\u6211\u3005\u306E\u52DD\u5229\u3060\u306A"
+    voiceText:
+    - "\u8A66\u5408\u52DD\u5229"
+    - "\u8A66\u5408\u52DD\u5229"
+    - "\u6BD4\u8D5B\u80DC\u5229"
+    - "\u6BD4\u8CFD\u52DD\u5229"
+    voiceFullText:
+    - "\u6211\u3005\u306E\u52DD\u5229\u3060\u306A"
+    - "\u6211\u3005\u306E\u52DD\u5229\u3060\u306A"
+    - "\u8FD9\u5C31\u662F\u6211\u4EEC\u7684\u80DC\u5229\u554A\uFF01"
+    - "\u9019\u5C31\u662F\u6211\u5011\u7684\u52DD\u5229\u554A\uFF01"
   - voiceClip: {fileID: 8300000, guid: 619c2319175df034da9d2391ed7c2136, type: 3}
-    voiceText: "\u30D5\u30A1\u30A4\u30C8"
-    voiceFullText: "\u7740\u3044\u3066\u6765\u3044"
+    voiceText:
+    - "\u30D5\u30A1\u30A4\u30C8"
+    - "\u30D5\u30A1\u30A4\u30C8"
+    - "\u5F00\u6218"
+    - "\u958B\u6230"
+    voiceFullText:
+    - "\u7740\u3044\u3066\u6765\u3044"
+    - "\u7740\u3044\u3066\u6765\u3044"
+    - "\u8DDF\u4E0A\u6211\uFF01"
+    - "\u8DDF\u4E0A\u6211\uFF01"
   - voiceClip: {fileID: 8300000, guid: 2ad91c422405a514baa75b1fd98fc3a9, type: 3}
-    voiceText: "\u30EA\u30ED\u30FC\u30C91"
-    voiceFullText: "\u30EA\u30ED\u30FC\u30C9\u3059\u308B"
+    voiceText:
+    - "\u30EA\u30ED\u30FC\u30C91"
+    - "\u30EA\u30ED\u30FC\u30C91"
+    - "\u88C5\u586B1"
+    - "\u88DD\u586B1"
+    voiceFullText:
+    - "\u30EA\u30ED\u30FC\u30C9\u3059\u308B"
+    - "\u30EA\u30ED\u30FC\u30C9\u3059\u308B"
+    - "\u73B0\u5728\u5F00\u59CB\u6362\u5F39"
+    - "\u73FE\u5728\u958B\u59CB\u63DB\u5F48"
   - voiceClip: {fileID: 8300000, guid: 85a1ddd4e527b9541a079e5d4899c2da, type: 3}
-    voiceText: "\u30EA\u30ED\u30FC\u30C92"
-    voiceFullText: "\u30EA\u30ED\u30FC\u30C9"
+    voiceText:
+    - "\u30EA\u30ED\u30FC\u30C92"
+    - "\u30EA\u30ED\u30FC\u30C92"
+    - "\u88C5\u586B2"
+    - "\u88DD\u586B2"
+    voiceFullText:
+    - "\u30EA\u30ED\u30FC\u30C9"
+    - "\u30EA\u30ED\u30FC\u30C9"
+    - "\u88C5\u5F39"
+    - "\u88DD\u5F48"
   - voiceClip: {fileID: 8300000, guid: 6eff6b3b7d163034ca9d95958528df55, type: 3}
-    voiceText: "\u30EA\u30ED\u30FC\u30C93"
-    voiceFullText: "\u30EA\u30ED\u30FC\u30C9\u3060"
+    voiceText:
+    - "\u30EA\u30ED\u30FC\u30C93"
+    - "\u30EA\u30ED\u30FC\u30C93"
+    - "\u88C5\u586B3"
+    - "\u88DD\u586B3"
+    voiceFullText:
+    - "\u30EA\u30ED\u30FC\u30C9\u3060"
+    - "\u30EA\u30ED\u30FC\u30C9\u3060"
+    - "\u5F00\u59CB\u88C5\u5F39"
+    - "\u958B\u59CB\u88DD\u5F48"
   - voiceClip: {fileID: 8300000, guid: 86670268b11953543bb6ac1000ccfbda, type: 3}
-    voiceText: "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
-    voiceFullText: "\u3075\u3063\uFF01"
+    voiceText:
+    - "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
+    - "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
+    - "\u4F7F\u7528\u526F\u6B66\u5668"
+    - "\u4F7F\u7528\u526F\u6B66\u5668"
+    voiceFullText:
+    - "\u3075\u3063\uFF01"
+    - "\u3075\u3063\uFF01"
+    - "\u5687\uFF01"
+    - "\u5687\uFF01"
   - voiceClip: {fileID: 8300000, guid: d73b1aa0544bb2f44b3161ff2e2f87d4, type: 3}
-    voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
-    voiceFullText: "\u3053\u3053\u304B\u306A"
+    voiceText:
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56681"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56681"
+    voiceFullText:
+    - "\u3053\u3053\u304B\u306A"
+    - "\u3053\u3053\u304B\u306A"
+    - "\u5728\u8FD9\u91CC\u5BF9\u5427"
+    - "\u5728\u9019\u88CF\u5C0D\u5427"
   - voiceClip: {fileID: 8300000, guid: 2c0a5644859812a4bbf83c3fa917aca9, type: 3}
-    voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
-    voiceFullText: "\u3053\u3053"
+    voiceText:
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56682"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56682"
+    voiceFullText:
+    - "\u3053\u3053"
+    - "\u3053\u3053"
+    - "\u8FD9\u91CC\uFF01"
+    - "\u9019\u88CF\uFF01"
   - voiceClip: {fileID: 8300000, guid: ec2ff5336a0d1a942bc89e42ed24f9c8, type: 3}
-    voiceText: "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
-    voiceFullText: "\u305D\u3053\u3060"
+    voiceText:
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
+    - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56683"
+    - "\u4F7F\u7528\u4E3B\u6B66\u56683"
+    voiceFullText:
+    - "\u305D\u3053\u3060"
+    - "\u305D\u3053\u3060"
+    - "\u5728\u90A3\u91CC\uFF01"
+    - "\u5728\u90A3\u88CF!"
   - voiceClip: {fileID: 8300000, guid: 798c39e4ec42f2042a021a3c9e34fcf4, type: 3}
-    voiceText: "\u6483\u7834\u3055\u308C\u305F"
-    voiceFullText: "\u304F\u305D\u3063"
+    voiceText:
+    - "\u6483\u7834\u3055\u308C\u305F"
+    - "\u6483\u7834\u3055\u308C\u305F"
+    - "\u88AB\u51FB\u8D25"
+    - "\u88AB\u64CA\u6557"
+    voiceFullText:
+    - "\u304F\u305D\u3063"
+    - "\u304F\u305D\u3063"
+    - "\u53EF\u6076\uFF01"
+    - "\u53EF\u60E1\uFF01"
   - voiceClip: {fileID: 8300000, guid: ba35a51f286798e46afad2ab55e22287, type: 3}
-    voiceText: "\u6575\u64831"
-    voiceFullText: "\u826F\u3057"
+    voiceText:
+    - "\u6575\u64831"
+    - "\u6575\u64831"
+    - "\u653B\u51FB\u654C\u65B91"
+    - "\u653B\u64CA\u6575\u65B91"
+    voiceFullText:
+    - "\u826F\u3057"
+    - "\u826F\u3057"
+    - "\u597D\uFF01"
+    - "\u597D\uFF01"
   - voiceClip: {fileID: 8300000, guid: 0a203133945965943acf3d9a4c657d5b, type: 3}
-    voiceText: "\u6575\u64832"
-    voiceFullText: "\u30AF\u30EA\u30A2"
+    voiceText:
+    - "\u6575\u64832"
+    - "\u6575\u64832"
+    - "\u653B\u51FB\u654C\u4EBA2"
+    - "\u653B\u64CA\u6575\u4EBA2"
+    voiceFullText:
+    - "\u30AF\u30EA\u30A2"
+    - "\u30AF\u30EA\u30A2"
+    - "\u6E05\u9664\u5B8C\u6210"
+    - "\u6E05\u9664\u5B8C\u6210"
   - voiceClip: {fileID: 8300000, guid: fa5769c320e72dc44be1708f5c0741e8, type: 3}
-    voiceText: "\u6575\u64833"
-    voiceFullText: "\u6575\u3092\u7121\u529B\u5316"
+    voiceText:
+    - "\u6575\u64833"
+    - "\u6575\u64833"
+    - "\u653B\u51FB\u654C\u4EBA3"
+    - "\u653B\u64CA\u6575\u4EBA3"
+    voiceFullText:
+    - "\u6575\u3092\u7121\u529B\u5316"
+    - "\u6575\u3092\u7121\u529B\u5316"
+    - "\u5DF2\u5C06\u654C\u65B9\u65E0\u529B\u5316"
+    - "\u5DF2\u5C07\u6575\u65B9\u7121\u529B\u5316"
   - voiceClip: {fileID: 8300000, guid: 034fe1a955321a64d8372e4e22ed5648, type: 3}
-    voiceText: "FF\uFF08\u3055\u308C\u305F\u6642\uFF09"
-    voiceFullText: "\u4F55\u3092\u3057\u3066\u3044\u308B"
+    voiceText:
+    - "FF\uFF08\u3055\u308C\u305F\u6642\uFF09"
+    - "FF\uFF08\u3055\u308C\u305F\u6642\uFF09"
+    - "\u88AB\u53CB\u65B9\u547D\u4E2D"
+    - "\u88AB\u53CB\u65B9\u547D\u4E2D"
+    voiceFullText:
+    - "\u4F55\u3092\u3057\u3066\u3044\u308B"
+    - "\u4F55\u3092\u3057\u3066\u3044\u308B"
+    - "\u4F60\u5728\u5E72\u4EC0\u4E48"
+    - "\u4F60\u5728\u5E79\u4EC0\u9EBD"
   - voiceClip: {fileID: 8300000, guid: c1d6c3ce07a865940b75933b466d2311, type: 3}
-    voiceText: "FF\uFF08\u3057\u305F\u6642\uFF09"
-    voiceFullText: "\u524D\u306B\u7ACB\u3064\u306A\uFF01"
+    voiceText:
+    - "FF\uFF08\u3057\u305F\u6642\uFF09"
+    - "FF\uFF08\u3057\u305F\u6642\uFF09"
+    - "\u547D\u4E2D\u53CB\u65B9"
+    - "\u547D\u4E2D\u53CB\u65B9"
+    voiceFullText:
+    - "\u524D\u306B\u7ACB\u3064\u306A\uFF01"
+    - "\u524D\u306B\u7ACB\u3064\u306A\uFF01"
+    - "\u522B\u6321\u5728\u524D\u9762\u554A"
+    - "\u5225\u64CB\u5728\u524D\u9762\u554A"
   - voiceClip: {fileID: 8300000, guid: 3345a178054fe1449a705a2f8d345309, type: 3}
-    voiceText: "\u7F60\u304B\u304B\u3063\u305F1"
-    voiceFullText: "\u307E\u305A\u3044\u306A"
+    voiceText:
+    - "\u7F60\u304B\u304B\u3063\u305F1"
+    - "\u7F60\u304B\u304B\u3063\u305F1"
+    - "\u4E2D\u9677\u96311"
+    - "\u4E2D\u9677\u96311"
+    voiceFullText:
+    - "\u307E\u305A\u3044\u306A"
+    - "\u307E\u305A\u3044\u306A"
+    - "\u8FD9\u4E0B\u7CDF\u7CD5\u4E86"
+    - "\u9019\u4E0B\u7CDF\u7CD5\u4E86"
   - voiceClip: {fileID: 8300000, guid: 029b16604cc9c284e9d93c85cbd60265, type: 3}
-    voiceText: "\u7F60\u304B\u304B\u3063\u305F2"
-    voiceFullText: "\u304F\u3045"
+    voiceText:
+    - "\u7F60\u304B\u304B\u3063\u305F2"
+    - "\u7F60\u304B\u304B\u3063\u305F2"
+    - "\u4E2D\u9677\u96312"
+    - "\u4E2D\u9677\u96312"
+    voiceFullText:
+    - "\u304F\u3045"
+    - "\u5495.."
+    - "\u304F\u3045"
+    - "\u5495.."
   - voiceClip: {fileID: 8300000, guid: a5e275a311b885145ad12c94cdbf79f6, type: 3}
-    voiceText: "\u7F60\u304B\u304B\u3063\u305F3"
-    voiceFullText: "\u3057\u307E\u3063\u305F"
+    voiceText:
+    - "\u7F60\u304B\u304B\u3063\u305F3"
+    - "\u7F60\u304B\u304B\u3063\u305F3"
+    - "\u4E2D\u9677\u96313"
+    - "\u4E2D\u9677\u96313"
+    voiceFullText:
+    - "\u3057\u307E\u3063\u305F"
+    - "\u3057\u307E\u3063\u305F"
+    - "\u7CDF\u7CD5\uFF01"
+    - "\u7CDF\u7CD5\uFF01"
   - voiceClip: {fileID: 8300000, guid: 1ab602dbf82938542847022394de261e, type: 3}
-    voiceText: "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
-    voiceFullText: "\u3088\u304F\u3084\u3063\u305F"
+    voiceText:
+    - "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
+    - "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
+    - "\u56DE\u5408\u80DC\u5229"
+    - "\u56DE\u5408\u52DD\u5229"
+    voiceFullText:
+    - "\u3088\u304F\u3084\u3063\u305F"
+    - "\u3088\u304F\u3084\u3063\u305F"
+    - "\u5E72\u5F97\u5F88\u597D\uFF01"
+    - "\u4E7E\u5F97\u5F88\u597D"
   - voiceClip: {fileID: 8300000, guid: d013e2e18c839ab4a8310a2e25f73ae3, type: 3}
-    voiceText: "\u5473\u65B9\u3078\u611F\u8B1D"
-    voiceFullText: "\u3042\u308A\u304C\u3068\u306A"
+    voiceText:
+    - "\u5473\u65B9\u3078\u611F\u8B1D"
+    - "\u5473\u65B9\u3078\u611F\u8B1D"
+    - "\u611F\u8C22\u53CB\u65B9"
+    - "\u611F\u8B1D\u53CB\u65B9"
+    voiceFullText:
+    - "\u3042\u308A\u304C\u3068\u306A"
+    - "\u3042\u308A\u304C\u3068\u306A"
+    - "\u8C22\u4E86"
+    - "\u8B1D\u4E86"
