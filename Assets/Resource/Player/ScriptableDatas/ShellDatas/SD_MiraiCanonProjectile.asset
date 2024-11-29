@@ -33,7 +33,7 @@ MonoBehaviour:
   - "\u901F\u5EA6\u6162\u3001\u901F\u5EA6\u4F4E\u7684\u5DE8\u5927\u7832\u5F48\u3002\r\n\u300C\u8D8A\u63A5\u8FD1\u52DD\u5229\u8D8A\u5BB9\u6613\u6389\u4EE5\u8F15\u5FC3\u5462\u300D"
   reloadTime: 3
   recoilTime: 2.5
-  projectileSpeed: 7.5
+  projectileSpeed: 10
   aimRange: 0
   aimDegree: 360
-  lifeTime: 2
+  lifeTime: 1.5
