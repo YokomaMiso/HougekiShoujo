@@ -287,7 +287,7 @@ public class GameManager : MonoBehaviour
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
-       //  return _data;
+        //return _data;
 
         if (!_data.play) { return _data; }
         if (_data.winner != -1) { return _data; }
@@ -360,8 +360,6 @@ public class GameManager : MonoBehaviour
         {
             _data.winner = (int)TEAM_NUM.B;
             _data.winCountTeamB++;
-            Debug.Log("Aチームの死亡数でチェック通ったよ");
-            Debug.Log("Bチームの勝利数 " + _data.winCountTeamB);
 
             for (int i = 0; i < playerInstance.Length; i++)
             {
@@ -383,8 +381,6 @@ public class GameManager : MonoBehaviour
         {
             _data.winner = (int)TEAM_NUM.A;
             _data.winCountTeamA++;
-            Debug.Log("Bチームの死亡数でチェック通ったよ");
-            Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
 
             for (int i = 0; i < playerInstance.Length; i++)
             {

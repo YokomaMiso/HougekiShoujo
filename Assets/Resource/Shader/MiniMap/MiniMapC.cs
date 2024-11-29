@@ -89,7 +89,7 @@ public class MiniMapC : MonoBehaviour
 
             arrayIndex++;
 
-            Debug.Log("MaxPlayer" + playerCount);
+            //Debug.Log("MaxPlayer" + playerCount);
             for (int i = 0; i < playerCount; i++)
             {
                 if (i >= playerTeams.Length)
@@ -104,8 +104,8 @@ public class MiniMapC : MonoBehaviour
                     continue;
                 }
 
-                Debug.Log("PlayerTeams" + playerTeams[i]);
-                Debug.Log("PlayerPosition" + playerPositions[i]);
+                //Debug.Log("PlayerTeams" + playerTeams[i]);
+                //Debug.Log("PlayerPosition" + playerPositions[i]);
             }
 
         }

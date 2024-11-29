@@ -110,7 +110,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             cutSend = true;
-            Debug.Log("送信処理カット中");
+            //Debug.Log("送信処理カット中");
         }
         else
         {
@@ -118,11 +118,11 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
         }
 
 
-        Debug.Log("PlayerID is " + Managers.instance.playerID);
-        Debug.Log("IPAddress is " + GetLocalIPAddress());
-        Debug.Log(testS);
-
-        Debug.Log(testNum);
+        //Debug.Log("PlayerID is " + Managers.instance.playerID);
+        //Debug.Log("IPAddress is " + GetLocalIPAddress());
+        //Debug.Log(testS);
+        
+        //Debug.Log(testNum);
 
         if (isFinishHandshake)
         {
@@ -144,7 +144,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
 
         if (playerDataList.Count == 0)
         {
-            Debug.Log("nullです");
+            //Debug.Log("nullです");
             return;
         }
 
@@ -182,7 +182,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
 
                         if (_data.rData.myID != -1)
                         {
-                            Debug.Log("ID " + i + " へデータ送信");
+                            //Debug.Log("ID " + i + " へデータ送信");
                             SendValue(_data);
                         }
                     }
@@ -200,7 +200,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
 
                     if (_data.rData.myID != -1)
                     {
-                        Debug.Log("インゲームデータ送信(クライアント)");
+                        //Debug.Log("インゲームデータ送信(クライアント)");
                         SendValue(_data);
                     }
                 }
@@ -367,7 +367,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
 
         if (roomData.isHandshaking == true)
         {
-            Debug.Log("ハンドシェイクの送信");
+            //Debug.Log("ハンドシェイクの送信");
             SendValue(_data);
         }
 
@@ -378,13 +378,13 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
     {
         yield return new WaitForSeconds(waitHandshakeResponseTime);
 
-        Debug.Log("コルーチン作動");
+        //Debug.Log("コルーチン作動");
 
         if (roomData.isHandshaking)
         {
             //ハンドシェイク確認用パケット破棄前にサーバがなくなるとバグるためここに記述
             CancelInvoke("SendFirstHandshake");
-            Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
+            //Debug.Log("サーバからの返答がありません、サーバ処理へ移行");
 
             Managers.instance.playerID = 0;
             myNetIngameData.PlayerID = Managers.instance.playerID;
@@ -411,7 +411,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
         else
         {
             CancelInvoke("SendFirstHandshake");
-            Debug.Log("サーバが存在しました、クライアント処理へ移行");
+            //Debug.Log("サーバが存在しました、クライアント処理へ移行");
 
             tempServer.Dispose();
 
@@ -454,7 +454,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
         {
             if (_clientData.IsUsing())
             {
-                Debug.Log(i + " へデータ送信");
+                //Debug.Log(i + " へデータ送信");
 
                 //データの送信
                 _clientData.client.Send(address, _sendBytes, _sendBytes.Length);
@@ -694,7 +694,7 @@ public class OSCManagerLocalOnlyRoom : MonoBehaviour
                 {
                     InitNetworkData();
 
-                    Debug.Log("接続がタイムアウトしました");
+                    //Debug.Log("接続がタイムアウトしました");
 
                     DisPacket();
 
