@@ -131,9 +131,6 @@ public class InputManager : MonoBehaviour
 
         UpdateCurrentController();
         if (isChangedController) { nowButtonSpriteData = allButtonSpriteData.GetButtonSprite((int)currentController); }
-
-        Debug.Log(currentController);
-        Debug.Log(isChangedController);
     }
 
     /// <summary>

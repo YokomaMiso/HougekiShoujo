@@ -26,7 +26,7 @@ public class Blink : MonoBehaviour
         sphereHits = Physics.SphereCastAll(warpPos, 0.5f, targetVec, 0.1f);
         for (int i = 0; i < sphereHits.Length; i++)
         {
-            if (sphereHits[i].collider.tag == "Ground") { Debug.Log("なんかあるよ"); isHit = true; break; }
+            if (sphereHits[i].collider.tag == "Ground") { isHit = true; break; }
         }
 
         if (isHit)
@@ -42,7 +42,6 @@ public class Blink : MonoBehaviour
                 {
                     //ワープ座標を変更
                     warpPos = hits[i].point - targetVec;
-                    Debug.Log("当たってるよ");
                     break;
                 }
             }

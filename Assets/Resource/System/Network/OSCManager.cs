@@ -436,7 +436,7 @@ public class OSCManager : MonoBehaviour
 
         tempServer.TryAddMethod(address, ReadMainValue);
 
-        Debug.Log("一時ネットワーク作成完了");
+        //Debug.Log("一時ネットワーク作成完了");
 
         /************** 初期化終了 *************/
 
