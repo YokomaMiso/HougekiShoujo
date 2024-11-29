@@ -24,7 +24,7 @@ MonoBehaviour:
   - "\u672C\u6821\u76842\u5E74\u751F\u3001\u6AFB\u65E5\u7434\u7372\u5F97\u4E86\u4ECA\u5E74\u7684MVP\uFF01\uFF01\u4ED6\uFF01\u554A\uFF0C\u62B1\u6B49\uFF0C\u5979\u671D\u8457\u5922\u60F3\u7684\u8FC5\u731B\u9032\u64CA\u4F9D\u7136\u6C92\u6709\u505C\u6B62\u7684\u8DE1\u8C61\u3002"
   characterAnimData: {fileID: 11400000, guid: 04ebc765b4d510240880bb9fcc5ab3a9, type: 2}
   moveSpeed: 5
-  difficulity: 3
+  difficulity: 2
   shell: {fileID: 11400000, guid: 85c7c7447fdc6874e8c970153900e2ab, type: 2}
   subWeapon: {fileID: 11400000, guid: 8f356ed14768bb54ea142a45182e3b8a, type: 2}
   playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}
