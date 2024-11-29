@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum SUB_TYPE { BUFF = 0, INSTALLATION, BLINK, BOMB };
-public enum BUFF_TYPE { NONE = 0, SPEED, RELOAD };
+public enum BUFF_TYPE { NONE = 0, SPEED, DASH };
 
 [CreateAssetMenu(fileName = "SubWeaponData", menuName = "Create/PlayerData/SubWeaponData", order = 1)]
 public class SubWeapon : ScriptableObject
