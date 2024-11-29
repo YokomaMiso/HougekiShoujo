@@ -287,7 +287,7 @@ public class GameManager : MonoBehaviour
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
-        // return _data;
+       //  return _data;
 
         if (!_data.play) { return _data; }
         if (_data.winner != -1) { return _data; }
