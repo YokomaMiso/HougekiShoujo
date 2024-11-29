@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2569756816433642799}
-  - component: {fileID: 8945264094767309695}
   - component: {fileID: 1166596283970069200}
   - component: {fileID: 4280665764232894923}
+  - component: {fileID: 1539389194804392456}
   m_Layer: 0
   m_Name: BambooBombPrefab
   m_TagString: Untagged
@@ -35,19 +35,6 @@ Transform:
   - {fileID: 3775975727048791887}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8945264094767309695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3179393461812120061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bf58fa922d71b24b91030c9a7c2f83e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 11400000, guid: 5a8f3aa7f7213014a87e533b6dd9a2a0, type: 2}
 --- !u!135 &1166596283970069200
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -96,6 +83,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1539389194804392456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179393461812120061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17cef0b0dda7d0f49bcc42593975e8a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 0}
+  bambooWall: {fileID: 7245978872269269884, guid: bd2c9dee48c10cc4bb3745ac5cf71a45,
+    type: 3}
 --- !u!1 &7495808424539395539
 GameObject:
   m_ObjectHideFlags: 0
