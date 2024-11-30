@@ -15,11 +15,16 @@ public class BombBehavior : MonoBehaviour
 
     protected Vector3 addVector;
 
+    [SerializeField] AudioClip launchSFX;
+    [SerializeField] AudioClip hitSFX;
+
     public virtual void LaunchBomb(Vector3 _vector)
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         addVector = _vector + Vector3.up * 0.5f;
         rb.AddForce(addVector, ForceMode.Impulse);
+
+        SoundManager.PlaySFX(launchSFX, ownerPlayer.transform);
     }
     protected virtual void Update()
     {
@@ -36,6 +41,8 @@ public class BombBehavior : MonoBehaviour
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
         obj.AddComponent<RoundCheckerSubWeapon>();
+
+        SoundManager.PlaySFX(hitSFX, obj.transform);
     }
 
     protected virtual void OnTriggerEnter(Collider other)

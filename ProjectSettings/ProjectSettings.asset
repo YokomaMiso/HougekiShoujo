@@ -540,12 +540,12 @@ PlayerSettings:
     tvOS: 1
   m_BuildTargetGroupLightmapEncodingQuality:
   - m_BuildTarget: Android
-    m_EncodingQuality: 1
+    m_EncodingQuality: 0
   - m_BuildTarget: Standalone
     m_EncodingQuality: 0
   m_BuildTargetGroupHDRCubemapEncodingQuality:
   - m_BuildTarget: Android
-    m_EncodingQuality: 1
+    m_EncodingQuality: 0
   - m_BuildTarget: Standalone
     m_EncodingQuality: 0
   m_BuildTargetGroupLightmapSettings: []
@@ -820,6 +820,7 @@ PlayerSettings:
     Android: 1
     Standalone: 1
   il2cppCompilerConfiguration:
+    Android: 2
     Standalone: 2
   il2cppCodeGeneration: {}
   managedStrippingLevel:

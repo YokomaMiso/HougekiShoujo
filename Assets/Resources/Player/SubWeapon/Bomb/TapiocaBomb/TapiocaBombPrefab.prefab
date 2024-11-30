@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 11400000, guid: 9d4fdc695ac81e942abe7b9285b1ccbd, type: 2}
+  launchSFX: {fileID: 8300000, guid: 63c7840b417dcab4e91df6480ae881c1, type: 3}
+  hitSFX: {fileID: 8300000, guid: b5a1abfdedd44694896337077240414d, type: 3}
 --- !u!135 &1166596283970069200
 SphereCollider:
   m_ObjectHideFlags: 0
