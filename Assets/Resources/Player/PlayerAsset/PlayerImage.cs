@@ -11,6 +11,7 @@ public class PlayerImage : MonoBehaviour
     SpriteRenderer charaSprite;
     CharacterAnimData animData;
 
+    public GameObject GetCharaImageObject() { return charaSprite.gameObject; }
 
     void Start()
     {

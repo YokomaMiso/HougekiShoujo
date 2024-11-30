@@ -64,6 +64,8 @@ public class Player : MonoBehaviour
     }
     public float GetDeadTimer() { return playerDead.deadTimer; }
 
+    public GameObject GetPlayerImageObject() { return playerImage.GetCharaImageObject(); }
+
     public int GetKiller() { return playerDead.GetKillPlayerID(); }
     public void SetAlive() { alive = true; playerState = PLAYER_STATE.IDLE; }
     public bool GetAlive() { return alive; }

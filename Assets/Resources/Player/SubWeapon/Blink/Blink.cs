@@ -1,12 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 public class Blink : MonoBehaviour
 {
+    const int shadowNum = 8;
+
     void Start()
     {
+        BlinkShadowBehavior.timeSub = 1.0f / shadowNum;
+
         Player player = GetComponent<Player>();
         if (!player) { Destroy(this); return; }
 
@@ -45,6 +47,21 @@ public class Blink : MonoBehaviour
                     break;
                 }
             }
+        }
+
+        //écëúÇê∂ê¨
+        float posRate = 1.0f / shadowNum;
+        float posRateSub = posRate;
+        GameObject imageRef = player.GetPlayerImageObject();
+        for (int i = 0; i < shadowNum; i++)
+        {
+            Vector3 pos = Vector3.Lerp(warpPos, transform.position + Vector3.up * 0.5f, posRate + posRateSub * i);
+            GameObject obj = Instantiate(imageRef, pos, Quaternion.identity);
+            Destroy(obj.GetComponent<Animator>());
+            BlinkShadowBehavior bsb = obj.AddComponent<BlinkShadowBehavior>();
+            bsb.SetTime(i);
+
+            obj.transform.localScale = new Vector3(player.NowDirection() * 2, 2, 2);
         }
 
         transform.position = warpPos - Vector3.up * 0.5f;
