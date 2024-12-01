@@ -63,6 +63,16 @@ public class Blink : MonoBehaviour
 
             obj.transform.localScale = new Vector3(player.NowDirection() * 2, 2, 2);
         }
+        /*
+        {
+            Vector3 pos = transform.position + Vector3.up * 0.5f;
+            GameObject obj = Instantiate(imageRef, pos, Quaternion.identity);
+            Destroy(obj.GetComponent<Animator>());
+            obj.AddComponent<BlinkShadowBehavior>();
+
+            obj.transform.localScale = new Vector3(player.NowDirection() * 2, 2, 2);
+        }
+        */
 
         transform.position = warpPos - Vector3.up * 0.5f;
         Destroy(this);
