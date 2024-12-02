@@ -23,6 +23,7 @@ public class StageSelectBehavior : MonoBehaviour
     Image stump;
 
     [SerializeField] SelecterArrow[] selectArrows;
+    [SerializeField] TextChangerAtLanguage stageAnnounce;
 
     void OnEnable()
     {
@@ -34,6 +35,7 @@ public class StageSelectBehavior : MonoBehaviour
         stump.color = Color.clear;
 
         DisplayStageUpdate(OSCManager.OSCinstance.roomData.stageNum);
+        stageAnnounce.ChangeText();
     }
 
     void Update()

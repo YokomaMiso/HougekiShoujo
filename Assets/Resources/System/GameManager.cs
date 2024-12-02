@@ -29,12 +29,16 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject bgmAnnounceCanvas;
 
+    [SerializeField] Material defaultMat;
+    public Material spriteDefaultMat;
 
     const float startDelay = 4;
     const float endDelay = 3;
 
     //For Client
     int nowRound = 1;
+
+    void Awake() { spriteDefaultMat = defaultMat; }
 
     public void CreatePlayer()
     {
