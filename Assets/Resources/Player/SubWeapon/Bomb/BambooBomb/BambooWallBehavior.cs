@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BambooWallBehavior : MonoBehaviour
 {
+    int bambooCount;
     const float posXSub = 0.16f;
-    const float defaultPosX = posXSub * 2;
+    float defaultPosX;
     const float defaultLocalHeight = -0.5f;
     const float endLocalHeight = 0.5f;
 
@@ -21,7 +22,9 @@ public class BambooWallBehavior : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < transform.childCount; i++) { transform.GetChild(i).rotation = Quaternion.identity; }
+        bambooCount = transform.childCount;
+        defaultPosX = posXSub * bambooCount / 2;
+        for (int i = 0; i < bambooCount; i++) { transform.GetChild(i).rotation = Quaternion.identity; }
     }
 
     void Update()
