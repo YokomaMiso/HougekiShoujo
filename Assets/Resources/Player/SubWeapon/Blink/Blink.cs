@@ -60,6 +60,7 @@ public class Blink : MonoBehaviour
             Destroy(obj.GetComponent<Animator>());
             BlinkShadowBehavior bsb = obj.AddComponent<BlinkShadowBehavior>();
             bsb.SetTime(i);
+            bsb.SetTeamNum(OSCManager.OSCinstance.GetRoomData(player.GetPlayerID()).myTeamNum);
 
             obj.transform.localScale = new Vector3(player.NowDirection() * 2, 2, 2);
         }
