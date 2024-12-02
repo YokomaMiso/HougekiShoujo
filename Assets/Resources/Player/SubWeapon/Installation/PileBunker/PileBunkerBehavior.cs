@@ -10,6 +10,8 @@ public class PileBunkerBehavior : InstallationBehavior
     float buffLifeTime;
     SpriteRenderer vfxSpriteRenderer;
 
+    const float applyDebuffTime = 0.5f;
+
     protected override void Start()
     {
         lifeTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetLifeTime();
@@ -21,7 +23,7 @@ public class PileBunkerBehavior : InstallationBehavior
         vfxSpriteRenderer = imageAnimator.GetComponent<SpriteRenderer>();
 
         speedRate = ownerPlayer.GetPlayerData().GetSubWeapon().GetSpeedRate();
-        buffLifeTime = 1.0f;
+        buffLifeTime = 3.0f;
 
         hitedPlayer[ownerPlayer.GetPlayerID()] = true;
 
@@ -59,6 +61,8 @@ public class PileBunkerBehavior : InstallationBehavior
 
     void OnTriggerStay(Collider other)
     {
+        if (lifeTime / 2 < timer) { return; }
+
         Player player = other.GetComponent<Player>();
         if (!player) { return; }
 

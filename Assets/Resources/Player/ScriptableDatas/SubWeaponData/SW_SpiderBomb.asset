@@ -34,6 +34,6 @@ MonoBehaviour:
     5 \u79D2\u3002"
   installationStartAnim: {fileID: 0}
   installationLoopAnim: {fileID: 0}
-  reloadTime: 20
+  reloadTime: 15
   speedRate: 0.7
   lifeTime: 10
