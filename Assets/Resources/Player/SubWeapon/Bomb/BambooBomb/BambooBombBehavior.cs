@@ -11,6 +11,8 @@ public class BambooBombBehavior : BombBehavior
         Rigidbody rb = GetComponent<Rigidbody>();
         addVector = _vector * 1.5f + Vector3.up;
         rb.AddForce(addVector, ForceMode.Impulse);
+
+        SoundManager.PlaySFX(launchSFX, ownerPlayer.transform);
     }
 
     protected override void SpawnExplosion()

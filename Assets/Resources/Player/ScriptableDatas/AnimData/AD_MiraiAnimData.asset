@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: f2174e31faaee6449a69cd1f20d7416f, type: 2}
   - {fileID: 9100000, guid: f2174e31faaee6449a69cd1f20d7416f, type: 2}
   - {fileID: 9100000, guid: f2174e31faaee6449a69cd1f20d7416f, type: 2}
-  reloadAnimationData: {fileID: 9100000, guid: 53f59b051e6128e478e19ac72946294b, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: 969bc8063a229904a8e5b0217e6ce2e8, type: 2}
   aimAnimationData:
   - {fileID: 9100000, guid: 7addb9d2e22a3e94f96d5d634e4d3eca, type: 2}
   - {fileID: 9100000, guid: 3946d3d54f7c40b44a464492e53ee77a, type: 2}
@@ -47,7 +47,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 07617456fa67bbd4f8078b4ee2c111b9, type: 2}
   - {fileID: 9100000, guid: 07617456fa67bbd4f8078b4ee2c111b9, type: 2}
   - {fileID: 9100000, guid: 07617456fa67bbd4f8078b4ee2c111b9, type: 2}
-  reloadAnimationData2: {fileID: 9100000, guid: 9538bff5a3ed6ec46b617f52aba0eb17,
+  reloadAnimationData2: {fileID: 9100000, guid: 22578cfaec869994ea9af61809c8701e,
     type: 2}
   aimAnimationData2:
   - {fileID: 9100000, guid: f3084adb04ca30c43a23581c1138b431, type: 2}
