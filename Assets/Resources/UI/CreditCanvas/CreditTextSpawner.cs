@@ -17,7 +17,7 @@ public class CreditTextSpawner : MonoBehaviour
 
     void Start() 
     {
-        lifeTime = spawnStartTime + 6.7f * credits.Length;
+        lifeTime = spawnStartTime + 6.1f * credits.Length;
         spawnSpan = (lifeTime - spawnStartTime) / credits.Length; 
     }
 
