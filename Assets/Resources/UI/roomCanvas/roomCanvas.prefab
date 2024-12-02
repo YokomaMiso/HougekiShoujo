@@ -1662,6 +1662,7 @@ MonoBehaviour:
   selectArrows:
   - {fileID: 8933073467203853271}
   - {fileID: 9188444697818549024}
+  stageAnnounce: {fileID: 4291418217610847640}
 --- !u!1 &3648120999037756819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2846,6 +2847,7 @@ GameObject:
   - component: {fileID: 1688745005188087835}
   - component: {fileID: 144285866353945211}
   - component: {fileID: 5233803088372631162}
+  - component: {fileID: 4291418217610847640}
   m_Layer: 5
   m_Name: StageAnnouce
   m_TagString: Untagged
@@ -2869,7 +2871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 112, y: -136}
+  m_AnchoredPosition: {x: 112, y: -112}
   m_SizeDelta: {x: 240, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &144285866353945211
@@ -2914,6 +2916,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u30B9\u30C6\u30FC\u30B8"
+--- !u!114 &4291418217610847640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4582249974453627763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a98bc9ee6b5b44db6d870e6d2a00e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  japanese: "\u30B9\u30C6\u30FC\u30B8"
+  english: Stage
+  simpleChinese: "\u5730\u56FE"
+  traditionalChinese: "\u5730\u5716"
 --- !u!1 &4674194438214227359
 GameObject:
   m_ObjectHideFlags: 0

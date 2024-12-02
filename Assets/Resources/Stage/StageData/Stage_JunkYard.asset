@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a08d4c96db6ce74f986a905ad61582d, type: 3}
   m_Name: Stage_JunkYard
   m_EditorClassIdentifier: 
-  stageName: "(\u682A)\u5B89\u4EC1\u89E3\u4F53 \u30B9\u30AF\u30E9\u30C3\u30D7\u7F6E\u304D\u5834"
+  stageName:
+  - "(\u682A)\u5B89\u4EC1\u89E3\u4F53 \u30B9\u30AF\u30E9\u30C3\u30D7\u7F6E\u304D\u5834"
+  - "Anjin \nDisassembly Co.\nScrap-Yard"
+  - "(\u682A)\u5B89\u4EC1\u89E3\u4F53 \u5E9F\u6599\u573A"
+  - "(\u682A)\u5B89\u4EC1\u89E3\u4F53 \u5EE2\u6599\u5834"
   stagePrefab: {fileID: 5198325544041908592, guid: c340fd0687a1ee74babec8bf3f4d7644,
     type: 3}
   stageSize: {x: 20, y: 0, z: 20}

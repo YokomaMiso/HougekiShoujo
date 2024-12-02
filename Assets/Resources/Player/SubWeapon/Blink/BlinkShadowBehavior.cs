@@ -16,13 +16,8 @@ public class BlinkShadowBehavior : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        Material defaultMat;
-#if UNITY_EDITOR
-        defaultMat = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Material>("Sprites-Default.mat");
-#else
-        defaultMat = Resources.GetBuiltinResource<Material>("Sprites-Default.mat");
-#endif
-        sr.material = defaultMat;
+        sr.material = Managers.instance.gameManager.spriteDefaultMat;
+
         float nowRate = timer / lifeTime;
         float alpha = (1.0f - nowRate) * 0.8f;
         sr.color = new Color(0.4f, 0.4f, 1.0f, alpha);
