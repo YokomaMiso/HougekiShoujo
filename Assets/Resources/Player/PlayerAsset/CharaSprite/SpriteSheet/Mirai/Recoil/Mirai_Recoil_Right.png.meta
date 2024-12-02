@@ -437,27 +437,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Mirai_Recoil_Right_15
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4382e61af0d63ae44add3dd15a027d1f
-      internalID: 71774762
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -476,7 +455,6 @@ TextureImporter:
       Mirai_Recoil_Right_12: -1947587732
       Mirai_Recoil_Right_13: 2087958685
       Mirai_Recoil_Right_14: -860955659
-      Mirai_Recoil_Right_15: 71774762
       Mirai_Recoil_Right_2: 389698848
       Mirai_Recoil_Right_3: 1188304710
       Mirai_Recoil_Right_4: 704142106
