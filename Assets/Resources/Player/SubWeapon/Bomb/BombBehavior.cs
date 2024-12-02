@@ -15,8 +15,8 @@ public class BombBehavior : MonoBehaviour
 
     protected Vector3 addVector;
 
-    [SerializeField] AudioClip launchSFX;
-    [SerializeField] AudioClip hitSFX;
+    [SerializeField] protected AudioClip launchSFX;
+    [SerializeField] protected AudioClip hitSFX;
 
     public virtual void LaunchBomb(Vector3 _vector)
     {

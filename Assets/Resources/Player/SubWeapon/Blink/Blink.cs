@@ -25,7 +25,7 @@ public class Blink : MonoBehaviour
 
         //ワープ座標に壁があるかどうか球体のレイを作る
         RaycastHit[] sphereHits;
-        sphereHits = Physics.SphereCastAll(warpPos, 0.5f, targetVec, 0.1f);
+        sphereHits = Physics.SphereCastAll(warpPos + Vector3.up * 0.5f, 0.5f, targetVec, 0.01f);
         for (int i = 0; i < sphereHits.Length; i++)
         {
             if (sphereHits[i].collider.tag == "Ground") { isHit = true; break; }
