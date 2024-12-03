@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2596348104808432211}
   - component: {fileID: 4199394049154672233}
   - component: {fileID: 6530317157581830170}
+  - component: {fileID: 4998420970976103160}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -115,6 +116,7 @@ MonoBehaviour:
   bgmAnnounceCanvas: {fileID: 4432466077039030639, guid: 8ff561359b06d2344bcdfd62568506c6,
     type: 3}
   defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  spriteDefaultMat: {fileID: 0}
 --- !u!114 &5065934935842733564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +231,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allButtonSpriteDataPrefab: {fileID: 11400000, guid: 1feb5fd6c7f42de4faee9e9d5147125f,
     type: 2}
+--- !u!114 &4998420970976103160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662274610589041154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6390a679a908d24887dd4c3a65eb4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2126027679143519720
 PrefabInstance:
   m_ObjectHideFlags: 0
