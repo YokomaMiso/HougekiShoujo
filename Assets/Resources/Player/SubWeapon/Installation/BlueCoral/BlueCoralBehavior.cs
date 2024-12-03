@@ -77,6 +77,9 @@ public class BlueCoralBehavior : InstallationBehavior
         if (roomData.myTeamNum != myRoomData.myTeamNum) { return; }
 
         //Š´ŽÓƒ{ƒCƒX‚ð–Â‚ç‚·
-        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetThanks(), Camera.main.transform);
+        if (player != ownerPlayer)
+        {
+            player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetThanks(), Camera.main.transform);
+        }
     }
 }
