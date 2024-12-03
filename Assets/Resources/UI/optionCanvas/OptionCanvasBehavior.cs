@@ -15,7 +15,7 @@ public class OptionCanvasBehavior : MonoBehaviour
     const float cursorTimer = 0.15f;
 
     int settingNum = 0;
-    readonly int[] settingMaxNum = new int[categoryMaxNum] { 5, 3, 2, 0 };
+    readonly int[] settingMaxNum = new int[categoryMaxNum] { 5, 4, 2, 0 };
 
     bool inCategory;
 
@@ -61,6 +61,7 @@ public class OptionCanvasBehavior : MonoBehaviour
         soundSetting.transform.GetChild(3).GetComponent<VolumeIndexSetting>().SetValue(optionData.voiceVolume);
         gamePlaySetting.transform.GetChild(0).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.cameraShakeOn);
         gamePlaySetting.transform.GetChild(1).GetComponent<VolumeIndexSetting>().SetValue(optionData.mortarSensitive);
+        gamePlaySetting.transform.GetChild(2).GetComponent<RadioBoxIndexSetting>().SetValue(optionData.displayTutorial);
         languageSetting.transform.GetChild(0).GetComponent<LanguageRadioBoxSetting>().SetValue(optionData.languageNum);
 
         for (int i = 0; i < categoryMaxNum; i++)
@@ -102,6 +103,7 @@ public class OptionCanvasBehavior : MonoBehaviour
         optionData.voiceVolume = soundSetting.transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
         optionData.cameraShakeOn = gamePlaySetting.transform.GetChild(0).GetComponent<RadioBoxIndexSetting>().on;
         optionData.mortarSensitive = gamePlaySetting.transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
+        optionData.displayTutorial = gamePlaySetting.transform.GetChild(2).GetComponent<RadioBoxIndexSetting>().on;
         optionData.languageNum = languageSetting.transform.GetChild(0).GetComponent<LanguageRadioBoxSetting>().num;
     }
 
@@ -214,6 +216,7 @@ public class OptionCanvasBehavior : MonoBehaviour
                         gamePlaySetting.transform.GetChild(1).GetChild(1).GetComponent<Slider>().handleRect.GetComponent<Image>().sprite = levelThreePen[0];
                         gamePlaySetting.transform.GetChild(1).GetChild(2).GetComponent<Image>().sprite = levelFourWindow[0];
                         gamePlaySetting.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
+                        gamePlaySetting.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
                         break;
                     case 1:
                         gamePlaySetting.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
@@ -221,13 +224,23 @@ public class OptionCanvasBehavior : MonoBehaviour
                         gamePlaySetting.transform.GetChild(1).GetChild(1).GetComponent<Slider>().handleRect.GetComponent<Image>().sprite = levelThreePen[1];
                         gamePlaySetting.transform.GetChild(1).GetChild(2).GetComponent<Image>().sprite = levelFourWindow[1];
                         gamePlaySetting.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
+                        gamePlaySetting.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
+                        break;
+                    case 2:
+                        gamePlaySetting.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
+                        gamePlaySetting.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
+                        gamePlaySetting.transform.GetChild(1).GetChild(1).GetComponent<Slider>().handleRect.GetComponent<Image>().sprite = levelThreePen[0];
+                        gamePlaySetting.transform.GetChild(1).GetChild(2).GetComponent<Image>().sprite = levelFourWindow[0];
+                        gamePlaySetting.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[1];
+                        gamePlaySetting.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
                         break;
                     default:
                         gamePlaySetting.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
                         gamePlaySetting.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
                         gamePlaySetting.transform.GetChild(1).GetChild(1).GetComponent<Slider>().handleRect.GetComponent<Image>().sprite = levelThreePen[0];
                         gamePlaySetting.transform.GetChild(1).GetChild(2).GetComponent<Image>().sprite = levelFourWindow[0];
-                        gamePlaySetting.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[1];
+                        gamePlaySetting.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
+                        gamePlaySetting.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[1];
                         break;
                 }
                 break;
@@ -284,6 +297,9 @@ public class OptionCanvasBehavior : MonoBehaviour
                         if (_x < 0) { applyValue *= -1; }
                         gamePlaySetting.transform.GetChild(settingNum).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
                         break;
+                    case 2:
+                        gamePlaySetting.transform.GetChild(settingNum).GetComponent<RadioBoxIndexSetting>().SetValue(_x < 0);
+                        break;
                 }
                 break;
             //language
@@ -327,6 +343,7 @@ public class OptionCanvasBehavior : MonoBehaviour
                 gamePlaySetting.transform.GetChild(1).GetChild(1).GetComponent<Slider>().handleRect.GetComponent<Image>().sprite = levelThreePen[0];
                 gamePlaySetting.transform.GetChild(1).GetChild(2).GetComponent<Image>().sprite = levelFourWindow[0];
                 gamePlaySetting.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
+                gamePlaySetting.transform.GetChild(3).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[0];
                 break;
 
             //language
