@@ -17,8 +17,14 @@ public class SelecterArrow : MonoBehaviour
         timer = moveTime;
         transform.localPosition = defaultPos + addPos;
     }
+    public void Init()
+    {
+        add = false;
+        timer = 0;
+        transform.localPosition = defaultPos;
+    }
 
-    void Start()
+    void Awake()
     {
         defaultPos = transform.localPosition;
     }
