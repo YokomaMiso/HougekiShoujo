@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,15 +10,19 @@ public class TutorialWindow : MonoBehaviour
     TitleCanvasBehavior parent;
     public void SetParent(TitleCanvasBehavior _parent) { parent = _parent; }
 
-    [SerializeField] Image tutorialImage;
+    [SerializeField] Image[] tutorialImage;
     [SerializeField] SelecterArrow[] arrows;
-    [SerializeField] Sprite[] tutorialSprites;
 
     int spriteNum = 0;
-
     void Start()
     {
+        int maxNum = tutorialImage.Length;
 
+        for (int i = 0; i < maxNum; i++)
+        {
+            bool active = (i == spriteNum);
+            tutorialImage[i].gameObject.SetActive(active);
+        }
     }
 
     void Update()
@@ -39,11 +44,16 @@ public class TutorialWindow : MonoBehaviour
 
     public void ChangeSpriteNum(int _num)
     {
-        int maxNum = tutorialSprites.Length;
+        int maxNum = tutorialImage.Length;
 
         if (_num > 0) { spriteNum = (spriteNum + 1) % maxNum; }
         else { spriteNum = (spriteNum + maxNum - 1) % maxNum; }
+        arrows[Mathf.RoundToInt(Mathf.Clamp01(_num))].SetAdd();
 
-        tutorialImage.sprite = tutorialSprites[spriteNum];
+        for (int i = 0; i < maxNum; i++)
+        {
+            bool active = (i == spriteNum);
+            tutorialImage[i].gameObject.SetActive(active);
+        }
     }
 }
