@@ -9,7 +9,7 @@ public class BambooBombBehavior : BombBehavior
     public override void LaunchBomb(Vector3 _vector)
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-        addVector = _vector * 1.5f + Vector3.up;
+        addVector = _vector * 1.2f + Vector3.up;
         rb.AddForce(addVector, ForceMode.Impulse);
 
         SoundManager.PlaySFX(launchSFX, ownerPlayer.transform);
