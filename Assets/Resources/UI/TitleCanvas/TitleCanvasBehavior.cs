@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TITLE_STATE { STAY = -1, SELECT = 0, INPUT_NAME, CREDIT, CHANGE_TO_CONNECTION };
+public enum TITLE_STATE { STAY = -1, SELECT = 0,TUTORIAL, INPUT_NAME, CREDIT, CHANGE_TO_CONNECTION };
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
     [SerializeField, Header("TitleBGM")] AudioClip titleBGM;
 
     [SerializeField] GameObject buttons;
-    //[SerializeField] GameObject selectNetwork;
+    [SerializeField] GameObject tutorial;
     [SerializeField] GameObject inputName;
-    GameObject[] uis = new GameObject[2];
+    GameObject[] uis = new GameObject[3];
 
     TITLE_STATE state = TITLE_STATE.SELECT;
     public TITLE_STATE GetTitleState() { return state; }
 
     float titleCallTimer;
-    const float titleCallTime = 0.5f;
+    const float titleCallTime = 1.0f;
     bool titleCalled;
 
     void Start()
     {
         uis[(int)TITLE_STATE.SELECT] = Instantiate(buttons, transform);
         uis[(int)TITLE_STATE.SELECT].GetComponent<TitleButtons>().SetParent(this);
-        //uis[1] = Instantiate(selectNetwork, transform);
-        //uis[1].GetComponent<SelectNetwork>().SetParent(this);
+        uis[(int)TITLE_STATE.TUTORIAL] = Instantiate(tutorial, transform);
+        uis[(int)TITLE_STATE.TUTORIAL].GetComponent<TutorialWindow>().SetParent(this);
         uis[(int)TITLE_STATE.INPUT_NAME] = Instantiate(inputName, transform);
         uis[(int)TITLE_STATE.INPUT_NAME].GetComponent<InputName>().SetParent(this);
         //uis[(int)TITLE_STATE.CREDIT] = Instantiate(creditCanvas, transform);
@@ -55,6 +55,7 @@ public class TitleCanvasBehavior : MonoBehaviour
         switch (_state)
         {
             case TITLE_STATE.SELECT:
+            case TITLE_STATE.TUTORIAL:
             case TITLE_STATE.INPUT_NAME:
             case TITLE_STATE.CREDIT:
                 UIsUpdate();
@@ -76,7 +77,8 @@ public class TitleCanvasBehavior : MonoBehaviour
         switch (_num)
         {
             case 0:
-                ChangeTitleState(TITLE_STATE.INPUT_NAME);
+                if (Managers.instance.optionData.displayTutorial) { ChangeTitleState(TITLE_STATE.TUTORIAL); }
+                else { ChangeTitleState(TITLE_STATE.INPUT_NAME); }
                 break;
             case 1:
                 Managers.instance.CreateOptionCanvas();
