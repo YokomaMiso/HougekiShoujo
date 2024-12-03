@@ -37,5 +37,5 @@ MonoBehaviour:
   installationLoopAnim: {fileID: 9100000, guid: ab12581ac6d1fa04c984951dbe8d22bd,
     type: 2}
   reloadTime: 20
-  speedRate: 0.8
+  speedRate: 0.65
   lifeTime: 1
