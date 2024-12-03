@@ -56,8 +56,8 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 52b074c6b533a5341a9e7be5506e7a51, type: 2}
   - {fileID: 9100000, guid: 9f4d6417bf261594b8c565ce9443c814, type: 2}
   recoilAnimationData2:
-  - {fileID: 9100000, guid: c59b7186be8057a44b148f3c40195b00, type: 2}
-  - {fileID: 9100000, guid: c59b7186be8057a44b148f3c40195b00, type: 2}
-  - {fileID: 9100000, guid: c59b7186be8057a44b148f3c40195b00, type: 2}
-  - {fileID: 9100000, guid: c59b7186be8057a44b148f3c40195b00, type: 2}
-  - {fileID: 9100000, guid: c59b7186be8057a44b148f3c40195b00, type: 2}
+  - {fileID: 9100000, guid: 1afbb57349d343e40b4ab22b71ff388a, type: 2}
+  - {fileID: 9100000, guid: 1afbb57349d343e40b4ab22b71ff388a, type: 2}
+  - {fileID: 9100000, guid: 1afbb57349d343e40b4ab22b71ff388a, type: 2}
+  - {fileID: 9100000, guid: 1afbb57349d343e40b4ab22b71ff388a, type: 2}
+  - {fileID: 9100000, guid: 1afbb57349d343e40b4ab22b71ff388a, type: 2}
