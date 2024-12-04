@@ -21,8 +21,7 @@ public class TutorialTwoBehavior : MonoBehaviour
         transform.GetChild(0).GetComponent<Image>().sprite = applySprites[2]; 
         transform.GetChild(1).GetComponent<Image>().sprite = applySprites[2]; 
         transform.GetChild(2).GetComponent<Image>().sprite = applySprites[2]; 
-        transform.GetChild(3).GetComponent<Image>().sprite = applySprites[0]; 
-        transform.GetChild(4).GetComponent<Image>().sprite = applySprites[1]; 
-        transform.GetChild(5).GetComponent<Image>().sprite = applySprites[3]; 
+        transform.GetChild(3).GetComponent<Image>().sprite = applySprites[5]; 
+        transform.GetChild(4).GetComponent<Image>().sprite = applySprites[3]; 
     }
 }
