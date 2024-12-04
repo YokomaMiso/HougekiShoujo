@@ -58,6 +58,7 @@ public class IngameData
         public bool alive;
         public RADIO_CHAT_ID playerChatID;
         public int killPlayerID;
+        public float deadTime;
         
         public int killCount;
         public int deathCount;
