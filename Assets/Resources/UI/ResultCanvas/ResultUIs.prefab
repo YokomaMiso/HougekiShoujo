@@ -2844,6 +2844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdfebabf5dafc141afe687ba6e0ccd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endLoopBGM: {fileID: 8300000, guid: 1241a079b2c2b4042b7a7ff0901cecf9, type: 3}
 --- !u!1 &4913317103519607307
 GameObject:
   m_ObjectHideFlags: 0

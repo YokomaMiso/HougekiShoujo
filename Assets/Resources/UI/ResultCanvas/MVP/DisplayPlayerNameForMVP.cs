@@ -13,6 +13,7 @@ public class DisplayPlayerNameForMVP : MonoBehaviour
 
     bool jinglePlayed;
     AudioClip mvpJingle;
+    [SerializeField] AudioClip endLoopBGM;
 
     public void SetText(ResultScoreBoard.KDFData _kdf)
     {
@@ -21,7 +22,6 @@ public class DisplayPlayerNameForMVP : MonoBehaviour
         text.text = _kdf.playerName;
         PlayerData pd = Managers.instance.gameManager.playerDatas[_kdf.characterID];
         mvpJingle = pd.GetResultJingle();
-
     }
 
     void Update()
@@ -37,7 +37,8 @@ public class DisplayPlayerNameForMVP : MonoBehaviour
         if (jinglePlayed) { return; }
         if (timer >= startTime)
         {
-            SoundManager.PlayJingleForResult(mvpJingle);
+            GameObject obj = SoundManager.PlayJingleForResult(mvpJingle);
+            obj.AddComponent<ResultEndLoopPlayer>().SetClip(endLoopBGM);
             jinglePlayed = true;
         }
     }
