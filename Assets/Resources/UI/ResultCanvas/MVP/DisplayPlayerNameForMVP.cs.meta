@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - endLoopBGM: {fileID: 8300000, guid: 1241a079b2c2b4042b7a7ff0901cecf9, type: 3}
+  - endLoopRanBGM: {fileID: 8300000, guid: 23f9dabdc804e4f4980e3193775f31a8, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

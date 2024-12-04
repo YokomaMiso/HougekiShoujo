@@ -17,3 +17,5 @@ MonoBehaviour:
   submit: {fileID: 21300000, guid: 71b4ec746260b9046b45ce099b3e19e4, type: 3}
   cancel: {fileID: 21300000, guid: a45f6089a937b2c468905832e1b57ab3, type: 3}
   stageSelect: {fileID: 21300000, guid: 8cc6ddc90143faf4299fb3e3cdf7bcc2, type: 3}
+  stickL: {fileID: 21300000, guid: 5a6b6d80ddfe14f4fa5439bffe78a8c9, type: 3}
+  stickR: {fileID: 21300000, guid: a17a719ed5e2aed4283ef0d608c1b15b, type: 3}
