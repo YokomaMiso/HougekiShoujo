@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BlindSmokeExplosion : ExplosionBehavior
+public class BlindSmokeExplosion : SubExplosionBehavior
 {
     bool hitCheck = false;
-    bool[] hitedPlayer = new bool[6];
 
     [SerializeField] GameObject blindCanvas;
     const float vfxStopSub = 1.5f;

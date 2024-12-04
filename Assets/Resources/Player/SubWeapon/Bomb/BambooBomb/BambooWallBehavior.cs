@@ -29,7 +29,7 @@ public class BambooWallBehavior : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
+        timer += Managers.instance.timeManager.GetDeltaTime();
 
         if (timer <= growTime + 0.2f)
         {
