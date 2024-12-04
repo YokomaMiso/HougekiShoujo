@@ -369,12 +369,9 @@ public class GameManager : MonoBehaviour
             else if (ffCount[(int)TEAM_NUM.B] < ffCount[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.A; }
             else
             {
-                if (deadTime[(int)TEAM_NUM.A] > deadTime[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.A; }
-                else if (deadTime[(int)TEAM_NUM.B] > deadTime[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.B; }
-                else
-                {
-                    tentativeWinner = Random.Range(0, 2);
-                }
+                if (deadTime[(int)TEAM_NUM.A] > deadTime[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.B; }
+                else if (deadTime[(int)TEAM_NUM.B] > deadTime[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.A; }
+                else { tentativeWinner = Random.Range(0, 2); }
             }
         }
 
@@ -393,7 +390,7 @@ public class GameManager : MonoBehaviour
 
                 AudioClip clip;
                 PlayerVoiceData pvd = playerDatas[roomData.selectedCharacterID].GetPlayerVoiceData();
-                if (_data.winCountTeamA >= 3) { clip = pvd.GetGameWin(); }
+                if (_data.winCountTeamB >= 3) { clip = pvd.GetGameWin(); }
                 else { clip = pvd.GetRoundWin(); }
 
                 GetPlayer(i).PlayVoice(clip, Camera.main.transform, 2);
