@@ -36,7 +36,7 @@ public class InGameEndText : MonoBehaviour
     {
         IngameData.GameData hostIngameData = OSCManager.OSCinstance.GetIngameData(0).mainPacketData.inGameData;
 
-        if (!hostIngameData.end)
+        if (hostIngameData.winner != -1)
         {
             image.color = Color.clear;
             vfx.color = Color.clear;
