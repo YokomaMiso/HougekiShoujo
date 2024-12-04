@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class TutorialTwoBehavior : MonoBehaviour
 {
+    [SerializeField] GameObject[] texts;
+    void Start()
+    {
+        Instantiate(texts[(int)Managers.instance.nowLanguage], transform);
+    }
+
     void OnEnable()
     {
         ChangeDisplayButtons();

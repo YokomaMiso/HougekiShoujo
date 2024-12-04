@@ -42,6 +42,7 @@ public class TutorialWindow : MonoBehaviour
     public void Submit()
     {
         parent.ChangeTitleState(TITLE_STATE.INPUT_NAME);
+        Managers.instance.PlaySFXForUI(0);
     }
 
     public void ChangeSpriteNum(int _num)
@@ -67,6 +68,7 @@ public class TutorialWindow : MonoBehaviour
         }
 
         ArrowUpdate();
+        Managers.instance.PlaySFXForUI(2);
     }
 
     void ArrowUpdate()
