@@ -93,8 +93,17 @@ public class ResultCanvasBehavior : MonoBehaviour
         Managers.instance.roomManager.Init();
         Managers.instance.gameManager.Init();
         ScoreInit();
-        Managers.instance.ChangeScene(GAME_STATE.ROOM);
-        Managers.instance.ChangeState(GAME_STATE.ROOM);
+
+        if (OSCManager.OSCinstance.roomData.myID == -1)
+        {
+            Managers.instance.ChangeScene(GAME_STATE.TITLE);
+            Managers.instance.ChangeState(GAME_STATE.TITLE);
+        }
+        else
+        {
+            Managers.instance.ChangeScene(GAME_STATE.ROOM);
+            Managers.instance.ChangeState(GAME_STATE.ROOM);
+        }
     }
 
     public void PressBG()
