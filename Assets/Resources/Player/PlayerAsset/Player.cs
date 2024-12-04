@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
             if (hostIngameData.end) { return; }
 
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = false;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.deadTime = hostIngameData.roundTimer;
             Camera.main.GetComponent<CameraMove>().ResetCameraFar();
         }
         alive = false;
@@ -127,6 +128,7 @@ public class Player : MonoBehaviour
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.fire = false;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.useSub = false;
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.alive = true;
+            OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.deadTime = 0;
         }
 
         myCollider.enabled = true;

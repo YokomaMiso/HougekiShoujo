@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour
 
         sdaInstance.Init();
         Camera.main.GetComponent<CameraMove>().ResetCameraFar();
+
     }
 
     void EndBehavior()
@@ -289,6 +290,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    int tentativeCount;
+    const int tentativeMaxCount = 5;
+
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
         //return _data;
@@ -298,6 +302,7 @@ public class GameManager : MonoBehaviour
 
         //チームごとの生き残り数
         int[] aliveCount = new int[2] { 0, 0 };
+        int[] ffCount = new int[2] { 0, 0 };
 
         for (int i = 0; i < playerInstance.Length; i++)
         {
@@ -317,50 +322,59 @@ public class GameManager : MonoBehaviour
             if (oscRoomData.myTeamNum == MachingRoomData.bannerEmpty) { continue; }
 
             if (nowIngameData.alive) { aliveCount[oscRoomData.myTeamNum]++; }
+            else
+            {
+                if (OSCManager.OSCinstance.GetRoomData(nowIngameData.killPlayerID).myTeamNum == oscRoomData.myTeamNum)
+                {
+                    ffCount[oscRoomData.myTeamNum]++;
+                }
+            }
         }
-
-        //MachingRoomData.RoomData hostRoomData = OSCManager.OSCinstance.roomData;
 
         _data.alivePlayerCountTeamA = aliveCount[(int)TEAM_NUM.A];
         _data.alivePlayerCountTeamB = aliveCount[(int)TEAM_NUM.B];
 
-        /*
-        if (_data.roundTimer <= 0)
+        int tentativeWinner = -1;
+        if (aliveCount[(int)TEAM_NUM.A] <= 0)
         {
-            Debug.Log("時間切れだよ");
+            if (aliveCount[(int)TEAM_NUM.B] <= 0) { tentativeWinner = 2; }
+            else { tentativeWinner = 1; }
+        }
+        else if (aliveCount[(int)TEAM_NUM.B] <= 0) { tentativeWinner = 0; }
 
-            //if(hostRoomData.teamACount== hostRoomData.teamBCount) { }
-            if (_data.alivePlayerCountTeamA > _data.alivePlayerCountTeamB)
+        if (tentativeWinner == (int)TEAM_NUM.A || tentativeWinner == (int)TEAM_NUM.B) { tentativeCount++; }
+
+        if (tentativeCount < tentativeMaxCount) { return _data; }
+
+        tentativeCount = 0;
+        if (tentativeWinner == 2)
+        {
+            MachingRoomData.RoomData hostRoomData;
+            if (Managers.instance.playerID == 0) { hostRoomData = OSCManager.OSCinstance.roomData; }
+            else { hostRoomData = OSCManager.OSCinstance.GetRoomData(0); }
+
+            float[] deadTime = new float[2] { 60, 60 };
+            for (int i = 0; i < hostRoomData.playerCount; i++)
             {
-                _data.winner = (int)TEAM_NUM.A;
-                _data.winCountTeamA++;
+                MachingRoomData.RoomData nowRoomData = OSCManager.OSCinstance.GetRoomData(i);
+                IngameData.GameData nowIngameData = OSCManager.OSCinstance.GetIngameData(i).mainPacketData.inGameData;
+                if (deadTime[nowRoomData.myTeamNum] > nowIngameData.deadTime)
+                {
+                    deadTime[nowRoomData.myTeamNum] = nowIngameData.deadTime;
+                }
             }
+
+            if (deadTime[(int)TEAM_NUM.A] > deadTime[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.A; }
+            else if (deadTime[(int)TEAM_NUM.B] > deadTime[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.B; }
             else
             {
-                _data.winner = (int)TEAM_NUM.B;
-                _data.winCountTeamB++;
+                if (ffCount[(int)TEAM_NUM.A] > ffCount[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.B; }
+                else if (ffCount[(int)TEAM_NUM.B] < ffCount[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.A; }
+                else { tentativeWinner = Random.Range(0, 2); }
             }
         }
-        else
-        {
-                if (aliveCount[(int)TEAM_NUM.A] <= 0)
-                {
-                    _data.winner = (int)TEAM_NUM.B;
-                    _data.winCountTeamB++;
-                    Debug.Log("Aチームの死亡数でチェック通ったよ");
-                    Debug.Log("Bチームの勝利数 " + _data.winCountTeamB);
-                }
-                if (aliveCount[(int)TEAM_NUM.B] <= 0)
-                {
-                    _data.winner = (int)TEAM_NUM.A;
-                    _data.winCountTeamA++;
-                    Debug.Log("Bチームの死亡数でチェック通ったよ");
-                    Debug.Log("Aチームの勝利数 " + _data.winCountTeamA);
-                }
-        }
-        */
 
-        if (aliveCount[(int)TEAM_NUM.A] <= 0)
+        if (tentativeWinner == (int)TEAM_NUM.A)
         {
             _data.winner = (int)TEAM_NUM.B;
             _data.winCountTeamB++;
@@ -381,7 +395,7 @@ public class GameManager : MonoBehaviour
                 GetPlayer(i).PlayVoice(clip, Camera.main.transform, 2);
             }
         }
-        else if (aliveCount[(int)TEAM_NUM.B] <= 0)
+        else if (tentativeWinner == (int)TEAM_NUM.B)
         {
             _data.winner = (int)TEAM_NUM.A;
             _data.winCountTeamA++;
