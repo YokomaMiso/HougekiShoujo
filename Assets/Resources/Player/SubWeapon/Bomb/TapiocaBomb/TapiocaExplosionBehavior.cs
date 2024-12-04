@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TapiocaExplosionBehavior : ExplosionBehavior
+public class TapiocaExplosionBehavior : SubExplosionBehavior
 {
-    bool hitCheck = false;
-    bool[] hitedPlayer = new bool[6];
 
     public override void SetData(Explosion _data)
     {
@@ -37,5 +35,7 @@ public class TapiocaExplosionBehavior : ExplosionBehavior
         nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
 
         nowPlayer.GetComponent<PlayerMove>().ReceiveSlip(6.0f);
+        nowPlayer.AddComponent<ResetHitedPlayer>().SetData(this, id, 6.0f);
+
     }
 }
