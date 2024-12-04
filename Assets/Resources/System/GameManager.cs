@@ -342,11 +342,12 @@ public class GameManager : MonoBehaviour
         }
         else if (aliveCount[(int)TEAM_NUM.B] <= 0) { tentativeWinner = 0; }
 
-        if (tentativeWinner == (int)TEAM_NUM.A || tentativeWinner == (int)TEAM_NUM.B) { tentativeCount++; }
+        if (tentativeWinner != -1) { tentativeCount++; }
 
         if (tentativeCount < tentativeMaxCount) { return _data; }
 
         tentativeCount = 0;
+        Debug.Log(tentativeWinner);
         if (tentativeWinner == 2)
         {
             MachingRoomData.RoomData hostRoomData;
@@ -374,7 +375,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (tentativeWinner == (int)TEAM_NUM.A)
+        if (tentativeWinner == (int)TEAM_NUM.B)
         {
             _data.winner = (int)TEAM_NUM.B;
             _data.winCountTeamB++;
@@ -395,7 +396,7 @@ public class GameManager : MonoBehaviour
                 GetPlayer(i).PlayVoice(clip, Camera.main.transform, 2);
             }
         }
-        else if (tentativeWinner == (int)TEAM_NUM.B)
+        else if (tentativeWinner == (int)TEAM_NUM.A)
         {
             _data.winner = (int)TEAM_NUM.A;
             _data.winCountTeamA++;
