@@ -291,7 +291,7 @@ public class GameManager : MonoBehaviour
     }
 
     int tentativeCount;
-    const int tentativeMaxCount = 5;
+    const int tentativeMaxCount = 10;
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
@@ -338,9 +338,9 @@ public class GameManager : MonoBehaviour
         if (aliveCount[(int)TEAM_NUM.A] <= 0)
         {
             if (aliveCount[(int)TEAM_NUM.B] <= 0) { tentativeWinner = 2; }
-            else { tentativeWinner = 1; }
+            else { tentativeWinner = (int)TEAM_NUM.B; }
         }
-        else if (aliveCount[(int)TEAM_NUM.B] <= 0) { tentativeWinner = 0; }
+        else if (aliveCount[(int)TEAM_NUM.B] <= 0) { tentativeWinner = (int)TEAM_NUM.A; }
 
         if (tentativeWinner != -1) { tentativeCount++; }
 
@@ -365,13 +365,16 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (deadTime[(int)TEAM_NUM.A] > deadTime[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.A; }
-            else if (deadTime[(int)TEAM_NUM.B] > deadTime[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.B; }
+            if (ffCount[(int)TEAM_NUM.A] > ffCount[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.B; }
+            else if (ffCount[(int)TEAM_NUM.B] < ffCount[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.A; }
             else
             {
-                if (ffCount[(int)TEAM_NUM.A] > ffCount[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.B; }
-                else if (ffCount[(int)TEAM_NUM.B] < ffCount[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.A; }
-                else { tentativeWinner = Random.Range(0, 2); }
+                if (deadTime[(int)TEAM_NUM.A] > deadTime[(int)TEAM_NUM.B]) { tentativeWinner = (int)TEAM_NUM.A; }
+                else if (deadTime[(int)TEAM_NUM.B] > deadTime[(int)TEAM_NUM.A]) { tentativeWinner = (int)TEAM_NUM.B; }
+                else
+                {
+                    tentativeWinner = Random.Range(0, 2);
+                }
             }
         }
 
