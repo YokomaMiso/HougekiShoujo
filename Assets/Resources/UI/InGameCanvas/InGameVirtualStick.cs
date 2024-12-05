@@ -7,6 +7,8 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
     public RectTransform handle;
     private Vector2 inputVector;
 
+    Vector2 spawnPos;
+
     private void Start()
     {
         background.gameObject.SetActive(false);
@@ -17,6 +19,8 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
     {
         background.gameObject.SetActive(true);
         handle.gameObject.SetActive(true);
+
+        background.transform.position = eventData.pressPosition;
 
         OnDrag(eventData);
     }
@@ -32,7 +36,7 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
             inputVector = new Vector2(pos.x * 2, pos.y * 2);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
-            handle.anchoredPosition = new Vector2(inputVector.x * (background.sizeDelta.x / 2), inputVector.y * (background.sizeDelta.y / 2));
+            handle.transform.localPosition = new Vector2(inputVector.x * (background.sizeDelta.x / 2), inputVector.y * (background.sizeDelta.y / 2));
         }
     }
 
@@ -41,6 +45,6 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
         background.gameObject.SetActive(false);
         handle.gameObject.SetActive(false);
 
-        handle.anchoredPosition = Vector2.zero;
+        handle.transform.localPosition = Vector2.zero;
     }
 }
