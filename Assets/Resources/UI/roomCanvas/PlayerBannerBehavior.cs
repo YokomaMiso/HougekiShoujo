@@ -51,9 +51,21 @@ public class PlayerBannerBehavior : MonoBehaviour
 
         if (num == 0)
         {
-            if (Managers.instance.roomManager.readyCount >= _roomData.playerCount)
+            int readyCount = 0;
+            for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
             {
+                RoomData otherData = OSCManager.OSCinstance.GetRoomData(i);
+                if (otherData.ready) { readyCount++; }
+            }
+
+            if (readyCount >= _roomData.playerCount - 1)
+            {
+#if UNITY_EDITOR
                 buttonImage.color = Color.white;
+#else
+                if(readyCount <= 0){ buttonImage.color = Color.clear; }
+                else{ buttonImage.color = Color.white; }
+#endif
             }
             else
             {
