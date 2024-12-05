@@ -383,9 +383,19 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < playerInstance.Length; i++)
             {
                 MachingRoomData.RoomData roomData;
-                if (i == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
-                else { roomData = OSCManager.OSCinstance.GetRoomData(i); }
+                IngameData.GameData ingameData;
+                if (i == Managers.instance.playerID)
+                {
+                    roomData = OSCManager.OSCinstance.roomData;
+                    ingameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+                }
+                else
+                {
+                    roomData = OSCManager.OSCinstance.GetRoomData(i);
+                    ingameData = OSCManager.OSCinstance.GetIngameData(i).mainPacketData.inGameData;
+                }
 
+                if (!ingameData.alive) { continue; }
                 if (roomData.myTeamNum != _data.winner) { continue; }
 
                 AudioClip clip;
@@ -393,7 +403,7 @@ public class GameManager : MonoBehaviour
                 if (_data.winCountTeamB >= 3) { clip = pvd.GetGameWin(); }
                 else { clip = pvd.GetRoundWin(); }
 
-                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 2);
+                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 3);
             }
         }
         else if (tentativeWinner == (int)TEAM_NUM.A)
@@ -404,9 +414,19 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < playerInstance.Length; i++)
             {
                 MachingRoomData.RoomData roomData;
-                if (i == Managers.instance.playerID) { roomData = OSCManager.OSCinstance.roomData; }
-                else { roomData = OSCManager.OSCinstance.GetRoomData(i); }
+                IngameData.GameData ingameData;
+                if (i == Managers.instance.playerID) 
+                {
+                    roomData = OSCManager.OSCinstance.roomData;
+                    ingameData = OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData;
+                }
+                else 
+                {
+                    roomData = OSCManager.OSCinstance.GetRoomData(i); 
+                    ingameData = OSCManager.OSCinstance.GetIngameData(i).mainPacketData.inGameData;
+                }
 
+                if (!ingameData.alive) { continue; }
                 if (roomData.myTeamNum != _data.winner) { continue; }
 
                 AudioClip clip;
@@ -414,7 +434,7 @@ public class GameManager : MonoBehaviour
                 if (_data.winCountTeamA >= 3) { clip = pvd.GetGameWin(); }
                 else { clip = pvd.GetRoundWin(); }
 
-                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 2);
+                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 3);
             }
         }
 
