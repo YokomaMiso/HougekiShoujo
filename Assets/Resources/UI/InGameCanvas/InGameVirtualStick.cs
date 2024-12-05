@@ -7,7 +7,7 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
     public RectTransform handle;
     private Vector2 inputVector;
 
-    Vector2 spawnPos;
+    Vector2 defaultPos;
 
     private void Start()
     {
@@ -20,13 +20,16 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
         background.gameObject.SetActive(true);
         handle.gameObject.SetActive(true);
 
-        background.transform.position = eventData.pressPosition;
+        defaultPos = eventData.pressPosition;
+        background.transform.position = defaultPos;
 
         OnDrag(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        background.transform.position = defaultPos;
+
         Vector2 pos;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(background, eventData.position, eventData.pressEventCamera, out pos))
         {
