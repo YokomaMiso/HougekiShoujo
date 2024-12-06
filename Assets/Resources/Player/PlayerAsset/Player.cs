@@ -357,6 +357,7 @@ public class Player : MonoBehaviour
         {
             switch (playerState)
             {
+                case PLAYER_STATE.IDLE:
                 case PLAYER_STATE.RUN:
                 case PLAYER_STATE.AIMING:
                     //移動に応じてキャラグラフィックの向き変更
