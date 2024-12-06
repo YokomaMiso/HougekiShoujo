@@ -14,6 +14,7 @@ public class TutorialWindow : MonoBehaviour
     [SerializeField] SelecterArrow[] arrows;
 
     int spriteNum = 0;
+    public bool TutorialEnd() { return spriteNum >= tutorialImage.Length - 1; }
     void Start()
     {
         int maxNum = tutorialImage.Length;
@@ -41,8 +42,15 @@ public class TutorialWindow : MonoBehaviour
 
     public void Submit()
     {
-        parent.ChangeTitleState(TITLE_STATE.INPUT_NAME);
-        Managers.instance.PlaySFXForUI(0);
+        if (TutorialEnd())
+        {
+            parent.ChangeTitleState(TITLE_STATE.INPUT_NAME);
+            Managers.instance.PlaySFXForUI(0);
+        }
+        else
+        {
+            ChangeSpriteNum(1);
+        }
     }
 
     public void ChangeSpriteNum(int _num)
@@ -79,12 +87,12 @@ public class TutorialWindow : MonoBehaviour
         {
             arrows[0].Init();
             arrows[0].gameObject.SetActive(false);
-            arrows[maxNum - 1].gameObject.SetActive(true);
+            arrows[1].gameObject.SetActive(true);
         }
         else if (spriteNum == maxNum - 1)
         {
-            arrows[maxNum - 1].Init();
-            arrows[maxNum - 1].gameObject.SetActive(false);
+            arrows[1].Init();
+            arrows[1].gameObject.SetActive(false);
             arrows[0].gameObject.SetActive(true);
         }
         else

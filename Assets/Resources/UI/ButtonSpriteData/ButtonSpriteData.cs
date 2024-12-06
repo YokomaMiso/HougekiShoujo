@@ -12,10 +12,11 @@ public class ButtonSpriteData : ScriptableObject
     [SerializeField, Header("LeftShoulder")] Sprite stageSelect;
     [SerializeField, Header("LeftStick")] Sprite stickL;
     [SerializeField, Header("RightStick")] Sprite stickR;
+    [SerializeField, Header("RightShoulder")] Sprite teamChat;
 
     public Sprite[] GetAllSprites()
     {
-        Sprite[] sprites = new Sprite[7];
+        Sprite[] sprites = new Sprite[8];
         sprites[0] = horizontal;
         sprites[1] = vertical;
         sprites[2] = submit;
@@ -23,6 +24,7 @@ public class ButtonSpriteData : ScriptableObject
         sprites[4] = stageSelect;
         sprites[5] = stickL;
         sprites[6] = stickR;
+        sprites[7] = teamChat;
         return sprites;
     }
     public Sprite GetSubmit() { return submit; }
@@ -30,4 +32,5 @@ public class ButtonSpriteData : ScriptableObject
     public Sprite GetShoulder() { return stageSelect; }
     public Sprite GetLeftStick() { return stickL; }
     public Sprite GetRightStick() { return stickR; }
+    public Sprite GetTrigger() { return teamChat; }
 }
