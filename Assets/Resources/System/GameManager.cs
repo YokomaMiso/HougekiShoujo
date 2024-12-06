@@ -258,6 +258,7 @@ public class GameManager : MonoBehaviour
             {
                 OSCManager.OSCinstance.roomData.gameStart = false;
                 OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.roundCount = 0;
+                OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerChatID = RADIO_CHAT_ID.NONE;
 
                 Managers.instance.ChangeScene(GAME_STATE.RESULT);
                 Managers.instance.ChangeState(GAME_STATE.RESULT);
@@ -283,6 +284,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerChatID = RADIO_CHAT_ID.NONE;
                 Managers.instance.ChangeScene(GAME_STATE.RESULT);
                 Managers.instance.ChangeState(GAME_STATE.RESULT);
             }

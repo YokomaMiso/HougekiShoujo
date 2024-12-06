@@ -4,7 +4,7 @@ using UnityEngine;
 using static IngameData;
 
 public enum RADIO_CHAT_ID { NONE = 0, BLITZ, SUPPORT, RETREAT, HELP, APOLOGIZE, LAUGH, WHAT, PROVOC, POP_CORN, FACE_PALM, ANGRY, TEE_HEE, GOOD_JOB, MAX_NUM }
-public enum RADIO_TYPE { NONE = 0, EMOTE=9,TEXT=4 }
+public enum RADIO_TYPE { NONE = 0, EMOTE = 9, TEXT = 4 }
 
 public class PlayerRadioChat : MonoBehaviour
 {
@@ -21,9 +21,9 @@ public class PlayerRadioChat : MonoBehaviour
     GameObject fastChatInstance = null;
 
     RADIO_CHAT_ID radioChatID;
-    RADIO_TYPE radioType= RADIO_TYPE.NONE;
+    RADIO_TYPE radioType = RADIO_TYPE.NONE;
 
-    const float resetTime = 5.0f;
+    const float resetTime = 3.0f;
     float timer;
 
     void Update()
@@ -83,7 +83,7 @@ public class PlayerRadioChat : MonoBehaviour
                 radioType = RADIO_TYPE.EMOTE;
                 fastChatInstance = Instantiate(EmoteChatCanvasPrefab);
                 fastChatInstance.GetComponent<FastChat>().SetChatType((int)RADIO_TYPE.EMOTE);
-                if (chatMainTex[0] != null && chatColorTex[0]!=null)
+                if (chatMainTex[0] != null && chatColorTex[0] != null)
                 {
                     fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_MainTex", chatMainTex[0]);
                     fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetTexture("_ColorTex", chatColorTex[0]);
@@ -98,7 +98,7 @@ public class PlayerRadioChat : MonoBehaviour
             if (fastChatInstance != null)
             {
                 int nowRegion = fastChatInstance.GetComponent<FastChat>().GetRegion();
-                
+
                 if (nowRegion >= 0)
                 {
                     nowRegion += 5;
@@ -150,12 +150,12 @@ public class PlayerRadioChat : MonoBehaviour
     {
         if (radioChatID != RADIO_CHAT_ID.NONE) { return; }
 
-        int buttonMaxCount = (BoolActions.RadioChat13+1) - BoolActions.RadioChat1;
+        int buttonMaxCount = (BoolActions.RadioChat13 + 1) - BoolActions.RadioChat1;
         for (int i = 0; i < buttonMaxCount; i++)
         {
             if (InputManager.GetKeyDown(BoolActions.RadioChat1 + (i)))
             {
-                radioChatID = (RADIO_CHAT_ID)((i >= 0 && i < 9) ? (i + 5) : (i >=9 && i <13) ? (i - 8) : i);
+                radioChatID = (RADIO_CHAT_ID)((i >= 0 && i < 9) ? (i + 5) : (i >= 9 && i < 13) ? (i - 8) : i);
                 MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
                 SpawnSerifOrEmote(oscRoomData, radioChatID);
 
