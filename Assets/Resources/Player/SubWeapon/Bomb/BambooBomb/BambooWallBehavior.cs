@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BambooWallBehavior : MonoBehaviour
@@ -15,24 +16,25 @@ public class BambooWallBehavior : MonoBehaviour
 
     float lifeTime;
 
-    GameObject[] bamboos;
+    BambooBehavior[] bamboos;
 
     public void SetData(SubWeapon _sub)
     {
         lifeTime = _sub.GetLifeTime();
     }
 
-    public void DeleteBamboo(int _num) { Destroy(bamboos[_num]); }
+    public void DeleteBamboo(int _num) { Destroy(bamboos[_num].gameObject); }
 
     void Start()
     {
         bambooCount = transform.childCount;
         defaultPosX = posXSub * bambooCount / 2;
-        bamboos = new GameObject[bambooCount];
+        bamboos = new BambooBehavior[bambooCount];
         for (int i = 0; i < bambooCount; i++)
         {
             transform.GetChild(i).rotation = Quaternion.identity;
-            bamboos[i] = transform.GetChild(i).gameObject;
+            bamboos[i] = transform.GetChild(i).GetComponent<BambooBehavior>();
+            bamboos[i].SetNum(i);
         }
     }
 
