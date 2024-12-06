@@ -150,7 +150,7 @@ public class RoomManager : MonoBehaviour
                 {
                     myRoomData.ready = true;
                     PlayerData pd = Managers.instance.gameManager.playerDatas[myRoomData.selectedCharacterID];
-                    SoundManager.PlayVoice(pd.GetPlayerVoiceData().GetReady());
+                    SoundManager.PlayVoiceForUI(pd.GetPlayerVoiceData().GetReady());
                 }
             }
         }
