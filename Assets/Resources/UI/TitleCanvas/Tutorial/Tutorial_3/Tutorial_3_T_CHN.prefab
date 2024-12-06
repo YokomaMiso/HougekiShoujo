@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8377969223245173166}
   m_Layer: 0
-  m_Name: Tutorial_3_JPN
+  m_Name: Tutorial_3_T_CHN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3067\u524D\u5F8C\u5DE6\u53F3\u306B\u79FB\u52D5"
+  m_Text: Character move
 --- !u!1 &5808503455985895027
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 480, y: -240}
-  m_SizeDelta: {x: 400, y: 54}
+  m_SizeDelta: {x: 420, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8591966063864147066
 CanvasRenderer:
@@ -194,4 +194,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u3067\u30B5\u30D6\u6B66\u5668\u3092\u4F7F\u7528"
+  m_Text: Use sub weapon
