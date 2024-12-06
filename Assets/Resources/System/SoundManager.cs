@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using static Unity.VisualScripting.Member;
 
-public enum SOUND_TYPE { BGM = 0, SFX, SFX_FOR_UI, VOICE };
+public enum SOUND_TYPE { BGM = 0, SFX, SFX_FOR_UI, VOICE, VOICE_FOR_UI };
 
 public class SoundManager : MonoBehaviour
 {
@@ -46,6 +46,15 @@ public class SoundManager : MonoBehaviour
 
         GameObject obj = Instantiate(soundObject, _transform);
         obj.GetComponent<SoundObject>().ReceiveSound(_clip, SOUND_TYPE.VOICE, false);
+
+        return obj;
+    }
+    public static GameObject PlayVoiceForUI(AudioClip _clip, Transform _transform = null)
+    {
+        if (_transform == null) { _transform = Camera.main.transform.GetChild(0); }
+
+        GameObject obj = Instantiate(soundObject, _transform);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip, SOUND_TYPE.VOICE_FOR_UI, false);
 
         return obj;
     }

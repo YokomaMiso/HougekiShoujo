@@ -148,15 +148,14 @@ public class Player : MonoBehaviour
     int voiceSoundID = 0;
     public void PlayVoice(AudioClip _clip, Transform _transform = null, int _num = 0)
     {
-        if (_num >= voiceSoundID)
-        {
-            if (voiceSoundObject != null) { Destroy(voiceSoundObject); }
-            voiceSoundID = _num;
-        }
+        if (_num < voiceSoundID) { return; }
+        if (voiceSoundObject != null) { Destroy(voiceSoundObject); }
+        voiceSoundID = _num;
 
         if (_transform == null) { _transform = transform; }
 
-        voiceSoundObject = SoundManager.PlayVoice(_clip, _transform);
+        if (IsMine()) { voiceSoundObject = SoundManager.PlayVoiceForUI(_clip, _transform); }
+        else { voiceSoundObject = SoundManager.PlayVoice(_clip, _transform); }
         voiceSoundObject.AddComponent<PlayerVoiceReset>().SetOwnerPlayer(this);
     }
     public void ResetVoiceSoundID() { voiceSoundID = 0; }

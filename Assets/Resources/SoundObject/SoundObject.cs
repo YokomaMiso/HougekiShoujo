@@ -49,6 +49,11 @@ public class SoundObject : MonoBehaviour
                 volume *= SoundManager.voiceVolume;
                 lifeTime = clip.length;
                 break;
+            case SOUND_TYPE.VOICE_FOR_UI:
+                volume *= SoundManager.voiceVolume;
+                lifeTime = clip.length;
+                source.spatialBlend = 0;
+                break;
         }
 
         source.volume = volume;
