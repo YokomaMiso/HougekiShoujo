@@ -56,11 +56,11 @@ public class BambooWallBehavior : MonoBehaviour
                 bamboos[i].transform.localPosition = applyLocalPos;
             }
         }
-        if (lifeTime - growTime <= timer && timer <= lifeTime)
+        if (lifeTime - growTime <= timer && timer < lifeTime)
         {
-            float subTime = lifeTime - growTime;
+            float subTime = timer - (lifeTime - growTime);
 
-            float nowRate = Mathf.Clamp01(timer - subTime / lifeTime - subTime);
+            float nowRate = Mathf.Clamp01(subTime / growTime);
             float applyPosY = Mathf.Lerp(endLocalHeight, defaultLocalHeight, nowRate);
 
             for (int i = 0; i < bambooCount; i++)
