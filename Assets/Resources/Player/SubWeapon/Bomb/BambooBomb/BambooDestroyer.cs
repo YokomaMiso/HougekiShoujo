@@ -6,10 +6,11 @@ public class BambooDestroyer : MonoBehaviour
 {
     void OnTriggerStay(Collider other)
     {
-        BambooBehavior bamboo;
-        bamboo = other.transform.parent.GetComponent<BambooBehavior>();
-        if (bamboo == null) { return; }
-
-        bamboo.DeleteBamboo();
+        if (other.GetComponent<BambooBehavior>())
+        {
+            BambooBehavior bamboo = other.GetComponent<BambooBehavior>();
+            bamboo.DeleteBamboo();
+        }
+            
     }
 }
