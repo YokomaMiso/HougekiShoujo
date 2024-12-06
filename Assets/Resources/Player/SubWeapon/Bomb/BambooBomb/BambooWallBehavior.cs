@@ -15,32 +15,43 @@ public class BambooWallBehavior : MonoBehaviour
 
     float lifeTime;
 
+    GameObject[] bamboos;
+
     public void SetData(SubWeapon _sub)
     {
         lifeTime = _sub.GetLifeTime();
     }
 
+    public void DeleteBamboo(int _num) { Destroy(bamboos[_num]); }
+
     void Start()
     {
         bambooCount = transform.childCount;
         defaultPosX = posXSub * bambooCount / 2;
-        for (int i = 0; i < bambooCount; i++) { transform.GetChild(i).rotation = Quaternion.identity; }
+        bamboos = new GameObject[bambooCount];
+        for (int i = 0; i < bambooCount; i++)
+        {
+            transform.GetChild(i).rotation = Quaternion.identity;
+            bamboos[i] = transform.GetChild(i).gameObject;
+        }
     }
 
     void Update()
     {
         timer += Managers.instance.timeManager.GetDeltaTime();
 
-        if (timer <= growTime + 0.2f)
+        if (timer <= growTime)
         {
             float nowRate = Mathf.Clamp01(timer / growTime);
             float applyPosY = Mathf.Lerp(defaultLocalHeight, endLocalHeight, nowRate);
 
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < bambooCount; i++)
             {
+                if (bamboos[i] == null) { continue; }
+
                 float posX = defaultPosX - posXSub * i;
                 Vector3 applyLocalPos = new Vector3(posX, applyPosY);
-                transform.GetChild(i).localPosition = applyLocalPos;
+                bamboos[i].transform.localPosition = applyLocalPos;
             }
         }
         if (lifeTime - growTime <= timer && timer <= lifeTime)
@@ -50,11 +61,13 @@ public class BambooWallBehavior : MonoBehaviour
             float nowRate = Mathf.Clamp01(timer - subTime / lifeTime - subTime);
             float applyPosY = Mathf.Lerp(endLocalHeight, defaultLocalHeight, nowRate);
 
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < bambooCount; i++)
             {
+                if (bamboos[i] == null) { continue; }
+
                 float posX = defaultPosX - posXSub * i;
                 Vector3 applyLocalPos = new Vector3(posX, applyPosY);
-                transform.GetChild(i).localPosition = applyLocalPos;
+                bamboos[i].transform.localPosition = applyLocalPos;
             }
         }
 
