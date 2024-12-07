@@ -8,6 +8,13 @@ public class BlindDebuffCanvasBehavior : MonoBehaviour
     const float startTime = 0.5f;
     const float lifeTime = 15;
 
+    [SerializeField] AudioClip debuffClip;
+    void Start()
+    {
+        SoundManager.PlaySFXForUI(debuffClip);
+        SoundObject.SetBlind(timer / lifeTime);
+    }
+
     void Update()
     {
         IngameData.GameData hostIngameData;
@@ -19,6 +26,7 @@ public class BlindDebuffCanvasBehavior : MonoBehaviour
         if (!myIngameData.alive) { Destroy(gameObject); return; }
 
         timer += Managers.instance.timeManager.GetDeltaTime();
+        SoundObject.SetBlind(Mathf.Pow(timer / lifeTime, 2));
 
         if (timer < startTime)
         {
@@ -36,5 +44,10 @@ public class BlindDebuffCanvasBehavior : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        SoundObject.ResetBlind();
     }
 }
