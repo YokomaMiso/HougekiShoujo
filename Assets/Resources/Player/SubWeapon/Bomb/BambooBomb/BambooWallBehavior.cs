@@ -16,6 +16,8 @@ public class BambooWallBehavior : MonoBehaviour
 
     float lifeTime;
 
+    int cnt;
+    bool bambooEnable = true;
     BambooBehavior[] bamboos;
 
     public void SetData(SubWeapon _sub)
@@ -42,6 +44,11 @@ public class BambooWallBehavior : MonoBehaviour
     {
         timer += Managers.instance.timeManager.GetDeltaTime();
 
+        if (timer > lifeTime) { Destroy(gameObject); }
+    }
+
+    void FixedUpdate()
+    {
         if (timer <= growTime)
         {
             float nowRate = Mathf.Clamp01(timer / growTime);
@@ -55,8 +62,35 @@ public class BambooWallBehavior : MonoBehaviour
                 Vector3 applyLocalPos = new Vector3(posX, applyPosY);
                 bamboos[i].transform.localPosition = applyLocalPos;
             }
+
+            if (bambooEnable)
+            {
+                cnt++;
+                if (cnt > 1)
+                {
+                    for (int i = 0; i < bambooCount; i++)
+                    {
+                        if (bamboos[i] == null) { continue; }
+                        bamboos[i].DeleteCollision();
+                        bamboos[i].EnableSprite();
+                    }
+                    bambooEnable = false;
+                }
+            }
         }
-        if (lifeTime - growTime <= timer && timer < lifeTime)
+        else if (growTime < timer && timer < lifeTime - growTime)
+        {
+            if (!bambooEnable)
+            {
+                for (int i = 0; i < bambooCount; i++)
+                {
+                    if (bamboos[i] == null) { continue; }
+                    bamboos[i].EnableCollision();
+                }
+                bambooEnable = true;
+            }
+        }
+        else if (lifeTime - growTime <= timer && timer < lifeTime)
         {
             float subTime = timer - (lifeTime - growTime);
 
@@ -71,8 +105,16 @@ public class BambooWallBehavior : MonoBehaviour
                 Vector3 applyLocalPos = new Vector3(posX, applyPosY);
                 bamboos[i].transform.localPosition = applyLocalPos;
             }
-        }
 
-        if (timer > lifeTime) { Destroy(gameObject); }
+            if (bambooEnable)
+            {
+                for (int i = 0; i < bambooCount; i++)
+                {
+                    if (bamboos[i] == null) { continue; }
+                    bamboos[i].DeleteCollision();
+                }
+                bambooEnable = false;
+            }
+        }
     }
 }
