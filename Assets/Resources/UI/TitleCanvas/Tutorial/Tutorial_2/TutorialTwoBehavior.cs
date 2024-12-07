@@ -3,25 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialTwoBehavior : MonoBehaviour
+public class TutorialTwoBehavior : TutorialBehavior
 {
-    [SerializeField] GameObject[] texts;
-    void Start()
-    {
-        Instantiate(texts[(int)Managers.instance.nowLanguage], transform);
-    }
-
-    void OnEnable()
-    {
-        ChangeDisplayButtons();
-    }
-
-    void Update()
-    {
-        if (InputManager.isChangedController) { ChangeDisplayButtons(); }
-    }
-
-    void ChangeDisplayButtons()
+    protected override void ChangeDisplayButtons()
     {
         Sprite[] applySprites = InputManager.nowButtonSpriteData.GetAllSprites();
         transform.GetChild(0).GetComponent<Image>().sprite = applySprites[2]; 

@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialOneBehavior : MonoBehaviour
+public class TutorialOneBehavior : TutorialBehavior
 {
-    [SerializeField] GameObject[] texts;
 
-    void Start()
-    {
-        Instantiate(texts[(int)Managers.instance.nowLanguage],transform);
-    }
 }

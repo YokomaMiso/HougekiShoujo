@@ -3,25 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TutorialThreeBehavior : MonoBehaviour
+public class TutorialThreeBehavior : TutorialBehavior
 {
-    [SerializeField] GameObject[] texts;
-    void Start()
-    {
-        Instantiate(texts[(int)Managers.instance.nowLanguage], transform);
-    }
+    protected override void ChangeDisplayButtons()
 
-    void OnEnable()
-    {
-        ChangeDisplayButtons();
-    }
-
-    void Update()
-    {
-        if (InputManager.isChangedController) { ChangeDisplayButtons(); }
-    }
-
-    void ChangeDisplayButtons()
     {
         Sprite[] applySprites = InputManager.nowButtonSpriteData.GetAllSprites();
         transform.GetChild(0).GetComponent<Image>().sprite = applySprites[5];
