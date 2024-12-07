@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2e2ee1207b008e4881a23804526a4a6, type: 3}
+  m_Name: PVD_Tsubasa
+  m_EditorClassIdentifier: 
+  titleCall:
+  - {fileID: 8300000, guid: 76a802123a23e9549992dfb36074c763, type: 3}
+  selfPR:
+  - {fileID: 8300000, guid: 22f1489fb859c174d8bcb0e0711bca01, type: 3}
+  ready:
+  - {fileID: 8300000, guid: ed2fa5c6026293e41828284f9dc68a86, type: 3}
+  gameStart:
+  - {fileID: 8300000, guid: 3a44935d9f80dcb4ca16830387ae651a, type: 3}
+  reload:
+  - {fileID: 8300000, guid: 6c1cfa0d1b79ff949bf800429a14fb5d, type: 3}
+  - {fileID: 8300000, guid: 73cc494e398ccfb439a340f4103ff8a7, type: 3}
+  - {fileID: 8300000, guid: 031c0fbcf7b99384d830e123ec75fa0e, type: 3}
+  - {fileID: 8300000, guid: 86d9fbaeed6733f429cc6b0a2fbe93d0, type: 3}
+  - {fileID: 8300000, guid: 99f33537d5a7632478587a8b8164bbca, type: 3}
+  - {fileID: 8300000, guid: 7ebeb6e384e4f0f43835d7f42c76d7f9, type: 3}
+  - {fileID: 8300000, guid: b0cb59eba48407f4a9cf382f7e5c1336, type: 3}
+  - {fileID: 8300000, guid: a90fc6ce791abcd4a915662f3618c7f7, type: 3}
+  - {fileID: 8300000, guid: f52ffe63103b99f4a81a2b881da8d2cb, type: 3}
+  useMain: []
+  useSub:
+  - {fileID: 8300000, guid: 62b9941fb7602e2428833abac93c3354, type: 3}
+  - {fileID: 8300000, guid: 629f5e7c07af66d4dbb0e14f8d682074, type: 3}
+  - {fileID: 8300000, guid: 2b093c4b7ddf07040aefdd2f239835d8, type: 3}
+  kill:
+  - {fileID: 8300000, guid: 1482e0718db29a6468ab7914035019a8, type: 3}
+  - {fileID: 8300000, guid: c91bb1b202ca84246b9596629d4c042f, type: 3}
+  - {fileID: 8300000, guid: 73b4d0609cca7394f8ea11acdeba7621, type: 3}
+  - {fileID: 8300000, guid: 43c9b05b6a982bb4eb9b5f789b54d6ad, type: 3}
+  - {fileID: 8300000, guid: 7b37659bdfc68ff4288179982aaab23b, type: 3}
+  - {fileID: 8300000, guid: a4c46b4bd71c66c43b4c406afeaf61d2, type: 3}
+  friendlyFire:
+  - {fileID: 8300000, guid: 25c9a196becaa0a4eae196a54ee8daa1, type: 3}
+  - {fileID: 8300000, guid: 45f865cbf3e887b41ad2a878e87cea60, type: 3}
+  damage:
+  - {fileID: 8300000, guid: 7a9e6d8c939be534b9ff28c97abcd4cb, type: 3}
+  damageFF:
+  - {fileID: 8300000, guid: af4cff6619232b0428cdaf7bb602da36, type: 3}
+  - {fileID: 8300000, guid: 283cf4f511546cc48ad44686d20f4166, type: 3}
+  damageTrap:
+  - {fileID: 8300000, guid: 3a75d774ce28e5f4e95b464892ec9f9e, type: 3}
+  - {fileID: 8300000, guid: 2731e6baf345cdd478f4d10b12d7f121, type: 3}
+  thanks:
+  - {fileID: 8300000, guid: 4a3c1a996d024434abd5c061ba7d46fe, type: 3}
+  roundWin:
+  - {fileID: 8300000, guid: 61c5ec1c012753a4aada8047849eb563, type: 3}
+  gameWin:
+  - {fileID: 8300000, guid: 9d22ac1c89e38fa4796c8d7767c9fccb, type: 3}
