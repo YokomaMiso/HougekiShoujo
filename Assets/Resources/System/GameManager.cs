@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         GameObject sda = Instantiate(suddenDeathAreaPrefab, stage.transform);
         sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();
         sdaInstance = sda.GetComponent<SuddenDeathArea>();
+        if (soloPlayDebug) { sdaInstance.gameObject.SetActive(false); }
 
         //ステージBGMの再生
         SoundManager.PlayBGM(nowStageData.GetBGMData().GetBGM());
