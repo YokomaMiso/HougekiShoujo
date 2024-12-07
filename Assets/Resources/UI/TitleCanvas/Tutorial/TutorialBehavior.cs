@@ -23,12 +23,12 @@ public class TutorialBehavior : MonoBehaviour
     void OnEnable()
     {
         ChangeDisplayButtons();
+        TextSpawner();
     }
 
     void Update()
     {
         if (InputManager.isChangedController) { ChangeDisplayButtons(); }
-        if (languageNum != Managers.instance.nowLanguage) { TextSpawner(); }
     }
 
     protected virtual void ChangeDisplayButtons()
