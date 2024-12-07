@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject playerPrefab;
@@ -34,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     const float startDelay = 4;
     const float endDelay = 3;
+
+    [SerializeField] bool soloPlayDebug;
 
     //For Client
     int nowRound = 1;
@@ -297,7 +298,7 @@ public class GameManager : MonoBehaviour
 
     IngameData.GameData DeadCheck(IngameData.GameData _data)
     {
-        //return _data;
+        if (soloPlayDebug) { return _data; }
 
         if (!_data.play) { return _data; }
         if (_data.winner != -1) { return _data; }
