@@ -8,9 +8,9 @@ public class KeyAnnounceInTutorial : MonoBehaviour
     [SerializeField] TutorialWindow tw;
     readonly string[] announceText = new string[2] { "Next", "OK" };
 
-     void Start()
+    void Start()
     {
-        if (Managers.instance.GetSmartPhoneFlag()) { Destroy(transform.parent.gameObject); }
+        //if (Managers.instance.GetSmartPhoneFlag()) { Destroy(transform.parent.gameObject); }
     }
 
     void OnEnable()
