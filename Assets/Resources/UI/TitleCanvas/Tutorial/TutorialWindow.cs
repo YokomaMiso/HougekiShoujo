@@ -28,6 +28,17 @@ public class TutorialWindow : MonoBehaviour
         ArrowUpdate();
     }
 
+    void OnEnable()
+    {
+        spriteNum = 0;
+        int maxNum = tutorialImage.Length;
+        for (int i = 0; i < maxNum; i++)
+        {
+            bool active = (i == spriteNum);
+            tutorialImage[i].gameObject.SetActive(active);
+        }
+    }
+
     void Update()
     {
         Vector2 inputVector = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.2f);
@@ -38,6 +49,7 @@ public class TutorialWindow : MonoBehaviour
         }
 
         if (InputManager.GetKeyDown(BoolActions.SouthButton)) { Submit(); }
+        else if (InputManager.GetKeyDown(BoolActions.EastButton)) { Cancel(); }
     }
 
     public void Submit()
@@ -50,6 +62,19 @@ public class TutorialWindow : MonoBehaviour
         else
         {
             ChangeSpriteNum(1);
+        }
+    }
+
+    public void Cancel()
+    {
+        if (spriteNum == 0)
+        {
+            parent.ChangeTitleState(TITLE_STATE.SELECT);
+            Managers.instance.PlaySFXForUI(1);
+        }
+        else
+        {
+            ChangeSpriteNum(-1);
         }
     }
 
