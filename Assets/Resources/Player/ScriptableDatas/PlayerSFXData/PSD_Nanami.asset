@@ -16,4 +16,5 @@ MonoBehaviour:
   aimSFX: {fileID: 8300000, guid: db6733eb4836b674081532cc86722966, type: 3}
   fireSFX: {fileID: 8300000, guid: 10ee9bb9ee8f6cc4191cb0550a79a6d5, type: 3}
   flySFX: {fileID: 8300000, guid: ae3ccbe7fc502b244a0f900dc752905f, type: 3}
-  explosionSFX: {fileID: 8300000, guid: 3c05675bd0321ff41ab80b1e8a6ecf4d, type: 3}
+  explosionSFX:
+  - {fileID: 8300000, guid: 3c05675bd0321ff41ab80b1e8a6ecf4d, type: 3}

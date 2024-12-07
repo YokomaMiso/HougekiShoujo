@@ -11,11 +11,11 @@ public class PlayerSFXData : ScriptableObject
     [SerializeField, Header("Aim SFX")] AudioClip aimSFX;
     [SerializeField, Header("Fire SFX")] AudioClip fireSFX;
     [SerializeField, Header("Fly SFX")] AudioClip flySFX;
-    [SerializeField, Header("Explosion SFX")] AudioClip explosionSFX;
+    [SerializeField, Header("Explosion SFX")] AudioClip[] explosionSFX;
 
     public AudioClip GetReloadSFX() { return reloadSFX; }
     public AudioClip GetAimSFX() { return aimSFX; }
     public AudioClip GetFireSFX() { return fireSFX; }
     public AudioClip GetFlySFX() { return flySFX; }
-    public AudioClip GetExplosionSFX() { return explosionSFX; }
+    public AudioClip GetExplosionSFX(int _num = 0) { return explosionSFX[_num]; }
 }

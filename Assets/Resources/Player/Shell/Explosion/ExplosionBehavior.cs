@@ -15,6 +15,9 @@ public class ExplosionBehavior : MonoBehaviour
     protected float lifeTime;
     protected float timer;
 
+    int num = 0;
+    public void SetNum(int _num) { num = _num; }
+
     public virtual void SetData(Explosion _data)
     {
         imageAnimator = transform.GetChild(0).GetComponent<Animator>();
@@ -23,14 +26,13 @@ public class ExplosionBehavior : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, scale);
 
         imageAnimator.runtimeAnimatorController = _data.GetAnim();
-
     }
 
     protected virtual void Start()
     {
         lifeTime = imageAnimator.GetCurrentAnimatorStateInfo(0).length * 0.5f;
 
-        GameObject obj = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetExplosionSFX());
+        GameObject obj = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetExplosionSFX(num));
         obj.transform.position = this.transform.position;
 
         Vector3 distance = transform.position - Camera.main.transform.position;
