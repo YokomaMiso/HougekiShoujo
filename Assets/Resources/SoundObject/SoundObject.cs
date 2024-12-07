@@ -1,16 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoundObject : MonoBehaviour
 {
-    int soundID = -1;
+    const float lowPassMax = 22000;
+    const float lowPassMin = 1200;
+    static float blindScale;
+    static bool blind;
+
+    SOUND_TYPE soundType;
+
+    AudioLowPassFilter lowPassInstance = null;
     float lifeTime;
     AudioClip clip;
     AudioSource source;
 
-    bool isBGM = false;
     float timer;
+    
+    public static void SetBlind(float _t) 
+    {
+        blind = true;
+        blindScale = _t;
+    }
+    public static void ResetBlind()
+    {
+        blind = false;
+        blindScale = 0;
+    }
 
     public void ReceiveSound(AudioClip _clip, SOUND_TYPE _type, bool _loop)
     {
@@ -23,13 +41,13 @@ public class SoundObject : MonoBehaviour
         float volume = SoundManager.masterVolume;
         float pitch = 1.0f;
 
-        switch (_type)
+        soundType = _type;
+        switch (soundType)
         {
             case SOUND_TYPE.BGM:
-                volume *= SoundManager.bgmVolume/2;
+                volume *= SoundManager.bgmVolume / 2;
                 if (_loop) { lifeTime = Mathf.Infinity; }
                 else { lifeTime = clip.length; }
-                isBGM = true;
                 source.spatialBlend = 0;
                 break;
 
@@ -66,5 +84,26 @@ public class SoundObject : MonoBehaviour
     {
         timer += Time.deltaTime;
         if (timer >= lifeTime) { Destroy(gameObject); }
+
+        if (blind)
+        {
+            if (lowPassInstance == null) { CreateLowPassFilter(); }
+            else { LowPassFilterUpdate(); }
+        }
+        else
+        {
+            if (lowPassInstance != null) { Destroy(lowPassInstance); }
+        }
+    }
+
+    void CreateLowPassFilter()
+    {
+        lowPassInstance = transform.AddComponent<AudioLowPassFilter>();
+        lowPassInstance.cutoffFrequency = Mathf.Lerp(lowPassMin, lowPassMax, blindScale);
+    }
+
+    void LowPassFilterUpdate()
+    {
+        lowPassInstance.cutoffFrequency = Mathf.Lerp(lowPassMin, lowPassMax, blindScale);
     }
 }
