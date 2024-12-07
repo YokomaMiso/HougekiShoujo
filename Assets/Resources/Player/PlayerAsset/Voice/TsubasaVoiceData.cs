@@ -11,9 +11,9 @@ public class TsubasaVoiceData : PlayerVoiceData
 
     public override AudioClip GetReload(float _t)
     {
-        if (_t < 0.33f) { return reload[Random.Range(0, reload.Length)]; }
+        if (_t <= 0) { return reload4[Random.Range(0, reload.Length)]; }
+        else if (_t < 0.33f) { return reload3[Random.Range(0, reload.Length)]; }
         else if (_t < 0.66f) { return reload2[Random.Range(0, reload.Length)]; }
-        else if (_t < 0.99f) { return reload3[Random.Range(0, reload.Length)]; }
-        else { return reload4[Random.Range(0, reload.Length)]; }
+        else { return reload[Random.Range(0, reload.Length)]; }
     }
 }

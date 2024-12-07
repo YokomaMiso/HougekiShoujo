@@ -46,7 +46,7 @@ public class PlayerReload : MonoBehaviour
         if (timer > reloadTime)
         {
             timer = 0;
-            if (ownerPlayer.GetPlayerData().GetShell().GetShellType() != SHELL_TYPE.SPECIAL) 
+            if (ownerPlayer.GetPlayerData().GetShell().GetShellType() != SHELL_TYPE.SPECIAL)
             {
                 ownerPlayer.ChangeShellIconColor(1);
             }
@@ -59,7 +59,14 @@ public class PlayerReload : MonoBehaviour
     public void Reload(int _num)
     {
         shellNum = _num;
-        float reloadRate = Mathf.Clamp01(timer / reloadTime);
+
+        float reloadRate = 0;
+        if (ownerPlayer.GetPlayerData().GetShell().GetShellType() == SHELL_TYPE.SPECIAL)
+        {
+            float nowTimer = ownerPlayer.GetSubWeaponReload();
+            float maxTime = ownerPlayer.GetPlayerData().GetSubWeapon().GetReloadTime();
+            reloadRate = Mathf.Clamp01(nowTimer / maxTime);
+        }
         ownerPlayer.PlayVoice(ownerPlayer.GetPlayerData().GetPlayerVoiceData().GetReload(reloadRate));
         GameObject reloadSFX = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetReloadSFX(), transform);
         reloadSFX.GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
