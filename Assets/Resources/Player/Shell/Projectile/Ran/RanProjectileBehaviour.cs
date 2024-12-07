@@ -36,6 +36,7 @@ public class RanProjectileBehaviour : ProjectileBehavior
         GameObject obj = Instantiate(explosionInstance, spawnPos, Quaternion.identity);
         obj.GetComponent<ExplosionBehavior>().SetPlayer(ownerPlayer);
         obj.GetComponent<ExplosionBehavior>().SetData(explosion);
+        obj.GetComponent<ExplosionBehavior>().SetNum(state);
 
         state++;
     }

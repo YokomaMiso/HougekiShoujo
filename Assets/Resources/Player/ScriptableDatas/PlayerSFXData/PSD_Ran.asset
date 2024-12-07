@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb239e671dab7cb45bb9374ffa27ee41, type: 3}
-  m_Name: PSD_Chikane
+  m_Name: PSD_Ran
   m_EditorClassIdentifier: 
-  reloadSFX: {fileID: 8300000, guid: 656ba9eb9a4510e44acc46e5bd1ac5e8, type: 3}
-  aimSFX: {fileID: 8300000, guid: a394c1da9443a694b9b3a4e753b8ce8b, type: 3}
-  fireSFX: {fileID: 8300000, guid: 37944658b33bfcb47afd6be7ae5e0241, type: 3}
+  reloadSFX: {fileID: 8300000, guid: e668ee55a61eeab4596a58eb3013b6c7, type: 3}
+  aimSFX: {fileID: 8300000, guid: 3b82852df1873744b939b3d400fb9fc6, type: 3}
+  fireSFX: {fileID: 8300000, guid: b6c6134b4ad54384591bbcac0776e86b, type: 3}
   flySFX: {fileID: 0}
   explosionSFX:
-  - {fileID: 8300000, guid: ecbbe21c156166443bde1696f25bde5a, type: 3}
+  - {fileID: 8300000, guid: 66bce00c6f6b42048887c89b026e92b2, type: 3}
+  - {fileID: 8300000, guid: 89516610b2cd931469cecf6c87026ad2, type: 3}
