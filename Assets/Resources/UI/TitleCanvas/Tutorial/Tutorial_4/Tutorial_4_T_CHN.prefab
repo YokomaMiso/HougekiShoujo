@@ -66,7 +66,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 74fd8ad6f5ed0084bb12eaa45b6d1af4, type: 3}
+    m_Font: {fileID: 12800000, guid: 5419935eecdc9254d9c467872f2250d2, type: 3}
     m_FontSize: 48
     m_FontStyle: 0
     m_BestFit: 0
@@ -78,9 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Send
-
-    Emote'
+  m_Text: "\u5BC4\u9001\u8868\u60C5"
 --- !u!1 &2329341268245269216
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +183,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 74fd8ad6f5ed0084bb12eaa45b6d1af4, type: 3}
+    m_Font: {fileID: 12800000, guid: 5419935eecdc9254d9c467872f2250d2, type: 3}
     m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
@@ -197,7 +195,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Communicate your emotions.
+  m_Text: "\u6E9D\u901A\u4F60\u7684\u60C5\u7DD2\u3002"
 --- !u!1 &8315324247382189666
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +262,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 74fd8ad6f5ed0084bb12eaa45b6d1af4, type: 3}
+    m_Font: {fileID: 12800000, guid: 5419935eecdc9254d9c467872f2250d2, type: 3}
     m_FontSize: 48
     m_FontStyle: 0
     m_BestFit: 0
@@ -276,6 +274,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Send
-
-    Chat'
+  m_Text: "\u5BC4\u9001\u6587\u5B57"
