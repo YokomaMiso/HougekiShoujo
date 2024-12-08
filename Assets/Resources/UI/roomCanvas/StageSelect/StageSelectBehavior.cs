@@ -25,6 +25,14 @@ public class StageSelectBehavior : MonoBehaviour
     [SerializeField] SelecterArrow[] selectArrows;
     [SerializeField] TextChangerAtLanguage stageAnnounce;
 
+    [SerializeField] AudioClip binderIn;
+    [SerializeField] AudioClip binderOut;
+    [SerializeField] AudioClip stageChange;
+    [SerializeField] AudioClip stageDecide;
+
+    bool inEffect;
+    bool outEffect;
+
     void OnEnable()
     {
         start = true;
@@ -36,6 +44,9 @@ public class StageSelectBehavior : MonoBehaviour
 
         DisplayStageUpdate(OSCManager.OSCinstance.roomData.stageNum);
         stageAnnounce.ChangeText();
+
+        inEffect = false;
+        outEffect = false;
     }
 
     void Update()
@@ -51,6 +62,12 @@ public class StageSelectBehavior : MonoBehaviour
 
             float nowRate = Mathf.Sqrt(timer / binderMoveTime);
             binder.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
+
+            if (!inEffect)
+            {
+                SoundManager.PlaySFXForUI(binderIn);
+                inEffect = true;
+            }
         }
         else if (!end)
         {
@@ -77,6 +94,11 @@ public class StageSelectBehavior : MonoBehaviour
 
                 float nowRate = Mathf.Sqrt(timer / binderMoveTime);
                 binder.localPosition = Vector3.Lerp(startPos, endPos, nowRate);
+                if (!outEffect)
+                {
+                    SoundManager.PlaySFXForUI(binderOut);
+                    outEffect = true;
+                }
             }
             else
             {
@@ -91,7 +113,7 @@ public class StageSelectBehavior : MonoBehaviour
     void StageNumChange()
     {
         float input = InputManager.GetAxisDelay<Vector2>(Vec2AxisActions.LStickAxis, 0.5f).x;
-        if (Mathf.Abs(input) >= 0.1f)
+        if (Mathf.Abs(input) >= 0.9f)
         {
             MachingRoomData.RoomData myRoomData = OSCManager.OSCinstance.roomData;
             int stageNum = myRoomData.stageNum;
@@ -110,6 +132,7 @@ public class StageSelectBehavior : MonoBehaviour
             }
 
             OSCManager.OSCinstance.roomData.stageNum = stageNum;
+            SoundManager.PlaySFXForUI(stageChange);
 
             DisplayStageUpdate(stageNum);
         }
@@ -134,6 +157,7 @@ public class StageSelectBehavior : MonoBehaviour
         }
 
         OSCManager.OSCinstance.roomData.stageNum = stageNum;
+        SoundManager.PlaySFXForUI(stageChange);
 
         DisplayStageUpdate(stageNum);
     }
@@ -149,13 +173,19 @@ public class StageSelectBehavior : MonoBehaviour
 
     void PressSubmit()
     {
+        if (end) { return; }
+
         if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
             end = true;
+            SoundManager.PlaySFXForUI(stageDecide);
         }
     }
     public void PressSubmitFromUI()
     {
+        if (end) { return; }
+
         end = true;
+        SoundManager.PlaySFXForUI(stageDecide);
     }
 }

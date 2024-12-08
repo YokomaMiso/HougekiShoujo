@@ -240,7 +240,7 @@ public class SelectRoomCanvasBehavior : MonoBehaviour
         if (roomBannerList[selectRoomNum].memberCount >= 6) { return; }
         if (roomBannerList[selectRoomNum].isPlaying) { return; }
 
-        Managers.instance.PlaySFXForUI(0);
+        Managers.instance.PlaySFXForUI(3);
 
         OSCManager.OSCinstance.startPort = selectRoomNum * 10 + 50000;
 
