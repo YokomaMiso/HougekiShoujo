@@ -59,7 +59,8 @@ public class SoundObject : MonoBehaviour
 
             case SOUND_TYPE.SFX_FOR_UI:
                 volume *= SoundManager.sfxVolume;
-                lifeTime = clip.length;
+                if (_loop) { lifeTime = Mathf.Infinity; }
+                else { lifeTime = clip.length; }
                 source.spatialBlend = 0;
                 break;
 

@@ -67,12 +67,12 @@ public class SoundManager : MonoBehaviour
 
         return obj;
     }
-    public static GameObject PlaySFXForUI(AudioClip _clip, Transform _transform = null)
+    public static GameObject PlaySFXForUI(AudioClip _clip, Transform _transform = null, bool _loop = false)
     {
         if (_transform == null) { _transform = thisTransform; }
 
         GameObject obj = Instantiate(soundObject, _transform);
-        obj.GetComponent<SoundObject>().ReceiveSound(_clip, SOUND_TYPE.SFX_FOR_UI, false);
+        obj.GetComponent<SoundObject>().ReceiveSound(_clip, SOUND_TYPE.SFX_FOR_UI, _loop);
 
         return obj;
     }

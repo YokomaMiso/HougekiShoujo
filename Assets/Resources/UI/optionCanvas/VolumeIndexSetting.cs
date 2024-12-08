@@ -47,5 +47,6 @@ public class VolumeIndexSetting : MonoBehaviour
 
         slider.value = nowValue;
         transform.GetChild(2).GetChild(0).GetComponent<Text>().text = nowValue.ToString("f1");
+        Managers.instance.PlaySFXForUI(2);
     }
 }
