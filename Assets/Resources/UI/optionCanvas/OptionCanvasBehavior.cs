@@ -121,6 +121,8 @@ public class OptionCanvasBehavior : MonoBehaviour
 
             categorys[selectCategory].sprite = levelOneWindow[1];
             settings[selectCategory].SetActive(true);
+
+            Managers.instance.PlaySFXForUI(2);
         }
     }
     void SubmitInCategory()
@@ -133,16 +135,19 @@ public class OptionCanvasBehavior : MonoBehaviour
                 soundSetting.transform.GetChild(settingNum).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[1];
                 soundSetting.transform.GetChild(settingNum).GetChild(1).GetComponent<Slider>().handleRect.GetComponent<Image>().sprite = levelThreePen[1];
                 soundSetting.transform.GetChild(settingNum).GetChild(2).GetComponent<Image>().sprite = levelFourWindow[1];
+                Managers.instance.PlaySFXForUI(0);
                 break;
             case 1:
                 inCategory = true;
                 settingNum = 0;
                 gamePlaySetting.transform.GetChild(settingNum).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[1];
+                Managers.instance.PlaySFXForUI(0);
                 break;
             case 2:
                 inCategory = true;
                 settingNum = 0;
                 languageSetting.transform.GetChild(settingNum).GetChild(0).GetComponent<Image>().sprite = levelTwoWindow[1];
+                Managers.instance.PlaySFXForUI(0);
                 break;
 
             case 3:
@@ -261,6 +266,7 @@ public class OptionCanvasBehavior : MonoBehaviour
             case 3:
                 break;
         }
+        Managers.instance.PlaySFXForUI(2);
     }
 
     void ChangeSelectedValue(float _x)
@@ -316,6 +322,7 @@ public class OptionCanvasBehavior : MonoBehaviour
             case 3:
                 break;
         }
+        Managers.instance.PlaySFXForUI(2);
     }
 
     void SubmitInSetting()
@@ -353,6 +360,7 @@ public class OptionCanvasBehavior : MonoBehaviour
                 break;
         }
 
+        Managers.instance.PlaySFXForUI(0);
         inCategory = false;
         settingNum = 0;
     }
@@ -363,6 +371,8 @@ public class OptionCanvasBehavior : MonoBehaviour
 
     public void Submit()
     {
+        Managers.instance.PlaySFXForUI(3);
+
         Managers.instance.SaveOptionData(optionData);
         Destroy(gameObject);
     }

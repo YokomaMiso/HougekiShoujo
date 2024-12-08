@@ -46,5 +46,7 @@ public class LanguageRadioBoxSetting : MonoBehaviour
             transform.GetChild(i + 1).GetComponent<Image>().sprite = sprite;
             transform.GetChild(i + 1).GetChild(0).GetComponent<Text>().color = color;
         }
+
+        Managers.instance.PlaySFXForUI(2);
     }
 }

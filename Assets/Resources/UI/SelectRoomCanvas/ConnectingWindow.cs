@@ -11,9 +11,12 @@ public class ConnectingWindow : MonoBehaviour
     Text connectText;
     const string textString = "Connecting";
 
+    [SerializeField] AudioClip connnectSFX;
+
     void Start()
     {
         connectText = transform.GetChild(0).GetChild(0).GetComponent<Text>();
+        SoundManager.PlaySFXForUI(connnectSFX, this.transform, true);
     }
 
     void Update()

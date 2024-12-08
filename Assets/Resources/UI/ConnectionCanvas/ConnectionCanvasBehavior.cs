@@ -42,6 +42,9 @@ public class ConnectionCanvasBehavior : MonoBehaviour
         "超时\n返回主页面",
         "超時\n返回主頁面",
     };
+
+    [SerializeField] AudioClip connnectSFX;
+
     private void Start()
     {
         stateText = transform.GetChild(2).GetComponent<Text>();
@@ -49,6 +52,8 @@ public class ConnectionCanvasBehavior : MonoBehaviour
         stateText.color = Color.clear;
 
         OSCManager.OSCinstance.CreateTempNet();
+
+        SoundManager.PlaySFXForUI(connnectSFX, this.transform, true);
     }
 
     void Update()

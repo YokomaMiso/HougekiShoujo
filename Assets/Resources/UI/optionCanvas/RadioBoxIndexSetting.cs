@@ -26,7 +26,8 @@ public class RadioBoxIndexSetting : MonoBehaviour
             transform.GetChild(1).GetChild(0).GetComponent<Text>().color = colors[0];
             transform.GetChild(2).GetComponent<Image>().sprite = levelFourWindow[1];
             transform.GetChild(2).GetChild(0).GetComponent<Text>().color = colors[1];
-
         }
+
+        Managers.instance.PlaySFXForUI(2);
     }
 }
