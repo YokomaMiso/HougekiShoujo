@@ -107,7 +107,7 @@ public class InputName : MonoBehaviour
         Managers.instance.SaveOptionData(Managers.instance.optionData);
         OSCManager.OSCinstance.roomData.playerName = playerName;
 
-        Managers.instance.PlaySFXForUI(0);
+        Managers.instance.PlaySFXForUI(3);
         parent.ChangeTitleState(TITLE_STATE.CHANGE_TO_CONNECTION);
     }
 

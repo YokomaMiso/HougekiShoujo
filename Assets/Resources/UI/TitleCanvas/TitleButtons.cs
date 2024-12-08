@@ -68,13 +68,13 @@ public class TitleButtons : MonoBehaviour
     {
         if (InputManager.GetKeyDown(BoolActions.SouthButton))
         {
-            Managers.instance.PlaySFXForUI(0);
+            Managers.instance.PlaySFXForUI(3);
             parent.ChangeFromButtons(selectNum);
         }
     }
     public void DecideSelectFromTouch()
     {
-        Managers.instance.PlaySFXForUI(0);
+        Managers.instance.PlaySFXForUI(3);
         parent.ChangeFromButtons(selectNum);
     }
     void PressCancel()

@@ -1663,6 +1663,10 @@ MonoBehaviour:
   - {fileID: 8933073467203853271}
   - {fileID: 9188444697818549024}
   stageAnnounce: {fileID: 4291418217610847640}
+  binderIn: {fileID: 8300000, guid: a2feeece735acd04197d4ab5a7221e6e, type: 3}
+  binderOut: {fileID: 8300000, guid: 3ad0e0477a57afd4184ea2576505ac94, type: 3}
+  stageChange: {fileID: 8300000, guid: d3fb6164fada2544ab63500b9f137ba8, type: 3}
+  stageDecide: {fileID: 8300000, guid: d1290ad55f1f4c94b8d7aeb99cca202d, type: 3}
 --- !u!1 &3648120999037756819
 GameObject:
   m_ObjectHideFlags: 0

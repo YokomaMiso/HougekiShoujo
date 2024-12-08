@@ -13,6 +13,8 @@ public class RoomManager : MonoBehaviour
 
     public int readyCount = 0;
 
+    [SerializeField] AudioClip charaChange;
+    [SerializeField] AudioClip teamChange;
 
     public void Init()
     {
@@ -75,6 +77,7 @@ public class RoomManager : MonoBehaviour
         if (teamCount[_num] >= 4) { return; }
 
         myRoomData.myTeamNum = _num;
+        SoundManager.PlaySFXForUI(teamChange);
         OSCManager.OSCinstance.roomData = myRoomData;
     }
 
@@ -93,6 +96,7 @@ public class RoomManager : MonoBehaviour
         else { calc = (calc + (maxCharaCount - 1)) % maxCharaCount; }
 
         myRoomData.selectedCharacterID = calc;
+        SoundManager.PlaySFXForUI(charaChange);
 
         OSCManager.OSCinstance.roomData = myRoomData;
     }
@@ -104,6 +108,8 @@ public class RoomManager : MonoBehaviour
         //自分がホストなら
         if (myRoomData.myID == 0)
         {
+            if (myRoomData.gameStart) { return; }
+
             if (myRoomData.teamACount >= 4) { return; }
             if (myRoomData.teamBCount >= 4) { return; }
 
@@ -125,6 +131,7 @@ public class RoomManager : MonoBehaviour
                 {
                     myRoomData.stageNum = Random.Range(1, Managers.instance.gameManager.allStageData.GetStageLength());
                 }
+                Managers.instance.PlaySFXForUI(3);
 #else
                 //メンバー数が偶数ならゲームスタート
                 if(myRoomData.teamACount == myRoomData.teamBCount)
@@ -135,6 +142,7 @@ public class RoomManager : MonoBehaviour
                     {
                         myRoomData.stageNum = Random.Range(1, Managers.instance.gameManager.allStageData.GetStageLength());
                     }
+                    Managers.instance.PlaySFXForUI(3);
                 }
 #endif
             }
@@ -172,6 +180,7 @@ public class RoomManager : MonoBehaviour
         else
         {
             if (myRoomData.ready) { myRoomData.ready = false; }
+            Managers.instance.PlaySFXForUI(1);
         }
 
         OSCManager.OSCinstance.roomData = myRoomData;

@@ -54,6 +54,7 @@ public class Managers : MonoBehaviour
     [SerializeField] AudioClip submitSFX;
     [SerializeField] AudioClip cancelSFX;
     [SerializeField] AudioClip cursorSFX;
+    [SerializeField] AudioClip startSFX;
     public void PlaySFXForUI(int _num)
     {
         AudioClip ac;
@@ -62,6 +63,7 @@ public class Managers : MonoBehaviour
             default: ac = submitSFX; break;
             case 1: ac = cancelSFX; break;
             case 2: ac = cursorSFX; break;
+            case 3: ac = startSFX; break;
         }
         SoundManager.PlaySFXForUI(ac);
     }

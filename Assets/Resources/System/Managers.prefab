@@ -74,6 +74,7 @@ MonoBehaviour:
   submitSFX: {fileID: 8300000, guid: 30696a7cf03517b41842776ace7ab440, type: 3}
   cancelSFX: {fileID: 8300000, guid: c65ae382bdd476d499e66d03215bb856, type: 3}
   cursorSFX: {fileID: 8300000, guid: 0f69e7d6eb8f2154486ac58c69359770, type: 3}
+  startSFX: {fileID: 8300000, guid: 9355cd00dbc764647a0b2735b477cee1, type: 3}
 --- !u!114 &2265797116704708556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +118,7 @@ MonoBehaviour:
     type: 3}
   defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   spriteDefaultMat: {fileID: 0}
+  soloPlayDebug: 0
 --- !u!114 &5065934935842733564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readyCount: 0
+  charaChange: {fileID: 8300000, guid: 874a0c429e3dca34cbec3817e0b10dbe, type: 3}
+  teamChange: {fileID: 8300000, guid: 910bc8742d394dd43b7b3d5741d635c0, type: 3}
 --- !u!114 &7942510688574649445
 MonoBehaviour:
   m_ObjectHideFlags: 0
