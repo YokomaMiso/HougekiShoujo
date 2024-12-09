@@ -39,9 +39,20 @@ public class CharaVisualInRoomCanvas : MonoBehaviour
     const float endTime = arriveTime + dropShadowArriveTime;
 
     PlayerData nowChara;
+    LANGUAGE_NUM textNum;
 
     void Update()
     {
+        if (textNum != Managers.instance.nowLanguage)
+        {
+            charaName.text = nowChara.GetCharaName();
+            charaNameRubi.text = nowChara.GetCharaNameRubi();
+            SetShellType((int)nowChara.GetShell().GetShellType());
+            SetSkillIcon(nowChara.GetShell());
+            SetSkillIcon(nowChara.GetSubWeapon());
+            textNum = Managers.instance.nowLanguage;
+        }
+
         if (timer >= endTime) { return; }
         timer += Time.deltaTime;
         if (timer >= endTime) { timer = endTime; }
