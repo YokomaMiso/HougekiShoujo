@@ -27,6 +27,6 @@ MonoBehaviour:
   difficulity: 2
   shell: {fileID: 11400000, guid: 85c7c7447fdc6874e8c970153900e2ab, type: 2}
   subWeapon: {fileID: 11400000, guid: 8f356ed14768bb54ea142a45182e3b8a, type: 2}
-  playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}
+  playerSFXData: {fileID: 11400000, guid: b29d7a580e3fae04ea0b656aabc0e5e7, type: 2}
   playerVoiceData: {fileID: 11400000, guid: 80e59f8eb0fe1b5479206af4b39a52b4, type: 2}
   resultJingle: {fileID: 8300000, guid: 54afb621898d7e34abc39c40a4cda88b, type: 3}
