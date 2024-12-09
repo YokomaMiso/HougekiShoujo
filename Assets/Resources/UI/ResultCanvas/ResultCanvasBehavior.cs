@@ -32,6 +32,10 @@ public class ResultCanvasBehavior : MonoBehaviour
     [Header("ƒWƒ“ƒOƒ‹")]
     [SerializeField] AudioClip startJingle;
 
+    bool[] sfxPlayed = new bool[2] { false, false };
+    [SerializeField] AudioClip middleMove;
+    [SerializeField] AudioClip outMove;
+
     void Start()
     {
         scoreBoard.Init();
@@ -60,11 +64,21 @@ public class ResultCanvasBehavior : MonoBehaviour
         float nowRate;
         if (displayAwardTime < timer && timer <= moveToMVPTime)
         {
+            if (!sfxPlayed[0])
+            {
+                SoundManager.PlaySFXForUI(middleMove);
+                sfxPlayed[0] = true;
+            }
             nowRate = Mathf.Sqrt((timer - displayAwardTime) / (moveToMVPTime - displayAwardTime));
             MoveItems(Vector3.Lerp(displayAwardPos, displayMVPPos, nowRate));
         }
         else if (displayMVPTime < timer && timer <= moveToScoreTime)
         {
+            if (!sfxPlayed[1])
+            {
+                SoundManager.PlaySFXForUI(outMove);
+                sfxPlayed[1] = true;
+            }
             nowRate = Mathf.Sqrt((timer - displayMVPTime) / (moveToScoreTime - displayMVPTime));
             MoveItems(Vector3.Lerp(displayMVPPos, displayScorePos, nowRate));
         }

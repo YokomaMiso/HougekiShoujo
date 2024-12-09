@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ecb6ed7a6f37047a729194b9c20423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popSFX: {fileID: 8300000, guid: 8a419c7089b092b44ab406f4542ce402, type: 3}
 --- !u!1 &565162491481939165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,6 +2447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db75c4020e7db914ab0d4e11c74535a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnSFX: {fileID: 8300000, guid: dec6ef93566362f47bee8a37baf01d30, type: 3}
 --- !u!1 &4308508915031080610
 GameObject:
   m_ObjectHideFlags: 0
@@ -3072,6 +3074,8 @@ MonoBehaviour:
   awardCanvas: {fileID: 1259577327565910999}
   exitButton: {fileID: 2475075734694297818}
   startJingle: {fileID: 8300000, guid: b423fba74c9380343a7c5bd057198403, type: 3}
+  middleMove: {fileID: 8300000, guid: bc2f5724f7b1543418e318aa920806c2, type: 3}
+  outMove: {fileID: 8300000, guid: 71ffd9bf07f9c63468c85fd19963b5df, type: 3}
 --- !u!1 &5325189518673690223
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,6 +3257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697775ab92e509947bed754a8c49022a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sfx: {fileID: 8300000, guid: cdd9baea7d2493e43a988193133f4a1a, type: 3}
 --- !u!1 &6169940767737095644
 GameObject:
   m_ObjectHideFlags: 0
@@ -3873,7 +3878,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32719d1df969be47b85167bab6db99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outline: {fileID: 0}
+  popSFX:
+  - {fileID: 8300000, guid: 27ac1b8dcaecfdd49b4c0493039bf863, type: 3}
+  - {fileID: 8300000, guid: 27ac1b8dcaecfdd49b4c0493039bf863, type: 3}
+  - {fileID: 8300000, guid: b89b93e54c41ca54ca46edf233cb0aac, type: 3}
 --- !u!1 &7439065881776160557
 GameObject:
   m_ObjectHideFlags: 0

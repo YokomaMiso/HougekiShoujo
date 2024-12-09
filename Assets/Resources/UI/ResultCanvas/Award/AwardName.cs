@@ -16,6 +16,9 @@ public class AwardName : MonoBehaviour
 
     Image[] names = new Image[(int)AWARD_ID.MAX_NUM];
 
+    bool[] sfxPlayed = new bool[(int)AWARD_ID.MAX_NUM] { false, false, false };
+    [SerializeField] AudioClip sfx;
+
     void Start()
     {
         limit = shrinkStart + childSub * (int)AWARD_ID.MAX_NUM;
@@ -38,6 +41,15 @@ public class AwardName : MonoBehaviour
 
             names[i].transform.localScale = Vector3.Lerp(startScale, endScale, scaleValue);
             names[i].color = Color.white * scaleValue;
+
+            if (!sfxPlayed[i])
+            {
+                if (scaleValue > 0)
+                {
+                    SoundManager.PlaySFXForUI(sfx);
+                    sfxPlayed[i] = true;
+                }
+            }
         }
     }
 }

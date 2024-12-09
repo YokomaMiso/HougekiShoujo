@@ -15,6 +15,9 @@ public class CharaIllustForMVP : MonoBehaviour
     Image allMask;
     Image illust;
 
+    bool sfxPlayed = false ;
+    [SerializeField] AudioClip popSFX;
+
     public void SetSprite(ResultScoreBoard.KDFData _kdf)
     {
         allMask = transform.GetComponent<Image>();
@@ -36,6 +39,15 @@ public class CharaIllustForMVP : MonoBehaviour
         float colorValue = Mathf.Clamp01((timer - startTime) / (endTime - startTime));
         allMask.color = teamColor * colorValue;
         illust.color = Color.white * colorValue;
+
+        if (!sfxPlayed)
+        {
+            if (colorValue > 0)
+            {
+                SoundManager.PlaySFXForUI(popSFX);
+                sfxPlayed = true;
+            }
+        }
     }
 
     Color ColorCordToRGB(int _num)

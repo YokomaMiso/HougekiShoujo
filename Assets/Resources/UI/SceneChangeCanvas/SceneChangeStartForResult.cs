@@ -16,6 +16,10 @@ public class SceneChangeStartForResult : SceneChange
     float newsPaperStopTime;
     float newsPaperZoomStartTime;
 
+    [SerializeField] AudioClip paperStartSFX;
+    [SerializeField] AudioClip paperInSFX;
+    bool paperIn;
+
     protected override void Start()
     {
         lifeTime = 3.0f;
@@ -23,6 +27,8 @@ public class SceneChangeStartForResult : SceneChange
         newsPaperStopTime = lifeTime - 1.0f;
         newsPaperZoomStartTime = lifeTime - 0.25f;
         newsPaper = transform.GetChild(1);
+
+        SoundManager.PlaySFXForUI(paperStartSFX);
     }
 
     void Update()
@@ -38,6 +44,11 @@ public class SceneChangeStartForResult : SceneChange
         }
         else if (newsPaperStopTime >= timer && timer > newsPaperMoveTime)
         {
+            if (!paperIn) 
+            {
+                SoundManager.PlaySFXForUI(paperInSFX,Managers.instance.transform);
+                paperIn = true;
+            }
             nowRate = Mathf.Pow((timer - newsPaperMoveTime) / (newsPaperStopTime - newsPaperMoveTime), 2);
             newsPaper.localPosition = Vector3.Lerp(newsPaperStartPos, newsPaperArrivePos, nowRate);
         }

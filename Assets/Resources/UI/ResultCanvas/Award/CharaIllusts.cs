@@ -18,7 +18,8 @@ public class CharaIllusts : MonoBehaviour
     Image[] allMasks = new Image[(int)AWARD_ID.MAX_NUM];
     Image[] illusts = new Image[(int)AWARD_ID.MAX_NUM];
 
-    [SerializeField] Material outline;
+    bool[] sfxPlayed = new bool[(int)AWARD_ID.MAX_NUM] { false, false, false };
+    [SerializeField] AudioClip[] popSFX;
 
     public void SetSprite(AWARD_ID _id, ResultScoreBoard.KDFData _kdf)
     {
@@ -46,6 +47,15 @@ public class CharaIllusts : MonoBehaviour
             float colorValue = Mathf.Clamp01(timer - alphaStart - (childSub * i));
             allMasks[i].color = teamColors[i] * colorValue;
             illusts[i].color = Color.white * colorValue;
+
+            if (!sfxPlayed[i]) 
+            {
+                if (colorValue > 0)
+                {
+                    SoundManager.PlaySFXForUI(popSFX[i]);
+                    sfxPlayed[i] = true;
+                }
+            }
         }
     }
 
