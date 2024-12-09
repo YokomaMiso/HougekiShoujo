@@ -14,6 +14,7 @@ public class PlayerRadioChat : MonoBehaviour
     [SerializeField] GameObject emotePrefab;
     [SerializeField] GameObject TeamChatCanvasPrefab;
     [SerializeField] GameObject EmoteChatCanvasPrefab;
+    [SerializeField] AudioClip openRadioChat;
 
     [SerializeField] Texture[] chatMainTex;
     [SerializeField] Texture[] chatColorTex;
@@ -90,6 +91,7 @@ public class PlayerRadioChat : MonoBehaviour
                     fastChatInstance.GetComponent<FastChat>().GetFastChatMat().SetFloat("_AngleOffset", 5.0f);
                 }
                 fastChatInstance.GetComponent<FastChat>().ReceiverFromRadioChat(true);
+                SoundManager.PlaySFXForUI(openRadioChat);
             }
         }
 
@@ -127,6 +129,7 @@ public class PlayerRadioChat : MonoBehaviour
                 }
                 fastChatInstance.GetComponent<FastChat>().SetChatType((int)RADIO_TYPE.TEXT);
                 fastChatInstance.GetComponent<FastChat>().ReceiverFromRadioChat(true);
+                SoundManager.PlaySFXForUI(openRadioChat);
             }
         }
 

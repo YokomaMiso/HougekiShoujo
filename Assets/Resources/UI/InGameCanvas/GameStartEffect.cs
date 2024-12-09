@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GameStartEffect : MonoBehaviour
 {
-
     Image baseLine;
 
     readonly Vector2 baseLineStartScale = new Vector3(1920, 688);
