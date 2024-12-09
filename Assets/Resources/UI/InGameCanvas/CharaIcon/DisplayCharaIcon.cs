@@ -45,6 +45,9 @@ public class DisplayCharaIcon : MonoBehaviour
     int[] iconNums = new int[6] { -1, -1, -1, -1, -1, -1 };
 
     bool attachedToPlacement = false;
+    bool[] sfxPlayed = new bool[6] { false, false, false, false, false, false };
+
+    [SerializeField] AudioClip iconPlace;
 
     void Start()
     {
@@ -136,7 +139,10 @@ public class DisplayCharaIcon : MonoBehaviour
             if (iconNums[i] == -1) { continue; }
             Vector2 pos = Vector2.Lerp(iconLineUpPos[iconNums[i]], iconPos[iconNums[i]], _rate);
             transform.GetChild(iconNums[i]).transform.localPosition = pos;
+            if (!sfxPlayed[i]) { SoundManager.PlaySFXForUI(iconPlace); }
         }
+
+        for (int i = _num; i < _num + 2; i++) { sfxPlayed[i] = true; }
     }
 
     void InPlacement()

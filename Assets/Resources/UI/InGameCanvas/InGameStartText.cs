@@ -16,6 +16,8 @@ public class InGameStartText : MonoBehaviour
     [SerializeField] AudioClip[] roundVoice;
     [SerializeField] AudioClip fightVoice;
 
+    [SerializeField] AudioClip fightSFX;
+
     void Start()
     {
         Init();
@@ -30,7 +32,7 @@ public class InGameStartText : MonoBehaviour
 
         vfx.color = Color.clear;
 
-        //for (int i = 0; i < soundPlayed.Length; i++) { soundPlayed[i] = false; }
+        for (int i = 0; i < soundPlayed.Length; i++) { soundPlayed[i] = false; }
     }
 
     void Update()
@@ -41,7 +43,7 @@ public class InGameStartText : MonoBehaviour
         {
             image.color = Color.clear;
             vfx.color = Color.clear;
-            //for (int i = 0; i < soundPlayed.Length; i++) { soundPlayed[i] = false; }
+            for (int i = 0; i < soundPlayed.Length; i++) { soundPlayed[i] = false; }
 
             return;
         }
@@ -50,13 +52,14 @@ public class InGameStartText : MonoBehaviour
 
         if (4.0f > timer && timer > 3.5f)
         {
-            /*
+            
             if (!soundPlayed[1]) 
             {
-                SoundManager.PlaySFXForUI(fightVoice);
+                //SoundManager.PlaySFXForUI(fightVoice);
+                SoundManager.PlaySFXForUI(fightSFX);
                 soundPlayed[1] = true;
             }
-            */
+            
 
             const float maxTime = 4.0f;
             float seed = (maxTime - timer) * 20;
@@ -71,13 +74,11 @@ public class InGameStartText : MonoBehaviour
         else if (3.5f > timer && timer > 2.5f)
         {
             int roundCount = hostIngameData.roundCount - 1;
-            /*
             if (!soundPlayed[0]) 
             {
-                SoundManager.PlaySFXForUI(roundVoice[roundCount]);
+                //SoundManager.PlaySFXForUI(roundVoice[roundCount]);
                 soundPlayed[0] = true;
             }
-            */
 
             image.sprite = roundSprites[roundCount];
             image.color = Color.white;

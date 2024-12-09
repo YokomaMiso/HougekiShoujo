@@ -855,6 +855,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b51f8563bf6425242b38e1101b6fc98b, type: 3}
   - {fileID: 8300000, guid: 39bb838f8f028664bae0185c4dffbea3, type: 3}
   fightVoice: {fileID: 8300000, guid: f303a11bc534aa749a8a902be8e47fe6, type: 3}
+  fightSFX: {fileID: 8300000, guid: a561f9178e029e24597743ff735755e7, type: 3}
 --- !u!1 &3569549600905928874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,6 +1526,8 @@ MonoBehaviour:
   winVoice:
   - {fileID: 8300000, guid: cc266314d5ad28d4eb348f4f26192224, type: 3}
   - {fileID: 8300000, guid: fd945fa0aca2d16439be4b958356c721, type: 3}
+  roundSFX: {fileID: 8300000, guid: b330d8493393a714f8df592dd9371894, type: 3}
+  winSFX: {fileID: 8300000, guid: a84e1dc6dc708184196492bdb4f8f778, type: 3}
 --- !u!114 &7114193224090447309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3148,6 +3151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253c59f5589763a4f826024744c93186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconPlace: {fileID: 8300000, guid: 23493420448445f42b7baa8a000b1d10, type: 3}
 --- !u!1001 &1220360111290149387
 PrefabInstance:
   m_ObjectHideFlags: 0

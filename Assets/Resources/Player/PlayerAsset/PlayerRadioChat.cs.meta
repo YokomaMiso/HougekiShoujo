@@ -6,10 +6,11 @@ MonoImporter:
   defaultReferences:
   - emotePrefab: {fileID: 2522134910337228876, guid: e2635b3d3c59752458cbe02e36d149dc,
       type: 3}
-  - fastChatCanvasPrefab: {fileID: 4432466077039030639, guid: 3cf0983ca891a8d44a4060748899ad96,
+  - TeamChatCanvasPrefab: {fileID: 4432466077039030639, guid: 495c75c0d28ac9243ace25f5bcd0acda,
       type: 3}
-  - serifWindow: {fileID: 2264529309454844271, guid: e1cda63bc62952a4f8cc6d9d28455d8c,
+  - EmoteChatCanvasPrefab: {fileID: 4432466077039030639, guid: 3cf0983ca891a8d44a4060748899ad96,
       type: 3}
+  - openRadioChat: {fileID: 8300000, guid: de234dea543824146b0146a3c562d2f6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
