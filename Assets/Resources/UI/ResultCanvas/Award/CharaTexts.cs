@@ -13,6 +13,8 @@ public class CharaTexts : MonoBehaviour
 
     Text[] texts = new Text[(int)AWARD_ID.MAX_NUM];
 
+
+
     public void SetText(AWARD_ID _id, ResultScoreBoard.KDFData _kdf)
     {
         texts[(int)_id] = transform.GetChild((int)_id).GetComponent<Text>();

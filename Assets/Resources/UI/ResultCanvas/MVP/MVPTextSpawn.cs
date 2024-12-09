@@ -16,6 +16,9 @@ public class MVPTextSpawn : MonoBehaviour
 
     Image[] texts = new Image[3];
 
+    bool sfxPlayed = false;
+    [SerializeField] AudioClip spawnSFX;
+
     void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -42,6 +45,15 @@ public class MVPTextSpawn : MonoBehaviour
 
             texts[i].transform.localScale = Vector3.Lerp(startScale, endScale, scaleValue);
             texts[i].color = Color.white * scaleValue;
+        }
+
+        if (!sfxPlayed)
+        {
+            if (timer > startTime)
+            {
+                SoundManager.PlaySFXForUI(spawnSFX);
+                sfxPlayed = true;
+            }
         }
     }
 }

@@ -116,6 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92107269980952446b0d608830f21510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paperStartSFX: {fileID: 8300000, guid: 4e308b06e2c448f47ace28e11b5c8eb6, type: 3}
+  paperInSFX: {fileID: 8300000, guid: 255f7df3d9e2ac94bb3be59e6c4fa558, type: 3}
 --- !u!1 &4678988526829535378
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +286,7 @@ VideoPlayer:
   m_RenderMode: 2
   m_AspectRatio: 1
   m_DataSource: 0
-  m_TimeUpdateMode: 2
+  m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
