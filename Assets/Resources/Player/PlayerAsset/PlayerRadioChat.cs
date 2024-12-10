@@ -23,7 +23,7 @@ public class PlayerRadioChat : MonoBehaviour
     RADIO_CHAT_ID radioChatID;
     RADIO_TYPE radioType = RADIO_TYPE.NONE;
 
-    const float resetTime = 3.0f;
+    const float resetTime = 1.0f;
     float timer;
 
     void Update()
