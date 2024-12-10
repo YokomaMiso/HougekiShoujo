@@ -20,11 +20,8 @@ public class VolumeIndexSetting : MonoBehaviour
 
     void Update()
     {
-        if (slider.value != nowValue)
-        {
-            nowValue = slider.value;
-            ValueChange();
-        }
+        nowValue = slider.value;
+        transform.GetChild(2).GetChild(0).GetComponent<Text>().text = nowValue.ToString("f1");
     }
 
     public void SetValue(float _value)
@@ -36,6 +33,7 @@ public class VolumeIndexSetting : MonoBehaviour
     public void AddValue(float _value)
     {
         nowValue += _value * (maxValue / 10);
+        Managers.instance.PlaySFXForUI(2);
         ValueChange();
     }
     public float GetValue() { return nowValue; }
@@ -47,6 +45,5 @@ public class VolumeIndexSetting : MonoBehaviour
 
         slider.value = nowValue;
         transform.GetChild(2).GetChild(0).GetComponent<Text>().text = nowValue.ToString("f1");
-        Managers.instance.PlaySFXForUI(2);
     }
 }

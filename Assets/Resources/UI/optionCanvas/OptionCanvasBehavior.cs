@@ -105,6 +105,13 @@ public class OptionCanvasBehavior : MonoBehaviour
         optionData.mortarSensitive = gamePlaySetting.transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
         optionData.displayTutorial = gamePlaySetting.transform.GetChild(2).GetComponent<RadioBoxIndexSetting>().on;
         optionData.languageNum = languageSetting.transform.GetChild(0).GetComponent<LanguageRadioBoxSetting>().num;
+
+        SoundManager.masterVolume = optionData.masterVolume;
+        SoundManager.bgmVolume = optionData.bgmVolume;
+        SoundManager.sfxVolume = optionData.sfxVolume;
+        SoundManager.voiceVolume = optionData.voiceVolume;
+        float nowVolume = SoundManager.masterVolume * SoundManager.bgmVolume;
+        SoundManager.BGMVolumeChange(nowVolume);
     }
 
 
@@ -283,13 +290,6 @@ public class OptionCanvasBehavior : MonoBehaviour
                 {
                     if (_x < 0) { applyValue *= -1; }
                     soundSetting.transform.GetChild(settingNum).GetComponent<VolumeIndexSetting>().AddValue(applyValue);
-                    SoundManager.masterVolume = soundSetting.transform.GetChild(0).GetComponent<VolumeIndexSetting>().GetValue();
-                    SoundManager.bgmVolume = soundSetting.transform.GetChild(1).GetComponent<VolumeIndexSetting>().GetValue();
-                    SoundManager.sfxVolume = soundSetting.transform.GetChild(2).GetComponent<VolumeIndexSetting>().GetValue();
-                    SoundManager.voiceVolume = soundSetting.transform.GetChild(3).GetComponent<VolumeIndexSetting>().GetValue();
-
-                    float nowVolume = SoundManager.masterVolume * SoundManager.bgmVolume;
-                    SoundManager.BGMVolumeChange(nowVolume);
                 }
                 break;
             //gameplay
