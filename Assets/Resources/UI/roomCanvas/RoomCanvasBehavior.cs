@@ -27,6 +27,8 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     [SerializeField] ExitCheck exitCheck;
 
+    [SerializeField] GameObject preview;
+
     void Start()
     {
         rm = Managers.instance.roomManager;
@@ -48,6 +50,7 @@ public class RoomCanvasBehavior : MonoBehaviour
 
         exitCheck.SetOwner(this);
         exitCheck.gameObject.SetActive(false);
+        preview.gameObject.SetActive(false);
     }
 
     void Update()
@@ -61,6 +64,7 @@ public class RoomCanvasBehavior : MonoBehaviour
                 PressSubmit();
                 PressCancel();
                 GameStart();
+                CheckLeftTrigger();
                 OpenOption();
                 CheckStageSelectButton();
             }
@@ -73,6 +77,7 @@ public class RoomCanvasBehavior : MonoBehaviour
     {
         if (stageSelect.gameObject.activeInHierarchy) { return true; }
         if (exitCheck.gameObject.activeInHierarchy) { return true; }
+        if (preview.gameObject.activeInHierarchy) { return true; }
 
         return false;
     }
@@ -223,6 +228,14 @@ public class RoomCanvasBehavior : MonoBehaviour
             else { exitCheck.gameObject.SetActive(true); }
         }
     }
+
+    void CheckLeftTrigger() 
+    {
+        if (InputManager.GetKeyDown(BoolActions.LeftTrigger)) { OpenPreview(); }
+    }
+    public void CheckPreviewButtonFromUI() { OpenPreview(); }
+    void OpenPreview() { preview.SetActive(true); }
+
     public void PressBackTitle()
     {
         exitCheck.gameObject.SetActive(true);

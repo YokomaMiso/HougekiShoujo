@@ -19,3 +19,4 @@ MonoBehaviour:
   stageSelect: {fileID: 21300000, guid: e768fb975716da34ea91a9b4c8400bfc, type: 3}
   stickL: {fileID: 21300000, guid: c42816b816ffab846936a973b62dd453, type: 3}
   stickR: {fileID: 21300000, guid: 7516765e04d694449bd52491baff88d3, type: 3}
+  teamChat: {fileID: 21300000, guid: 32f45482fe9061c44a2cb32049170905, type: 3}
