@@ -35,11 +35,13 @@ public class InputName : MonoBehaviour
         //"13",
     };
 
+    public void DeadUnlockWindow() { inputField.ActivateInputField(); }
+
     void Start()
     {
         inputField = transform.GetChild(1).GetComponent<InputField>();
         inputField.text = Managers.instance.optionData.playerName;
-        inputField.Select();
+        inputField.ActivateInputField();
 
         prevText = inputField.text;
 
@@ -88,7 +90,7 @@ public class InputName : MonoBehaviour
                 {
                     Managers.instance.unlockFlag[i] = true;
                     unlockWindowInstance = Instantiate(unlockWindowPrefab, parent.transform);
-                    unlockWindowInstance.GetComponent<UnlockWindow>().SetTextNum(i);
+                    unlockWindowInstance.GetComponent<UnlockWindow>().SetTextNum(this,i);
                     return true;
                 }
             }

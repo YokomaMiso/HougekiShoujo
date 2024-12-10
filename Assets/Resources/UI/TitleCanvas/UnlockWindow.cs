@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UnlockWindow : MonoBehaviour
 {
+    InputName parent;
+
     float timer;
     const float lifeTime = 3.0f;
 
@@ -17,7 +19,11 @@ public class UnlockWindow : MonoBehaviour
     };
 
     int textNum;
-    public void SetTextNum(int _num) { textNum = _num; }
+    public void SetTextNum(InputName _parent, int _num)
+    {
+        parent = _parent;
+        textNum = _num;
+    }
 
     void Start()
     {
@@ -28,6 +34,10 @@ public class UnlockWindow : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer > lifeTime) { Destroy(gameObject); }
+        if (timer > lifeTime)
+        {
+            parent.DeadUnlockWindow();
+            Destroy(gameObject);
+        }
     }
 }
