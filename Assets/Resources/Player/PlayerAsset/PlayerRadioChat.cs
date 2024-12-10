@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static IngameData;
 
 public enum RADIO_CHAT_ID { NONE = 0, BLITZ, SUPPORT, RETREAT, HELP, APOLOGIZE, LAUGH, WHAT, PROVOC, POP_CORN, FACE_PALM, ANGRY, TEE_HEE, GOOD_JOB, MAX_NUM }
 public enum RADIO_TYPE { NONE = 0, EMOTE = 9, TEXT = 4 }
@@ -167,6 +166,13 @@ public class PlayerRadioChat : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void ReceiveChatButtonFromUI(RADIO_CHAT_ID _id)
+    {
+        radioChatID = _id;
+        MachingRoomData.RoomData oscRoomData = OSCManager.OSCinstance.roomData;
+        SpawnSerifOrEmote(oscRoomData, radioChatID);
     }
 
     void CheckRadioChat()
