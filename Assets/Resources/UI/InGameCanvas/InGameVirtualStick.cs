@@ -11,6 +11,8 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     private void Start()
     {
+        if (!Managers.instance.GetSmartPhoneFlag()) { Destroy(gameObject); return; }
+
         background.gameObject.SetActive(false);
         handle.gameObject.SetActive(false);
     }
