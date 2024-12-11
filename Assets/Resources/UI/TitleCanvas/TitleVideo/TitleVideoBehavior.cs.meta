@@ -4,8 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - startVideo: {fileID: 32900000, guid: d03e69f5d6ad27a47bf31ab24c479b83, type: 3}
-  - loopVideo: {fileID: 32900000, guid: e7fda989730d4d343901b627f622e6c2, type: 3}
+  - audioClip: {fileID: 8300000, guid: 2fcaefce142d0134388f731e16dac993, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
