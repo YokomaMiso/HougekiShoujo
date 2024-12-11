@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 0}
-  launchSFX: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
-  hitSFX: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  launchSFX: {fileID: 8300000, guid: f3f0dc02ff2155c42b4ceab3a11fae03, type: 3}
+  hitSFX: {fileID: 8300000, guid: cc555c52775f49143ac49e768879428b, type: 3}
   bambooWall: {fileID: 7245978872269269884, guid: bd2c9dee48c10cc4bb3745ac5cf71a45,
     type: 3}
 --- !u!1 &7495808424539395539

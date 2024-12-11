@@ -234,7 +234,12 @@ public class RoomCanvasBehavior : MonoBehaviour
         if (InputManager.GetKeyDown(BoolActions.LeftTrigger)) { OpenPreview(); }
     }
     public void CheckPreviewButtonFromUI() { OpenPreview(); }
-    void OpenPreview() { preview.SetActive(true); }
+    void OpenPreview() 
+    {
+        RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        if (myRoomData.ready) { return; }
+        preview.SetActive(true); 
+    }
 
     public void PressBackTitle()
     {

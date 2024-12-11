@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerSubAction : MonoBehaviour
 {
     Player ownerPlayer;
+
     public void SetPlayer(Player _player)
     {
         ownerPlayer = _player;

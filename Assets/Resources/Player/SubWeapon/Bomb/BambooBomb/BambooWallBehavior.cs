@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BambooWallBehavior : MonoBehaviour
 {
-    int bambooCount;
+    const int bambooCount = 7;
     const float posXSub = 0.16f;
     float defaultPosX;
     const float defaultLocalHeight = -0.5f;
@@ -29,12 +29,13 @@ public class BambooWallBehavior : MonoBehaviour
 
     void Start()
     {
-        bambooCount = transform.childCount;
+        //bambooCount = transform.childCount;
         defaultPosX = posXSub * bambooCount / 2;
         bamboos = new BambooBehavior[bambooCount];
         for (int i = 0; i < bambooCount; i++)
         {
             transform.GetChild(i).rotation = Quaternion.identity;
+            if (!transform.GetChild(i).GetComponent<BambooBehavior>()) { continue; }
             bamboos[i] = transform.GetChild(i).GetComponent<BambooBehavior>();
             bamboos[i].SetNum(i);
         }
