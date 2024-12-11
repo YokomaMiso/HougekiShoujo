@@ -14,12 +14,18 @@ public class SoundManager : MonoBehaviour
     static GameObject soundObject;
     static Transform thisTransform;
 
-    static AudioSource nowBGMAudioSource = null;
+    public static AudioSource nowBGMAudioSource = null;
 
     public static float masterVolume = 1.0f;
     public static float bgmVolume = 0.5f;
     public static float sfxVolume = 0.5f;
     public static float voiceVolume = 0.5f;
+
+    /*
+    [SerializeField] GameObject interactPrefab;
+    static GameObject interactBGMObject;
+    static GameObject interactInstance;
+    */
 
     void Start()
     {
@@ -31,6 +37,7 @@ public class SoundManager : MonoBehaviour
         voiceVolume = oData.voiceVolume;
 
         soundObject = soundObjectPrefab;
+        //interactBGMObject = interactPrefab;
         thisTransform = transform;
     }
 
@@ -87,6 +94,24 @@ public class SoundManager : MonoBehaviour
 
         return obj;
     }
+    /*
+    public static GameObject PlayInteractBGM(int _num)
+    {
+        InteractBGMObject ibo;
+
+        if (interactInstance == null) 
+        {
+            interactInstance = Instantiate(interactBGMObject, Managers.instance.transform); 
+        }
+        ibo = interactInstance.GetComponent<InteractBGMObject>();
+        ibo.ChangeBGM(_num);
+
+        GameObject obj = ibo.GetObject(_num);
+        SetNowBGM(obj.GetComponent<AudioSource>());
+
+        return obj;
+    }
+    */
     public static GameObject PlayJingleForResult(AudioClip _clip, Transform _transform = null)
     {
         if (_transform == null) { _transform = Camera.main.transform.GetChild(0); }

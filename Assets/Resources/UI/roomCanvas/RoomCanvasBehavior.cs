@@ -21,13 +21,13 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     bool joinedStartedRoom;
 
-    [SerializeField] AudioClip roomBGM;
-
     [SerializeField] SelecterArrow[] charaArrows;
 
     [SerializeField] ExitCheck exitCheck;
 
     [SerializeField] GameObject preview;
+
+    [SerializeField] AudioClip roomBGM;
 
     void Start()
     {
@@ -46,11 +46,11 @@ public class RoomCanvasBehavior : MonoBehaviour
         if (Managers.instance.playerID != 0) { stageBinder.SetActive(false); }
         else { stageDisplay.SetActive(false); }
 
-        SoundManager.PlayBGM(roomBGM);
-
         exitCheck.SetOwner(this);
         exitCheck.gameObject.SetActive(false);
         preview.gameObject.SetActive(false);
+
+        SoundManager.PlayBGM(roomBGM);
     }
 
     void Update()
@@ -229,16 +229,16 @@ public class RoomCanvasBehavior : MonoBehaviour
         }
     }
 
-    void CheckLeftTrigger() 
+    void CheckLeftTrigger()
     {
         if (InputManager.GetKeyDown(BoolActions.LeftTrigger)) { OpenPreview(); }
     }
     public void CheckPreviewButtonFromUI() { OpenPreview(); }
-    void OpenPreview() 
+    void OpenPreview()
     {
         RoomData myRoomData = OSCManager.OSCinstance.roomData;
         if (myRoomData.ready) { return; }
-        preview.SetActive(true); 
+        preview.SetActive(true);
     }
 
     public void PressBackTitle()

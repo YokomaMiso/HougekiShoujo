@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - connnectSFX: {fileID: 8300000, guid: 3e7f982834406064fab428302dbf6808, type: 3}
+  - connectBGM: {fileID: 8300000, guid: e8bc687deb9a2d440a0d3d4e00fc0ed4, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
