@@ -33,6 +33,8 @@ public class PileBunkerBehavior : InstallationBehavior
 
         float shakeValue = 1.0f / weight * 0.75f;
         Camera.main.GetComponent<CameraMove>().SetCameraShake(shakeValue);
+
+        SoundManager.PlaySFX(launchSFX, this.transform);
     }
 
     protected override void Update()

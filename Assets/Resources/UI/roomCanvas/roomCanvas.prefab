@@ -1512,6 +1512,7 @@ GameObject:
   - component: {fileID: 1055779282668814216}
   - component: {fileID: 5622090413938410870}
   - component: {fileID: 482947696156051896}
+  - component: {fileID: 1382519444516300377}
   m_Layer: 0
   m_Name: SkillPreview
   m_TagString: Untagged
@@ -1537,7 +1538,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 498.5, y: -394.2}
+  m_AnchoredPosition: {x: 496, y: -392}
   m_SizeDelta: {x: 280, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7651946401319164776
@@ -1647,6 +1648,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1382519444516300377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208795750427963101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5431ab7b8f21afb47b6f06d1d77c5b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3453574221240040729
 GameObject:
   m_ObjectHideFlags: 0
@@ -4548,7 +4561,6 @@ GameObject:
   - component: {fileID: 962213278628295697}
   - component: {fileID: 2601072770466434277}
   - component: {fileID: 624967494927520920}
-  - component: {fileID: 812560511041597904}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -4613,18 +4625,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &812560511041597904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5819013377681961209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5431ab7b8f21afb47b6f06d1d77c5b0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5957482862758645367
 GameObject:
   m_ObjectHideFlags: 0

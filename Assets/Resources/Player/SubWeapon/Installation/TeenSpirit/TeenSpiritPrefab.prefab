@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1cb74b760f0c047a8e7ab4e1cd6beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  launchSFX: {fileID: 8300000, guid: 5b0dc3c7020212643adaf1732b201658, type: 3}
 --- !u!135 &6790464838379298388
 SphereCollider:
   m_ObjectHideFlags: 0

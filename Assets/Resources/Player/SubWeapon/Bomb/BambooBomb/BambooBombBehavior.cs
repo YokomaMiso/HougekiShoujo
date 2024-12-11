@@ -30,6 +30,8 @@ public class BambooBombBehavior : BombBehavior
         obj.GetComponent<BambooWallBehavior>().SetData(ownerPlayer.GetPlayerData().GetSubWeapon());
         obj.AddComponent<RoundCheckerSubWeapon>();
 
+        SoundManager.PlaySFX(hitSFX, obj.transform);
+
         spawned = true;
     }
 }

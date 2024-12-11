@@ -19,6 +19,7 @@ public class InstallationBehavior : MonoBehaviour
     protected RuntimeAnimatorController startAnim;
     protected RuntimeAnimatorController loopAnim;
 
+    [SerializeField] protected AudioClip launchSFX;
 
     protected virtual void Start()
     {

@@ -24,6 +24,9 @@ public class TeenSpiritBehavior : InstallationBehavior
         buffLifeTime = 8.0f;
 
         hitedPlayer[ownerPlayer.GetPlayerID()] = true;
+
+        GameObject obj = SoundManager.PlaySFX(launchSFX, this.transform);
+        obj.GetComponent<AudioSource>().pitch = 1;
     }
 
     protected override void Update()
