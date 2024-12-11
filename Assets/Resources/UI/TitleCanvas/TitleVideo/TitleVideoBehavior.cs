@@ -10,7 +10,7 @@ public class TitleVideoBehavior : MonoBehaviour
 
     void Start()
     {
-        GameObject obj = SoundManager.PlaySFXForUI(audioClip, null, true);
+        GameObject obj = SoundManager.PlaySFXForUI(audioClip, Camera.main.transform, true);
         //obj.AddComponent<AudioLowPassFilter>().cutoffFrequency = 2000;
     }
 }

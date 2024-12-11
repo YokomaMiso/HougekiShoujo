@@ -3073,7 +3073,7 @@ MonoBehaviour:
   stageSelect: {fileID: 8589024957306964187}
   stageBinder: {fileID: 6147753632539301608}
   stageDisplay: {fileID: 7257981158185615266}
-  roomBGM: {fileID: 8300000, guid: b8e0192871f2e7f4da7a0a53a396b625, type: 3}
+  roomBGM: {fileID: 8300000, guid: 17dc4619edab52b4bb58e7f2d9f1f748, type: 3}
   charaArrows:
   - {fileID: 5522949247184413981}
   - {fileID: 5305381604992588193}
