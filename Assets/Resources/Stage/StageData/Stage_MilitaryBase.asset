@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a08d4c96db6ce74f986a905ad61582d, type: 3}
-  m_Name: Stage6Data
+  m_Name: Stage_MilitaryBase
   m_EditorClassIdentifier: 
   stageName:
-  - "\u8CA1\u524D\u30C6\u30CB\u30B9\u5834\u6A2A\n\u68EE\u6797\u7AF6\u6280\u5834"
-  - Forest near the Zaizen Tennis
-  - "\u8D22\u524D\u7F51\u7403\u573A\u65C1\n\u68EE\u6797\u4F53\u80B2\u573A"
-  - "\u8CA1\u524D\u7DB2\u7403\u5834\u65C1\n\u68EE\u6797\u9AD4\u80B2\u5834"
+  - "\u81EA\u8B66\u968A \n\u4EE3\u7B52\u99D0\u5C6F\u5730"
+  - 'Military Police
+
+    Daito Camp'
+  - "\u81EA\u8B66\u968A\n\u4EE3\u7B52\u9A7B\u519B"
+  - "\u81EA\u8B66\u968A\n\u4EE3\u7B52\u99D0\u8ECD"
   stagePrefab: {fileID: 5198325544041908592, guid: 2e077cf4c398354488272765218ec3a3,
     type: 3}
-  stageSize: {x: 42, y: 0, z: 34}
+  stageSize: {x: 50, y: 0, z: 36}
   defaultPosition:
   - {x: -16, y: 0, z: -14}
   - {x: 18, y: 0, z: 16}
@@ -28,7 +30,7 @@ MonoBehaviour:
   - {x: -14, y: 0, z: -12}
   - {x: 20, y: 0, z: 12}
   BGM: {fileID: 11400000, guid: 182392feb2853e44fb5b30d92e09bcdb, type: 2}
-  screenShot: {fileID: 21300000, guid: 51d7892fd375b3e4794165f648226135, type: 3}
+  screenShot: {fileID: 21300000, guid: 4dd553c4fcf7a5d4a9250470a521aead, type: 3}
   minimap: {fileID: 21300000, guid: a0c5d7898570256459073a59723a13ed, type: 3}
   minX: 0
   maxX: 0
