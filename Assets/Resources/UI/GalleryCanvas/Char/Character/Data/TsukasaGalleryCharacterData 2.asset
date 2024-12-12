@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charData:
     characterName: "\u8FD1\u885B \u53F8"
-    schoolText: "\u5B66\u6821\u3000\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821"
-    schoolYear: "\u5B66\u5E74\u3000\u4E8C\u5E74"
+    schoolText: "\u4EE3\u7B52\u7B2C\u4E00\u9AD8\u7B49\u5B66\u6821"
+    schoolYear: "\u4E8C\u5E74"
     charDesign:
     - "\u98A8\u7D00\u59D4\u54E1\u3092\u62C5\u3046\u30AF\u30FC\u30EB\u30D3\n\u30E5\u30FC\u30C6\u30A3\u30FC\u3002\r\u7537\u5144\u5F1F\u304C\u591A\u304F\u3001\u6027\n\u683C\u3082\u7537\u52DD\u308A\u3002\r\u904B\u52D5\u306F\u3068\u3066\u3064\u3082\u306A\n\u304F\u5F97\u610F\u3060\u304C\u3001\u5B9F\u306F\u72AC\u304C\u82E6\u624B\u3002"
     - "\u98A8\u7D00\u59D4\u54E1\u3092\u62C5\u3046\u30AF\u30FC\u30EB\u30D3\n\u30E5\u30FC\u30C6\u30A3\u30FC\u3002\r\u7537\u5144\u5F1F\u304C\u591A\u304F\u3001\u6027\n\u683C\u3082\u7537\u52DD\u308A\u3002\r\u904B\u52D5\u306F\u3068\u3066\u3064\u3082\u306A\n\u304F\u5F97\u610F\u3060\u304C\u3001\u5B9F\u306F\u72AC\u304C\u82E6\u624B\u3002"
@@ -61,13 +61,14 @@ MonoBehaviour:
     - "\u5411\u524D\u65B9\u77AC\u79FB\u4E00\u5C0F\u6BB5\u8DDD\u79BB\u7684\u88C5\u7F6E\n\u51B7\u5374\u65F6\u95F415\u79D2"
     - "\u5411\u524D\u65B9\u77AC\u79FB\u4E00\u5C0F\u6BB5\u8DDD\u96E2\u7684\u88DD\u7F6E\n\u51B7\u537B\u6642\u959315\u79D2"
   sketh: {fileID: 21300000, guid: e562042c49160194d8a6d092563ca157, type: 3}
-  iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
+  iconMaterial: {fileID: 2100000, guid: 97dfc9bdd4289fc4f8173f07f6aa62c2, type: 2}
   animatorControllers:
-  - {fileID: 9100000, guid: 021030eafa4ec654192485fa90820376, type: 2}
-  - {fileID: 9100000, guid: b90f70cf8dfe1184db583fda985ecfee, type: 2}
+  - {fileID: 9100000, guid: 74357b2229a89734793bb56b4c30ba68, type: 2}
+  - {fileID: 9100000, guid: 024db5a30e3b5e3429772f0a7beae772, type: 2}
   - {fileID: 9100000, guid: a2560cbd49d4a154ca6be1e6823ed240, type: 2}
-  - {fileID: 9100000, guid: d095f7c70ca9f764bb699ad6410f7af5, type: 2}
-  - {fileID: 9100000, guid: 1cdaf127179484640a723a1769897e94, type: 2}
+  - {fileID: 9100000, guid: e8ff8f95536b3554e8d21f5879e465f2, type: 2}
+  - {fileID: 9100000, guid: 849550b18455b474e8de1c2ba594ae7b, type: 2}
+  - {fileID: 9100000, guid: 11ae4331938bfbf49adfb32a9916279d, type: 2}
   CharVoice:
   - voiceClip: {fileID: 8300000, guid: 7e17bbb3ae5280148a7b93619065322d, type: 3}
     voiceText:
@@ -265,8 +266,8 @@ MonoBehaviour:
     voiceFullText:
     - "\u4F55\u3092\u3057\u3066\u3044\u308B"
     - "\u4F55\u3092\u3057\u3066\u3044\u308B"
-    - "\u4F60\u5728\u5E72\u4EC0\u4E48"
-    - "\u4F60\u5728\u5E79\u4EC0\u9EBD"
+    - "\u4F60\u5728\u6253\u54EA\u91CC"
+    - "\u4F60\u5728\u6253\u54EA\u88CF"
   - voiceClip: {fileID: 8300000, guid: c1d6c3ce07a865940b75933b466d2311, type: 3}
     voiceText:
     - "FF\uFF08\u3057\u305F\u6642\uFF09"
@@ -297,8 +298,8 @@ MonoBehaviour:
     - "\u4E2D\u9677\u96312"
     voiceFullText:
     - "\u304F\u3045"
-    - "\u5495.."
     - "\u304F\u3045"
+    - "\u5495.."
     - "\u5495.."
   - voiceClip: {fileID: 8300000, guid: a5e275a311b885145ad12c94cdbf79f6, type: 3}
     voiceText:
