@@ -168,7 +168,9 @@ public class StageSelectBehavior : MonoBehaviour
         binder.GetChild(2).GetComponent<Image>().sprite = sd.GetScreenShot();
         binder.GetChild(3).GetComponent<Image>().sprite = sd.GetMinimap();
         binder.GetChild(7).GetComponent<Text>().text = sd.GetStageName();
-        binder.GetChild(8).GetComponent<Text>().text = _num.ToString("00");
+
+        if (_num == 0) { binder.GetChild(8).GetComponent<Text>().text = "??"; }
+        else { binder.GetChild(8).GetComponent<Text>().text = _num.ToString("00"); }
     }
 
     void PressSubmit()
