@@ -18,8 +18,14 @@ public class SoundObject : MonoBehaviour
     AudioSource source;
 
     float timer;
-    
-    public static void SetBlind(float _t) 
+
+    [SerializeField, Range(0.0f, 2.0f)] float bgmRate = 0.5f;
+    [SerializeField, Range(0.0f, 2.0f)] float sfxRate = 1.0f;
+    [SerializeField, Range(0.0f, 2.0f)] float uiSfxRate = 1.0f;
+    [SerializeField, Range(0.0f, 2.0f)] float voiceRate = 1.0f;
+    [SerializeField, Range(0.0f, 2.0f)] float uiVoiceRate = 1.0f;
+
+    public static void SetBlind(float _t)
     {
         blind = true;
         blindScale = _t;
@@ -45,7 +51,7 @@ public class SoundObject : MonoBehaviour
         switch (soundType)
         {
             case SOUND_TYPE.BGM:
-                volume *= SoundManager.bgmVolume / 2;
+                volume *= SoundManager.bgmVolume * bgmRate;
                 if (_loop) { lifeTime = Mathf.Infinity; }
                 else { lifeTime = clip.length; }
                 source.spatialBlend = 0;
@@ -53,23 +59,23 @@ public class SoundObject : MonoBehaviour
 
             case SOUND_TYPE.SFX:
                 pitch *= Random.Range(0.95f, 1.05f);
-                volume *= SoundManager.sfxVolume;
+                volume *= SoundManager.sfxVolume * sfxRate;
                 lifeTime = clip.length;
                 break;
 
             case SOUND_TYPE.SFX_FOR_UI:
-                volume *= SoundManager.sfxVolume;
+                volume *= SoundManager.sfxVolume * uiSfxRate;
                 if (_loop) { lifeTime = Mathf.Infinity; }
                 else { lifeTime = clip.length; }
                 source.spatialBlend = 0;
                 break;
 
             case SOUND_TYPE.VOICE:
-                volume *= SoundManager.voiceVolume;
+                volume *= SoundManager.voiceVolume * voiceRate;
                 lifeTime = clip.length;
                 break;
             case SOUND_TYPE.VOICE_FOR_UI:
-                volume *= SoundManager.voiceVolume;
+                volume *= SoundManager.voiceVolume * uiVoiceRate;
                 lifeTime = clip.length;
                 source.spatialBlend = 0;
                 break;
