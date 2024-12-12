@@ -8,6 +8,7 @@ public class CharaSerifBehavior : MonoBehaviour
     protected Image chatBG;
     protected Text playerName;
     protected Image charaIcon;
+    protected Text teamChatText;
 
     [SerializeField] protected Sprite[] bgSprite;
     [SerializeField] AudioClip[] clips;
@@ -24,13 +25,38 @@ public class CharaSerifBehavior : MonoBehaviour
 
     protected float timer = 0;
 
+    [SerializeField] string[] teamChatTextsJPN;
+    [SerializeField] string[] teamChatTextsENG;
+    [SerializeField] string[] teamChatTextsSCHN;
+    [SerializeField] string[] teamChatTextsTCHN;
+
     public virtual void SetSerif(MachingRoomData.RoomData _roomData, RADIO_CHAT_ID _chatID)
     {
         chatBG = transform.GetComponent<Image>();
         playerName = transform.GetChild(0).GetComponent<Text>();
         charaIcon = transform.GetChild(1).GetComponent<Image>();
+        teamChatText = transform.GetChild(2).GetComponent<Text>();
 
-        chatBG.sprite = bgSprite[_roomData.myTeamNum * 4 + (int)_chatID - 1];
+        chatBG.sprite = bgSprite[_roomData.myTeamNum];
+
+        string applyText;
+        switch(Managers.instance.nowLanguage)
+        {
+            default:
+                applyText = teamChatTextsJPN[(int)_chatID - 1];
+                break;
+            case LANGUAGE_NUM.ENGLISH:
+                applyText = teamChatTextsENG[(int)_chatID - 1];
+                break;
+            case LANGUAGE_NUM.SIMPLE_CHINESE:
+                applyText = teamChatTextsSCHN[(int)_chatID - 1];
+                break;
+            case LANGUAGE_NUM.TRADITIONAL_CHINESE:
+                applyText = teamChatTextsTCHN[(int)_chatID - 1];
+                break;
+        }
+        teamChatText.text = applyText;
+
 
         playerName.text = _roomData.playerName;
 
@@ -56,6 +82,7 @@ public class CharaSerifBehavior : MonoBehaviour
             chatBG.color = chatBG.color * fadeColor;
             playerName.color = playerName.color * fadeColor;
             charaIcon.color = charaIcon.color * fadeColor;
+            teamChatText.color= teamChatText.color * fadeColor;
         }
 
         if (timer > lifeTime) { Destroy(gameObject); }
