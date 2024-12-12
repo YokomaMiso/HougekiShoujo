@@ -32,7 +32,7 @@ MonoBehaviour:
   BGM: {fileID: 11400000, guid: 182392feb2853e44fb5b30d92e09bcdb, type: 2}
   screenShot: {fileID: 21300000, guid: 4dd553c4fcf7a5d4a9250470a521aead, type: 3}
   minimap: {fileID: 21300000, guid: 7b9f06a89d48b2445a8180b1b80d5e5b, type: 3}
-  minX: 0
-  maxX: 0
-  minZ: 0
-  maxZ: 0
+  minX: -25
+  maxX: 25
+  minZ: -25
+  maxZ: 25
