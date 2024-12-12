@@ -65,6 +65,9 @@ public class GalleryManager : MonoBehaviour
     private Vector3[] targetWorldPosition=new Vector3[2];
     private Vector3 currentPositionCount;
 
+    private Vector3 rotationCenter = new Vector3(50.0f,545.0f,0.0f);
+    private float rotationAngle=-25.0f;
+
 
     private void Start()
     {
@@ -189,14 +192,14 @@ public class GalleryManager : MonoBehaviour
         {
             inputIndex++;
             if (inputIndex >= childTransforms.Count) { inputIndex = 0; }
-            GalleryMainSelect();
+            GalleryMainSelect(inputIndex);
             canChangeIndex = false;
         }
         else if (axisInput.y > 0.5f && canChangeIndex)
         {
             inputIndex--;
             if (inputIndex < 0) { inputIndex = childTransforms.Count-1; }
-            GalleryMainSelect();
+            GalleryMainSelect(inputIndex);
             canChangeIndex = false;
         }
         else if (axisInput.y > -0.5f && axisInput.y < 0.5f)
@@ -216,7 +219,7 @@ public class GalleryManager : MonoBehaviour
                         soundsManeger.GenerateVoiceButton();
                     }
                 }
-                TransFadeOut(inputIndex);
+                TransRotationIn();
             }
         }
 
@@ -248,7 +251,7 @@ public class GalleryManager : MonoBehaviour
                 WorldFadeOut(0.5f);
             }
             SetCategoryChild(largeCategory);
-            TransFadeIn(inputIndex);
+            TransRotationOut();
         }
 
         if (!isFade) 
@@ -302,17 +305,31 @@ public class GalleryManager : MonoBehaviour
     {
     }
 
-    private void GalleryMainSelect()
+    private void GalleryMainSelect(int index)
     {
 
         for (int i = 0; i < childTransforms.Count; i++)
         {
-            childTransforms[i].localScale = defaultSize;
-        }
-
-        if (inputIndex >= 0 && inputIndex < childTransforms.Count)
-        {
-            childTransforms[inputIndex].localScale = selecterSize;
+            if (i == index)
+            {
+                Image image = childTransforms[i].GetComponent<Image>();
+                if(image != null)
+                {
+                    Color color = image.color;
+                    color.a = 1.0f;
+                    image.color = color;
+                }
+            }
+            else
+            {
+                Image image = childTransforms[i].GetComponent<Image>();
+                if (image != null)
+                {
+                    Color color = image.color;
+                    color.a = 0.0f;
+                    image.color = color;
+                }
+            }
         }
     }
 
@@ -362,6 +379,11 @@ public class GalleryManager : MonoBehaviour
     private void ButtonMove(Transform targetobject,Vector3 targetposition,float _duration)
     {
         StartCoroutine(MoveObject(targetobject, targetposition, _duration));
+    }
+
+    private void ButtonRotation(RectTransform targetobject,float angle, float _duration)
+    {
+        StartCoroutine(RotateUI(targetobject,angle, _duration));
     }
 
     private IEnumerator FadeIn(Image image, float duration)
@@ -417,6 +439,31 @@ public class GalleryManager : MonoBehaviour
         targetObject.localPosition = targetPosition;
     }
 
+    private IEnumerator RotateUI(RectTransform targetObject, float angle, float duration)
+    {
+        float elapsedTime = 0f;
+        float currentAngle = 0f;
+        isFade = true;
+        Quaternion startRotation = targetObject.rotation;
+
+        while (elapsedTime < duration)
+        {
+            float deltaAngle = Mathf.Lerp(0, angle, elapsedTime / duration) - currentAngle;
+            currentAngle += deltaAngle;
+
+            targetObject.rotation = startRotation * Quaternion.Euler(0, 0, currentAngle);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        targetObject.rotation = startRotation * Quaternion.Euler(0, 0, angle);
+        isFade = false;
+    }
+
+
+
+
     private void TransFadeIn(int index) 
     {
 
@@ -445,6 +492,16 @@ public class GalleryManager : MonoBehaviour
             }
             ButtonFadeOut(childTransforms[i]);
         }
+    }
+
+    private void TransRotationIn()
+    {
+        ButtonRotation(largeCategory.GetComponent<RectTransform>(),rotationAngle, Duration);
+    }
+
+    private void TransRotationOut()
+    {
+        ButtonRotation(largeCategory.GetComponent<RectTransform>(), -rotationAngle, Duration);
     }
 
     private void WorldFadeIn(float _duration)

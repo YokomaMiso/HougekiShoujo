@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charData:
     characterName: "\u8CA1\u524D \u6731\u91CC\u4E9C"
-    schoolText: "\u5B66\u6821\u3000\u4EC7\u5C04\u9AD8\u6821"
-    schoolYear: "\u5B66\u5E74\u3000\u4E8C\u5E74"
+    schoolText: "\u4EC7\u5C04\u9AD8\u6821"
+    schoolYear: "\u4E8C\u5E74"
     charDesign:
     - "\u6E29\u539A\u3067\u4EBA\u60F3\u3044\u3001\u983C\u308A\u306B\u306A\u308B\u59C9\u5FA1\n\u808C\u3002\r\u7531\u7DD2\u6B63\u3057\u3044\u5BB6\u7CFB\u3067\u80B2\u3061\u3001\u793C\n\u5100\u4F5C\u6CD5\u306F\u5B66\u6821\u3067\u3082\u5668\u7528\u306B\u4F7F\u3044\u3053\n\u306A\u3059\u3002\r\u4EC7\u5C04\u9AD8\u6821\u3092\u9078\u3093\u3060\u306E\u306F\u53CB\n\u9054\u304C\u591A\u3044\u305F\u3081\u3002\r\u6012\u3089\u305B\n\u308B\u3068\u6016\u3044\u3002\u2026\u3089\u3057\u3044\u3002"
     - "\u6E29\u539A\u3067\u4EBA\u60F3\u3044\u3001\u983C\u308A\u306B\u306A\u308B\u59C9\u5FA1\n\u808C\u3002\r\u7531\u7DD2\u6B63\u3057\u3044\u5BB6\u7CFB\u3067\u80B2\u3061\u3001\u793C\n\u5100\u4F5C\u6CD5\u306F\u5B66\u6821\u3067\u3082\u5668\u7528\u306B\u4F7F\u3044\u3053\n\u306A\u3059\u3002\r\u4EC7\u5C04\u9AD8\u6821\u3092\u9078\u3093\u3060\u306E\u306F\u53CB\n\u9054\u304C\u591A\u3044\u305F\u3081\u3002\r\u6012\u3089\u305B\n\u308B\u3068\u6016\u3044\u3002\u2026\u3089\u3057\u3044\u3002"
@@ -59,13 +59,13 @@ MonoBehaviour:
     - "\u6295\u64F2\u6301\u7E8C 10 \u79D2\u7684\u8718\u86DB\u7DB2\u3002\n\u964D\u4F4E\u79FB\u52D5\u901F\u5EA6\uFF0C\u6301\u7E8C
       5 \u79D2\u3002"
   sketh: {fileID: 21300000, guid: e562042c49160194d8a6d092563ca157, type: 3}
-  iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
+  iconMaterial: {fileID: 2100000, guid: 97dfc9bdd4289fc4f8173f07f6aa62c2, type: 2}
   animatorControllers:
-  - {fileID: 9100000, guid: 74fa1f6a0cfb4a1429ac939d205b8f0b, type: 2}
-  - {fileID: 9100000, guid: 86e89820564e2c04f8dd413c8e6147f8, type: 2}
+  - {fileID: 9100000, guid: 59af7393c68163846bd55713d48dbc0c, type: 2}
+  - {fileID: 9100000, guid: 5a59126cdc5958a438569df4acd443ec, type: 2}
   - {fileID: 9100000, guid: 876b6857dbc45454e962b7906767ff78, type: 2}
-  - {fileID: 9100000, guid: fc9691d62ce08e741b8b33c1c62c96ab, type: 2}
-  - {fileID: 9100000, guid: d48cd30d425c9894b9bfc48cc9975ce9, type: 2}
+  - {fileID: 9100000, guid: 5a44ef35921f4da488a70b8e5931a2fc, type: 2}
+  - {fileID: 9100000, guid: 3aa3731c5e73edb49a58a0c1db31ea79, type: 2}
   CharVoice:
   - voiceClip: {fileID: 8300000, guid: 8ff4f5b0120b3f14681571474c9dac72, type: 3}
     voiceText:
@@ -85,10 +85,12 @@ MonoBehaviour:
     - "\u81EA\u6211\u4ECB\u7ECD"
     - "\u81EA\u6211\u4ECB\u7D39"
     voiceFullText:
-    - "\u4EC7\u5C042\u5E74\u306E\u89B3\u6708\u5343\u9244\u3060\u3002\u3046\u3061\u306E\u4F5C\u3063\u305F\u5927\u7832\u898B\u3066\u304F\u308C\u3088\u3002\u3053\u308C\u3068\u304B\uFF5E\u3001\u3053\u308C\u3068\u304B\u3063\uFF01\u3042\u3001\u3053\u308C\u306F\u898B\u305B\u3061\u3083\u30C0\u30E1\u306A\u5974\u3060\u3063\u305F\u3002"
-    - "\u4EC7\u5C042\u5E74\u306E\u89B3\u6708\u5343\u9244\u3060\u3002\u3046\u3061\u306E\u4F5C\u3063\u305F\u5927\u7832\u898B\u3066\u304F\u308C\u3088\u3002\u3053\u308C\u3068\u304B\uFF5E\u3001\u3053\u308C\u3068\u304B\u3063\uFF01\u3042\u3001\u3053\u308C\u306F\u898B\u305B\u3061\u3083\u30C0\u30E1\u306A\u5974\u3060\u3063\u305F\u3002"
-    - "\u4EC7\u5C04\u9AD8\u6821\u4E8C\u5E74\u7EA7\u7684\u89C2\u6708\u5343\u94C1\uFF01\u8981\u770B\u770B\u6211\u4F5C\u7684\u5927\u70AE\u5417\uFF01\u8FD9\u4E2A\u5566\uFF5E\u8FD8\u6709\u8FD9\u4E2A\uFF01\u554A\uFF0C\u8FD9\u4E2A\u4E0D\u884C\uFF0C\u8FD9\u662F\u4E0D\u80FD\u770B\u7684\u4E1C\u897F\uFF01"
-    - "\u4EC7\u5C04\u9AD8\u6821\u4E8C\u5E74\u7D1A\u7684\u89C0\u6708\u5343\u9435\uFF01\u8981\u770B\u770B\u6211\u4F5C\u7684\u5927\u70AE\u55CE\uFF01\u9019\u500B\u5566\uFF5E\u9084\u6709\u9019\u500B\uFF01\u554A\uFF0C\u9019\u500B\u4E0D\u884C\uFF0C\u9019\u662F\u4E0D\u80FD\u770B\u7684\u6771\u897F\uFF01"
+    - "\u4EC7\u5C04\u9AD8\u68212\u5E74\u3002\u8CA1\u524D\u6731\u91CC\u4E9C\u3067\u3059\u308F\uFF5E\u3002\u5343\u9244\u306B\u52E7\u3081\u3089\u308C\u3066\u5927\u7832\u9053\u59CB\u3081\u307E\u3057\u305F\u306E\u3002\u5927\u7832\u3082\u5343\u9244\u306B\u4F5C\u3063\u3066\u3082\u3089\u3044\u307E\u3057\u305F\u306E\u3002\u304A\u4F3C\u5408\u3044\u3067\u3057\u3087\u3046\uFF1F\r"
+    - Second year at Avenging High School. I'm Zaizen Juria. Chikane recommended
+      me to start artillery. Sentetsu also made me a cannon. Isn't it a good match
+      for me?
+    - "\u6211\u662F\u4EC7\u5C04\u9AD8\u6821\u4E8C\u5E74\u7EA7\u7684\u8D22\u524D\u6731\u91CC\u4E9A\uFF5E\u3002\u56E0\u4E3A\u5343\u94C1\u7684\u63A8\u8350\uFF0C\u6211\u5F00\u59CB\u63A5\u89E6\u5927\u70AE\u9053\u4E86\uFF5E\u3002\u8FD9\u95E8\u5927\u70AE\u4E5F\u662F\u5343\u94C1\u4E3A\u6211\u5236\u4F5C\u7684\u54E6\uFF0C\u633A\u9002\u5408\u6211\u7684\u5427\uFF1F"
+    - "\u6211\u662F\u4EC7\u5C04\u9AD8\u6821\u4E8C\u5E74\u7D1A\u7684\u8CA1\u524D\u6731\u88E1\u4E9E\uFF5E\u3002\u56E0\u70BA\u5343\u9435\u7684\u63A8\u85A6\uFF0C\u6211\u958B\u59CB\u63A5\u89F8\u5927\u70AE\u9053\u4E86\uFF5E\u3002\u9019\u9580\u5927\u70AE\u4E5F\u662F\u5343\u9435\u70BA\u6211\u88FD\u4F5C\u7684\u54E6\uFF0C\u633A\u9069\u5408\u6211\u7684\u5427\uFF1F"
   - voiceClip: {fileID: 8300000, guid: 1d554de56b87c554999ca68ab8bb03f2, type: 3}
     voiceText:
     - Ready
@@ -96,10 +98,10 @@ MonoBehaviour:
     - "\u51C6\u5907"
     - "\u6E96\u5099"
     voiceFullText:
-    - "\u3063\u3088\u3057\u3002\u884C\u304F\u305E"
-    - "\u3063\u3088\u3057\u3002\u884C\u304F\u305E"
-    - "\u597D\uFF0C\u4E0A\u4E86"
-    - "\u597D\uFF0C\u4E0A\u4E86"
+    - "\u6E96\u5099\u3067\u304D\u307E\u3057\u305F\u308F"
+    - "I\u2019m all set"
+    - "\u672C\u5C0F\u59D0\u51C6\u5907\u597D\u4E86"
+    - "\u672C\u5C0F\u59D0\u51C6\u5099\u597D\u4E86"
   - voiceClip: {fileID: 8300000, guid: 4f34117ed2c2ff4418b7aaa7985dc01d, type: 3}
     voiceText:
     - "\u30BF\u30A4\u30C8\u30EB\u30DC\u30A4\u30B9"
@@ -107,10 +109,10 @@ MonoBehaviour:
     - "\u6807\u9898\u754C\u9762"
     - "\u6A19\u984C\u754C\u9762"
     voiceFullText:
-    - "\u30E1\u30F3\u30C6\u306F\u30A6\u30C1\u306B\u4EFB\u305B\u306A"
-    - "\u30E1\u30F3\u30C6\u306F\u30A6\u30C1\u306B\u4EFB\u305B\u306A"
-    - "\u4FDD\u517B\u5C31\u4EA4\u7ED9\u6211\u5427"
-    - "\u4FDD\u990A\u5C31\u4EA4\u7D66\u6211\u5427"
+    - "\u30EC\u30C3\u30C4\u7206\u767A\u2661\u2026\u3067\u3059\u308F\uFF01"
+    - "Let\u2019s explode \u2661... desuwa"
+    - "\u8BA9\u6211\u4EEC\u4E00\u8D77\u7206\u70B8\u5427\uFF01\r"
+    - "\u8B93\u6211\u5011\u4E00\u8D77\u7206\u70B8\u5427\uFF01"
   - voiceClip: {fileID: 8300000, guid: 4805811e2ab317048811311484179cd2, type: 3}
     voiceText:
     - "\u8A66\u5408\u52DD\u5229"
@@ -118,10 +120,10 @@ MonoBehaviour:
     - "\u6BD4\u8D5B\u83B7\u80DC"
     - "\u6BD4\u8D5B\u7372\u52DD"
     voiceFullText:
-    - "\u3046\u3061\u3089\u6700\u5F37\u3058\u3083\u3093\uFF08\u7B11\uFF09"
-    - "\u3046\u3061\u3089\u6700\u5F37\u3058\u3083\u3093\uFF08\u7B11\uFF09"
-    - "\u6211\u4EEC\u8D85\u5F3A\u8BF6\uFF08\u7B11\uFF09"
-    - "\u6211\u5011\u8D85\u5F3A\u6B38\uFF08\u7B11\uFF09"
+    - "\u3084\u308A\u307E\u3057\u305F\u308F\uFF5E\r"
+    - "I did it~\r"
+    - "\u5E72\u6389\u4E86~\r"
+    - "\u5E79\u6389\u4E86~\r"
   - voiceClip: {fileID: 8300000, guid: e5eefcfe25bd04f4e9882070f9fc1725, type: 3}
     voiceText:
     - "\u30D5\u30A1\u30A4\u30C8"
@@ -129,10 +131,10 @@ MonoBehaviour:
     - "\u5F00\u6218"
     - "\u958B\u6230"
     voiceFullText:
-    - "\u304B\u304B\u3063\u3066\u3053\u3044"
-    - "\u304B\u304B\u3063\u3066\u3053\u3044"
-    - "\u653E\u9A6C\u8FC7\u6765"
-    - "\u653E\u99AC\u904E\u4F86"
+    - "\u304A\u59C9\u3055\u3093\u306B\u4EFB\u305B\u306A\u3055\u3044\r"
+    - "Leave it to me\r"
+    - "\u5305\u5728\u59D0\u59D0\u8EAB\u4E0A\r"
+    - "\u9019\u88CF\u5C31\u4EA4\u7D66\u59D0\u59D0\u5427\r"
   - voiceClip: {fileID: 8300000, guid: be20e0e1fdbfc604cac4ce0ca8e835ae, type: 3}
     voiceText:
     - "\u30EA\u30ED\u30FC\u30C91"
@@ -140,10 +142,10 @@ MonoBehaviour:
     - "\u88C5\u586B1"
     - "\u88DD\u586B1"
     voiceFullText:
-    - "\u3046\u308A\u3083\u308A\u3083\u308A\u3083"
-    - "\u3046\u308A\u3083\u308A\u3083\u308A\u3083"
-    - "\u54E6\u5566\u5566\u5566\u5566\uFF01"
-    - "\u54E6\u5566\u5566\u5566\u5566\uFF01"
+    - "\u3046\u3093\u3002\u3088\u3057\uFF01"
+    - Yeah. Alright
+    - "\u55EF\uFF0C\u5E72\u5F97\u597D\uFF01"
+    - "\u55EF\uFF0C\u5E79\u5F97\u597D\uFF01"
   - voiceClip: {fileID: 8300000, guid: 0337f3cba9895774599d28bc6b0bd704, type: 3}
     voiceText:
     - "\u30EA\u30ED\u30FC\u30C92"
@@ -151,10 +153,10 @@ MonoBehaviour:
     - "\u88C5\u586B2"
     - "\u88DD\u586B2"
     voiceFullText:
-    - "\u6B21\u3060\u6B21\uFF01"
-    - "\u6B21\u3060\u6B21\uFF01"
-    - "\u518D\u6765\u518D\u6765\uFF01"
-    - "\u518D\u4F86\u518D\u4F86!"
+    - "\u6B21\u3067\u3059\u308F"
+    - On to the next
+    - "\u4E0B\u4E00\u4E2A~"
+    - "\u4E0B\u4E00\u500B~"
   - voiceClip: {fileID: 8300000, guid: 4ee409524b765334b801a8460a8ac787, type: 3}
     voiceText:
     - "\u30EA\u30ED\u30FC\u30C93"
@@ -162,10 +164,10 @@ MonoBehaviour:
     - "\u88C5\u586B3"
     - "\u88DD\u586B3"
     voiceFullText:
-    - "\u5F85\u3063\u3066\u308D-?"
-    - "\u5F85\u3063\u3066\u308D-?"
-    - "\u4F60\u7ED9\u6211\u7B49\u7740"
-    - "\u4F60\u7D66\u6211\u7B49\u8457"
+    - "\u3088\u3044\u3001\u3063\u3057\u3087\uFF01"
+    - Here we go
+    - "\u563F~\u54BB\r"
+    - "\u563F~\u54BB\r"
   - voiceClip: {fileID: 8300000, guid: 7e701847f46cd5942a0c4a45dff42952, type: 3}
     voiceText:
     - "\u30B5\u30D6\u6B66\u5668\u4F7F\u7528"
@@ -173,10 +175,10 @@ MonoBehaviour:
     - "\u4F7F\u7528\u526F\u6B66\u5668"
     - "\u4F7F\u7528\u526F\u6B66\u5668"
     voiceFullText:
-    - "\u6C7A\u3081\u308B\u305C"
-    - "\u6C7A\u3081\u308B\u305C"
-    - "\u5C31\u8FD9\u4E2A\u4E86\uFF01"
-    - "\u5C31\u9019\u500B\u4E86\uFF01"
+    - "\u3069\u3046\u304B\u3057\u3089\r"
+    - "How about this\r"
+    - "\u8FD9\u4E2A\u5982\u4F55\uFF1F\r"
+    - "\u9019\u500B\u5982\u4F55\uFF1F\r"
   - voiceClip: {fileID: 8300000, guid: ef9c504f2ca978342b2b2be664b3f5fa, type: 3}
     voiceText:
     - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75281"
@@ -184,10 +186,10 @@ MonoBehaviour:
     - "\u4F7F\u7528\u4E3B\u6B66\u56681"
     - "\u4F7F\u7528\u4E3B\u6B66\u56681"
     voiceFullText:
-    - "\u307B\u3089\u3088"
-    - "\u307B\u3089\u3088"
-    - "\u55E8~"
-    - "\u55E8~"
+    - "\u30B3\u30B3\u3067\u3059\u308F\uFF5E"
+    - This is it desuwa
+    - "\u5728\u8FD9\u91CC\u54E6~"
+    - "\u5728\u9019\u88CF\u54E6~"
   - voiceClip: {fileID: 8300000, guid: a358b91a39a1aca4495e876cf99be870, type: 3}
     voiceText:
     - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75282"
@@ -195,10 +197,10 @@ MonoBehaviour:
     - "\u4F7F\u7528\u4E3B\u6B66\u5668"
     - "\u4F7F\u7528\u4E3B\u6B66\u5668"
     voiceFullText:
-    - "\u30D0\u30FC\u30F3\uFF57"
-    - "\u30D0\u30FC\u30F3\uFF57"
-    - "\u6886\uFF01\uFF01w"
-    - "\u6886\uFF01\uFF01w"
+    - "\u3069\u3046\u304B\u3057\u3089\uFF1F"
+    - What do you think
+    - "\u8FD9\u4E2A\u5982\u4F55~"
+    - "\u9019\u500B\u5982\u4F55~"
   - voiceClip: {fileID: 8300000, guid: 56c505d526daeb94995f0e8a9ea5ffd4, type: 3}
     voiceText:
     - "\u30E1\u30A4\u30F3\u6B66\u5668\u4F7F\u75283"
@@ -206,10 +208,10 @@ MonoBehaviour:
     - "\u4F7F\u7528\u4E3B\u6B66\u56683"
     - "\u4F7F\u7528\u4E3B\u6B66\u56683"
     voiceFullText:
-    - "\u3053\u3053\u3060\uFF01"
-    - "\u3053\u3053\u3060\uFF01"
-    - "\u5C31\u662F\u73B0\u5728\uFF01"
-    - "\u5C31\u662F\u73FE\u5728\uFF01"
+    - " \u3044\u304D\u307E\u3059\u308F\uFF5E\r"
+    - "Here I go~,desuwa\r"
+    - "\u6211\u8981\u4E0A\u54AF~\r"
+    - "\u6211\u8981\u4E0A\u54AF~\r"
   - voiceClip: {fileID: 8300000, guid: dd899706690cdfb46a5883f1744c1005, type: 3}
     voiceText:
     - "\u6483\u7834\u3055\u308C\u305F"
@@ -217,10 +219,10 @@ MonoBehaviour:
     - "\u88AB\u51FB\u8D25"
     - "\u88AB\u64CA\u6557"
     voiceFullText:
-    - "\u3063\u304F\u3063\u305D\u3049\uFF5E"
-    - "\u3063\u304F\u3063\u305D\u3049\uFF5E"
-    - "\u53EF\u6076~\uFF01"
-    - "\u53EF\u60E1~\uFF01"
+    - "\u899A\u3048\u3066\u306A\u3055\u3044\r"
+    - "Don't forget this\r"
+    - "\u4F60\u7ED9\u6211\u8BB0\u4F4F\r"
+    - "\u4F60\u7D66\u6211\u8A18\u4F4F\r"
   - voiceClip: {fileID: 8300000, guid: 8406bdf714f71274a852bf7f831c8fa9, type: 3}
     voiceText:
     - "\u6575\u64831"
@@ -228,10 +230,10 @@ MonoBehaviour:
     - "\u653B\u51FB\u654C\u65B91"
     - "\u653B\u64CA\u6575\u65B91"
     voiceFullText:
-    - "\u306F\u3063\uFF08\u7B11\uFF09\u3069\u3046\u3060"
-    - "\u306F\u3063\uFF08\u7B11\uFF09\u3069\u3046\u3060"
-    - "\u54C8\uFF01\uFF08\u7B11\uFF09\u5982\u4F55\uFF1F"
-    - "\u54C8\uFF01\uFF08\u7B11\uFF09\u5982\u4F55\uFF1F"
+    - "\u304A\uFF5E\u307B\u3063\u307B\u3063"
+    - Oh ho ho ho
+    - "\u54E6~\u5475~\u5475~"
+    - "\u54E6~\u5475~\u5475~"
   - voiceClip: {fileID: 8300000, guid: 7d5b5d798325d604f88cdebea85e42a7, type: 3}
     voiceText:
     - "\u6575\u64832"
@@ -239,21 +241,10 @@ MonoBehaviour:
     - "\u653B\u51FB\u654C\u65B92"
     - "\u653B\u64CA\u6575\u65B92"
     voiceFullText:
-    - "\u3084\u3063\u305F\u305C"
-    - "\u3084\u3063\u305F\u305C"
-    - "\u592A\u68D2\u4E86\uFF01"
-    - "\u592A\u68D2\u4E86\uFF01"
-  - voiceClip: {fileID: 8300000, guid: feef21bf4dabae44383bae63b258a030, type: 3}
-    voiceText:
-    - "\u6575\u64833"
-    - "\u6575\u64833"
-    - "\u653B\u51FB\u654C\u65B93"
-    - "\u653B\u64CA\u6575\u65B93"
-    voiceFullText:
-    - "\u3069\u30FC\u3088"
-    - "\u3069\u30FC\u3088"
-    - "\u5982\u4F55\uFF1F\uFF01"
-    - "\u5982\u4F55\uFF1F\uFF01"
+    - "\u3054\u3081\u3093\u3042\u305D\u3070\u305B\uFF1F"
+    - I beg your pardon
+    - "\u8BF7\u60A8\u89C1\u8C05"
+    - "\u8ACB\u60A8\u898B\u8AD2"
   - voiceClip: {fileID: 8300000, guid: 9ff722afb5414ca40812159559d9616b, type: 3}
     voiceText:
     - "FF\uFF08\u3055\u308C\u305F\u6642\uFF09"
@@ -261,10 +252,10 @@ MonoBehaviour:
     - "\u88AB\u53CB\u65B9\u51FB\u4E2D"
     - "\u88AB\u53CB\u65B9\u64CA\u4E2D"
     voiceFullText:
-    - "\u3070\u3063\u304B\u3084\u308D\u3046"
-    - "\u3070\u3063\u304B\u3084\u308D\u3046"
-    - "\u4F60\u4E2A\u8822\u8D27\uFF01"
-    - "\u4F60\u500B\u8822\u8CA8\uFF01"
+    - "\u2026\u5F8C\u3067\u88CF\u306D"
+    - "...We\u2019ll talk later, privately\r"
+    - "...\u540E\u65B9\u51FA\u4E86\u4E2A\u53DB\u5F92\u5462\r"
+    - "...\u5F8C\u65B9\u51FA\u4E86\u500B\u53DB\u5F92\u5462\r"
   - voiceClip: {fileID: 8300000, guid: 32f1d831f0f55a347a7855a338c808d2, type: 3}
     voiceText:
     - "FF\uFF08\u3057\u305F\u6642\uFF09"
@@ -272,10 +263,10 @@ MonoBehaviour:
     - "\u547D\u4E2D\u53CB\u65B9"
     - "\u547D\u4E2D\u53CB\u65B9"
     voiceFullText:
-    - "\u3060\u304B\u3089\u96E2\u308C\u308D\u3063\u3066"
-    - "\u3060\u304B\u3089\u96E2\u308C\u308D\u3063\u3066"
-    - "\u90FD\u8BF4\u4E86\u79BB\u8FDC\u70B9\uFF01"
-    - "\u90FD\u8AAC\u4E86\u96E2\u9060\u9EDE\uFF01"
+    - "\u90AA\u9B54"
+    - You're in the way
+    - "\u522B\u788D\u4E8B"
+    - "\u5225\u7919\u4E8B"
   - voiceClip: {fileID: 8300000, guid: bfe39b22c5cf66c42ac1115064e0c7d2, type: 3}
     voiceText:
     - "\u7F60\u304B\u304B\u3063\u305F1"
@@ -283,10 +274,10 @@ MonoBehaviour:
     - "\u4E2D\u9677\u96311"
     - "\u4E2D\u9677\u96311"
     voiceFullText:
-    - "\u3063\u3084\u3079"
-    - "\u3063\u3084\u3079"
-    - "\u4E0D\u597D\uFF01"
-    - "\u4E0D\u597D\uFF01"
+    - "\u3042\u3089\u3063"
+    - Oh
+    - "\u554A\u5566~"
+    - "\u554A\u5566~"
   - voiceClip: {fileID: 8300000, guid: 89b0442b7b5ef4842bcecb8070138176, type: 3}
     voiceText:
     - "\u7F60\u304B\u304B\u3063\u305F2"
@@ -294,21 +285,10 @@ MonoBehaviour:
     - "\u4E2D\u9677\u96312"
     - "\u4E2D\u9677\u96312"
     voiceFullText:
-    - "\u307E\u305A\u3063\uFF01"
-    - "\u307E\u305A\u3063\uFF01"
-    - "\u7CDF\u4E86\uFF01"
-    - "\u7CDF\u4E86\uFF01"
-  - voiceClip: {fileID: 8300000, guid: 818f2d2129f854f409736898124ad552, type: 3}
-    voiceText:
-    - "\u7F60\u304B\u304B\u3063\u305F3"
-    - "\u7F60\u304B\u304B\u3063\u305F3"
-    - "\u4E2D\u9677\u96313"
-    - "\u4E2D\u9677\u96313"
-    voiceFullText:
-    - "\u3084\u3063\u3070\u3044"
-    - "\u3084\u3063\u3070\u3044"
-    - "\u5B8C\u5566\uFF01"
-    - "\u5B8C\u5566\uFF01"
+    - "\u30AD\u30E3\u30C3\uFF01"
+    - Eek
+    - "\u5440\u554A\u554A\uFF01"
+    - "\u5440\u554A\u554A\uFF01"
   - voiceClip: {fileID: 8300000, guid: a624c8671ca10204299d134c90d79e89, type: 3}
     voiceText:
     - "\u30E9\u30A6\u30F3\u30C9\u52DD\u5229"
@@ -316,10 +296,10 @@ MonoBehaviour:
     - "\u56DE\u5408\u80DC\u5229"
     - "\u56DE\u5408\u80DC\u5229"
     voiceFullText:
-    - "\u3042\u3063\u306F\u3063\u306F\u3063\u306F\uFF5E\uFF5E\uFF5E"
-    - "\u3042\u3063\u306F\u3063\u306F\u3063\u306F\uFF5E\uFF5E\uFF5E"
-    - "\u554A~\u54C8~\u54C8~\u54C8~"
-    - "\u554A~\u54C8~\u54C8~\u54C8~"
+    - "\u3054\u3075\u3063\u3068\u3073\u3042\u305D\u3070\u305B\u30FC\r"
+    - Please blow away
+    - "\u8BF7\u98DE\u8FDC\u4E00\u70B9\u5427\uFF5E"
+    - "\u8ACB\u98DB\u9060\u4E00\u9EDE\u5427~"
   - voiceClip: {fileID: 8300000, guid: 37a42fc9bd10d2c4b921ed12d2fb6075, type: 3}
     voiceText:
     - "\u5473\u65B9\u3078\u611F\u8B1D"
@@ -327,7 +307,7 @@ MonoBehaviour:
     - "\u611F\u8C22\u53CB\u65B9"
     - "\u611F\u8B1D\u53CB\u65B9"
     voiceFullText:
-    - "\u3042\u308A\u304C\u3068\u306A"
-    - "\u3042\u308A\u304C\u3068\u306A"
-    - "\u8C22\u4E86"
-    - "\u8B1D\u4E86"
+    - "\u3042\u308A\u304C\u3068\u2661"
+    - thank you
+    - "\u8C22\u8C22\u5566~\r"
+    - "\u8B1D\u8B1D\u5566~"

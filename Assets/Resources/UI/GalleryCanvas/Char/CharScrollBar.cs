@@ -18,12 +18,13 @@ public class OffsetChildObjects : MonoBehaviour
     public Vector3 iconScale = new Vector3(0.2f, 0.2f, 0.2f);
     public Vector2 iconSize = new Vector2(200, 200);
 
-    int inputIndex = -1;
+    int inputIndex = 0;
 
+    private bool isMove = false;
     private bool EnterDown = false;
     void Start()
     {
-        inputIndex = -1;
+        inputIndex = 0;
         GalleryManager.Instance.SetState(GalleryState.CharacterSelect);
 
         Vector3 newPosition = transform.localPosition;
@@ -48,9 +49,8 @@ public class OffsetChildObjects : MonoBehaviour
         for (int i = 0; i < contentParent.childCount; i++)
         {
             RectTransform currentChild = contentParent.GetChild(i).GetComponent<RectTransform>();
-            float newY = basePosition.y - i * (baseHeight / 2);
-            float newX = (i % 2 == 0) ? basePosition.x : basePosition.x + baseWidth;
-            currentChild.localPosition = new Vector3(newX, newY, basePosition.z);
+            float newY = basePosition.y - (i * baseHeight*1.2f);
+            currentChild.localPosition = new Vector3(basePosition.x, newY, basePosition.z);
         }
     }
 
@@ -72,11 +72,7 @@ public class OffsetChildObjects : MonoBehaviour
             if (buttonImage != null)
             {
                 buttonImage.sprite = character.charData.characterIcon;
-                if (character.iconMaterial != null)
-                {
-                    buttonImage.material = new Material(character.iconMaterial);
-                    buttonImage.material.SetFloat("_OutlinePixelWidth", 0.0f);
-                }
+                buttonImage.material = character.iconMaterial;
             }
 
             Text buttonText = newButton.GetComponentInChildren<Text>();
@@ -93,7 +89,6 @@ public class OffsetChildObjects : MonoBehaviour
     void Update()
     {
         HandleInput();
-        HighlightCurrentIcon();
         HandleEnterKey();
 
     }
@@ -105,29 +100,70 @@ public class OffsetChildObjects : MonoBehaviour
 
         if (GalleryManager.Instance.CurrentState == GalleryState.CharacterSelect)
         {
-            if (Inout.x > 0.5f && LeftStickcanChange)
+            if (Inout.y > 0.5f && LeftStickcanChange)
             {
-                if (inputIndex < contentParent.childCount - 1)
-                {
-                    inputIndex++;
-                }
-                LeftStickcanChange = false;
-            }
-            else if (Inout.x < -0.5f && LeftStickcanChange)
-            {
-                if (inputIndex > 0)
+                if (inputIndex > 0&&!isMove)
                 {
                     inputIndex--;
+                    MoveScrollView(-1);
                 }
                 LeftStickcanChange = false;
             }
-            else if (Inout.x > -0.5f && Inout.x < 0.5f)
+            else if (Inout.y < -0.5f && LeftStickcanChange)
+            {
+                if (inputIndex < contentParent.childCount - 1&&!isMove)
+                {
+                    inputIndex++;
+                    MoveScrollView(1);
+                }
+                LeftStickcanChange = false;
+            }
+            else if (Inout.y > -0.5f && Inout.y < 0.5f)
             {
                 LeftStickcanChange = true;
             }
         }
 
     }
+
+
+    IEnumerator SmoothScrollTo(Vector2 targetPosition)
+    {
+        isMove = true;
+        RectTransform contentRect = contentParent.GetComponent<RectTransform>();
+        Vector2 startPosition = contentRect.anchoredPosition;
+        float duration = 0.1f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            contentRect.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, elapsed / duration);
+            yield return null;
+        }
+
+        contentRect.anchoredPosition = targetPosition;
+        isMove = false;
+    }
+
+
+    void MoveScrollView(int direction)
+    {
+        RectTransform contentRect = contentParent.GetComponent<RectTransform>();
+
+        float moveDistance = 188;
+
+        float newY = contentRect.anchoredPosition.y + (direction * moveDistance);
+
+        float minY = 0;
+        float maxY = Mathf.Max(0, (contentParent.childCount - 1) * moveDistance);
+        newY = Mathf.Clamp(newY, minY, maxY);
+
+        StartCoroutine(SmoothScrollTo(new Vector2(contentRect.anchoredPosition.x, newY)));
+    }
+
+
+
 
     void HighlightCurrentIcon()
     {
@@ -157,7 +193,7 @@ public class OffsetChildObjects : MonoBehaviour
                 EnterDown = true;
                 mainViewPort.EnterCharacterGallery(charGalleryManager.characterList[inputIndex]);
                 charGalleryController.SetCharData(charGalleryManager.characterList[inputIndex]);
-                mainViewPort.GenerateIll(charGalleryManager.characterList[inputIndex]);
+                charGalleryController.ReSetSpriteState();
                 GalleryManager.Instance.SetState(GalleryState.CharacterGallery);
             }
         }

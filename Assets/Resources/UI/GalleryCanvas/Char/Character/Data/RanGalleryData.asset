@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charData:
     characterName: "\u897F\u5712 \u862D"
-    schoolText: "\u5B66\u6821\u3000\u82B1\u97F3\u5973\u5B66\u9662\u9AD8\u7B49\u79D1"
-    schoolYear: "\u5B66\u5E74\u3000\u4E00\u5E74"
+    schoolText: "\u82B1\u97F3\u5973\u5B66\u9662\u9AD8\u7B49\u79D1"
+    schoolYear: "\u4E00\u5E74"
     charDesign:
     - "\u30D1\u30F3\u30AF\u3067\u30ED\u30C3\u30AF\u306A\u5973\u306E\u5B50\r\u66F2\u304C\u3063\n\u305F\u3053\u3068\u304C\u5ACC\u3044\u306A\u9811\u56FA\u8005\u3002\r\u5927\u7832\u306E\n\u8F5F\u97F3\u306B\u60F9\u304B\u308C\u5927\u7832\u9053\u3092\u59CB\u3081\u308B"
     - "\u30D1\u30F3\u30AF\u3067\u30ED\u30C3\u30AF\u306A\u5973\u306E\u5B50\r\u66F2\u304C\u3063\n\u305F\u3053\u3068\u304C\u5ACC\u3044\u306A\u9811\u56FA\u8005\u3002\r\u5927\u7832\u306E\n\u8F5F\u97F3\u306B\u60F9\u304B\u308C\u5927\u7832\u9053\u3092\u59CB\u3081\u308B"
@@ -62,13 +62,13 @@ MonoBehaviour:
     - "\u7528\u5409\u4ED6\u7684\u529B\u91CF\u64CA\u98DB\u5468\u570D\u7684\u73A9\u5BB6\r\nHello,
       hello, hello, how low?"
   sketh: {fileID: 21300000, guid: e562042c49160194d8a6d092563ca157, type: 3}
-  iconMaterial: {fileID: 2100000, guid: 59ceecd16836bfa43985c35b11f76e5c, type: 2}
+  iconMaterial: {fileID: 2100000, guid: 97dfc9bdd4289fc4f8173f07f6aa62c2, type: 2}
   animatorControllers:
-  - {fileID: 9100000, guid: 15cadc8b8308bea41b977f2cad7d2347, type: 2}
-  - {fileID: 9100000, guid: 4d76b364b488fd24a82d7904823669ff, type: 2}
-  - {fileID: 9100000, guid: 9c8badb5741610d44b447a5649230c1a, type: 2}
-  - {fileID: 9100000, guid: aaf5a25c87e3f6f4ab72847a6f28c3db, type: 2}
-  - {fileID: 9100000, guid: c10a4341154763f4195a54e631e40cce, type: 2}
+  - {fileID: 9100000, guid: a4cc8c78615cb5d4da9626b46cfa4c02, type: 2}
+  - {fileID: 9100000, guid: 45a9a598e85591e41915d6471a762dba, type: 2}
+  - {fileID: 9100000, guid: 4ac87c6afc3da964bad8635c47c703e8, type: 2}
+  - {fileID: 9100000, guid: 26e5b73463107974984b119d61bbcce7, type: 2}
+  - {fileID: 9100000, guid: c7601e155f063ab4980f76296406b18e, type: 2}
   CharVoice:
   - voiceClip: {fileID: 8300000, guid: 5f15c13f1eb23e34f8118cf9ec18519a, type: 3}
     voiceText:

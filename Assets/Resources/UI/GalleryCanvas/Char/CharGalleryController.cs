@@ -13,6 +13,8 @@ public class CharGalleryController : MonoBehaviour
 
     private int inputIndex=1;
 
+    private int spriteIndex = 0;
+
 
     void Start()
     {
@@ -28,47 +30,67 @@ public class CharGalleryController : MonoBehaviour
 
     void CharGalleryInput()
     {
-        if(GalleryManager.Instance.CurrentState != GalleryState.CharacterGallery) { return; }
+        if (GalleryManager.Instance.CurrentState != GalleryState.CharacterGallery) { return; }
         Vector2 Inout = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
 
-            if (Inout.x > 0.5f && LeftStickcanChange)
+        if (Inout.x > 0.5f && LeftStickcanChange)
+        {
+            inputIndex++;
+            if (inputIndex > mainViewPort.GetMaxPage())
             {
-                inputIndex++;
-                if (inputIndex > mainViewPort.GetMaxPage())
-                {
-                    inputIndex = 1;
-                }
-                mainViewPort.SwitchPage(inputIndex,characterData);
-                LeftStickcanChange = false;
+                inputIndex = 1;
             }
-            else if (Inout.x < -0.5f && LeftStickcanChange)
+            mainViewPort.SwitchPage(inputIndex, characterData);
+            LeftStickcanChange = false;
+        }
+        else if (Inout.x < -0.5f && LeftStickcanChange)
+        {
+            inputIndex--;
+            if (inputIndex <= 0)
             {
-                inputIndex--;
-                if (inputIndex <= 0)
-                {
-                    inputIndex=mainViewPort.GetMaxPage();
-                }
-                mainViewPort.SwitchPage(inputIndex, characterData);
-                LeftStickcanChange = false;
+                inputIndex = mainViewPort.GetMaxPage();
             }
-            else if (Inout.x > -0.5f && Inout.x < 0.5f)
-            {
-                LeftStickcanChange = true;
-            }
+            mainViewPort.SwitchPage(inputIndex, characterData);
+            LeftStickcanChange = false;
+        }
 
-            if (InputManager.GetKeyUp(BoolActions.SouthButton))
+        if (Inout.y > 0.5f && LeftStickcanChange)
+        {
+            spriteIndex--;                                                                          
+            if (spriteIndex < 0)
             {
-                EnterDown = false;
+                spriteIndex = characterData.animatorControllers.Count-1;
             }
-
-
-        if (InputManager.GetKeyDown(BoolActions.EastButton))
+            mainViewPort.UpdateCharAnime(spriteIndex,characterData);
+            LeftStickcanChange = false;
+        }
+        else if (Inout.y < -0.5f && LeftStickcanChange)
+        {
+            spriteIndex++;
+            if (spriteIndex > characterData.animatorControllers.Count-1)
             {
-            mainViewPort.SetActive(false);
-            mainViewPort.DeletCharIll();
+                spriteIndex = 0;
+            }
+            mainViewPort.UpdateCharAnime(spriteIndex, characterData);
+            LeftStickcanChange = false;
+        }
+        else if (Inout.y > -0.5f && Inout.y < 0.5f&& Inout.x > -0.5f && Inout.x < 0.5f                                                                                                                                                                      )
+        {
+            LeftStickcanChange = true;
+        }
+
+        if (InputManager.GetKeyUp(BoolActions.SouthButton))
+        {
+            EnterDown = false;
+        }
+
+
+        if (InputManager.GetKeyDown(BoolActions.EastButton) && !mainViewPort.GetPageMove())
+        {
+            mainViewPort.PageReturn();
             inputIndex = 1;
             GalleryManager.Instance.SetState(GalleryState.CharacterSelect);
-            }
+        }
     }
 
     public void SetCharData(CharacterData data)
@@ -77,5 +99,9 @@ public class CharGalleryController : MonoBehaviour
         {
             characterData = data;
         }
+    }
+    public void ReSetSpriteState()
+    {
+        spriteIndex = 0;
     }
 }
