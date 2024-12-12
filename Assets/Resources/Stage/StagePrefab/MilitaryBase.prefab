@@ -2097,7 +2097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6559112036885389630}
   m_Layer: 0
-  m_Name: APCGroup
+  m_Name: Humvee2Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2116,7 +2116,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7122446570234113974}
+  - {fileID: 214663745199531165}
   - {fileID: 823043885328303378}
   - {fileID: 3472795274053728109}
   - {fileID: 3410128283628299077}
@@ -3930,6 +3930,95 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ffd697d9b47e8df4a9aa63ef0a40021d,
     type: 3}
   m_PrefabInstance: {fileID: 381533939404121965}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &391842805145174902
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6559112036885389630}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.0999997
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.0999997
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.09999995
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e9e2144528db1714bac7280eebd2d80e,
+        type: 3}
+      propertyPath: m_Name
+      value: Humvee2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e9e2144528db1714bac7280eebd2d80e, type: 3}
+--- !u!4 &214663745199531165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e9e2144528db1714bac7280eebd2d80e,
+    type: 3}
+  m_PrefabInstance: {fileID: 391842805145174902}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &401869657250053172
 PrefabInstance:
@@ -7250,100 +7339,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ffd697d9b47e8df4a9aa63ef0a40021d,
     type: 3}
   m_PrefabInstance: {fileID: 6812931279328288874}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &7301102550248163421
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6559112036885389630}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2.0999997
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.0999997
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 05583ca7ede3e1c40a094fcc07d24372,
-        type: 3}
-      propertyPath: m_Name
-      value: Humvee
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 05583ca7ede3e1c40a094fcc07d24372, type: 3}
---- !u!4 &7122446570234113974 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 05583ca7ede3e1c40a094fcc07d24372,
-    type: 3}
-  m_PrefabInstance: {fileID: 7301102550248163421}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7404917234663567226
 PrefabInstance:
