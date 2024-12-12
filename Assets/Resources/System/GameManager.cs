@@ -407,7 +407,7 @@ public class GameManager : MonoBehaviour
                 if (_data.winCountTeamB >= 3) { clip = pvd.GetGameWin(); }
                 else { clip = pvd.GetRoundWin(); }
 
-                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 3);
+                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 5);
             }
         }
         else if (tentativeWinner == (int)TEAM_NUM.A)
@@ -438,7 +438,7 @@ public class GameManager : MonoBehaviour
                 if (_data.winCountTeamA >= 3) { clip = pvd.GetGameWin(); }
                 else { clip = pvd.GetRoundWin(); }
 
-                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 3);
+                GetPlayer(i).PlayVoice(clip, Camera.main.transform, 5);
             }
         }
 

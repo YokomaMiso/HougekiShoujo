@@ -60,12 +60,12 @@ public class KillLogBehavior : MonoBehaviour
         //Ž©Œˆ‚È‚ç
         if (killer == deadMan)
         {
-            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage(), Camera.main.transform, 2);
+            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamage(), Camera.main.transform, 4);
         }
         //FF‚È‚ç
         else if (killerTeam == deadManTeam)
         {
-            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamageFF(), Camera.main.transform, 2);
+            _player.PlayVoice(_player.GetPlayerData().GetPlayerVoiceData().GetDamageFF(), Camera.main.transform, 3);
             killerPlayer = Managers.instance.gameManager.GetPlayer(killer);
             killVoice = killerPlayer.GetPlayerData().GetPlayerVoiceData().GetFriendlyFire();
         }
