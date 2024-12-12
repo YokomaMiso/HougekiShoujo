@@ -83,7 +83,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d249074be5d0fc3458cfefaaea9799d2, type: 3}
+    m_Font: {fileID: 12800000, guid: 5419935eecdc9254d9c467872f2250d2, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d249074be5d0fc3458cfefaaea9799d2, type: 3}
+    m_Font: {fileID: 12800000, guid: 5419935eecdc9254d9c467872f2250d2, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   japanese: "\u9032\u8ECD\u3057\u307E\u3059"
-  english: Assault
+  english: Going Ahead!
   simpleChinese: "\u6211\u51B2\u950B"
   traditionalChinese: "\u6211\u885D\u92D2"
 --- !u!1 &4432466077039030639
@@ -395,7 +395,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -320, y: 0}
-  m_SizeDelta: {x: 320, y: 240}
+  m_SizeDelta: {x: 360, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1492353372177588820
 CanvasRenderer:
@@ -441,7 +441,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d249074be5d0fc3458cfefaaea9799d2, type: 3}
+    m_Font: {fileID: 12800000, guid: 5419935eecdc9254d9c467872f2250d2, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   japanese: "\u5F8C\u9000\u3057\u307E\u3059"
-  english: Retreat
+  english: Retreating!
   simpleChinese: "\u6211\u5728\u64A4\u9000"
   traditionalChinese: "\u6211\u5728\u64A4\u9000"
 --- !u!1 &5289509339798597389
@@ -625,7 +625,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d249074be5d0fc3458cfefaaea9799d2, type: 3}
+    m_Font: {fileID: 12800000, guid: 5419935eecdc9254d9c467872f2250d2, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -651,6 +651,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   japanese: "\u63F4\u8B77\u3057\u307E\u3059"
-  english: I'll cover you
+  english: I'll cover you!
   simpleChinese: "\u6211\u63A9\u62A4\u4F60"
   traditionalChinese: "\u6211\u63A9\u8B77\u4F60"
