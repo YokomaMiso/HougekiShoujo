@@ -32,7 +32,7 @@ public class MainViewPort : MonoBehaviour
 
     void Update()
     {
-        if (InputManager.GetKeyDown(BoolActions.WestButton))
+        if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             if (!IsSecondPage(currentPage))
             {
