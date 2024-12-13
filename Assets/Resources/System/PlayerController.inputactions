@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "WestButton",
+                    "type": "Button",
+                    "id": "ceabb304-f4ed-4bf8-b047-8cb4b04f6083",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RightShoulder",
                     "type": "Button",
                     "id": "d1dd9131-7b79-4a61-97b8-0e432c5756cb",
@@ -759,6 +768,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "RadioChat9",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0527845-4fa6-4967-bb10-9d408785fdd9",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "WestButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0cddc4c-fcc4-49ba-8a85-57025fd7298f",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Key&Mouse",
+                    "action": "WestButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

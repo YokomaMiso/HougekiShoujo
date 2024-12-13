@@ -18,6 +18,7 @@ public enum BoolActions
     RStickButton = 0,
     SouthButton,
     EastButton,
+    WestButton,
     RightShoulder,
     LeftShoulder,
     LeftTrigger,
