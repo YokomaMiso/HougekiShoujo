@@ -69,7 +69,7 @@ public class CharaSerifBehavior : MonoBehaviour
 
     public void ChatNumAdd() { chatNum++; }
 
-    void Update()
+    protected virtual void Update()
     {
         timer += Time.deltaTime;
         float nowRate = Mathf.Clamp01(timer / arriveTime);

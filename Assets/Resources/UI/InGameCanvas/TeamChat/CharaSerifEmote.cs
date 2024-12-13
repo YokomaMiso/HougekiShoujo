@@ -23,4 +23,22 @@ public class CharaSerifEmote : CharaSerifBehavior
 
         transform.localPosition = startPos;
     }
+
+    protected override void Update()
+    {
+        timer += Time.deltaTime;
+        float nowRate = Mathf.Clamp01(timer / arriveTime);
+        transform.localPosition = Vector3.Lerp(startPos, endPos, nowRate) + Vector3.down * (chatNum * posAdd);
+
+        if (timer > fadeStart)
+        {
+            float fadeRate = 1.0f - (timer - fadeStart) / (lifeTime - fadeStart);
+            Color fadeColor = new Color(1, 1, 1, fadeRate);
+            chatBG.color = chatBG.color * fadeColor;
+            playerName.color = playerName.color * fadeColor;
+            charaIcon.color = charaIcon.color * fadeColor;
+        }
+
+        if (timer > lifeTime) { Destroy(gameObject); }
+    }
 }
