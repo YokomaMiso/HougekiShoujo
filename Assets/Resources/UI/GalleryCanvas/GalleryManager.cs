@@ -43,6 +43,7 @@ public class GalleryManager : MonoBehaviour
     public GameObject soundCategory;
 
     public SoundGalleryManeger soundsManeger;
+    public MainViewPort mainViewPort;
 
 
     //入力処理用(GalleryMain)
@@ -226,6 +227,8 @@ public class GalleryManager : MonoBehaviour
         if (InputManager.GetKeyDown(BoolActions.EastButton))
         {
             if (soundsManeger.audioSource.isPlaying) { return; }
+            if (mainViewPort.GetPageMove()) { return; }
+            
             charCategory.SetActive(false);
             nextState = -1;
             switch (CurrentState)
@@ -494,12 +497,12 @@ public class GalleryManager : MonoBehaviour
         }
     }
 
-    private void TransRotationIn()
+    public void TransRotationIn()
     {
         ButtonRotation(largeCategory.GetComponent<RectTransform>(),rotationAngle, Duration);
     }
 
-    private void TransRotationOut()
+    public void TransRotationOut()
     {
         ButtonRotation(largeCategory.GetComponent<RectTransform>(), -rotationAngle, Duration);
     }
