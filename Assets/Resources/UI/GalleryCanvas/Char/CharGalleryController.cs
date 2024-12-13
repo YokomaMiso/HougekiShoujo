@@ -33,7 +33,7 @@ public class CharGalleryController : MonoBehaviour
         if (GalleryManager.Instance.CurrentState != GalleryState.CharacterGallery) { return; }
         Vector2 Inout = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
 
-        if (Inout.x > 0.5f && LeftStickcanChange)
+        if (Inout.x > 0.5f && LeftStickcanChange&&!mainViewPort.GetPageMove())
         {
             inputIndex++;
             if (inputIndex > mainViewPort.GetMaxPage())
@@ -43,7 +43,7 @@ public class CharGalleryController : MonoBehaviour
             mainViewPort.SwitchPage(inputIndex, characterData);
             LeftStickcanChange = false;
         }
-        else if (Inout.x < -0.5f && LeftStickcanChange)
+        else if (Inout.x < -0.5f && LeftStickcanChange && !mainViewPort.GetPageMove())
         {
             inputIndex--;
             if (inputIndex <= 0)
