@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
+  m_Name: SD_RanProjectile
+  m_EditorClassIdentifier: 
+  shellIcon: {fileID: 21300000, guid: 148e11e4596762e4980cdbf65a6c4193, type: 3}
+  shellType: 0
+  projectile: {fileID: 5179943196335613339, guid: 024b3f64d90d9cf4d868b370b4b720ce,
+    type: 3}
+  projectileAnim: {fileID: 0}
+  explosion: {fileID: 11400000, guid: a0edeb93c7d7b714da6c4edb5887ec86, type: 2}
+  weaponName:
+  - YELLOW-1892
+  - YELLOW-1892
+  - YELLOW-1892
+  - YELLOW-1892
+  shellExplain:
+  - "\u524D\u65B9\u5E83\u7BC4\u56F2\u306B\uFF12\u767A\u306E\u5F3E\u3092\u767A\u5C04\u3059\u308B\r\n\u305D\u306E\u4EE3\u308F\u308A\u306B\u767A\u751F\u304C\u9045\u304F\u3001\u786C\u76F4\u304C\u9577\u3044"
+  - 'It fires two bullets in a wide frontal area.
+
+    Instead, they have a slow
+    onset and a long hardness.'
+  - "\u80FD\u5411\u6B63\u524D\u65B9\u53D1\u5C04\u4E24\u679A\u5927\u8303\u56F4\u7206\u5F39\n\u4EE3\u4EF7\u662F\u7206\u70B8\u53D1\u751F\u6162\uFF0C\u786C\u76F4\u957F"
+  - "\u80FD\u5411\u6B63\u524D\u65B9\u767C\u5C04\u5169\u679A\u5927\u7BC4\u570D\u7206\u5F48\n\u4EE3\u50F9\u662F\u7206\u70B8\u767C\u751F\u6162\uFF0C\u786C\u76F4\u9577"
+  reloadTime: 1.5
+  recoilTime: 2
+  projectileSpeed: 0
+  aimRange: 10
+  aimDegree: 15
+  lifeTime: 1.5

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
+  m_Name: SW_BambooBomb
+  m_EditorClassIdentifier: 
+  subWeaponIcon: {fileID: 21300000, guid: 2ed3b496665c8bf48a98dbe56d83ba1f, type: 3}
+  subType: 3
+  buffType: 0
+  installation: {fileID: 3179393461812120061, guid: e61bf80c8671bdf49acb62a65d7f54e2,
+    type: 3}
+  subWeaponName:
+  - "\u7AF6\u6280\u6539\u826F\u578B \u85E4\u5802\u731F\u5E2B\u4F1A\u5236\u5F0F\u4E71\u676D"
+  - Todo's Punji Stake
+  - "\u7AF6\u6280\u6539\u826F\u578B \u85E4\u5802\u731F\u5E2B\u4F1A\u5236\u5F0F\u4E71\u676D"
+  - "\u7AF6\u6280\u6539\u826F\u578B \u85E4\u5802\u731F\u5E2B\u4F1A\u5236\u5F0F\u4E71\u676D"
+  subWeaponExplain:
+  - "\u7AF9\u3092\u751F\u3084\u3059\u30BF\u30B1\u30CE\u30B3\u3092\u6295\u64F2\r\n\u58C1\u304C\u751F\u6210\u3055\u308C\u300110\u79D2\u9593\u5F3E\u3092\u9632\u3050"
+  - 'Throwing bamboo shoots that grow bamboo.
+
+    A wall is created, blocking projectiles
+    for 10 sec.'
+  - "\u6295\u63B7\u7AF9\u7B0B\uFF0C\u957F\u51FA\u4E00\u6392\u7AF9\u5B50\u3002\n\u5F62\u6210\u6301\u7EED10\u79D2\u7684\u5899\u58C1\uFF0C\u963B\u6321\u5C04\u51FB\u3002"
+  - "\u6295\u64F2\u7AF9\u7B4D\uFF0C\u9577\u51FA\u4E00\u6392\u7AF9\u5B50\u3002\n\u5F62\u6210\u6301\u7E8C10\u79D2\u7684\u58BB\u58C1\uFF0C\u963B\u64CB\u5C04\u64CA\u3002"
+  installationStartAnim: {fileID: 0}
+  installationLoopAnim: {fileID: 0}
+  reloadTime: 15
+  speedRate: 0
+  lifeTime: 10

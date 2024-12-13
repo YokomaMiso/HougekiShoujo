@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984964a682a8df641abd1ffb44a932d5, type: 3}
+  m_Name: AD_SaraAnimData
+  m_EditorClassIdentifier: 
+  characterIcon: {fileID: 21300000, guid: eabff61d07131814f9456d577d369d86, type: 3}
+  idleFirstSprite: {fileID: -83681858, guid: 589216a5687118542b451cafc244a71e, type: 3}
+  charaIllust: {fileID: 21300000, guid: 3268fea1691a3114c99cd29a86f021f3, type: 3}
+  idleForUIAnimationData: {fileID: 9100000, guid: 1a4229925cd5c4448844f856aa1ad083,
+    type: 2}
+  runForUIAnimationData: {fileID: 9100000, guid: df7311cac4b529f489dae9c79541c835,
+    type: 2}
+  idleAnimationData: {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
+  runAnimationData:
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  - {fileID: 9100000, guid: 135a5a49188af7a40b03100b16cb2846, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: 9d054954505153645af22917b3e803a9, type: 2}
+  aimAnimationData:
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  - {fileID: 9100000, guid: ca9cb0ab934604c4a99c526ff5a5029d, type: 2}
+  recoilAnimationData:
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
+  recoilAnimationData2: {fileID: 9100000, guid: 45b2d9b8c62134b40bae9d6b09b28428,
+    type: 2}

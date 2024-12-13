@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9930c27c35dc8a44cac3559ecd71bb32
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - newsPaperBG: {instanceID: 0}
+  - awards: {instanceID: 0}
+  - scoreBoard: {instanceID: 0}
+  - mvpGroup: {instanceID: 0}
+  - awardCanvas: {instanceID: 0}
+  - exitButton: {instanceID: 0}
+  - startJingle: {fileID: 8300000, guid: b423fba74c9380343a7c5bd057198403, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

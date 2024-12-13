@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a08d4c96db6ce74f986a905ad61582d, type: 3}
+  m_Name: Stage_KyushaMae
+  m_EditorClassIdentifier: 
+  stageName:
+  - "\u4EC7\u5C04\u9AD8\u6821\u6B63\u9580\u524D"
+  - 'Kyusha
+
+    Highschool'
+  - "\u4EC7\u5C04\u9AD8\u6821\u6B63\u9580\u524D"
+  - "\u4EC7\u5C04\u9AD8\u6821\u6B63\u9580\u524D"
+  stagePrefab: {fileID: 5198325544041908592, guid: 739fc8a94ca56004d980df378464ab84,
+    type: 3}
+  stageSize: {x: 36, y: 0, z: 15}
+  defaultPosition:
+  - {x: -10, y: 0, z: 3}
+  - {x: 10, y: 0, z: 3}
+  - {x: -10, y: 0, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: -10, y: 0, z: -3}
+  - {x: 10, y: 0, z: -3}
+  BGM: {fileID: 11400000, guid: 4688876da384ac147b152a1b5e4af1cd, type: 2}
+  screenShot: {fileID: 21300000, guid: 3a3bbbc3214565a42aa12cd6d542d09d, type: 3}
+  minimap: {fileID: 21300000, guid: 1bf7ec4f2091f384daa437fc69e9d0fa, type: 3}
+  minX: -18
+  maxX: 18.8
+  minZ: -20
+  maxZ: 22.15

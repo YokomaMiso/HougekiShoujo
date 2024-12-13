@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a31c1470f654b4f966451ba4142eae, type: 3}
+  m_Name: Stage2BulidData
+  m_EditorClassIdentifier: 
+  bulidTextPair:
+  - sprite: {fileID: 21300000, guid: 3aa7742f04b0c2e40a0bbe200b1bc632, type: 3}
+    bulidingText: Default Text
+    hasText: 0
+  - sprite: {fileID: 352477320, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1
+  - sprite: {fileID: -548206531, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1
+  - sprite: {fileID: 828546768, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1
+  - sprite: {fileID: 246169630, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1
+  - sprite: {fileID: -1705449928, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1
+  - sprite: {fileID: 1715301108, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1
+  - sprite: {fileID: -637792132, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1
+  - sprite: {fileID: 983888424, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
+    bulidingText: Default Text
+    hasText: 1

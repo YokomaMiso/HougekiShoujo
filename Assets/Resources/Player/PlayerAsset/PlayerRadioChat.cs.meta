@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ae8844448b7928b4d946645dee597077
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - emotePrefab: {fileID: 2522134910337228876, guid: e2635b3d3c59752458cbe02e36d149dc,
+      type: 3}
+  - TeamChatCanvasPrefab: {fileID: 4432466077039030639, guid: 495c75c0d28ac9243ace25f5bcd0acda,
+      type: 3}
+  - EmoteChatCanvasPrefab: {fileID: 4432466077039030639, guid: 3cf0983ca891a8d44a4060748899ad96,
+      type: 3}
+  - openRadioChat: {fileID: 8300000, guid: de234dea543824146b0146a3c562d2f6, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

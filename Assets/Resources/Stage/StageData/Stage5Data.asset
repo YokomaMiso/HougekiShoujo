@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a08d4c96db6ce74f986a905ad61582d, type: 3}
+  m_Name: Stage5Data
+  m_EditorClassIdentifier: 
+  stageName:
+  - "\u4EE3\u7B52\u5546\u5E97\u8857"
+  - Daito shopping street
+  - "\u4EE3\u7B52\u8D2D\u7269\u8857"
+  - "\u4EE3\u7B52\u8CFC\u7269\u8857"
+  stagePrefab: {fileID: 5198325544041908592, guid: e6a3bdebb071b3a4d8b4fa8536477417,
+    type: 3}
+  stageSize: {x: 48, y: 0, z: 28}
+  defaultPosition:
+  - {x: -13, y: 0, z: -8}
+  - {x: 13, y: 0, z: 8}
+  - {x: -15, y: 0, z: -12}
+  - {x: 15, y: 0, z: 12}
+  - {x: -13, y: 0, z: -12}
+  - {x: 13, y: 0, z: 12}
+  BGM: {fileID: 11400000, guid: 057282ebdda54e9489ccba7e1e45ddf9, type: 2}
+  screenShot: {fileID: 21300000, guid: cb1a853b9f9f3a141a992eb4085b88a5, type: 3}
+  minimap: {fileID: 21300000, guid: a0c5d7898570256459073a59723a13ed, type: 3}
+  minX: 0
+  maxX: 0
+  minZ: 0
+  maxZ: 0

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: c1e0405fb1535c143861149f2e9cea18
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rm: {instanceID: 0}
+  - charaVisual: {instanceID: 0}
+  - playerBanners: {instanceID: 0}
+  - stageSelect: {instanceID: 0}
+  - stageBinder: {instanceID: 0}
+  - stageDisplay: {instanceID: 0}
+  - roomBGM: {fileID: 8300000, guid: 17dc4619edab52b4bb58e7f2d9f1f748, type: 3}
+  - exitCheck: {instanceID: 0}
+  - preview: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

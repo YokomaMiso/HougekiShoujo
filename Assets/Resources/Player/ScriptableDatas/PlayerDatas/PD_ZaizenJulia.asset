@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_ZaizenJulia
+  m_EditorClassIdentifier: 
+  charaName: "\u8CA1\u524D \u6731\u91CC\u4E9C"
+  charaNameRubi: "\u3056\u3044\u305C\u3093 \u3058\u3085\u308A\u3042"
+  charaNameRubiEnglish: Julia Zaizen
+  schoolData: {fileID: 11400000, guid: 74745430b8c5aae4d9fd52e77dc1552b, type: 2}
+  grade: 2
+  mvpExplain:
+  - "\u4ECA\u5E74\u306EMVP\u306F\u4EC7\u5C04\u9AD8\u68212\u5E74\u306E\u8CA1\u524D\u6731\u91CC\u4E9C\u304C\u53D7\u8CDE\u3002\u5F7C\u5973\u306E\u5F37\u529B\u306A\u30AD\u30E3\u30CE\u30F3\u3067\u8A66\u5408\u4E2D\u3001\u591A\u304F\u306E\u76F8\u624B\u3092\u5012\u3057\u30C1\u30FC\u30E0\u306B\u8CA2\u732E\u307E\u3057\u305F\u3002"
+  - "\u4ECA\u5E74\u306EMVP\u306F\u4EC7\u5C04\u9AD8\u68212\u5E74\u306E\u8CA1\u524D\u6731\u91CC\u4E9C\u304C\u53D7\u8CDE\u3002\u5F7C\u5973\u306E\u5F37\u529B\u306A\u30AD\u30E3\u30CE\u30F3\u3067\u8A66\u5408\u4E2D\u3001\u591A\u304F\u306E\u76F8\u624B\u3092\u5012\u3057\u30C1\u30FC\u30E0\u306B\u8CA2\u732E\u307E\u3057\u305F\u3002"
+  - "\u4ECA\u5E74\u7684MVP\u7531\u4EC7\u5C04\u9AD8\u68212\u5E74\u7EA7\u7684\u8CA1\u524D\u6731\u91CC\u4E9C\u83B7\u5F97\u3002\u5979\u51ED\u501F\u5F3A\u5927\u7684\u70AE\u51FB\u5728\u6BD4\u8D5B\u4E2D\u51FB\u8D25\u4E86\u4F17\u591A\u5BF9\u624B\uFF0C\u4E3A\u56E2\u961F\u4F5C\u51FA\u4E86\u5DE8\u5927\u8D21\u732E\u3002"
+  - "\u4ECA\u5E74\u7684MVP\u7531\u4EC7\u5C04\u9AD8\u68212\u5E74\u7D1A\u7684\u8CA1\u524D\u6731\u91CC\u4E9C\u7372\u5F97\u3002\u5979\u6191\u85C9\u5F3A\u5927\u7684\u70AE\u64CA\u5728\u6BD4\u8CFD\u4E2D\u64CA\u6557\u4E86\u8846\u591A\u5C0D\u624B\uFF0C\u70BA\u5718\u968A\u4F5C\u51FA\u4E86\u5DE8\u5927\u8CA2\u737B\u3002"
+  characterAnimData: {fileID: 11400000, guid: 9abf50c65441dfb4db61cb776c0c1c4a, type: 2}
+  moveSpeed: 5
+  difficulity: 1
+  shell: {fileID: 11400000, guid: e153c3496aaafbd4c80861b57f56fa94, type: 2}
+  subWeapon: {fileID: 11400000, guid: 69a86b1a143f5a34ba637120cd970d00, type: 2}
+  playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: a9c4bd312ae2d1d4db4a5909c7bde3c2, type: 2}
+  resultJingle: {fileID: 8300000, guid: 54afb621898d7e34abc39c40a4cda88b, type: 3}

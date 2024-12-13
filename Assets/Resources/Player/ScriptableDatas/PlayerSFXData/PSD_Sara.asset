@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb239e671dab7cb45bb9374ffa27ee41, type: 3}
+  m_Name: PSD_Sara
+  m_EditorClassIdentifier: 
+  reloadSFX: {fileID: 8300000, guid: 6693596281a4cca40b3cb68e666b910d, type: 3}
+  aimSFX: {fileID: 8300000, guid: 248de2ec550b5534cbb92c4add627ad1, type: 3}
+  fireSFX: {fileID: 8300000, guid: 8316bd1e88755834793c42cfbc8bb8ee, type: 3}
+  flySFX: {fileID: 8300000, guid: 02cbca62fa3a63240a147d46f1698f23, type: 3}
+  explosionSFX:
+  - {fileID: 8300000, guid: 6dbd51f91f05c124fbe5e7ee982a770a, type: 3}

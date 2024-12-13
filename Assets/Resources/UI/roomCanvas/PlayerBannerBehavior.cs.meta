@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a7229761cfd1dd941bc70d807da554ac
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - buttonSpriteStart: {fileID: 21300000, guid: 6cec60d4f21092e4bbe8601875fbb8eb,
+      type: 3}
+  - buttonSpriteReady: {fileID: 21300000, guid: 16a7922cce554d44ca023a77a95790da,
+      type: 3}
+  - buttonSpriteCancel: {fileID: 21300000, guid: 5b1ac1f69f573d54cbd3c075ffc0e836,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

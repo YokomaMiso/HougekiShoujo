@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 9959159e2d797f14b886ec3bac6c68b3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - blinkSFX: {fileID: 8300000, guid: e9eb44cf132794e40aef791e4797821c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

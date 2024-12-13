@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_KonoeTsukasa
+  m_EditorClassIdentifier: 
+  charaName: "\u8FD1\u885B \u53F8"
+  charaNameRubi: "\u3053\u306E\u3048 \u3064\u304B\u3055"
+  charaNameRubiEnglish: Tsukasa Konoe
+  schoolData: {fileID: 11400000, guid: d77aa8742f68024408ab889f0fe075ac, type: 2}
+  grade: 2
+  mvpExplain:
+  - "\u6211\u304C\u6821\u306E\u98A8\u7D00\u59D4\u54E1\u9577\u3092\u52D9\u3081\u308B2\u5E74\u3001\u8FD1\u885B\u53F8\u304C\u4ECA\u5927\u4F1A\u306EMVP\u3092\u53D7\u8CDE\uFF01\uFF01\u6211\u304C\u6821\u3067\u306F\uFF13\u4EBA\u76EE\u306EMVP\u53D7\u8CDE\u8005\u304C\u751F\u307E\u308C\u307E\u3057\u305F\u3002"
+  - "\u6211\u304C\u6821\u306E\u98A8\u7D00\u59D4\u54E1\u9577\u3092\u52D9\u3081\u308B2\u5E74\u3001\u8FD1\u885B\u53F8\u304C\u4ECA\u5927\u4F1A\u306EMVP\u3092\u53D7\u8CDE\uFF01\uFF01\u6211\u304C\u6821\u3067\u306F\uFF13\u4EBA\u76EE\u306EMVP\u53D7\u8CDE\u8005\u304C\u751F\u307E\u308C\u307E\u3057\u305F\u3002"
+  - "\u62C5\u4EFB\u672C\u6821\u98CE\u7EAA\u59D4\u5458\u957F\u5DF2\u7ECF2\u5E74\u7684\u8FD1\u885B\u53F8\uFF0C\u83B7\u5F97\u4E86\u6B64\u6B21\u5927\u4F1A\u7684MVP\uFF01\u672C\u6821\u7EC8\u4E8E\u8BDE\u751F\u4E86\u7B2C\u4E09\u4F4DMVP\u83B7\u5F97\u8005\u3002"
+  - "\u64D4\u4EFB\u672C\u6821\u98A8\u7D00\u59D4\u54E1\u9577\u5DF2\u7D932\u5E74\u7684\u8FD1\u885B\u53F8\uFF0C\u7372\u5F97\u4E86\u6B64\u6B21\u5927\u6703\u7684MVP\uFF01\u672C\u6821\u7D42\u65BC\u8A95\u751F\u4E86\u7B2C\u4E09\u4F4DMVP\u7372\u5F97\u8005\u3002"
+  characterAnimData: {fileID: 11400000, guid: bbc7345adcf545f40ad96d4a1db983d1, type: 2}
+  moveSpeed: 5
+  difficulity: 2
+  shell: {fileID: 11400000, guid: 28420fd291fcd2741a10660ed38ac6ac, type: 2}
+  subWeapon: {fileID: 11400000, guid: ed7bb5eba41b87143a4c8c92438afe81, type: 2}
+  playerSFXData: {fileID: 11400000, guid: f564a2fe6f4050d4e8539cf01ce3f3e8, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: 280d283dac35a83429e897fef2e3b4cc, type: 2}
+  resultJingle: {fileID: 8300000, guid: b444f2b03827101489d8e4fc7c2535b1, type: 3}

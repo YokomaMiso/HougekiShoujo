@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a678d712ad9c1a4ba72c5a95ccfa214, type: 3}
+  m_Name: BSD_PS
+  m_EditorClassIdentifier: 
+  horizontal: {fileID: 21300000, guid: 690d71ca2e6104a46984b324f548d3ea, type: 3}
+  vertical: {fileID: 21300000, guid: fc80876ae03b0e14782061b9e78a19ca, type: 3}
+  submit: {fileID: 21300000, guid: 71b4ec746260b9046b45ce099b3e19e4, type: 3}
+  cancel: {fileID: 21300000, guid: a45f6089a937b2c468905832e1b57ab3, type: 3}
+  stageSelect: {fileID: 21300000, guid: 8cc6ddc90143faf4299fb3e3cdf7bcc2, type: 3}
+  stickL: {fileID: 21300000, guid: 5a6b6d80ddfe14f4fa5439bffe78a8c9, type: 3}
+  stickR: {fileID: 21300000, guid: a17a719ed5e2aed4283ef0d608c1b15b, type: 3}
+  teamChat: {fileID: 21300000, guid: 3af965470a3be9745b5919838445e271, type: 3}

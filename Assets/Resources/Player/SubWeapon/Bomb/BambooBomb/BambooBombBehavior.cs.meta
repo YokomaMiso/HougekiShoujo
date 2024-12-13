@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 17cef0b0dda7d0f49bcc42593975e8a7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - explosion: {instanceID: 0}
+  - bambooWall: {fileID: 3179393461812120061, guid: e61bf80c8671bdf49acb62a65d7f54e2,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

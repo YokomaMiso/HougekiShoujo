@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: 9f31b165ee73e3745a5ffa9ba22b73e0
   - enabled: 1
+    path: Assets/Scenes/SelectRoomScene.unity
+    guid: c3a7bdd3977289440bb4a6c1eb1370c0
+  - enabled: 1
     path: Assets/Scenes/ConnectionScene.unity
     guid: 4f8295f9669df054a94739b96a215706
   - enabled: 1
@@ -23,4 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ResultScene.unity
     guid: 7301b5c030e1e824abbdcfd9d2726765
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/GalleryScene.unity
+    guid: e5ccf8b7d8259a34fba72b379c05b2e8
+  - enabled: 1
+    path: Assets/Scenes/CreditScene.unity
+    guid: bd6d2b54cccac534da1e7ac8e7d5bb87
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 3119423baa5ed7440ae8e5d27b964d66,
+      type: 2}

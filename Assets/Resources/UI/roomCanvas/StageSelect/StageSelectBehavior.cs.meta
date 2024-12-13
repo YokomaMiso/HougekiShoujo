@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 467eff0a16818d64e8bd9ca81e9d11db
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - binder: {instanceID: 0}
+  - stageAnnounce: {instanceID: 0}
+  - binderIn: {fileID: 8300000, guid: a2feeece735acd04197d4ab5a7221e6e, type: 3}
+  - binderOut: {fileID: 8300000, guid: 3ad0e0477a57afd4184ea2576505ac94, type: 3}
+  - stageChange: {fileID: 8300000, guid: d3fb6164fada2544ab63500b9f137ba8, type: 3}
+  - stageDecide: {fileID: 8300000, guid: d1290ad55f1f4c94b8d7aeb99cca202d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

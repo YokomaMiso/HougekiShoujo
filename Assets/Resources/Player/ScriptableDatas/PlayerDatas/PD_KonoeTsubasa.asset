@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_KonoeTsubasa
+  m_EditorClassIdentifier: 
+  charaName: "\u8FD1\u885B \u7FFC"
+  charaNameRubi: "\u3053\u306E\u3048 \u3064\u3070\u3055"
+  charaNameRubiEnglish: Tsubasa Konoe
+  schoolData: {fileID: 11400000, guid: 23e1893a02047b04e921451f276c2caf, type: 2}
+  grade: 0
+  mvpExplain:
+  - "\u4ECA\u5E74\u306EMVP\u306F\u306A\u3093\u3068\uFF01\u4F1D\u8AAC\u306E\u5143\u5927\u7832\u90E8\u54E1\u3001\u8FD1\u885B\u7FFC\u304C\u53D7\u8CDE\u3057\u307E\u3057\u305F\uFF01\u5F7C\u5973\u306F\u6211\u304C\u6821\u306E\u5352\u696D\u751F\u3067\u3042\u308A\u3001\u521D\u4EE3MVP\u53D7\u8CDE\u8005\u3067\u3082\u3042\u308A\u307E\u3059\u3002"
+  - "\u4ECA\u5E74\u306EMVP\u306F\u306A\u3093\u3068\uFF01\u4F1D\u8AAC\u306E\u5143\u5927\u7832\u90E8\u54E1\u3001\u8FD1\u885B\u7FFC\u304C\u53D7\u8CDE\u3057\u307E\u3057\u305F\uFF01\u5F7C\u5973\u306F\u6211\u304C\u6821\u306E\u5352\u696D\u751F\u3067\u3042\u308A\u3001\u521D\u4EE3MVP\u53D7\u8CDE\u8005\u3067\u3082\u3042\u308A\u307E\u3059\u3002"
+  - "\u83B7\u5F97\u4ECA\u5E74MVP\u7684\u7ADF\u7136\u662F\u90A3\u4F4D\uFF1F\uFF01\u4F20\u8BF4\u4E2D\u7684\u5143\u5927\u70AE\u793E\u793E\u5458\uFF0C\u8FD1\u885B\u7FFC\uFF01\u5979\u4F5C\u4E3A\u672C\u6821\u6BD5\u4E1A\u751F\u7684\u540C\u65F6\uFF0C\u4E5F\u662F\u521D\u4EE3MVP\u83B7\u5F97\u8005\uFF01"
+  - "\u7372\u5F97\u4ECA\u5E74MVP\u7684\u7ADF\u7136\u662F\u90A3\u4F4D\uFF1F\uFF01\u50B3\u8AAC\u4E2D\u7684\u5143\u5927\u70AE\u793E\u6210\u54E1\uFF0C\u8FD1\u885B\u7FFC\uFF01\u5979\u4F5C\u7232\u672C\u6821\u7562\u696D\u751F\u7684\u540C\u6642\uFF0C\u4E5F\u662F\u521D\u4EE3MVP\u7372\u5F97\u8005\uFF01"
+  characterAnimData: {fileID: 11400000, guid: d6da2f312f9ffd84ebef66ed61331e30, type: 2}
+  moveSpeed: 5
+  difficulity: 2
+  shell: {fileID: 11400000, guid: 92686f0c805db35448a1cc93b7252295, type: 2}
+  subWeapon: {fileID: 11400000, guid: 9fee1f3668fb84b4d8e27e6bf94386a9, type: 2}
+  playerSFXData: {fileID: 11400000, guid: 7cc0acfdc0328c247ba4c474e483c02c, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: 8c9c0833ddb15914a9a435ddb6ca6038, type: 2}
+  resultJingle: {fileID: 8300000, guid: b444f2b03827101489d8e4fc7c2535b1, type: 3}

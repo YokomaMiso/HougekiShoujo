@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
+  m_Name: SW_TeenSpirit
+  m_EditorClassIdentifier: 
+  subWeaponIcon: {fileID: 21300000, guid: aac976f88e2157a409fc1f894ecd3662, type: 3}
+  subType: 1
+  buffType: 0
+  installation: {fileID: 1008518316061016973, guid: 0081d9098c47f6440a3c50534a511907,
+    type: 3}
+  subWeaponName:
+  - "\u30C6\u30A3\u30FC\u30F3\u30B9\u30D4\u30EA\u30C3\u30C8"
+  - Teen Spirit
+  - "\u9752\u6625\u6C14\u606F"
+  - "\u9752\u6625\u6C23\u606F"
+  subWeaponExplain:
+  - "\u30AE\u30BF\u30FC\u306E\u529B\u3067\u5468\u56F2\u306E\u30D7\u30EC\u30A4\u30E4\u30FC\u3092\u5439\u304D\u98DB\u3070\u3059\r\nHello,
+    hello, hello, how low?"
+  - 'The guitar power blow away the players around you.
+
+    Hello, hello, hello,
+    how low?'
+  - "\u7528\u5409\u4ED6\u7684\u529B\u91CF\u51FB\u98DE\u5468\u56F4\u7684\u73A9\u5BB6\r\nHello,
+    hello, hello, how low?"
+  - "\u7528\u5409\u4ED6\u7684\u529B\u91CF\u64CA\u98DB\u5468\u570D\u7684\u73A9\u5BB6\r\nHello,
+    hello, hello, how low?"
+  installationStartAnim: {fileID: 9100000, guid: 85f5d2fae858efe4f985a1568827bf5e,
+    type: 2}
+  installationLoopAnim: {fileID: 9100000, guid: ab12581ac6d1fa04c984951dbe8d22bd,
+    type: 2}
+  reloadTime: 15
+  speedRate: 0
+  lifeTime: 1

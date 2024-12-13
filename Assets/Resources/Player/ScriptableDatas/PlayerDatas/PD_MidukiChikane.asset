@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_MidukiChikane
+  m_EditorClassIdentifier: 
+  charaName: "\u89B3\u6708 \u5343\u9244"
+  charaNameRubi: "\u307F\u3065\u304D \u3061\u304B\u306D"
+  charaNameRubiEnglish: Chikane Miduki
+  schoolData: {fileID: 11400000, guid: 74745430b8c5aae4d9fd52e77dc1552b, type: 2}
+  grade: 2
+  mvpExplain:
+  - "\u4ECA\u5E74\u306EMVP\u306F\u4EC7\u5C04\u9AD8\u68212\u5E74\u306E\u89B3\u6708\u5343\u9244\u304C\u53D7\u8CDE\u3002\u5F7C\u5973\u306F\u6301\u3061\u524D\u306E\u811A\u529B\u3092\u6D3B\u304B\u3057\u3001\u9053\u3092\u5207\u308A\u958B\u304D\u52DD\u5229\u3078\u5C0E\u304D\u307E\u3057\u305F\u3002"
+  - "\u4ECA\u5E74\u306EMVP\u306F\u4EC7\u5C04\u9AD8\u68212\u5E74\u306E\u89B3\u6708\u5343\u9244\u304C\u53D7\u8CDE\u3002\u5F7C\u5973\u306F\u6301\u3061\u524D\u306E\u811A\u529B\u3092\u6D3B\u304B\u3057\u3001\u9053\u3092\u5207\u308A\u958B\u304D\u52DD\u5229\u3078\u5C0E\u304D\u307E\u3057\u305F\u3002"
+  - "\u83B7\u5F97\u4ECA\u5E74MVP\u7684\u662F\u4EC7\u5C04\u9AD8\u68212\u5E74\u7EA7\u7684\u89B3\u6708\u5343\u9244\u3002\u5979\u6216\u7528\u81EA\u8EAB\u5F3A\u5927\u7684\u884C\u52A8\u529B\uFF0C\u8E0F\u5E73\u9053\u8DEF\u5F15\u9886\u961F\u4F0D\u8D70\u5411\u4E86\u80DC\u5229\uFF01"
+  - "\u7372\u5F97\u4ECA\u5E74MVP\u7684\u662F\u4EC7\u5C04\u9AD8\u68212\u5E74\u7D1A\u7684\u89B3\u6708\u5343\u9244\u3002\u5979\u6D3B\u7528\u81EA\u8EAB\u5F3A\u5927\u7684\u884C\u52D5\u529B\uFF0C\u8E0F\u5E73\u9053\u8DEF\u6307\u5F15\u968A\u4F0D\u8D70\u5411\u4E86\u52DD\u5229\uFF01"
+  characterAnimData: {fileID: 11400000, guid: 2e6790484df528446bd847d126044e89, type: 2}
+  moveSpeed: 5
+  difficulity: 1
+  shell: {fileID: 11400000, guid: bb631e357c6d78348adf725933bdd39a, type: 2}
+  subWeapon: {fileID: 11400000, guid: 498a63f1d0d0dd54883438851b0aaef1, type: 2}
+  playerSFXData: {fileID: 11400000, guid: df044055227ad2b4fbde61784f337fab, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: fb2143eb82f7d424e8f2b5b6cca0b471, type: 2}
+  resultJingle: {fileID: 8300000, guid: fc884f5592daab44480ff478b44cdd9a, type: 3}

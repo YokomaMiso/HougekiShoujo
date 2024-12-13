@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
+  m_Name: SW_BlindSmokeBomb
+  m_EditorClassIdentifier: 
+  subWeaponIcon: {fileID: 21300000, guid: 5c48bfccacc5d6d4c9b012866be5c4a6, type: 3}
+  subType: 3
+  buffType: 0
+  installation: {fileID: 3179393461812120061, guid: b34e1b1f17a7548438fcd16ae1b7fe78,
+    type: 3}
+  subWeaponName:
+  - "\u7159\u5E55\u5F3E"
+  - Smoke Bomb
+  - "\u70DF\u5E55\u5F3E"
+  - "\u7159\u5E55\u5F3E"
+  subWeaponExplain:
+  - "10\u79D2\u6301\u7D9A\u3059\u308B\u7159\u5E55\u3092\u6295\u64F2\r\n15\u79D2\u9593\u8996\u754C\u304C\u60AA\u304F\u306A\u308B"
+  - 'Throws a smoke screen that lasts 10 sec.
+
+    Reduces visibility for 15 sec.'
+  - "\u6295\u63B7\u6301\u7EED10\u79D2\u7684\u70DF\u5E55\u5F39\n\u78B0\u5230\u7684\u8BDD15\u79D2\u5185\u89C6\u91CE\u4F1A\u964D\u4F4E"
+  - "\u6295\u64F2\u6301\u7E8C10\u79D2\u7684\u70DF\u5E55\u5F48\n\u78B0\u5230\u7684\u8A7115\u79D2\u5185\u8996\u91CE\u6703\u964D\u4F4E"
+  installationStartAnim: {fileID: 0}
+  installationLoopAnim: {fileID: 0}
+  reloadTime: 15
+  speedRate: 0.5
+  lifeTime: 10

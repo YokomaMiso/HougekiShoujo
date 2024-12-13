@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
+  m_Name: SD_KotoCanonProjectile
+  m_EditorClassIdentifier: 
+  shellIcon: {fileID: 21300000, guid: 7578c0a2a3708b844aa3e0deaba8a456, type: 3}
+  shellType: 1
+  projectile: {fileID: 1008518316061016973, guid: a51f5310a589a074d8dee7ab0dcaba47,
+    type: 3}
+  projectileAnim: {fileID: 9100000, guid: 81c0c6dd80912384abc8b8352d447bb1, type: 2}
+  explosion: {fileID: 11400000, guid: 5884a6cdf597f38418290525c90a3402, type: 2}
+  weaponName:
+  - "\u30B9\u30A6\u30A3\u30FC\u30C984"
+  - Swede84
+  - "\u745E\u517884"
+  - "\u745E\u517884"
+  shellExplain:
+  - "\u5F8C\u65B9\u306B\u7206\u98A8\u304C\u51FA\u308B\u7121\u53CD\u52D5\u7832\r\n\u53CD\u52D5\u306F\u5C11\u306A\u3044\u304C\u3001\u30EA\u30ED\u30FC\u30C9\u306F\u9577\u3044"
+  - 'Recoilless gun with rearward blast.
+
+    Little recoil, but long reload.'
+  - "\u4F1A\u5728\u540E\u65B9\u4EA7\u751F\u51B2\u51FB\u6CE2\u7684\u65E0\u540E\u5EA7\u529B\u70AE\n\u57FA\u672C\u65E0\u786C\u76F4\uFF0C\u4F46\u88C5\u586B\u65F6\u95F4\u5F88\u957F"
+  - "\u6703\u5728\u5F8C\u65B9\u7522\u751F\u885D\u64CA\u6CE2\u7684\u7121\u5F8C\u5750\u529B\u70AE\n\u57FA\u672C\u7121\u786C\u76F4\uFF0C\u4F46\u88DD\u586B\u6642\u9593\u5F88\u9577"
+  reloadTime: 2.5
+  recoilTime: 1
+  projectileSpeed: 9
+  aimRange: 0
+  aimDegree: 360
+  lifeTime: 0.65

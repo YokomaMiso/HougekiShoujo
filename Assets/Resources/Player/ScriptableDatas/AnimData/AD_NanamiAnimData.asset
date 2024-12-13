@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dcac409aae28845a824db328c084ae, type: 3}
+  m_Name: AD_NanamiAnimData
+  m_EditorClassIdentifier: 
+  characterIcon: {fileID: 21300000, guid: 74be7e797db44ee4585912337706401c, type: 3}
+  idleFirstSprite: {fileID: 1440274642, guid: f9ab6918cd2de974ba5c9040fb7de7cc, type: 3}
+  charaIllust: {fileID: 21300000, guid: 17806bd83a5a9634aa6d1903b7c3b5b1, type: 3}
+  idleForUIAnimationData: {fileID: 9100000, guid: 95d9e3d9c5573b246b6ec7978433b61f,
+    type: 2}
+  runForUIAnimationData: {fileID: 9100000, guid: c0254ca399a5a0e46938fc1b2c8e031f,
+    type: 2}
+  idleAnimationData: {fileID: 9100000, guid: ba06dcf618123104b8c92a81bed65804, type: 2}
+  runAnimationData:
+  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
+  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
+  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
+  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
+  - {fileID: 9100000, guid: 771b70c773b82bc4e978a1b9af0db985, type: 2}
+  reloadAnimationData: {fileID: 9100000, guid: 5a557b481c1f95f4a85439f67bcf95f6, type: 2}
+  aimAnimationData:
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  - {fileID: 9100000, guid: b64d3fbdc9e505f41b428a03f33e77c0, type: 2}
+  recoilAnimationData:
+  - {fileID: 9100000, guid: 96adf6a26e12e9d4c896b07f3a2400ce, type: 2}
+  - {fileID: 9100000, guid: 96adf6a26e12e9d4c896b07f3a2400ce, type: 2}
+  - {fileID: 9100000, guid: 96adf6a26e12e9d4c896b07f3a2400ce, type: 2}
+  - {fileID: 9100000, guid: 96adf6a26e12e9d4c896b07f3a2400ce, type: 2}
+  - {fileID: 9100000, guid: 96adf6a26e12e9d4c896b07f3a2400ce, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: ba06dcf618123104b8c92a81bed65804, type: 2}
+  idle2AnimationData: {fileID: 9100000, guid: a88271af4b46aa549bacdaffcd2cfc54, type: 2}
+  run2AnimationData:
+  - {fileID: 9100000, guid: 651003bc397630c4d9de9a13f3a23cc4, type: 2}
+  - {fileID: 9100000, guid: 651003bc397630c4d9de9a13f3a23cc4, type: 2}
+  - {fileID: 9100000, guid: 651003bc397630c4d9de9a13f3a23cc4, type: 2}
+  - {fileID: 9100000, guid: 651003bc397630c4d9de9a13f3a23cc4, type: 2}
+  - {fileID: 9100000, guid: 651003bc397630c4d9de9a13f3a23cc4, type: 2}

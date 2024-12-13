@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b7a72afa95f394b9ba83c4d68d18bf, type: 3}
+  m_Name: PD_HanaseriSara
+  m_EditorClassIdentifier: 
+  charaName: "\u82B1\u82B9 \u6C99\u7F85"
+  charaNameRubi: "\u306F\u306A\u305B\u308A \u3055\u3089"
+  charaNameRubiEnglish: Sara Hanaseri
+  schoolData: {fileID: 11400000, guid: 74745430b8c5aae4d9fd52e77dc1552b, type: 2}
+  grade: 1
+  mvpExplain:
+  - "\u4ECA\u5E74\u306EMVP\u306F\u4EC7\u5C04\u9AD8\u68211\u5E74\u306E\u82B1\u82B9\u6C99\u7F85\u304C\u53D7\u8CDE\u3002\u5F7C\u5973\u304B\u3089\u7E70\u308A\u51FA\u3055\u308C\u308B\u53EF\u611B\u3044\u3089\u3057\u3044\u30AF\u30DE\u3055\u3093\u304C\u8A66\u5408\u3092\u5F69\u308A\u307E\u3057\u305F\u3002"
+  - "\u4ECA\u5E74\u306EMVP\u306F\u4EC7\u5C04\u9AD8\u68211\u5E74\u306E\u82B1\u82B9\u6C99\u7F85\u304C\u53D7\u8CDE\u3002\u5F7C\u5973\u304B\u3089\u7E70\u308A\u51FA\u3055\u308C\u308B\u53EF\u611B\u3044\u3089\u3057\u3044\u30AF\u30DE\u3055\u3093\u304C\u8A66\u5408\u3092\u5F69\u308A\u307E\u3057\u305F\u3002"
+  - "\u4ECA\u5E74\u83B7\u5F97MVP\u7684\u662F\u4EC7\u5C04\u9AD8\u68211\u5E74\u7EA7\u7684\u82B1\u82B9\u6C99\u7F85\u3002\u5979\u5E26\u6765\u7684\u53EF\u7231\u5C0F\u718A\u4E3A\u8FD9\u573A\u6BD4\u8D5B\u589E\u6DFB\u4E86\u8272\u5F69\uFF01"
+  - "\u4ECA\u5E74\u7372\u5F97MVP\u7684\u662F\u4EC7\u5C04\u9AD8\u68211\u5E74\u7D1A\u7684\u82B1\u82B9\u6C99\u7F85\u3002\u5979\u5E36\u4F86\u7684\u53EF\u611B\u5C0F\u718A\u70BA\u9019\u5834\u6BD4\u8CFD\u589E\u6DFB\u4E86\u8272\u5F69\uFF01"
+  characterAnimData: {fileID: 11400000, guid: 40b063252180c8741afe9768be173a78, type: 2}
+  moveSpeed: 5
+  difficulity: 1
+  shell: {fileID: 11400000, guid: b1483feaed5a5e443a86f742b928184f, type: 2}
+  subWeapon: {fileID: 11400000, guid: 2e7d495e072aa044f9d52df27c059a4e, type: 2}
+  playerSFXData: {fileID: 11400000, guid: 76f5f68135546be4fadbae03208b9c65, type: 2}
+  playerVoiceData: {fileID: 11400000, guid: 804cb3d8ee5106e45ab553cc549b5d74, type: 2}
+  resultJingle: {fileID: 8300000, guid: 74ea9b51614ebf24087ec25905739cfa, type: 3}
