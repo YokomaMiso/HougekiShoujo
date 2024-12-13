@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48, y: -48}
+  m_AnchoredPosition: {x: 40, y: -36}
   m_SizeDelta: {x: 120, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &799884863912321935
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 24367d4018c1ea6409fe406040b1e4f4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da65dea7ff5960f42ba79213fc056ee6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -170,9 +170,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgSprite:
-  - {fileID: 21300000, guid: 24367d4018c1ea6409fe406040b1e4f4, type: 3}
-  - {fileID: 21300000, guid: 41d3a199d92e45541966029a3e1bdc69, type: 3}
+  - {fileID: 21300000, guid: da65dea7ff5960f42ba79213fc056ee6, type: 3}
+  - {fileID: 21300000, guid: f2e5df00c0117f348956e5fc053802e7, type: 3}
   clips: []
+  teamChatTextsJPN: []
+  teamChatTextsENG: []
+  teamChatTextsSCHN: []
+  teamChatTextsTCHN: []
   emotes:
   - {fileID: 21300000, guid: ef997e550ed24ba4f87f220c8458c329, type: 3}
   - {fileID: 21300000, guid: e5d9f98e9cbec77418e42093f2bdd891, type: 3}
@@ -217,7 +221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 8, y: 12}
+  m_AnchoredPosition: {x: 8, y: 24}
   m_SizeDelta: {x: 280, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6175600320056460835

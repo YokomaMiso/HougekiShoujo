@@ -40,7 +40,7 @@ public class CharaSerifBehavior : MonoBehaviour
         chatBG.sprite = bgSprite[_roomData.myTeamNum];
 
         string applyText;
-        switch(Managers.instance.nowLanguage)
+        switch (Managers.instance.nowLanguage)
         {
             default:
                 applyText = teamChatTextsJPN[(int)_chatID - 1];
@@ -69,7 +69,7 @@ public class CharaSerifBehavior : MonoBehaviour
 
     public void ChatNumAdd() { chatNum++; }
 
-    protected virtual void Update()
+    void Update()
     {
         timer += Time.deltaTime;
         float nowRate = Mathf.Clamp01(timer / arriveTime);
@@ -82,7 +82,7 @@ public class CharaSerifBehavior : MonoBehaviour
             chatBG.color = chatBG.color * fadeColor;
             playerName.color = playerName.color * fadeColor;
             charaIcon.color = charaIcon.color * fadeColor;
-            teamChatText.color= teamChatText.color * fadeColor;
+            teamChatText.color = teamChatText.color * fadeColor;
         }
 
         if (timer > lifeTime) { Destroy(gameObject); }
