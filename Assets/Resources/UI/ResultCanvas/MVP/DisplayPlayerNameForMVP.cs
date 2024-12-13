@@ -14,6 +14,7 @@ public class DisplayPlayerNameForMVP : MonoBehaviour
     bool jinglePlayed;
     AudioClip mvpJingle;
     [SerializeField] AudioClip endLoopBGM;
+    [SerializeField] AudioClip endLoopKotoBGM;
     [SerializeField] AudioClip endLoopRanBGM;
 
     int charaID;
@@ -44,7 +45,8 @@ public class DisplayPlayerNameForMVP : MonoBehaviour
             GameObject obj = SoundManager.PlayJingleForResult(mvpJingle);
 
             AudioClip playClip;
-            if (charaID == 5) { playClip = endLoopRanBGM; }
+            if (charaID == 1) { playClip = endLoopKotoBGM; }
+            else if (charaID == 5) { playClip = endLoopRanBGM; }
             else { playClip = endLoopBGM; }
             obj.AddComponent<ResultEndLoopPlayer>().SetClip(playClip);
             jinglePlayed = true;
