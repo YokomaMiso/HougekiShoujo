@@ -2222,6 +2222,7 @@ GameObject:
   - component: {fileID: 5519433478648904854}
   - component: {fileID: 5074003536557076770}
   - component: {fileID: 4254373313111801742}
+  - component: {fileID: 4317173007718145313}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -2303,6 +2304,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3cea47c4ae87db4aa8575ca878a4651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4317173007718145313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109784620972970662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 0.5, y: 0.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4141076339291730458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,6 +2331,7 @@ GameObject:
   - component: {fileID: 3082622334431631630}
   - component: {fileID: 8871945392230071331}
   - component: {fileID: 3835947582586575424}
+  - component: {fileID: 4077135451329233780}
   m_Layer: 5
   m_Name: Text (Legacy) (1)
   m_TagString: Untagged
@@ -2396,6 +2413,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3cea47c4ae87db4aa8575ca878a4651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4077135451329233780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4141076339291730458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 0.5, y: 0.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &4225729247373822190
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,6 +3120,7 @@ GameObject:
   - component: {fileID: 6158349275063638030}
   - component: {fileID: 4810803339269935389}
   - component: {fileID: 1925212598766416472}
+  - component: {fileID: 4040960732091502876}
   m_Layer: 5
   m_Name: Text (Legacy) (2)
   m_TagString: Untagged
@@ -3169,6 +3202,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3cea47c4ae87db4aa8575ca878a4651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4040960732091502876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325189518673690223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 0.5, y: 0.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5960472424762005990
 GameObject:
   m_ObjectHideFlags: 0
