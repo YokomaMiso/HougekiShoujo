@@ -190,8 +190,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundObjectPrefab: {fileID: 3429242908488642311, guid: e807ec81dec37b14ab31fb6ada6b87fb,
     type: 3}
-  interactPrefab: {fileID: 3703789643153601252, guid: b6cd6060a84120242bff701074de30d9,
-    type: 3}
 --- !u!114 &4199394049154672233
 MonoBehaviour:
   m_ObjectHideFlags: 0

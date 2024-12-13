@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7722909917046024637}
   - component: {fileID: 4544235152543614201}
   m_Layer: 0
-  m_Name: Bamboo (8)
+  m_Name: Bamboo_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 176338751688476742}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.5, y: 5.5, z: -12.2}
-  m_LocalScale: {x: 40, y: 5, z: 8}
+  m_LocalPosition: {x: 6, y: 5.5, z: -19.1}
+  m_LocalScale: {x: 35, y: 8, z: 16}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 8645036084792591042}
   - component: {fileID: 7627220430368380722}
   m_Layer: 0
-  m_Name: Bamboo (9)
+  m_Name: Bamboo_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,8 +374,8 @@ Transform:
   m_GameObject: {fileID: 2303084058930144138}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.5, y: 5.5, z: 1.5}
-  m_LocalScale: {x: 8, y: 8, z: 31}
+  m_LocalPosition: {x: 26.6, y: 5.5, z: 4}
+  m_LocalScale: {x: 8, y: 8, z: 42}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 952297071150643023}
   - component: {fileID: 240564111501763261}
   m_Layer: 0
-  m_Name: Bamboo (1)
+  m_Name: Bamboo_Bottom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,8 +440,8 @@ Transform:
   m_GameObject: {fileID: 2734776845587694590}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16, y: 5.5, z: -20}
-  m_LocalScale: {x: 15, y: 8, z: 8}
+  m_LocalPosition: {x: -17.5, y: 5.5, z: -21.1}
+  m_LocalScale: {x: 12, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 8129985389359898623}
   - component: {fileID: 4425714390406313971}
   m_Layer: 0
-  m_Name: Bamboo (5)
+  m_Name: Bamboo_Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -507,7 +507,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5, y: 5.5, z: 2}
-  m_LocalScale: {x: 4.8, y: 10, z: 3.8}
+  m_LocalScale: {x: 5.8, y: 10, z: 2.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 7233343680111622466}
   - component: {fileID: 5209084483158038055}
   m_Layer: 0
-  m_Name: Bamboo (7)
+  m_Name: Bamboo_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -850,8 +850,8 @@ Transform:
   m_GameObject: {fileID: 3575255146984525376}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 5.5, z: 12.2}
-  m_LocalScale: {x: 40, y: 5, z: 8}
+  m_LocalPosition: {x: -6, y: 5.5, z: 17.6}
+  m_LocalScale: {x: 35, y: 8, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -1051,6 +1051,72 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &3916562087083581660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 194865761172393826}
+  - component: {fileID: 8993110058250684790}
+  - component: {fileID: 8104739196985555497}
+  m_Layer: 0
+  m_Name: Bamboo_Container (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &194865761172393826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916562087083581660}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15, y: 5.5, z: -3.64}
+  m_LocalScale: {x: 4.8, y: 10, z: 10.05}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6358944495713042368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8993110058250684790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916562087083581660}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: -0.5, z: 0}
+--- !u!114 &8104739196985555497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916562087083581660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d3658a132fb7040b59aef838a4d6c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3928065988223785599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,16 +1265,16 @@ Transform:
   - {fileID: 4409670526705414147}
   - {fileID: 9038483408225710628}
   - {fileID: 7534248499492119909}
+  - {fileID: 5501561760215177729}
   - {fileID: 6083636696819871004}
+  - {fileID: 5333784023698568407}
+  - {fileID: 7147269295663734526}
   - {fileID: 4538521835586079054}
-  - {fileID: 6052442632965374605}
-  - {fileID: 7200548195048961482}
+  - {fileID: 778629171479723740}
   - {fileID: 7919925161446602764}
   - {fileID: 6768194529161053833}
-  - {fileID: 5501561760215177729}
-  - {fileID: 7147269295663734526}
-  - {fileID: 5333784023698568407}
-  - {fileID: 778629171479723740}
+  - {fileID: 6052442632965374605}
+  - {fileID: 194865761172393826}
   - {fileID: 8056646214929508653}
   - {fileID: 7074715997987697401}
   - {fileID: 2478480385250801944}
@@ -1553,7 +1619,7 @@ GameObject:
   - component: {fileID: 4715940623432478789}
   - component: {fileID: 3624052487992629442}
   m_Layer: 0
-  m_Name: Bamboo (10)
+  m_Name: Bamboo_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1568,8 +1634,8 @@ Transform:
   m_GameObject: {fileID: 6230682167878391694}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.5, y: 5.5, z: -6.5}
-  m_LocalScale: {x: 8, y: 8, z: 31}
+  m_LocalPosition: {x: -26.6, y: 5.5, z: -4}
+  m_LocalScale: {x: 8, y: 8, z: 42}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -1602,72 +1668,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6230682167878391694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62d3658a132fb7040b59aef838a4d6c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &6250545680430588938
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7200548195048961482}
-  - component: {fileID: 5535955107536461554}
-  - component: {fileID: 7331368949055586095}
-  m_Layer: 0
-  m_Name: Bamboo (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7200548195048961482
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250545680430588938}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15, y: 5.5, z: -3}
-  m_LocalScale: {x: 4.8, y: 10, z: 8.8}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6358944495713042368}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5535955107536461554
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250545680430588938}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: -0.5, z: 0}
---- !u!114 &7331368949055586095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6250545680430588938}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62d3658a132fb7040b59aef838a4d6c2, type: 3}
@@ -1883,7 +1883,7 @@ GameObject:
   - component: {fileID: 2934053109206004877}
   - component: {fileID: 7411995484367162364}
   m_Layer: 0
-  m_Name: Bamboo (3)
+  m_Name: Bamboo_Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1898,8 +1898,8 @@ Transform:
   m_GameObject: {fileID: 7207084053218433929}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15, y: 5.5, z: 3}
-  m_LocalScale: {x: 4.8, y: 10, z: 8.8}
+  m_LocalPosition: {x: -15, y: 5.5, z: 3.12}
+  m_LocalScale: {x: 4.8, y: 10, z: 10.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -2149,7 +2149,7 @@ GameObject:
   - component: {fileID: 4351711326454904417}
   - component: {fileID: 1481898442011101597}
   m_Layer: 0
-  m_Name: Bamboo (6)
+  m_Name: Bamboo_Trolley
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2165,7 +2165,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5, y: 5.5, z: -2}
-  m_LocalScale: {x: 4.8, y: 10, z: 3.8}
+  m_LocalScale: {x: 5.8, y: 10, z: 3.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6358944495713042368}
@@ -2215,7 +2215,7 @@ GameObject:
   - component: {fileID: 5935578344970377743}
   - component: {fileID: 3746912814251479159}
   m_Layer: 0
-  m_Name: Bamboo
+  m_Name: Bamboo_Top (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2230,7 +2230,7 @@ Transform:
   m_GameObject: {fileID: 8712600313280867743}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.5, y: 5.5, z: 19}
+  m_LocalPosition: {x: 17.5, y: 5.5, z: 19.1}
   m_LocalScale: {x: 15, y: 5, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
