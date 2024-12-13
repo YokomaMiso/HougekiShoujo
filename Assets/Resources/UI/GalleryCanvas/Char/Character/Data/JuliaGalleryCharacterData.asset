@@ -63,7 +63,7 @@ MonoBehaviour:
   animatorControllers:
   - {fileID: 9100000, guid: 59af7393c68163846bd55713d48dbc0c, type: 2}
   - {fileID: 9100000, guid: 5a59126cdc5958a438569df4acd443ec, type: 2}
-  - {fileID: 9100000, guid: 876b6857dbc45454e962b7906767ff78, type: 2}
+  - {fileID: 9100000, guid: bb65f7b1a6a441842afd3aebfc85388d, type: 2}
   - {fileID: 9100000, guid: 5a44ef35921f4da488a70b8e5931a2fc, type: 2}
   - {fileID: 9100000, guid: 3aa3731c5e73edb49a58a0c1db31ea79, type: 2}
   CharVoice:
