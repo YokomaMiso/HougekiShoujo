@@ -57,7 +57,7 @@ public class TutorialWindow : MonoBehaviour
         if (TutorialEnd())
         {
             parent.ChangeTitleState(TITLE_STATE.INPUT_NAME);
-            Managers.instance.PlaySFXForUI(0);
+            Managers.instance.PlaySFXForUI(4);
         }
         else
         {

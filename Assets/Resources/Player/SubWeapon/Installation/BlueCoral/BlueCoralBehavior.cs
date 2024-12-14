@@ -29,7 +29,7 @@ public class BlueCoralBehavior : InstallationBehavior
         transform.localScale = Vector3.zero;
 
         GameObject obj = SoundManager.PlaySFX(launchSFX);
-        obj.transform.position = transform.position;
+        transform.SetParent(ownerPlayer.transform);
     }
 
     protected override void Update()

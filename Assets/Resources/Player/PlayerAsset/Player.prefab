@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9959159e2d797f14b886ec3bac6c68b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkSFX: {fileID: 8300000, guid: e9eb44cf132794e40aef791e4797821c, type: 3}
 --- !u!114 &7707400329611790020
 MonoBehaviour:
   m_ObjectHideFlags: 0

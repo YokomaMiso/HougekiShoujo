@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerSubAction : MonoBehaviour
 {
     Player ownerPlayer;
-
+    [SerializeField] AudioClip blinkSFX;
     public void SetPlayer(Player _player)
     {
         ownerPlayer = _player;
@@ -70,7 +70,7 @@ public class PlayerSubAction : MonoBehaviour
                 installation = obj;
                 break;
             case SUB_TYPE.BLINK:
-                transform.AddComponent<Blink>();
+                transform.AddComponent<Blink>().SetSFX(blinkSFX);
                 break;
             case SUB_TYPE.BOMB:
                 Vector3 spawnPos = transform.position + Vector3.up + ownerPlayer.GetInputVector();
