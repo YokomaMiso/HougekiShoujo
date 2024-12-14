@@ -23,6 +23,6 @@ public class EMPExplosionBehavior : ExplosionBehavior
         other.AddComponent<SpeedBuff>().SetRateAndTime(0.0f, 2.0f);
 
         //トラップ被弾ボイスを鳴らす
-        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
+        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap());
     }
 }

@@ -48,7 +48,7 @@ public class BlindSmokeExplosion : SubExplosionBehavior
         //ヒットしたボイスを鳴らす
         hitedPlayer[id] = true;
         //トラップ被弾ボイスを鳴らす
-        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
+        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap());
 
         //自分じゃないならリターン
         if (id != Managers.instance.playerID) { return; }

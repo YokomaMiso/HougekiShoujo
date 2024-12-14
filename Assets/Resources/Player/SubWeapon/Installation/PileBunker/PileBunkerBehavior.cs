@@ -75,6 +75,6 @@ public class PileBunkerBehavior : InstallationBehavior
         player.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
 
         //”í’eƒ{ƒCƒX‚ð–Â‚ç‚·
-        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
+        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap());
     }
 }

@@ -32,7 +32,7 @@ public class TapiocaExplosionBehavior : SubExplosionBehavior
         //ヒットしたボイスを鳴らす
         hitedPlayer[id] = true;
         //トラップ被弾ボイスを鳴らす
-        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
+        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap());
 
         nowPlayer.GetComponent<PlayerMove>().ReceiveSlip(6.0f);
         nowPlayer.AddComponent<ResetHitedPlayer>().SetData(this, id, 6.0f);

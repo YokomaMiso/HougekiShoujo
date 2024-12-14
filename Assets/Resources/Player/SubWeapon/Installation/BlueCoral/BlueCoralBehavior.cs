@@ -82,7 +82,7 @@ public class BlueCoralBehavior : InstallationBehavior
         //Š´ŽÓƒ{ƒCƒX‚ð–Â‚ç‚·
         if (player != ownerPlayer)
         {
-            player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetThanks(), Camera.main.transform);
+            player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetThanks());
         }
     }
 }

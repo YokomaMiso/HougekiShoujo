@@ -63,6 +63,6 @@ public class TeenSpiritBehavior : InstallationBehavior
         player.GetComponent<PlayerMove>().ReceiveSlip(0.5f, direction * 10);
 
         //”í’eƒ{ƒCƒX‚ð–Â‚ç‚·
-        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
+        player.PlayVoice(player.GetPlayerData().GetPlayerVoiceData().GetDamageTrap());
     }
 }

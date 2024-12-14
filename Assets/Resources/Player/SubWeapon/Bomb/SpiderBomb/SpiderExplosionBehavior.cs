@@ -37,6 +37,6 @@ public class SpiderExplosionBehavior : SubExplosionBehavior
         hitedPlayer[id] = true;
 
         //トラップ被弾ボイスを鳴らす
-        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap(), Camera.main.transform);
+        nowPlayer.PlayVoice(nowPlayer.GetPlayerData().GetPlayerVoiceData().GetDamageTrap());
     }
 }
