@@ -78,8 +78,19 @@ public class Blink : MonoBehaviour
         */
 
         transform.position = warpPos - Vector3.up * 0.5f;
-        GameObject so = SoundManager.PlaySFX(blinkSFX);
-        so.transform.position = transform.position;
+
+        //自分の時は移動前の座標
+        GameObject so; 
+        if (player.IsMine())
+        {
+            so = SoundManager.PlaySFX(blinkSFX,player.transform);
+        }
+        //他人の時は移動後の座標
+        else
+        {
+            so = SoundManager.PlaySFX(blinkSFX);
+            so.transform.position = transform.position;
+        }
 
         Destroy(this);
     }
