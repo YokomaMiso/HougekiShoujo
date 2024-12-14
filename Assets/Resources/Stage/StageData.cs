@@ -13,7 +13,9 @@ public class StageData : ScriptableObject
     [SerializeField, Header("Stage Position")] Vector3[] defaultPosition;
 
     [SerializeField, Header("Stage BGM Data")] BGMData BGM;
-    
+
+    [SerializeField, Header("Directional Light")] GameObject directionalLight;
+
     [SerializeField, Header("Stage Screen Shot")] Sprite screenShot;
     [SerializeField, Header("Stage MiniMap")] Sprite minimap;
 
@@ -29,6 +31,8 @@ public class StageData : ScriptableObject
     public Vector3 GetDefaultPosition(int _num) { return defaultPosition[_num]; }
 
     public BGMData GetBGMData() { return BGM; }
+
+    public GameObject GetDirectionalLight() { return directionalLight; }
 
     public Sprite GetScreenShot() {  return screenShot; }
     public Sprite GetMinimap() { return minimap; }

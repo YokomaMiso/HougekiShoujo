@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
         StageData nowStageData = allStageData.GetStageData(roomData.stageNum);
         GameObject stage = Instantiate(nowStageData.GetStagePrefab());
 
+        //DirectionalLightの生成
+        Instantiate(nowStageData.GetDirectionalLight());
+
         //サドンデスエリアの生成
         GameObject sda = Instantiate(suddenDeathAreaPrefab, stage.transform);
         sda.transform.localScale = Vector3.one * nowStageData.GetStageRadius();

@@ -11,7 +11,7 @@ public class ExitCheck : MonoBehaviour
     bool exit;
     int id;
     [SerializeField] GameObject announceTextInstance;
-    TextChangerAtLanguage[] announceText;
+    TextChangerAtLanguage announceText;
 
     [SerializeField] Image[] buttonIcon;
 
@@ -20,15 +20,13 @@ public class ExitCheck : MonoBehaviour
         Managers.instance.PlaySFXForUI(1);
 
         if (announceText == null) { return; }
-        announceText[id].ChangeText();
+        announceText.ChangeText();
     }
     void Start()
     {
-        announceText = announceTextInstance.GetComponents<TextChangerAtLanguage>();
+        announceText = announceTextInstance.GetComponent<TextChangerAtLanguage>();
 
         id = (int)Mathf.Clamp01(Managers.instance.playerID);
-        announceText[id].enabled = true;
-        announceText[(id + 1) % 2].enabled = false;
 
         if (Managers.instance.GetSmartPhoneFlag())
         {
