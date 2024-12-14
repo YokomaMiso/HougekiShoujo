@@ -4,6 +4,8 @@ using UnityEngine;
 public class Blink : MonoBehaviour
 {
     const int shadowNum = 8;
+    AudioClip blinkSFX;
+    public void SetSFX(AudioClip _clip) { blinkSFX = _clip; }
 
     void Start()
     {
@@ -76,6 +78,9 @@ public class Blink : MonoBehaviour
         */
 
         transform.position = warpPos - Vector3.up * 0.5f;
+        GameObject so = SoundManager.PlaySFX(blinkSFX);
+        so.transform.position = transform.position;
+
         Destroy(this);
     }
 }

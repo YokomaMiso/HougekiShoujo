@@ -17,6 +17,8 @@ public class ExitCheck : MonoBehaviour
 
     private void OnEnable()
     {
+        Managers.instance.PlaySFXForUI(1);
+
         if (announceText == null) { return; }
         announceText[id].ChangeText();
     }
@@ -70,12 +72,14 @@ public class ExitCheck : MonoBehaviour
         if (exit) { return; }
 
         exit = true;
+        Managers.instance.PlaySFXForUI(3);
         owner.rm.BackToTitle();
     }
 
     public void PressCancel()
     {
         if (exit) { return; }
+        Managers.instance.PlaySFXForUI(1);
         gameObject.SetActive(false);
     }
 }

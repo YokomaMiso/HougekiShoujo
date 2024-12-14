@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class InputName : MonoBehaviour
 {
@@ -54,7 +50,8 @@ public class InputName : MonoBehaviour
 
         if (prevText != inputField.text)
         {
-            SoundManager.PlaySFXForUI(inputTextSFX);
+            GameObject obj = SoundManager.PlaySFXForUI(inputTextSFX);
+            obj.GetComponent<AudioSource>().pitch = Random.Range(0.95f, 1.05f);
             prevText = inputField.text;
         }
 

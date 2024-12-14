@@ -30,6 +30,8 @@ public class PreviewVideo : MonoBehaviour
         nowColor = Color.black;
         videoImage = videoPlayer.GetComponent<RawImage>();
         timer = 0;
+
+        Managers.instance.PlaySFXForUI(0);
     }
 
     void Update()
@@ -53,6 +55,8 @@ public class PreviewVideo : MonoBehaviour
         videoImage.color = nowColor;
         gameObject.SetActive(false);
         timer = 0;
+
+        Managers.instance.PlaySFXForUI(1);
     }
 
     public void LoopPointReached(VideoPlayer vp) { CloseBehavior(); }

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: DefaultOptionData
   m_EditorClassIdentifier: 
   playerName: Player
-  masterVolume: 1
-  bgmVolume: 0.3
-  sfxVolume: 0.90000004
-  voiceVolume: 0.8
+  masterVolume: 0.7
+  bgmVolume: 1
+  sfxVolume: 1
+  voiceVolume: 1
   cameraShakeOn: 1
   mortarSensitive: 20
+  displayTutorial: 1
+  languageNum: 0

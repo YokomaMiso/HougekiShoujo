@@ -25,8 +25,9 @@ public class TeenSpiritBehavior : InstallationBehavior
 
         hitedPlayer[ownerPlayer.GetPlayerID()] = true;
 
-        GameObject obj = SoundManager.PlaySFX(launchSFX, this.transform);
+        GameObject obj = SoundManager.PlaySFX(launchSFX);
         obj.GetComponent<AudioSource>().pitch = 1;
+        transform.SetParent(ownerPlayer.transform);
     }
 
     protected override void Update()

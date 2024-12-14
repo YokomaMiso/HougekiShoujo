@@ -55,17 +55,25 @@ public class Managers : MonoBehaviour
     [SerializeField] AudioClip cancelSFX;
     [SerializeField] AudioClip cursorSFX;
     [SerializeField] AudioClip startSFX;
+    [SerializeField] AudioClip closeTutorialSFX;
+
     public void PlaySFXForUI(int _num)
     {
         AudioClip ac;
+        float pitch = 1.0f;
         switch (_num)
         {
             default: ac = submitSFX; break;
             case 1: ac = cancelSFX; break;
-            case 2: ac = cursorSFX; break;
+            case 2: 
+                ac = cursorSFX; 
+                pitch = Random.Range(0.95f, 1.05f); 
+                break;
             case 3: ac = startSFX; break;
+            case 4: ac = closeTutorialSFX; break;
         }
-        SoundManager.PlaySFXForUI(ac);
+        GameObject obj = SoundManager.PlaySFXForUI(ac);
+        obj.GetComponent<AudioSource>().pitch = pitch;
     }
 
     //スマートフォンフラグ

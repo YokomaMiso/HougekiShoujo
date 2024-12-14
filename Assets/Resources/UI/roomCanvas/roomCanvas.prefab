@@ -3073,12 +3073,12 @@ MonoBehaviour:
   stageSelect: {fileID: 8589024957306964187}
   stageBinder: {fileID: 6147753632539301608}
   stageDisplay: {fileID: 7257981158185615266}
-  roomBGM: {fileID: 8300000, guid: 17dc4619edab52b4bb58e7f2d9f1f748, type: 3}
   charaArrows:
   - {fileID: 5522949247184413981}
   - {fileID: 5305381604992588193}
   exitCheck: {fileID: 2374594851503218819}
   preview: {fileID: 9175758060920653483}
+  roomBGM: {fileID: 8300000, guid: 17dc4619edab52b4bb58e7f2d9f1f748, type: 3}
 --- !u!1 &4478471455035712463
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,13 +6528,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
