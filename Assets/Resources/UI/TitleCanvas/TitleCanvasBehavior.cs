@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum TITLE_STATE { STAY = -1, SELECT = 0,TUTORIAL, INPUT_NAME, CREDIT, CHANGE_TO_CONNECTION };
+public enum TITLE_STATE { STAY = -1, SELECT = 0, TUTORIAL, INPUT_NAME, CREDIT, CHANGE_TO_CONNECTION };
 
 public class TitleCanvasBehavior : MonoBehaviour
 {
@@ -42,7 +42,7 @@ public class TitleCanvasBehavior : MonoBehaviour
         if (titleCallTimer > titleCallTime)
         {
             int characterID = Random.Range(0, Managers.instance.gameManager.playerDatas.Length - 1);
-            SoundManager.PlayVoiceForUI(Managers.instance.gameManager.playerDatas[characterID].GetPlayerVoiceData().GetTitleCall());
+            SoundManager.PlayVoiceForUI(Managers.instance.gameManager.playerDatas[characterID].GetPlayerVoiceData().GetTitleCall(), Managers.instance.transform);
             titleCalled = true;
         }
     }
