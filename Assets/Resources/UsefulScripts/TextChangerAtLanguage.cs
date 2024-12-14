@@ -7,13 +7,13 @@ public class TextChangerAtLanguage : MonoBehaviour
 {
     public static bool change;
 
-    Text text;
-    [SerializeField] string japanese;
-    [SerializeField] string english;
-    [SerializeField] string simpleChinese;
-    [SerializeField] string traditionalChinese;
+    protected Text text;
+    [SerializeField] protected string japanese;
+    [SerializeField] protected string english;
+    [SerializeField] protected string simpleChinese;
+    [SerializeField] protected string traditionalChinese;
 
-    public void ChangeText()
+    public virtual void ChangeText()
     {
         if (text == null) 
         {
