@@ -51,7 +51,7 @@ public class InputName : MonoBehaviour
         if (prevText != inputField.text)
         {
             GameObject obj = SoundManager.PlaySFXForUI(inputTextSFX);
-            obj.GetComponent<AudioSource>().pitch = Random.Range(0.95f, 1.05f);
+            obj.GetComponent<AudioSource>().pitch = Random.Range(0.99f, 1.01f);
             prevText = inputField.text;
         }
 
