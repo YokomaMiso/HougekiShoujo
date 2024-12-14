@@ -27,6 +27,9 @@ public class BlueCoralBehavior : InstallationBehavior
         buffLifeTime = 5.0f;
 
         transform.localScale = Vector3.zero;
+
+        GameObject obj = SoundManager.PlaySFX(launchSFX);
+        obj.transform.position = transform.position;
     }
 
     protected override void Update()
