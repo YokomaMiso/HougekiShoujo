@@ -75,6 +75,7 @@ MonoBehaviour:
   cancelSFX: {fileID: 8300000, guid: c65ae382bdd476d499e66d03215bb856, type: 3}
   cursorSFX: {fileID: 8300000, guid: 0f69e7d6eb8f2154486ac58c69359770, type: 3}
   startSFX: {fileID: 8300000, guid: 9355cd00dbc764647a0b2735b477cee1, type: 3}
+  closeTutorialSFX: {fileID: 8300000, guid: 66814fc9f24fff8489a4802819aca567, type: 3}
 --- !u!114 &2265797116704708556
 MonoBehaviour:
   m_ObjectHideFlags: 0
