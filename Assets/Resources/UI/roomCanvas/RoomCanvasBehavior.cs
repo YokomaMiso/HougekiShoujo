@@ -243,6 +243,8 @@ public class RoomCanvasBehavior : MonoBehaviour
 
     public void PressBackTitle()
     {
+        RoomData myRoomData = OSCManager.OSCinstance.roomData;
+        if (myRoomData.ready) { return; }
         exitCheck.gameObject.SetActive(true);
         //rm.BackToTitle();
     }

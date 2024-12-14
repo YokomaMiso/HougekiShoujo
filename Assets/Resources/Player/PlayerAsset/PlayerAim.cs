@@ -78,12 +78,6 @@ public class PlayerAim : MonoBehaviour
 
         GameObject aimSFX = SoundManager.PlaySFX(ownerPlayer.GetPlayerData().GetPlayerSFXData().GetAimSFX(), transform);
         Camera.main.GetComponent<CameraMove>().SetCameraFar(shellData.GetAimRange() / 2);
-
-        if (!ownerPlayer.IsMine())
-        {
-            aimSFX.GetComponent<AudioSource>().volume *= 0.5f;
-            aimSFX.AddComponent<AudioLowPassFilter>();
-        }
     }
 
     public Vector3 AimMove()
@@ -191,11 +185,6 @@ public class PlayerAim : MonoBehaviour
             OSCManager.OSCinstance.myNetIngameData.mainPacketData.inGameData.playerStickValue = aimVector;
 
             ResetAim();
-        }
-        else
-        {
-            fireSFX.GetComponent<AudioSource>().volume *= 0.5f;
-            fireSFX.AddComponent<AudioLowPassFilter>();
         }
 
         ownerPlayer.ChangeShellIconColor(0);

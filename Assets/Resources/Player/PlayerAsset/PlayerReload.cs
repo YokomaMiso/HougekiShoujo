@@ -73,8 +73,6 @@ public class PlayerReload : MonoBehaviour
 
         if (!ownerPlayer.IsMine())
         {
-            reloadSFX.GetComponent<AudioSource>().volume *= 0.5f;
-            reloadSFX.AddComponent<AudioLowPassFilter>();
             reloadFlagForOther = true;
         }
     }
