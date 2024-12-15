@@ -13,6 +13,7 @@ public class PlayerBannerBehavior : MonoBehaviour
     Image buttonImage = null;
 
     public int num = -1;
+
     public void SetNum(int _num)
     {
         num = _num;
@@ -22,14 +23,8 @@ public class PlayerBannerBehavior : MonoBehaviour
             transform.GetChild(3).GetComponent<Text>().color = Color.black;
             buttonImage = transform.GetChild(5).GetComponent<Image>();
 
-            if (num == 0)
-            {
-                buttonImage.sprite = buttonSpriteStart;
-            }
-            else
-            {
-                buttonImage.sprite = buttonSpriteReady;
-            }
+            if (num == 0) { buttonImage.sprite = buttonSpriteStart; }
+            else { buttonImage.sprite = buttonSpriteReady; }
         }
         else
         {
@@ -63,8 +58,8 @@ public class PlayerBannerBehavior : MonoBehaviour
 #if UNITY_EDITOR
                 buttonImage.color = Color.white;
 #else
-                if(readyCount <= 0){ buttonImage.color = Color.clear; }
-                else{ buttonImage.color = Color.white; }
+                if (_roomData.teamACount == _roomData.teamBCount) { buttonImage.color = Color.white; }
+                else { buttonImage.color = Color.clear; }
 #endif
             }
             else
@@ -82,7 +77,6 @@ public class PlayerBannerBehavior : MonoBehaviour
             {
                 buttonImage.sprite = buttonSpriteReady;
             }
-
         }
     }
 }
