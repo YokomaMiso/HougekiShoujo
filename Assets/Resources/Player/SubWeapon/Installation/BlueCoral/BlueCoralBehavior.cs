@@ -30,6 +30,9 @@ public class BlueCoralBehavior : InstallationBehavior
 
         GameObject obj = SoundManager.PlaySFX(launchSFX);
         transform.SetParent(ownerPlayer.transform);
+
+        hitedPlayer[Managers.instance.playerID] = true;
+        ownerPlayer.AddComponent<SpeedBuff>().SetRateAndTime(speedRate, buffLifeTime);
     }
 
     protected override void Update()
