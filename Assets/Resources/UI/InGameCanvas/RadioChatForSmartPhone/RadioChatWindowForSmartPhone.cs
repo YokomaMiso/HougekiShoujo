@@ -18,8 +18,8 @@ public class RadioChatWindowForSmartPhone : MonoBehaviour
 
     PlayerRadioChat myRadioChat;
 
-    Vector3 defaultPos = Vector3.right * 1040;
-    Vector3 addPos = Vector3.right * 820;
+    Vector3 defaultPos = Vector3.right * 1000;
+    Vector3 addPos = Vector3.right * 792;
 
     bool active;
     bool moved;
