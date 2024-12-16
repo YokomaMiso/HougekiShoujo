@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class CharaSerifEmote : CharaSerifBehavior
 {
     [SerializeField] Sprite[] emotes;
+    protected new Vector3 startPos = new Vector3(-1220, 330);
+    protected new Vector3 endPos = new Vector3(-800, 330);
 
     public override void SetSerif(MachingRoomData.RoomData _roomData, RADIO_CHAT_ID _chatID)
     {

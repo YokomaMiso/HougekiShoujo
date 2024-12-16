@@ -13,8 +13,8 @@ public class CharaSerifBehavior : MonoBehaviour
     [SerializeField] protected Sprite[] bgSprite;
     [SerializeField] AudioClip[] clips;
 
-    public readonly static Vector3 startPos = new Vector3(-1170, 330);
-    public readonly static Vector3 endPos = new Vector3(-750, 330);
+    protected Vector3 startPos = new Vector3(-1170, 330);
+    protected Vector3 endPos = new Vector3(-750, 330);
 
     protected int chatNum = 0;
     public readonly int posAdd = 128;
