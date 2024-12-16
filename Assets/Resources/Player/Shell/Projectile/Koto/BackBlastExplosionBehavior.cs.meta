@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: d0558d9173dfa7d45bba79cc6aaa1d68
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - backBlastSFX: {fileID: 8300000, guid: a667f2a8a9d51d644959174934727a83, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

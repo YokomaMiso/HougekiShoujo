@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea82a71e064af341b9c69f4636d1777, type: 3}
   m_Name: ED_KotoBackBlastExplosion
   m_EditorClassIdentifier: 
-  explosionBody: {fileID: 3179393461812120061, guid: 5fbefd8f387895448bc643a35cd119ea,
+  explosionBody: {fileID: 3179393461812120061, guid: 46a04472c2ebc0048896b724facf7637,
     type: 3}
   scale: 1
   explosionAnim: {fileID: 9100000, guid: 577ebf6b008e65f4f8b9490ed56d45f3, type: 2}
