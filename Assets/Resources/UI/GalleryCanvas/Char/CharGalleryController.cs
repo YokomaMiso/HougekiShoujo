@@ -14,6 +14,7 @@ public class CharGalleryController : MonoBehaviour
     private int inputIndex=1;
 
     private int spriteIndex = 0;
+    private int voiceIndex = 0;
 
 
     void Start()
@@ -24,8 +25,6 @@ public class CharGalleryController : MonoBehaviour
     void Update()
     {
         CharGalleryInput();
-        //Debug.Log("EastKeyInput" + EastDown);
-        //Debug.Log("GalleryState" + GalleryManager.Instance.CurrentState);
     }
 
     void CharGalleryInput()
@@ -40,6 +39,8 @@ public class CharGalleryController : MonoBehaviour
             {
                 inputIndex = 1;
             }
+            voiceIndex = 0;
+            mainViewPort.ResetVoiceIndex();
             mainViewPort.SwitchPage(inputIndex, characterData);
             LeftStickcanChange = false;
         }
@@ -50,28 +51,53 @@ public class CharGalleryController : MonoBehaviour
             {
                 inputIndex = mainViewPort.GetMaxPage();
             }
+            voiceIndex = 0;
+            mainViewPort.ResetVoiceIndex();
             mainViewPort.SwitchPage(inputIndex, characterData);
             LeftStickcanChange = false;
         }
 
         if (Inout.y > 0.5f && LeftStickcanChange)
         {
-            spriteIndex--;                                                                          
-            if (spriteIndex < 0)
+            if (inputIndex == 1)
             {
-                spriteIndex = characterData.animatorControllers.Count-1;
+                spriteIndex--;
+                if (spriteIndex < 0)
+                {
+                    spriteIndex = characterData.animatorControllers.Count - 1;
+                }
+                mainViewPort.UpdateCharAnime(spriteIndex, characterData);
             }
-            mainViewPort.UpdateCharAnime(spriteIndex,characterData);
+            else if (inputIndex == 2)
+            {
+                int maxVoiceNum = characterData.CharVoice.Count;
+                if (voiceIndex == 0) { return; }
+                voiceIndex--;
+                mainViewPort.SetVoicePage(voiceIndex);
+                mainViewPort.SetCusorPosition(voiceIndex, maxVoiceNum);
+            }
+
             LeftStickcanChange = false;
         }
         else if (Inout.y < -0.5f && LeftStickcanChange)
         {
-            spriteIndex++;
-            if (spriteIndex > characterData.animatorControllers.Count-1)
+            if (inputIndex == 1)
             {
-                spriteIndex = 0;
+                spriteIndex++;
+                if (spriteIndex > characterData.animatorControllers.Count - 1)
+                {
+                    spriteIndex = 0;
+                }
+                mainViewPort.UpdateCharAnime(spriteIndex, characterData);
             }
-            mainViewPort.UpdateCharAnime(spriteIndex, characterData);
+            else if (inputIndex == 2)
+            {
+                int maxVoiceNum = characterData.CharVoice.Count;
+                if (voiceIndex == maxVoiceNum-1) { return; }
+                voiceIndex++;
+                mainViewPort.SetVoicePage(voiceIndex);
+                mainViewPort.SetCusorPosition(voiceIndex, maxVoiceNum);
+            }
             LeftStickcanChange = false;
         }
         else if (Inout.y > -0.5f && Inout.y < 0.5f&& Inout.x > -0.5f && Inout.x < 0.5f                                                                                                                                                                      )

@@ -7,4 +7,5 @@ using UnityEngine;
 public class AllWorldGalleryData : ScriptableObject
 {
     public List<WorldGalleryData> worldGalleryDatas;
+    public Material buildMat;
 }
