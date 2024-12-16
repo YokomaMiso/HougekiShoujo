@@ -7,7 +7,7 @@ public class IngameCanvasBehavior : MonoBehaviour
     [SerializeField] KillLogCanvas killLogList;
     [SerializeField] SerifListBehavior serifList;
 
-    void Awake() 
+    void Awake()
     {
         Managers.instance.gameManager.ingameCanvas = this;
 
@@ -15,7 +15,7 @@ public class IngameCanvasBehavior : MonoBehaviour
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                DisplayShellIcon shellIcon= transform.GetChild(i).GetComponent<DisplayShellIcon>();
+                DisplayShellIcon shellIcon = transform.GetChild(i).GetComponent<DisplayShellIcon>();
                 if (shellIcon == null)
                 {
                     transform.GetChild(i).gameObject.SetActive(false);

@@ -2595,10 +2595,10 @@ Transform:
   - {fileID: 6704216935804895998}
   - {fileID: 1925366296469137139}
   - {fileID: 7508336116624497330}
-  - {fileID: 1004754870733544476}
   - {fileID: 832583510616678388}
   - {fileID: 7924438893201172031}
   - {fileID: 6719447402724261009}
+  - {fileID: 1004754870733544476}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9031331128263316634
@@ -4149,9 +4149,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

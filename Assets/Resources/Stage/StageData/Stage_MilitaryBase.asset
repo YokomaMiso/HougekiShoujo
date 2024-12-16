@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Stage_MilitaryBase
   m_EditorClassIdentifier: 
   stageName:
-  - "\u81EA\u8B66\u968A \n\u4EE3\u7B52\u99D0\u5C6F\u5730"
+  - "\u81EA\u8B66\u968A \n\u4EC7\u5C04\u99D0\u5C6F\u5730"
   - 'Military Police
 
-    Daito Camp'
-  - "\u81EA\u8B66\u968A\n\u4EE3\u7B52\u9A7B\u519B"
-  - "\u81EA\u8B66\u968A\n\u4EE3\u7B52\u99D0\u8ECD"
+    Kyusha Camp'
+  - "\u81EA\u8B66\u968A\n\u4EC7\u5C04\u9A7B\u519B"
+  - "\u81EA\u8B66\u968A\n\u4EC7\u5C04\u99D0\u8ECD"
   stagePrefab: {fileID: 5198325544041908592, guid: 2e077cf4c398354488272765218ec3a3,
     type: 3}
   stageSize: {x: 40, y: 0, z: 30}
