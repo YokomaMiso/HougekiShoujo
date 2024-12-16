@@ -78,21 +78,24 @@ public class PlayerBannerBehavior : MonoBehaviour
             }
         }
 
-        if (prevReady != _roomData.ready)
+        if (num != Managers.instance.playerID)
         {
-            if (_roomData.ready) { Managers.instance.PlaySFXForUI(4); }
-            else { Managers.instance.PlaySFXForUI(1); }
-            prevReady = _roomData.ready;
-        }
-        else if (prevTeamNum != _roomData.myTeamNum)
-        {
-            Managers.instance.PlaySFXForUI(2);
-            prevTeamNum = _roomData.myTeamNum;
-        }
-        else if (prevChara != _roomData.selectedCharacterID)
-        {
-            Managers.instance.PlaySFXForUI(2);
-            prevChara = _roomData.selectedCharacterID;
+            if (prevReady != _roomData.ready)
+            {
+                if (_roomData.ready) { Managers.instance.PlaySFXForUI(4); }
+                else { Managers.instance.PlaySFXForUI(1); }
+                prevReady = _roomData.ready;
+            }
+            else if (prevTeamNum != _roomData.myTeamNum)
+            {
+                Managers.instance.PlaySFXForUI(2);
+                prevTeamNum = _roomData.myTeamNum;
+            }
+            else if (prevChara != _roomData.selectedCharacterID)
+            {
+                Managers.instance.PlaySFXForUI(2);
+                prevChara = _roomData.selectedCharacterID;
+            }
         }
     }
 }
