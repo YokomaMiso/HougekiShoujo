@@ -41,6 +41,11 @@ public class GalleryManager : MonoBehaviour
     public GameObject charCategory;
     public GameObject worldCategory;
     public GameObject soundCategory;
+    public GameObject worldMain;
+    public GameObject soundMain;
+
+    private GameObject intantWorldObject;
+    private Vector3 spawnWorldPosition;
 
     public SoundGalleryManeger soundsManeger;
     public MainViewPort mainViewPort;
@@ -52,10 +57,16 @@ public class GalleryManager : MonoBehaviour
     private List<Transform> childTransforms = new List<Transform>();
     private Vector3 selecterSize = new Vector3(1.1f, 1.1f, 1.1f);
     private Vector3 defaultSize = new Vector3(1f, 1f, 1f);
+    private Vector3 currentSoundPosition;
+    private Vector3 endSoundPosition = new Vector3(1010.0f,-841.0f,0.0f);
 
     //fade
     public float fadeDuration = 1f;
     private bool isFade=false;
+    private bool isMove = false;
+    public void SetMoveState(bool state) => isMove = state;
+
+
     private int nextState = -1;
     private static float Duration = 0.2f;
 
@@ -69,11 +80,17 @@ public class GalleryManager : MonoBehaviour
     private Vector3 rotationCenter = new Vector3(50.0f,545.0f,0.0f);
     private float rotationAngle=-25.0f;
 
+    public void SetNextStage(int index)
+    {
+        nextState = index;
+    }
 
     private void Start()
     {
         childTransforms.Clear();
         currentPosition.Clear();
+        currentSoundPosition = soundMain.transform.localPosition;
+        spawnWorldPosition = new Vector3(-2050.0f, 0.0f, 0);
         if (largeCategory != null)
         {
             for (int i = 0; i < largeCategory.transform.childCount; i++)
@@ -81,15 +98,6 @@ public class GalleryManager : MonoBehaviour
                 Transform child = largeCategory.transform.GetChild(i);
                 childTransforms.Add(child);
                 currentPosition.Add(child.localPosition);
-            }
-        }
-
-        if (worldCategory != null)
-        {
-            for(int i = 0; i < worldCategory.transform.childCount; i++)
-            {
-                worldCurrentPosition[i] = worldCategory.transform.GetChild(i).localPosition;
-                targetWorldPosition[i] = new Vector3(221, worldCurrentPosition[i].y, worldCurrentPosition[i].z);
             }
         }
         SetState(GalleryState.GalleryMain);
@@ -107,8 +115,6 @@ public class GalleryManager : MonoBehaviour
         {
             case GalleryState.GalleryMain:
                 charCategory.SetActive(false);
-                worldCategory.SetActive(false);
-                soundCategory.SetActive(false);
                 break;
             case GalleryState.CharacterSelect:
                 charCategory.SetActive(true);
@@ -148,18 +154,14 @@ public class GalleryManager : MonoBehaviour
                 break;
             case GalleryState.CharacterSelect:
                 HandleGalleryMainInput();
-                HandleCharSelectInput();
                 break;
             case GalleryState.CharacterGallery:
-                HandleCharGalleryInput();
                 break;
             case GalleryState.WorldSelect:
                 HandleGalleryMainInput();
-                HandleWorldSelectInput();
                 break;
             case GalleryState.SoundSelect:
                 HandleGalleryMainInput();
-                HandleSoundSelectInput();
                 break;
             default:
                 break;
@@ -187,7 +189,8 @@ public class GalleryManager : MonoBehaviour
     
     private void HandleGalleryMainInput()
     {
-        if (isFade) { return; }
+        if(isFade) { return; }
+        if(isMove) { return; }
         Vector2 axisInput = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
         if (axisInput.y < -0.5f && canChangeIndex)
         {
@@ -213,14 +216,21 @@ public class GalleryManager : MonoBehaviour
             if(CurrentState == GalleryState.GalleryMain)
             {
                 nextState = inputIndex;
+                if (nextState == 1) { StartCoroutine(HandleWorldResetSequentially()); }
                 if (nextState == 2)
                 {
                     if (soundsManeger != null)
                     {
-                        soundsManeger.GenerateVoiceButton();
+                        soundsManeger.ResetIndex();
+                        soundsManeger.SoundsSelecter(0);
+                        StartCoroutine(HandleSoundResetSequentially());
                     }
                 }
-                TransRotationIn();
+                else
+                {
+                    TransRotationIn();
+                }
+                
             }
         }
 
@@ -235,26 +245,21 @@ public class GalleryManager : MonoBehaviour
             {
                 case GalleryState.CharacterSelect:
                     inputIndex = 0;
+                    TransRotationOut();
                     break;
                 case GalleryState.WorldSelect:
                     inputIndex = 1;
+                    StartCoroutine(HandleWorldExitSequentially());
                     break;
                 case GalleryState.SoundSelect:
                     inputIndex = 2;
-                    if (soundsManeger != null)
-                    {
-                        soundsManeger.DeleteSoundsImage();
-                    }
+                    StartCoroutine(HandleSoundExitSequentially());
                     break;
                 default:
                     break;
             }
-            if (CurrentState == GalleryState.WorldSelect)
-            {
-                WorldFadeOut(0.5f);
-            }
             SetCategoryChild(largeCategory);
-            TransRotationOut();
+            
         }
 
         if (!isFade) 
@@ -271,7 +276,6 @@ public class GalleryManager : MonoBehaviour
                     break;
                 case 1:
                     SetCategoryChild(worldCategory);
-                    WorldFadeIn(0.5f);
                     SetState(GalleryState.WorldSelect);
                     break;
                 case 2:
@@ -285,27 +289,10 @@ public class GalleryManager : MonoBehaviour
 
     }
 
-    private void HandleCharSelectInput()
-    {
-    }
-
-    private void HandleCharGalleryInput()
-    {
-
-    }
-
 
     private void GalleryMainUpdate()
     {
         BackToMainTitle();
-    }
-
-    private void HandleWorldSelectInput()
-    {
-    }
-
-    private void HandleSoundSelectInput()
-    {
     }
 
     private void GalleryMainSelect(int index)
@@ -338,7 +325,7 @@ public class GalleryManager : MonoBehaviour
 
     private void BackToMainTitle()
     {
-        if (InputManager.GetKeyDown(BoolActions.EastButton)&&!isFade)
+        if (InputManager.GetKeyDown(BoolActions.EastButton)&&!isFade&&!isMove)
         {
             Managers.instance.ChangeState(GAME_STATE.TITLE);
             Managers.instance.ChangeScene(GAME_STATE.TITLE);
@@ -429,6 +416,7 @@ public class GalleryManager : MonoBehaviour
 
     private IEnumerator MoveObject(Transform targetObject, Vector3 targetPosition, float duration)
     {
+        isFade = true;
         float elapsedTime = 0f;
         Vector3 startingPosition = targetObject.localPosition;
 
@@ -440,6 +428,7 @@ public class GalleryManager : MonoBehaviour
         }
 
         targetObject.localPosition = targetPosition;
+        isFade = false;
     }
 
     private IEnumerator RotateUI(RectTransform targetObject, float angle, float duration)
@@ -465,7 +454,60 @@ public class GalleryManager : MonoBehaviour
     }
 
 
+    private IEnumerator HandleWorldExitSequentially()
+    {
+        isMove = true;
+        SetState(GalleryState.GalleryMain);
+        if (intantWorldObject != null)
+        {
+            yield return StartCoroutine(MoveObject(intantWorldObject.transform, spawnWorldPosition, 0.5f));
+        }
 
+        yield return StartCoroutine(RotateUI(largeCategory.GetComponent<RectTransform>(), -rotationAngle, Duration));
+        isMove = false;
+        worldCategory.SetActive(false);
+    }
+
+    private IEnumerator HandleWorldResetSequentially()
+    {
+        isMove = true;
+        worldCategory.SetActive(true);
+        yield return StartCoroutine(RotateUI(largeCategory.GetComponent<RectTransform>(), rotationAngle, Duration));
+
+        if (intantWorldObject == null)
+        {
+            intantWorldObject = Instantiate(worldMain, worldCategory.transform);
+            intantWorldObject.transform.localPosition = spawnWorldPosition;
+        }
+        yield return StartCoroutine(MoveObject(intantWorldObject.transform, Vector3.zero, 0.5f));
+
+        isMove = false;
+    }
+
+    private IEnumerator HandleSoundExitSequentially()
+    {
+        isMove = true;
+        SetState(GalleryState.GalleryMain);
+        if (soundMain != null)
+        {
+            yield return StartCoroutine(MoveObject(soundMain.transform, currentSoundPosition, 0.5f));
+        }
+
+        yield return StartCoroutine(RotateUI(largeCategory.GetComponent<RectTransform>(), -rotationAngle, Duration));
+        isMove = false;
+        soundCategory.SetActive(false);
+    }
+
+    private IEnumerator HandleSoundResetSequentially()
+    {
+        isMove = true;
+        soundCategory.SetActive(true);
+        yield return StartCoroutine(RotateUI(largeCategory.GetComponent<RectTransform>(), rotationAngle, Duration));
+
+        yield return StartCoroutine(MoveObject(soundMain.transform, endSoundPosition, 0.5f));
+
+        isMove = false;
+    }
 
     private void TransFadeIn(int index) 
     {
@@ -509,26 +551,19 @@ public class GalleryManager : MonoBehaviour
 
     private void WorldFadeIn(float _duration)
     {
-        if (CurrentState == GalleryState.GalleryMain)
+        if (intantWorldObject == null)
         {
-            for (int i = 0; i < childTransforms.Count; i++)
-            {
-                currentPosition[i] = currentPositionCount;
-                ButtonMove(childTransforms[i], targetWorldPosition[i], Duration);
-                ButtonFadeIn(childTransforms[i]);
-            }
+            intantWorldObject = Instantiate(worldMain, worldCategory.transform);
+            intantWorldObject.transform.localPosition = spawnWorldPosition;
         }
+        StartCoroutine(MoveObject(intantWorldObject.transform, Vector3.zero, _duration));
     }
 
     private void WorldFadeOut( float _duration)
     {
-        if (CurrentState == GalleryState.WorldSelect)
+        if (intantWorldObject != null)
         {
-            for (int i = 0; i < childTransforms.Count; i++)
-            {
-                ButtonMove(childTransforms[i], worldCurrentPosition[i], Duration);
-                ButtonFadeOut(childTransforms[i]);
-            }
+            StartCoroutine(MoveObject(intantWorldObject.transform, spawnWorldPosition, _duration));
         }
     }
 

@@ -18,7 +18,14 @@ public class OffsetChildObjects : MonoBehaviour
     public Vector3 iconScale = new Vector3(0.2f, 0.2f, 0.2f);
     public Vector2 iconSize = new Vector2(200, 200);
 
-    int inputIndex = 0;
+    private int inputIndex = 0;
+
+    public void SetInputIndex(int index)
+    {
+        inputIndex = index;
+    }
+
+    public int GetInputIndex() {  return inputIndex; }
 
     private bool isMove = false;
     private bool EnterDown = false;
@@ -102,20 +109,12 @@ public class OffsetChildObjects : MonoBehaviour
         {
             if (Inout.y > 0.5f && LeftStickcanChange)
             {
-                if (inputIndex > 0&&!isMove)
-                {
-                    inputIndex--;
-                    MoveScrollView(-1);
-                }
+                MoveScrollUp();
                 LeftStickcanChange = false;
             }
             else if (Inout.y < -0.5f && LeftStickcanChange)
             {
-                if (inputIndex < contentParent.childCount - 1&&!isMove)
-                {
-                    inputIndex++;
-                    MoveScrollView(1);
-                }
+                MoveScrollDown();
                 LeftStickcanChange = false;
             }
             else if (Inout.y > -0.5f && Inout.y < 0.5f)
@@ -124,6 +123,24 @@ public class OffsetChildObjects : MonoBehaviour
             }
         }
 
+    }
+
+    public void MoveScrollUp()
+    {
+        if (inputIndex > 0 && !isMove)
+        {
+            inputIndex--;
+            MoveScrollView(-1);
+        }
+    }
+
+    public void MoveScrollDown()
+    {
+        if (inputIndex < contentParent.childCount - 1 && !isMove)
+        {
+            inputIndex++;
+            MoveScrollView(1);
+        }
     }
 
 
@@ -154,7 +171,6 @@ public class OffsetChildObjects : MonoBehaviour
         float moveDistance = 188;
 
         float newY = contentRect.anchoredPosition.y + (direction * moveDistance);
-
         float minY = 0;
         float maxY = Mathf.Max(0, (contentParent.childCount - 1) * moveDistance);
         newY = Mathf.Clamp(newY, minY, maxY);

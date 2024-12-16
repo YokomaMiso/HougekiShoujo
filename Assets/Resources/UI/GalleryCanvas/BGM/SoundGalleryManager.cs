@@ -7,12 +7,14 @@ public class SoundGalleryManeger : MonoBehaviour
 {
     public GallerySoundData soundsData;
     public GameObject soundsPrefab;
+    public GameObject cursorObject;
 
     public Transform contentParent;
-    public Vector3 StartPosition = new Vector3(0, 0, 0);
+    public Vector3 StartPosition = new Vector3(37, 310, 0);
 
     private bool RightStickcanChange=true;
-    private int CurrentSoundsIndex = -1;
+    private int CurrentSoundsIndex = 0;
+    public void ResetIndex() => CurrentSoundsIndex = 0;
 
     int MaxSounds=0;
     
@@ -32,8 +34,12 @@ public class SoundGalleryManeger : MonoBehaviour
 
     public void GenerateVoiceButton()
     {
+        if (voiceButtons.Count == MaxSounds)
+        {
+            return;
+        }
 
-        float verticalSpacing = 150.0f;
+        float verticalSpacing = 75.0f;
         Vector3 startPos = StartPosition;
 
         for (int i = 0; i < MaxSounds; i++)
@@ -105,42 +111,40 @@ public class SoundGalleryManeger : MonoBehaviour
         }
     }
 
-    private void SoundsSelecter(int index)
+    public void SoundsSelecter(int index)
     {
 
-        Color selectedColor = Color.yellow;
-        Color defaultColor = Color.white;
-
-        for (int i = 0; i < voiceButtons.Count; i++)
+        if (index < 0 || index >= voiceButtons.Count)
         {
-            Image buttonImage = voiceButtons[i].GetComponentInChildren<Image>();
-            if (buttonImage != null)
-            {
-                if (i == index)
-                {
-                    buttonImage.color = selectedColor;
-                }
-                else
-                {
-                    buttonImage.color = defaultColor;
-                }
-            } 
+            Debug.Log("index" + CurrentSoundsIndex);
+            return;
         }
+
+        GameObject targetButton = voiceButtons[index];
+        RectTransform buttonRect = targetButton.GetComponent<RectTransform>();
+
+        if (buttonRect != null)
+        {
+            float buttonY = buttonRect.anchoredPosition.y;
+            RectTransform cursorObjectRect = cursorObject.GetComponent<RectTransform>();
+            if (cursorObjectRect != null)
+            {
+                Vector2 currentPos = cursorObjectRect.anchoredPosition;
+                cursorObjectRect.anchoredPosition = new Vector2(currentPos.x, buttonY);
+            }
+        }
+
     }
     private void LoadSoundsText(GameObject gameobject,int index)
     {
         if (gameobject != null)
         {
-            Transform soundTransform = gameobject.transform.Find("BackGround/Text");
-            if (soundTransform != null)
+            Text soundText = gameobject.GetComponent<Text>();
+            if (soundText != null)
             {
-                Text soundText = soundTransform.GetComponent<Text>();
-                if (soundText != null)
-                {
-                    string newText = $"{index + 1}. {soundsData.sounds[index].Name} / " +
-                        $"{soundsData.sounds[index].Author}  {soundsData.sounds[index].Time}";
-                    soundText.text = newText;
-                }
+                string newText = $"{index + 1}. {soundsData.sounds[index].Name} / " +
+                    $"{soundsData.sounds[index].Author}  {soundsData.sounds[index].Time}";
+                soundText.text = newText;
             }
         }
     }

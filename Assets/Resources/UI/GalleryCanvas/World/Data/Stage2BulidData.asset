@@ -14,29 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulidTextPair:
   - sprite: {fileID: 21300000, guid: 3aa7742f04b0c2e40a0bbe200b1bc632, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 0
   - sprite: {fileID: 352477320, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1
   - sprite: {fileID: -548206531, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1
   - sprite: {fileID: 828546768, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1
   - sprite: {fileID: 246169630, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1
   - sprite: {fileID: -1705449928, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1
   - sprite: {fileID: 1715301108, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1
   - sprite: {fileID: -637792132, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1
   - sprite: {fileID: 983888424, guid: 9cfd5df4b5285914da0322cf1403bb97, type: 3}
-    bulidingText: Default Text
+    name: Default Text
+    bulidingText: 
     hasText: 1

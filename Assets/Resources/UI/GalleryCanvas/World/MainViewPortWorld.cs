@@ -8,272 +8,238 @@ public class MainViewPortWorld : MonoBehaviour
 
     public AllWorldGalleryData allWorldGalleryData;
     public WorldIntroData worldIntroData;
+    private WorldScrollGenerate buildSpawner;
+    public WorldScrollGenerate GetViewPortWorld()=>buildSpawner;
+    private ScrollViewController scrollViewController;
 
-    public Vector3 BulidingPosition = new Vector3(-450, 0, 0);
+    public Vector3 BulidingEndPosition = new Vector3(-450, 0, 0);
+    public Vector3 BulidingStartPosition;
+
+    public Vector3 IntroEndPosition = new Vector3(1064, -840, 0);
+    public Vector3 IntroStartPosition;
     public Vector3 BulidingScale = new Vector3(1, 1, 1);
 
     public Vector3 WorldIntroPosition = new Vector3(0, 0, 0);
-
-
-    public Vector3 TextPosition = new Vector3(800, 0, 0);
-
     public Transform contentParent;
+
     public GameObject BulidingObjectPrefab;
     public GameObject WolrdIntroObjectPrefab;
 
     private GameObject CurrentBulidingObject;
     private GameObject CurrentIntroObject;
 
-    private bool LeftStickcanChange = true;
-    private int currentBulidingSprite = 0;
-    private int currentWorldIntro = 0;
+    
 
     private int MaxBuliding = 0;
+    private bool isMove = false;
+    public bool GetMoveState() => isMove;
+
+    private Vector3 currentPageLastPosition;
 
     void Start()
     {
-        foreach (WorldGalleryData worldData in allWorldGalleryData.worldGalleryDatas)
-        {
-            if (worldData != null && worldData.bulidTextPair != null)
-            {
-                MaxBuliding += worldData.bulidTextPair.Count;
-            }
-        }
     }
 
     void Update()
     {
-        WorldGalleryInput();
     }
 
-    void GenerateBulidingObject()
+    public void GenerateBulidingObject()
     {
         GameObject newBulidingObject = Instantiate(BulidingObjectPrefab, contentParent);
-        newBulidingObject.tag = "GalleryObject";
 
         RectTransform bulidTransform = newBulidingObject.GetComponent<RectTransform>();
-        if (bulidTransform != null)
+        if (CurrentBulidingObject == null)
         {
-            bulidTransform.localPosition = BulidingPosition;
+            BulidingStartPosition= bulidTransform.localPosition; 
             CurrentBulidingObject = newBulidingObject;
         }
+        buildSpawner = newBulidingObject.transform.Find("charScroll")?.GetComponent<WorldScrollGenerate>();
     }
 
-    void GenerateIntroObject()
+    public void GenerateIntroObject()
     {
         GameObject newWorldIntroObject = Instantiate(WolrdIntroObjectPrefab, contentParent);
-        newWorldIntroObject.tag = "GalleryObject";
 
         RectTransform bulidTransform = newWorldIntroObject.GetComponent<RectTransform>();
-        if (bulidTransform != null)
+        if (CurrentIntroObject == null)
         {
-            bulidTransform.localPosition = WorldIntroPosition;
+            IntroStartPosition=bulidTransform.localPosition; 
             CurrentIntroObject = newWorldIntroObject;
         }
     }
 
-    void WorldGalleryInput()
+
+    public IEnumerator MoveObject(Transform targetObject, Vector3 targetPosition, float duration,bool isExit,bool hasScroll)
     {
-        Vector2 Inout = InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis);
+        if (hasScroll) { CurrentBulidingObject.transform.Find("charScroll").gameObject.SetActive(false); }
+        
+        float elapsedTime = 0f;
+        Vector3 startingPosition = targetObject.localPosition;
 
-        if (InputManager.GetKeyDown(BoolActions.SouthButton))
+        while (elapsedTime < duration)
         {
-            if (GalleryManager.Instance.GetInputIndex() == 0 && GalleryManager.Instance.CurrentState == GalleryState.WorldSelect)
-            {
-                GalleryManager.Instance.SetState(GalleryState.WorldIllGallery);
-                GenerateBulidingObject();
-                SetBulidingSprite(currentBulidingSprite);
-            }
-            if (GalleryManager.Instance.GetInputIndex() == 1 && GalleryManager.Instance.CurrentState == GalleryState.WorldSelect)
-            {
-                GalleryManager.Instance.SetState(GalleryState.WorldTextGallery);
-                GenerateIntroObject();
-                SetWorldIntro(currentWorldIntro);
-            }
+            float t = elapsedTime / duration;
+            t = EaseInOutQuad(t);
+            targetObject.localPosition = Vector3.Lerp(startingPosition, targetPosition, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
-        if (InputManager.GetKeyDown(BoolActions.EastButton))
+        targetObject.localPosition = targetPosition;
+        if (isExit)
         {
-            if (GalleryManager.Instance.CurrentState == GalleryState.WorldIllGallery ||
-               GalleryManager.Instance.CurrentState == GalleryState.WorldTextGallery)
-            {
-                currentBulidingSprite = 0;
-                GalleryManager.Instance.SetState(GalleryState.WorldSelect);
-                ClearWorldGallery();
-            }
+            Destroy(CurrentBulidingObject);
+            CurrentBulidingObject = null;
+            Destroy(CurrentIntroObject);
+            CurrentIntroObject = null;
+        }
+        else
+        {
+            if (hasScroll) { CurrentBulidingObject.transform.Find("charScroll").gameObject.SetActive(true); }
+        }
+    }
+
+    public IEnumerator HandleBuildingExitSequentially()
+    {
+        isMove = true;
+        Transform pageTransform = transform.Find("page1-2");
+        if(pageTransform != null)
+        {
+            Vector3 newPagePosition = new Vector3(pageTransform.localPosition.x-1500.0f,pageTransform.localPosition.y,0.0f);
+            currentPageLastPosition = pageTransform.localPosition;
+            yield return StartCoroutine(MoveObject(pageTransform, newPagePosition, 0.5f, false, false));
+
+            
+            yield return StartCoroutine(MoveObject(CurrentBulidingObject.transform, BulidingEndPosition, 0.5f, false, true));
+        }
+        isMove = false;
+    }
+
+    public IEnumerator HandleBuildingResetSequentially()
+    {
+        isMove = true;
+        Transform pageTransform = transform.Find("page1-2");
+        if (pageTransform != null)
+        {
+            yield return StartCoroutine(MoveObject(CurrentBulidingObject.transform, BulidingStartPosition, 0.5f, true, true));
+
+
+            yield return StartCoroutine(MoveObject(pageTransform, currentPageLastPosition, 0.5f, false, false));
+        }
+        GalleryManager.Instance.SetState(GalleryState.WorldSelect);
+        isMove = false;
+    }
+
+    public IEnumerator HandleIntroExitSequentially()
+    {
+        isMove = true;
+        Transform pageTransform = transform.Find("page1-2");
+        if (pageTransform != null)
+        {
+            Vector3 newPagePosition = new Vector3(pageTransform.localPosition.x - 1500.0f, pageTransform.localPosition.y, 0.0f);
+            currentPageLastPosition = pageTransform.localPosition;
+            yield return StartCoroutine(MoveObject(pageTransform, newPagePosition, 0.5f, false, false));
+
+
+            yield return StartCoroutine(MoveObject(CurrentIntroObject.transform, IntroEndPosition, 0.5f, false, false));
+        }
+        isMove = false;
+    }
+
+    public IEnumerator HandleIntroResetSequentially()
+    {
+        isMove = true;
+        Transform pageTransform = transform.Find("page1-2");
+        if (pageTransform != null)
+        {
+            yield return StartCoroutine(MoveObject(CurrentIntroObject.transform, IntroStartPosition, 0.5f, true, false));
+
+
+            yield return StartCoroutine(MoveObject(pageTransform, currentPageLastPosition, 0.5f, false, false));
+        }
+        GalleryManager.Instance.SetState(GalleryState.WorldSelect);
+        isMove = false;
+    }
+
+    private float EaseInOutQuad(float t)
+    {
+        if (t < 0.5f)
+            return 2 * t * t;
+        return 1 - Mathf.Pow(-2 * t + 2, 2) / 2;
+    }
+
+    private float EaseInQuad(float t) => t * t;
+
+    private float EaseOutQuad(float t) => 1 - (1 - t) * (1 - t);
+
+    public void LoadSpriteAndText(int stageIndex,int buildIndex)
+    {
+        Text nameText = CurrentBulidingObject.transform.Find("Name")?.GetComponent<Text>();
+        if(nameText != null)
+        {
+            nameText.text = allWorldGalleryData.worldGalleryDatas[stageIndex].bulidTextPair[buildIndex].name;
         }
 
-        if (GalleryManager.Instance.CurrentState == GalleryState.WorldIllGallery)
+        Text introText = CurrentBulidingObject.transform.Find("Intro")?.GetComponent<Text>();
+        if (introText != null)
         {
-            if (Inout.x > 0.5f && LeftStickcanChange)
-            {
-                currentBulidingSprite++;
-                if (currentBulidingSprite >= MaxBuliding) { currentBulidingSprite = 0; }
-                SetBulidingSprite(currentBulidingSprite);
-                LeftStickcanChange = false;
-            }
-            else if (Inout.x < -0.5f && LeftStickcanChange)
-            {
-                currentBulidingSprite--;
-                if (currentBulidingSprite < 0) { currentBulidingSprite = MaxBuliding - 1; }
-                SetBulidingSprite(currentBulidingSprite);
-                LeftStickcanChange = false;
-            }
-            else if (Inout.x > -0.5f && Inout.x < 0.5f)
-            {
-                LeftStickcanChange = true;
-            }
+            introText.text = allWorldGalleryData.worldGalleryDatas[stageIndex].bulidTextPair[buildIndex].bulidingText;
         }
 
-        if (GalleryManager.Instance.CurrentState == GalleryState.WorldTextGallery)
+        Image buildSprite = CurrentBulidingObject.transform.Find("Photo/Mask/Sprite")?.GetComponent<Image>();
+        if (buildSprite != null)
         {
-            if (Inout.x > 0.5f && LeftStickcanChange)
+            Sprite newSprite = allWorldGalleryData.worldGalleryDatas[stageIndex].bulidTextPair[buildIndex].sprite;
+            buildSprite.sprite = newSprite;
+            RectTransform maskTransform = CurrentBulidingObject.transform.Find("Photo/Mask")?.GetComponent<RectTransform>();
+            if (maskTransform != null && newSprite != null)
             {
-                currentWorldIntro++;
-                if (currentWorldIntro >= worldIntroData.worldIntro.Count) { currentWorldIntro = 0; }
-                SetWorldIntro(currentWorldIntro);
-                Scrollbar scrollbar = CurrentIntroObject.GetComponentInChildren<Scrollbar>();
-                if (scrollbar != null)
+                Vector2 maskSize = maskTransform.rect.size;
+                float spriteWidth = newSprite.rect.width;
+                float spriteHeight = newSprite.rect.height;
+
+                float maskAspect = maskSize.x / maskSize.y;
+                float spriteAspect = spriteWidth / spriteHeight;
+
+                Vector2 newSize;
+                if (spriteAspect > maskAspect)
                 {
-                    scrollbar.value = 1.0f;
+                    newSize = new Vector2(maskSize.x, maskSize.x / spriteAspect);
                 }
-                LeftStickcanChange = false;
-            }
-            else if (Inout.x < -0.5f && LeftStickcanChange)
-            {
-                currentWorldIntro--;
-                if (currentWorldIntro < 0) { currentWorldIntro = worldIntroData.worldIntro.Count; }
-                SetWorldIntro(currentWorldIntro);
-                Scrollbar scrollbar = CurrentIntroObject.GetComponentInChildren<Scrollbar>();
-                if (scrollbar != null)
+                else
                 {
-                    scrollbar.value = 1.0f;
+                    newSize = new Vector2(maskSize.y * spriteAspect, maskSize.y);
                 }
-                LeftStickcanChange = false;
-            }
-            else if (Inout.x > -0.5f && Inout.x < 0.5f)
-            {
-                LeftStickcanChange = true;
-            }
-            if (Inout.y > 0.5f)
-            {
-                Scrollbar scrollbar = CurrentIntroObject.GetComponentInChildren<Scrollbar>();
-                if (scrollbar != null)
+
+                RectTransform spriteTransform = buildSprite.GetComponent<RectTransform>();
+                if (spriteTransform != null)
                 {
-                    scrollbar.value = Mathf.Clamp(scrollbar.value - 0.01f, 0f, 1f);
-                }
-            }
-            if (Inout.y < -0.5f)
-            {
-                Scrollbar scrollbar = CurrentIntroObject.GetComponentInChildren<Scrollbar>();
-                if (scrollbar != null)
-                {
-                    scrollbar.value = Mathf.Clamp(scrollbar.value + 0.01f, 0f, 1f);
+                    spriteTransform.sizeDelta = newSize;
+                    spriteTransform.sizeDelta *= 0.75f;
                 }
             }
         }
     }
-
-    Sprite GetSpriteByIndex(int index)
+    public void LoadIntroText(int index)
     {
-        int currentIndex = 0;
-        foreach (WorldGalleryData worldData in allWorldGalleryData.worldGalleryDatas)
+        Text nameText = CurrentIntroObject.transform.Find("ScrollView/NameText")?.GetComponent<Text>();
+        if (nameText != null)
         {
-            if (index < currentIndex + worldData.bulidTextPair.Count)
-            {
-                return worldData.bulidTextPair[index - currentIndex].sprite;
-            }
-            currentIndex += worldData.bulidTextPair.Count;
+            nameText.text = worldIntroData.worldIntro[index].Name;
         }
-        return null;
-    }
 
-    string GetTextByIndex(int index)
-    {
-        int currentIndex = 0;
-        foreach (WorldGalleryData worldData in allWorldGalleryData.worldGalleryDatas)
+        Text introText = CurrentIntroObject.transform.Find("ScrollView/Viewport/Content/Text")?.GetComponent<Text>();
+        if (introText != null)
         {
-            if (index < currentIndex + worldData.bulidTextPair.Count)
-            {
-                return worldData.bulidTextPair[index - currentIndex].bulidingText;
-            }
-            currentIndex += worldData.bulidTextPair.Count;
-        }
-        return null;
-    }
+            introText.text = worldIntroData.worldIntro[index].WorldIntroText;
+            float preferredHeight = introText.preferredHeight;
 
-    void SetBulidingSprite(int index)
-    {
-        if (CurrentBulidingObject != null)
-        {
-            Image bulidingImage = CurrentBulidingObject.GetComponent<Image>();
-            if (bulidingImage != null)
-            {
-                Sprite newSprite = GetSpriteByIndex(index);
-                bulidingImage.sprite = newSprite;
-                if (newSprite != null)
-                {
-                    RectTransform rectTransform = CurrentBulidingObject.GetComponent<RectTransform>();
-                    if (rectTransform != null)
-                    {
-                        rectTransform.sizeDelta = new Vector2(newSprite.rect.width, newSprite.rect.height);
-                    }
-                }
-            }
+            RectTransform rectTransform = introText.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, preferredHeight);
 
-            Transform textTransform = CurrentBulidingObject.transform.Find("Text");
-            if (textTransform != null)
-            {
-                Text bulidingText = textTransform.GetComponent<Text>();
-                if (bulidingText != null)
-                {
-                    string newText = GetTextByIndex(index);
-                    bulidingText.text = newText;
-                    if (!string.IsNullOrEmpty(newText))
-                    {
-                        textTransform.localPosition = TextPosition;
-                    }
-                }
-            }
-        }
-    }
-
-    void SetWorldIntro(int index)
-    {
-        if (CurrentIntroObject != null)
-        {
-            Transform textTransform = CurrentIntroObject.transform.Find("Viewport/Content/Text");
-            if (textTransform != null)
-            {
-                Text worldIntroText = textTransform.GetComponent<Text>();
-                if (worldIntroText != null)
-                {
-                    string newText = worldIntroData.worldIntro[index].WorldIntroText;
-                    worldIntroText.text = newText;
-                }
-            }
-
-            Transform nameTransform = CurrentIntroObject.transform.Find("NameText");
-            if (nameTransform != null)
-            {
-                Text nameText = nameTransform.GetComponent<Text>();
-                if (nameText != null)
-                {
-                    string newText = worldIntroData.worldIntro[index].Name;
-                    nameText.text = newText;
-                }
-            }
-        }
-    }
-
-    void ClearWorldGallery()
-    {
-        foreach (Transform child in contentParent)
-        {
-            if (child.CompareTag("GalleryObject"))
-            {
-                Destroy(child.gameObject);
-            }
+            scrollViewController= CurrentIntroObject.transform.Find("ScrollView/Viewport/Content/Text")?.GetComponent<ScrollViewController>();
+            scrollViewController.SetRect(rectTransform);
         }
     }
 }

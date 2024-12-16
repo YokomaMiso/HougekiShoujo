@@ -15,3 +15,4 @@ MonoBehaviour:
   worldGalleryDatas:
   - {fileID: 11400000, guid: 1c4a177e25fb8454e9c01da18bbe2e64, type: 2}
   - {fileID: 11400000, guid: 0e46fbf6552ad6545a632bcf5eb3099f, type: 2}
+  buildMat: {fileID: 2100000, guid: 29929fd96ed32ee4d8226cd9101f8a5b, type: 2}

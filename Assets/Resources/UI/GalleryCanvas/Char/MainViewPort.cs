@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
@@ -18,9 +18,19 @@ public class MainViewPort : MonoBehaviour
     private int maxPage = 3;
 
     private int voicePage;
+    public void SetVoicePage(int voiceIndex){voicePage = voiceIndex;}
+
     private CharacterData currentCharData;
 
     public float typingSpeed = 0.05f;
+
+    private int minVoiceIndex=0;
+    private int maxVoiceIndex=11;
+    public void ResetVoiceIndex()
+    {
+        minVoiceIndex=0;
+        maxVoiceIndex = 11;
+    }
 
     private AudioSource currentVoiceObject;
 
@@ -62,6 +72,11 @@ public class MainViewPort : MonoBehaviour
                 currentPage=GetPageFromPool(layoutPrefabs[0]);
                 pageTypeCount = 0;
                 UpdatePageContent(currentPage,characterData,pageTypeCount);
+                if (GalleryManager.Instance.CurrentState == GalleryState.CharacterGallery)
+                {
+                    currentPage.transform.localPosition= new Vector3(297, -351, 0.0f);
+                    return;
+                }
                 StartCoroutine(MovePage(currentPage.transform, new Vector3(297, -351, 0.0f), 0.5f));
                 return;
             case 2:
@@ -202,7 +217,7 @@ public class MainViewPort : MonoBehaviour
                 subWeaponIcon.texture = characterData.weapon[1].weaponIcon.texture;
             }
 
-            RawImage charEmote = page.transform.Find("Setting/Emote")?.GetComponent<RawImage>();
+            RawImage charEmote = page.transform.Find("Emote")?.GetComponent<RawImage>();
             if (charEmote != null)
             {
                 charEmote.texture = characterData.charData.emoteIllustration.texture;
@@ -224,7 +239,7 @@ public class MainViewPort : MonoBehaviour
         int maxVoiceNum = characterData.CharVoice.Count;
 
 
-        Transform voice = page.transform.Find("ScrollView/Viewport/Content/Voice");
+        Transform voice = page.transform.Find("ScrollView/Viewport/Content/Voice_0");
 
         Transform voiceParent = page.transform.Find("ScrollView/Viewport/Content");
         if (voice == null)
@@ -233,20 +248,13 @@ public class MainViewPort : MonoBehaviour
             return;
         }
 
-        Image voiceImage = voice.GetComponent<Image>();
-        if (voiceImage == null)
-        {
-            Debug.LogError("Voice object does not have an Image component!");
-            return;
-        }
-
         Text voiceText = voice.GetComponentInChildren<Text>();
         if (voiceText != null)
         {
-            voiceText.text = characterData.CharVoice[0].GetVoiceText();
+            voiceText.text = $"{characterData.charData.characterName}            {characterData.CharVoice[0].GetVoiceText()}";
         }
 
-        float spacing = 140.0f;
+        float spacing = 56.0f;
         for (int i = 1; i < maxVoiceNum; i++)
         {
             Transform existingVoice = page.transform.Find($"Voice_{i}");
@@ -270,17 +278,14 @@ public class MainViewPort : MonoBehaviour
                 Text newVoiceText = newVoice.GetComponentInChildren<Text>();
                 if (newVoiceText != null)
                 {
-                    newVoiceText.text = characterData.CharVoice[i].GetVoiceText();
+                    newVoiceText.text = $"{characterData.charData.characterName}            {characterData.CharVoice[i].GetVoiceText()}";
                 }
                 newVoice.name = $"Voice_{i}";
             }
         }
     }
 
-    public void SetVoicePage(int voiceIndex)
-    {
-        voicePage = voiceIndex;
-    }
+
 
 
     bool IsSecondPage(GameObject page)
@@ -396,7 +401,9 @@ public class MainViewPort : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            targetObject.localPosition = Vector3.Lerp(startingPosition, targetPosition, elapsedTime / duration);
+            float t = elapsedTime / duration;
+            t = EaseInOutQuad(t);
+            targetObject.localPosition = Vector3.Lerp(startingPosition, targetPosition, t);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -404,7 +411,18 @@ public class MainViewPort : MonoBehaviour
         targetObject.localPosition = targetPosition;
         isPageMove = false;
     }
-    
+
+    private float EaseInOutQuad(float t)
+    {
+        if (t < 0.5f)
+            return 2 * t * t;
+        return 1 - Mathf.Pow(-2 * t + 2, 2) / 2;
+    }
+
+    private float EaseInQuad(float t) => t * t;
+
+    private float EaseOutQuad(float t) => 1 - (1 - t) * (1 - t);
+
     public void PageReturn()
     {
         StartCoroutine(PageReturnCoroutine());
@@ -417,4 +435,54 @@ public class MainViewPort : MonoBehaviour
         SetActive(false);
         DeletCharIll();
     }
+
+    public void SetCusorPosition(int index, int maxNum)
+    {
+        if (!IsSecondPage(currentPage))
+        {
+            return;
+        }
+
+        Transform contentTransform = currentPage.transform.Find("ScrollView/Viewport/Content");
+        Transform cursorTransform = currentPage.transform.Find("ScrollView/Viewport/Content/voicePlayer");
+        ScrollRect scrollRect = currentPage.transform.Find("ScrollView").GetComponent<ScrollRect>();
+
+        RectTransform contentRect = contentTransform.GetComponent<RectTransform>();
+        RectTransform viewportRect = currentPage.transform.Find("ScrollView/Viewport").GetComponent<RectTransform>();
+
+        float itemHeight = 56.0f;
+
+        if (index < minVoiceIndex)
+        {
+            minVoiceIndex--;
+            maxVoiceIndex--;
+
+            contentRect.localPosition -= new Vector3(0, itemHeight, 0);
+        }
+        else if (index > maxVoiceIndex)
+        {
+            minVoiceIndex++;
+            maxVoiceIndex++;
+
+            contentRect.localPosition += new Vector3(0, itemHeight, 0);
+        }
+
+        Transform newTargetVoice = contentTransform.Find($"Voice_{index}");
+        if (newTargetVoice == null)
+        {
+            Debug.LogError($"Voice_{index} not found");
+            return;
+        }
+
+        cursorTransform.localPosition = new Vector3(cursorTransform.localPosition.x, newTargetVoice.localPosition.y, cursorTransform.localPosition.z);
+
+        minVoiceIndex = Mathf.Clamp(minVoiceIndex, 0, maxNum - 1);
+        maxVoiceIndex = Mathf.Clamp(maxVoiceIndex, 0, maxNum - 1);
+    }
+
+
+
+
+
+
 }
