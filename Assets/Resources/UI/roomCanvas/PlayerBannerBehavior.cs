@@ -14,6 +14,10 @@ public class PlayerBannerBehavior : MonoBehaviour
 
     public int num = -1;
 
+    int prevChara = 0;
+    int prevTeamNum = 0;
+    bool prevReady = false;
+
     public void SetNum(int _num)
     {
         num = _num;
@@ -42,41 +46,53 @@ public class PlayerBannerBehavior : MonoBehaviour
         transform.GetChild(3).GetComponent<Text>().text = _roomData.playerName;
         transform.GetChild(4).gameObject.SetActive(_roomData.ready);
 
-        if (!buttonImage) { return; }
-
-        if (num == 0)
+        if (buttonImage)
         {
-            int readyCount = 0;
-            for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
+            if (num == 0)
             {
-                RoomData otherData = OSCManager.OSCinstance.GetRoomData(i);
-                if (otherData.ready) { readyCount++; }
-            }
+                int readyCount = 0;
+                for (int i = 1; i < MachingRoomData.playerMaxCount; i++)
+                {
+                    RoomData otherData = OSCManager.OSCinstance.GetRoomData(i);
+                    if (otherData.ready) { readyCount++; }
+                }
 
-            if (readyCount >= _roomData.playerCount - 1)
-            {
+                if (readyCount >= _roomData.playerCount - 1)
+                {
 #if UNITY_EDITOR
-                buttonImage.color = Color.white;
+                    buttonImage.color = Color.white;
 #else
-                if (_roomData.teamACount == _roomData.teamBCount) { buttonImage.color = Color.white; }
-                else { buttonImage.color = Color.clear; }
+                    if (_roomData.teamACount == _roomData.teamBCount) { buttonImage.color = Color.white; }
+                    else { buttonImage.color = Color.clear; }
 #endif
+                }
+                else
+                {
+                    buttonImage.color = Color.clear;
+                }
             }
             else
             {
-                buttonImage.color = Color.clear;
+                if (_roomData.ready) { buttonImage.sprite = buttonSpriteCancel; }
+                else { buttonImage.sprite = buttonSpriteReady; }
             }
         }
-        else
+
+        if (prevReady != _roomData.ready)
         {
-            if (_roomData.ready)
-            {
-                buttonImage.sprite = buttonSpriteCancel;
-            }
-            else
-            {
-                buttonImage.sprite = buttonSpriteReady;
-            }
+            if (_roomData.ready) { Managers.instance.PlaySFXForUI(4); }
+            else { Managers.instance.PlaySFXForUI(1); }
+            prevReady = _roomData.ready;
+        }
+        else if (prevTeamNum != _roomData.myTeamNum)
+        {
+            Managers.instance.PlaySFXForUI(2);
+            prevTeamNum = _roomData.myTeamNum;
+        }
+        else if (prevChara != _roomData.selectedCharacterID)
+        {
+            Managers.instance.PlaySFXForUI(2);
+            prevChara = _roomData.selectedCharacterID;
         }
     }
 }
