@@ -24,6 +24,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2ad91c422405a514baa75b1fd98fc3a9, type: 3}
   - {fileID: 8300000, guid: 85a1ddd4e527b9541a079e5d4899c2da, type: 3}
   - {fileID: 8300000, guid: 6eff6b3b7d163034ca9d95958528df55, type: 3}
+  - {fileID: 8300000, guid: 4b819ec3d26082245876307be5b54509, type: 3}
   useMain:
   - {fileID: 8300000, guid: d73b1aa0544bb2f44b3161ff2e2f87d4, type: 3}
   - {fileID: 8300000, guid: 2c0a5644859812a4bbf83c3fa917aca9, type: 3}
@@ -43,7 +44,6 @@ MonoBehaviour:
   damageTrap:
   - {fileID: 8300000, guid: 3345a178054fe1449a705a2f8d345309, type: 3}
   - {fileID: 8300000, guid: 029b16604cc9c284e9d93c85cbd60265, type: 3}
-  - {fileID: 8300000, guid: a5e275a311b885145ad12c94cdbf79f6, type: 3}
   thanks:
   - {fileID: 8300000, guid: d013e2e18c839ab4a8310a2e25f73ae3, type: 3}
   roundWin:
