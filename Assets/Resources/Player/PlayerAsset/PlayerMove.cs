@@ -45,6 +45,11 @@ public class PlayerMove : MonoBehaviour
         Vector3 movement = Vector3.zero;
         movement += Vector3.right * InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis).x;
         movement += Vector3.forward * InputManager.GetAxis<Vector2>(Vec2AxisActions.LStickAxis).y;
+        if (movement == Vector3.zero)
+        {
+            movement += Vector3.right * ownerPlayer.GetInputVectorFromUI().x;
+            movement += Vector3.forward * ownerPlayer.GetInputVectorFromUI().y;
+        }
         movement = movement.normalized;
 
         float currentSpeed = speed * NowSpeedRate() * Managers.instance.timeManager.TimeRate();
