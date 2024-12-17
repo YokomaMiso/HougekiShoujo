@@ -160,6 +160,10 @@ public class Player : MonoBehaviour
     }
     public void ResetVoiceSoundID() { voiceSoundID = 0; }
 
+    Vector3 inputVectorFromUI;
+    public void SetInputVectorFromUI(Vector3 _input) { inputVectorFromUI = _input; }
+    public Vector3 GetInputVectorFromUI() { return inputVectorFromUI; }
+
     void Start()
     {
         playerMove = gameObject.GetComponent<PlayerMove>();
