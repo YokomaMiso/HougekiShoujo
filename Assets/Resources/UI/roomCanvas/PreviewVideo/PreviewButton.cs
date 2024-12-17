@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Composites;
 using UnityEngine.UI;
 
 public class PreviewButton : MonoBehaviour
@@ -19,6 +16,7 @@ public class PreviewButton : MonoBehaviour
         text = transform.GetChild(1).GetComponent<Text>();
 
         buttonImage.sprite = InputManager.nowButtonSpriteData.GetTrigger();
+        if (Managers.instance.GetSmartPhoneFlag()) { buttonImage.color = Color.clear; }
     }
 
     void Update()
@@ -32,8 +30,8 @@ public class PreviewButton : MonoBehaviour
             else { color = Color.white; }
 
             image.color = color;
-            buttonImage.color = color;
             text.color = color;
+            if (!Managers.instance.GetSmartPhoneFlag()) { buttonImage.color = color; }
             prevReady = myRoomData.ready;
         }
 

@@ -719,8 +719,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 560, y: 376}
-  m_SizeDelta: {x: 160, y: 80}
+  m_AnchoredPosition: {x: 432, y: 376}
+  m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5664979898934878714
 CanvasRenderer:
@@ -757,7 +757,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 56
-    m_Alignment: 3
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -8392,7 +8392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6776230166548540822
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8479,6 +8479,7 @@ MonoBehaviour:
   - {fileID: 32900000, guid: a48867a0215b2e149a98e4f2d6124d97, type: 3}
   - {fileID: 32900000, guid: c8d96759654ab4b418a845d55cc3548d, type: 3}
   button: {fileID: 8701540403792511039}
+  annouce: {fileID: 8243093522942509127}
 --- !u!1001 &3126832055123048148
 PrefabInstance:
   m_ObjectHideFlags: 0
