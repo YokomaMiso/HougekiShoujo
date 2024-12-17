@@ -18,7 +18,7 @@ public class TitleCanvasBehavior : MonoBehaviour
     public TITLE_STATE GetTitleState() { return state; }
 
     float titleCallTimer;
-    const float titleCallTime = 1.0f;
+    const float titleCallTime = 0.7f;
     bool titleCalled;
 
     void Start()
@@ -41,7 +41,10 @@ public class TitleCanvasBehavior : MonoBehaviour
         titleCallTimer += Time.deltaTime;
         if (titleCallTimer > titleCallTime)
         {
-            int characterID = Random.Range(0, Managers.instance.gameManager.playerDatas.Length - 1);
+            int characterID;
+            if (Managers.instance.unlockFlag[(int)UNLOCK_ITEM.TSUBASA]) { characterID = Random.Range(0, Managers.instance.gameManager.playerDatas.Length); }
+            else {characterID = Random.Range(0, Managers.instance.gameManager.playerDatas.Length - 1); }
+
             SoundManager.PlayVoiceForUI(Managers.instance.gameManager.playerDatas[characterID].GetPlayerVoiceData().GetTitleCall(), Managers.instance.transform);
             titleCalled = true;
         }
