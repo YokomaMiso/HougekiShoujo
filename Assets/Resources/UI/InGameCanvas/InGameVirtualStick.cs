@@ -21,7 +21,7 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
         ownPlayer = Managers.instance.gameManager.GetPlayer(Managers.instance.playerID);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         ownPlayer.SetInputVectorFromUI(inputVector);
         inputVector = Vector3.zero;
