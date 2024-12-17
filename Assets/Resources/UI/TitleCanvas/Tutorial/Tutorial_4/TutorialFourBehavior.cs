@@ -10,7 +10,17 @@ public class TutorialFourBehavior : TutorialBehavior
         Sprite[] applySprites = InputManager.nowButtonSpriteData.GetAllSprites();
 
         Color color;
-        if (InputManager.currentController == ControllerType.Keyboard)
+        if (Managers.instance.GetSmartPhoneFlag())
+        {
+            color = Color.clear;
+            transform.GetChild(0).GetComponent<Image>().color = color;
+            transform.GetChild(1).GetComponent<Image>().color = color;
+            transform.GetChild(2).GetComponent<Image>().color = color;
+            transform.GetChild(3).GetComponent<Image>().color = color;
+            transform.GetChild(4).GetComponent<Image>().color = color;
+            transform.GetChild(5).GetComponent<Image>().color = color;
+        }
+        else if (InputManager.currentController == ControllerType.Keyboard)
         {
             color = Color.clear;
             transform.GetChild(0).GetComponent<Image>().color = color;

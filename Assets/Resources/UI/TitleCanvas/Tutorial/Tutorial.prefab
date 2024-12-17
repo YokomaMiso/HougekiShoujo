@@ -885,6 +885,9 @@ MonoBehaviour:
   - {fileID: 6829981440347563590, guid: e0a7917f6b95a1e40bbc12036e282b9e, type: 3}
   - {fileID: 6829981440347563590, guid: 8266e098043182b4b87473463a54b4f5, type: 3}
   - {fileID: 6829981440347563590, guid: 5a0faed777d656e47885986ea640f8b1, type: 3}
+  shell: {fileID: 21300000, guid: 969d75255d044d642bc49727552b3489, type: 3}
+  shellCancel: {fileID: 21300000, guid: cb483df2f0e8edc4ca8fb8f20ae1ced5, type: 3}
+  stick: {fileID: 21300000, guid: 033eb6413bc25c84d9f6d713af7362b1, type: 3}
 --- !u!114 &5789901673087561906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2166,6 +2169,8 @@ MonoBehaviour:
   - {fileID: 2329341268245269216, guid: 31e012ffb3a145743b47056eb58b4515, type: 3}
   - {fileID: 2329341268245269216, guid: c25944149738f68448e71bd8d94bc731, type: 3}
   - {fileID: 2329341268245269216, guid: 022c60b0271546f40ac1223d3410277b, type: 3}
+  sub: {fileID: 21300000, guid: b347624ca608da247a5141aa49d2e801, type: 3}
+  stick: {fileID: 21300000, guid: 033eb6413bc25c84d9f6d713af7362b1, type: 3}
 --- !u!1 &9111438028755299695
 GameObject:
   m_ObjectHideFlags: 0
