@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 1, g: 1, b: 1, a: 0}
-  m_EffectDistance: {x: 3.6, y: 3.6}
+  m_EffectDistance: {x: 2.5, y: 2.5}
   m_UseGraphicAlpha: 1
 --- !u!1 &168946869582630132
 GameObject:
@@ -8392,7 +8392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6776230166548540822
 RectTransform:
   m_ObjectHideFlags: 0

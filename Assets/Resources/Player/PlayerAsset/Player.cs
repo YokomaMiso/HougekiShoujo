@@ -149,6 +149,7 @@ public class Player : MonoBehaviour
     public void PlayVoice(AudioClip _clip, Transform _transform = null, int _num = 0)
     {
         if (_num < voiceSoundID) { return; }
+
         if (voiceSoundObject != null) { Destroy(voiceSoundObject); }
         voiceSoundID = _num;
 
