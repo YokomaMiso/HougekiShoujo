@@ -7,10 +7,14 @@ public class KeyAnnounceInTutorial : MonoBehaviour
 {
     [SerializeField] TutorialWindow tw;
     readonly string[] announceText = new string[2] { "Next", "OK" };
+    readonly string[] announceTextForSmartPhone = new string[2] { "Press to Next", "Press to OK" };
 
     void Start()
     {
-        //if (Managers.instance.GetSmartPhoneFlag()) { Destroy(transform.parent.gameObject); }
+        if (Managers.instance.GetSmartPhoneFlag())
+        {
+            transform.GetChild(0).GetComponent<Image>().color = Color.clear;
+        }
     }
 
     void OnEnable()
@@ -31,9 +35,13 @@ public class KeyAnnounceInTutorial : MonoBehaviour
     }
     void ChangeText()
     {
+        int applyNum = 0;
+        if (tw.TutorialEnd()) { applyNum = 1; }
+
         string text;
-        if (tw.TutorialEnd()) { text = announceText[1]; }
-        else { text = announceText[0]; }
+        if (Managers.instance.GetSmartPhoneFlag()) { text = announceTextForSmartPhone[applyNum]; }
+        else { text = announceText[applyNum]; }
+
         transform.GetChild(1).GetComponent<Text>().text = text;
     }
 }

@@ -11,11 +11,18 @@ public class PreviewVideo : MonoBehaviour
     [SerializeField] VideoPlayer videoPlayer;
     [SerializeField] VideoClip[] clips;
     [SerializeField] Image button;
+    [SerializeField] Text annouce;
 
     RawImage videoImage;
     Color nowColor;
     float timer;
     const float brightTime = 0.5f;
+
+    readonly string[] announceTexts = new string[2]
+    {
+        "Close",
+        "Press to Close",
+    };
 
     void OnEnable()
     {
@@ -26,6 +33,11 @@ public class PreviewVideo : MonoBehaviour
         videoPlayer.loopPointReached += LoopPointReached;
         videoPlayer.Play();
         button.sprite = InputManager.nowButtonSpriteData.GetCancel();
+        if (Managers.instance.GetSmartPhoneFlag()) 
+        {
+            button.color = Color.clear;
+            annouce.text = announceTexts[1];
+        }
 
         nowColor = Color.black;
         videoImage = videoPlayer.GetComponent<RawImage>();
@@ -36,7 +48,7 @@ public class PreviewVideo : MonoBehaviour
 
     void Update()
     {
-        if (InputManager.GetKeyDown(BoolActions.EastButton)) { CloseBehavior();  }
+        if (InputManager.GetKeyDown(BoolActions.EastButton)) { CloseBehavior(); }
         if (InputManager.isChangedController) { button.sprite = InputManager.nowButtonSpriteData.GetCancel(); }
 
         if (timer >= brightTime) { return; }

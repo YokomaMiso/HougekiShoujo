@@ -32,6 +32,11 @@ public class DisplayShellIcon : MonoBehaviour
 
         shellButton = shellIcon.transform.GetChild(0).GetComponent<Image>();
         subButton = subIcon.transform.GetChild(2).GetComponent<Image>();
+        if (Managers.instance.GetSmartPhoneFlag())
+        {
+            shellButton.color = Color.clear;
+            subButton.color = Color.clear;
+        }
 
         shellIconSprite = ownerPlayer.GetPlayerData().GetShell().GetShellIcon();
         shellIcon.sprite = shellIconSprite;
