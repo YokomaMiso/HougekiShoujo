@@ -13,26 +13,16 @@ MonoBehaviour:
   m_Name: AD_TsubasaAnimData
   m_EditorClassIdentifier: 
   characterIcon: {fileID: 21300000, guid: 0e6bef598d6891248b15b1e3f7c56757, type: 3}
-  idleFirstSprite: {fileID: -961174824, guid: e1da27869baa27b46b1b16de8d415b58, type: 3}
+  idleFirstSprite: {fileID: 116761717, guid: 841c9a8bc2be0394e95c8bbd02e80b4d, type: 3}
   charaIllust: {fileID: 21300000, guid: f29aaffd98276cf43a0bb97606e261a1, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: 2878bf234f7b7db4aa8b450bcb7ac81d,
     type: 2}
-  runForUIAnimationData: {fileID: 9100000, guid: 024db5a30e3b5e3429772f0a7beae772,
+  runForUIAnimationData: {fileID: 9100000, guid: e9409eda386ea5a4e93f06f1dacc3eac,
     type: 2}
   idleAnimationData: {fileID: 9100000, guid: edfd3a6b1c9beba4bbe77202e04ec0a7, type: 2}
   runAnimationData:
-  - {fileID: 9100000, guid: b90f70cf8dfe1184db583fda985ecfee, type: 2}
+  - {fileID: 9100000, guid: 8a86f7e6b95444142ab06d634f99e448, type: 2}
   reloadAnimationData: {fileID: 9100000, guid: 2bcc1238f695b6549ad4ae5a87ae3b5b, type: 2}
-  aimAnimationData:
-  - {fileID: 9100000, guid: 2a35fdbfbe7d92149b894e0917a8b5c2, type: 2}
-  - {fileID: 9100000, guid: 059a037f4993f6b4fac74c51a1512fc1, type: 2}
-  - {fileID: 9100000, guid: a2560cbd49d4a154ca6be1e6823ed240, type: 2}
-  - {fileID: 9100000, guid: 83d7e237575514e408c014480e7bbf26, type: 2}
-  - {fileID: 9100000, guid: ded9fb6e10f219f4899f34f1a34f5eb6, type: 2}
-  recoilAnimationData:
-  - {fileID: 9100000, guid: 623ec09593121a040980fa04cc8311e2, type: 2}
-  - {fileID: 9100000, guid: 623ec09593121a040980fa04cc8311e2, type: 2}
-  - {fileID: 9100000, guid: 623ec09593121a040980fa04cc8311e2, type: 2}
-  - {fileID: 9100000, guid: 623ec09593121a040980fa04cc8311e2, type: 2}
-  - {fileID: 9100000, guid: 623ec09593121a040980fa04cc8311e2, type: 2}
-  deadAnimationData: {fileID: 9100000, guid: 53604a5c401fc7d408d1ad154d688256, type: 2}
+  aimAnimationData: []
+  recoilAnimationData: []
+  deadAnimationData: {fileID: 9100000, guid: edfd3a6b1c9beba4bbe77202e04ec0a7, type: 2}
