@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b918fea7caec176489bcd3fc6fcd745a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emotionText: {fileID: 7151152217573894577}
 --- !u!1 &7151152217573894577
 GameObject:
   m_ObjectHideFlags: 0

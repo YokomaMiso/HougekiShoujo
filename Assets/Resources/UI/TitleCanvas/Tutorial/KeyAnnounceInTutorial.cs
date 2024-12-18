@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class KeyAnnounceInTutorial : MonoBehaviour
 {
     [SerializeField] TutorialWindow tw;
-    readonly string[] announceText = new string[2] { "Next", "OK" };
+    readonly string[] announceText = new string[2] { "Next ", "OK   " };
     readonly string[] announceTextForSmartPhone = new string[2] { "Press to Next", "Press to OK" };
 
     void Start()

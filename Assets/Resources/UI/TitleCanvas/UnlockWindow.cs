@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +11,15 @@ public class UnlockWindow : MonoBehaviour
     const float lifeTime = 3.0f;
 
     Text unlockText;
-    readonly string[] textString = new string[(int)UNLOCK_ITEM.MAX_NUM]
+
+    readonly string[][] textString = new string[(int)LANGUAGE_NUM.MAX_NUM][]
     {
-        "uƒn[ƒhƒRƒAƒ‚[ƒhv‚ğ‹N“®",
-        "u‹ß‰q—ƒv‚ğ‰ğ•ú‚µ‚Ü‚µ‚½",
-        //"u‚Ø‚Á‚Ø‚ëŠÛv‚ğ‰ğ•ú‚µ‚Ü‚µ‚½",
+       new string[(int)UNLOCK_ITEM.MAX_NUM]{ "ã€Œãƒãƒ¼ãƒ‰ã‚³ã‚¢ãƒ¢ãƒ¼ãƒ‰ã€ã‚’èµ·å‹•", "ã€Œè¿‘è¡›ç¿¼ã€ã‚’è§£æ”¾ã—ã¾ã—ãŸ" },
+       new string[(int)UNLOCK_ITEM.MAX_NUM]{ "Hardcore Mode ON.", "Tsubasa Konoe unlocked." },
+       new string[(int)UNLOCK_ITEM.MAX_NUM]{ "ã€Œé«˜éš¾åº¦æ¨¡å¼ã€å¼€å§‹", "ã€Œè¿‘è¡›ç¿¼ã€è§£æ”¾" },
+       new string[(int)UNLOCK_ITEM.MAX_NUM]{ "ã€Œé«˜é›£åº¦æ¨¡å¼ã€é–‹å§‹", "ã€Œè¿‘è¡›ç¿¼ã€è§£æ”¾" },
     };
+    //"ã€Œãºã£ãºã‚ä¸¸ã€ã‚’è§£æ”¾ã—ã¾ã—ãŸ",
 
     int textNum;
     public void SetTextNum(InputName _parent, int _num)
@@ -28,7 +31,7 @@ public class UnlockWindow : MonoBehaviour
     void Start()
     {
         unlockText = transform.GetChild(0).GetChild(0).GetComponent<Text>();
-        unlockText.text = textString[textNum];
+        unlockText.text = textString[(int)Managers.instance.nowLanguage][textNum];
     }
 
     void Update()

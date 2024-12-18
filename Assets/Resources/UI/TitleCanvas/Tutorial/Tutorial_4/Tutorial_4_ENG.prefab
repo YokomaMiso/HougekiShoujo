@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: -272}
-  m_SizeDelta: {x: 240, y: 104}
+  m_AnchoredPosition: {x: -208, y: -272}
+  m_SizeDelta: {x: 360, y: 104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6130465255080285330
 CanvasRenderer:
@@ -72,15 +72,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 48
-    m_Alignment: 6
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Send
-
-    Emote'
+  m_Text: Send Emote
 --- !u!1 &2329341268245269216
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b918fea7caec176489bcd3fc6fcd745a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emotionText: {fileID: 7151152217573894577}
 --- !u!1 &3688540394076702940
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -400}
+  m_AnchoredPosition: {x: -80, y: -432}
   m_SizeDelta: {x: 1080, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2253140963821224252
@@ -306,7 +305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Communicate your emotions.
+  m_Text: Let's express your emotions.
 --- !u!1 &8315324247382189666
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 744, y: -272}
+  m_AnchoredPosition: {x: 720, y: -272}
   m_SizeDelta: {x: 320, y: 104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7608636867213950669
@@ -379,12 +378,10 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 48
-    m_Alignment: 6
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Send
-
-    Chat'
+  m_Text: Send Chat
