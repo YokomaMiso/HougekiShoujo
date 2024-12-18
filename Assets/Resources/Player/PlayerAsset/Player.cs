@@ -370,7 +370,11 @@ public class Player : MonoBehaviour
                     break;
                 case PLAYER_STATE.RELOADING:
                     if (canonState != CANON_STATE.EMPTY) { break; }
-                    if (!playerReload.reloadFlagForOther) { playerReload.Reload(0); }
+                    if (!playerReload.reloadFlagForOther)
+                    {
+                        if (playerData.GetShell().GetShellType() == SHELL_TYPE.SPECIAL) { playerSubAction.CutOffReloadTime(5.0f); }
+                        playerReload.Reload(0);
+                    }
                     break;
             }
         }
