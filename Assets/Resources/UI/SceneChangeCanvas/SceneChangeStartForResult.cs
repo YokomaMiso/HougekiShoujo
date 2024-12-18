@@ -20,6 +20,9 @@ public class SceneChangeStartForResult : SceneChange
     [SerializeField] AudioClip paperInSFX;
     bool paperIn;
 
+    AudioSource bgmInstance;
+    float bgmValue;
+
     protected override void Start()
     {
         lifeTime = 3.0f;
@@ -29,6 +32,8 @@ public class SceneChangeStartForResult : SceneChange
         newsPaper = transform.GetChild(1);
 
         SoundManager.PlaySFXForUI(paperStartSFX);
+        bgmInstance = SoundManager.nowBGMAudioSource;
+        bgmValue = SoundManager.masterVolume * SoundManager.bgmVolume;
     }
 
     void Update()
@@ -53,6 +58,14 @@ public class SceneChangeStartForResult : SceneChange
             newsPaper.localPosition = Vector3.Lerp(newsPaperStartPos, newsPaperArrivePos, nowRate);
         }
 
+        BGMFade();
+
         DestroyCheck(true);
+    }
+
+    void BGMFade()
+    {
+        if (bgmInstance == null) { return; }
+        bgmInstance.volume = bgmValue * 1.0f - (timer / lifeTime);
     }
 }
