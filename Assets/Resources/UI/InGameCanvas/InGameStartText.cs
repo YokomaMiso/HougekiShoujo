@@ -55,7 +55,7 @@ public class InGameStartText : MonoBehaviour
             
             if (!soundPlayed[1]) 
             {
-                //SoundManager.PlaySFXForUI(fightVoice);
+                SoundManager.PlayVoiceForUI(fightVoice);
                 SoundManager.PlaySFXForUI(fightSFX);
                 soundPlayed[1] = true;
             }
@@ -76,7 +76,7 @@ public class InGameStartText : MonoBehaviour
             int roundCount = hostIngameData.roundCount - 1;
             if (!soundPlayed[0]) 
             {
-                //SoundManager.PlaySFXForUI(roundVoice[roundCount]);
+                SoundManager.PlayVoiceForUI(roundVoice[roundCount]);
                 soundPlayed[0] = true;
             }
 

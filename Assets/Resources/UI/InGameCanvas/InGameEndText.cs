@@ -70,12 +70,12 @@ public class InGameEndText : MonoBehaviour
             {
                 if (gameEnd) 
                 {
-                    //SoundManager.PlaySFXForUI(winVoice[teamIndex]); 
+                    //SoundManager.PlayVoiceForUI(winVoice[teamIndex]); 
                     SoundManager.PlaySFXForUI(winSFX); 
                 }
                 else 
                 {
-                    //SoundManager.PlaySFXForUI(roundSetVoice[teamIndex]); 
+                    //SoundManager.PlayVoiceForUI(roundSetVoice[teamIndex]); 
                     SoundManager.PlaySFXForUI(roundSFX); 
                 }
                 soundPlayed = true;
