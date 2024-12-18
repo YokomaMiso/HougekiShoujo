@@ -80,17 +80,21 @@ public class TitleCanvasBehavior : MonoBehaviour
         switch (_num)
         {
             case 0:
+                Managers.instance.PlaySFXForUI(3);
                 if (Managers.instance.optionData.displayTutorial) { ChangeTitleState(TITLE_STATE.TUTORIAL); }
                 else { ChangeTitleState(TITLE_STATE.INPUT_NAME); }
                 break;
             case 1:
+                Managers.instance.PlaySFXForUI(3);
                 Managers.instance.CreateOptionCanvas();
                 break;
             case 2:
-                Managers.instance.ChangeState(GAME_STATE.GALLERY);
-                Managers.instance.ChangeScene(GAME_STATE.GALLERY);
+                //Managers.instance.ChangeState(GAME_STATE.GALLERY);
+                //Managers.instance.ChangeScene(GAME_STATE.GALLERY);
+                Managers.instance.PlaySFXForUI(1);
                 break;
             case 3:
+                Managers.instance.PlaySFXForUI(3);
                 Managers.instance.ChangeState(GAME_STATE.CREDIT);
                 Managers.instance.ChangeScene(GAME_STATE.CREDIT);
                 break;
