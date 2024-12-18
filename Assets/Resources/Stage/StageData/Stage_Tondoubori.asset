@@ -32,7 +32,7 @@ MonoBehaviour:
   BGM: {fileID: 11400000, guid: 057282ebdda54e9489ccba7e1e45ddf9, type: 2}
   directionalLight: {fileID: 1593891116581776150, guid: d48fc7faf288fa2448cd0a397de65824,
     type: 3}
-  screenShot: {fileID: 21300000, guid: cb1a853b9f9f3a141a992eb4085b88a5, type: 3}
+  screenShot: {fileID: 21300000, guid: 011f27eff27c57c4faccea3842b0c376, type: 3}
   minimap: {fileID: 21300000, guid: a0c5d7898570256459073a59723a13ed, type: 3}
   minX: -24
   maxX: 24
