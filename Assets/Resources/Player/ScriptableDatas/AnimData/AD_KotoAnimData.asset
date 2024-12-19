@@ -39,7 +39,7 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 5a966be49f07a1941acef5f00a3b4893, type: 2}
   - {fileID: 9100000, guid: d3b9a4291c569a84e95a02e16acd21b8, type: 2}
   - {fileID: 9100000, guid: 2f8b3479c2d2cf94abea93d25be0c4ca, type: 2}
-  deadAnimationData: {fileID: 9100000, guid: e88ce4b70ad9b964289d5aa6c38a323a, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: 7f5a318ef945f2247a0a3fb5f844830e, type: 2}
   idleAnimationData2: {fileID: 9100000, guid: d697e55d605fe5342be6a290ab0312f6, type: 2}
   runAnimationData2:
   - {fileID: 9100000, guid: f59dddeee8dddda488a756e3b85d3e4f, type: 2}

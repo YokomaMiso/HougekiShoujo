@@ -25,4 +25,4 @@ MonoBehaviour:
   reloadAnimationData: {fileID: 9100000, guid: 2bcc1238f695b6549ad4ae5a87ae3b5b, type: 2}
   aimAnimationData: []
   recoilAnimationData: []
-  deadAnimationData: {fileID: 9100000, guid: edfd3a6b1c9beba4bbe77202e04ec0a7, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: 02eb89f80ccc43a49ab9aa2f60705035, type: 2}

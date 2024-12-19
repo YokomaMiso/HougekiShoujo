@@ -39,6 +39,6 @@ MonoBehaviour:
   - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
   - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
   - {fileID: 9100000, guid: f29873b69edac1d4fb9f08a5f873ea03, type: 2}
-  deadAnimationData: {fileID: 9100000, guid: 229ca13950d09db4fae62d6427b2946e, type: 2}
+  deadAnimationData: {fileID: 9100000, guid: 2bd4d74157280cf448b7fa56835fba9c, type: 2}
   recoilAnimationData2: {fileID: 9100000, guid: 45b2d9b8c62134b40bae9d6b09b28428,
     type: 2}
