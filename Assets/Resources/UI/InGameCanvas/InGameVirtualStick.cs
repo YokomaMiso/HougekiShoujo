@@ -23,6 +23,8 @@ public class InGameVirtualStick : MonoBehaviour, IPointerDownHandler, IDragHandl
 
     private void Update()
     {
+        if (!Managers.instance.GetSmartPhoneFlag()) { return; }
+
         ownPlayer.SetInputVectorFromUI(inputVector);
     }
 
