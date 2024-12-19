@@ -163,4 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5af19b80d2f7542ac331f1ffbc5d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageSFX: {fileID: 8300000, guid: b36f4eb977987e948a09150d3a136831, type: 3}
+  damageSFX: {fileID: 8300000, guid: 77f395c5f3beed14990eb6bd98b10641, type: 3}
