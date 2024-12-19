@@ -37,6 +37,10 @@ public class PlayerReload : MonoBehaviour
                 ownerPlayer.ChangeShellIconColor(1);
                 ownerPlayer.canonState = CANON_STATE.RELOADED;
             }
+            else
+            {
+                ownerPlayer.SubActionCutOff();
+            }
         }
     }
 
@@ -49,6 +53,10 @@ public class PlayerReload : MonoBehaviour
             if (ownerPlayer.GetPlayerData().GetShell().GetShellType() != SHELL_TYPE.SPECIAL)
             {
                 ownerPlayer.ChangeShellIconColor(1);
+            }
+            else
+            {
+                ownerPlayer.SubActionCutOff();
             }
             return shellNum;
         }

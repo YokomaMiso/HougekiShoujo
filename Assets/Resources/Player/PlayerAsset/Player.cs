@@ -165,6 +165,8 @@ public class Player : MonoBehaviour
     public void SetInputVectorFromUI(Vector3 _input) { inputVectorFromUI = _input; }
     public Vector3 GetInputVectorFromUI() { return inputVectorFromUI; }
 
+    public void SubActionCutOff() { playerSubAction.CutOffReloadTime(5.0f); }
+
     void Start()
     {
         playerMove = gameObject.GetComponent<PlayerMove>();
@@ -274,7 +276,6 @@ public class Player : MonoBehaviour
                         else
                         {
                             if (playerData.GetShell().GetShellType() != SHELL_TYPE.SPECIAL) { canonState = (CANON_STATE)reloadNum; }
-                            else { playerSubAction.CutOffReloadTime(5.0f); }
                             playerState = PLAYER_STATE.IDLE;
                         }
                         break;
@@ -370,11 +371,8 @@ public class Player : MonoBehaviour
                     break;
                 case PLAYER_STATE.RELOADING:
                     if (canonState != CANON_STATE.EMPTY) { break; }
-                    if (!playerReload.reloadFlagForOther)
-                    {
-                        if (playerData.GetShell().GetShellType() == SHELL_TYPE.SPECIAL) { playerSubAction.CutOffReloadTime(5.0f); }
-                        playerReload.Reload(0);
-                    }
+
+                    if (!playerReload.reloadFlagForOther) { playerReload.Reload(0); }
                     break;
             }
         }
