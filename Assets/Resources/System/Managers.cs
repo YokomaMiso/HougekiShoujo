@@ -65,9 +65,9 @@ public class Managers : MonoBehaviour
         {
             default: ac = submitSFX; break;
             case 1: ac = cancelSFX; break;
-            case 2: 
-                ac = cursorSFX; 
-                pitch = Random.Range(0.95f, 1.05f); 
+            case 2:
+                ac = cursorSFX;
+                pitch = Random.Range(0.95f, 1.05f);
                 break;
             case 3: ac = startSFX; break;
             case 4: ac = closeTutorialSFX; break;
@@ -126,7 +126,10 @@ public class Managers : MonoBehaviour
 
     public void ChangeScene(GAME_STATE _state)
     {
-        if (nextState == _state) { return; }
+        if (nextState == _state)
+        {
+            if (_state != GAME_STATE.TITLE) { return; }
+        }
 
         if (changeSceneCanvasInstance == null)
         {
@@ -141,6 +144,13 @@ public class Managers : MonoBehaviour
             SceneChange sceneChange = changeSceneCanvasInstance.GetComponent<SceneChange>();
             sceneChange.SetNextScene(_state);
             sceneChange.RibbonsVisible(nextState != GAME_STATE.CONNECTION);
+        }
+        else
+        {
+            if (_state == GAME_STATE.TITLE)
+            {
+                changeSceneCanvasInstance.GetComponent<SceneChange>().SetNextScene(_state);
+            }
         }
         nextState = _state;
     }

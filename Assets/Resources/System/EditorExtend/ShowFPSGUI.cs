@@ -17,11 +17,13 @@ public class PerformanceMeasure : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Create()
     {
+#if UNITY_EDITOR
         if (Instance) return;
 
         var go = new GameObject();
         Instance = go.AddComponent<PerformanceMeasure>();
         DontDestroyOnLoad(go);
+#endif
     }
 
     void Update()
