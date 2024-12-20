@@ -305,7 +305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Let's express your emotions.
+  m_Text: Let's use cute emotes.
 --- !u!1 &8315324247382189666
 GameObject:
   m_ObjectHideFlags: 0
