@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9106c66a050944a851ed5e2049ac63, type: 3}
   m_Name: SW_FlaskBomb
   m_EditorClassIdentifier: 
-  subWeaponIcon: {fileID: 21300000, guid: b347624ca608da247a5141aa49d2e801, type: 3}
+  subWeaponIcon: {fileID: 21300000, guid: 23906d57733a2fd4c9a830aa4898c191, type: 3}
   subType: 3
   buffType: 0
   installation: {fileID: 3179393461812120061, guid: 63f33aa670e67a1498f5999850d1b60b,

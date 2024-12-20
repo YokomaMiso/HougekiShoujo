@@ -66,19 +66,28 @@ public class DisplayShellIcon : MonoBehaviour
 
     void CheckPlayerShell()
     {
-        int canonState = ownerPlayer.GetCanonState();
-
-        switch (canonState)
+        if (ownerPlayer.GetPlayerData().GetShell().GetShellType() != SHELL_TYPE.SPECIAL)
         {
-            case -1:
-                iconFrame.color = Color.clear;
-                shellIcon.color = Color.gray;
-                break;
-            default:
-                iconFrame.color = Color.white;
-                shellIcon.color = Color.white;
-                break;
+            int canonState = ownerPlayer.GetCanonState();
+
+            switch (canonState)
+            {
+                case -1:
+                    iconFrame.color = Color.clear;
+                    shellIcon.color = Color.gray;
+                    break;
+                default:
+                    iconFrame.color = Color.white;
+                    shellIcon.color = Color.white;
+                    break;
+            }
         }
+        else
+        {
+            iconFrame.color = Color.clear;
+            shellIcon.color = Color.white;
+        }
+
     }
 
     void CheckPlayerSubWeapon()
