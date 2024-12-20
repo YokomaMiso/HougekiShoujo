@@ -12,28 +12,34 @@ public class VideoAttach : MonoBehaviour
     [SerializeField] Texture videoTexture;
 
     float applyTimer;
-    const float applyTime = 0.1f;
+    float applyTime;
 
-    void Start()
+    void Awake()
     {
         ri = GetComponent<RawImage>().material;
         ri.SetTexture("_mainTex", gb);
 
         vp = GetComponent<VideoPlayer>();
         vp.frame = 0;
+
+        float frameRate = 1.0f / Time.deltaTime;
+        vp.playbackSpeed = 120.0f / frameRate;
+        applyTime = vp.playbackSpeed * 0.1f;
+
+        vp.prepareCompleted += OnCompletePrepare;
+
+        vp.Prepare();
     }
 
     void Update()
     {
-        if (applyTimer < applyTime)
-        {
-            applyTimer += Time.deltaTime;
-            if (applyTimer >= applyTime)
-            {
-                applyTimer = applyTime;
-                ri.SetTexture("_mainTex", videoTexture);
-            }
-        }
-        vp.playbackSpeed = Time.deltaTime * Application.targetFrameRate;
+        float frameRate = 1.0f / Time.deltaTime;
+        vp.playbackSpeed = 120.0f / frameRate;
+    }
+
+    void OnCompletePrepare(VideoPlayer _vp)
+    {
+        ri.SetTexture("_mainTex", videoTexture);
+        vp.Play();
     }
 }
