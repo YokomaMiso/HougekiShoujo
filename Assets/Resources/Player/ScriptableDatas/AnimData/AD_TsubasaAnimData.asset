@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ed411256c0a3545ac11d57b7bb9940, type: 3}
   m_Name: AD_TsubasaAnimData
   m_EditorClassIdentifier: 
-  characterIcon: {fileID: 21300000, guid: 0e6bef598d6891248b15b1e3f7c56757, type: 3}
+  characterIcon: {fileID: 21300000, guid: b1f957b90d4574840b14e0c3258837dd, type: 3}
   idleFirstSprite: {fileID: 116761717, guid: 841c9a8bc2be0394e95c8bbd02e80b4d, type: 3}
   charaIllust: {fileID: 21300000, guid: f29aaffd98276cf43a0bb97606e261a1, type: 3}
   idleForUIAnimationData: {fileID: 9100000, guid: 2878bf234f7b7db4aa8b450bcb7ac81d,
