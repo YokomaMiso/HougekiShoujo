@@ -43,4 +43,10 @@ public class VideoAttach : MonoBehaviour
         vp.Play();
         riMat.SetTexture("_mainTex", videoTexture);
     }
+
+    void OnDestroy()
+    {
+        riMat.SetTexture("_mainTex", gb);
+        riMat.SetFloat("_alpha", 0);
+    }
 }
