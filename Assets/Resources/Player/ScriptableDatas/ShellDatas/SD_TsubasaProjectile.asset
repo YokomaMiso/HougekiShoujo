@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f87803495264c5408731d930aa35ece, type: 3}
   m_Name: SD_TsubasaProjectile
   m_EditorClassIdentifier: 
-  shellIcon: {fileID: 21300000, guid: 969d75255d044d642bc49727552b3489, type: 3}
+  shellIcon: {fileID: 21300000, guid: 3d8b2938113464346b21340cac2bbb88, type: 3}
   shellType: 3
   projectile: {fileID: 0}
   projectileAnim: {fileID: 0}
