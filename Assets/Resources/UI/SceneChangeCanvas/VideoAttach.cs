@@ -6,40 +6,41 @@ using UnityEngine.Video;
 
 public class VideoAttach : MonoBehaviour
 {
-    Material ri;
+    RawImage ri;
+    Material riMat;
     VideoPlayer vp;
     [SerializeField] Texture gb;
     [SerializeField] Texture videoTexture;
 
-    float applyTimer;
-    float applyTime;
+    float applyTimer = 0;
+    const float applyTime = 1.0f;
 
-    void Awake()
+    void Start()
     {
-        ri = GetComponent<RawImage>().material;
-        ri.SetTexture("_mainTex", gb);
-
         vp = GetComponent<VideoPlayer>();
-        vp.frame = 0;
-
-        float frameRate = 1.0f / Time.deltaTime;
-        vp.playbackSpeed = 120.0f / frameRate;
-        applyTime = vp.playbackSpeed * 0.1f;
 
         vp.prepareCompleted += OnCompletePrepare;
-
         vp.Prepare();
+
+        ri = GetComponent<RawImage>();
+        riMat = ri.material;
+        riMat.SetTexture("_mainTex", gb);
+        riMat.SetFloat("_alpha", 0);
     }
 
     void Update()
     {
-        float frameRate = 1.0f / Time.deltaTime;
-        vp.playbackSpeed = 120.0f / frameRate;
+        if (!vp.isPrepared) { return; }
+
+        applyTimer += Time.deltaTime;
+        float alpha = Mathf.Clamp01(applyTimer / applyTime);
+        riMat.SetFloat("_alpha", alpha);
     }
 
     void OnCompletePrepare(VideoPlayer _vp)
     {
-        ri.SetTexture("_mainTex", videoTexture);
+        vp.frame = 1;
         vp.Play();
+        riMat.SetTexture("_mainTex", videoTexture);
     }
 }
