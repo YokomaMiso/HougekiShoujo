@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 56341b3bc2f78e34ab72302eef40adce
+guid: 2920f5916b9237746974650570954858
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,7 +7,7 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: NIghtCity2
+      name: NightCityv3
     second: {fileID: 2100000, guid: 4add35424da90d346b1464391a79b6fa, type: 2}
   materials:
     materialImportMode: 2
